@@ -30,10 +30,11 @@ class VideoRepo extends BaseRepository
         $cacheKey = $this->cachePrefix . $userId . 'get_all' . $limit . '.' . implode(',', $columns);
 
         //Lấy cache
-        $videos = Redis::get($cacheKey);
-        if (isset($videos)){
-            return unserialize($videos);
-        }
+        //Todo: bỏ comment đoạn này khi triển khai thực tế để ăn cache, hiện dev thì để lấy từ db luôn test cho nó dễ
+//        $videos = Redis::get($cacheKey);
+//        if (isset($videos)){
+//            return unserialize($videos);
+//        }
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
         $videos = $this->query()
             ->where('user_id', $userId)
