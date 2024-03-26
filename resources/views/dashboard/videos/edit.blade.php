@@ -127,7 +127,7 @@
                                     <input type="text" name="format" id="format" class="form-control" value="{{ $video->format }}">
                                 </div>
 
-                                <!-- Add other fields of the VideoInfo model as needed -->
+                                <!-- Add other fields of the Video model as needed -->
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Update</button>

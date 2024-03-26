@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Models\VideoInfo;
-use App\Repositories\VideoInfoRepo;
+use App\Models\Video;
+use App\Repositories\VideoInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class VideoController
 {
-    protected VideoInfoRepo $videoRepo;
+    protected VideoInfo $videoRepo;
 
-    public function __construct(VideoInfoRepo $videoRepo){
+    public function __construct(VideoInfo $videoRepo){
         $this->videoRepo = $videoRepo;
     }
 

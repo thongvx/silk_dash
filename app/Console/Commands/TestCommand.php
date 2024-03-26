@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\VideoInfo;
+use App\Models\Video;
 use Illuminate\Console\Command;
 use Faker\Factory as Faker;
 
@@ -31,7 +31,7 @@ class TestCommand extends Command
 
         for ($i = 0; $i < 100; $i++) {
             $userId = [1, 2, 3][rand(0, 2)]; // Chọn ngẫu nhiên userId từ 1, 2, 3
-            $video = new VideoInfo();
+            $video = new Video();
             $video->videoID = 'video_' . $i;
             $video->userID = $userId;
             $video->middleVideoID = $faker->text;

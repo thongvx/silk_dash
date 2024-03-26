@@ -8,21 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
-class VideoInfo extends Model
+class Video extends Model
 {
     use HasFactory;
 
-    protected $table = 'videoInfo';
+    protected $table = 'videos';
 
     protected $fillable = [
-        'videoID',
+        'video_id',
+        'user_id',
+        'folder',
+        'path_stream',
+        'sd',
+        'hd',
+        'fhd',
+        'soft_delete',
         'title',
-        'userID',
         'poster',
-        'sub',
-        'totalPlay',
-        'lastPlayed',
-        'dateUpload',
+        'grid_poster',
+        'is_sub',
+        'total_play',
+        'last_played',
+        'size',
+        'duration',
+        'quality',
+        'format',
     ];
 
     protected static function boot()

@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\VideoInfo;
+use App\Models\Video;
 use Illuminate\Support\Facades\Redis;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class VideoInfoRepo extends BaseRepository
+class VideoInfo extends BaseRepository
 {
     private string $cachePrefix = 'videos:';
     public function model()
     {
-        return VideoInfo::class;
+        return Video::class;
     }
 
     public function getAllUserVideo($userId, $search = false, $limit = 20, $columns = ['*']){
@@ -20,7 +20,7 @@ class VideoInfoRepo extends BaseRepository
         if ($search) {
             //Ví dụ một query gì đó
             return $this->query()
-                ->where('userID', $userId)
+                ->where('user_id', $userId)
                 ->where('title', 'LIKE', '%'.$search.'%')
                 ->select($columns)
                 ->orderBy('id', 'desc')
@@ -36,7 +36,7 @@ class VideoInfoRepo extends BaseRepository
         }
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
         $videos = $this->query()
-            ->where('userId', $userId)
+            ->where('user_id', $userId)
             ->select($columns)
             ->orderBy('id', 'desc')
             ->paginate($limit);
