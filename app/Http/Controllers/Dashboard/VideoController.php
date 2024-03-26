@@ -22,26 +22,38 @@ class VideoController
     }
 
     public function uploadVideo(Request $request){
-        //Todo: Lấy danh sach các server có thể upload
-        $serverUploads = [];
+        //Kiểm tra xem có đang phải là một tiến trình mới hay không nếu có thì mới chọn lại con server
+        //Dựa trên file băm - có thuộc tính gì đó của thằng file gốc
+        $thuocTinhFilegoc = 'abcdef';
+        if (Redis::setnx($thuocTinhFilegoc)){
+            //Todo: Thêm redis exprire cho nó sau 30p 1 tiếng
 
-        //Cờ để lấy server
-        $keyToGet = Redis::get('keyToGet');
-        if (!isset($keyToGet)){
-            $keyToGet = 0;
+
+            //Todo: Lấy danh sach các server có thể upload
+            $serverUploads = [];
+
+            //Cờ để lấy server
+            $keyToGet = Redis::get('keyToGet');
+            if (!isset($keyToGet)){
+                $keyToGet = 0;
+                Redis::set('keyToGet', $keyToGet);
+            }
+
+
+            //Gắn lại lại cờ
+            $keyToGet = $keyToGet + 1;
+            if ($keyToGet >= count($serverUploads)){
+                $keyToGet = 0;
+            }
             Redis::set('keyToGet', $keyToGet);
         }
 
         $choiceServer = $serverUploads[$keyToGet];
 
         //Todo: Xử lý upload lên con choise server được chọn
+        //Forward Request $request to server được chon
 
-        //Gắn lại lại cờ
-        $keyToGet = $keyToGet + 1;
-        if ($keyToGet >= count($serverUploads)){
-            $keyToGet = 0;
-        }
-        Redis::set('keyToGet', $keyToGet);
+
     }
     // Hiển thị danh sách các video của user
     public function index(Request $request)
