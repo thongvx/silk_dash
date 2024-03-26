@@ -15,7 +15,6 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->text('name_folder')->nullable();
-            $table->string('id_folder', 10)->nullable();
             $table->integer('number_file')->nullable();
             $table->integer('soft_delete')->nullable();
             $table->timestamps();

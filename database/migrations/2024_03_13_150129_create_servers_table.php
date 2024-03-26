@@ -13,20 +13,19 @@ return new class extends Migration
     {
         Schema::create('servers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userID');
-            $table->unsignedBigInteger('videoID');
+            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('video_id')->index();
             $table->string('status');
             $table->integer('priority');
             $table->string('quality');
             $table->string('size');
-            $table->string('svEncoder');
-            $table->string('svUpload');
-            $table->integer('startEncoder');
-            $table->integer('finishEncoder');
-            $table->string('svStorage');
+            $table->string('sv_encoder');
+            $table->string('sv_upload');
+            $table->timestamp('start_encoder');
+            $table->timestamp('finish_encoder');
+            $table->string('sv_storage');
             $table->integer('retry');
             $table->integer('failure');
-            $table->timestamps();
         });
     }
 

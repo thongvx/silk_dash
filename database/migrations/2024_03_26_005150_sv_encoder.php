@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sv_encoder', function (Blueprint $table) {
+        Schema::create('sv_encoders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 10)->nullable();
             $table->string('ip', 15)->nullable();
@@ -28,8 +28,7 @@ return new class extends Migration
             $table->float('in_speed')->nullable();
             $table->float('out_speed')->nullable();
             $table->string('provider', 20)->nullable();
-            $table->integer('active')->nullable();
-            $table->timestamps();
+            $table->boolean('active')->default(true);
         });
     }
 

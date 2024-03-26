@@ -6,7 +6,7 @@ use App\Models\Video;
 use Illuminate\Support\Facades\Redis;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class VideoInfo extends BaseRepository
+class VideoRepo extends BaseRepository
 {
     private string $cachePrefix = 'videos:';
     public function model()

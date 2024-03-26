@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sv_storage', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('sv_storages', function (Blueprint $table) {
+            $table->id();
             $table->string('name', 10)->nullable();
             $table->string('ip', 15)->nullable();
             $table->string('pass', 20)->nullable();
@@ -27,10 +27,10 @@ return new class extends Migration
             $table->integer('max_speed')->nullable();
             $table->float('in_speed')->nullable();
             $table->float('out_speed')->nullable();
-            $table->integer('in_data')->nullable();
+            $table->integer('in_data')->nullable()->comment('???');
             $table->string('provider', 20)->nullable();
-            $table->integer('active')->nullable();
-            $table->timestamps();
+            $table->boolean('active')->default(true);
+
         });
     }
 

@@ -183,6 +183,7 @@ class ComposerStaticInit484597023386cf9468b92f96e7390f51
         ),
         'A' => 
         array (
+            'Arrilot\\Widgets\\' => 16,
             'App\\' => 4,
         ),
     );
@@ -362,8 +363,8 @@ class ComposerStaticInit484597023386cf9468b92f96e7390f51
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -557,6 +558,10 @@ class ComposerStaticInit484597023386cf9468b92f96e7390f51
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src',
         ),
+        'Arrilot\\Widgets\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/arrilot/laravel-widgets/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -590,13 +595,33 @@ class ComposerStaticInit484597023386cf9468b92f96e7390f51
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\Server' => __DIR__ . '/../..' . '/app/Models/Server.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
-        'App\\Models\\VideoInfo' => __DIR__ . '/../..' . '/app/Models/VideoInfo.php',
+        'App\\Models\\Video' => __DIR__ . '/../..' . '/app/Models/Video.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\Repositories\\VideoInfoRepo' => __DIR__ . '/../..' . '/app/Repositories/VideoInfoRepo.php',
+        'App\\Repositories\\VideoRepo' => __DIR__ . '/../..' . '/app/Repositories/VideoRepo.php',
+        'Arrilot\\Widgets\\AbstractWidget' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/AbstractWidget.php',
+        'Arrilot\\Widgets\\AsyncFacade' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/AsyncFacade.php',
+        'Arrilot\\Widgets\\Console\\WidgetMakeCommand' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Console/WidgetMakeCommand.php',
+        'Arrilot\\Widgets\\Contracts\\ApplicationWrapperContract' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Contracts/ApplicationWrapperContract.php',
+        'Arrilot\\Widgets\\Controllers\\WidgetController' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Controllers/WidgetController.php',
+        'Arrilot\\Widgets\\Facade' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Facade.php',
+        'Arrilot\\Widgets\\Factories\\AbstractWidgetFactory' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Factories/AbstractWidgetFactory.php',
+        'Arrilot\\Widgets\\Factories\\AsyncWidgetFactory' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Factories/AsyncWidgetFactory.php',
+        'Arrilot\\Widgets\\Factories\\JavascriptFactory' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Factories/JavascriptFactory.php',
+        'Arrilot\\Widgets\\Factories\\WidgetFactory' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Factories/WidgetFactory.php',
+        'Arrilot\\Widgets\\Misc\\EncryptException' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Misc/EncryptException.php',
+        'Arrilot\\Widgets\\Misc\\InvalidWidgetClassException' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Misc/InvalidWidgetClassException.php',
+        'Arrilot\\Widgets\\Misc\\LaravelApplicationWrapper' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Misc/LaravelApplicationWrapper.php',
+        'Arrilot\\Widgets\\Misc\\NamespaceNotFoundException' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Misc/NamespaceNotFoundException.php',
+        'Arrilot\\Widgets\\Misc\\ViewExpressionTrait' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/Misc/ViewExpressionTrait.php',
+        'Arrilot\\Widgets\\NamespacesRepository' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/NamespacesRepository.php',
+        'Arrilot\\Widgets\\ServiceProvider' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/ServiceProvider.php',
+        'Arrilot\\Widgets\\WidgetGroup' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/WidgetGroup.php',
+        'Arrilot\\Widgets\\WidgetGroupCollection' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/WidgetGroupCollection.php',
+        'Arrilot\\Widgets\\WidgetId' => __DIR__ . '/..' . '/arrilot/laravel-widgets/src/WidgetId.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
