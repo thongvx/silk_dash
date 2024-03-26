@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('size');
             $table->string('sv_encoder');
             $table->string('sv_upload');
-            $table->timestamp('start_encoder');
-            $table->timestamp('finish_encoder');
+            $table->timestamp('start_encoder')->nullable();
+            $table->timestamp('finish_encoder')->nullable();
             $table->string('sv_storage');
             $table->integer('retry');
             $table->integer('failure');
@@ -32,7 +32,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('servers');
     }
