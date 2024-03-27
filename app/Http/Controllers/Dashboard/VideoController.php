@@ -23,7 +23,8 @@ class VideoController
     public function index(Request $request)
     {
         $user = Auth::user();
-        $data['videos'] = $this->videoRepo->getAllUserVideo($user->id, $request->input('search'));
+        $limit = $request->input('limit', 20);
+        $data['videos'] = $this->videoRepo->getAllUserVideo($user->id, $request->input('search'), $limit);
         return view('dashboard.videos.index', $data);
     }
 

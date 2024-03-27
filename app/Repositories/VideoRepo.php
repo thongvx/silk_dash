@@ -14,7 +14,7 @@ class VideoRepo extends BaseRepository
         return Video::class;
     }
 
-    public function getAllUserVideo($userId, $search = false, $limit = 20, $columns = ['*']){
+    public function getAllUserVideo($userId, $search = false, $limit, $columns = ['*']){
 
         // Nếu có tham số search, không sử dụng cache
         if ($search) {
@@ -37,12 +37,12 @@ class VideoRepo extends BaseRepository
 //        }
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
         $videos = $this->query()
-            ->where('user_id', $userId)
+//            ->where('user_id', $userId)
             ->select($columns)
             ->orderBy('id', 'desc')
             ->paginate($limit);
 
-        Redis::setex($cacheKey, 259200, serialize($videos));
+//        Redis::setex($cacheKey, 259200, serialize($videos));
         return $videos;
     }
 

@@ -14,13 +14,9 @@
 <main class="relative h-full transition-all duration-200 ease-in-out xl:ml-24 rounded-xl bg-[#1a2035]">
     @include('dashboard.components.navbar')
     <!-- cards -->
-    <div class="w-full px-3 md:px-6 py-6 mx-auto">
+    <div class="w-full px-3 md:px-6 pt-3 mx-auto">
        @yield('content')
     </div>
 @include('dashboard.components.footer')
-</body>
-<!-- plugin for charts  -->
-<script src="../assets/js/plugins/chartjs.min.js" async></script>
-@include('dashboard.components.scriptfooter')
 
 

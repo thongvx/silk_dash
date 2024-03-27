@@ -23,7 +23,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'upload'])->name('upload');
-    Route::get('/video', [\App\Http\Controllers\Dashboard\VideoController::class, 'index']);
+    Route::get('/video', [\App\Http\Controllers\Dashboard\VideoController::class, 'index'])->name('video.index');
 
 });
 

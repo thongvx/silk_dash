@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('slug', 20)->unique()->comment('url slug để play video');
+            $table->string('slug', 50)->unique()->comment('url slug để play video');
             $table->integer('user_id')->index();
             $table->string('folder_id', 15)->nullable();
             $table->string('sd', 10)->nullable();
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('videoManage');
+        Schema::dropIfExists('videos');
     }
 };

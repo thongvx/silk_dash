@@ -31,4 +31,11 @@
     </div>
     <!-- end cards -->
   </main>
+ </body>
+
+ <!-- plugin for scrollbar  -->
+ <script src="../assets/js/plugins/perfect-scrollbar.min.js" async></script>
+ <!-- main script file  -->
+ <script src="../assets/js/main.js" async></script>
+ </html>
 

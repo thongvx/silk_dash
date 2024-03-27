@@ -48,9 +48,12 @@ class Video extends Model
             }
         });
         static::creating(function ($model) {
-            $userId = Auth::user()->id;
-            $cacheUserVideoKeys = 'videos:' . $userId . 'get_all*';
-            Redis::del(Redis::keys($cacheUserVideoKeys));
+            $user = Auth::user();
+            if ($user) {
+                $userId = $user->id;
+                $cacheUserVideoKeys = 'videos:' . $userId . 'get_all*';
+                Redis::del(Redis::keys($cacheUserVideoKeys));
+            }
         });
         static::deleted(function ($model) {
             $userId =$model->getOriginal()['userID'];
