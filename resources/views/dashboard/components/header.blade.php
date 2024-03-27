@@ -32,18 +32,6 @@
         -webkit-font-feature-settings: 'liga';
         -webkit-font-smoothing: antialiased;
     }
-    span a.paginate_button {
-        background: #0f172a;
-        margin: 0 5px;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 12px;
-    }
-    .dataTables_length select {
-        background-color: transparent;
-        border: none;
-        outline: none;
-    }
 </style>
 </head>
 

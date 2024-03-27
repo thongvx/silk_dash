@@ -2,7 +2,7 @@
     <nav
       class="sticky top-0 flex z-20 flex-wrap bg-[#1a2035] items-center justify-between px-3 py-2 lg:px-3 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
       navbar-main navbar-scroll="false">
-      <div class="flex items-center justify-between w-full px-0 smpx-4 py-1 mx-auto flex-wrap">
+      <div class="flex items-center justify-between w-full px-0 sm:px-4 py-1 mx-auto flex-wrap">
         <nav>
           <!-- breadcrumb -->
           <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
@@ -22,7 +22,7 @@
                 <label class="p-1 flex bg-slate-900 items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
                 </span>
                 <input type="text"
-                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 rounded-lg text-white bg-transparent bg-clip-padding text-gray-700 focus:outline-none 
+                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 rounded-lg text-white bg-transparent bg-clip-padding text-gray-700 focus:outline-none
                          border border-solid border-slate-900"
                   onfocus="focused(this)" onfocusout="defocused(this)"/>
               </div>
@@ -48,11 +48,11 @@
               </a>
 
               <ul dropdown-menu
-                class="text-sm transform-dropdown bg-[#202940] before:font-awesome before:leading-default before:duration-350 before:ease 
-                       shadow-lg shadow-slate-900 duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10 
-                       origin-top list-none rounded-lg border-none bg-clip-padding 
+                class="text-sm transform-dropdown bg-[#202940] before:font-awesome before:leading-default before:duration-350 before:ease
+                       shadow-lg shadow-slate-900 duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10
+                       origin-top list-none rounded-lg border-none bg-clip-padding
                        px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10
-                       before:inline-block before:font-normal before:text-[#202940] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6 
+                       before:inline-block before:font-normal before:text-[#202940] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
                        lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
                 <!-- add show class on dropdown open js -->
                 <li class="relative mb-2">
@@ -139,11 +139,11 @@
                 <span class="rounded-full border h-10 w-10 text-lg font-bold flex items-center justify-center">VD</span>
               </a>
               <ul dropdown-menu
-                class="text-sm transform-dropdown bg-[#202940] before:font-awesome before:leading-default before:duration-350 before:ease 
-                       shadow-lg shadow-slate-900 duration-250 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-12 
-                       origin-top list-none rounded-lg border-none bg-clip-padding 
+                class="text-sm transform-dropdown bg-[#202940] before:font-awesome before:leading-default before:duration-350 before:ease
+                       shadow-lg shadow-slate-900 duration-250 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-12
+                       origin-top list-none rounded-lg border-none bg-clip-padding
                        pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10
-                       before:inline-block before:font-normal before:text-[#202940] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6 
+                       before:inline-block before:font-normal before:text-[#202940] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
                        lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
                 <li class="relative mb-1">
                   <a class="ease py-1.5 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 lg:transition-colors"
@@ -201,7 +201,7 @@
               </a>
             </li>
 
-            
+
           </ul>
         </div>
       </div>

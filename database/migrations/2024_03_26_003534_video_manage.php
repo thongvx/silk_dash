@@ -15,12 +15,9 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('slug', 50)->unique()->comment('url slug để play video');
+            $table->string('slug', 500)->unique()->comment('url slug để play video');
             $table->integer('user_id')->index();
             $table->string('folder_id', 15)->nullable();
-            $table->string('sd', 10)->nullable();
-            $table->string('hd', 10)->nullable();
-            $table->string('fhd', 10)->nullable();
             $table->string('title', 500)->comment('file name');
             $table->string('poster')->nullable();
             $table->string('grid_poster')->nullable();
