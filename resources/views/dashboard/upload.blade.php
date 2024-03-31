@@ -1,18 +1,21 @@
 @extends('dashboard.layouts.app')
 
 @section('content')
-    <div class="grid">
+    <div class="grid" box-lifted>
         <div class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start flex flex-col items-start md:grid">
             <button
-                class="[--tab-border-color:#202940] tab !text-green-400 text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block" data-content="file">
+                class="tab-lifted [--tab-border-color:#202940] tab !text-green-400 text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                data-content="file">
                 <i class="material-icons mr-3 py-2">cloud_upload</i>File Upload
             </button>
             <button
-                class="[--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block" data-content="remote">
+                class="tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                data-content="remote">
                 <i class="material-icons mr-3 py-2">link</i>Remote / URL Upload
             </button>
             <button
-                class="[--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block" data-content="clone">
+                class="tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                data-content="clone">
                 <i class="material-icons mr-3 py-2">content_copy</i>Clone Upload
             </button>
         </div>

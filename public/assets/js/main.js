@@ -33,11 +33,19 @@ $(function(){
     return index > 0
   }).addClass('bg-emerald-400')
 })
+document.onreadystatechange = function () {
+    var state = document.readyState;
+    if (state == 'loading') {
+        document.getElementById('loading').style.display = "block";
+    } else if (state == 'complete') {
+        document.getElementById('loading').style.display = "none";
+    }
+};
 if (document.querySelector("[btn-video]")) {
   loadJS(to_build + "assets/js/jsVideo/box-video.js", true);
 }
 if (document.querySelector("[datatable]")) {
-  loadJS(to_build + "assets/datatable/datatables.min.js", true);
+  loadJS(to_build + "assets/js/jsVideo/datatable.js", true);
 }
 if (document.querySelector("[box-lifted]")) {
     loadJS(to_build + "assets/js/tabs-lifted.js", true);

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 class HomeController extends Controller
 {
     public function dashboard(){
-        return view('dashboard.index');
+        $data['title'] = 'Dashboard';
+        return view('dashboard.index', $data);
     }
 }

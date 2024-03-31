@@ -181,13 +181,16 @@
                 </li>
 
                 <li class="relative mb-2">
-                  <a class="menu-sidebar pl-2 pr-12 text-red-500 opacity-80 hover:bg-slate-900 py-1.5 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors"
-                    href="">
-                    <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                      <i class="material-icons opacity-1 font-bold	">logout</i>
-                    </div>
-                    <span class="ml-1 duration-300 opacity-1 pointer-events-none ease">Log Out</span>
-                  </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="_method" value="POST">
+                        <button type="submit" class="menu-sidebar pl-2 pr-12 text-red-500 opacity-80 hover:bg-slate-900 py-1.5 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors">
+                            <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                                <i class="material-icons opacity-1 font-bold">logout</i>
+                            </div>
+                            <span class="ml-1 duration-300 opacity-1 pointer-events-none ease">Log Out</span>
+                        </button>
+                    </form>
                 </li>
               </ul>
             </li>
