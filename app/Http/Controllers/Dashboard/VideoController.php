@@ -16,7 +16,9 @@ class VideoController
     }
 
     public function video(Request $request){
+        $data = $this->getVideoData($request);
 
+        return view('dashboard.videos.index', $data);
     }
     // lay data video
     private function getVideoData(Request $request)
@@ -44,12 +46,12 @@ class VideoController
         foreach ($data['videos'] as $video) {
             $video->size = $this->convertFileSize($video->size);
         }
-        var_dump($data); die;
         return $data;
     }
     // Hiển thị danh sách các video của user
     public function index(Request $request)
     {
+
         $data = $this->getVideoData($request);
 
         return view('dashboard.videos.index', $data);
