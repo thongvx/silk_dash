@@ -30,8 +30,7 @@ class VideoFactory extends Factory
             'quality' => $this->faker->randomElement(['none','SD', 'HD', 'FHD']),
             'format' => $this->faker->randomElement(['mp4', 'avi', 'mkv']),
             'soft_delete' => $this->faker->boolean(),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+
         ];
     }
 }
