@@ -15,12 +15,6 @@ class VideoController
         $this->videoRepo = $videoRepo;
     }
 
-    public function video(Request $request){
-        var_dump('ahjiaiaia');
-        $data = $this->getVideoData($request);
-
-        return view('dashboard.videos.index', $data);
-    }
     // lay data video
     private function getVideoData(Request $request)
     {
