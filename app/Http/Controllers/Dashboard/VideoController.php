@@ -44,7 +44,7 @@ class VideoController
         foreach ($data['videos'] as $video) {
             $video->size = $this->convertFileSize($video->size);
         }
-
+        var_dump($data); die;
         return $data;
     }
     // Hiển thị danh sách các video của user
