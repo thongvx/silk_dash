@@ -16,6 +16,7 @@ class VideoController
     }
 
     public function video(Request $request){
+        var_dump('ahjiaiaia');
         $data = $this->getVideoData($request);
 
         return view('dashboard.videos.index', $data);
