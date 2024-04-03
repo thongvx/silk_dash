@@ -32,14 +32,24 @@ $(function(){
     let index = path.indexOf(menu)
     return index > 0
   }).addClass('bg-emerald-400')
-}) 
+})
+document.onreadystatechange = function () {
+    var state = document.readyState;
+    if (state == 'loading') {
+        document.getElementById('loading').style.display = "block";
+    } else if (state == 'complete') {
+        document.getElementById('loading').style.display = "none";
+    }
+};
 if (document.querySelector("[btn-video]")) {
-  loadJS(to_build + "assets/js/jsVideo/box-video.js?v=1.0.1", true);
+  loadJS(to_build + "assets/js/jsVideo/box-video.js", true);
 }
 if (document.querySelector("[datatable]")) {
-  loadJS(to_build + "assets/datatable/datatables.min.js", true);
+  loadJS(to_build + "assets/js/jsVideo/datatable.js", true);
 }
-
+if (document.querySelector("[box-lifted]")) {
+    loadJS(to_build + "assets/js/tabs-lifted.js", true);
+}
 if (document.querySelector("nav [navbar-trigger]")) {
   loadJS(to_build + "assets/js/navbar-collapse.js", true);
 }
@@ -58,15 +68,15 @@ if (document.querySelector("[dropdown-trigger]")) {
 }
 
 if (document.querySelector("[fixed-plugin]")) {
-  loadJS(to_build + "assets/js/fixed-plugin.js?v=1.0.5", true);
+  loadJS(to_build + "assets/js/fixed-plugin.js", true);
 }
 
 if (document.querySelector("[navbar-main]") || document.querySelector("[navbar-profile]")) {
   if(document.querySelector("[navbar-main]")){
-    loadJS(to_build + "assets/js/navbar-sticky.js?v=1", true);
+    loadJS(to_build + "assets/js/navbar-sticky.js", true);
   }
   if (document.querySelector("aside")) {
-    loadJS(to_build + "assets/js/sidenav-burger.js?v=1.2.30", true);
+    loadJS(to_build + "assets/js/sidenav-burger.js?", true);
   }
 }
 

@@ -11,7 +11,8 @@ class UploadController
 {
     //Trả về giao diện upload
     public function upload(Request $request){
-        return view('dashboard.upload');
+        $data['title'] = 'Upload';
+        return view('dashboard.upload', $data);
     }
 
     //Xử lý gọi vào hàm này để đẩy videos lên

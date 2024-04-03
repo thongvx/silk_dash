@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('folder', function (Blueprint $table) {
+        Schema::create('folders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->text('name_folder')->nullable();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('folder');
+        Schema::dropIfExists('folders');
     }
 };

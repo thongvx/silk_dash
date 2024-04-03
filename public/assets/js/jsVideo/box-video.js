@@ -1,6 +1,5 @@
 var fixedVideo = document.querySelector("[fixed-video]");
 
-var fixedBox = document.querySelectorAll("[btn-video]");
 var fixedEdit = document.querySelector("[btn-edit]");
 var fixedDelete = document.querySelector("[btn-delete]");
 var fixedExport = document.querySelector("[btn-export]");
@@ -10,15 +9,15 @@ var fixedVideoCard = document.querySelector("[fixed-video-card]");
 var fixedVideoCloseButton = document.querySelectorAll("[fixed-video-close-button]");
 
 
-fixedBox.forEach(function(element) {
-  element.addEventListener("click", function () {
+function fixedBox () {
     fixedVideoCard.classList.toggle("opacity-0");
     fixedVideoCard.classList.toggle("opacity-1");
     fixedVideoCard.classList.toggle("hidden");
     fixedVideoCard.classList.toggle("block");
-  });
-});
-fixedEdit.addEventListener("click", function () {
+}
+$(document).on('click', '.btn-edit', function() {
+    console.log('a')
+    fixedBox()
     $('#edit').toggle("hidden");
 });
 fixedDelete.addEventListener("click", function () {
@@ -39,3 +38,5 @@ fixedVideoCloseButton.forEach(function(element) {
     $('#move,#edit,#delete,#export').css("display",'none')
   });
 });
+
+

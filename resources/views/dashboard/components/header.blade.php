@@ -1,4 +1,12 @@
-<!--     Fonts and icons     -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png"/>
+    <link rel="icon" type="image/png" href="../assets/img/logo-stream2.png"/>
+    <title>{{$title}}</title><!--     Fonts and icons     -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
@@ -14,6 +22,7 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
     .material-icons {
@@ -30,18 +39,6 @@
         direction: ltr;
         -webkit-font-feature-settings: 'liga';
         -webkit-font-smoothing: antialiased;
-    }
-    span a.paginate_button {
-        background: #0f172a;
-        margin: 0 5px;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 12px;
-    }
-    .dataTables_length select {
-        background-color: transparent;
-        border: none;
-        outline: none;
     }
 </style>
 </head>
