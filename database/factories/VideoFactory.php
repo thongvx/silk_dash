@@ -17,7 +17,7 @@ class VideoFactory extends Factory
         $folderIds = Folder::pluck('id')->toArray();
 
         return [
-            'slug' => Str::uuid(),
+            'slug' => uniqid(),
             'user_id' => $this->faker->numberBetween(100000, 999999),
             'folder_id' => $this->faker->randomElement($folderIds), // Chọn một ID thư mục ngẫu nhiên
             'title' => $this->faker->sentence(),
