@@ -150,9 +150,9 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="mb-1 text-lg font-semibold leading-normal dark:text-white">Full Name</h6>
+                        <h6 class="mb-1 text-lg font-semibold leading-normal dark:text-white">{{\Illuminate\Support\Facades\Auth::user()->name}}</h6>
                         <p class="mb-0 text-xs leading-tight text-white/80">
-                          full@gmail.com
+                            {{\Illuminate\Support\Facades\Auth::user()->email}}
                         </p>
                       </div>
                     </div>
