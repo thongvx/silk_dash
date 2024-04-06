@@ -41,33 +41,35 @@
                             </div>
                         </div>
                         <div class='-mb-12 bg-slate-900 mx-6 rounded-xl'>
-                            <h3 class='py-4 px-3 dark:text-white font-bold'>Save To <span>Single Videos( Default Folder)</span></h3>
+                            <h3 class='py-4 px-3 dark:text-white font-bold'>Save To <span id="folder">Single Videos( Default Folder)</span></h3>
                         </div>
                     </div>
                     <div id="remote" class="tab-content">
-                        <form class='from-current pb-8'>
-                            <div class="col-span-full text-center">
-                                <div class="noti text-green-400 italic">
-                                    <label htmlFor="cover-photo" class="text-start block text-sm font-medium leading-6">
-                                        After submiting torrent, only files with allowed extensions (mkv, wmv, avi, mp4,
-                                        mpeg4, mpegps, flv, 3gp, webm, mov, mpg, m4v) and allowed size (less than 10GB)
-                                        will be shown, then you can select one or more files for uploading.
-                                    </label>
-                                    <label htmlFor="cover-photo" class="text-start block text-sm font-medium leading-6">
-                                        Please note each task has maximum 24 hours to finish downloading, after that it
-                                        will be cleared. If you facing any issues, please open support ticket and let us
-                                        know
-                                    </label>
-                                </div>
-                                <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
+                        <div class="col-span-full text-center">
+                            <div class="noti text-green-400 italic">
+                                <label htmlFor="cover-photo" class="text-start block text-sm font-medium leading-6">
+                                    After submiting torrent, only files with allowed extensions (mkv, wmv, avi, mp4,
+                                    mpeg4, mpegps, flv, 3gp, webm, mov, mpg, m4v) and allowed size (less than 10GB)
+                                    will be shown, then you can select one or more files for uploading.
+                                </label>
+                                <label htmlFor="cover-photo" class="text-start block text-sm font-medium leading-6">
+                                    Please note each task has maximum 24 hours to finish downloading, after that it
+                                    will be cleared. If you facing any issues, please open support ticket and let us
+                                    know
+                                </label>
+                            </div>
+                            <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
+                            <form class='from-current pb-8' onsubmit="transferLink(event)">
                                 <div
-                                    class="mt-2 lg:mx-32 shadow-lg hover:shadow-indigo-500/40 hover:border-indigo-600 dark:hover:border-indigo-600 flex justify-center relative rounded-lg border border-solid border-gray-900/25 dark:border-gray-200">
-                                    <textarea name="" id="" class='w-full bg-transparent rounded-xl px-2 py-1' rows="8"></textarea>
+                                    class="mt-2 lg:mx-32 shadow-lg flex justify-center relative rounded-lg  bg-slate-900">
+                                    <textarea name="link_transfer" id="" class='w-full bg-transparent rounded-xl px-2 py-1' rows="8"></textarea>
+                                    <input class="hidden" type="text" id="userID" name="userID" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
+                                    <input class="hidden" type="text" id="nameFolderPost" name="nameFolder" value="single videos">
                                 </div>
                                 <button type="submit"
                                         class='font-semibold hover:text-indigo-600 dark:hover:text-indigo-600 mt-4 dark:text-white rounded-lg px-6 py-1.5 shadow-lg shadow-gray-400/50 dark:shadow-slate-900 bg-gray-100 dark:bg-gray-900'>Submit</button>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                         <div class='-mb-12 bg-slate-900 mx-6 rounded-xl'>
                             <h3 class='py-4 px-3 dark:text-white font-bold'>Save To <span>Single Videos( Default
                           Folder)</span></h3>
@@ -99,12 +101,31 @@
             </div>
         </div>
         <div class="mt-10 bg-[#202940] rounded-xl py-3">
-            <div class="text-white text-lg font-bold pl-3 pt-3">File Upload</div>
+            <div class="text-white pl-3 pt-3 flex justify-between items-center">
+                <div class=" text-lg font-bold ">Transfer</div>
+                <div class="text-white">
+                    <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote all pending</button>
+                </div>
+            </div>
             <hr class="h-px my-3 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
             <div class="text-center text-emerald-500 font-bold">
                 No Active Tasks
             </div>
-
+            <div id="list-upload">
+                <div class="mx-3 mb-3" id="${data._progress.theId}">
+                    <div class="text-white pb-2 flex justify-between">
+                        <div class="title-file">Uploading</div>
+                        <div class="size"></div>
+                    </div>
+                    <div class="progress bg-gray-600 h-3.5 rounded-lg">
+                        <div class="bar bg-orange-500 h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center" style="width:20%">20%</div>
+                    </div>
+                    <div class="text-white mt-3">
+                        <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote</button>
+                        <button class="px-4 py-1 rounded-lg bg-blue-500">Retry</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
