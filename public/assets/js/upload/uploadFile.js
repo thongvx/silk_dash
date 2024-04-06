@@ -1,9 +1,11 @@
-const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 var size, size2, size3, size4
 var $ = window.$; // use the global jQuery instance
 var $uploadList = $("#list-upload");
 var uploadlist1 = document.getElementById('list-upload')
 var $fileUpload = $('#file');
+var $folder = $('#folder');
+
+const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 function niceBytes(x){
     let l = 0, n = parseInt(x, 10) || 0;
 
