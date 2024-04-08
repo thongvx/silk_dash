@@ -185,5 +185,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+    'google_api_key' => env('API_KEY', 'AIzaSyBw5Dl-jfZdcZR8O5YJdGKQy3dhmO9OZs8'),
 
 ];

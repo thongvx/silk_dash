@@ -29,7 +29,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('video.control');
 
-
+Route::get('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUpload']);
+Route::post('uploadRemote', [\App\Http\Controllers\UploadRemoteController::class, 'upload']);
+Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
 
 

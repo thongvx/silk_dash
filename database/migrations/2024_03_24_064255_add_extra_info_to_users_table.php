@@ -25,7 +25,7 @@ return new class extends Migration
                 $table->integer('uploaded')->nullable();
                 $table->integer('video')->nullable();
                 $table->integer('play')->nullable();
-                $table->text('storage')->nullable();
+                $table->bigInteger('storage')->nullable();
                 $table->text('domain')->nullable();
                 $table->integer('max_transfer')->nullable();
                 $table->integer('max_torrent')->nullable();

@@ -9,7 +9,7 @@ Hướng dẫn cho người mới:
 - sau đó tải các thư viện js bằng lệnh <b>npm install</b>, sau đó <b>npm update</b> và cuối cùng chạy <b>npm run dev</b>
 - Chạy lệnh <b>php artisan storage:link</b> để link storage
 - Chạy server bằng lệnh <b>php artisan serve</b> ok giờ có thể truy cập website rồi
-  Những công việc cần làm 
+  Những công việc cần làm
 
 
   

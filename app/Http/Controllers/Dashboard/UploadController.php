@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 
 
+use App\Factories\DownloadFactory;
+use App\Models\User;
+use Google\Service\ServiceControl\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -11,6 +14,18 @@ class UploadController
 {
     //Trả về giao diện upload
     public function upload(Request $request){
+
+        $videoInfo = $request->all();
+        $userId = $videoInfo['userId'];
+        $user = User::find($userId);
+        //Update video, storage, lastUpload
+
+        $videoSize = $videoInfo['size'];
+        $user->increment('video');
+        $user->increment('storage', $videoSize);
+        $user->save();
+
+        //Lam giau thong tin
         $data['title'] = 'Upload';
         return view('dashboard.upload', $data);
     }
@@ -49,6 +64,25 @@ class UploadController
         //Forward Request $request to server được chon
 
 
+    }
+
+    //Cho phép người dùng upload từ url
+    public function remoteUpload($url)
+    {
+        try {
+            $download = DownloadFactory::create($url);
+            $download->download();
+        } catch (\Exception $e) {
+            $key = 'uploadProgress.'.$url;
+            Redis::setex($key, 3600, 'error: '.$e->getMessage());
+        }
+
+    }
+
+    public function getProgress(Request $request)
+    {
+        $progressKey = 'uploadProgress.'.$request->input('key');
+        return Redis::get($progressKey);
     }
 
 }
