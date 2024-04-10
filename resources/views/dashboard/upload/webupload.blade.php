@@ -4,7 +4,7 @@
             You can upload multiple video files per a session with total sizes up to 100 GB
         </div>
         <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
-        <form class='lg:mx-32 from-current' onsubmit="uploadFile(event)">
+        <form class='lg:mx-32 from-current' method="POST" action="e01.streamsilk.com/uploadapi" onsubmit="uploadFile(event)">
             <label htmlfor="file" class="rounded-xl py-10 bg-slate-900 flex justify-center flex-col h-full w-full relative ">
                 <span class='font-semibold text-green-400'>Select Video files to upload</span>
                 <p class="pl-1">or drag and drop</p>
