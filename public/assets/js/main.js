@@ -57,11 +57,17 @@ if (document.querySelector("[data-target='tooltip']")) {
     loadJS(to_build + "assets/js/tooltips.js", true);
     loadStylesheet(to_build + "assets/css/tooltips.css");
 }
+if (document.querySelector("#box-upload")) {
+    loadJS(to_build + "assets/js/upload/upload.js", true);
+}
+
+if (document.querySelector("#box-upload")) {
+    loadJS(to_build + "assets/js/upload/transfer.js", true);
+}
 
 if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/uploadFile.js", true);
 }
-
 if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/jquery.fileupload.js", true);
 }

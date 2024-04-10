@@ -15,19 +15,13 @@ class UploadController
     //Trả về giao diện upload
     public function upload(Request $request){
 
-        $videoInfo = $request->all();
-        $userId = $videoInfo['userId'];
-        $user = User::find($userId);
-        //Update video, storage, lastUpload
-
-        $videoSize = $videoInfo['size'];
-        $user->increment('video');
-        $user->increment('storage', $videoSize);
-        $user->save();
-
         //Lam giau thong tin
         $data['title'] = 'Upload';
         return view('dashboard.upload', $data);
+    }
+    public function box_upload(Request $request){
+        $uploadType = $request->input('upload');
+        return view('dashboard.upload.'.$uploadType);
     }
 
     //Xử lý gọi vào hàm này để đẩy videos lên
@@ -65,7 +59,11 @@ class UploadController
 
 
     }
-
+    public function remoteUploadDirect(Request $request)
+    {
+        $url = $request->input('url');
+        $this->remoteUpload($url);
+    }
     //Cho phép người dùng upload từ url
     public function remoteUpload($url)
     {

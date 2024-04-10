@@ -1,90 +1,146 @@
-<x-laravel-ui-adminlte::adminlte-layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/img/logo3.png" />
+    <title>Stream Silk</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <body class="hold-transition register-page">
-        <div class="register-box">
-            <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Main Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        input:-webkit-autofill {
+            background-color: #e21010 !important;
+        }
+
+        input::-moz-placeholder {
+            background-color: #e70707 !important; /* Màu nền khi có placeholder */
+        }
+    </style>
+</head>
+<body class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500 bg-[url('../image/background.jpg')]">
+<main class="mt-0 transition-all duration-200 ease-in-out">
+    <section>
+        <div class="relative flex items-center w-full min-h-screen p-0 overflow-hidden">
+            <div class="md:w-6/12 w-0 hidden md:block pl-20">
+                <div class="text-white">
+                    <h4  class="text-6xl font-semibold">Welcome To</h4>
+                    <h4 class="text-8xl font-semibold">Stream Silk</h4>
+                </div>
+                <div>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-6/12 w-full flex justify-center">
+                <div class="flex -mx-3 rounded-2xl md:w-7/12 w-8/12 backdrop-blur-xl bg-white/20">
+                    <div class="relative w-full flex flex-col items-center min-w-0 break-words border-0 shadow-none lg:py4">
+                        <div class="py-6 pb-0 mb-0 text-white text-center">
+                            <h4 class="font-semibold text-3xl">Create Account</h4>
+                            <p class="mb-0">fill out the details below</p>
+                        </div>
+                        <div class="w-11/12 p-6 text-white">
+                            <form method="post" action="{{ route('register') }}">
+                                @csrf
+                                <div class="mb-4">
+                                    <label >Name</label>
+                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
+                                        <i class="material-icons opacity-1 text-2xl p-1">person</i>
+                                        <input type="text" name="name"
+                                               class="@error('name') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               placeholder="Full name">
+                                    </div>
+                                    @error('name')
+                                    <span class="font-italic error invalid-feedback text-red-500" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label >Email</label>
+                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
+                                        <i class="material-icons opacity-1 text-2xl p-1">email</i>
+                                        <input type="email" name="email"
+                                               class="@error('email') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               placeholder="Full name">
+                                    </div>
+                                    @error('email')
+                                    <span class="font-italic error invalid-feedback text-red-500" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label >Password</label>
+                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
+                                        <i class="material-icons opacity-1 text-2xl p-1">key</i>
+                                        <input type="password" name="password"
+                                               class="@error('password') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               placeholder="Full name">
+                                    </div>
+                                    @error('password')
+                                    <span class="font-italic  error invalid-feedback text-red-500" role="alert">
+                                        {{ $message }}\
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-4">
+                                    <label >Retype Password</label>
+                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
+                                        <i class="material-icons opacity-1 text-2xl p-1">key</i>
+                                        <input type="password" name="password_confirmation"
+                                               class="bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               placeholder="Retype password">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="icheck-primary">
+                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                  after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
+                                                  checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
+                                                   >
+                                            <label for="agreeTerms" class="ml-2">
+                                                I agree to the <a href="#">terms</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="flex justify-center mt-3">
+                                        <button type="submit" class="rounded-lg bg-indigo-600 px-5 py-1.5">Register</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
+                        </div>
+                        <div class="border-black/12.5 rounded-b-2xl border-t-0 border-solid p-6 text-center pt-0 px-1 sm:px-6">
+                            <p class="mx-auto mb-6 leading-normal text-sm text-white">
+                                Already have an account? <a href="{{ route('login') }}" class="font-semibold text-transparent bg-clip-text bg-fuchsia-500">Sign up</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card">
-                <div class="card-body register-card-body">
-                    <p class="login-box-msg">Register a new membership</p>
-
-                    <form method="post" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="input-group mb-3">
-                            <input type="text" name="name"
-                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
-                                placeholder="Full name">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-user"></span></div>
-                            </div>
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <input type="email" name="email" value="{{ old('email') }}"
-                                class="form-control @error('email') is-invalid @enderror" placeholder="Email">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-envelope"></span></div>
-                            </div>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror" placeholder="Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
-                            </div>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <input type="password" name="password_confirmation" class="form-control"
-                                placeholder="Retype password">
-                            <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="icheck-primary">
-                                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                    <label for="agreeTerms">
-                                        I agree to the <a href="#">terms</a>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Register</button>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                    </form>
-
-                    <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
-                </div>
-                <!-- /.form-box -->
-            </div><!-- /.card -->
-
-            <!-- /.form-box -->
         </div>
-        <!-- /.register-box -->
-    </body>
-</x-laravel-ui-adminlte::adminlte-layout>
+    </section>
+</main>
+</body>
+
+</html>
