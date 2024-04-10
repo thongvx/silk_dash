@@ -11,7 +11,7 @@ $(document).on('submit', '#transferLink', function(event) {
         if(url != ''){
             url = url.trim();
             // Thêm một tiến trình upload mới vào danh sách
-            var div_progress = `<div class="mx-3 mb-3 link_transfer" id="">
+            var div_progress = `<div class="mx-3 mb-3 info-link" id="">
                                         <div class="text-white pb-2 flex justify-between">
                                             <div class="title-file">${url}</div>
                                             <div class="size"></div>
@@ -45,3 +45,4 @@ $(document).on('submit', '#transferLink', function(event) {
     //         console.error('Error:', error);
     //     });
 });
+

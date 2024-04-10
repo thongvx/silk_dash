@@ -20,7 +20,7 @@ class UploadController
         return view('dashboard.upload', $data);
     }
     public function box_upload(Request $request){
-        $uploadType = $request->input('upload');
+        $uploadType = $request->input('upload', 'webupload');
         return view('dashboard.upload.'.$uploadType);
     }
 
