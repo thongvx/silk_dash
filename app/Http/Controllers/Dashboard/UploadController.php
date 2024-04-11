@@ -3,21 +3,28 @@
 namespace App\Http\Controllers\Dashboard;
 
 
-
+use Illuminate\Support\Facades\Auth;
 use App\Factories\DownloadFactory;
 use App\Models\User;
-use Google\Service\ServiceControl\Auth;
+use App\Repositories\VideoRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class UploadController
 {
+    protected  $videoRepo;
     //Trả về giao diện upload
+    public function __construct(VideoRepo $videoRepo){
+        $this->videoRepo = $videoRepo;
+    }
     public function upload(Request $request){
 
         //Lam giau thong tin
+        $user = Auth::user();
         $data['title'] = 'Upload';
+        $data['folders'] = $this->videoRepo->getAllFolders(1);
         return view('dashboard.upload', $data);
+
     }
     public function box_upload(Request $request){
         $uploadType = $request->input('upload', 'webupload');

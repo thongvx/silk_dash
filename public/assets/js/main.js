@@ -7,6 +7,7 @@ if (!aux.includes("pages")) {
 }
 loadStylesheet(to_build + "assets/css/perfect-scrollbar.css");
 loadJS(to_build + "assets/js/perfect-scrollbar.js", true);
+
 $(function(){
     const path = window.location.pathname
     if(path.indexOf('dashboard') > 0){
@@ -57,13 +58,13 @@ if (document.querySelector("[data-target='tooltip']")) {
     loadJS(to_build + "assets/js/tooltips.js", true);
     loadStylesheet(to_build + "assets/css/tooltips.css");
 }
-setTimeout(function () {
+
+if (document.querySelector("#box-upload")) {
+    loadJS(to_build + "assets/js/upload/upload.js", true);
+}
+setTimeout(function (){
     if (document.querySelector("#box-upload")) {
         loadJS(to_build + "assets/js/upload/transfer.js", true);
-    }
-
-    if (document.querySelector("[file-upload]")) {
-        loadJS(to_build + "assets/js/upload/uploadFile.js", true);
     }
     if (document.querySelector("[file-upload]")) {
         loadJS(to_build + "assets/js/upload/jquery.fileupload.js", true);
@@ -74,11 +75,10 @@ setTimeout(function () {
     if (document.querySelector("[file-upload]")) {
         loadJS(to_build + "assets/js/upload/jquery.ui.widget.js", true);
     }
-}, 2000)
-if (document.querySelector("#box-upload")) {
-    loadJS(to_build + "assets/js/upload/upload.js", true);
-}
-
+    if (document.querySelector("[file-upload]")) {
+        loadJS(to_build + "assets/js/upload/uploadFile.js", true);
+    }
+}, 1000)
 
 
 if (document.querySelector("[file-upload]")) {

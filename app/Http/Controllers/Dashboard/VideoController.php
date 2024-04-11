@@ -27,7 +27,7 @@ class VideoController
         $limit = $request->input('limit', 20);
 
         // Lấy danh sách thư mục và tên thư mục hiện tại
-        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
+        $data['folders'] = $this->videoRepo->getAllFolders(1);
         $data['currentFolderName'] = $this->videoRepo->getFolderName($folderId);
 
         // Lấy danh sách video theo cách sắp xếp mới
