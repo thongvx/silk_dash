@@ -4,7 +4,7 @@
             You can upload multiple video files per a session with total sizes up to 100 GB
         </div>
         <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
-        <form class='lg:mx-32 from-current' method="POST"
+        <form class='lg:mx-32 from-current' method="POST" id="form-upload-file"
               action="e01.streamsilk.com/uploadapi" enctype="multipart/form-data">
             <label htmlfor="file" class="rounded-xl py-10 bg-slate-900 flex justify-center flex-col h-full w-full relative ">
                 <span class='font-semibold text-green-400'>Select Video files to upload</span>
@@ -14,7 +14,7 @@
             <input class="hidden" type="text" id="userID" name="userID" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
             <input class="hidden" type="text" id="folderPost" name="FolderID" value="1">
         </form>
-        <div id="list-upload-file">
+        <div class="lg:mx-32" id="list-upload-file">
         </div>
     </div>
     <div class='-mb-12 bg-slate-900 mx-6 rounded-xl flex justify-between items-center px-3'>

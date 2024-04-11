@@ -12,12 +12,12 @@ function niceBytes(x){
     }
     size = n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l]
 }
+Upload_FILE()
 $(document).ready(function() {
     $(document).on('change', '#file', function() {
         const MAX_FILE_SIZE = 100 * 1073741824; // 100GB
         const form = this.closest('form');
         const total_size = Array.from(this.files).reduce((total, file) => total + file.size, 0);
-        var formData = new FormData(form);
         if(total_size < MAX_FILE_SIZE){
             Upload_FILE(formData);
             $(form).addClass('hidden');
@@ -25,9 +25,10 @@ $(document).ready(function() {
 
     });
 });
-function Upload_FILE (formData){
+function Upload_FILE (){
     if ($uploadList.length > 0 && $fileUpload.length > 0) {
-        console.log('a')
+        const form = $('#form-upload-file')[0];
+        var formData = new FormData(form);
         var idSequence = 0;
         $fileUpload.fileupload({
             maxChunkSize: 5 * 1024 * 1024,
@@ -52,7 +53,7 @@ function Upload_FILE (formData){
                                             </div>
                                         </div>`;
                 uploadlist1.insertAdjacentHTML('beforebegin', div_progress);
-                $('#box-upload').addClass('d-none');
+                $('#form-upload-file').addClass('hidden');
                 data.submit();
             },
             progress: function (e, data) {
