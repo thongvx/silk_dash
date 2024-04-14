@@ -18,6 +18,7 @@ $(document).ready(function() {
         const MAX_FILE_SIZE = 100 * 1073741824; // 100GB
         const form = this.closest('form');
         const total_size = Array.from(this.files).reduce((total, file) => total + file.size, 0);
+        var formData = new FormData(form);
         if(total_size < MAX_FILE_SIZE){
             Upload_FILE(formData);
             $(form).addClass('hidden');

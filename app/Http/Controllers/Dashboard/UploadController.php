@@ -26,10 +26,6 @@ class UploadController
         return view('dashboard.upload', $data);
 
     }
-    public function box_upload(Request $request){
-        $uploadType = $request->input('upload', 'webupload');
-        return view('dashboard.upload.'.$uploadType);
-    }
 
     //Xử lý gọi vào hàm này để đẩy videos lên
     public function uploadVideo(Request $request){
@@ -77,17 +73,23 @@ class UploadController
         try {
             $download = DownloadFactory::create($url);
             $download->download();
+
         } catch (\Exception $e) {
             $key = 'uploadProgress.'.$url;
             Redis::setex($key, 3600, 'error: '.$e->getMessage());
         }
-
     }
 
     public function getProgress(Request $request)
     {
         $progressKey = 'uploadProgress.'.$request->input('key');
-        return Redis::get($progressKey);
+        $progress = Redis::get($progressKey);
+
+        if ($progress === null) {
+            return response()->json(['error' => 'Progress not found'], 404);
+        }
+
+        return $progress;
     }
 
 }

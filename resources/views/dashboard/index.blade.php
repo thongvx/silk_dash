@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="flex flex-wrap -mx-3">
@@ -10,10 +10,10 @@
         <!-- card1 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                        class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">storage</i>
                     </div>
                     <div class='font-semibold'>
@@ -37,10 +37,10 @@
         <!-- card2 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                        class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">trending_up</i>
                     </div>
                     <div class='font-semibold'>
@@ -64,10 +64,10 @@
         <!-- card3 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                        class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">trending_up</i>
                     </div>
                     <div class='font-semibold'>
@@ -91,10 +91,10 @@
         <!-- card4 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                        class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">attach_money</i>
                     </div>
                     <div class='font-semibold'>
@@ -120,7 +120,7 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                class="border-black/12.5 bg-[#202940] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                    class="border-black/12.5 bg-[#202940] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
                     <h6 class="text-emerald-500 font-bold">Statistics</h6>
                     <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
@@ -144,7 +144,7 @@
                 </div>
                 <div class="grid grid-cols-1 gap-4 px-4 mt-3 h-[calc(380px)] overflow-auto">
                     <div
-                        class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                            class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-icons mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                            class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-icons mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -170,7 +170,7 @@
                         </div>
                     </div>
                     <div
-                        class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                            class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-icons mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -191,7 +191,7 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#202940] dark:shadow-dark-xl border-black-125 rounded-2xl bg-clip-border">
+                    class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#202940] dark:shadow-dark-xl border-black-125 rounded-2xl bg-clip-border">
                 <div class="p-4 pb-0 mb-0 rounded-t-4">
                     <div class="flex justify-between">
                         <h6 class="mb-2 text-emerald-500 font-bold text-lg">Top 10 viewed videos today</h6>
@@ -199,7 +199,7 @@
                 </div>
                 <div class="overflow-auto h-[calc(25vh)]">
                     <table
-                        class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
+                            class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
                         <tbody>
                         <tr>
                             <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
@@ -210,7 +210,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -225,7 +225,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -240,7 +240,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -255,7 +255,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -270,7 +270,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -285,7 +285,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -300,7 +300,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -315,7 +315,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -330,7 +330,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -345,7 +345,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
                                 </div>
@@ -358,13 +358,13 @@
         </div>
         <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
             <div
-                class="border-black/12.5 shadow-xl bg-[#202940] dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                    class="border-black/12.5 shadow-xl bg-[#202940] dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="p-4 pb-0 rounded-t-4">
                     <h6 class="mb-0 text-emerald-500 font-bold text-lg">Top Country</h6>
                 </div>
                 <div class="overflow-auto">
                     <table
-                        class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
+                            class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
                         <tbody>
                         <tr>
                             <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
@@ -395,7 +395,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
                                         Bounce:</p>
@@ -432,7 +432,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
                                         Bounce:</p>
@@ -469,7 +469,7 @@
                                 </div>
                             </td>
                             <td
-                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                 <div class="flex-1 text-center">
                                     <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
                                         Bounce:</p>

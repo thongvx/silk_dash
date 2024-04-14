@@ -1,7 +1,7 @@
 $(document).on('submit', '#transferLink', function(event) {
     event.preventDefault();
-
     // Tạo một đối tượng FormData mới
+
     var form = event.target.closest('form')
     var formData = new FormData(form);
 
@@ -29,20 +29,39 @@ $(document).on('submit', '#transferLink', function(event) {
 
     });
 
-    // Tạo một yêu cầu POST đến server để thực hiện remote upload
-    // fetch('/uploadRemote', {
-    //     method: 'POST',
-    //     body: formData,
-    //     headers: {
-    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-    //     },
-    // })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.error(data);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error:', error);
-    //     });
+    fetch('/uploadRemote', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.error(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 });
+setInterval(function() {
+    if ($('.info-link').length == 0) return;
+    $('.info-link').each(function() {
+        var url = $(this).find('.title-file').text();
+        var encodedUrl = encodeURIComponent(url);
+        fetch('/uploadRemoteStatus?key=' + encodedUrl, {
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+}, 5000);
 

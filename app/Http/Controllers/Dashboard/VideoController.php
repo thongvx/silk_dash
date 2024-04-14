@@ -49,14 +49,14 @@ class VideoController
 
         $data = $this->getVideoData($request);
 
-        return view('dashboard.videos.index', $data);
+        return view('videos.index', $data);
     }
 // Hàm sort
     public function control(Request $request)
     {
         $data = $this->getVideoData($request);
 
-        return view('dashboard.videos.table', $data);
+        return view('videos.table', $data);
     }
     //cover
     private function convertFileSize($sizeInBytes)
