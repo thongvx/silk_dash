@@ -11,6 +11,8 @@ Hướng dẫn cho người mới:
 - Chạy server bằng lệnh <b>php artisan serve</b> ok giờ có thể truy cập website rồi
   Những công việc cần làm
 
+Code xong nhớ commit lên git nha
+
 
   
 
