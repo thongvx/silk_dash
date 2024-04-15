@@ -23,7 +23,7 @@ class UploadController
         $user = Auth::user();
         $data['title'] = 'Upload';
         $data['folders'] = $this->videoRepo->getAllFolders(1);
-        return view('dashboard.upload', $data);
+        return view('upload.upload', $data);
 
     }
 

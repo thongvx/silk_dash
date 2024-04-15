@@ -59,7 +59,7 @@ if (document.querySelector("[data-target='tooltip']")) {
     loadStylesheet(to_build + "assets/css/tooltips.css");
 }
 
-if (document.querySelector("#box-upload")) {
+if (document.querySelector("#box-content")) {
     loadJS(to_build + "assets/js/upload/upload.js", true);
 }
 setTimeout(function (){

@@ -1,7 +1,6 @@
 var fixedFolderCard = document.querySelector("[fixed-folder-card]");
 var fixedFolderCloseButton = document.querySelectorAll("[fixed-folder-close-button]");
 
-
 function fixedBox () {
     fixedFolderCard.classList.toggle("opacity-0");
     fixedFolderCard.classList.toggle("opacity-1");
@@ -16,11 +15,12 @@ fixedFolderCloseButton.forEach(function(element) {
         fixedFolderCard.classList.toggle("block");
     });
 });
-$(document).on('click', '[change-folder]', function() {
-    fixedBox()
+$(document).on('click', '[change-folder]', function () {
+    fixedBox();
 });
 $(document).on('click', '[folder]', function() {
     fixedBox()
-    $('#folderPost').val($(this).data('folderid'))
+    $('#folderPost').attr('value',$(this).data('folderid'))
     $('#folderName').text($(this).find('h5').first().text())
+    Upload_FILE ()
 });

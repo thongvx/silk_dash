@@ -4,14 +4,14 @@
     <div class="min-h-[calc(100vh-10em)]">
         <div class="flex flex-col" box-lifted data-page="upload">
             <div
-                class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
+                class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start md:!flex">
                 <button
                     class="tab-upload webupload tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                     data-content="webupload">
                     <i class="material-icons mr-3 py-2">cloud_upload</i>File Upload
                 </button>
                 <button
-                    class="tab-upload transfer tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                    class="tab-upload transfer tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                     data-content="transfer">
                     <i class="material-icons mr-3 py-2">link</i>Remote / URL Upload
                 </button>
@@ -43,6 +43,7 @@
             </div>
 
         </div>
-        @include('upload.folder')
+
     </div>
+    @include('upload.folder')
 @endsection

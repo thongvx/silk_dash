@@ -2,18 +2,6 @@ $(document).on('click', '[checked-All]', function () {
     var isChecked = $(this).prop('checked');
     $(this).closest('table').find('input[type="checkbox"]').prop('checked', isChecked);
 })
-function searchFolder(input) {
-    var valInput = $(input).val().toLowerCase()
-    var folder = input.closest('[folder]')
-    var itemFolders = folder.querySelectorAll('.item-folder');
-    valInput === ''
-        ? $(itemFolders).removeClass('hidden')
-        : $(itemFolders).filter(function () {
-            $(this).removeClass('hidden')
-            var folder = $(this).find('a').text().toLowerCase().indexOf(valInput)
-            folder > 0 ? '' : $(this).addClass('hidden')
-        })
-}
 $(document).on('click', '.checkbox',function(){
     var table = this.closest('table');
     var rows = $(table).find('tbody .checkbox').length;

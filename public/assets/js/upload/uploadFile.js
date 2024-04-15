@@ -12,8 +12,8 @@ function niceBytes(x){
     }
     return n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l];
 }
-Upload_FILE()
 $(document).ready(function() {
+    Upload_FILE()
     $(document).on('change', '#file', function() {
         const MAX_FILE_SIZE = 100 * 1073741824; // 100GB
         const form = this.closest('form');
@@ -41,7 +41,7 @@ function Upload_FILE (){
             sequentialUploads: false,
             formData: function (form) {
                         // Append token to the request - required for web routes
-                        return [{name: '_token', value: tokenValue}, {name: 'userID', value: userIDValue}, {name: 'nameFolder', value: folderID}];
+                        return [{name: '_token', value: tokenValue}, {name: 'userID', value: userIDValue}, {name: 'folderID', value: folderID}];
                     },
             crossDomain: true,
             xhrFields: { withCredentials: true },
