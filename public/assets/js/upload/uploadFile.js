@@ -41,7 +41,7 @@ function Upload_FILE (){
             sequentialUploads: false,
             formData: function (form) {
                         // Append token to the request - required for web routes
-                        return [{name: '_token', tokenValue}, {name: 'userID', userIDValue}, {name: 'nameFolder', value: folderID}];
+                        return [{name: '_token', tokenValue}, {name: 'userID', userIDValue}, {name: 'nameFolder', folderID}];
                     },
             crossDomain: true,
             xhrFields: { withCredentials: true },
