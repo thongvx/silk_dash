@@ -72,9 +72,6 @@ if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/jquery.ui.widget.js", true);
 }
 
-if (document.querySelector("[file-upload]")) {
-    loadJS(to_build + "assets/js/upload/remoteTransfer.js", true);
-}
 
 if (document.querySelector("[nav-pills]")) {
     loadJS(to_build + "assets/js/nav-pills.js", true);
