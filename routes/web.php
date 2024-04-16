@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
-
+Route::get('/uploadvideo', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadVideo']);
 
 
 Auth::routes();
@@ -36,6 +36,7 @@ Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 
 Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
 Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
 Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
+
 
 
 

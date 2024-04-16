@@ -24,7 +24,9 @@ class User extends Authenticatable
         'email',
         'password',
         'video',
-        'storage'
+        'storage',
+        'last_upload',
+        'encoder_priority'
     ];
 
     /**

@@ -8,30 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 
-class Video extends Model
+class encoderTask extends Model
 {
     use HasFactory;
 
-    protected $table = 'videos';
+    protected $table = 'encoder_task';
 
     protected $fillable = [
-        'slug',
-        'middle_slug',
         'user_id',
-        'folder_id',
-        'sd',
-        'hd',
-        'fhd',
-        'title',
-        'poster',
-        'grid_poster',
-        'is_sub',
-        'total_play',
-        'size',
-        'duration',
+        'slug',
+        'status',
+        'priority',
         'quality',
-        'format',
-        'soft_delete',
+        'size',
+        'sv_encoder',
+        'sv_upload',
+        'sv_storage',
+        'start_encoder',
+        'finish_encoder',
     ];
 
     protected static function boot()
