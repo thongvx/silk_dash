@@ -40,6 +40,8 @@ Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'down
 //-------------------------encoderController-------------------------------------------------------
 Route::get('/startEncoderTask', [\App\Http\Controllers\admin\encoderController::class, 'startEncoderTask']);
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\encoderController::class, 'finishEncoder']);
-
+//-------------------------storageController-------------------------------------------------------
+Route::get('/startStorageTask', [\App\Http\Controllers\admin\storageController::class, 'startStorageTask']);
+Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::class, 'finishStorage']);
 
 
