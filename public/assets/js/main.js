@@ -59,27 +59,6 @@ if (document.querySelector("[data-target='tooltip']")) {
     loadStylesheet(to_build + "assets/css/tooltips.css");
 }
 
-if (document.querySelector("#box-content")) {
-    loadJS(to_build + "assets/js/upload/upload.js", true);
-}
-setTimeout(function (){
-    if (document.querySelector("#box-upload")) {
-        loadJS(to_build + "assets/js/upload/transfer.js", true);
-    }
-    if (document.querySelector("[file-upload]")) {
-        loadJS(to_build + "assets/js/upload/jquery.fileupload.js", true);
-    }
-    if (document.querySelector("[file-upload]")) {
-        loadJS(to_build + "assets/js/upload/jquery.iframe-transport.js", true);
-    }
-    if (document.querySelector("[file-upload]")) {
-        loadJS(to_build + "assets/js/upload/jquery.ui.widget.js", true);
-    }
-    if (document.querySelector("[file-upload]")) {
-        loadJS(to_build + "assets/js/upload/uploadFile.js", true);
-    }
-}, 1000)
-
 
 if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/remoteTransfer.js", true);
@@ -113,6 +92,26 @@ if (document.querySelector("canvas")) {
 
 if (document.querySelector(".github-button")) {
     loadJS("https://buttons.github.io/buttons.js", true);
+}
+
+if (document.querySelector("#box-content")) {
+    loadJS(to_build + "assets/js/upload/upload.js", true);
+}
+if (document.querySelector("#box-upload")) {
+    loadJS(to_build + "assets/js/upload/transfer.js", true);
+}
+if (document.querySelector("[file-upload]")) {
+    loadJS(to_build + "assets/js/upload/jquery.fileupload.js", true);
+}
+if (document.querySelector("[file-upload]")) {
+    loadJS(to_build + "assets/js/upload/jquery.iframe-transport.js", true);
+}
+if (document.querySelector("[file-upload]")) {
+    loadJS(to_build + "assets/js/upload/jquery.ui.widget.js", true);
+}
+
+if (document.querySelector("[setting]")) {
+    loadJS(to_build + "assets/js/setting/setting.js", true);
 }
 
 function loadJS(FILE_URL, async) {

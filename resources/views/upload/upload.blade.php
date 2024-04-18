@@ -24,7 +24,7 @@
             <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative">
                 <div
                     class="border-[#202940] rounded-b-box rounded-se-box gap-2 bg-[#202940] bg-top p-4 [border-width:var(--tab-border)]"
-                    id="box-content">
+                    id="box-content" file-upload>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
     <table id="live-table" datatable data-page-size="10" data-column-table="{{ $column }}"
            data-column-direction="{{ $direction }}"
-           class="text-sm table-auto overflow-y-clip w-full min-w-max text-white text-left border-t-0">
+           class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left border-t-0">
         <thead class="sticky top-0 z-10">
         <tr class="bg-slate-900 transition-colors text-md">
             <th class="flex justify-center item-center py-2">
@@ -12,41 +12,41 @@
                                                   checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
                        checked-All>
             </th>
-            <th data-column="title" class='sortable-column cursor-pointer relative' aria-sort>
+            <th data-column="title" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                       data-direction="asc">▲</span>
                 <a href="javascript:void(0)">Filename</a>
                 <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                       data-direction="desc">▼</span>
             </th>
-            <th>
+            <th class="text-center">
                 ID
             </th>
-            <th>
+            <th class="text-center">
                 Poster
             </th>
-            <th data-column="size" class='pr-6 sortable-column cursor-pointer relative' aria-sort>
+            <th data-column="size" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                       data-direction="asc">▲</span>
                 <a href="javascript:void(0)">Filesize</a>
                 <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                       data-direction="desc">▼</span>
             </th>
-            <th data-column="total_play" class='sortable-column pr-6 cursor-pointer relative' aria-sort>
+            <th data-column="total_play" class='pl-2 sortable-column pr-6 cursor-pointer relative' aria-sort>
                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                       data-direction="asc">▲</span>
                 <a href="javascript:void(0)">Views</a>
                 <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                       data-direction="desc">▼</span>
             </th>
-            <th data-column="created_at" class='sortable-column cursor-pointer relative' aria-sort>
+            <th data-column="created_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                       data-direction="asc">▲</span>
                 <a href="javascript:void(0)">Uploaded</a>
                 <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                       data-direction="desc">▼</span>
             </th>
-            <th>
+            <th class="px-1 text-center">
                 Note
             </th>
             <th>
@@ -58,19 +58,24 @@
         </thead>
         <tbody>
         @foreach($videos as $index => $video)
+            @if($videos->count() == 0 || $videos->count() == null)
+                <tr class="my-3 h-12 bg-slate-900">
+                    <td class="flex items" colspan="9">No data available in table</td>
+                </tr>
+            @endif
             <tr class="my-3 h-12 {{ $index % 2 == 0 ? '' : 'bg-slate-900' }}">
                 <td class="flex items-center justify-center h-[inherit] px-2">
                     <input type="checkbox"
                            class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
                 </td>
-                <td>{{ $video->title }}</td>
-                <td>{{ $video->id }}</td>
+                <td class="pl-2">{{ $video->title }}</td>
+                <td class="text-center px-2">{{ $video->id }}</td>
                 <td>
                     <img class="h-10 px-2" src="{{ $video->poster }}">
                 </td>
-                <td>{{ $video->size }}</td>
-                <td>{{ $video->total_play }}</td>
-                <td>{{ $video->created_at }}</td>
+                <td class="text-center">{{ $video->size }}</td>
+                <td class="text-center">{{ $video->total_play }}</td>
+                <td class="pl-2">{{ $video->created_at }}</td>
                 <td class="text-center">{{ $video->is_sub }}</td>
                 <td class="relative">
                     <li class="list-none">

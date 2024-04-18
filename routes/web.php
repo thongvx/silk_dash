@@ -37,6 +37,9 @@ Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadControl
 Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
 Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
-
+route::get('report',function (){
+    $data['title'] = 'Report';
+    return view('Report.report', $data);
+});
 
 

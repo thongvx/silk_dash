@@ -41,7 +41,7 @@
                             <div class="rounded-xl">
                                 <div class="relative rounded-xl bg-[#202940]">
                                     <div class="px-2 pt-4 md:p-4">
-                                        <div id="box-content"
+                                        <div id="box-content" setting
                                              class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
                                         </div>
                                     </div>

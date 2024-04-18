@@ -9,10 +9,10 @@
     <form action="">
         <div class="text-emerald-500">
             <div class="grid grid-cols-4 gap-4 ">
-                <h5 class="col-span-1 text-end">
+                <h5 class="col-span-4 sm:col-span-1 md:text-end">
                     Video type
                 </h5>
-                <div class="col-span-2 flex flex-col text-white font-normal">
+                <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
                     <div class="flex justify-between">
                         <div>
                             <input type="radio" id="Non" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
@@ -71,10 +71,10 @@
                 </div>
             </div>
             <div class="grid grid-cols-4 gap-4 mt-6">
-                <h5 class="col-span-1 text-end">
+                <h5 class="col-span-4 sm:col-span-1 md:text-end">
                     Access Restriction
                 </h5>
-                <div class="col-span-2 text-white font-normal">
+                <div class="col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal">
                     <h5>(Allow who will be able to access your videos)</h5>
                     <div class="mt-2">
                         <input type="checkbox" id="block" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="grid grid-cols-4 gap-4 mt-6">
-                <h5 class="col-span-1 text-end">
+                <h5 class="col-span-4 sm:col-span-1 md:text-end">
                     Only follow (sub) domains to embed (comma seperated)
                 </h5>
                 <div class="col-span-2 text-white font-normal">
@@ -104,10 +104,10 @@
                 </div>
             </div>
             <div class="grid grid-cols-4 gap-4 items-center mt-6">
-                <h5 class="col-span-1 text-end">
+                <h5 class="col-span-4 sm:col-span-1 md:text-end">
                    Mode
                 </h5>
-                <div class="col-span-2 text-white font-normal grid grid-cols-2 gap-4 items-center">
+                <div class="col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal grid grid-cols-2 gap-4 items-center">
                     <div class="flex">
                         <h5 class="mr-4">
                             Premium Mode
@@ -137,10 +137,10 @@
                 </div>
             </div>
             <div class="grid grid-cols-4 gap-4 items-center mt-6">
-                <h5 class="col-span-1 text-end">
+                <h5 class="col-span-4 sm:col-span-1 md:text-end">
                     Public Videos
                 </h5>
-                <div class="text-white col-span-2">
+                <div class="text-white col-span-4 sm:col-span-3 md:col-span-2">
                     <div class="mt-2">
                         <input type="checkbox" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
@@ -155,10 +155,10 @@
                 </div>
             </div>
             <div class="grid grid-cols-4 gap-4 mt-6">
-                <h5 class="col-span-1 text-end text-warning">
+                <h5 class="col-span-4 sm:col-span-1 md:text-end text-warning">
                     Earning Modes
                 </h5>
-                <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 bg-slate-900">
+                <div class="text-white col-span-4 sm:col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 bg-slate-900">
                     <div class="flex justify-between flex-col p-2">
                         <div class="mb-3">
                             <input type="radio" id="Not" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
