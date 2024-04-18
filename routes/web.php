@@ -37,7 +37,9 @@ Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadControl
 Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
 Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
-
+//-------------------------encoderController-------------------------------------------------------
+Route::get('/startEncoderTask', [\App\Http\Controllers\admin\encoderController::class, 'startEncoderTask']);
+Route::get('/finishEncoder', [\App\Http\Controllers\admin\encoderController::class, 'finishEncoder']);
 
 
 

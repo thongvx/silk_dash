@@ -21,6 +21,7 @@ class encoderTask extends Model
         'priority',
         'quality',
         'size',
+        'format',
         'sv_encoder',
         'sv_upload',
         'sv_storage',

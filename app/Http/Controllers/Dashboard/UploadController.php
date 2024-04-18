@@ -93,6 +93,7 @@ class UploadController
             $encoderTask480->status = 0;
             $encoderTask480->priority = $encoderPriority+2;
             $encoderTask480->quality = 480;
+            $encoderTask480->format = $videoInfo['format'];
             $encoderTask480->size = $videoSize;
             $encoderTask480->sv_encoder = 0;
             $encoderTask480->sv_upload = 0;
@@ -108,6 +109,7 @@ class UploadController
                 $encoderTask720->status = 0;
                 $encoderTask720->priority = $encoderPriority+1;
                 $encoderTask720->quality = 720;
+                $encoderTask720->format = $videoInfo['format'];
                 $encoderTask720->size = $videoSize;
                 $encoderTask720->sv_encoder = 0;
                 $encoderTask720->sv_upload = 0;
@@ -124,6 +126,7 @@ class UploadController
                 $encoderTask1080->status = 0;
                 $encoderTask1080->priority = $encoderPriority;
                 $encoderTask1080->quality = 1080;
+                $encoderTask1080->format = $videoInfo['format'];
                 $encoderTask1080->size = $videoSize;
                 $encoderTask1080->sv_encoder = 0;
                 $encoderTask1080->sv_upload = 0;
