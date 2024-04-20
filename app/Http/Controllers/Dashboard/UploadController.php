@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Factories\DownloadFactory;
 use App\Models\User;
 use App\Models\Video;
-use App\Models\encoderTask;
+use App\Models\EncoderTask;
 use App\Repositories\VideoRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -41,102 +41,53 @@ class UploadController
         $user->last_upload = time();
         $user->save();
         //check video
-        $video = Video::where('duration', $videoInfo['duration'])->where('size', $videoSize)->where('quality', $videoInfo['quality'])->first();
+        $check_duplicate = md5($videoInfo['duration'].$videoSize.$videoInfo['quality']);
+        $video = Video::where('check_duplicate', $check_duplicate)->first();
+        $videoData = [
+            'slug' => $videoInfo['slug'],
+            'user_id' => $userId,
+            'folder_id' => $videoInfo['folder'],
+            'title' => $videoInfo['title'],
+            'poster' => '0',
+            'grid_poster' => '0',
+            'is_sub' => 0,
+            'total_play' => 0,
+            'size' => $videoSize,
+            'duration' => $videoInfo['duration'],
+            'quality' => $videoInfo['quality'],
+            'format' => $videoInfo['format'],
+            'soft_delete' => 0,
+        ];
         if($video){
             //create video exist
-            $middleSlug = $video->middle_slug;
-            $videoNew = new Video();
-            $videoNew->slug = $videoInfo['slug'];
-            $videoNew->middle_slug = $middleSlug;
-            $videoNew->user_id = $userId;
-            $videoNew->folder_id = $videoInfo['folder'];
-            $videoNew->sd = $video->sd;
-            $videoNew->hd = $video->hd;
-            $videoNew->fhd = $video->fhd;
-            $videoNew->title = $videoInfo['title'];
-            $videoNew->poster = '0';
-            $videoNew->grid_poster = '0';
-            $videoNew->is_sub = 0;
-            $videoNew->total_play = 0;
-            $videoNew->size = $videoSize;
-            $videoNew->duration = $videoInfo['duration'];
-            $videoNew->quality = $videoInfo['quality'];
-            $videoNew->format = $videoInfo['format'];
-            $videoNew->soft_delete = 0;
-            $videoNew->save();
+            $videoData['middle_slug'] = $video->middle_slug;
+            $videoData['sd'] = $video->sd;
+            $videoData['hd'] = $video->hd;
+            $videoData['fhd'] = $video->fhd;
+            $videoData['check_duplicate'] = 0;
         }else{
             $encoderPriority = $user->encoder_priority;
-            //create new video
-            $videoNew = new Video();
-            $videoNew->slug = $videoInfo['slug'];
-            $videoNew->middle_slug = $videoInfo['slug'];
-            $videoNew->user_id = $userId;
-            $videoNew->folder_id = $videoInfo['folder'];
-            $videoNew->sd = '0';
-            $videoNew->hd = '0';
-            $videoNew->fhd = '0';
-            $videoNew->title = $videoInfo['title'];
-            $videoNew->poster = '0';
-            $videoNew->grid_poster = '0';
-            $videoNew->is_sub = 0;
-            $videoNew->total_play = 0;
-            $videoNew->size = $videoSize;
-            $videoNew->duration = $videoInfo['duration'];
-            $videoNew->quality = $videoInfo['quality'];
-            $videoNew->format = $videoInfo['format'];
-            $videoNew->soft_delete = 0;
-            $videoNew->save();
+            $videoData['middle_slug'] = $videoInfo['slug'];
+            $videoData['sd'] = '0';
+            $videoData['hd'] = '0';
+            $videoData['fhd'] = '0';
+            $videoData['check_duplicate'] = $check_duplicate;
             //create encoder task 480
-            $encoderTask480 = new encoderTask();
-            $encoderTask480->user_id = $userId;
-            $encoderTask480->slug = $videoInfo['slug'];
-            $encoderTask480->status = 0;
-            $encoderTask480->priority = $encoderPriority+2;
-            $encoderTask480->quality = 480;
-            $encoderTask480->format = $videoInfo['format'];
-            $encoderTask480->size = $videoSize;
-            $encoderTask480->sv_encoder = 0;
-            $encoderTask480->sv_upload = 0;
-            $encoderTask480->sv_storage = 0;
-            $encoderTask480->start_encoder = 0;
-            $encoderTask480->finish_encoder = 0;
+            $encoderTask480 = new EncoderTask($videoData, $encoderPriority, 480);
             $encoderTask480->save();
             //create encoder task 720
             if($videoInfo['quality'] > 480){
-                $encoderTask720 = new encoderTask();
-                $encoderTask720->user_id = $userId;
-                $encoderTask720->slug = $videoInfo['slug'];
-                $encoderTask720->status = 0;
-                $encoderTask720->priority = $encoderPriority+1;
-                $encoderTask720->quality = 720;
-                $encoderTask720->format = $videoInfo['format'];
-                $encoderTask720->size = $videoSize;
-                $encoderTask720->sv_encoder = 0;
-                $encoderTask720->sv_upload = 0;
-                $encoderTask720->sv_storage = 0;
-                $encoderTask720->start_encoder = 0;
-                $encoderTask720->finish_encoder = 0;
+                $encoderTask720 = new EncoderTask($videoData, $encoderPriority, 720);
                 $encoderTask720->save();
             }
             //create encoder task 1080
             if($videoInfo['quality'] > 720){
-                $encoderTask1080 = new encoderTask();
-                $encoderTask1080->user_id = $userId;
-                $encoderTask1080->slug = $videoInfo['slug'];
-                $encoderTask1080->status = 0;
-                $encoderTask1080->priority = $encoderPriority;
-                $encoderTask1080->quality = 1080;
-                $encoderTask1080->format = $videoInfo['format'];
-                $encoderTask1080->size = $videoSize;
-                $encoderTask1080->sv_encoder = 0;
-                $encoderTask1080->sv_upload = 0;
-                $encoderTask1080->sv_storage = 0;
-                $encoderTask1080->start_encoder = 0;
-                $encoderTask1080->finish_encoder = 0;
+                $encoderTask1080 = new EncoderTask($videoData, $encoderPriority, 1080);
                 $encoderTask1080->save();
             }
-
         }
+        $video = Video::create($videoData);
+        return response()->json(['status' => 'success', 'message' => 'Upload success']);
     }
     public function remoteUploadDirect(Request $request)
     {

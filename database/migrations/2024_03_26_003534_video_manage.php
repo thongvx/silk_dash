@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('duration')->nullable();
             $table->string('quality', 5)->nullable();
             $table->string('format', 5)->nullable();
+            $table->string('check_duplicate', 100)->index();
             $table->boolean('soft_delete')->nullable();
             $table->timestamps();
         });
