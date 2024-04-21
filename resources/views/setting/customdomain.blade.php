@@ -1,5 +1,5 @@
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-    <div class="mb-2 text-emerald-500" id='title'>
+    <div class="mb-2 text-[#009FB2]" id='title'>
         <h5 class="">
             Player Settings
         </h5>
@@ -12,7 +12,7 @@
         </h5>
     </div>
     <div class="grid grid-cols-4 gap-4">
-        <h5 class="col-span-4 sm:col-span-1 md:text-end text-emerald-500">
+        <h5 class="col-span-4 sm:col-span-1 md:text-end text-[#009FB2]">
             Our Namesevers:
         </h5>
         <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
@@ -21,12 +21,12 @@
         </div>
     </div>
     <form action="" class="grid grid-cols-4 gap-4 mt-6 items-center">
-        <h5 class="col-span-4 sm:col-span-1 md:text-end text-emerald-500">
+        <h5 class="col-span-4 sm:col-span-1 md:text-end text-[#009FB2]">
             Add Domain:
         </h5>
         <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
             <div class="flex">
-                <div class="w-full text-white rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-slate-900 bg-slate-900/70">
+                <div class="w-full text-white rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
                     <input type="text" id="power" name="power" value=""
                            class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                            placeholder="Power url">
@@ -41,7 +41,7 @@
         <table id="live-table" datatable data-page-size="10"
                class="text-sm border-separate table-auto w-full min-w-max text-white text-left border-gray-200 border">
             <thead class="sticky top-0 z-10">
-                <tr class="bg-slate-900 transition-colors text-md">
+                <tr class="bg-[#142132] transition-colors text-md">
                     <th class="py-1.5 pl-3">Domain</th>
                     <th class="py-1.5 pl-3">Created</th>
                     <th class="py-1.5 pl-3">Status</th>

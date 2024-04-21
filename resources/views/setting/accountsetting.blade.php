@@ -1,5 +1,5 @@
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-    <div class="mb-2 text-emerald-500" id='title'>
+    <div class="mb-2 text-[#009FB2]" id='title'>
         <h5 class="">
             Account Settings
         </h5>
@@ -7,7 +7,7 @@
 </div>
 <div>
     <form action="">
-        <div class="text-emerald-500">
+        <div class="text-[#009FB2]">
             <div class="grid grid-cols-4 gap-4 ">
                 <h5 class="col-span-4 sm:col-span-1 md:text-end">
                     Video type
@@ -95,7 +95,7 @@
                 </h5>
                 <div class="col-span-2 text-white font-normal">
                     <div class="mt-2">
-                        <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-slate-900 bg-slate-900/70">
+                        <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
                             <input type="text" name="website" value=""
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="website">
@@ -158,7 +158,7 @@
                 <h5 class="col-span-4 sm:col-span-1 md:text-end text-warning">
                     Earning Modes
                 </h5>
-                <div class="text-white col-span-4 sm:col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 bg-slate-900">
+                <div class="text-white col-span-4 sm:col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]">
                     <div class="flex justify-between flex-col p-2">
                         <div class="mb-3">
                             <input type="radio" id="Not" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons

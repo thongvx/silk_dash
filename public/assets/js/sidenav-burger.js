@@ -53,35 +53,35 @@ function addclass() {
    buttonMiniSidebar.classList.add('-rotate-180')
    nameWeb.setAttribute('class','ml-1 font-semibold transition-all duration-200 ease-nav-brand')
    logo.setAttribute('class','flex px-6 py-4 m-0 text-sm whitespace-nowrap items-center')
-   main.setAttribute('class','relative h-full transition-all duration-200 ease-in-out xl:ml-72 rounded-xl bg-[#1a2035]')
+   main.setAttribute('class','relative h-full transition-all duration-200 ease-in-out xl:ml-72 rounded-xl bg-[#142132]')
    accountPages.setAttribute('class','w-full mt-4 mb-2')
    nameMenu.attr('class','ml-3 opacity-1 pointer-events-none ease')
-   aside.setAttribute('class',`fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 
+   aside.setAttribute('class',`fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4
          antialiased transition-transform duration-300 -translate-x-full border-0 shadow-xl max-w-64
          ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0`)
    liMenu.attr('class','mt-2.5 w-full')
    a_menu.attr('class','menu-sidebar px-4 py-1.5 text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors')
-   
+
  } else{
    buttonMiniSidebar.classList.remove('-rotate-180')
    nameWeb.setAttribute('class','xl:max-w-0 xl:opacity-0 ml-1 font-semibold transition-all duration-200 ease-nav-brand')
    logo.setAttribute('class','flex px-2 py-4 m-0 text-sm whitespace-nowrap items-center xl:scale-75')
-   main.setAttribute('class','relative h-full transition-all duration-200 ease-in-out xl:ml-24 rounded-xl bg-[#1a2035]')
+   main.setAttribute('class','relative h-full transition-all duration-200 ease-in-out xl:ml-24 rounded-xl bg-[#142132]')
    accountPages.setAttribute('class','w-full mt-4 mb-2 xl:hidden')
    nameMenu.attr('class','xl:max-w-0 xl:hidden ml-3 opacity-1 pointer-events-none ease')
-   aside.setAttribute('class',`fixed inset-y-0 flex-wrap items-center justify-between block w-full xl:w-max p-0 my-4 
+   aside.setAttribute('class',`fixed inset-y-0 flex-wrap items-center justify-between block w-full xl:w-max p-0 my-4
          antialiased transition-transform duration-300 -translate-x-full border-0 shadow-xl max-w-64
          ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0`)
    liMenu.attr('class','mt-2.5 w-full xl:w-max')
    a_menu.attr('class','menu-sidebar px-2 py-1.5 text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors')
-   
+
  }
  const path = window.location.pathname
   a_menu.filter(function(){
     let menu = $(this).find('span').attr('name');
     let index = path.indexOf(menu)
     return index > 0
-  }).addClass('bg-emerald-400')
+  }).addClass('bg-[#009FB2]')
 }
 addclass()
 buttonMiniSidebar.addEventListener("click", function() {
@@ -93,7 +93,7 @@ buttonMiniSidebar.addEventListener("click", function() {
     localStorage.setItem('minisidebar', false);
     addclass()
   }
-  
+
 });
 
 window.addEventListener("click", function(e) {

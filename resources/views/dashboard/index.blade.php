@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex flex-wrap -mx-3">
-        <div class="w-full text-emerald-300 mb-10 pl-3">
+        <div class="w-full text-[#009FB2] mb-10 pl-3">
             <h2 class="text-4xl font-bold italic">
                 Welcome back to {{\Illuminate\Support\Facades\Auth::user()->name}}
             </h2>
@@ -10,14 +10,14 @@
         <!-- card1 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">storage</i>
                     </div>
                     <div class='font-semibold'>
-                        <h3 class='text-lg text-emerald-500'>Storage</h3>
+                        <h3 class='text-lg text-[#009FB2]'>Storage</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white text-end">
                             5.1 GB
                         </h5>
@@ -26,7 +26,7 @@
                 <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
                 <div>
                     <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">255</span>
+                        <span class="text-sm font-bold leading-normal text-[#009FB2]">255</span>
                         file
                     </p>
                 </div>
@@ -37,14 +37,14 @@
         <!-- card2 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">trending_up</i>
                     </div>
                     <div class='font-semibold'>
-                        <h3 class='text-lg text-emerald-500'>Today’s Earning</h3>
+                        <h3 class='text-lg text-[#009FB2]'>Today’s Earning</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white text-end">
                             $53,000
                         </h5>
@@ -53,7 +53,7 @@
                 <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
                 <div>
                     <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
+                        <span class="text-sm font-bold leading-normal text-[#009FB2]">+55%</span>
                         since yesterday
                     </p>
                 </div>
@@ -64,14 +64,14 @@
         <!-- card3 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">trending_up</i>
                     </div>
                     <div class='font-semibold'>
-                        <h3 class='text-lg text-emerald-500'>Yesterday’s Earning</h3>
+                        <h3 class='text-lg text-[#009FB2]'>Yesterday’s Earning</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white text-end">
                             $53,000
                         </h5>
@@ -80,7 +80,7 @@
                 <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
                 <div>
                     <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
+                        <span class="text-sm font-bold leading-normal text-[#009FB2]">+55%</span>
                         since yesterday
                     </p>
                 </div>
@@ -91,14 +91,14 @@
         <!-- card4 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#202940] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
-                            class='bg-gradient-to-br from-emerald-600 to-emerald-400 p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
+                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
                         <i class="material-icons opacity-1 text-white text-3xl leading-none	">attach_money</i>
                     </div>
                     <div class='font-semibold'>
-                        <h3 class='text-lg text-emerald-500'>Total Balance</h3>
+                        <h3 class='text-lg text-[#009FB2]'>Total Balance</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white text-end">
                             $53,000
                         </h5>
@@ -107,7 +107,7 @@
                 <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
                 <div>
                     <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
+                        <span class="text-sm font-bold leading-normal text-[#009FB2]">+55%</span>
                         since yesterday
                     </p>
                 </div>
@@ -120,11 +120,11 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                    class="border-black/12.5 bg-[#202940] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                    class="border-black/12.5 bg-[#121520] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
-                    <h6 class="text-emerald-500 font-bold">Statistics</h6>
+                    <h6 class="text-[#009FB2] font-bold">Statistics</h6>
                     <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
-                        <i class="fa fa-arrow-up text-emerald-500"></i>
+                        <i class="fa fa-arrow-up text-[#009FB2]"></i>
                         <span class="font-semibold">4% more</span> in 2024
                     </p>
                 </div>
@@ -137,14 +137,14 @@
         </div>
 
         <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
-            <div class="border-black/12.5 bg-[#202940] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl
+            <div class="border-black/12.5 bg-[#121520] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl
                       border-0 border-solid bg-clip-border pb-3">
                 <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
-                    <h6 class="text-emerald-500 font-bold">Notification</h6>
+                    <h6 class="text-[#009FB2] font-bold">Notification</h6>
                 </div>
                 <div class="grid grid-cols-1 gap-4 px-4 mt-3 h-[calc(380px)] overflow-auto">
                     <div
-                            class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-icons mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div
-                            class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-icons mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -170,7 +170,7 @@
                         </div>
                     </div>
                     <div
-                            class="bg-[#1a2035] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-icons mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -191,10 +191,10 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                    class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#202940] dark:shadow-dark-xl border-black-125 rounded-2xl bg-clip-border">
+                    class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#121520] dark:shadow-dark-xl border-black-125 rounded-2xl bg-clip-border">
                 <div class="p-4 pb-0 mb-0 rounded-t-4">
                     <div class="flex justify-between">
-                        <h6 class="mb-2 text-emerald-500 font-bold text-lg">Top 10 viewed videos today</h6>
+                        <h6 class="mb-2 text-[#009FB2] font-bold text-lg">Top 10 viewed videos today</h6>
                     </div>
                 </div>
                 <div class="overflow-auto h-[calc(25vh)]">
@@ -358,9 +358,9 @@
         </div>
         <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
             <div
-                    class="border-black/12.5 shadow-xl bg-[#202940] dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                    class="border-black/12.5 shadow-xl bg-[#121520] dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="p-4 pb-0 rounded-t-4">
-                    <h6 class="mb-0 text-emerald-500 font-bold text-lg">Top Country</h6>
+                    <h6 class="mb-0 text-[#009FB2] font-bold text-lg">Top Country</h6>
                 </div>
                 <div class="overflow-auto">
                     <table

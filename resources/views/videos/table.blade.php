@@ -3,7 +3,7 @@
            data-column-direction="{{ $direction }}"
            class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left border-t-0">
         <thead class="sticky top-0 z-10">
-        <tr class="bg-slate-900 transition-colors text-md">
+        <tr class="bg-[#142132] transition-colors text-md">
             <th class="flex justify-center item-center py-2">
                 <input type="checkbox" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
@@ -59,11 +59,11 @@
         <tbody>
         @foreach($videos as $index => $video)
             @if($videos->count() == 0 || $videos->count() == null)
-                <tr class="my-3 h-12 bg-slate-900">
+                <tr class="my-3 h-12 bg-[#142132]">
                     <td class="flex items" colspan="9">No data available in table</td>
                 </tr>
             @endif
-            <tr class="my-3 h-12 {{ $index % 2 == 0 ? '' : 'bg-slate-900' }}">
+            <tr class="my-3 h-12 {{ $index % 2 == 0 ? '' : 'bg-[#142132]' }}">
                 <td class="flex items-center justify-center h-[inherit] px-2">
                     <input type="checkbox"
                            class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
@@ -109,7 +109,7 @@
     </table>
 </div>
 <div class="button-table pt-4 text-white text-sm flex justify-between items-center">
-    <div class="dataTables_info bg-slate-900 rounded-lg">
+    <div class="dataTables_info bg-[#142132] rounded-lg">
         <p class="p-2">
             Showing
             <span class="font-medium">{{$videos->firstItem()  }}</span>
@@ -124,10 +124,10 @@
         {{-- Previous Page Link --}}
         @if ($videos->onFirstPage())
             <span
-                class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-slate-900">Previous</span>
+                class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
         @else
             <li class="page list-none page-item" data-page="{{ $videos->currentPage() -1 }}">
-                <a class="hover:bg-emerald-400 py-2 px-4 w-max rounded-lg bg-slate-900"
+                <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)" rel="prev">Previous</a>
             </li>
         @endif
@@ -136,7 +136,7 @@
         {{-- Pagination Elements --}}
         @if ($videos->currentPage() > 2)
             <li class="page list-none " data-page="1">
-                <a class="hover:bg-emerald-400 text-white mx-1 py-2 px-3 w-max rounded-lg bg-slate-900"
+                <a class="hover:bg-[#009FB2] text-white mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)">1</a>
             </li>
             @if ($videos->currentPage() > 3)
@@ -146,7 +146,7 @@
 
         @for ($i = max(1, $videos->currentPage() - 1); $i <= min($videos->lastPage(), $videos->currentPage() + 1); $i++)
             <li class="page list-none page-item" data-page="{{ $i }}">
-                <a class="text-white mx-1 py-2 px-3 w-max rounded-lg {{ ($videos->currentPage() == $i) ? 'bg-emerald-400 cursor-not-allowed ' : 'bg-slate-900 hover:bg-emerald-400' }}"
+                <a class="text-white mx-1 py-2 px-3 w-max rounded-lg {{ ($videos->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed ' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
                    href="javascript:void(0)">{{ $i }}</a>
             </li>
         @endfor
@@ -156,7 +156,7 @@
                 <li class="list-none page-item disabled px-2"><span class="page-link">...</span></li>
             @endif
             <li class="page list-none page-item" data-page="{{ $videos->lastPage() }}">
-                <a class="hover:bg-emerald-400 text-white mx-1 py-2 px-3 w-max rounded-lg bg-slate-900"
+                <a class="hover:bg-[#009FB2] text-white mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)">{{ $videos->lastPage() }}</a>
             </li>
         @endif
@@ -164,11 +164,11 @@
         {{-- Next Page Link --}}
         @if ($videos->hasMorePages())
             <li class="page list-none page-item" data-page="{{ $videos->currentPage() +1 }}">
-                <a class="hover:bg-emerald-400 py-2 px-4 w-max rounded-lg bg-slate-900"
+                <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)" rel="next">Next</a>
             </li>
         @else
-            <span class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-slate-900">Next</span>
+            <span class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Next</span>
         @endif
     </div>
 </div>

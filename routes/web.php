@@ -28,18 +28,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'upload'])->name('upload');
     Route::get('/video', [\App\Http\Controllers\Dashboard\VideoController::class, 'index'])->name('video.index');
+    Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('video.control');
+
+    Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
+    Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
+    Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
+
+    route::get('report',function (){
+        $data['title'] = 'report';
+        return view('report.report', $data);
+    });
+    route::get('support',function (){
+        $data['title'] = 'Support';
+        return view('support.support', $data);
+    });
     Route::get('/setting', [\App\Http\Controllers\Setting\SettingController::class, 'index'])->name('setting.index');
+
+    Route::get('/test',function (){
+        $data['title'] = 'test';
+        return view('test', $data);
+    });
+    Route::get('/test2',function (){
+        $data['title'] = 'test';
+        return view('test2', $data);
+    });
 });
-
-Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('video.control');
-
-Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
-Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
-Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
-
-route::get('report',function (){
-    $data['title'] = 'Report';
-    return view('Report.report', $data);
-});
-
 

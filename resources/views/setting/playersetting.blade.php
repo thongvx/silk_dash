@@ -1,5 +1,5 @@
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-    <div class="mb-2 text-emerald-500" id='title'>
+    <div class="mb-2 text-[#009FB2]" id='title'>
         <h5 class="">
             Player Settings
         </h5>
@@ -7,7 +7,7 @@
 </div>
 <div>
     <form action="">
-        <div class="text-emerald-500">
+        <div class="text-[#009FB2]">
             <div class="grid grid-cols-4 gap-4">
                 <h5 class="col-span-4 sm:col-span-1 md:text-end">
                     Customize Logo
@@ -16,13 +16,13 @@
                     <div class="w-full pr-3 text-white">
                         <div class="flex box-img">
                             <img src="https://internetviettel.vn/wp-content/uploads/2017/05/1-2.jpg" alt="" class="hidden w-1/3 h-12 mr-3 mb-3">
-                            <div class="bg-slate-900 rounded-lg py-1 text-center mb-3 flex w-full items-center">
+                            <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full items-center">
                                 <input name="fileLogo" type="file" id="file-logo" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img">
                                 <label for="file-logo" class="w-full">choose file</label>
                             </div>
                         </div>
-                        <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-slate-900 bg-slate-900/70">
+                        <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
                             <input type="text" id="power" name="power" value=""
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
@@ -31,7 +31,7 @@
                     <div class="flex md:items-center mt-3 flex-col md:flex-row">
                         <div class="flex items-center">
                             <label for="position" class="mr-3">Position:</label>
-                            <select name="position" class="h-max outline-transparent bg-slate-900 px-3 py-1.5 rounded-lg"
+                            <select name="position" class="h-max outline-transparent bg-[#142132] px-3 py-1.5 rounded-lg"
                                     id="position">
                                 <option value="10"
                                         class="position" >
@@ -65,7 +65,7 @@
                         <label for="power">
                             Power URL
                         </label>
-                        <div class="text-white rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-slate-900 bg-slate-900/70">
+                        <div class="text-white rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
                             <input type="text" id="power" name="power" value=""
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
@@ -81,13 +81,13 @@
                     <div class="w-full pr-3 text-white">
                         <div class="flex box-img">
                             <img src="" alt="" class="w-1/3 h-12 mr-3 mb-3 hidden">
-                            <div class="bg-slate-900 rounded-lg py-1 text-center mb-3 flex w-full">
+                            <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full">
                                 <input name="fileLogo" type="file" id="file-logo" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img">
                                 <label for="file-logo" class="w-full">choose file</label>
                             </div>
                         </div>
-                        <div class="rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-slate-900 bg-slate-900/70">
+                        <div class="rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
                             <input type="text" id="power" name="power" value=""
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">

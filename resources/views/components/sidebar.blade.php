@@ -2,7 +2,7 @@
 <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full xl:w-max p-0 my-4
          antialiased transition-transform duration-300 -translate-x-full border-0 shadow-xl max-w-64
          ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0 " aside-menu
-       style="background-image: linear-gradient(195deg,#323a54,#1a2035)" aria-expanded="false">
+       style="background-color: #121520" aria-expanded="false">
     <div class="h-19">
         <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white text-slate-400 xl:hidden"
            sidenav-close></i>
@@ -16,7 +16,7 @@
         </a>
     </div>
     <div button-mini-sidebar mini-sidebar="false"
-         class="z-10 p-1 absolute text-white top-16 -right-3 transition-all duration-300 rounded-full bg-[#202940] hidden xl:flex cursor-pointer">
+         class="z-10 p-1 absolute text-white top-16 -right-3 transition-all duration-300 rounded-full bg-[#009FB2] hidden xl:flex cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-5 w-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"></path></svg>
     </div>
     <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
@@ -24,7 +24,7 @@
     <div class="items-center block w-auto max-h-[calc(100vh-9em)] overflow-y-auto h-sidenav grow basis-full mt-3 ">
         <ul class="flex flex-col pl-0 mb-0">
             <li class="mt-2.5 w-full xl:w-max" li-menu>
-                <a class="menu-sidebar px-2 py-1.5 text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$title}} menu-sidebar px-2 py-1.5 text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
                    href="/dashboard">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-icons opacity-1 text-3xl">dashboard</i>

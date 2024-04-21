@@ -8,35 +8,34 @@
                 <div
                     class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                     <button
-                        class="[--tab-border-color:#202940] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] row-start-auto tab tab-lifted w-max !text-green-400 text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="live"
-                        data-title='<h5 class="text-green-400"><i class="material-icons">folder</i><i class="material-icons">navigate_next</i>folder1</h5>'>
+                        class="tab-upload live hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="live">
                         <span class="px-2 py-1">Live Videos</span>
                     </button>
                     <button
-                        class="[--tab-border-color:#202940] row-start-auto	tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="processing" data-title='Processing Videos'>
+                        class="tab-upload processing hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="processing">
                         <span class="px-2 py-1">Processing Videos</span>
                     </button>
                     <button
-                        class="[--tab-border-color:#202940] row-start-auto	tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="DMCA" data-title='DMCA Warnings'>
+                        class="tab-upload DMCA hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="DMCA">
                         <span class="px-2 py-1">DMCA Warnings</span>
                     </button>
                     <button
-                        class="[--tab-border-color:#202940] row-start-auto	tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="removed" data-title='DMCA Warnings'>
+                        class="tab-upload removed hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="removed">
                         <span class="px-2 py-1">Removed Videos</span>
                     </button>
                 </div>
                 <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
                     <div
-                        class="border-[#202940] rounded-b-box rounded-se-box gap-2 bg-[#202940] bg-top [border-width:var(--tab-border)] undefined">
+                        class="border-[#202940] rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
                         <div class="lg:min-h-[calc(100vh-11em)]">
                             <div class="rounded-xl">
-                                <div class="relative rounded-xl bg-[#202940]">
+                                <div class="relative rounded-xl">
                                     <div class="px-2 pt-4 md:p-4">
-                                        <div class="mb-2 text-green-400" id='title'>
+                                        <div class="mb-2 text-[#009FB2]" id='title'>
                                             <h5 class="">
                                                 <i class="material-icons">folder</i>
                                                 <i class="material-icons">navigate_next</i>
@@ -44,7 +43,7 @@
                                             </h5>
                                         </div>
                                         <div class="flex justify-between items-center w-full mb-3">
-                                            <div class="text-sm bg-slate-900 rounded-lg p-2">
+                                            <div class="text-sm bg-[#142132] rounded-lg p-2">
                                                 <label for="limit">Show:</label>
                                                 <select name="limit" class="bg-transparent outline-transparent"
                                                         id="limit">
@@ -113,14 +112,14 @@
             </div>
             <div class="mb-3 mt-4 lg:mt-0">
                 <div class="md:ml-auto">
-                    <div class="flex items-center relative bg-slate-900 w-full rounded-lg ease" search>
+                    <div class="flex items-center relative bg-[#121520] w-full rounded-lg ease" search>
                         <label
-                            class="p-1 bg-slate-900 flex items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search
+                            class="p-1 bg-[#121520] flex items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search
                             folder</label>
                         </span>
                         <input type="text" onkeyup="searchFolder(this)"
                                class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto rounded-lg text-white bg-transparent bg-clip-padding text-gray-700 focus:outline-none
-                         border border-solid border-slate-900"
+                         border border-solid border-[#121520]"
                                onfocus="focused(this)" onfocusout="defocused(this)"/>
                     </div>
                 </div>
@@ -129,7 +128,7 @@
             <div class="list-folder max-h-[calc(100vh-30em)] lg:max-h-[calc(100vh-14em)]  overflow-scroll">
                 <div class="w-full overflow-hidden">
                     <div
-                        class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-emerald-500">
+                        class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#009FB2]">
                         <a href="{{ route("video.index", ['folderId' =>  $currentFolderName -> id ]) }}&limit={{ $videos->perPage() }}">
                             {{ $currentFolderName -> name_folder }}
                         </a>
@@ -155,8 +154,8 @@
                     @foreach($folders as $folder)
                         @if ($folder -> name_folder != $currentFolderName -> name_folder)
                             <div
-                                class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-slate-900">
-                                <a href="{{ route("video.index", ['folderId' => $folder->id]) }}&limit={{ $videos->perPage() }}">
+                                class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#121520]">
+                                <a class="w-full" href="{{ route("video.index", ['folderId' => $folder->id]) }}&limit={{ $videos->perPage() }}">
                                     {{$folder -> name_folder}}
                                 </a>
                                 <li class="list-none">

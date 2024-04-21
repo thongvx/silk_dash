@@ -25,8 +25,8 @@ function updateURLParameter(content, page) {
 }
 function loadContent(data_content, page) {
     updateURLParameter(data_content, page)
-    $('.tab-lifted').removeClass('tab-active !text-emerald-500 md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
-    $('.'+data_content).addClass('tab-active !text-emerald-500 md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
+    $('.tab-lifted').removeClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
+    $('.'+data_content).addClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
     if(data_content === 'webupload') {
         $('#box-list-upload').addClass('hidden')
     }else{
