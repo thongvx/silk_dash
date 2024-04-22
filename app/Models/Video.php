@@ -32,6 +32,7 @@ class Video extends Model
         'quality',
         'format',
         'check_duplicate',
+        'origin',
         'soft_delete',
     ];
 

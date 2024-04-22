@@ -73,16 +73,19 @@ class UploadController
             $videoData['fhd'] = '0';
             $videoData['check_duplicate'] = $check_duplicate;
             //create encoder task 480
-            $encoderTask480 = new EncoderTask($videoData, $encoderPriority, 480);
+            $encoderTask480 = new EncoderTask();
+            $encoderTask480->insertEncoderTask($videoData, $encoderPriority, 480);
             $encoderTask480->save();
             //create encoder task 720
             if($videoInfo['quality'] > 480){
-                $encoderTask720 = new EncoderTask($videoData, $encoderPriority, 720);
+                $encoderTask720 = new EncoderTask();
+                $encoderTask720->insertEncoderTask($videoData, $encoderPriority, 720);
                 $encoderTask720->save();
             }
             //create encoder task 1080
             if($videoInfo['quality'] > 720){
-                $encoderTask1080 = new EncoderTask($videoData, $encoderPriority, 1080);
+                $encoderTask1080 = new EncoderTask();
+                $encoderTask1080->insertEncoderTask($videoData, $encoderPriority, 1080);
                 $encoderTask1080->save();
             }
         }

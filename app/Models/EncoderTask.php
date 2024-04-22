@@ -28,8 +28,8 @@ class EncoderTask extends Model
         'start_encoder',
         'finish_encoder',
     ];
-    public function __construct(array $videoData = [], $priority = 0, $quality){
-        parent::__construct();
+    public function insertEncoderTask(array $videoData = [], $priority = 0, $quality){
+
         $this->user_id = $videoData['user_id'];
         $this->priority = $priority;
         $this->slug = $videoData['slug'];

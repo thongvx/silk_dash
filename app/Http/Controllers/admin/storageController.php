@@ -50,7 +50,36 @@ class storageController
             $data->save();
             $dataVideo = Video::where('middle_slug',$encoderTaskInfo['slug'])->first();
             $dataVideo->sd = $encoderTaskInfo['path'];
+            $dataVideo->origin = 1;
             $dataVideo->save();
+            //create m3u8
+            if(!file_exists('data/'.$encoderTaskInfo['slug']))
+                mkdir('data/'.$encoderTaskInfo['slug']);
+            if(!file_exists('data/'.$encoderTaskInfo['slug']).'/'. $encoderTaskInfo['slug'].'.m3u8')
+                copy('DataHLS/master.m3u8', 'data/'.$encoderTaskInfo['slug'].'/'. $encoderTaskInfo['slug'].'.m3u8');
+            if($encoderTaskInfo['quality'] == '480'){
+                $this->createM3u8Quality($encoderTaskInfo['slug'], '480', $encoderTaskInfo['path']);
+            }
+            if($encoderTaskInfo['quality'] == '720'){
+                $this->createM3u8Quality($encoderTaskInfo['slug'], '720', $encoderTaskInfo['path']);
+            }
+            if($encoderTaskInfo['quality'] == '1080'){
+                $this->createM3u8Quality($encoderTaskInfo['slug'], '1080', $encoderTaskInfo['path']);
+            }
         }
+    }
+
+    function createM3u8Quality($slug, $quality, $path)
+    {
+        $arrPath = explode('-', $path);
+        $svSto = SvStorage::where('name', $arrPath[0])->first();
+        $subDomain = str_replace('st', 'cdn', $svSto->name);
+        $urlM3u8 = 'https://'.$subDomain.'.'.$svSto->domain.'/data/'.$arrPath[1].'/'.$arrPath[2].'/'.$slug.'/'.$slug.$quality.'.m3u8';
+        $dataHls = file_get_contents('DataHLS/'.$quality.'.m3u8');
+        $dataHls = str_replace('master'.$quality.'.m3u8', $urlM3u8, $dataHls);
+
+        $dataHlsMaster = file_get_contents('data/'.$slug.'/'.$slug.'.m3u8');
+        $dataHlsMaster = $dataHlsMaster.$dataHls;
+        file_put_contents('data/'.$slug.'/'.$slug.'.m3u8', $dataHlsMaster);
     }
 }

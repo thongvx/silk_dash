@@ -18,8 +18,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/play', function () {
+    return view('play');
+});
+
 Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
 Route::get('/uploadvideo', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadVideo']);
+
+
+Route::get('/t/{slug}', [\App\Http\Controllers\play\playController::class, 'play']);
 
 
 Auth::routes();
@@ -64,4 +71,4 @@ Route::get('/video/{id}/stream/hls/{segment}/info/download', [App\Http\Controlle
 Route::get('/video/{id}/stream/dash/{segment}/info/download', [App\Http\Controllers\StreamController::class, 'dashSegmentInfoDownload']);
 
 Route::get('/video/{id}/stream/hls/playlist.m3u8', [App\Http\Controllers\StreamController::class, 'hlsPlaylist']);
-Route::get
+
