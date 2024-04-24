@@ -18,3 +18,5 @@ yarn-error.log
 /.idea
 /.vscode
 /vendor/arrilot/laravel-widgets/
+/public/data/
+/public/DataHLS/
