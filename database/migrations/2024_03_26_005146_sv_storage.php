@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 10)->nullable();
             $table->string('ip', 15)->nullable();
+            $table->string('domain', 20)->nullable();
             $table->string('pass', 20)->nullable();
             $table->integer('port')->nullable();
             $table->integer('number_files')->nullable();

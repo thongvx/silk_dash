@@ -16,50 +16,30 @@ class Video extends Model
 
     protected $fillable = [
         'slug',
+        'middle_slug',
         'user_id',
-        'folder',
-        'path_stream',
+        'folder_id',
         'sd',
         'hd',
         'fhd',
-        'soft_delete',
         'title',
         'poster',
         'grid_poster',
         'is_sub',
         'total_play',
-        'last_played',
         'size',
         'duration',
         'quality',
         'format',
+        'check_duplicate',
+        'origin',
+        'soft_delete',
     ];
 
     protected static function boot()
     {
         parent::boot();
-        static::updating(function ($model) {
-            $userId = $model->getOriginal()['userID'];
 
-            $cacheUserVideoKeys = 'videos:' . $userId . 'get_all*';
-
-            if ($model->isDirty('title')) {
-                Redis::del(Redis::keys($cacheUserVideoKeys));
-            }
-        });
-        static::creating(function ($model) {
-            $user = Auth::user();
-            if ($user) {
-                $userId = $user->id;
-                $cacheUserVideoKeys = 'videos:' . $userId . 'get_all*';
-                Redis::del(Redis::keys($cacheUserVideoKeys));
-            }
-        });
-        static::deleted(function ($model) {
-            $userId =$model->getOriginal()['userID'];
-            $cacheUserVideoKeys = 'videos:' . $userId . 'get_all*';
-            Redis::del(Redis::keys($cacheUserVideoKeys));
-        });
 
     }
 
