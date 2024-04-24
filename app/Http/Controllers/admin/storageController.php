@@ -49,8 +49,13 @@ class storageController
             $data->sv_storage = $encoderTaskInfo['sv'];
             $data->finish_encoder = time();
             $data->save();
+            $selectQuality = 'sd';
+            if($encoderTaskInfo['quality'] == '720')
+                $selectQuality = 'hd';
+            if($encoderTaskInfo['quality'] == '1080')
+                $selectQuality = 'full_hd';
             $dataVideo = Video::where('middle_slug',$encoderTaskInfo['slug'])->first();
-            $dataVideo->sd = $encoderTaskInfo['path'];
+            $dataVideo->$selectQuality = $encoderTaskInfo['path'];
             $dataVideo->origin = 1;
             $dataVideo->save();
             //create m3u8
