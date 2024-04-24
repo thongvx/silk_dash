@@ -38,7 +38,7 @@ class EncoderTask extends Model
         $this->size = $videoData['size'];
         $this->format = $videoData['format'];
         $this->sv_encoder = 0;
-        $this->sv_upload = 0;
+        $this->sv_upload = $videoData['sv_upload'];
         $this->sv_storage = 0;
         $this->start_encoder = 0;
         $this->finish_encoder = 0;

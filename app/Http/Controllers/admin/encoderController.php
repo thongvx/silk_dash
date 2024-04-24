@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 
 use App\Factories\DownloadFactory;
-use App\Models\encoderTask;
+use App\Models\EncoderTask;
 use App\Models\SvEncoder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -13,7 +13,7 @@ class encoderController
 {
     public function startEncoderTask ()
     {
-        $data = encoderTask::where('status', 0)->orderBy('priority', 'desc')->first();
+        $data = EncoderTask::where('status', 0)->orderBy('priority', 'desc')->first();
         if($data){
             $data->increment('status');
             //select sv encoder
@@ -46,7 +46,7 @@ class encoderController
     public function finishEncoder(Request $request)
     {
         $encoderTaskInfo = $request->all();
-        $data = encoderTask::where('slug', $encoderTaskInfo['slug'])->where('quality', $encoderTaskInfo['quality'])->first();
+        $data = EncoderTask::where('slug', $encoderTaskInfo['slug'])->where('quality', $encoderTaskInfo['quality'])->first();
         if($data){
             $data->status = 2;
             $data->sv_encoder = $encoderTaskInfo['sv'];
