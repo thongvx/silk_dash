@@ -15,7 +15,7 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
                     <div class="flex justify-between">
                         <div>
-                            <input type="radio" id="Non" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="Non" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
@@ -25,7 +25,7 @@
                             <label for="Non" class="ml-3">Non Adult</label>
                         </div>
                         <div>
-                            <input type="radio" id="Adult" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="Adult" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
@@ -36,7 +36,7 @@
                         </div>
 
                         <div>
-                            <input type="radio" id="Both" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="Both" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="mt-2">
-                        <input type="checkbox" id="adblocker" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                        <input type="checkbox" id="adblocker" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
@@ -58,7 +58,7 @@
                         </label>
                     </div>
                     <div class="mt-2">
-                        <input type="checkbox" id="embeds" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                        <input type="checkbox" id="embeds" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
@@ -77,7 +77,7 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal">
                     <h5>(Allow who will be able to access your videos)</h5>
                     <div class="mt-2">
-                        <input type="checkbox" id="block" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                        <input type="checkbox" id="block" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
@@ -142,7 +142,7 @@
                 </h5>
                 <div class="text-white col-span-4 sm:col-span-3 md:col-span-2">
                     <div class="mt-2">
-                        <input type="checkbox" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                        <input type="checkbox" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
@@ -161,7 +161,7 @@
                 <div class="text-white col-span-4 sm:col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]">
                     <div class="flex justify-between flex-col p-2">
                         <div class="mb-3">
-                            <input type="radio" id="Not" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="Not" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
@@ -171,7 +171,7 @@
                             <label for="Not" class="ml-3">No Earning: 1 Popunder on pre-roll (per page)</label>
                         </div>
                         <div class="mb-3">
-                            <input type="radio" id="1" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="1" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
@@ -182,7 +182,7 @@
                         </div>
 
                         <div>
-                            <input type="radio" id="2.5" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="2.5" name="earning" class="w-4 h-4 ease rounded-full checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all

@@ -34,7 +34,7 @@
             <li class="flex items-center px-4 hidden md:inline">
               <a href="upload"
                 class="flex flex-col px-0 py-2 font-semibold text-white transition-all ease-nav-brand">
-                <i class="material-icons text-3xl">cloud_upload</i>
+                <i class="material-symbols-outlined text-3xl">cloud_upload</i>
               </a>
             </li>
             <!-- notifications -->
@@ -51,7 +51,7 @@
                        shadow-lg shadow-slate-900 duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10
                        origin-top list-none rounded-lg border-none bg-clip-padding
                        px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10
-                       before:inline-block before:font-normal before:text-[#202940] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
+                       before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
                        lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
                 <!-- add show class on dropdown open js -->
                 <li class="relative mb-2">
@@ -142,7 +142,7 @@
                        shadow-lg shadow-slate-900 duration-250 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-12
                        origin-top list-none rounded-lg border-none bg-clip-padding
                        pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10
-                       before:inline-block before:font-normal before:text-[#202940] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
+                       before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
                        lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
                 <li class="relative mb-1">
                   <a class="ease py-1.5 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 lg:transition-colors"
@@ -160,32 +160,32 @@
                 <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
                 <!-- add show class on dropdown open js -->
                 <li class="relative my-2">
-                  <a class="menu-sidebar pl-2 pr-12 text-white opacity-80 hover:bg-slate-900 py-1.5 text-sm ease-nav-brand my-0  flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors"
+                  <a class="menu-sidebar pl-2 pr-12 text-white opacity-80 hover:bg-[#009FB2] py-1.5 text-sm ease-nav-brand my-0  flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors"
                     href="/setting">
                     <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                      <i class="material-icons opacity-1">person</i>
+                      <i class="material-symbols-outlined opacity-1">person</i>
                     </div>
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="setting">My Account</span>
                   </a>
                 </li>
 
                 <li class="relative mb-2">
-                  <a class=" pl-2 pr-12 menu-sidebar text-white opacity-80 hover:bg-slate-900 py-1.5 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors"
+                  <a class=" pl-2 pr-12 menu-sidebar text-white opacity-80 hover:bg-[#009FB2] py-1.5 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors"
                     href="/premium">
                     <div class="mr-2 flex h-8 w-8 bg-yellow-400 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                      <i class="material-icons text-white font-bold	">star</i>
+                      <i class="material-symbols-outlined text-white font-bold	">star</i>
                     </div>
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="premium">Go Premium</span>
                   </a>
                 </li>
 
                 <li class="relative mb-2">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="menu-sidebar pl-2 pr-12opacity-80 hover:bg-[#009FB2] py-1.5 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors">
                         @csrf
                         <input type="hidden" name="_method" value="POST">
-                        <button type="submit" class="menu-sidebar pl-2 pr-12 text-red-500 opacity-80 hover:bg-slate-900 py-1.5 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors">
+                        <button type="submit" class=" text-red-500 flex items-center">
                             <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                                <i class="material-icons opacity-1 font-bold">logout</i>
+                                <i class="material-symbols-outlined opacity-1 font-bold">logout</i>
                             </div>
                             <span class="ml-1 duration-300 opacity-1 pointer-events-none ease">Log Out</span>
                         </button>

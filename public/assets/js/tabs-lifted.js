@@ -32,13 +32,22 @@ function loadContent(data_content, page) {
     }else{
         $('#box-list-upload').removeClass('hidden')
     }
+    var url = page === 'videos' ? '/loadPageVideo' : '/loadPage';
     // Sử dụng hàm
     $.ajax({
-        url: "/loadPage",
+        url: url,
         type: 'GET',
         data: {
             content: data_content,
             page: page
+        },
+        beforeSend: function() {
+            $('#box-content').html(`<div class="w-full justify-center items-center flex h-full">
+                                <div class="flex text-white my-20">
+                                    <div class="loading"></div>
+                                    <span class="ml-3">Loading</span>
+                                </div>
+                            </div>`);
         },
         success: function(response) {
             $('#box-content').html(response);
@@ -56,7 +65,7 @@ $(document).ready(function() {
 $(document).on('click', '.tab-lifted', function() {
     var data_content = $(this).data('content');
     loadContent(data_content, page);
-    if (document.querySelector("[file-upload]")) {
+    if (document.querySelector("[web-upload]")) {
         Upload_FILE()
     }
 });

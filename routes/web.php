@@ -22,12 +22,12 @@ Route::get('/play', function () {
     return view('play');
 });
 
-Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
+
 Route::get('/uploadvideo', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadVideo']);
 
 
 Route::get('/t/{slug}', [\App\Http\Controllers\play\playController::class, 'play']);
-
+Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
 Auth::routes();
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -41,12 +41,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
     Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
-//-------------------------encoderController-------------------------------------------------------
-Route::get('/startEncoderTask', [\App\Http\Controllers\admin\encoderController::class, 'startEncoderTask']);
-Route::get('/finishEncoder', [\App\Http\Controllers\admin\encoderController::class, 'finishEncoder']);
-//-------------------------storageController-------------------------------------------------------
-Route::get('/startStorageTask', [\App\Http\Controllers\admin\storageController::class, 'startStorageTask']);
-Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::class, 'finishStorage']);
+    //-------------------------encoderController-------------------------------------------------------
+    Route::get('/startEncoderTask', [\App\Http\Controllers\admin\encoderController::class, 'startEncoderTask']);
+    Route::get('/finishEncoder', [\App\Http\Controllers\admin\encoderController::class, 'finishEncoder']);
+    //-------------------------storageController-------------------------------------------------------
+    Route::get('/startStorageTask', [\App\Http\Controllers\admin\storageController::class, 'startStorageTask']);
+    Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::class, 'finishStorage']);
     route::get('report',function (){
         $data['title'] = 'report';
         return view('report.report', $data);
@@ -57,14 +57,9 @@ Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::cla
     });
     Route::get('/setting', [\App\Http\Controllers\Setting\SettingController::class, 'index'])->name('setting.index');
 
-    Route::get('/test',function (){
-        $data['title'] = 'test';
-        return view('test', $data);
-    });
-    Route::get('/test2',function (){
-        $data['title'] = 'test';
-        return view('test2', $data);
-    });
+    // load page
+    Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
+    Route::get('/loadPageVideo', [\App\Helpers\ModelHelpers::class, 'loadPagevideo']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

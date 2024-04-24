@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // Tạo dữ liệu giả lập cho bảng 'folder'
 
 
-        Folder::factory()->count(60)->create()->each(function ($folder) {
+        Folder::factory()->count(300)->create()->each(function ($folder) {
             Video::factory()->count($folder->number_file)->create([
                 'folder_id' => $folder->id,
             ]);

@@ -47,7 +47,7 @@ class VideoRepo extends BaseRepository
 //        }
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
         $videos = $this->query()
-//            ->where('user_id', $userId)
+            ->where('user_id', $userId)
             ->where('folder_id', $folderId)
             ->select($columns)
             ->orderBy($column, $direction)

@@ -1,12 +1,5 @@
-$(document).on('click', '[checked-All]', function () {
-    var isChecked = $(this).prop('checked');
-    $(this).closest('table').find('input[type="checkbox"]').prop('checked', isChecked);
-})
-$(document).on('click', '.checkbox',function(){
-    var table = this.closest('table');
-    var rows = $(table).find('tbody .checkbox').length;
-    var rows_checked = $(table).find('tbody .checkbox:checked').length;
-    var checkBoxAll = $(table).find('[checked-All]');
+function btn_video(){
+    var rows_checked = $('table').find('tbody .checkbox:checked').length;
     if (rows_checked > 0) {
         $('button[btn-video]').prop('disabled', false);
         $('button[btn-video]').removeClass('cursor-not-allowed')
@@ -16,11 +9,24 @@ $(document).on('click', '.checkbox',function(){
         $('button[btn-video]').addClass('cursor-not-allowed')
         $('button[btn-video]').removeClass('hover:text-[#009FB2]')
     }
+
+}
+$(document).on('click', '[checked-All]', function () {
+    var isChecked = $(this).prop('checked');
+    $(this).closest('table').find('input[type="checkbox"]').prop('checked', isChecked);
+    btn_video()
+})
+$(document).on('click', '.checkbox',function(){
+    var table = this.closest('table');
+    var rows = $(table).find('tbody .checkbox').length;
+    var rows_checked = $(table).find('tbody .checkbox:checked').length;
+    var checkBoxAll = $(table).find('[checked-All]');
     if (rows_checked < rows) {
         checkBoxAll.prop('checked', false);
     } else {
         checkBoxAll.prop('checked', true);
     }
+    btn_video()
 });// Hàm để update giá trị của URL Parameters
 function highlightSortedColumn() {
     var sortColumn = document.querySelectorAll("[aria-sort]");
@@ -36,7 +42,7 @@ function highlightSortedColumn() {
     });
 }
 highlightSortedColumn()
-function updateURLParameter(column,direction,folderId,limit,page) {
+function updateURLParameterVideo(column,direction,folderId,limit,page) {
     var urlParams = new URLSearchParams(window.location.search);
     column ? urlParams.set('column', column): '';
     direction ? urlParams.set('direction', direction): '';
@@ -54,7 +60,7 @@ $(document).on('click', '.sortable-column', function() {
     var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
     var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
     var page= '';
-    updateURLParameter(column,direction,folderId,limit,page)
+    updateURLParameterVideo(column,direction,folderId,limit,page)
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -77,8 +83,7 @@ $(document).on('click', '.page', function() {
     var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
     var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
     var page = $(this).data('page');
-    console.log(page)
-    updateURLParameter(column,direction,folderId,limit,page)
+    updateURLParameterVideo(column,direction,folderId,limit,page)
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -88,6 +93,14 @@ $(document).on('click', '.page', function() {
             folderId: folderId,
             limit: limit,
             page: page
+        },
+        beforeSend: function() {
+            $('#live').html(`<div class="w-full justify-center items-center flex h-full">
+                                <div class="flex text-white my-20">
+                                    <div class="loading"></div>
+                                    <span class="ml-3">Loading</span>
+                                </div>
+                            </div>`);
         },
         success: function(response) {
             $('#live').html(response);
@@ -102,7 +115,7 @@ $(document).on('change', '#limit', function() {
     var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
     var limit = $(this).val();
     var page = '';
-    updateURLParameter(column,direction,folderId,limit,page)
+    updateURLParameterVideo(column,direction,folderId,limit,page)
     $.ajax({
         url: "/control",
         type: 'GET',
