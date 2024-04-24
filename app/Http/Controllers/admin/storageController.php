@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 
 use App\Factories\DownloadFactory;
-use App\Models\encoderTask;
+use App\Models\EncoderTask;
 use App\Models\SvStorage;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class storageController
 {
     public function startStorageTask ()
     {
-        $data = encoderTask::where('status', 2)->orderBy('priority', 'desc')->first();
+        $data = EncoderTask::where('status', 2)->orderBy('priority', 'desc')->first();
         if($data){
             $data->increment('status');
             //select sv encoder
@@ -42,7 +42,7 @@ class storageController
     public function finishStorage(Request $request)
     {
         $encoderTaskInfo = $request->all();
-        $data = encoderTask::where('slug', $encoderTaskInfo['slug'])->where('quality', $encoderTaskInfo['quality'])->first();
+        $data = EncoderTask::where('slug', $encoderTaskInfo['slug'])->where('quality', $encoderTaskInfo['quality'])->first();
         if($data){
             $data->status = 4;
             $data->sv_storage = $encoderTaskInfo['sv'];
