@@ -10,11 +10,11 @@ $(document).on('click', '.checkbox',function(){
     if (rows_checked > 0) {
         $('button[btn-video]').prop('disabled', false);
         $('button[btn-video]').removeClass('cursor-not-allowed')
-        $('button[btn-video]').addClass('hover:text-green-500')
+        $('button[btn-video]').addClass('hover:text-[#009FB2]')
     } else {
         $('button[btn-video]').prop('disabled', true);
         $('button[btn-video]').addClass('cursor-not-allowed')
-        $('button[btn-video]').removeClass('hover:text-green-500')
+        $('button[btn-video]').removeClass('hover:text-[#009FB2]')
     }
     if (rows_checked < rows) {
         checkBoxAll.prop('checked', false);

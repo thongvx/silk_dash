@@ -1,6 +1,6 @@
 <!-- Navbar -->
     <nav
-      class="sticky top-0 flex z-20 flex-wrap bg-[#1a2035] items-center justify-between px-3 py-2 lg:px-3 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
+      class="sticky top-0 flex z-20 flex-wrap bg-[#142132] items-center justify-between px-3 py-2 lg:px-3 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
       navbar-main navbar-scroll="false">
       <div class="flex items-center justify-between w-full px-0 sm:px-4 py-1 mx-auto flex-wrap">
         <nav>
@@ -11,19 +11,18 @@
             </li>
             <li
               class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
-              aria-current="page">Dashboard</li>
+              aria-current="page">{{$title}}</li>
           </ol>
-          <h6 class="mb-0 font-bold text-white capitalize">Dashboard</h6>
+          <h6 class="mb-0 font-bold text-white capitalize">{{$title}}</h6>
         </nav>
 
         <div class="flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
           <div class="flex items-center md:ml-auto pr-4">
-            <div class="flex items-center relative bg-slate-900 w-full rounded-lg ease" search>
-                <label class="p-1 flex bg-slate-900 items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
-                </span>
+            <div class="flex items-center relative bg-[#121520] w-full rounded-lg ease" search>
+                <label class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
                 <input type="text"
                   class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 rounded-lg text-white bg-transparent bg-clip-padding text-gray-700 focus:outline-none
-                         border border-solid border-slate-900"
+                         border border-solid border-[#121520]"
                   onfocus="focused(this)" onfocusout="defocused(this)"/>
               </div>
           </div>
@@ -48,7 +47,7 @@
               </a>
 
               <ul dropdown-menu
-                class="text-sm transform-dropdown bg-[#202940] before:font-awesome before:leading-default before:duration-350 before:ease
+                class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
                        shadow-lg shadow-slate-900 duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10
                        origin-top list-none rounded-lg border-none bg-clip-padding
                        px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10
@@ -139,7 +138,7 @@
                 <span class="rounded-full border h-10 w-10 text-lg font-bold flex items-center justify-center">VD</span>
               </a>
               <ul dropdown-menu
-                class="text-sm transform-dropdown bg-[#202940] before:font-awesome before:leading-default before:duration-350 before:ease
+                class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
                        shadow-lg shadow-slate-900 duration-250 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-12
                        origin-top list-none rounded-lg border-none bg-clip-padding
                        pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10

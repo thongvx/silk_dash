@@ -25,8 +25,8 @@ function updateURLParameter(content, page) {
 }
 function loadContent(data_content, page) {
     updateURLParameter(data_content, page)
-    $('.tab-lifted').removeClass('tab-active !text-emerald-500 md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
-    $('.'+data_content).addClass('tab-active !text-emerald-500 md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
+    $('.tab-lifted').removeClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
+    $('.'+data_content).addClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
     if(data_content === 'webupload') {
         $('#box-list-upload').addClass('hidden')
     }else{
@@ -49,8 +49,14 @@ $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
     var content = urlParams.get('content') === null ? $('.tabs-lifted .tab:eq(0)').data('content') : urlParams.get('content');
     loadContent(content, page);
+    if (document.querySelector("[file-upload]")) {
+        loadJS("assets/js/upload/uploadFile.js", true);
+    }
 });
 $(document).on('click', '.tab-lifted', function() {
     var data_content = $(this).data('content');
     loadContent(data_content, page);
+    if (document.querySelector("[file-upload]")) {
+        Upload_FILE()
+    }
 });

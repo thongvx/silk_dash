@@ -1,12 +1,12 @@
-var fixedVideo = document.querySelector("[fixed-video.blade.php]");
+var fixedVideo = document.querySelector("[fixed-video]");
 
 var fixedEdit = document.querySelector("[btn-edit]");
 var fixedDelete = document.querySelector("[btn-delete]");
 var fixedExport = document.querySelector("[btn-export]");
 var fixedMove = document.querySelector("[btn-move]");
 
-var fixedVideoCard = document.querySelector("[fixed-video.blade.php-card]");
-var fixedVideoCloseButton = document.querySelectorAll("[fixed-video.blade.php-close-button]");
+var fixedVideoCard = document.querySelector("[fixed-video-card]");
+var fixedVideoCloseButton = document.querySelectorAll("[fixed-video-close-button]");
 
 
 function fixedBox () {

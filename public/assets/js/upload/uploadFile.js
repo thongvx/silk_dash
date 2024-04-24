@@ -1,7 +1,6 @@
 var size, size2, size3, size4
 var $ = window.$; // use the global jQuery instance
 var $uploadList = $("#list-upload-file");
-var uploadlist1 = document.getElementById('list-upload-file')
 var $fileUpload = $('#file');
 var $folder = $('#folder');
 const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -14,20 +13,10 @@ function niceBytes(x){
 }
 $(document).ready(function() {
     Upload_FILE()
-    $(document).on('change', '#file', function() {
-        const MAX_FILE_SIZE = 100 * 1073741824; // 100GB
-        const form = this.closest('form');
-        const total_size = Array.from(this.files).reduce((total, file) => total + file.size, 0);
-        var formData = new FormData(form);
-        if(total_size < MAX_FILE_SIZE){
-            Upload_FILE(formData);
-            $(form).addClass('hidden');
-        }
-
-    });
 });
 function Upload_FILE (){
     if ($uploadList.length > 0 && $fileUpload.length > 0) {
+        console.log('a')
         const form = $('#form-upload-file')[0];
         var formData = new FormData(form);
         var userIDValue = formData.get('userID');
@@ -58,7 +47,7 @@ function Upload_FILE (){
                                                     <div class="bar bg-orange-500 h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center"></div>
                                                 </div>
                                             </div>`;
-                uploadlist1.insertAdjacentHTML('beforebegin', div_progress);
+                document.getElementById('list-upload-file').insertAdjacentHTML('beforebegin', div_progress);
                 $('#form-upload-file').addClass('hidden');
                 data.submit();
             },

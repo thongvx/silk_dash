@@ -8,40 +8,39 @@
                 <div
                     class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                     <button
-                        class="tab-lifted profile [--tab-border-color:#202940] row-start-auto tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="profile"
-                        data-title='<h5 class="text-green-400"><i class="material-icons">folder</i><i class="material-icons">navigate_next</i>folder1</h5>'>
+                        class="tab-upload profile hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="profile">
                         <span class="px-2 py-1">Profile</span>
                     </button>
                     <button
-                        class="tab-lifted accountsetting [--tab-border-color:#202940] row-start-auto tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="accountsetting" data-title='Processing Videos'>
+                        class="tab-upload accountsetting hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="accountsetting">
                         <span class="px-2 py-1">Account Settings</span>
                     </button>
                     <button
-                        class="tab-lifted playersetting [--tab-border-color:#202940] row-start-auto	tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="playersetting" data-title='DMCA Warnings'>
+                        class="tab-upload playersetting hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="playersetting">
                         <span class="px-2 py-1">Player Setting</span>
                     </button>
                     <button
-                        class="tab-lifted customdomain [--tab-border-color:#202940] row-start-auto	tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="customdomain" data-title='DMCA Warnings'>
+                        class="tab-upload customdomain hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="customdomain">
                         <span class="px-2 py-1">Custom Domain</span>
                     </button>
                     <button
-                        class="tab-lifted customads [--tab-border-color:#202940] row-start-auto	tab tab-lifted w-max text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                        data-content="customads" data-title='DMCA Warnings'>
+                        class="tab-upload customads hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="customads">
                         <span class="px-2 py-1">Custom Ads</span>
                     </button>
                 </div>
                 <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
                     <div
-                        class="border-[#202940] rounded-b-box rounded-se-box gap-2 bg-[#202940] bg-top [border-width:var(--tab-border)] undefined">
+                        class="border-[#202940] rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
                         <div class="lg:min-h-[calc(100vh-11em)]">
                             <div class="rounded-xl">
-                                <div class="relative rounded-xl bg-[#202940]">
+                                <div class="relative rounded-xl">
                                     <div class="px-2 pt-4 md:p-4">
-                                        <div id="box-content"
+                                        <div id="box-content" setting
                                              class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
                                         </div>
                                     </div>

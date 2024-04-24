@@ -1,4 +1,4 @@
- <footer class="pt-3 bg-[#1a2035]">
+ <footer class="pt-3">
         <div class="w-full px-3 mx-auto">
           <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
             <div class="w-full max-w-full mt-0 shrink-0 lg:w-1/2 lg:flex-none">
@@ -35,6 +35,7 @@
 
  <!-- plugin for scrollbar  -->
  <script src="../assets/js/plugins/perfect-scrollbar.min.js" async></script>
+
  <!-- main script file  -->
  <script src="../assets/js/main.js" async></script>
  </html>

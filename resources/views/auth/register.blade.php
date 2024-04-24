@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500 bg-[url('../image/background.jpg')]">
+<body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default text-slate-500 bg-[url('https://show.moxcreative.com/automaton/wp-content/uploads/sites/16/2021/11/fiber-optical-network-cable.jpg')]">
 <main class="mt-0 transition-all duration-200 ease-in-out">
     <section>
         <div class="relative flex items-center w-full min-h-screen p-0 overflow-hidden">
