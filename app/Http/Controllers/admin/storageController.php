@@ -36,6 +36,7 @@ class storageController
                 ),
             ));
             $response = curl_exec($curl);
+            echo $response;
             curl_close($curl);
         }
     }
