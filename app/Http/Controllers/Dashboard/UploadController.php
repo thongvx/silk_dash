@@ -71,6 +71,7 @@ class UploadController
             $videoData['sd'] = '0';
             $videoData['hd'] = '0';
             $videoData['fhd'] = '0';
+            $videoData['sv_upload'] = $videoInfo['sv'];
             $videoData['check_duplicate'] = $check_duplicate;
             //create encoder task 480
             $encoderTask480 = new EncoderTask();
