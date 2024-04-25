@@ -53,16 +53,17 @@ class storageController
             if($encoderTaskInfo['quality'] == '720')
                 $selectQuality = 'hd';
             if($encoderTaskInfo['quality'] == '1080')
-                $selectQuality = 'full_hd';
+                $selectQuality = 'fhd';
             $dataVideo = Video::where('middle_slug',$encoderTaskInfo['slug'])->first();
             $dataVideo->$selectQuality = $encoderTaskInfo['path'];
             $dataVideo->origin = 1;
             $dataVideo->save();
             //create m3u8
-            if(!file_exists('data/'.$encoderTaskInfo['slug']))
+            if(!file_exists('data/'.$encoderTaskInfo['slug'])){
                 mkdir('data/'.$encoderTaskInfo['slug']);
-            if(!file_exists('data/'.$encoderTaskInfo['slug']).'/'. $encoderTaskInfo['slug'].'.m3u8')
                 copy('DataHLS/master.m3u8', 'data/'.$encoderTaskInfo['slug'].'/'. $encoderTaskInfo['slug'].'.m3u8');
+            }
+
             if($encoderTaskInfo['quality'] == '480'){
                 $this->createM3u8Quality($encoderTaskInfo['slug'], '480', $encoderTaskInfo['path']);
             }
