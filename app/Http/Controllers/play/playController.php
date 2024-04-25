@@ -24,7 +24,7 @@ class playController
             }
             else{
                 //play storage
-                $urlPlay = 'http://127.0.0.1:8000/data/'.$slug.'/'.$slug.'.m3u8';
+                $urlPlay = 'https://user.streamsilk.com/data/'.$slug.'/'.$slug.'.m3u8';
                 return view('play', ['urlPlay' => $urlPlay]);
             }
         }
