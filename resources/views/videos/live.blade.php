@@ -5,7 +5,7 @@
                 <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
                     <i class="material-symbols-outlined">folder</i>
                     <i class="material-symbols-outlined">navigate_next</i>
-                    {{ $currentFolderName -> name_folder }}
+                    <span id="currentFolderName">{{ $currentFolderName -> name_folder }}</span>
                 </h5>
             </div>
             <div class="flex justify-between items-center w-full mb-3">

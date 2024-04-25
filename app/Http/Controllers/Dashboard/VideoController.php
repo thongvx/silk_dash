@@ -48,7 +48,7 @@ class VideoController
     {
         $user = Auth::user();
         $data['title'] = 'Video';
-        $folderId = $this->videoRepo->getAllFolders($user->id)->first()->id;
+        $folderId = $request->query('folderId', $this->videoRepo->getAllFolders($user->id)->first()->id);
         $data['currentFolderName'] = $this->videoRepo->getFolderName($folderId);
         $data['folders'] = $this->videoRepo->getAllFolders($user->id);
         $data['videos'] = $this->videoRepo->getAllUserVideo($user->id, $request->input('search'), 'created_at', 'asc', $folderId, 20);

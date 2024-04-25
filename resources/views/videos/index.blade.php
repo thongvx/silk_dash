@@ -31,7 +31,7 @@
                 <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
                     <div
                         class="border-[#121520] rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
-                        <div class="lg:min-h-[calc(100vh-11em)]" id="box-content">
+                        <div class="lg:min-h-[calc(100vh-11em)]" id="box-content" page-video>
                         </div>
                     </div>
                 </div>

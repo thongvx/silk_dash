@@ -1,5 +1,5 @@
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-    <table id="live-table" datatable data-page-size="10" data-column-table="{{ $column }}"
+    <table id="datatable" datatable data-page-size="10" data-column-table="{{ $column }}"
            data-column-direction="{{ $direction }}"
            class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
         <thead class="sticky top-0 z-10">

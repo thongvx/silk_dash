@@ -32,7 +32,7 @@
 </div>
 <div class="mt-14 bg-[#121520] rounded-xl py-3" id="box-list-upload">
     <div class="text-white pl-3 pt-3 flex justify-between items-center">
-        <div class=" text-lg font-bold ">Transfer</div>
+        <div class=" text-lg font-bold" transfer>Transfer</div>
         <div class="text-white">
             <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote all pending</button>
         </div>

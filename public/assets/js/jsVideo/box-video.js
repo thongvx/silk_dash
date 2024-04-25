@@ -22,8 +22,10 @@ $(document).on('click', '.btn-edit', function() {
     fixedBox()
     $('#edit').toggle("hidden");
 });
-fixedDelete.addEventListener("click", function () {
+$(document).on('click', '[btn-delete]', function() {
+    fixedBox()
     $('#delete').toggle("hidden");
+    checkAll()
 });
 $(document).on('click', '[btn-export]', function() {
     fixedBox()

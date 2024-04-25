@@ -23,8 +23,10 @@ function updateURLParameter(content, page) {
     var newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
 }
+
 function loadContent(data_content, page) {
     updateURLParameter(data_content, page)
+    var urlParams = new URLSearchParams(window.location.search);
     $('.tab-lifted').removeClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
     $('.'+data_content).addClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
     if(data_content === 'webupload') {
@@ -39,7 +41,8 @@ function loadContent(data_content, page) {
         type: 'GET',
         data: {
             content: data_content,
-            page: page
+            page: page,
+            folderId: urlParams.get('folderId')
         },
         beforeSend: function() {
             $('#box-content').html(`<div class="w-full justify-center items-center flex h-full">
@@ -53,6 +56,7 @@ function loadContent(data_content, page) {
             $('#box-content').html(response);
         }
     });
+
 }
 $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);

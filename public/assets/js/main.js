@@ -65,10 +65,10 @@ if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/jquery.ui.widget.js", true);
 }
 // load js video
-if (document.querySelector("[btn-video]")) {
+if (document.querySelector("[page-video]")) {
     loadJS(to_build + "assets/js/jsVideo/box-video.js", true);
 }
-if (document.querySelector("[datatable]")) {
+if (document.querySelector("[page-video]")) {
     loadJS(to_build + "assets/js/jsVideo/datatable.js", true);
 }
 // load js report

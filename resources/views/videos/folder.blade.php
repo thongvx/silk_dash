@@ -1,5 +1,5 @@
 <div list-folder
-     class="w-full max-w-full px-3 lg:w-3/12 lg:flex-none mb-5 lg:mb-0">
+     class="w-full max-w-full px-3 lg:w-3/12 lg:flex-none mb-5 lg:mb-0" id="#list-folder">
     <div class="mb-3">
         <div class="pl-3  rounded-lg flex justify-between items-center font-bold text-white">
             <h3 class="text-lg">
@@ -27,12 +27,12 @@
         </div>
 
     </div>
-    <div class="list-folder max-h-[calc(100vh-30em)] lg:max-h-[calc(100vh-14em)]  overflow-scroll">
-        <div class="w-full overflow-hidden">
+    <div class="max-h-[calc(100vh-30em)] lg:max-h-[calc(100vh-14em)]  overflow-scroll">
+        <div class="w-full overflow-hidden list-folder ">
             <div folder
                 class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-gradient-to-r from-[#009FB2] to-[#4CBE1F]">
                 <h5>
-                    {{ $currentFolderName -> name_folder }} - {{ $currentFolderName -> number_file }} files
+                    <span>{{ $currentFolderName -> name_folder }}</span> - {{ $currentFolderName -> number_file }} files
                 </h5>
                 <li class="list-none">
                                     <span class="relative"><a href="javascript:;" dropdown-trigger
@@ -56,8 +56,8 @@
                 @if ($folder -> name_folder != $currentFolderName -> name_folder)
                     <div folder
                         class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#121520] hover:bg-gradient-to-r from-[#009FB2] to-[#4CBE1F]">
-                        <a class="w-full" href="{{ route("video.index", ['folderId' => $folder->id]) }}&limit={{ $videos->perPage() }}">
-                            <h5>{{$folder -> name_folder}} - {{ $folder -> number_file }} files</h5>
+                        <a class="w-full btn-page-folder" href="javascript:;" data-folderid="{{$folder->id}}" data-limit="{{$videos->perPage()}}">
+                            <h5><span>{{$folder -> name_folder}}</span> - {{ $folder -> number_file }} files</h5>
                         </a>
                         <li class="list-none">
                                     <span class="relative"><a href="javascript:;" dropdown-trigger

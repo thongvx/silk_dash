@@ -28,62 +28,7 @@ $(document).on('click', '.checkbox',function(){
     }
     btn_video()
 });// Hàm để update giá trị của URL Parameters
-function highlightSortedColumn() {
-    var sortColumn = document.querySelectorAll("[aria-sort]");
-    var Table = document.querySelector("[datatable]");
-    var sortColumntable = Table.dataset.columnTable
-    var sortDirectionTable = Table.dataset.columnDirection
-    sortColumn.forEach(function (element) {
-        if ($(element).data('column') === sortColumntable) {
-            $(element).attr('aria-sort', sortDirectionTable);
-            $(element).find('.' + sortDirectionTable).addClass("opacity-100");
-            $(element).find('.' + sortDirectionTable).removeClass("opacity-50");
-        }
-    });
-}
-highlightSortedColumn()
-function updateURLParameterVideo(column,direction,folderId,limit,page) {
-    var urlParams = new URLSearchParams(window.location.search);
-    column ? urlParams.set('column', column): '';
-    direction ? urlParams.set('direction', direction): '';
-    folderId ? urlParams.set('folderId', folderId) : '';
-    limit ? urlParams.set('limit', limit) : '';
-    page ? urlParams.set('page', page) : '';
-    var newUrl = window.location.pathname + '?' + urlParams.toString();
-    history.pushState(null, '', newUrl);
-}
-
-$(document).on('click', '.sortable-column', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var column = $(this).data('column');
-    var direction = $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc';
-    var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
-    var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
-    var page= '';
-    updateURLParameterVideo(column,direction,folderId,limit,page)
-    $.ajax({
-        url: "/control",
-        type: 'GET',
-        data: {
-            column: column,
-            direction: direction,
-            folderId: folderId,
-            limit: limit
-        },
-        success: function(response) {
-            $('#live').html(response);
-            highlightSortedColumn()
-        }
-    });
-});
-$(document).on('click', '.page', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
-    var direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
-    var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
-    var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
-    var page = $(this).data('page');
-    updateURLParameterVideo(column,direction,folderId,limit,page)
+function ajaxdatatable(column,direction,folderId,limit,page) {
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -107,6 +52,50 @@ $(document).on('click', '.page', function() {
             highlightSortedColumn()
         }
     });
+
+}
+function highlightSortedColumn() {
+    var sortColumn = document.querySelectorAll("[aria-sort]");
+    var Table = $("#datatable")[0];
+    var sortColumntable = Table.dataset.columnTable
+    var sortDirectionTable = Table.dataset.columnDirection
+    sortColumn.forEach(function (element) {
+        if ($(element).data('column') === sortColumntable) {
+            $(element).attr('aria-sort', sortDirectionTable);
+            $(element).find('.' + sortDirectionTable).addClass("opacity-100");
+            $(element).find('.' + sortDirectionTable).removeClass("opacity-50");
+        }
+    });
+}
+function updateURLParameterVideo(column,direction,folderId,limit,page) {
+    var urlParams = new URLSearchParams(window.location.search);
+    column ? urlParams.set('column', column): '';
+    direction ? urlParams.set('direction', direction): '';
+    folderId ? urlParams.set('folderId', folderId) : '';
+    limit ? urlParams.set('limit', limit) : '';
+    page ? urlParams.set('page', page) : '';
+    var newUrl = window.location.pathname + '?' + urlParams.toString();
+    history.pushState(null, '', newUrl);
+    ajaxdatatable(column,direction,folderId,limit,page)
+}
+
+$(document).on('click', '.sortable-column', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var column = $(this).data('column');
+    var direction = $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc';
+    var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
+    var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
+    var page= '';
+    updateURLParameterVideo(column,direction,folderId,limit,page)
+});
+$(document).on('click', '.page', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
+    var direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
+    var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
+    var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
+    var page = $(this).data('page');
+    updateURLParameterVideo(column,direction,folderId,limit,page)
 });
 $(document).on('change', '#limit', function() {
     var urlParams = new URLSearchParams(window.location.search);
@@ -116,19 +105,20 @@ $(document).on('change', '#limit', function() {
     var limit = $(this).val();
     var page = '';
     updateURLParameterVideo(column,direction,folderId,limit,page)
-    $.ajax({
-        url: "/control",
-        type: 'GET',
-        data: {
-            column: column,
-            direction: direction,
-            folderId: folderId,
-            limit: limit,
-            page: page
-        },
-        success: function(response) {
-            $('#live').html(response);
-            highlightSortedColumn()
-        }
-    });
 });
+$(document).on('click', '.btn-page-folder', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
+    var direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
+    var folderId = $(this).data('folderid');
+    var limit = $(this).data('limit');
+    var page = '';
+    const box_folder = $(this).closest('[folder]');
+    box_folder.prependTo(box_folder.closest('.list-folder'));
+    $('[folder]').addClass('bg-[#121520]')
+    $('[folder]').removeClass('bg-gradient-to-r')
+    $(box_folder).removeClass("bg-[#121520]")
+    $(box_folder).addClass("bg-gradient-to-r")
+    $('#currentFolderName').text($(this).find('span').text())
+    updateURLParameterVideo(column,direction,folderId,limit,page)
+})
