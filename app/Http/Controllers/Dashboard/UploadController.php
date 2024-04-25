@@ -65,7 +65,7 @@ class UploadController
             $videoData['sd'] = $video->sd;
             $videoData['hd'] = $video->hd;
             $videoData['fhd'] = $video->fhd;
-            $videoData['check_duplicate'] = $videoInfo['slug'];
+            $videoData['check_duplicate'] = 0;
         }else{
             $encoderPriority = $user->encoder_priority;
             $videoData['middle_slug'] = $videoInfo['slug'];
