@@ -8,22 +8,22 @@
                 <div
                     class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                     <button
-                        class="tab-upload live hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="tab-upload live hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="live">
                         <span class="px-2 py-1">Live Videos</span>
                     </button>
                     <button
-                        class="tab-upload processing hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="tab-upload processing hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="processing">
                         <span class="px-2 py-1">Processing Videos</span>
                     </button>
                     <button
-                        class="tab-upload DMCA hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="tab-upload DMCA hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="DMCA">
                         <span class="px-2 py-1">DMCA Warnings</span>
                     </button>
                     <button
-                        class="tab-upload removed hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="tab-upload removed hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="removed">
                         <span class="px-2 py-1">Removed Videos</span>
                     </button>

@@ -8,17 +8,17 @@
                 <div
                     class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                     <button
-                        class="tab-upload ticket hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="tab-upload ticket hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="ticket">
                         <span class="px-2 py-1">Ticket</span>
                     </button>
                     <button
-                        class="tab-upload apiDocuments hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="tab-upload apiDocuments hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="apiDocuments">
                         <span class="px-2 py-1">API documents</span>
                     </button>
                     <button
-                        class="tab-upload knowledge hover:text-[#009FB2] tab-lifted [--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="tab-upload knowledge hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="knowledge">
                         <span class="px-2 py-1">Knowledge Base</span>
                     </button>

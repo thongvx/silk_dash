@@ -75,79 +75,84 @@
             <div class="mt-10" id="webupload">
                 <h3 class="pb-3 text-[#009FB2] text-lg">Web Upload</h3>
                 <h4 class="text-primary">You need to change your api key value to the following tag:</h4>
-                <pre class="language-html max-h-[calc(100vh-18em)]">
-                    <code class="language-html">
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+                <div class="language-html highlighter-rouge">
+                    <div class="highlight">
+                        <pre class=" !bg-[#142132]">
+                            <code>
+        &lt;html lang="en"&gt;
+        &lt;head&gt;
+            &lt;meta charset="utf-8"&gt;
+            &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 
-    &lt;title&gt;Turboviplay api webupload&lt;/title&gt;
+            &lt;title&gt;Turboviplay api webupload&lt;/title&gt;
 
-    &lt;!-- Fonts --&gt;
+            &lt;!-- Fonts --&gt;
 
-    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"&gt;&lt;/script&gt;
-    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
-    &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js"&gt;&lt;/script&gt;
-    &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/jquery.iframe-transport.js"&gt;&lt;/script&gt;
-    &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/jquery.fileupload.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="flex-center position-ref full-height"&gt;
-        &lt;h2&gt;Web Upload&lt;/h2&gt;
-        &lt;div class="text-center"&gt;
-            &lt;input type="text" id="keyApi" name="keyApi" value="iCDR9HRrRY" style="display: none;"&gt;
-            &lt;input id="fileupload" type="file" name="file" data-url="https://uploadapi.sptvp.com/api/upload" style="display: inline;" multiple&gt;
-            &lt;ul id="file-upload-list" class="list-unstyled"&gt;
+            &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"&gt;&lt;/script&gt;
+            &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
+            &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js"&gt;&lt;/script&gt;
+            &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/jquery.iframe-transport.js"&gt;&lt;/script&gt;
+            &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/jquery.fileupload.js"&gt;&lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;div class="flex-center position-ref full-height"&gt;
+                &lt;h2&gt;Web Upload&lt;/h2&gt;
+                &lt;div class="text-center"&gt;
+                    &lt;input type="text" id="keyApi" name="keyApi" value="iCDR9HRrRY" style="display: none;"&gt;
+                    &lt;input id="fileupload" type="file" name="file" data-url="https://uploadapi.sptvp.com/api/upload" style="display: inline;" multiple&gt;
+                    &lt;ul id="file-upload-list" class="list-unstyled"&gt;
 
-            &lt;/ul&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;script &gt;
-        var $ = window.$; // use the global jQuery instance
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;script &gt;
+                var $ = window.$; // use the global jQuery instance
 
-        var $uploadList = $("#file-upload-list");
-        var $fileUpload = $('#fileupload');
-        var $filePath = $('#filepath');
-        var $keyApi = $('#keyApi');
-        if ($uploadList.length &gt; 0 &amp;&amp; $fileUpload.length &gt; 0) {
-            var idSequence = 0;
+                var $uploadList = $("#file-upload-list");
+                var $fileUpload = $('#fileupload');
+                var $filePath = $('#filepath');
+                var $keyApi = $('#keyApi');
+                if ($uploadList.length &gt; 0 &amp;&amp; $fileUpload.length &gt; 0) {
+                    var idSequence = 0;
 
-            // A quick way setup - url is taken from the html tag
-            $fileUpload.fileupload({
-                maxChunkSize: 5 * 1024 * 1024,
-                method: "POST",
-                // Not supported
-                sequentialUploads: false,
-                formData: function (form) {
-                    // Append token to the request - required for web routes
-                    return [{name: '_token', value: $('input[name=_token]').val()}, {name: 'keyApi', value: $keyApi.val()}];
-                },
-                progress: function (e, data) {
-                    var progress = parseInt(data.loaded / data.total * 100, 10);
-                    $("#" + data._progress.theId).text('Uploading ' + data._progress.name + ': ' + progress + '%');
-                },
-                add: function (e, data) {
-                    data._progress.theId = 'id_' + idSequence;
-                    data._progress.name = data.originalFiles[data.originalFiles.length - 1].name;
-                    idSequence++;
-                    $uploadList.append($('&lt;li id="' + data._progress.theId + '"&gt;&lt;/li&gt;').text('Uploading'));
-                    data.submit();
-                },
-                done: function (e, data) {
-                    console.log(data, e);
-                    $uploadList.append($('&lt;li&gt;&lt;/li&gt;').text('Uploaded: ' + data.result.path + data.result.name));
-                },
-                crossDomain: true,
-                xhrFields: { withCredentials: true }
-            });
-        }
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code>
-                </pre>
+                    // A quick way setup - url is taken from the html tag
+                    $fileUpload.fileupload({
+                        maxChunkSize: 5 * 1024 * 1024,
+                        method: "POST",
+                        // Not supported
+                        sequentialUploads: false,
+                        formData: function (form) {
+                            // Append token to the request - required for web routes
+                            return [{name: '_token', value: $('input[name=_token]').val()}, {name: 'keyApi', value: $keyApi.val()}];
+                        },
+                        progress: function (e, data) {
+                            var progress = parseInt(data.loaded / data.total * 100, 10);
+                            $("#" + data._progress.theId).text('Uploading ' + data._progress.name + ': ' + progress + '%');
+                        },
+                        add: function (e, data) {
+                            data._progress.theId = 'id_' + idSequence;
+                            data._progress.name = data.originalFiles[data.originalFiles.length - 1].name;
+                            idSequence++;
+                            $uploadList.append($('&lt;li id="' + data._progress.theId + '"&gt;&lt;/li&gt;').text('Uploading'));
+                            data.submit();
+                        },
+                        done: function (e, data) {
+                            console.log(data, e);
+                            $uploadList.append($('&lt;li&gt;&lt;/li&gt;').text('Uploaded: ' + data.result.path + data.result.name));
+                        },
+                        crossDomain: true,
+                        xhrFields: { withCredentials: true }
+                    });
+                }
+            &lt;/script&gt;
+        &lt;/body&gt;
+        &lt;/html&gt;
+        </code>
+                        </pre>
+                    </div>
+                </div>
+
             </div>
             <!-- /.end-web-upload -->
             <div class="mt-10" id="list_file">

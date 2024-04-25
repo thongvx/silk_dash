@@ -29,11 +29,6 @@ function loadContent(data_content, page) {
     var urlParams = new URLSearchParams(window.location.search);
     $('.tab-lifted').removeClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
     $('.'+data_content).addClass('tab-active !text-[#009FB2] md:shadow-[0_-8px_15px_0px_rgb(15,23,42,1)] ')
-    if(data_content === 'webupload') {
-        $('#box-list-upload').addClass('hidden')
-    }else{
-        $('#box-list-upload').removeClass('hidden')
-    }
     var url = page === 'videos' ? '/loadPageVideo' : '/loadPage';
     // Sử dụng hàm
     $.ajax({
