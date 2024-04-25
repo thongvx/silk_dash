@@ -56,6 +56,7 @@ class UploadController
             'duration' => $videoInfo['duration'],
             'quality' => $videoInfo['quality'],
             'format' => $videoInfo['format'],
+            'origin' => 0,
             'soft_delete' => 0,
         ];
         if($video){
