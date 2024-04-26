@@ -14,7 +14,7 @@
                         Name
                     </h5>
                     <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
-                        <i class="material-icons opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">person</i>
+                        <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">person</i>
                         <input type="text" name="name" value="{{\Illuminate\Support\Facades\Auth::user()->name}}"
                                class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                placeholder="name">
@@ -25,7 +25,7 @@
                         Email
                     </h5>
                     <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
-                        <i class="material-icons opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">email</i>
+                        <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">email</i>
                         <input type="email" name="email" value="{{\Illuminate\Support\Facades\Auth::user()->email}}"
                                class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                placeholder="email">
@@ -36,7 +36,7 @@
                         Password
                     </h5>
                     <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
-                        <i class="material-icons opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
+                        <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
                         <input type="password" name="password" readonly value="{{\Illuminate\Support\Facades\Auth::user()->password}}"
                                class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                placeholder="password">
@@ -47,7 +47,7 @@
                         Website
                     </h5>
                     <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
-                        <i class="material-icons opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">language</i>
+                        <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">language</i>
                         <input type="text" name="website" value="{{\Illuminate\Support\Facades\Auth::user()->website}}"
                                class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                placeholder="website">

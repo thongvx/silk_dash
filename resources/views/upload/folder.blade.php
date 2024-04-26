@@ -1,11 +1,11 @@
 <div fixed-folder>
     <!-- -right-90 in loc de 0-->
     <div fixed-folder-card
-         class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full
+         class="opacity-0 hidden bg-black/10 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full backdrop-blur-sm
            min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3">
         <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-folder-close-button>
         </div>
-        <div class="w-11/12 sm:w-4/5 xl:w-2/5 bg-[#202940] z-20 py-4 px-3 rounded-lg relative shadow-lg shadow-slate-900">
+        <div class="w-11/12 sm:w-4/5 xl:w-2/5 bg-[#121520] z-20 py-4 px-3 rounded-lg relative shadow-lg shadow-slate-900">
             <div class="absolute right-4 top-3">
                 <button fixed-folder-close-button
                         class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
@@ -35,7 +35,7 @@
                         @foreach($folders as $folder)
                             <div class="item-folder text-center cursor-pointer hover:text-blue-500" folder data-folderid="{{$folder -> id}}">
                                 <div class="text-center">
-                                    <i class="material-icons text-3xl">folder</i>
+                                    <i class="material-symbols-outlined text-3xl">folder</i>
                                 </div>
                                 <h5>
                                     {{$folder -> name_folder}}

@@ -1,4 +1,4 @@
-<div id="transfer" class="" transfer_link>
+<div id="transfer" class=" bg-[#121520] p-4 border-[#121520] rounded-b-box rounded-se-box gap-2 bg-top [border-width:var(--tab-border)]" transfer_link>
     <div class="col-span-full text-center">
         <div class="noti text-white italic">
             <label htmlFor="cover-photo" class="text-start block text-sm font-medium leading-6">
@@ -29,4 +29,19 @@
             Change Folder
         </div>
     </div>
+</div>
+<div class="mt-14 bg-[#121520] rounded-xl py-3" id="box-list-upload">
+    <div class="text-white pl-3 pt-3 flex justify-between items-center">
+        <div class=" text-lg font-bold ">Transfer</div>
+        <div class="text-white">
+            <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote all pending</button>
+        </div>
+    </div>
+    <hr class="h-px my-3 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
+    <div class="text-center text-emerald-500 font-bold">
+        No Active Tasks
+    </div>
+    <div id="list-upload">
+    </div>
+
 </div>

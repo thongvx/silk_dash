@@ -7,14 +7,127 @@
                 Welcome back to {{\Illuminate\Support\Facades\Auth::user()->name}}
             </h2>
         </div>
-        <!-- card1 -->
+        <!-- card -->
+        <div class="w-full max-w-full px-3 mb-6">
+            <div
+                class='flex flex-wrap justify-between mt-2 drop-shadow-sm bg-gradient-to-r from-[#009FB2] to-[#4CBE1F] rounded-2xl py-2 px-3'>
+                <!-- card1 -->
+                <div class="max-w-full px-1.5 mb-6 xl:mb-0 w-full lg:w-1/4">
+                    <div
+                        class='px-3 mt-2'>
+                        <div class='flex items-center justify-between'>
+                            <div
+                                class='py-1.5 px-2 rounded-full border border-white leading-none'>
+                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">database</i>
+                            </div>
+                            <div class='text-md lg:text-lg w-full flex flex-col mt-3 text-end'>
+                                <h3 class='text-[#000dffdb] font-bold'>Storage</h3>
+                                <h5 class="mb-0 text-white">
+                                    5.1 GB
+                                </h5>
+                            </div>
+                        </div>
+                        <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
+                        <div>
+                            <p class="mb-0 text-white opacity-0.8">
+                                <span class="text-sm font-bold leading-normal">255</span>
+                                file
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- card3 -->
+                <div class="max-w-full px-1.5 mb-6 xl:mb-0 w-full lg:w-1/4">
+                    <div
+                        class='px-3 mt-2'>
+                        <div class='flex items-center justify-between'>
+                            <div
+                                class='py-1.5 px-2 rounded-full border border-white leading-none'>
+                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">monitoring</i>
+                            </div>
+                            <div class='text-md lg:text-lg w-full flex flex-col mt-3 text-end'>
+                                <h3 class='text-[#000dffdb]  font-bold '>Yesterday’s Earning</h3>
+                                <h5 class="mb-0 text-white">
+                                    $53,000
+                                </h5>
+                            </div>
+                        </div>
+                        <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
+                        <div>
+                            <p class="mb-0 text-white opacity-0.8">
+                                <span class="text-sm font-bold leading-normal">+55%</span>
+                                since yesterday
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- card2 -->
+                <div class="max-w-full px-1.5 mb-6 xl:mb-0 w-full lg:w-1/4">
+                    <div
+                        class='px-3 mt-2'>
+                        <div class='flex items-center justify-between'>
+                            <div
+                                class='py-1.5 px-2 rounded-full border border-white leading-none'>
+                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">leaderboard
+                                </i>
+                            </div>
+                            <div class='text-md lg:text-lg w-full flex flex-col mt-3 text-end'>
+                                <h3 class='text-[#000dffdb] font-bold '>Today’s Earning</h3>
+                                <h5 class="mb-0 text-white">
+                                    $53,000
+                                </h5>
+                            </div>
+                        </div>
+                        <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
+                        <div>
+                            <p class="mb-0 text-white opacity-0.8">
+                                <span class="text-sm font-bold leading-normal">+55%</span>
+                                since yesterday
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- card4 -->
+                <div class="max-w-full px-1.5 mb-6 xl:mb-0 w-full lg:w-1/4">
+                    <div
+                        class='px-3 mt-2'>
+                        <div class='flex items-center justify-between'>
+                            <div
+                                class='py-1.5 px-2 rounded-full border border-white leading-none'>
+                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">attach_money</i>
+                            </div>
+                            <div class='text-md lg:text-lg w-full flex flex-col mt-3 text-end'>
+                                <h3 class='text-[#000dffdb] font-bold '>Total Balance</h3>
+                                <h5 class="mb-0 text-white">
+                                    $53,000
+                                </h5>
+                            </div>
+                        </div>
+                        <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
+                        <div>
+                            <p class="mb-0 text-white opacity-0.8">
+                                <span class="text-sm font-bold leading-normal">+55%</span>
+                                since yesterday
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{--<!-- card1 -->
         <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
             <div
                     class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex items-center justify-between'>
                     <div
                             class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-icons opacity-1 text-white text-3xl leading-none	">storage</i>
+                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">storage</i>
                     </div>
                     <div class='font-semibold'>
                         <h3 class='text-lg text-[#009FB2]'>Storage</h3>
@@ -41,7 +154,7 @@
                 <div class='flex items-center justify-between'>
                     <div
                             class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-icons opacity-1 text-white text-3xl leading-none	">trending_up</i>
+                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">trending_up</i>
                     </div>
                     <div class='font-semibold'>
                         <h3 class='text-lg text-[#009FB2]'>Today’s Earning</h3>
@@ -68,7 +181,7 @@
                 <div class='flex items-center justify-between'>
                     <div
                             class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-icons opacity-1 text-white text-3xl leading-none	">trending_up</i>
+                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">trending_up</i>
                     </div>
                     <div class='font-semibold'>
                         <h3 class='text-lg text-[#009FB2]'>Yesterday’s Earning</h3>
@@ -95,7 +208,7 @@
                 <div class='flex items-center justify-between'>
                     <div
                             class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-icons opacity-1 text-white text-3xl leading-none	">attach_money</i>
+                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">attach_money</i>
                     </div>
                     <div class='font-semibold'>
                         <h3 class='text-lg text-[#009FB2]'>Total Balance</h3>
@@ -113,7 +226,7 @@
                 </div>
             </div>
 
-        </div>
+        </div>--}}
     </div>
 
     <!-- cards row 2 -->
@@ -145,7 +258,7 @@
                 <div class="grid grid-cols-1 gap-4 px-4 mt-3 h-[calc(380px)] overflow-auto">
                     <div
                             class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
-                        <i class="material-icons mr-3 text-3xl text-red-500">error</i>
+                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
                                 Error encoder video GoPNmF4T0oEjnennbwt5
@@ -158,7 +271,7 @@
                     </div>
                     <div
                             class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
-                        <i class="material-icons mr-3 text-3xl text-red-500">error</i>
+                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
                                 Error encoder video GoPNmF4T0oEjnennbwt5
@@ -171,7 +284,7 @@
                     </div>
                     <div
                             class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
-                        <i class="material-icons mr-3 text-3xl text-red-500">error</i>
+                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
                                 Error encoder video GoPNmF4T0oEjnennbwt5

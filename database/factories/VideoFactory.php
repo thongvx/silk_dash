@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Video;
 use App\Models\Folder; // Import model Folder
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -15,11 +16,11 @@ class VideoFactory extends Factory
     {
         // Lấy tất cả các ID của các thư mục từ cơ sở dữ liệu
         $folderIds = Folder::pluck('id')->toArray();
-
+        $userIds = User::pluck('id')->toArray();
         return [
             'slug' => uniqid(),
-            'user_id' => $this->faker->numberBetween(100000, 999999),
-            'folder_id' => $this->faker->randomElement($folderIds), // Chọn một ID thư mục ngẫu nhiên
+            'user_id' => $this->faker->randomElement($userIds),
+            'folder_id' => $this->faker->randomElement($folderIds),
             'title' => $this->faker->sentence(),
             'poster' => $this->faker->imageUrl(),
             'grid_poster' => $this->faker->imageUrl(),

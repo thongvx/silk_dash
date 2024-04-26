@@ -46,22 +46,27 @@ $(document).on('submit', '#transferLink', function(event) {
 });
 setInterval(function() {
     if ($('.info-link').length == 0) return;
-    $('.info-link').each(function() {
-        var url = $(this).find('.title-file').text();
-        var encodedUrl = encodeURIComponent(url);
-        fetch('/uploadRemoteStatus?key=' + encodedUrl, {
-            method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
+    if($('[transfer]')){
+        $('.info-link').each(function() {
+            var url = $(this).find('.title-file').text();
+            var bar = $(this).find('.bar');
+            if(bar.text() == '100%') return;
+            var encodedUrl = encodeURIComponent(url);
+            fetch('/uploadRemoteStatus?key=' + encodedUrl, {
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    });
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    }
+
 }, 5000);
 

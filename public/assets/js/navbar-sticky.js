@@ -53,7 +53,7 @@ function focused(input){
     label.classList.add('text-red-500')
     input.classList.remove('z-20')
     input.classList.remove('border-slate-900')
-    input.classList.add('border-red-500')   
+    input.classList.add('border-red-500')
 }
 function defocused(input){
     let label = input.closest('[search]').querySelector('label')
@@ -67,5 +67,4 @@ function defocused(input){
       input.classList.add('border-slate-900')
       input.classList.remove('border-red-500')
     }
-
 }

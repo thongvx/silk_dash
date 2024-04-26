@@ -16,18 +16,18 @@ class VideoController
     }
 
     // lay data video
-    private function getVideoData(Request $request)
+    public function getVideoData(Request $request)
     {
         $user = Auth::user();
         $data['title'] = 'Video';
         // Lấy các thông tin từ request
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
-        $folderId = $request->query('folderId', 1);
+        $folderId = $request->query('folderId', $this->videoRepo->getAllFolders($user->id)->first()->id);
         $limit = $request->input('limit', 20);
 
         // Lấy danh sách thư mục và tên thư mục hiện tại
-        $data['folders'] = $this->videoRepo->getAllFolders(1);
+        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $this->videoRepo->getFolderName($folderId);
 
         // Lấy danh sách video theo cách sắp xếp mới
@@ -46,12 +46,16 @@ class VideoController
     // Hiển thị danh sách các video của user
     public function index(Request $request)
     {
-
-        $data = $this->getVideoData($request);
-
+        $user = Auth::user();
+        $data['title'] = 'Video';
+        $folderId = $request->query('folderId', $this->videoRepo->getAllFolders($user->id)->first()->id);
+        $data['currentFolderName'] = $this->videoRepo->getFolderName($folderId);
+        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
+        $data['videos'] = $this->videoRepo->getAllUserVideo($user->id, $request->input('search'), 'created_at', 'asc', $folderId, 20);
         return view('videos.index', $data);
     }
-// Hàm sort
+
+    // Hàm sort
     public function control(Request $request)
     {
         $data = $this->getVideoData($request);

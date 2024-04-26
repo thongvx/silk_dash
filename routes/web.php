@@ -22,7 +22,7 @@ Route::get('/play', function () {
     return view('play');
 });
 
-Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
+
 Route::get('/uploadvideo', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadVideo']);
 
 //-------------------------encoderController-------------------------------------------------------
@@ -33,7 +33,7 @@ Route::get('/startStorageTask', [\App\Http\Controllers\admin\storageController::
 Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::class, 'finishStorage']);
 
 Route::get('/t/{slug}', [\App\Http\Controllers\play\playController::class, 'play']);
-
+Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
 Auth::routes();
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -58,14 +58,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('/setting', [\App\Http\Controllers\Setting\SettingController::class, 'index'])->name('setting.index');
 
-    Route::get('/test',function (){
-        $data['title'] = 'test';
-        return view('test', $data);
-    });
-    Route::get('/test2',function (){
-        $data['title'] = 'test';
-        return view('test2', $data);
-    });
+    // load page
+    Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
+    Route::get('/loadPageVideo', [\App\Helpers\ModelHelpers::class, 'loadPagevideo']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -6,6 +6,7 @@ var sidenav_close_button = document.querySelector("[sidenav-close]");
 var burger = sidenav_trigger.firstElementChild;
 var top_bread = burger.firstElementChild;
 var bottom_bread = burger.lastElementChild;
+var a_menu = $('.menu-sidebar')
 
 sidenav_trigger.addEventListener("click", function() {
   if (page == "virtual-reality") {
@@ -28,6 +29,12 @@ sidenav_trigger.addEventListener("click", function() {
     bottom_bread.classList.toggle("translate-x-[5px]");
   }
 });
+const path = window.location.pathname
+a_menu.filter(function(){
+    let menu = $(this).find('span').attr('name');
+    let index = path.indexOf(menu)
+    return index > 0
+}).addClass('bg-[#009FB2]')
 sidenav_close_button.addEventListener("click", function() {
   sidenav_trigger.click();
 });
@@ -44,56 +51,48 @@ var nameWeb = document.querySelector("[name-web]");
 var nameMenu = $("[name-menu]");
 var liMenu = $("[li-menu]");
 var iconMenu = $("[icon-menu]");
-var a_menu = $('.menu-sidebar')
 var setMiniMenu = localStorage.getItem('minisidebar');
 
 function addclass() {
  setMiniMenu = localStorage.getItem('minisidebar');
- if(setMiniMenu === 'false'){
-   buttonMiniSidebar.classList.add('-rotate-180')
-   nameWeb.setAttribute('class','ml-1 font-semibold transition-all duration-200 ease-nav-brand')
-   logo.setAttribute('class','flex px-6 py-4 m-0 text-sm whitespace-nowrap items-center')
-   main.setAttribute('class','relative h-full transition-all duration-200 ease-in-out xl:ml-72 rounded-xl bg-[#142132]')
-   accountPages.setAttribute('class','w-full mt-4 mb-2')
-   nameMenu.attr('class','ml-3 opacity-1 pointer-events-none ease')
-   aside.setAttribute('class',`fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4
-         antialiased transition-transform duration-300 -translate-x-full border-0 shadow-xl max-w-64
-         ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0`)
-   liMenu.attr('class','mt-2.5 w-full')
-   a_menu.attr('class','menu-sidebar px-4 py-1.5 text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors')
-
- } else{
-   buttonMiniSidebar.classList.remove('-rotate-180')
-   nameWeb.setAttribute('class','xl:max-w-0 xl:opacity-0 ml-1 font-semibold transition-all duration-200 ease-nav-brand')
-   logo.setAttribute('class','flex px-2 py-4 m-0 text-sm whitespace-nowrap items-center xl:scale-75')
-   main.setAttribute('class','relative h-full transition-all duration-200 ease-in-out xl:ml-24 rounded-xl bg-[#142132]')
-   accountPages.setAttribute('class','w-full mt-4 mb-2 xl:hidden')
-   nameMenu.attr('class','xl:max-w-0 xl:hidden ml-3 opacity-1 pointer-events-none ease')
-   aside.setAttribute('class',`fixed inset-y-0 flex-wrap items-center justify-between block w-full xl:w-max p-0 my-4
-         antialiased transition-transform duration-300 -translate-x-full border-0 shadow-xl max-w-64
-         ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0`)
-   liMenu.attr('class','mt-2.5 w-full xl:w-max')
-   a_menu.attr('class','menu-sidebar px-2 py-1.5 text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors')
-
- }
- const path = window.location.pathname
-  a_menu.filter(function(){
-    let menu = $(this).find('span').attr('name');
-    let index = path.indexOf(menu)
-    return index > 0
-  }).addClass('bg-[#009FB2]')
+    buttonMiniSidebar.classList.toggle('-rotate-180');
+    $(nameWeb).toggleClass('xl:max-w-0 xl:opacity-0');
+    $(logo).toggleClass('px-2 py-4 xl:scale-75 justify-center')
+    $(logo).toggleClass('px-6 py-4')
+    $(main).toggleClass('xl:ml-72')
+    $(main).toggleClass('xl:ml-24')
+    $(accountPages).toggleClass('xl:hidden')
+    $(nameMenu).toggleClass('xl:max-w-0 xl:hidden')
+    $(aside).toggleClass('xl:w-max')
+    $(liMenu).toggleClass('xl:w-max')
+    $(a_menu).toggleClass('px-4')
+    $(a_menu).toggleClass('px-2')
 }
-addclass()
+// JavaScript
 buttonMiniSidebar.addEventListener("click", function() {
-  setMiniMenu = localStorage.getItem('minisidebar');
-  if(setMiniMenu === 'false'){
-    localStorage.setItem('minisidebar', true);
-    addclass()
-  }else{
-    localStorage.setItem('minisidebar', false);
-    addclass()
-  }
+    var miniSidebarStatus = this.getAttribute('mini-sidebar');
 
+    // Đảo ngược giá trị của mini-sidebar
+    miniSidebarStatus = (miniSidebarStatus === 'false') ? 'true' : 'false';
+
+    // Cập nhật giá trị của mini-sidebar trong HTML
+    this.setAttribute('mini-sidebar', miniSidebarStatus);
+
+    // Lưu giá trị của mini-sidebar vào localStorage
+    localStorage.setItem('minisidebar', miniSidebarStatus);
+
+    // Gửi yêu cầu AJAX đến server để cập nhật cookie
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/update-minimenu", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log("Cookie has been updated.");
+        }
+    }
+    xhr.send("minimenu=" + miniSidebarStatus);
+    addclass()
 });
 
 window.addEventListener("click", function(e) {

@@ -57,7 +57,7 @@
                         </div>
                         <div class="mt-3 md:mt-0 md:ml-4">
                             <button class="rounded-lg bg-rose-600 px-3 py-1 flex items-center">
-                                <i class="material-icons opacity-1 font-bold">delete</i>Remove Logo
+                                <i class="material-symbols-outlined opacity-1 font-bold">delete</i>Remove Logo
                             </button>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
                     <div class="flex justify-between">
                         <div>
-                            <input type="radio" id="1" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="1" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
@@ -127,7 +127,7 @@
                             <label for="1" class="ml-3">1x1</label>
                         </div>
                         <div>
-                            <input type="radio" id="4" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="4" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
@@ -138,7 +138,7 @@
                         </div>
 
                         <div>
-                            <input type="radio" id="5" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                            <input type="radio" id="5" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']

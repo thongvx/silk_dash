@@ -20,12 +20,7 @@ document.onreadystatechange = function () {
 if (document.querySelector("[box-lifted]")) {
     loadJS(to_build + "assets/js/tabs-lifted.js", true);
 }
-
-
-if (document.querySelector("[file-upload]")) {
-    loadJS(to_build + "assets/js/upload/remoteTransfer.js", true);
-}
-
+loadJS(to_build + "assets/js/search.js", true);
 
 if (document.querySelector("[dropdown-trigger]")) {
     loadJS(to_build + "assets/js/dropdown.js", true);
@@ -37,9 +32,9 @@ if (document.querySelector("[fixed-plugin]")) {
 }
 
 if (document.querySelector("[navbar-main]") || document.querySelector("[navbar-profile]")) {
-    if(document.querySelector("[navbar-main]")){
-        loadJS(to_build + "assets/js/navbar-sticky.js", true);
-    }
+    // if(document.querySelector("[navbar-main]")){
+    //     loadJS(to_build + "assets/js/navbar-sticky.js", true);
+    // }
     if (document.querySelector("aside")) {
         loadJS(to_build + "assets/js/sidenav-burger.js?", true);
     }
@@ -48,11 +43,11 @@ if (document.querySelector("[navbar-main]") || document.querySelector("[navbar-p
 if (document.querySelector("canvas")) {
     loadJS(to_build + "assets/js/charts.js", true);
 }
-
-if (document.querySelector(".github-button")) {
-    loadJS("https://buttons.github.io/buttons.js", true);
-}
 // load js upload
+if (document.querySelector("[file-upload]")) {
+    loadJS(to_build + "assets/js/upload/remoteTransfer.js", true);
+}
+
 if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/upload.js", true);
 }
@@ -63,25 +58,25 @@ if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/jquery.fileupload.js", true);
     loadJS(to_build + "assets/js/upload/jquery.iframe-transport.js", true);
     loadJS(to_build + "assets/js/upload/jquery.ui.widget.js", true);
+    loadJS(to_build + "assets/js/upload/uploadFile.js", true);
 }
+
 // load js video
-if (document.querySelector("[btn-video]")) {
+if (document.querySelector("[page-video]")) {
     loadJS(to_build + "assets/js/jsVideo/box-video.js", true);
 }
-if (document.querySelector("[datatable]")) {
+if (document.querySelector("[page-video]")) {
     loadJS(to_build + "assets/js/jsVideo/datatable.js", true);
 }
+
 // load js report
 if (document.querySelector("[report]")) {
     loadJS(to_build + "assets/js/report/report.js", true);
 }
 // load js dmca
 if (document.querySelector("[support]")) {
-    // loadStylesheet("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css");
-    // loadJS("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js", true);
-    // loadJS(to_build + "assets/js/support.js", true);
-    loadStylesheet(to_build + "assets/css/prism.css");
-    loadJS(to_build + "assets/js/prism.js", true);
+    loadStylesheet(to_build + "assets/highlight/styles/vs2015.css");
+    loadJS("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js", true);
 }
 // load js setting
 if (document.querySelector("[setting]")) {

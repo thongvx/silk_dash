@@ -1,4 +1,4 @@
-<div id="webupload" class="" file-upload>
+<div id="webupload" class="bg-[#121520] p-4 border-[#121520] rounded-b-box rounded-se-box gap-2 bg-top [border-width:var(--tab-border)]" web-upload>
     <div class="text-center pb-10">
         <div class="text-start block text-sm font-medium leading-6 text-white italic">
             You can upload multiple video files per a session with total sizes up to 100 GB
@@ -13,7 +13,7 @@
                 <input id="file"  name="file" accept="video/*" type="file"
                        multiple class="opacity-0 absolute cursor-pointer z-20 h-full w-full top-0 left-0" />
             </label>
-            <input class="hidden" type="text" id="userID" name="userID" value="1">
+            <input class="hidden" type="text" id="userID" name="userID" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
             <input class="hidden" type="text" id="folderPost" name="folderID" value="1">
         </form>
         <div class="lg:mx-32" id="list-upload-file">

@@ -24,7 +24,7 @@ class UploadController
         //Lam giau thong tin
         $user = Auth::user();
         $data['title'] = 'Upload';
-        $data['folders'] = $this->videoRepo->getAllFolders(1);
+        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
         return view('upload.upload', $data);
 
     }
