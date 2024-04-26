@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('slug', 20)->unique();
-            $table->string('middle_slug', 20)->unique();
+            $table->string('middle_slug', 20)->index();
             $table->integer('user_id')->index();
             $table->string('folder_id', 15)->nullable();
             $table->string('sd', 10)->nullable();
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->integer('duration')->nullable();
             $table->string('quality', 5)->nullable();
             $table->string('format', 5)->nullable();
-            $table->string('check_duplicate', 50)->unique();
+            $table->string('check_duplicate', 50)->index();
             $table->boolean('origin')->nullable();
             $table->boolean('soft_delete')->nullable();
             $table->timestamps();
