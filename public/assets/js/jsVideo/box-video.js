@@ -1,10 +1,3 @@
-var fixedVideo = document.querySelector("[fixed-video]");
-
-var fixedEdit = document.querySelector("[btn-edit]");
-var fixedDelete = document.querySelector("[btn-delete]");
-var fixedExport = document.querySelector("[btn-export]");
-var fixedMove = document.querySelector("[btn-move]");
-
 var fixedVideoCard = document.querySelector("[fixed-video-card]");
 var fixedVideoCloseButton = document.querySelectorAll("[fixed-video-close-button]");
 
@@ -59,22 +52,7 @@ $(document).on('click', '[move-to-folder]', function() {
     }
 });
 //end move video to folder
-function searchFolder(input) {
-    // Get the search keyword
-    var filter = input.value.toUpperCase();
-    var listFolder = input.closest('[list-folder]');    // Get all folder elements
-    var folders = listFolder.querySelectorAll('[folder]');
-    // Loop through all folder items
-    for (var i = 0; i < folders.length; i++) {
-        var title = folders[i].querySelector('h5').innerText;
-        // If the folder title doesn't match the search keyword, hide it
-        if (title.toUpperCase().indexOf(filter) > -1) {
-            folders[i].style.display = "";
-        } else {
-            folders[i].style.display = "none";
-        }
-    }
-}
+
 fixedVideoCloseButton.forEach(function(element) {
   element.addEventListener("click", function () {
     fixedVideoCard.classList.toggle("opacity-0");

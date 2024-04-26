@@ -1,4 +1,7 @@
-
+var size1, size2, size3, size4;
+var $ = window.$; // use the global jQuery instance
+var $uploadList = $("#list-upload-file");
+var $fileUpload = $('#file');
 const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 function niceBytes(x){
     let l = 0, n = parseInt(x, 10) || 0;
@@ -8,10 +11,6 @@ function niceBytes(x){
     return n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l];
 }
 function Upload_FILE (){
-    var size, size2, size3, size4;
-    var $ = window.$; // use the global jQuery instance
-    var $uploadList = $("#list-upload-file");
-    var $fileUpload = $('#file');
     if ($uploadList.length > 0 && $fileUpload.length > 0) {
         console.log('a')
         const form = $('#form-upload-file')[0];
@@ -77,8 +76,8 @@ function Upload_FILE (){
         });
     }
 }
-// $(document).ready(function() {
-//     Upload_FILE()
-// });
+$(document).ready(function() {
+     Upload_FILE()
+});
 
 

@@ -4,7 +4,7 @@
          ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0 bg-[#121520]" aside-menu
        aria-expanded="false">
     <div class="h-19">
-        <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white text-slate-400 xl:hidden"
+        <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fa fa-times text-white text-slate-400 xl:hidden"
            sidenav-close></i>
         <a class="{{$minimenu === 'true' ? 'px-2 py-4 xl:scale-75' :'px-6 py-4'}} flex m-0 text-sm whitespace-nowrap items-center" href="" target="_blank" logo>
             <img src="../assets/img/logo3.png"

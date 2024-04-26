@@ -20,6 +20,7 @@ document.onreadystatechange = function () {
 if (document.querySelector("[box-lifted]")) {
     loadJS(to_build + "assets/js/tabs-lifted.js", true);
 }
+loadJS(to_build + "assets/js/search.js", true);
 
 if (document.querySelector("[dropdown-trigger]")) {
     loadJS(to_build + "assets/js/dropdown.js", true);
@@ -31,9 +32,9 @@ if (document.querySelector("[fixed-plugin]")) {
 }
 
 if (document.querySelector("[navbar-main]") || document.querySelector("[navbar-profile]")) {
-    if(document.querySelector("[navbar-main]")){
-        loadJS(to_build + "assets/js/navbar-sticky.js", true);
-    }
+    // if(document.querySelector("[navbar-main]")){
+    //     loadJS(to_build + "assets/js/navbar-sticky.js", true);
+    // }
     if (document.querySelector("aside")) {
         loadJS(to_build + "assets/js/sidenav-burger.js?", true);
     }
@@ -42,7 +43,6 @@ if (document.querySelector("[navbar-main]") || document.querySelector("[navbar-p
 if (document.querySelector("canvas")) {
     loadJS(to_build + "assets/js/charts.js", true);
 }
-
 // load js upload
 if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/remoteTransfer.js", true);
@@ -58,7 +58,9 @@ if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/jquery.fileupload.js", true);
     loadJS(to_build + "assets/js/upload/jquery.iframe-transport.js", true);
     loadJS(to_build + "assets/js/upload/jquery.ui.widget.js", true);
+    loadJS(to_build + "assets/js/upload/uploadFile.js", true);
 }
+
 // load js video
 if (document.querySelector("[page-video]")) {
     loadJS(to_build + "assets/js/jsVideo/box-video.js", true);
@@ -66,6 +68,7 @@ if (document.querySelector("[page-video]")) {
 if (document.querySelector("[page-video]")) {
     loadJS(to_build + "assets/js/jsVideo/datatable.js", true);
 }
+
 // load js report
 if (document.querySelector("[report]")) {
     loadJS(to_build + "assets/js/report/report.js", true);
@@ -85,7 +88,7 @@ function loadJS(FILE_URL, async) {
     let version = Date.now();
 
     dynamicScript.setAttribute("src", FILE_URL + "?v=" + version);
-    dynamicScript.setAttribute("type", "module");
+    dynamicScript.setAttribute("type", "text/javascript");
     dynamicScript.setAttribute("async", async);
 
     document.head.appendChild(dynamicScript);
