@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 @include('components.header')
 <body
         class="m-0 font-sans text-base bg-[#142132] antialiased font-normal leading-default text-slate-500 min-h-screen h-full">
@@ -14,6 +16,14 @@
     <div class="w-full px-3 md:px-6 mx-auto">
         @yield('content')
     </div>
+    <!-- end cards -->
+</main>
 @include('components.footer')
+<script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}" async></script>
+@vite('resources/js/main.js')
+
+@yield('scripts')
+</body>
+</html>
 
 

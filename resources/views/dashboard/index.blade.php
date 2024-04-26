@@ -633,3 +633,7 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+{{--    Them cac script can thiet vao day--}}
+@endsection
