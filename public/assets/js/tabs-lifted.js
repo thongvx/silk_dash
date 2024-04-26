@@ -49,22 +49,23 @@ function loadContent(data_content, page) {
         },
         success: function(response) {
             $('#box-content').html(response);
+            if (document.querySelector("[web-upload]")) {
+                loadJS("assets/js/upload/uploadFile.js", true);
+            }
+            if ($("#webupload").length > 0) {
+                Upload_FILE()
+                console.log('b')
+            }
         }
     });
-
 }
 $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
     var content = urlParams.get('content') === null ? $('.tabs-lifted .tab:eq(0)').data('content') : urlParams.get('content');
     loadContent(content, page);
-    if (document.querySelector("[file-upload]")) {
-        loadJS("assets/js/upload/uploadFile.js", true);
-    }
+
 });
 $(document).on('click', '.tab-lifted', function() {
     var data_content = $(this).data('content');
     loadContent(data_content, page);
-    if (document.querySelector("[web-upload]")) {
-        Upload_FILE()
-    }
 });

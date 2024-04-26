@@ -26,3 +26,4 @@
         </div>
     </div>
 </div>
+<script  type="module" src="assets/js/upload/uploadFile.js"></script>

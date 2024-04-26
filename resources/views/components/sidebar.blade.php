@@ -1,8 +1,8 @@
 <!-- sidenav  -->
 <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full {{$minimenu === 'true' ? 'xl:w-max' :''}} p-0 my-4
          antialiased transition-transform duration-300 -translate-x-full border-0 shadow-xl max-w-64
-         ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0 " aside-menu
-       style="background-color: #121520" aria-expanded="false">
+         ease-nav-brand z-30 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0 bg-[#121520]" aside-menu
+       aria-expanded="false">
     <div class="h-19">
         <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white text-slate-400 xl:hidden"
            sidenav-close></i>

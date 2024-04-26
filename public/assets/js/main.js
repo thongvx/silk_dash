@@ -21,12 +21,6 @@ if (document.querySelector("[box-lifted]")) {
     loadJS(to_build + "assets/js/tabs-lifted.js", true);
 }
 
-
-if (document.querySelector("[file-upload]")) {
-    loadJS(to_build + "assets/js/upload/remoteTransfer.js", true);
-}
-
-
 if (document.querySelector("[dropdown-trigger]")) {
     loadJS(to_build + "assets/js/dropdown.js", true);
 
@@ -49,10 +43,11 @@ if (document.querySelector("canvas")) {
     loadJS(to_build + "assets/js/charts.js", true);
 }
 
-if (document.querySelector(".github-button")) {
-    loadJS("https://buttons.github.io/buttons.js", true);
-}
 // load js upload
+if (document.querySelector("[file-upload]")) {
+    loadJS(to_build + "assets/js/upload/remoteTransfer.js", true);
+}
+
 if (document.querySelector("[file-upload]")) {
     loadJS(to_build + "assets/js/upload/upload.js", true);
 }
@@ -77,11 +72,8 @@ if (document.querySelector("[report]")) {
 }
 // load js dmca
 if (document.querySelector("[support]")) {
-    // loadStylesheet("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css");
-    // loadJS("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js", true);
-    // loadJS(to_build + "assets/js/support.js", true);
-    loadStylesheet(to_build + "assets/css/prism.css");
-    loadJS(to_build + "assets/js/prism.js", true);
+    loadStylesheet(to_build + "assets/highlight/styles/vs2015.css");
+    loadJS("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js", true);
 }
 // load js setting
 if (document.querySelector("[setting]")) {
@@ -93,7 +85,7 @@ function loadJS(FILE_URL, async) {
     let version = Date.now();
 
     dynamicScript.setAttribute("src", FILE_URL + "?v=" + version);
-    dynamicScript.setAttribute("type", "text/javascript");
+    dynamicScript.setAttribute("type", "module");
     dynamicScript.setAttribute("async", async);
 
     document.head.appendChild(dynamicScript);
