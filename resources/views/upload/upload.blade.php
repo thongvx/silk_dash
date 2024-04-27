@@ -31,3 +31,9 @@
     </div>
     @include('upload.folder')
 @endsection
+@section('scripts')
+    <script src="{{asset('assets/js/upload/jquery.fileupload.js')}}" async></script>
+    @vite('resources/js/upload/upload.js')
+    @vite('resources/js/upload/transfer.js')
+    @vite('resources/js/upload/remoteTransfer.js')
+@endsection

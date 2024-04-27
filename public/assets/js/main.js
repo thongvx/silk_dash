@@ -36,7 +36,7 @@ if (document.querySelector("[navbar-main]") || document.querySelector("[navbar-p
     //     loadJS(to_build + "assets/js/navbar-sticky.js", true);
     // }
     if (document.querySelector("aside")) {
-        loadJS(to_build + "assets/js/sidenav-burger.js?", true);
+        loadJS(to_build + "assets/js/sidebar.js?", true);
     }
 }
 
