@@ -51,7 +51,7 @@
             </div>
             <div id="live"
                  class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
-                @include('videos.table')
+                @include('video.table')
             </div>
         </div>
     </div>

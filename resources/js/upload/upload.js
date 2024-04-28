@@ -1,19 +1,17 @@
-var fixedFolderCard = document.querySelector("[fixed-folder-card]");
-var fixedFolderCloseButton = document.querySelectorAll("[fixed-folder-close-button]");
+var fixedFolderCard = $("[fixed-folder-card]");
+var fixedFolderCloseButton = $("[fixed-folder-close-button]");
 
 function fixedBox () {
-    fixedFolderCard.classList.toggle("opacity-0");
-    fixedFolderCard.classList.toggle("opacity-1");
-    fixedFolderCard.classList.toggle("hidden");
-    fixedFolderCard.classList.toggle("block");
+    fixedFolderCard.toggleClass("opacity-0");
+    fixedFolderCard.toggleClass("opacity-1");
+    fixedFolderCard.toggleClass("hidden");
+    fixedFolderCard.toggleClass("block");
 }
-fixedFolderCloseButton.forEach(function(element) {
-    element.addEventListener("click", function () {
-        fixedFolderCard.classList.toggle("opacity-0");
-        fixedFolderCard.classList.toggle("opacity-1");
-        fixedFolderCard.classList.toggle("hidden");
-        fixedFolderCard.classList.toggle("block");
-    });
+fixedFolderCloseButton.on("click", function () {
+    fixedFolderCard.toggleClass("opacity-0");
+    fixedFolderCard.toggleClass("opacity-1");
+    fixedFolderCard.toggleClass("hidden");
+    fixedFolderCard.toggleClass("block");
 });
 $(document).on('click', '[change-folder]', function () {
     fixedBox();

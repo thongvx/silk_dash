@@ -27,8 +27,16 @@ class VideoController
         $limit = $request->input('limit', 20);
 
         // Lấy danh sách thư mục và tên thư mục hiện tại
-        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
-        $data['currentFolderName'] = $this->videoRepo->getFolderName($folderId);
+        $folders = $this->videoRepo->getAllFolders($user->id);
+        $data['folders'] = $folders;
+
+        // Nếu không có folderId được cung cấp, sử dụng ID của thư mục đầu tiên
+        if (!$folderId && count($folders) > 0) {
+            $folderId = $folders[0]->id;
+        }
+
+        $data['currentFolderName'] = $folders->firstWhere('id', $folderId);
+
 
         // Lấy danh sách video theo cách sắp xếp mới
         $data['videos'] = $this->videoRepo->getAllUserVideo($user->id, $request->input('search'), $column, $direction, $folderId, $limit);
@@ -46,21 +54,15 @@ class VideoController
     // Hiển thị danh sách các video của user
     public function index(Request $request)
     {
-        $user = Auth::user();
-        $data['title'] = 'Video';
-        $folderId = $request->query('folderId', $this->videoRepo->getAllFolders($user->id)->first()->id);
-        $data['currentFolderName'] = $this->videoRepo->getFolderName($folderId);
-        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
-        $data['videos'] = $this->videoRepo->getAllUserVideo($user->id, $request->input('search'), 'created_at', 'asc', $folderId, 20);
-        return view('videos.index', $data);
+        $data = $this->getVideoData($request);
+        return view('video.index', $data);
     }
 
     // Hàm sort
     public function control(Request $request)
     {
         $data = $this->getVideoData($request);
-
-        return view('videos.table', $data);
+        return view('video.table', $data);
     }
     //cover
     private function convertFileSize($sizeInBytes)

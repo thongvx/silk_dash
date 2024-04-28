@@ -9,7 +9,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 
 class VideoRepo extends BaseRepository
 {
-    private string $cachePrefix = 'videos:';
+    private string $cachePrefix = 'video:';
     public function model()
     {
         return Video::class;
@@ -41,19 +41,22 @@ class VideoRepo extends BaseRepository
 
         //Lấy cache
         //Todo: bỏ comment đoạn này khi triển khai thực tế để ăn cache, hiện dev thì để lấy từ db luôn test cho nó dễ
-//        $videos = Redis::get($cacheKey);
-//        if (isset($videos)){
-//            return unserialize($videos);
+//        $video = Redis::get($cacheKey);
+//        if (isset($video)){
+//            return unserialize($video);
 //        }
+        if ($column == 'created_at') {
+            $column = 'id';
+        }
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
         $videos = $this->query()
             ->where('user_id', $userId)
             ->where('folder_id', $folderId)
-            ->select($columns)
+//            ->select($columns)
             ->orderBy($column, $direction)
             ->paginate($limit);
 
-//        Redis::setex($cacheKey, 259200, serialize($videos));
+//        Redis::setex($cacheKey, 259200, serialize($video));
         return $videos;
     }
 

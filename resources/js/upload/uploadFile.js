@@ -79,5 +79,9 @@ function Upload_FILE (){
 $(document).ready(function() {
      Upload_FILE()
 });
-
+$(document).on('click', '.webupload', function() {
+    setTimeout(() => {
+        Upload_FILE()
+    }, 1000);
+});
 

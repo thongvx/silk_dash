@@ -528,5 +528,6 @@
 @endsection
 
 @section('scripts')
-{{--    Them cac script can thiet vao day--}}
+    @vite('resources/js/chart/filechart.js')
+    @vite('resources/js/chart/charts.js')
 @endsection
