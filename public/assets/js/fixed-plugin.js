@@ -22,23 +22,10 @@ var non_active_style = ["bg-none", "bg-transparent", "text-blue-500", "border-bl
 var active_style = ["bg-gradient-to-tl", "from-blue-500", "to-violet-500", "bg-blue-500", "text-white", "border-transparent"];
 
 var white_sidenav_classes = ["bg-white", "shadow-xl"];
-// var white_sidenav_highlighted = ["shadow-xl"];
-// var white_sidenav_icons = ["bg-white"];
 
 var black_sidenav_classes = ["bg-slate-850", "shadow-none"];
-// var black_sidenav_highlighted = ["shadow-none"];
-// var black_sidenav_icons = ["bg-gray-200"];
-
-var sidenav_highlight = document.querySelector("a[href=" + CSS.escape(sidenav_target) + "]");
-
 // fixed plugin toggle
 if (pageName != "rtl") {
-//   fixedPluginButton.addEventListener("click", function () {
-//     fixedPluginCard.classList.toggle("-right-90");
-//     fixedPluginCard.classList.toggle("right-0");
-//     fixedPluginCard.classList.toggle("opacity-1");
-//     fixedPluginCard.classList.toggle("opacity-0");
-//   });
 
   fixedPluginButtonNav.addEventListener("click", function () {
     fixedPluginCard.classList.toggle("opacity-0");

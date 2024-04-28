@@ -29,7 +29,7 @@ class UploadController
 
     }
 
-    //Xử lý gọi vào hàm này để đẩy videos lên
+    //Xử lý gọi vào hàm này để đẩy video lên
     public function uploadVideo(Request $request){
         $videoInfo = $request->all();
         $userId = $videoInfo['userId'];

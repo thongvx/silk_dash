@@ -8,27 +8,32 @@
                 <div
                     class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                     <button
-                        class="tab-upload profile hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="{{request()->get('tab') === 'profile' ? 'profile tab-active !text-[#009FB2]' : 'profile'}}
+                        profile hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="profile">
                         <span class="px-2 py-1">Profile</span>
                     </button>
                     <button
-                        class="tab-upload accountsetting hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="{{request()->get('tab') === 'accountsetting' ? 'accountsetting tab-active !text-[#009FB2]' : 'accountsetting'}}
+                        ticket hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="accountsetting">
                         <span class="px-2 py-1">Account Settings</span>
                     </button>
                     <button
-                        class="tab-upload playersetting hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="{{request()->get('tab') === 'playersetting' ? 'playersetting tab-active !text-[#009FB2]' : 'playersetting'}}
+                        playersetting hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="playersetting">
                         <span class="px-2 py-1">Player Setting</span>
                     </button>
                     <button
-                        class="tab-upload customdomain hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="{{request()->get('tab') === 'customdomain' ? 'customdomain tab-active !text-[#009FB2]' : 'customdomain'}}
+                        ticket hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="customdomain">
                         <span class="px-2 py-1">Custom Domain</span>
                     </button>
                     <button
-                        class="tab-upload customads hover:text-[#009FB2] tab-lifted [--tab-border-color:#121520] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="{{request()->get('tab') === 'customads' ? 'customads tab-active !text-[#009FB2]' : 'customads'}}
+                        customads hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="customads">
                         <span class="px-2 py-1">Custom Ads</span>
                     </button>
@@ -42,6 +47,7 @@
                                     <div class="px-2 pt-4 md:p-4">
                                         <div id="box-content" setting
                                              class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
+                                            @include(request()->path() . '.' . request()->get('tab'))
                                         </div>
                                     </div>
                                 </div>

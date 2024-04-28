@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('video', function (Blueprint $table) {
             $table->id();
             $table->string('slug', 20)->unique();
             $table->string('middle_slug', 20)->index();

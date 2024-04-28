@@ -19,9 +19,12 @@
     <!-- end cards -->
 </main>
 @include('components.footer')
-<script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}" async></script>
-@vite('resources/js/main.js')
-
+    <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}" async></script>
+    <script src="{{asset('assets/js/dropdown.js')}}" async></script>
+    <script src="{{asset('assets/js/input-search.js')}}" async></script>
+    @vite('resources/js/main.js')
+    @vite('resources/js/sidebar.js')
+    @vite('resources/js/tabs-lifted.js')
 @yield('scripts')
 </body>
 </html>

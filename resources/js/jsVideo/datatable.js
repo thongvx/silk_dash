@@ -9,7 +9,6 @@ function btn_video(){
         $('button[btn-video]').addClass('cursor-not-allowed')
         $('button[btn-video]').removeClass('hover:text-[#009FB2]')
     }
-
 }
 $(document).on('click', '[checked-All]', function () {
     var isChecked = $(this).prop('checked');
@@ -112,6 +111,8 @@ $(document).on('click', '.btn-page-folder', function() {
     var direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
     var folderId = $(this).data('folderid');
     var limit = $(this).data('limit');
+    $('.btn-page-folder').addClass('btn-page-folder')
+    $(this).removeClass('btn-page-folder')
     var page = '';
     const box_folder = $(this).closest('[folder]');
     box_folder.prependTo(box_folder.closest('.list-folder'));

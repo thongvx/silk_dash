@@ -120,113 +120,6 @@
                 </div>
             </div>
         </div>
-        {{--<!-- card1 -->
-        <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
-            <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
-                <div class='flex items-center justify-between'>
-                    <div
-                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">storage</i>
-                    </div>
-                    <div class='font-semibold'>
-                        <h3 class='text-lg text-[#009FB2]'>Storage</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white text-end">
-                            5.1 GB
-                        </h5>
-                    </div>
-                </div>
-                <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
-                <div>
-                    <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-[#009FB2]">255</span>
-                        file
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- card2 -->
-        <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
-            <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
-                <div class='flex items-center justify-between'>
-                    <div
-                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">trending_up</i>
-                    </div>
-                    <div class='font-semibold'>
-                        <h3 class='text-lg text-[#009FB2]'>Today’s Earning</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white text-end">
-                            $53,000
-                        </h5>
-                    </div>
-                </div>
-                <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
-                <div>
-                    <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-[#009FB2]">+55%</span>
-                        since yesterday
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- card3 -->
-        <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
-            <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
-                <div class='flex items-center justify-between'>
-                    <div
-                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">trending_up</i>
-                    </div>
-                    <div class='font-semibold'>
-                        <h3 class='text-lg text-[#009FB2]'>Yesterday’s Earning</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white text-end">
-                            $53,000
-                        </h5>
-                    </div>
-                </div>
-                <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
-                <div>
-                    <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-[#009FB2]">+55%</span>
-                        since yesterday
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- card4 -->
-        <div class="w-full max-w-full px-3 mb-6 sm:w-1/2 xl:mb-0 xl:w-1/4">
-            <div
-                    class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-2xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
-                <div class='flex items-center justify-between'>
-                    <div
-                            class='bg-[#009FB2] p-3 rounded-xl lg:-mt-14 shadow-lg shadow-gray-400/50 dark:shadow-slate-900'>
-                        <i class="material-symbols-outlined opacity-1 text-white text-3xl leading-none	">attach_money</i>
-                    </div>
-                    <div class='font-semibold'>
-                        <h3 class='text-lg text-[#009FB2]'>Total Balance</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white text-end">
-                            $53,000
-                        </h5>
-                    </div>
-                </div>
-                <hr class="h-px mx-1 mt-4 mb-2 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
-                <div>
-                    <p class="mb-0 text-white opacity-0.8">
-                        <span class="text-sm font-bold leading-normal text-[#009FB2]">+55%</span>
-                        since yesterday
-                    </p>
-                </div>
-            </div>
-
-        </div>--}}
     </div>
 
     <!-- cards row 2 -->
@@ -635,5 +528,6 @@
 @endsection
 
 @section('scripts')
-{{--    Them cac script can thiet vao day--}}
+    @vite('resources/js/chart/filechart.js')
+    @vite('resources/js/chart/charts.js')
 @endsection

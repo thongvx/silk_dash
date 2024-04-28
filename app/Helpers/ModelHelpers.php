@@ -18,12 +18,12 @@ class ModelHelpers
 
     }
     public function loadPage(Request $request){
-        $content = $request->input('content');
+        $content = $request->input('tab');
         $page = $request->input('page');
         return view($page.'.'.$content);
     }
     public function loadPagevideo(Request $request){
-        $content = $request->input('content');
+        $content = $request->input('tab');
         $page = $request->input('page');
         $data = $this->videoController->getVideoData($request);
 

@@ -1,9 +1,9 @@
 <div class="grid grid-cols-4 text-white">
     <div class="col-span-1 hidden lg:block">
-        <h4 class="text-warning">Upload</h4>
+        <h4 class="text-orange-500">Upload</h4>
         <a href="#add_link"><h5>Remote Uplaod</h5></a>
         <a href="#webupload"><h5>Web Upload</h5></a>
-        <h4 class="text-warning mt-4">File/Folder Management</h4>
+        <h4 class="text-orange-500 mt-4">File/Folder Management</h4>
         <a href="#list_file"><h5>List Files</h5></a>
         <a href="#info_video"><h5>Infor Video</h5></a>
         <a href="#file-rename"><h5>Rename File</h5></a>

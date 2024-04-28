@@ -1,7 +1,7 @@
 <div fixed-video>
     <!-- -right-90 in loc de 0-->
     <div fixed-video-card
-         class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full
+         class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full  backdrop-blur-sm
            min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3" id="fixed-video">
         <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-video-close-button>
         </div>
