@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="text-end mt-3">
-        <a href="/setting?page=setting&content=accountsetting"
+        <a href="/setting?tab=accountsetting"
            class="rounded-lg bg-orange-500 px-2 py-2 text-white text-sm">
             <i class="material-icons text-lg mr-2">settings</i>Earning Mode
         </a>
@@ -132,6 +132,4 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    @vite('resources/js/report/report.js')
-@endsection
+

@@ -32,25 +32,17 @@
                     </select>
                     <span>entries</span>
                 </div>
-                <div class="flex ">
-                    <button type="button" class="rounded-lg flex items-center px-1.5 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
-                            title="poster"  btn-poster>
-                        {!!
-                            request() -> get('poster')
-                            ? '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i>hide poster'
-                            : '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility</i>show poster'
-                        !!}
-                    </button>
-                    <button type="button" btn-video disabled class="cursor-not-allowed px-2"
+                <div class="grid grid-cols-3 grid-flow-col gap-2">
+                    <button type="button" btn-video disabled class="cursor-not-allowed"
                             title="delete">
                         <i btn-delete class="material-symbols-outlined opacity-1 text-3xl">delete</i>
                     </button>
-                    <button type="button" btn-video disabled class="cursor-not-allowed px-2"
+                    <button type="button" btn-video disabled class="cursor-not-allowed"
                             title="export">
                         <i btn-export
                            class="material-symbols-outlined opacity-1 text-3xl">ios_share</i>
                     </button>
-                    <button type="button" btn-video disabled class="cursor-not-allowed px-2"
+                    <button type="button" btn-video disabled class="cursor-not-allowed"
                             title="folder">
                         <i btn-move
                            class="material-symbols-outlined opacity-1 text-3xl">folder_open</i>

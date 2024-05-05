@@ -20,5 +20,4 @@ $(document).on('click', '[folder]', function() {
     fixedBox()
     $('#folderPost').attr('value',$(this).data('folderid'))
     $('#folderName').text($(this).find('h5').first().text())
-    Upload_FILE ()
 });

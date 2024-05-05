@@ -528,6 +528,6 @@
 @endsection
 
 @section('scripts')
-    @vite('resources/js/chart/filechart.js')
-    @vite('resources/js/chart/charts.js')
+{{--    @vite('resources/js/chart/filechart.js')--}}
+{{--    @vite('resources/js/chart/charts.js')--}}
 @endsection

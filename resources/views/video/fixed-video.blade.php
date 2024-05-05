@@ -10,21 +10,19 @@
             <div class="absolute right-4 top-3">
                 <button fixed-video-close-button
                         class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
-                    <i class="fa fa-close text-xl"></i>
+                    <i class="material-symbols-outlined text-3xl">close</i>
                 </button>
             </div>
             <div>
                 <div class="edit hidden" id="edit">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Edit file details</h5>
-                    <form class="text-white mt-3">
+                    <form class="text-white mt-3" action="">
                         <div class="grid grid-cols-3 gap-4 items-center">
                             <h5>
                                 Video title
                             </h5>
-                            <div class="col-span-2 pr-2">
-                                <input type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
-                       border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500
-                       focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
+                            <div class="col-span-2 pr-2 video-title">
+
                             </div>
                         </div>
                         <div class="grid grid-cols-3 gap-4 items-center my-4">
@@ -37,7 +35,7 @@
                         </div>
                         <div class="grid grid-cols-3 gap-4 items-center">
                             <h5>
-                                File name
+                                New video title
                             </h5>
                             <div class="col-span-2 pr-2">
                                 <input type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
@@ -45,6 +43,7 @@
                        focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
                             </div>
                         </div>
+                        <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132] hover:bg-[#009FB2]">Submit</button>
                     </form>
                 </div>
                 <div class="export hidden" id="export">
@@ -53,17 +52,17 @@
                         <div
                             class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start flex flex-col items-start md:grid">
                             <button
-                                class="[--tab-border-color:#202940] tab tab-lifted !text-[#009FB2] text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                                class="[--tab-border-color:#202940] tab !text-[#009FB2] text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                                 data-content="EmbedLink">
                                 EmbedLink
                             </button>
                             <button
-                                class="[--tab-border-color:#202940] tab tab-lifted text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
+                                class="[--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
                                 data-content="Embedcode">
                                 Embedcode
                             </button>
                             <button
-                                class="[--tab-border-color:#202940] tab tab-lifted text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
+                                class="[--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
                                 data-content="Download">
                                 Download Link
                             </button>
@@ -74,10 +73,10 @@
                                 <div id="EmbedLink" class="tab-content">
                                     <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>
-                                <div id="Embedcode" class="tab-content">
+                                <div id="Embedcode" class="tab-content hidden">
                                     <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"> </textarea>
                                 </div>
-                                <div id="Download" class="tab-content">
+                                <div id="Download" class="tab-content hidden">
                                     <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>
                             </div>

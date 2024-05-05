@@ -14,6 +14,9 @@ function checkAll() {
 $(document).on('click', '.btn-edit', function() {
     fixedBox()
     $('#edit').toggle("hidden");
+    console.log($(this).closest('tr').find('.video-title').text())
+    $('#edit .video-title').text($(this).closest('tr').find('.video-title').text())
+    console.log($(this).closest('tr').find('.videoID').text())
 });
 $(document).on('click', '[btn-delete]', function() {
     fixedBox()
@@ -53,6 +56,7 @@ $(document).on('click', '[move-to-folder]', function() {
 });
 //end move video to folder
 
+//
 fixedVideoCloseButton.on("click", function () {
     fixedVideoCard.toggleClass("opacity-0");
     fixedVideoCard.toggleClass("opacity-1");

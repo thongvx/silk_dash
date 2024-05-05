@@ -22,7 +22,7 @@
             <th class="text-center">
                 ID
             </th>
-            <th class="text-center">
+            <th class="text-center {{request()->get('poster') ? '' : 'hidden'}}" poster>
                 Poster
             </th>
             <th data-column="size" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
@@ -68,10 +68,10 @@
                     <input type="checkbox"
                            class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
                 </td>
-                <td class="pl-2 w-96">{{ $video->title }}</td>
-                <td class="text-center px-2">{{ $video->id }}</td>
-                <td>
-                    <img class="h-10 px-2" src="{{ $video->poster }}">
+                <td class="pl-2 w-96 video-title">{{ $video->title }}</td>
+                <td class="text-center px-2 videoID">{{ $video->id }}</td>
+                <td class="{{request()->get('poster') ? '' : 'hidden'}} flex justify-center items-center" poster>
+                    <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
                 </td>
                 <td class="text-center w-max">{{ $video->size }}</td>
                 <td class="text-center w-max">{{ $video->total_play }}</td>
@@ -83,21 +83,21 @@
                             href="javascript:" dropdown-trigger
                             aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
                         <ul dropdown-menu
-                            class="text-sm transform-dropdown bg-[#1a2035] before:font-awesome before:leading-default before:duration-350 before:ease
+                            class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
                                          shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-3 before:text-lg pointer-events-none absolute right-1 top-12 lg:top-12
                                          origin-top list-none rounded-lg  bg-clip-padding text-white z-10
                                          px-2 py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
                                          before:inline-block before:font-normal before:text-[#1a2035] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                            <li class="relative w-max btn-edit"><i
-                                    class="material-symbols-outlined opacity-1">edit_square</i>
+                            <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex"><i
+                                    class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
                                 Edit File
                             </li>
-                            <li class="relative my-3"><i
-                                    class="material-symbols-outlined opacity-1">content_copy</i>
+                            <li class="relative my-3 hover:text-[#009FB2] items-center flex"><i
+                                    class="material-symbols-outlined opacity-1 mr-2">content_copy</i>
                                 Clone
                             </li>
-                            <li class="relative"><i
-                                    class="material-symbols-outlined opacity-1">delete</i>
+                            <li class="relative hover:text-[#009FB2] items-center flex"><i
+                                    class="material-symbols-outlined opacity-1 mr-2">delete</i>
                                 Delete
                             </li>
                         </ul>
