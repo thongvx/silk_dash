@@ -8,6 +8,11 @@ document.onreadystatechange = function () {
     }
 };
 var page = window.location.pathname.replace('/', '');
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 function updateURLParameter(tab) {
     var urlParams = new URLSearchParams(window.location.search);
     tab ? urlParams.set('tab', tab) : '';
@@ -51,6 +56,13 @@ function loadContent(data_content) {
 $(document).on('click', '.tab-lifted', function() {
     var data_content = $(this).data('content');
     loadContent(data_content);
+});
+$(document).on('click', '.tab-export', function() {
+    var data_content = $(this).data('content');
+    $('.tab-export').removeClass('tab-active !text-[#009FB2]')
+    $('.'+data_content).addClass('tab-active !text-[#009FB2]')
+    $('.tab-content-export').addClass('hidden')
+    $('#'+data_content).removeClass('hidden')
 });
 var currentDropdownTrigger = null;
 var currentDropdownMenu = null;

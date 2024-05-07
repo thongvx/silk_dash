@@ -18,13 +18,14 @@
 
         <div class="flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
           <div class="flex items-center md:ml-auto pr-4">
-            <div class="flex items-center relative bg-[#121520] w-full rounded-lg ease" search>
+            <form class="flex items-center relative bg-[#121520] w-full rounded-lg ease" action="/video/search" method="GET" search>
                 <label class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
-                <input type="text"
-                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 rounded-lg text-white bg-transparent bg-clip-padding text-gray-700 focus:outline-none
+                <input type="text" id="search" name="videoID"
+                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 text-white rounded-lg bg-transparent bg-clip-padding focus:outline-none
                          border border-solid border-[#121520]"
                   onfocus="focused(this)" onfocusout="defocused(this)"/>
-              </div>
+                <input type="submit" value="Search" class="hidden" />
+            </form>
           </div>
           <ul class="items-center	flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
             <!-- online builder btn  -->

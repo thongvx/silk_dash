@@ -24,17 +24,15 @@ class VideoRepo extends BaseRepository
     {
         return Folder::findOrFail($folderId);
     }
-    public function getAllUserVideo($userId, $tab, $search = false,$column , $direction, $folderId, $limit, $columns = ['*']){
 
+    public function getAllUserVideo($userId, $tab, $search ,$column , $direction, $folderId, $limit, $columns = ['*']){
+
+        $query = $this->query()
+            ->where('user_id', $userId)
+            ->where('folder_id', $folderId);
         // Nếu có tham số search, không sử dụng cache
         if ($search) {
-            //Ví dụ một query gì đó
-            return $this->query()
-                ->where('user_id', $userId)
-                ->where('title', 'LIKE', '%'.$search.'%')
-                ->select($columns)
-                ->orderBy($column, $direction)
-                ->paginate($limit);
+            $query->where('title', 'LIKE', '%' . $search . '%');
         }
         //Tạo cache key
 //        $cacheKey = $this->cachePrefix . $userId . 'get_all' . $limit . '.' . implode(',', $columns);
@@ -48,30 +46,29 @@ class VideoRepo extends BaseRepository
 
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
         if ($tab == 'processing') {
-            $name = 'quality';
-            $value = 'none';
-        } elseif ($tab == 'DMCA') {
-            $value = '1';
-            $name = 'soft_delete';
-        } elseif ($tab == 'remove') {
-            $value = '1';
-            $name = 'soft_delete';
-        }  else {
-            $value = '0';
-            $name = 'soft_delete';
+            $query->where('quality', 'none');
+        } elseif ($tab == 'DMCA' || $tab == 'remove') {
+            $query->where('soft_delete', '1');
+        } else {
+            $query->where('soft_delete', '0');
         }
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
-        $videos = $this->query()
-            ->where('user_id', $userId)
-            ->where('folder_id', $folderId)
-            ->where($name, $value)
-//            ->select($columns)
-            ->orderBy($column1, $direction)
+        $videos = $query->orderBy($column1, $direction)
             ->paginate($limit);
 
 //        Redis::setex($cacheKey, 259200, serialize($video));
         return $videos;
     }
-
+    public function searchVideos($userId, $searchTerm,$limit,$column,$direction, $columns = ['*'], )
+    {
+        return $this->query()
+                    ->where('user_id', $userId)
+                    ->where(function ($query) use ($searchTerm) {
+                        $query->where('title', 'LIKE', '%' . $searchTerm . '%')
+                            ->orWhere('slug', 'LIKE', '%' . $searchTerm . '%');
+                    })
+                    ->orderBy($column, $direction)
+                    ->paginate($limit);
+    }
 
 }

@@ -16,35 +16,7 @@
             <div>
                 <div class="edit hidden" id="edit">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Edit file details</h5>
-                    <form class="text-white mt-3" action="">
-                        <div class="grid grid-cols-3 gap-4 items-center">
-                            <h5>
-                                Video title
-                            </h5>
-                            <div class="col-span-2 pr-2 video-title">
 
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 items-center my-4">
-                            <h5>
-                                File URL
-                            </h5>
-                            <div class="col-span-2">
-                                https://cdnwish.com/2aw9nl106nz1
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 items-center">
-                            <h5>
-                                New video title
-                            </h5>
-                            <div class="col-span-2 pr-2">
-                                <input type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
-                       border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500
-                       focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
-                            </div>
-                        </div>
-                        <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132] hover:bg-[#009FB2]">Submit</button>
-                    </form>
                 </div>
                 <div class="export hidden" id="export">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Files Export</h5>
@@ -52,31 +24,31 @@
                         <div
                             class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start flex flex-col items-start md:grid">
                             <button
-                                class="[--tab-border-color:#202940] tab !text-[#009FB2] text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                                class="tab-export EmbedLink [--tab-border-color:#142132] tab !text-[#009FB2] text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#142132] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                                 data-content="EmbedLink">
                                 EmbedLink
                             </button>
                             <button
-                                class="[--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
+                                class="tab-export Embedcode [--tab-border-color:#142132] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#142132] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
                                 data-content="Embedcode">
                                 Embedcode
                             </button>
                             <button
-                                class="[--tab-border-color:#202940] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#202940] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
+                                class="tab-export Download [--tab-border-color:#142132] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#142132] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
                                 data-content="Download">
                                 Download Link
                             </button>
                         </div>
                         <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative">
                             <div
-                                class="border-[#202940] rounded-b-box rounded-se-box gap-2 bg-[#202940] bg-top py-4 pl-4 [border-width:var(--tab-border)] undefined">
-                                <div id="EmbedLink" class="tab-content">
+                                class="border-[#142132] rounded-b-box rounded-se-box gap-2 bg-[#142132] bg-top py-4 pl-4 [border-width:var(--tab-border)] undefined">
+                                <div id="EmbedLink" class="tab-content-export">
                                     <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>
-                                <div id="Embedcode" class="tab-content hidden">
+                                <div id="Embedcode" class="tab-content-export hidden">
                                     <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"> </textarea>
                                 </div>
-                                <div id="Download" class="tab-content hidden">
+                                <div id="Download" class="tab-content-export hidden">
                                     <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>
                             </div>
@@ -84,7 +56,14 @@
                     </div>
                 </div>
                 <div class="delete hidden" id="delete">
-                    <h5 class="mt-4 mb-0 dark:text-white">delete</h5>
+                    <form action="">
+                        <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected video?</h5>
+                        <input type="text" class="hidden" name="videoid-remove" value="">
+                        <div class="flex justify-center mt-3 text-white ">
+                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
+                            <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Delete</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="move hidden" id="move">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Choose folder to move selected to</h5>
@@ -104,7 +83,7 @@
                         <div
                             class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 text-white mt-2 min-h-80 max-h-80 overflow-auto">
                             @foreach($folders as $folder)
-                                <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent bg-clip-text hover:bg-gradient-to-r from-violet-500 to-fuchsia-500">
+                                <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent bg-clip-text from-violet-500 to-fuchsia-500">
                                     <div class="text-center">
                                         <i class="material-symbols-outlined text-3xl">folder</i>
                                     </div>

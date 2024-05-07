@@ -6,17 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="../assets/img/logo3.png" />
     <title>Stream Silk</title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Main Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
+    <style>
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* Loại bỏ hiệu ứng nền khi gợi ý chọn được hiển thị */
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* Sử dụng shadow để che phủ hiệu ứng nền */
+        }
+    </style>
 </head>
-    <body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default text-slate-500 bg-[url('https://show.moxcreative.com/automaton/wp-content/uploads/sites/16/2021/11/fiber-optical-network-cable.jpg')]">
+    <body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default text-slate-500
+    bg-[url('{{asset('image/background.webp')}}')] backdrop-blur-[2px]">
     <main class="mt-0 transition-all duration-200 ease-in-out">
         <section>
             <div class="relative flex items-center w-full min-h-screen p-0 overflow-hidden">
@@ -43,7 +49,10 @@
                                     @csrf
                                     <div class="mb-4">
                                         <label >Email</label>
-                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="Email" class=" autofill:bg-yellow-200 @error('email') @enderror mt-1 focus:shadow-primary-outline text-sm leading-5.6 w-full appearance-none rounded-xl border border-solid border-gray-300 bg-clip-padding p-3 font-normal outline-none transition-all bg-transparent focus:bg-transparent placeholder:text-white focus:border-fuchsia-300 focus:outline-none" />
+                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="Email"
+                                               class="autofill:bg-yellow-200 @error('email') @enderror mt-1 focus:shadow-primary-outline text-sm leading-5.6 w-full
+                                               appearance-none rounded-xl border border-solid border-gray-300 bg-clip-padding p-3 font-normal outline-none transition-all
+                                               bg-transparent placeholder:text-white focus:border-fuchsia-300 focus:outline-none" />
                                         @error('email')
                                         <span class="error invalid-feedback text-red-500">{{ $message }}</span>
                                         @enderror
@@ -64,7 +73,7 @@
                                                          after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
                                                          after:content-[''] checked:border-green-500/95 checked:bg-green-500/95
                                                          checked:bg-none checked:bg-right" type="checkbox">
-                                        <label for="remember" class="ml-2 font-normal cursor-pointer select-none text-sm text-slate-700" for="rememberMe">I forgot my password</label>
+                                        <label for="remember" class="ml-2 font-normal cursor-pointer select-none text-sm text-white" for="rememberMe">I forgot my password</label>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center text-white align-middle transition-all bg-blue-500 border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25">Sign in</button>
@@ -73,7 +82,7 @@
                             </div>
                             <div class="border-black/12.5 rounded-b-2xl border-t-0 border-solid p-6 text-center pt-0 px-1 sm:px-6">
                                 <p class="mx-auto mb-6 leading-normal text-sm text-white">
-                                    Don't have an account? <a href="{{ route('register') }}" class="font-semibold text-transparent bg-clip-text bg-gradient-to-tl from-blue-700 to-violet-700">Sign up</a>
+                                    Don't have an account? <a href="{{ route('register') }}" class="font-semibold text-[#009FB2]">Sign up</a>
                                 </p>
                             </div>
                         </div>

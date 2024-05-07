@@ -1,4 +1,4 @@
-function btn_video(){
+export function btn_video(){
     const rows_checked = $('table').find('tbody .checkbox:checked').length;
     if (rows_checked > 0) {
         $('button[btn-video]').prop('disabled', false);
