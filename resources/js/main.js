@@ -13,6 +13,53 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+export function notification(type, message) {
+    let icon = '';
+    let bg = ''
+    switch (type) {
+        case 'success':
+            icon = 'done';
+            bg = 'bg-green-600';
+            break;
+        case 'error':
+            icon = 'error';
+            bg = 'bg-red-600';
+            break;
+        case 'warning':
+            icon = 'warning';
+            bg = 'bg-yellow-600';
+            break;
+        default:
+            icon = 'fa-info';
+            bg = 'bg-blue-600';
+            break;
+    }
+    const box_notification = `
+            <div class="box-noti fixed top-4 right-4 ${bg} z-[40] text-white rounded-xl flex flex-col">
+                <div class="flex items-center py-2 px-4">
+                    <i class="material-symbols-outlined opacity-1 text-2xl mr-2">${icon}</i>
+                    <h4>${message}</h4>
+                </div>
+                <div class="w-full bg-transparent rounded-full h-1 mx-2">
+                    <div id="progressBar-noti" class="bg-orange-500 h-1 rounded-full" style="width: 92%"></div>
+                </div>
+            </div>
+            `
+    $('body').append(box_notification)
+    let value = 92;
+    let decreaseInterval = 2000 / 92;
+    let progressBar = $('#progressBar-noti');
+
+    let interval = setInterval(() => {
+        value--;
+        progressBar.css('width', value + '%');
+        console.log('a')
+        if (value <= 0) {
+            clearInterval(interval);
+            $('.box-noti').remove();
+        }
+    }, decreaseInterval);
+}
 function updateURLParameter(tab) {
     var urlParams = new URLSearchParams(window.location.search);
     tab ? urlParams.set('tab', tab) : '';

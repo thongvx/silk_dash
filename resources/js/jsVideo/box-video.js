@@ -1,4 +1,5 @@
 import { btn_video } from './datatable.js';
+import { notification } from '../main.js';
 
 var fixedVideoCard = $("[fixed-video-card]");
 var fixedVideoCloseButton = $("[fixed-video-close-button]");
@@ -80,6 +81,11 @@ $(document).on('click', '.btn-edit', function() {
                 fixedBox ()
                 $('#edit form').remove()
                 $('#edit').toggle("hidden");
+                notification('success', 'Video title has been successfully edited.')
+            },
+            error: function(response) {
+                fixedBox()
+                notification('error', 'An error occurred while editing the video title.')
             }
         });
     });
@@ -105,7 +111,6 @@ function ajaxremove(videoIDs, bntSubmit){
                 `)
         },
         success: function(response) {
-            console.log(response)
             fixedBox()
             $('#delete').toggle("hidden");
             videoIDs.forEach(function(videoID) {
@@ -113,6 +118,12 @@ function ajaxremove(videoIDs, bntSubmit){
             });
             bntSubmit.html(`Delete`)
             btn_video()
+            notification('success', 'Video has been successfully deleted.')
+        },
+        error: function(response) {
+            fixedBox()
+            bntSubmit.html(`Delete`)
+            notification('error', 'An error occurred while deleting the video.')
         }
     });
 }
