@@ -5,7 +5,7 @@
        aria-expanded="false">
     <div class="h-19">
         <i class="material-symbols-outlined absolute top-0 right-0 p-4 opacity-50 cursor-pointer text-white xl:hidden font-bold" sidenav-close>close</i>
-        <a class="{{$minimenu === 'true' ? 'px-2 py-4 xl:scale-75' :'px-6 py-4'}} flex m-0 text-sm whitespace-nowrap items-center" href="" target="_blank" logo>
+        <a class="{{$minimenu === 'true' ? 'px-2 py-4 xl:scale-75' :'px-6 py-4'}} flex m-0 text-sm whitespace-nowrap items-center" target="_blank" logo>
             <img src="../assets/img/logo3.png"
                  class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-12" alt="main_logo" />
             <span class="{{$minimenu === 'true' ? 'xl:max-w-0 xl:opacity-0' :''}} ml-1 font-semibold transition-all duration-200 ease-nav-brand" name-web>

@@ -22,6 +22,7 @@ let addFolder = `<div class="add-folder" id="add-folder">
 $(document).on('click', '[btn-add-folder]', function() {
     fixedBox()
     $('#fixed-box-control').append(addFolder)
+    const limit = $('[folder]:eq(0) a').data('limit')
     $('#add-folder form').on('submit', function(e) {
         e.preventDefault();
         const folderName = $(this).find('input[name="name-folder"]').val();
@@ -49,7 +50,36 @@ $(document).on('click', '[btn-add-folder]', function() {
                 $('#add-folder').remove()
                 fixedBox()
                 notification('success', 'Add folder successfully')
-                location.reload()
+                $('[folder]:eq(0)').after(`<div folder
+                                            class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#121520] hover:bg-gradient-to-r from-[#009FB2] to-[#4CBE1F]">
+                                            <a class="w-full btn-page-folder" href="javascript:;" data-folderid="${data.folder.id}" data-limit="${limit}">
+                                                <h5>
+                                                    <span name-folder>${data.folder.name_folder}</span> - ${data.folder.number_file} files
+                                                </h5>
+                                            </a>
+                                            <li class="list-none pl-4">
+                                                <span class="relative"><a href="javascript:;" dropdown-trigger
+                                                                          aria-expanded="false" class="flex items-center"><i
+                                                            class="material-symbols-outlined">more_vert</i></a>
+                                                  <ul dropdown-menu
+                                                      class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
+                                                         shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-1 before:text-5.5 pointer-events-none absolute right-1 top-8 -lg:top-0
+                                                         origin-top list-none rounded-lg  bg-clip-padding text-white z-10
+                                                         py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
+                                                         before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                                                    <!-- add show class on dropdown open js -->
+                                                    <li class="relative w-max btn-edit-folder hover:text-[#009FB2] items-center flex"><i
+                                                            class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
+                                                        Edit Folder
+                                                    </li>
+                                                    <li class=" mt-3 relative btn-delete-folder hover:text-[#009FB2] items-center flex"><i
+                                                            class="material-symbols-outlined opacity-1 mr-2">delete</i>
+                                                        Delete
+                                                    </li>
+                                                  </ul>
+                                                </span>
+                                            </li>
+                                        </div>`)
             },
             error: function(err) {
                 $('#add-folder').remove()

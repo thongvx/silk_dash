@@ -33,7 +33,7 @@
                 <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
               </li> -->
             <li class="flex items-center px-4 hidden md:inline">
-              <a href="upload"
+              <a href="upload?tab=webupload"
                 class="flex flex-col px-0 py-2 font-semibold text-white transition-all ease-nav-brand">
                 <i class="material-symbols-outlined text-3xl">cloud_upload</i>
               </a>
@@ -62,7 +62,7 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg"
+                        <img src="../assets/img/team-2.jpg" alt="" loading="lazy"
                           class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
                       </div>
                       <div class="flex flex-col justify-center">
@@ -82,7 +82,7 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/small-logos/logo-spotify.svg"
+                        <img src="../assets/img/small-logos/logo-spotify.svg" alt="" loading="lazy"
                           class="inline-flex items-center justify-center mr-4 text-sm text-white bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
                       </div>
                       <div class="flex flex-col justify-center">

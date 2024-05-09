@@ -22,7 +22,7 @@
                 <th class="text-center">
                     ID
                 </th>
-                <th class="text-center {{request()->get('poster') ? '' : 'hidden'}}" poster>
+                <th class="text-center {{request()->get('poster') == 'show' ? '' : 'hidden'}}" poster>
                     Poster
                 </th>
                 <th data-column="size" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
@@ -72,7 +72,7 @@
                         <a href="{{$video -> slug }}">{{ $video->title }}</a>
                     </td>
                     <td class="text-center px-2 videoID">{{ $video->slug }}</td>
-                    <td class="{{request()->get('poster') ? '' : 'hidden'}} flex justify-center items-center" poster>
+                    <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} flex justify-center items-center" poster>
                         <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
                     </td>
                     <td class="text-center w-max">{{ $video->size }}</td>
