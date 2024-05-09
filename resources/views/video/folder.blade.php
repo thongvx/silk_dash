@@ -36,22 +36,27 @@
                         <span name-folder>{{ $currentFolderName -> name_folder }}</span> - {{ $currentFolderName -> number_file }} files
                     </h5>
                 </a>
-                <li class="list-none">
-                                    <span class="relative"><a href="javascript:;" dropdown-trigger
-                                                              aria-expanded="false"><i
-                                                class="material-symbols-outlined">more_vert</i></a>
-                                      <ul dropdown-menu
-                                          class="text-sm transform-dropdown bg-[#1a2035] before:font-awesome before:leading-default before:duration-350 before:ease
-                                             shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-1 before:text-5.5 pointer-events-none absolute right-1 top-8 z-10 lg:top-6
-                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10
-                                             px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
-                                             before:inline-block before:font-normal before:text-[#1a2035] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                                        <!-- add show class on dropdown open js -->
-                                        <li class="relative w-max"> <i class="material-symbols-outlined opacity-1">edit_square</i> Edit File </li>
-                                        <li class="relative"> <i
-                                                class="material-symbols-outlined opacity-1">delete</i> Delete </li>
-                                      </ul>
-                                    </span>
+                <li class="list-none pl-4">
+                    <span class="relative"><a href="javascript:;" dropdown-trigger
+                                              aria-expanded="false"><i
+                                class="material-symbols-outlined">more_vert</i></a>
+                      <ul dropdown-menu
+                          class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
+                             shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-1 before:text-5.5 pointer-events-none absolute right-1 top-8 -lg:top-0
+                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10
+                             py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
+                             before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                        <!-- add show class on dropdown open js -->
+                        <li class="relative w-max btn-edit-folder hover:text-[#009FB2] items-center flex"><i
+                                class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
+                            Edit Folder
+                        </li>
+                        <li class=" mt-3 relative btn-delete-folder hover:text-[#009FB2] items-center flex"><i
+                                class="material-symbols-outlined opacity-1 mr-2">delete</i>
+                            Delete
+                        </li>
+                      </ul>
+                    </span>
                 </li>
             </div>
             @foreach($folders as $folder)
@@ -61,22 +66,27 @@
                         <a class="w-full btn-page-folder" href="javascript:;" data-folderid="{{$folder->id}}" data-limit="{{$videos->perPage()}}">
                             <h5><span name-folder>{{$folder -> name_folder}}</span> - {{ $folder -> number_file }} files</h5>
                         </a>
-                        <li class="list-none">
-                                    <span class="relative"><a href="javascript:;" dropdown-trigger
-                                                              aria-expanded="false"><i
-                                                class="material-symbols-outlined">more_vert</i></a>
-                                      <ul dropdown-menu
-                                          class="text-sm transform-dropdown bg-[#1a2035] before:font-awesome before:leading-default before:duration-350 before:ease
-                                             shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-1 before:text-5.5 pointer-events-none absolute right-1 top-8 z-10 lg:top-6
-                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10
-                                             px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
-                                             before:inline-block before:font-normal before:text-[#1a2035] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                                        <!-- add show class on dropdown open js -->
-                                        <li class="relative w-max"> <i class="material-symbols-outlined opacity-1">edit_square</i> Edit File </li>
-                                        <li class="relative"> <i
-                                                class="material-symbols-outlined opacity-1">delete</i> Delete </li>
-                                      </ul>
-                                    </span>
+                        <li class="list-none pl-4">
+                            <span class="relative"><a href="javascript:;" dropdown-trigger
+                                                      aria-expanded="false"><i
+                                        class="material-symbols-outlined">more_vert</i></a>
+                              <ul dropdown-menu
+                                  class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
+                                     shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-1 before:text-5.5 pointer-events-none absolute right-1 top-8 -lg:top-0
+                                     origin-top list-none rounded-lg  bg-clip-padding text-white z-10
+                                     py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
+                                     before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                                <!-- add show class on dropdown open js -->
+                                <li class="relative w-max btn-edit-folder cursor-pointer hover:text-[#009FB2] items-center flex"><i
+                                        class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
+                                    Edit Folder
+                                </li>
+                                <li class=" mt-3 relative btn-delete-folder cursor-pointer hover:text-[#009FB2] items-center flex"><i
+                                        class="material-symbols-outlined opacity-1 mr-2">delete</i>
+                                    Delete
+                                </li>
+                              </ul>
+                            </span>
                         </li>
                     </div>
                 @endif

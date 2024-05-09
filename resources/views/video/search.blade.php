@@ -92,7 +92,7 @@
                                                     <th class="text-center">
                                                         ID
                                                     </th>
-                                                    <th class="text-center {{request()->get('poster') ? '' : 'hidden'}}" poster>
+                                                    <th class="text-center" poster>
                                                         Poster
                                                     </th>
                                                     <th data-column="size" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
@@ -129,7 +129,7 @@
                                                 <tbody>
                                                 @if($videos->count() == 0)
                                                     <tr class="my-3 h-12 bg-[#142132]">
-                                                        <td class="flex items-center" colspan="8">No data available in table</td>
+                                                        <td class="text-center" colspan="9">No data available in table</td>
                                                     </tr>
                                                 @else
                                                     @foreach($videos as $index => $video)

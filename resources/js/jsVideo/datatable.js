@@ -1,15 +1,4 @@
-export function btn_video(){
-    const rows_checked = $('table').find('tbody .checkbox:checked').length;
-    if (rows_checked > 0) {
-        $('button[btn-video]').prop('disabled', false);
-        $('button[btn-video]').removeClass('cursor-not-allowed')
-        $('button[btn-video]').addClass('hover:text-[#009FB2]')
-    } else {
-        $('button[btn-video]').prop('disabled', true);
-        $('button[btn-video]').addClass('cursor-not-allowed')
-        $('button[btn-video]').removeClass('hover:text-[#009FB2]')
-    }
-}
+import {btn_video} from "./video.js";
 $(document).on('click', '[checked-All]', function () {
     const isChecked = $(this).prop('checked');
     $(this).closest('table').find('input[type="checkbox"]').prop('checked', isChecked);
@@ -143,13 +132,14 @@ $(document).on('click', '.btn-page-folder', function() {
     const limit = $(this).data('limit');
     const box_folder = $(this).closest('[folder]');
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
-    $(this).removeClass('btn-page-folder')
     $('[folder] a').addClass('btn-page-folder')
+    $(this).removeClass('btn-page-folder')
     box_folder.prependTo(box_folder.closest('.list-folder'));
     $('[folder]').addClass('bg-[#121520]')
     $('[folder]').removeClass('bg-gradient-to-r')
     $(box_folder).removeClass("bg-[#121520]")
     $(box_folder).addClass("bg-gradient-to-r")
     $('#currentFolderName').text($(this).find('span').text())
+    btn_video()
     updateURLParameterVideo(column,direction,folderId,limit,'',poster)
 })

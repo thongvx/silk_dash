@@ -7,22 +7,10 @@
     <link rel="icon" type="image/png" href="../assets/img/logo3.png" />
     <title>Stream Silk</title>
     @vite('resources/css/app.css')
-    <style>
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        input:-webkit-autofill:active {
-            transition: background-color 5000s ease-in-out 0s;
-        }
-
-        /* Loại bỏ hiệu ứng nền khi gợi ý chọn được hiển thị */
-        input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* Sử dụng shadow để che phủ hiệu ứng nền */
-        }
-    </style>
 </head>
-    <body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default text-slate-500
-    bg-[url('{{asset('image/background.webp')}}')] backdrop-blur-[2px]">
+    <body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default
+    text-slate-500 backdrop-blur-[2px]"
+      style="background-image: url('{{asset('image/background.jpeg')}}')">
     <main class="mt-0 transition-all duration-200 ease-in-out">
         <section>
             <div class="relative flex items-center w-full min-h-screen p-0 overflow-hidden">

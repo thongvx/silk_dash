@@ -6,18 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="../assets/img/logo3.png" />
     <title>Stream Silk</title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Main Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <style>
+        @font-face {
+            font-family: 'Material Symbols Outlined';
+            src: url('{{ asset('assets/fonts/materialsymbolsoutlined.woff2') }}') format('woff2');
+            font-display: swap;
+        }
         input:-webkit-autofill {
             background-color: #e21010 !important;
         }
@@ -27,7 +22,9 @@
         }
     </style>
 </head>
-<body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default text-slate-500 bg-[url('https://show.moxcreative.com/automaton/wp-content/uploads/sites/16/2021/11/fiber-optical-network-cable.jpg')]">
+<body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default
+text-slate-500 backdrop-blur-[2px]"
+style="background-image: url('{{asset('image/background.jpeg')}}')">
 <main class="mt-0 transition-all duration-200 ease-in-out">
     <section>
         <div class="relative flex items-center w-full min-h-screen p-0 overflow-hidden">
@@ -43,7 +40,7 @@
                 </div>
             </div>
             <div class="md:w-6/12 w-full flex justify-center">
-                <div class="flex -mx-3 rounded-2xl md:w-7/12 w-8/12 backdrop-blur-xl bg-white/20">
+                <div class="flex -mx-3 rounded-2xl lg:w-7/12 md:w-9/12 w-11/12 backdrop-blur-xl bg-white/20">
                     <div class="relative w-full flex flex-col items-center min-w-0 break-words border-0 shadow-none lg:py4">
                         <div class="py-6 pb-0 mb-0 text-white text-center">
                             <h4 class="font-semibold text-3xl">Create Account</h4>
@@ -55,7 +52,7 @@
                                 <div class="mb-4">
                                     <label >Name</label>
                                     <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-icons opacity-1 text-2xl p-1">person</i>
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">person</i>
                                         <input type="text" name="name"
                                                class="@error('name') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Full name">
@@ -70,7 +67,7 @@
                                 <div class="mb-4">
                                     <label >Email</label>
                                     <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-icons opacity-1 text-2xl p-1">email</i>
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">email</i>
                                         <input type="email" name="email"
                                                class="@error('email') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Full name">
@@ -85,7 +82,7 @@
                                 <div class="mb-4">
                                     <label >Password</label>
                                     <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-icons opacity-1 text-2xl p-1">key</i>
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">key</i>
                                         <input type="password" name="password"
                                                class="@error('password') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Full name">
@@ -100,7 +97,7 @@
                                 <div class="mb-4">
                                     <label >Retype Password</label>
                                     <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-icons opacity-1 text-2xl p-1">key</i>
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">key</i>
                                         <input type="password" name="password_confirmation"
                                                class="bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Retype password">
@@ -110,7 +107,7 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <div class="icheck-primary">
-                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-icons
+                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']

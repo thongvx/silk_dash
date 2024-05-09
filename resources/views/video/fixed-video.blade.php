@@ -13,11 +13,8 @@
                     <i class="material-symbols-outlined text-3xl">close</i>
                 </button>
             </div>
-            <div>
-                <div class="edit hidden" id="edit">
-                    <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Edit file details</h5>
+            <div  id="fixed-box-control">
 
-                </div>
                 <div class="export hidden" id="export">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Files Export</h5>
                     <div class="grid mt-3" box-lifted>
@@ -76,14 +73,14 @@
                                   <i class="fa fa-search"></i>
                                 </span>
                                 <input type="text" onkeyup="searchFolder(this)"
-                                       class="pl-9 text-sm focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg bg-[#142132] text-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
+                                       class="pl-9 text-sm focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg bg-[#142132] text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
                                        placeholder="Search folder"/>
                             </div>
                         </div>
                         <div
                             class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 text-white mt-2 min-h-80 max-h-80 overflow-auto">
                             @foreach($folders as $folder)
-                                <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent bg-clip-text from-violet-500 to-fuchsia-500">
+                                <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-gradient-to-r bg-clip-text from-violet-500 to-fuchsia-500">
                                     <div class="text-center">
                                         <i class="material-symbols-outlined text-3xl">folder</i>
                                     </div>
@@ -101,22 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="add-folder hidden" id="add-folder">
-                    <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Edit file details</h5>
-                    <form class="text-white mt-3">
-                        <div class="grid grid-cols-3 gap-4 items-center">
-                            <h5>
-                                Folder name
-                            </h5>
-                            <div class="col-span-2 pr-2">
-                                <input type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg
-                       bg-[#142132] text-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500
-                       focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
-                            </div>
-                        </div>
-                        <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132] hover:bg-[#009FB2]">Submit</button>
-                    </form>
-                </div>
+
             </div>
         </div>
     </div>

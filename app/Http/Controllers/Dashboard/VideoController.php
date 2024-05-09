@@ -3,23 +3,27 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Repositories\VideoRepo;
+use App\Repositories\FolderRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VideoController
 {
     protected $videoRepo;
+    protected $folderRepo;
 
-    public function __construct(VideoRepo $videoRepo)
+    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo)
     {
         $this->videoRepo = $videoRepo;
+        $this->folderRepo = $folderRepo;
     }
+
     // Get video data
     public function getVideoData(Request $request)
     {
         $user = Auth::user();
         $folderId = $request->query('folderId');
-        $folders = $this->videoRepo->getAllFolders($user->id);
+        $folders = $this->folderRepo->getAllFolders($user->id);
         $folderId = $folderId ?? $folders->first()->id;
 
         $data = [
@@ -119,7 +123,7 @@ class VideoController
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
         $videos = $this->videoRepo->searchVideos($user->id, $searchTerm, $limit, $column, $direction);
-        $folders = $this->videoRepo->getAllFolders($user->id);
+        $folders = $this->folderRepo->getAllFolders($user->id);
 
 
         $data = [

@@ -14,17 +14,6 @@ class VideoRepo extends BaseRepository
     {
         return Video::class;
     }
-    //lay list folder
-    public function getAllFolders($userId, $columns = ['*'])
-    {
-        return Folder::where('user_id', $userId)->select($columns)->get();
-    }
-    //folder hien tai
-    public function getFolderName($folderId)
-    {
-        return Folder::findOrFail($folderId);
-    }
-
     public function getAllUserVideo($userId, $tab, $search ,$column , $direction, $folderId, $limit, $columns = ['*']){
 
         $query = $this->query()
