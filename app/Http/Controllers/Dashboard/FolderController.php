@@ -41,10 +41,12 @@ class FolderController
         $request->validate([
             'folderName' => 'required|string|max:255',
         ]);
-
+        $user = Auth::user();
         // Create a new folder
         $folder = new Folder;
         $folder->name_folder = $request->folderName;
+        $folder->user_id = $user->id;
+        $folder->number_file = 0;
         $folder->save();
 
         // Return a response

@@ -13,9 +13,9 @@ class FolderRepo extends BaseRepository
     }
 
     // Get all folders
-    public function getAllFolders()
+    public function getAllFolders($userId)
     {
-        return Folder::orderBy('id', 'desc')->get();
+        return Folder::where('user_id', $userId)->orderBy('id', 'desc')->get();
     }
 
     // Get folder name

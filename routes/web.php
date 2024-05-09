@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/video', \App\Http\Controllers\Dashboard\VideoController::class);
     Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('video.control');
     Route::post('/video/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple'])->name('video.destroyMultiple');
+    Route::post('/videos/move', [\App\Http\Controllers\Dashboard\VideoController::class, 'moveVideos'])->name('video.move');
     Route::resource('folder', \App\Http\Controllers\Dashboard\FolderController::class);
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);

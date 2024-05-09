@@ -52,16 +52,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="delete hidden" id="delete">
-                    <form action="">
-                        <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected video?</h5>
-                        <input type="text" class="hidden" name="videoid-remove" value="">
-                        <div class="flex justify-center mt-3 text-white ">
-                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
-                            <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Delete</button>
-                        </div>
-                    </form>
-                </div>
                 <div class="move hidden" id="move">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Choose folder to move selected to</h5>
                     <div class="mt-3" list-folder>
@@ -90,15 +80,14 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="pt-2 w-max text-white">
-                            <button move-to-folder
+                        <form class="pt-2 w-max text-white">
+                            <button move-to-folder type="submit"
                                 class="bg-[#142132] rounded-lg hover:bg-gradient-to-r from-yellow-600 to-rose-400 w-max font-semibold text-md py-2.5 px-5">
                                 Move To Folder
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

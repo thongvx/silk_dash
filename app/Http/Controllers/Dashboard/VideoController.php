@@ -115,6 +115,7 @@ class VideoController
 
         return response()->json(['message' => 'Videos deleted successfully']);
     }
+    // search video
     public function show(Request $request)
     {
         $user = Auth::user();
@@ -136,5 +137,27 @@ class VideoController
 
         return view('video.search', $data);
     }
-    // search video
+    //mover video
+    public function moveVideos(Request $request)
+    {
+        // Validate the request...
+        $validated = $request->validate([
+            'folder_id' => 'required|exists:folders,id',
+            'video_ids' => 'required|array',
+            'video_ids.*' => 'exists:videos,id',
+        ]);
+
+        // Find the videos and update their folder_id...
+        foreach ($validated['video_ids'] as $videoId) {
+            $video = $this->videoRepo->find($videoId);
+            if ($video) {
+                $video->folder_id = $validated['folder_id'];
+                $video->save();
+            }
+        }
+
+        // Return a response...
+        return response()->json(['message' => 'Videos moved successfully!']);
+    }
+
 }

@@ -26,14 +26,9 @@ export function checkAll() {
 
 $(document).on('click', '[btn-cancel], [fixed-video-close-button]', function() {
     fixedBox ()
-    $('#move,#delete,#export, #add-folder').css("display",'none')
-    $('#edit').remove()
+    $('#move,#export').css("display",'none')
+    $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video').remove()
     btn_video()
 });
 //move video to folder
-var currentFolderId = null;
-$(document).on('click', '#fixed-video [folder]', function() {
-    $(this).addClass('text-transparent bg-gradient-to-r')
-    $('#fixed-video [folder]').not(this).removeClass('text-transparent bg-gradient-to-r')
-    currentFolderId = $(this).data('folder-id')
-});
+

@@ -38,7 +38,7 @@
                 </a>
                 <li class="list-none pl-4">
                     <span class="relative"><a href="javascript:;" dropdown-trigger
-                                              aria-expanded="false"><i
+                                              aria-expanded="false" class="flex items-center"><i
                                 class="material-symbols-outlined">more_vert</i></a>
                       <ul dropdown-menu
                           class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
@@ -67,8 +67,8 @@
                             <h5><span name-folder>{{$folder -> name_folder}}</span> - {{ $folder -> number_file }} files</h5>
                         </a>
                         <li class="list-none pl-4">
-                            <span class="relative"><a href="javascript:;" dropdown-trigger
-                                                      aria-expanded="false"><i
+                            <span class="relative">
+                                <a href="javascript:;" class="flex items-center" dropdown-trigger aria-expanded="false"><i
                                         class="material-symbols-outlined">more_vert</i></a>
                               <ul dropdown-menu
                                   class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
