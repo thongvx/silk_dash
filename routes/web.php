@@ -51,6 +51,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
     Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
+    route::get('dmca',function (){
+        $data['title'] = 'DMCA';
+        return view('dmca.dmca', $data);
+    });
 
     route::get('report',function (){
         $data['title'] = 'report';

@@ -132,7 +132,7 @@ $(document).on('click', '.btn-page-folder', function() {
     const limit = $(this).data('limit');
     const box_folder = $(this).closest('[folder]');
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
-    $('[folder] a').addClass('btn-page-folder')
+    $('[folder] > a').addClass('btn-page-folder')
     $(this).removeClass('btn-page-folder')
     box_folder.prependTo(box_folder.closest('.list-folder'));
     $('[folder]').addClass('bg-[#121520]')
