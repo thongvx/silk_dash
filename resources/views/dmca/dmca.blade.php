@@ -40,8 +40,7 @@
                                             <span>entries</span>
                                         </div>
                                     </div>
-                                    <div id="live"
-                                         class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
+                                    <div class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
                                         <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
                                             <table id="datatable" datatable data-page-size="10" data-column-table="id"
                                                    data-column-direction="asc"
@@ -58,7 +57,7 @@
                                                 <tbody>
                                                     <tr class="my-3 h-12 bg-[#142132]">
                                                         <td class="text-center">1</td>
-                                                        <td>copyright@govinet.com</td>
+                                                        <td><a href="/dmca/1" class="hover:text-[#009FB2]">copyright@govinet.com</a></td>
                                                         <td class="text-center">
                                                             <button class="bg-emerald-400 px-3 py-1 rounded-md">open</button>
                                                         </td>

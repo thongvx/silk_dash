@@ -17,3 +17,5 @@ import './jsVideo/folder.js';
 import './report/report.js';
 //setting
 import './setting/setting.js';
+//dmca
+import './dmca/dmca.js';

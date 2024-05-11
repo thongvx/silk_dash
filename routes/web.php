@@ -55,6 +55,10 @@ Route::group(['middleware' => 'auth'], function () {
         $data['title'] = 'DMCA';
         return view('dmca.dmca', $data);
     });
+    route::get('dmca/1',function (){
+        $data['title'] = 'DMCA';
+        return view('dmca.dmcaInfo', $data);
+    });
 
     route::get('report',function (){
         $data['title'] = 'report';

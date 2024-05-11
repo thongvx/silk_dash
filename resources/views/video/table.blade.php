@@ -63,7 +63,7 @@
             </tr>
         @else
             @foreach($videos as $index => $video)
-                <tr class="my-3 h-12 {{ $index % 2 == 0 ? '' : 'bg-[#142132]' }}" data-videoid="{{ $video->id }}">
+                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" data-videoid="{{ $video->id }}">
                     <td class="flex items-center justify-center h-[inherit] px-2">
                         <input type="checkbox"
                                class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">

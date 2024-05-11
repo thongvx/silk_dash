@@ -1,7 +1,5 @@
-import { btn_video } from './video.js';
+import { checkAll, fixedBox , btn_video } from './video.js';
 import { notification } from '../main.js';
-import { fixedBox } from './video.js';
-import { checkAll } from './video.js';
 
 var fixedVideoCloseButton = $("[fixed-video-close-button]");
 //edit video

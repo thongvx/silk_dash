@@ -26,7 +26,7 @@ export function checkAll() {
 
 $(document).on('click', '[btn-cancel], [fixed-video-close-button]', function() {
     fixedBox ()
-    $('#move,#export').css("display",'none')
+    $('#move,#export, #delete-report, #clone').css("display",'none')
     $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video').remove()
     btn_video()
 });
