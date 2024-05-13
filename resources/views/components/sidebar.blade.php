@@ -24,7 +24,7 @@
     <div class="items-center block w-auto max-h-[calc(100vh-9em)] overflow-y-auto h-sidenav grow basis-full mt-3 ">
         <ul class="flex flex-col pl-0 mb-0">
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/dashboard">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1 text-3xl">dashboard</i>
@@ -34,7 +34,7 @@
             </li>
 
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/upload?tab=webupload">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1 text-3xl">cloud_upload</i>
@@ -44,7 +44,7 @@
             </li>
 
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/video?tab=live">
                     <div
                         class="flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5" icon-menu>
@@ -55,7 +55,7 @@
             </li>
 
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/report">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1 text-3xl">show_chart</i>
@@ -64,7 +64,7 @@
                 </a>
             </li>
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/support?tab=ticket">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1 text-3xl">support_agent</i>
@@ -73,7 +73,7 @@
                 </a>
             </li>
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/dmca">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1 text-3xl">report</i>
@@ -87,7 +87,7 @@
             </li>
 
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors"
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/setting?tab=profile">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1">person</i>
@@ -97,7 +97,7 @@
             </li>
 
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
-                <form class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold text-slate-700 transition-colors" id="logout-form" action="{{ route('logout') }}" method="POST">
+                <form class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors" id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="POST">
                     <button type="submit" class="flex items-center text-red-500">

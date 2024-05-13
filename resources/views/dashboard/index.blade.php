@@ -126,10 +126,10 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                    class="border-black/12.5 bg-[#121520] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                    class="border-black/12.5 bg-[#121520] shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
                     <h6 class="text-[#009FB2] font-bold">Statistics</h6>
-                    <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
+                    <p class="mb-0 text-sm leading-normal">
                         <i class="fa fa-arrow-up text-[#009FB2]"></i>
                         <span class="font-semibold">4% more</span> in 2024
                     </p>
@@ -143,7 +143,7 @@
         </div>
 
         <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
-            <div class="border-black/12.5 bg-[#121520] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl
+            <div class="border-black/12.5 bg-[#121520] shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl
                       border-0 border-solid bg-clip-border pb-3">
                 <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
                     <h6 class="text-[#009FB2] font-bold">Notification</h6>
@@ -197,7 +197,7 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                    class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#121520] dark:shadow-dark-xl border-black-125 rounded-2xl bg-clip-border">
+                    class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#121520] border-black-125 rounded-2xl bg-clip-border">
                 <div class="p-4 pb-0 mb-0 rounded-t-4">
                     <div class="flex justify-between">
                         <h6 class="mb-2 text-[#009FB2] font-bold text-lg">Top 10 viewed videos today</h6>
@@ -208,7 +208,7 @@
                             class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
                         <tbody>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -216,14 +216,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -231,14 +231,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -246,14 +246,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -261,14 +261,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -276,14 +276,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -291,14 +291,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -306,14 +306,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -321,14 +321,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -336,14 +336,14 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div class="text-white">
                                         sub-WAAA-135.mp4
@@ -351,9 +351,9 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
                             </td>
                         </tr>
@@ -364,122 +364,122 @@
         </div>
         <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
             <div
-                    class="border-black/12.5 shadow-xl bg-[#121520] dark:shadow-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                    class="border-black/12.5 shadow-xl bg-[#121520] relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="p-4 pb-0 rounded-t-4">
                     <h6 class="mb-0 text-[#009FB2] font-bold text-lg">Top Country</h6>
                 </div>
                 <div class="overflow-auto">
                     <table
-                            class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
+                            class="items-center w-full mb-4 align-top border-collapse border-gray-200 ">
                         <tbody>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div>
                                         <img src="../assets/img/icons/flags/US.png" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
-                                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                        <p class="mb-0 text-xs font-semibold leading-tight">
                                             Country:
                                         </p>
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">United States</h6>
+                                        <h6 class="mb-0 text-sm leading-normal">United States</h6>
                                     </div>
                                 </div>
                             </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Sales:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">2500</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">2500</h6>
                                 </div>
                             </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Value:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">$230,900</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">$230,900</h6>
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Bounce:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">29.9%</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">29.9%</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div>
                                         <img src="../assets/img/icons/flags/DE.png" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
-                                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                        <p class="mb-0 text-xs font-semibold leading-tight">
                                             Country:
                                         </p>
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">Germany</h6>
+                                        <h6 class="mb-0 text-sm leading-normal">Germany</h6>
                                     </div>
                                 </div>
                             </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Sales:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">3.900</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">3.900</h6>
                                 </div>
                             </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Value:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">$440,000</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">$440,000</h6>
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Bounce:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">40.22%</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">40.22%</h6>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div>
                                         <img src="../assets/img/icons/flags/GB.png" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
-                                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                        <p class="mb-0 text-xs font-semibold leading-tight">
                                             Top Country:
                                         </p>
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">Great Britain</h6>
+                                        <h6 class="mb-0 text-sm leading-normal">Great Britain</h6>
                                     </div>
                                 </div>
                             </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Sales:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">1.400</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">1.400</h6>
                                 </div>
                             </td>
-                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                            <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Value:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">$190,700</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">$190,700</h6>
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Bounce:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">23.44%</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">23.44%</h6>
                                 </div>
                             </td>
                         </tr>
@@ -490,32 +490,32 @@
                                         <img src="../assets/img/icons/flags/BR.png" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
-                                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                        <p class="mb-0 text-xs font-semibold leading-tight">
                                             Country:
                                         </p>
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">Brasil</h6>
+                                        <h6 class="mb-0 text-sm leading-normal">Brasil</h6>
                                     </div>
                                 </div>
                             </td>
                             <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Sales:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">562</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">562</h6>
                                 </div>
                             </td>
                             <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
                                 <div class="text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Value:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">$143,960</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">$143,960</h6>
                                 </div>
                             </td>
                             <td class="p-2 text-sm leading-normal align-middle bg-transparent border-0 whitespace-nowrap">
                                 <div class="flex-1 text-center">
-                                    <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
+                                    <p class="mb-0 text-xs font-semibold leading-tight">
                                         Bounce:</p>
-                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">32.14%</h6>
+                                    <h6 class="mb-0 text-sm leading-normal">32.14%</h6>
                                 </div>
                             </td>
                         </tr>
