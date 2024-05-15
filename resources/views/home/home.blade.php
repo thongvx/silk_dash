@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="relative w-full px-20">
-                <div class="w-full bg-[#e0fcff] bg-cover bg-center bg-no-repeat rounded-xl text-[#005f6a] px-8 pb-20"
+                <div class="w-full bg-[#ecfdff] bg-cover bg-center bg-no-repeat rounded-3xl text-[#005f6a] px-8 pb-20"
                      style="background-image: url({{asset('assets/img/background-homepage.svg')}})">
                     <h4 class="text-5xl text-center font-semibold pt-14 mb-24">Our Features</h4>
                     <div class="grid grid-cols-5 gap-10 mt-6">
@@ -102,7 +102,7 @@
                     </div>
 
                 </div>
-                <div class="w-full bg-[#e0fcff] bg-cover bg-center bg-no-repeat rounded-xl text-[#005f6a] px-8 pb-20 mt-40"
+                <div class="w-full bg-[#ecfdff] bg-cover bg-center bg-no-repeat rounded-3xl text-[#005f6a] px-8 pb-20 mt-40"
                      style="background-image: url({{asset('assets/img/background-homepage.svg')}})">
                     <div class="grid grid-cols-2 gap-10 mt-6 items-center">
                         <div class="py-8 px-4">

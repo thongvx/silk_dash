@@ -1,6 +1,5 @@
 $(document).on('submit', '#transferLink', function(event) {
     event.preventDefault();
-    // Tạo một đối tượng FormData mới
 
     var form = event.target.closest('form')
     var formData = new FormData(form);

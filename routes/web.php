@@ -68,6 +68,10 @@ Route::group(['middleware' => 'auth'], function () {
         $data['title'] = 'Support';
         return view('support.support', $data);
     });
+    route::get('premium',function (){
+        $data['title'] = 'Premium';
+        return view('premium', $data);
+    });
     Route::get('/setting', [\App\Http\Controllers\Setting\SettingController::class, 'index'])->name('setting.index');
 
     // load page
