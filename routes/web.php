@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.home');
 });
 
 Route::get('/play', function () {
@@ -40,13 +40,25 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'upload'])->name('upload');
-    Route::get('/video', [\App\Http\Controllers\Dashboard\VideoController::class, 'index'])->name('video.index');
+
+    Route::resource('/video', \App\Http\Controllers\Dashboard\VideoController::class);
     Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('video.control');
+    Route::post('/video/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple'])->name('video.destroyMultiple');
+    Route::post('/videos/move', [\App\Http\Controllers\Dashboard\VideoController::class, 'moveVideos'])->name('video.move');
+    Route::resource('folder', \App\Http\Controllers\Dashboard\FolderController::class);
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
     Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
     Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
+    route::get('dmca',function (){
+        $data['title'] = 'DMCA';
+        return view('dmca.dmca', $data);
+    });
+    route::get('dmca/1',function (){
+        $data['title'] = 'DMCA';
+        return view('dmca.dmcaInfo', $data);
+    });
 
     route::get('report',function (){
         $data['title'] = 'report';
@@ -55,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
     route::get('support',function (){
         $data['title'] = 'Support';
         return view('support.support', $data);
+    });
+    route::get('premium',function (){
+        $data['title'] = 'Premium';
+        return view('premium', $data);
     });
     Route::get('/setting', [\App\Http\Controllers\Setting\SettingController::class, 'index'])->name('setting.index');
 

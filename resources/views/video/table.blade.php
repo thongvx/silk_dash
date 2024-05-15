@@ -3,108 +3,111 @@
            data-column-direction="{{ $direction }}"
            class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
         <thead class="sticky top-0 z-10">
-        <tr class="bg-[#142132] transition-colors text-md">
-            <th class="flex justify-center item-center py-2">
-                <input type="checkbox" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                  checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
-                       checked-All>
-            </th>
-            <th data-column="title" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
-                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                      data-direction="asc">▲</span>
-                <a href="javascript:void(0)">Filename</a>
-                <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                      data-direction="desc">▼</span>
-            </th>
-            <th class="text-center">
-                ID
-            </th>
-            <th class="text-center">
-                Poster
-            </th>
-            <th data-column="size" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
-                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                      data-direction="asc">▲</span>
-                <a href="javascript:void(0)">Filesize</a>
-                <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                      data-direction="desc">▼</span>
-            </th>
-            <th data-column="total_play" class='pl-2 sortable-column pr-6 cursor-pointer relative' aria-sort>
-                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                      data-direction="asc">▲</span>
-                <a href="javascript:void(0)">Views</a>
-                <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                      data-direction="desc">▼</span>
-            </th>
-            <th data-column="created_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
-                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                      data-direction="asc">▲</span>
-                <a href="javascript:void(0)">Uploaded</a>
-                <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                      data-direction="desc">▼</span>
-            </th>
-            <th class="px-1 text-center">
-                Note
-            </th>
-            <th>
-                <h6
-                    class="antialiased tracking-normal font-sans text-base text-inherit flex py-5 items-center justify-between px-2 font-semibold leading-none">
-                </h6>
-            </th>
-        </tr>
+            <tr class="bg-[#142132] transition-colors text-md">
+                <th class="flex justify-center item-center py-2">
+                    <input type="checkbox" class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
+                                                      checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
+                           checked-All>
+                </th>
+                <th data-column="title" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Filename</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+                <th class="text-center">
+                    ID
+                </th>
+                <th class="text-center {{request()->get('poster') == 'show' ? '' : 'hidden'}}" poster>
+                    Poster
+                </th>
+                <th data-column="size" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Filesize</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+                <th data-column="total_play" class='pl-2 sortable-column pr-6 cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Views</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+                <th data-column="created_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Uploaded</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+                <th class="px-1 text-center">
+                    Note
+                </th>
+                <th>
+                    <h6
+                        class="antialiased tracking-normal font-sans text-base text-inherit flex py-5 items-center justify-between px-2 font-semibold leading-none">
+                    </h6>
+                </th>
+            </tr>
         </thead>
         <tbody>
-        @foreach($videos as $index => $video)
-            @if($videos->count() == 0 || $videos->count() == null)
-                <tr class="my-3 h-12 bg-[#142132]">
-                    <td class="flex items" colspan="9">No data available in table</td>
-                </tr>
-            @endif
-            <tr class="my-3 h-12 {{ $index % 2 == 0 ? '' : 'bg-[#142132]' }}">
-                <td class="flex items-center justify-center h-[inherit] px-2">
-                    <input type="checkbox"
-                           class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
-                </td>
-                <td class="pl-2 w-96">{{ $video->title }}</td>
-                <td class="text-center px-2">{{ $video->id }}</td>
-                <td>
-                    <img class="h-10 px-2" src="{{ $video->poster }}">
-                </td>
-                <td class="text-center w-max">{{ $video->size }}</td>
-                <td class="text-center w-max">{{ $video->total_play }}</td>
-                <td class="pl-2 w-24">{{ $video->created_at }}</td>
-                <td class="text-center w-max">{{ $video->is_sub }}</td>
-                <td class="relative">
-                    <li class="list-none">
-                        <a
-                            href="javascript:" dropdown-trigger
-                            aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
-                        <ul dropdown-menu
-                            class="text-sm transform-dropdown bg-[#1a2035] before:font-awesome before:leading-default before:duration-350 before:ease
-                                         shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-3 before:text-lg pointer-events-none absolute right-1 top-12 lg:top-12
-                                         origin-top list-none rounded-lg  bg-clip-padding text-white z-10
-                                         px-2 py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
-                                         before:inline-block before:font-normal before:text-[#1a2035] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                            <li class="relative w-max btn-edit"><i
-                                    class="material-symbols-outlined opacity-1">edit_square</i>
-                                Edit File
-                            </li>
-                            <li class="relative my-3"><i
-                                    class="material-symbols-outlined opacity-1">content_copy</i>
-                                Clone
-                            </li>
-                            <li class="relative"><i
-                                    class="material-symbols-outlined opacity-1">delete</i>
-                                Delete
-                            </li>
-                        </ul>
-                    </li>
-                </td>
+        @if($videos->count() == 0)
+            <tr class="my-3 h-12 bg-[#142132]">
+                <td class="text-center" colspan="9">No data available in table</td>
             </tr>
-        @endforeach
+        @else
+            @foreach($videos as $index => $video)
+                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" data-videoid="{{ $video->id }}">
+                    <td class="flex items-center justify-center h-[inherit] px-2">
+                        <input type="checkbox"
+                               class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
+                    </td>
+                    <td class="pl-2 w-[25rem] video-title">
+                        <a href="{{$video -> slug }}">{{ $video->title }}</a>
+                    </td>
+                    <td class="text-center px-2 videoID">{{ $video->slug }}</td>
+                    <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} flex justify-center items-center" poster>
+                        <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
+                    </td>
+                    <td class="text-center w-max">{{ $video->size }}</td>
+                    <td class="text-center w-max">{{ $video->total_play }}</td>
+                    <td class="pl-2 w-24">{{ $video->created_at }}</td>
+                    <td class="text-center w-max">{{ $video->is_sub }}</td>
+                    <td class="relative">
+                        <li class="list-none">
+                            <a
+                                href="javascript:" dropdown-trigger
+                                aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
+                            <ul dropdown-menu
+                                class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
+                                             shadow-lg shadow-slate-900 duration-250 before:sm:right-3 before:text-lg pointer-events-none absolute right-1 top-12 lg:top-12
+                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10
+                                             px-2 py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:-top-2 before:z-10
+                                             before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                                <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex"><i
+                                        class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
+                                    Edit File
+                                </li>
+                                <li class="relative my-3 hover:text-[#009FB2] items-center flex"><i
+                                        class="material-symbols-outlined opacity-1 mr-2">content_copy</i>
+                                    Clone
+                                </li>
+                                <li class="relative btn-delete hover:text-[#009FB2] items-center flex"><i
+                                        class="material-symbols-outlined opacity-1 mr-2">delete</i>
+                                    Delete
+                                </li>
+                            </ul>
+                        </li>
+                    </td>
+                </tr>
+            @endforeach
+        @endif
         </tbody>
     </table>
 </div>

@@ -18,13 +18,14 @@
 
         <div class="flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
           <div class="flex items-center md:ml-auto pr-4">
-            <div class="flex items-center relative bg-[#121520] w-full rounded-lg ease" search>
+            <form class="flex items-center relative bg-[#121520] w-full rounded-lg ease" action="/video/search" method="GET" search>
                 <label class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
-                <input type="text"
-                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 rounded-lg text-white bg-transparent bg-clip-padding text-gray-700 focus:outline-none
+                <input type="text" id="search" name="videoID"
+                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 text-white rounded-lg bg-transparent bg-clip-padding focus:outline-none
                          border border-solid border-[#121520]"
                   onfocus="focused(this)" onfocusout="defocused(this)"/>
-              </div>
+                <input type="submit" value="Search" class="hidden" />
+            </form>
           </div>
           <ul class="items-center	flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
             <!-- online builder btn  -->
@@ -32,7 +33,7 @@
                 <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
               </li> -->
             <li class="flex items-center px-4 hidden md:inline">
-              <a href="upload"
+              <a href="upload?tab=webupload"
                 class="flex flex-col px-0 py-2 font-semibold text-white transition-all ease-nav-brand">
                 <i class="material-symbols-outlined text-3xl">cloud_upload</i>
               </a>
@@ -43,7 +44,9 @@
               <p class="hidden transform-dropdown-show"></p>
               <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger
                 aria-expanded="false">
-                <i class="cursor-pointer fa fa-bell text-lg"></i>
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/>
+                  </svg>
               </a>
 
               <ul dropdown-menu
@@ -59,7 +62,7 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg"
+                        <img src="../assets/img/team-2.jpg" alt="" loading="lazy"
                           class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
                       </div>
                       <div class="flex flex-col justify-center">
@@ -79,7 +82,7 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/small-logos/logo-spotify.svg"
+                        <img src="../assets/img/small-logos/logo-spotify.svg" alt="" loading="lazy"
                           class="inline-flex items-center justify-center mr-4 text-sm text-white bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
                       </div>
                       <div class="flex flex-col justify-center">

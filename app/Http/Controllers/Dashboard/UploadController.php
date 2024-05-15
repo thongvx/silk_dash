@@ -8,23 +8,23 @@ use App\Factories\DownloadFactory;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\EncoderTask;
-use App\Repositories\VideoRepo;
+use App\Repositories\FolderRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class UploadController
 {
-    protected  $videoRepo;
+    protected  $folderRepo;
     //Trả về giao diện upload
-    public function __construct(VideoRepo $videoRepo){
-        $this->videoRepo = $videoRepo;
+    public function __construct(FolderRepo $videoRepo){
+        $this->folderRepo = $videoRepo;
     }
     public function upload(Request $request){
 
         //Lam giau thong tin
         $user = Auth::user();
         $data['title'] = 'Upload';
-        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
+        $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         return view('upload.upload', $data);
 
     }

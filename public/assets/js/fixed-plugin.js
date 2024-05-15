@@ -197,15 +197,12 @@ if (navbar) {
     if (this.checked) {
       white_elements.forEach(element => {
         element.classList.remove("text-white")
-        element.classList.add("dark:text-white")
       });
       white_bg_elements.forEach(element => {
         element.classList.remove("bg-white")
-        element.classList.add("dark:bg-white")
         element.classList.add("bg-slate-500")
       });
       white_before_elements.forEach(element => {
-        element.classList.add("dark:before:text-white")
         element.classList.remove("before:text-white")
       });
       navbar.setAttribute("navbar-scroll", "true");
@@ -213,8 +210,6 @@ if (navbar) {
       navbar.classList.add("top-[1%]");
       navbar.classList.add("backdrop-saturate-200");
       navbar.classList.add("backdrop-blur-2xl");
-      navbar.classList.add("dark:bg-slate-850/80");
-      navbar.classList.add("dark:shadow-dark-blur");
       navbar.classList.add("bg-[hsla(0,0%,100%,0.8)]");
       navbar.classList.add("shadow-blur");
       navbar.classList.add("z-110");
@@ -224,22 +219,17 @@ if (navbar) {
       navbar.classList.remove("top-[1%]");
       navbar.classList.remove("backdrop-saturate-200");
       navbar.classList.remove("backdrop-blur-2xl");
-      navbar.classList.remove("dark:bg-slate-850/80");
-      navbar.classList.remove("dark:shadow-dark-blur");
       navbar.classList.remove("bg-[hsla(0,0%,100%,0.8)]");
       navbar.classList.remove("shadow-blur");
       navbar.classList.remove("z-110");
       white_elements.forEach(element => {
         element.classList.add("text-white")
-        element.classList.remove("dark:text-white")
       });
       white_bg_elements.forEach(element => {
         element.classList.add("bg-white")
-        element.classList.remove("dark:bg-white")
         element.classList.remove("bg-slate-500")
       });
       white_before_elements.forEach(element => {
-        element.classList.remove("dark:before:text-white")
         element.classList.add("before:text-white")
       });
     }

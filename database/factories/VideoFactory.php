@@ -16,11 +16,12 @@ class VideoFactory extends Factory
     {
         // Lấy tất cả các ID của các thư mục từ cơ sở dữ liệu
         $folderIds = Folder::pluck('id')->toArray();
-        $userIds = User::pluck('id')->toArray();
+        $folderid = $this->faker->randomElement($folderIds);
+        $useid = Folder::where('id', $folderid)->first()->user_id;
         return [
             'slug' => uniqid(),
-            'user_id' => $this->faker->randomElement($userIds),
-            'folder_id' => $this->faker->randomElement($folderIds),
+            'user_id' => $useid,
+            'folder_id' => $folderid,
             'title' => $this->faker->sentence(),
             'poster' => $this->faker->imageUrl(),
             'grid_poster' => $this->faker->imageUrl(),
