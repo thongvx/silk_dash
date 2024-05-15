@@ -21,3 +21,6 @@ $(document).on('click', '[folder]', function() {
     $('#folderPost').attr('value',$(this).data('folderid'))
     $('#folderName').text($(this).find('h5').first().text())
 });
+$(document).on('click', '[create-ftp]', function() {
+    $('.box-ftp').removeClass('hidden')
+})
