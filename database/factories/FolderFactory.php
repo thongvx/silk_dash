@@ -16,7 +16,7 @@ class FolderFactory extends Factory
         return [
             'user_id' => $this->faker->randomElement($userIds),
             'name_folder' => $this->faker->word,
-            'number_file' => $this->faker->numberBetween(0, 4000),
+            'number_file' => $this->faker->numberBetween(0, 1000),
             'soft_delete' => 0,
         ];
     }

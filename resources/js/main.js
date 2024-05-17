@@ -13,6 +13,13 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+$(document).on('change', 'input[type="checkbox"]', function() {
+    if ($(this).is(':checked')) {
+        $(this).val(1);
+    } else {
+        $(this).val(0);
+    }
+});
 export function notification(type, message) {
     let icon = '';
     let bg = ''
@@ -72,10 +79,9 @@ function loadContent(data_content) {
     var urlParams = new URLSearchParams(window.location.search);
     $('.tab-lifted').removeClass('tab-active !text-[#009FB2]')
     $('.'+data_content).addClass('tab-active !text-[#009FB2]')
-    var url = page === 'video' ? '/loadPageVideo' : '/loadPage';
     // Sử dụng hàm
     $.ajax({
-        url: url,
+        url: '/loadPage',
         type: 'GET',
         data: {
             tab: data_content,

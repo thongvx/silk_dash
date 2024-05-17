@@ -7,7 +7,8 @@
 </div>
 <div class="">
     <div>
-        <form action="">
+        <form action="" id="form-profile">
+            @csrf
             <div class="text-[#009FB2]">
                 <div class="grid grid-cols-4 gap-4 items-center">
                     <h5 class="col-span-1 text-end">
@@ -81,7 +82,7 @@
                                placeholder="telegram">
                     </div>
                 </div>
-                <div class="text-center mt-3">
+                <div class="text-center mt-4 mb-10">
                     <button type="submit" class="px-10 py-2 rounded-lg bg-blue-400 text-white" disabled>Save</button>
                 </div>
             </div>

@@ -2,31 +2,35 @@
 
 namespace App\Helpers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Dashboard\VideoController;
+use App\Http\Controllers\Setting\AccountController;
+use Illuminate\Http\Request;
 
 class ModelHelpers
 {
     protected $videoController;
+    protected $AccountController;
 
-    public function __construct(VideoController $videoController)
+    public function __construct(VideoController $videoController, AccountController $AccountController)
     {
         $this->videoController = $videoController;
+        $this->AccountController = $AccountController;
     }
     public static function genVideoId(){
         $id = uniqid();
 
     }
     public function loadPage(Request $request){
-        $content = $request->input('tab');
+        $tab = $request->input('tab');
         $page = $request->input('page');
-        return view($page.'.'.$content);
-    }
-    public function loadPagevideo(Request $request){
-        $content = $request->input('tab');
-        $page = $request->input('page');
-        $data = $this->videoController->getVideoData($request);
-
-        return view($page.'.'.$content, $data);
+        switch ($page) {
+            case 'setting':
+                return $this->AccountController->index($tab);
+            case 'video':
+                $data = $this->videoController->getVideoData($request);
+                return view($page.'.'.$tab, $data);
+            default:
+                return view($page.'.'.$tab);
+        }
     }
 }

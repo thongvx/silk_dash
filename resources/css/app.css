@@ -16,8 +16,9 @@
     -webkit-font-smoothing: antialiased;
 }
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #131c2b inset;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
     -webkit-text-fill-color: white !important;
+    -webkit-background-clip: text;
 }
 input:hover input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px #142132 inset;

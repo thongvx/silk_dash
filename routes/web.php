@@ -72,11 +72,10 @@ Route::group(['middleware' => 'auth'], function () {
         $data['title'] = 'Premium';
         return view('premium', $data);
     });
-    Route::get('/setting', [\App\Http\Controllers\Setting\SettingController::class, 'index'])->name('setting.index');
-
+    Route::resource('/setting', \App\Http\Controllers\Setting\SettingController::class);
+    Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
-    Route::get('/loadPageVideo', [\App\Helpers\ModelHelpers::class, 'loadPagevideo']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

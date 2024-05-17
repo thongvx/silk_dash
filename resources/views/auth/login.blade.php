@@ -11,7 +11,7 @@
     <body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default
     text-slate-500 backdrop-blur-[2px]"
       style="background-image: url('{{asset('image/background.jpeg')}}')">
-    <main class="mt-0 transition-all duration-200 ease-in-out">
+    <main class="mt-0 transition-all duration-200 ease-in-out auth">
         <section>
             <div class="relative flex items-center w-full min-h-screen p-0 overflow-hidden">
                 <div class="md:w-6/12 w-0 hidden md:block pl-20">

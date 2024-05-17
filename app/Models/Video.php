@@ -40,24 +40,24 @@ class Video extends Model
         parent::boot();
 
         //Đại diện cho hành vi thêm và sửa
-        static::saved(function ($model) {
-            if (!$model->isDirty('total_play' && !$model->isDirty('quality'))) {
-                $this->deleteCache();
-            }
-        });
-
-        //Đại diện cho hành vi xóa
-        static::deleted(function ($model) {
-            if (!$model->isDirty('total_play')) {
-                $this->deleteCache();
-            }
-        });
+//        static::saved(function ($model) {
+//            if (!$model->isDirty('total_play' && !$model->isDirty('quality'))) {
+//                $this->deleteCache();
+//            }
+//        });
+//
+//        //Đại diện cho hành vi xóa
+//        static::deleted(function ($model) {
+//            if (!$model->isDirty('total_play')) {
+//                $this->deleteCache();
+//            }
+//        });
     }
 
-    public function deleteCache()
-    {
-        Redis::del(VideoCacheKeys::GET_PLAYER_FOR_VIDEO->value . $this->slug);
-        Redis::del(VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $this->user_id . '*');
-    }
+//    public function deleteCache()
+//    {
+//        Redis::del(VideoCacheKeys::GET_PLAYER_FOR_VIDEO->value . $this->slug);
+//        Redis::del(VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $this->user_id . '*');
+//    }
 
 }

@@ -6,7 +6,8 @@
     </div>
 </div>
 <div>
-    <form action="">
+    <form idd="form-setting" action="" useID="{{$setting -> user_id}}">
+        @csrf
         <div class="text-[#009FB2]">
             <div class="grid grid-cols-4 gap-4">
                 <h5 class="col-span-4 sm:col-span-1 md:text-end">
@@ -15,7 +16,7 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
                     <div class="w-full pr-3 text-white">
                         <div class="flex box-img">
-                            <img src="https://internetviettel.vn/wp-content/uploads/2017/05/1-2.jpg" alt="" class="hidden w-1/3 h-12 mr-3 mb-3">
+                            <img src="{{$setting -> logo}}" alt="" class="{{$setting -> logo == null || $setting -> logo == '' ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
                             <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full items-center">
                                 <input name="fileLogo" type="file" id="file-logo" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img">
@@ -33,24 +34,24 @@
                             <label for="position" class="mr-3">Position:</label>
                             <select name="position" class="h-max outline-transparent bg-[#142132] px-3 py-1.5 rounded-lg"
                                     id="position">
-                                <option value="10"
-                                        class="position" >
+                                <option value="tl"
+                                        class="position" {{ $setting -> position == 'tl' ? 'selected' : ''}}>
                                     Top left
                                 </option>
-                                <option value="20"
-                                        class="position">
+                                <option value="tr"
+                                        class="position" {{ $setting -> position == 'tr' ? 'selected' : ''}}>
                                     Top right
                                 </option>
-                                <option value="50"
-                                        class="position">
+                                <option value="bl"
+                                        class="position" {{ $setting -> position == 'bl' ? 'selected' : ''}}>
                                     Bottom left
                                 </option>
-                                <option value="100"
-                                        class="position">
+                                <option value="br"
+                                        class="position" {{ $setting -> position == 'br' ? 'selected' : ''}}>
                                     Bottom right
                                 </option>
-                                <option value="100"
-                                        class="position" selected>
+                                <option value=""
+                                        class="position" {{ $setting -> position == null || $setting -> position == '' ? 'selected' : ''}}>
                                     Control bar
                                 </option>
                             </select>
@@ -107,7 +108,8 @@
                                                          bg-left bg-no-repeat align-top transition-all after:absolute
                                                          after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
                                                          after:content-[''] checked:border-green-500/95 checked:bg-green-500/95
-                                                         checked:bg-none checked:bg-right" type="checkbox">
+                                                         checked:bg-none checked:bg-right" type="checkbox"
+                    {{$setting -> captionsMode ==1 ? 'checked': ''}}>
                 </div>
             </div>
             <div class="grid grid-cols-4 gap-4 items-center mt-6">
@@ -117,33 +119,33 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
                     <div class="flex justify-between">
                         <div>
-                            <input type="radio" id="1" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
+                            <input type="radio" id="1" name="gridPoster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
-                            >
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                            value="1" {{$setting -> gridPoster == 1 ? 'checked' : ''}}>
 
                             <label for="1" class="ml-3">1x1</label>
                         </div>
                         <div>
-                            <input type="radio" id="4" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
+                            <input type="radio" id="4" name="gridPoster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
-                            >
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                            value="4"    {{$setting -> gridPoster == 4 ? 'checked' : ''}}>
 
                             <label for="4" class="ml-3">4x4</label>
                         </div>
 
                         <div>
-                            <input type="radio" id="5" name="thumbnail" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
+                            <input type="radio" id="5" name="gridPoster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
-                            >
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                            value="5"    {{$setting -> gridPoster == 5 ? 'checked' : ''}}>
 
                             <label for="5" class="ml-3">5x5</label>
                         </div>
