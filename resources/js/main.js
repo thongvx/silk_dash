@@ -21,37 +21,70 @@ $(document).on('change', 'input[type="checkbox"]', function() {
     }
 });
 var originalFormState = $('#form-setting, #form-profile').serialize();
+
 export function updateOriginalFormState() {
     originalFormState = $('#form-setting, #form-profile').serialize();
 }
 $(document).on('change keyup', 'form', function() {
+    const button = $(this).find('button[type="submit"]');
     var currentFormState = $(this).serialize();
-    if (currentFormState !== originalFormState) {
+    var hasFile = false;
+    var fileInputs = $(this).find('input[type="file"]');
+    fileInputs.each(function() {
+        if ($(this).get(0).files.length > 0) {
+            hasFile = true;
+            return false; // Exit the loop as soon as a file input with files is found
+        }
+    });
+    if (currentFormState !== originalFormState || hasFile) {
         // Form has changed
-        $(this).find('button[type="submit"]').addClass('bg-blue-400 hover:bg-blue-700')
-        $(this).find('button[type="submit"]').removeClass('bg-[#142132]')
-        $(this).find('button[type="submit"]').removeAttr('disabled');
+        button.addClass('bg-blue-400 hover:bg-blue-700')
+        button.removeClass('bg-[#142132]')
+        button.removeAttr('disabled');
     } else {
         // Form has not changed, revert to original state
-        $(this).find('button[type="submit"]').removeClass('bg-blue-400 hover:bg-blue-700')
-        $(this).find('button[type="submit"]').addClass('bg-[#142132]')
-        $(this).find('button[type="submit"]').attr('disabled', 'disabled');
+        button.removeClass('bg-blue-400 hover:bg-blue-700')
+        button.addClass('bg-[#142132]')
+        button.attr('disabled', 'disabled');
     }
 });
-
-$(document).on('change', 'form', function() {
-    var currentFormState = $(this).serialize();
-    if (currentFormState !== originalFormState) {
-        // Form has changed
-        $(this).find('button[type="submit"]').addClass('bg-blue-400 hover:bg-blue-700')
-        $(this).find('button[type="submit"]').removeClass('bg-[#142132]')
-        $(this).find('button[type="submit"]').removeAttr('disabled');
-    } else {
-        // Form has not changed, revert to original state
-        $(this).find('button[type="submit"]').removeClass('bg-blue-400 hover:bg-blue-700')
-        $(this).find('button[type="submit"]').addClass('bg-[#142132]')
-        $(this).find('button[type="submit"]').attr('disabled', 'disabled');
+// Load image
+$(document).on('change', '.file-img', function() {
+    File_image(this);
+});
+var url_old
+// Load image
+function File_image(input){
+    var file = input.files[0];
+    if (!(file instanceof Blob)) {
+        console.error('The file is not a Blob object');
+        return;
     }
+    var box_img = $(input).closest('.box-img');
+    url_old = box_img.find('img').attr('src');
+    var reader = new FileReader();
+    box_img.find('img').removeClass('hidden');
+    reader.onload = function(e){
+        box_img.find('img').attr('src', e.target.result);
+        box_img.find('label').text(file.name);
+    };
+    reader.readAsDataURL(file);
+    box_img.find('[btn-delete-selected]').removeClass('hidden');
+}
+$(document).on('click', '[btn-delete-selected]', function() {
+    let box_img = $(this).closest('.box-img');
+    const button = $(this).closest('form').find('button[type="submit"]');
+    box_img.find('input[type="file"]').val('');
+    if(url_old){
+        box_img.find('img').attr('src', url_old);
+    }else{
+        box_img.find('img').addClass('hidden');
+    }
+    $(this).addClass('hidden');
+    box_img.find('label').text('Choose file');
+    button.removeClass('bg-blue-400 hover:bg-blue-700')
+    button.addClass('bg-[#142132]')
+    button.attr('disabled', 'disabled');
 });
 export function notification(type, message) {
     let icon = '';

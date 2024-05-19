@@ -16,11 +16,14 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
                     <div class="w-full pr-3 text-white">
                         <div class="flex box-img">
-                            <img src="{{ Storage::url($setting->logo) }}" alt="" class="{{$setting -> logo == null || $setting -> logo == '' ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
-                            <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full items-center">
+                            <img src="{{ $setting -> logo == null || $setting -> logo == '' ? '' : Storage::url($setting->logo) }}" alt="" class="{{$setting -> logo == null || $setting -> logo == '' ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
+                            <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full items-center relative">
                                 <input name="logo" type="file" id="file-logo" accept=".jpg, .png, .jpeg"
-                                       class="absolute opacity-0 file-img">
+                                       class="absolute opacity-0 file-img cursor-pointer w-full h-full">
                                 <label for="file-logo" class="w-full">choose file</label>
+                            </div>
+                            <div btn-delete-selected class="hidden items-center rounded-lg bg-rose-500 hover:bg-red-700 px-3 py-1 cursor-pointer mb-3 ml-3">
+                                <h4 class="w-max flex h-full items-center">Delete selected</h4>
                             </div>
                         </div>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
@@ -32,7 +35,7 @@
                     <div class="flex md:items-center mt-3 flex-col md:flex-row">
                         <div class="flex items-center">
                             <label for="position" class="mr-3">Position:</label>
-                            <select name="position" class="h-max outline-transparent bg-[#142132] px-3 py-1.5 rounded-lg"
+                            <select name="position" class="h-max outline-none bg-[#142132] px-3 py-1.5 rounded-lg hover:bg-[#009FB2]"
                                     id="position">
                                 <option value="tl"
                                         class="position" {{ $setting -> position == 'tl' ? 'selected' : ''}}>
@@ -57,9 +60,9 @@
                             </select>
                         </div>
                         <div class="mt-3 md:mt-0 md:ml-4">
-                            <button class="rounded-lg bg-rose-600 px-3 py-1 flex items-center">
+                            <div class="rounded-lg bg-rose-500 hover:bg-red-700 px-3 py-1 flex items-center cursor-pointer">
                                 <i class="material-symbols-outlined opacity-1 font-bold">delete</i>Remove Logo
-                            </button>
+                            </div>
                         </div>
                     </div>
                     <div class="mt-2">
@@ -81,11 +84,14 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal">
                     <div class="w-full pr-3 text-white">
                         <div class="flex box-img">
-                            <img src="{{ Storage::url($setting->poster) }}" alt="" class="{{$setting -> poster == null || $setting -> logo == '' ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
-                            <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full">
+                            <img src="{{ $setting -> poster == null || $setting -> poster == '' ? '' : Storage::url($setting->poster) }}" alt="" class="{{$setting -> poster == null || $setting -> logo == '' ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
+                            <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full relative">
                                 <input name="poster" type="file" id="file-poster" accept=".jpg, .png, .jpeg"
-                                       class="absolute opacity-0 file-img">
+                                       class="absolute opacity-0 file-img cursor-pointer w-full h-full">
                                 <label for="file-logo" class="w-full">choose file</label>
+                            </div>
+                            <div btn-delete-selected class="hidden items-center rounded-lg bg-rose-500 hover:bg-red-700 px-3 py-1 cursor-pointer mb-3 ml-3">
+                                <h4 class="w-max flex h-full items-center">Delete selected</h4>
                             </div>
                         </div>
                         <div class="rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">

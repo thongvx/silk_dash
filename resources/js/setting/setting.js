@@ -1,30 +1,11 @@
 import { notification, updateOriginalFormState } from '../main.js';
-// Load image
-$(document).on('change', '.file-img', function() {
-    File_image(this);
-});
-// Load image
-function File_image(input){
-    var file = input.files[0];
-    if (!(file instanceof Blob)) {
-        console.error('The file is not a Blob object');
-        return;
-    }
-    var box_img = $(input).closest('.box-img');
-    var reader = new FileReader();
-    box_img.find('img').removeClass('hidden');
-    reader.onload = function(e){
-        box_img.find('img').attr('src', e.target.result);
-    };
-    reader.readAsDataURL(file);
-}
 // update setting
 
 $(document).on('submit', '#form-setting', function(e) {
     e.preventDefault();
     var form = this;
     var formData = new FormData(form);
-    var useID = $(form).attr('useID');
+    const button = $(form).find('button[type="submit"]');
     $(form).find('input[type=checkbox]:not(:checked)').each(function() {
         formData.append($(this).attr('name'), 0);
     });
@@ -37,10 +18,12 @@ $(document).on('submit', '#form-setting', function(e) {
         contentType: false,
         success: function(response) {
             notification('success', 'Setting successfully');
-            $(form).find('button[type="submit"]').removeClass('bg-blue-400 hover:bg-blue-700')
-            $(form).find('button[type="submit"]').addClass('bg-[#142132]')
-            $(form).find('button[type="submit"]').attr('disabled', 'disabled');
+            button.removeClass('bg-blue-400 hover:bg-blue-700')
+            button.addClass('bg-[#142132]')
+            button.attr('disabled', 'disabled');
             updateOriginalFormState();
+            $('[btn-delete-selected]').addClass('hidden');
+            $(form).find('input[type="file"]').val('');
         },
         error: function(response) {
             console.log(response);
@@ -51,6 +34,7 @@ $(document).on('submit', '#form-profile', function(e) {
     e.preventDefault();
     var form = this;
     var formData = $(form).serialize();
+    const button = $(form).find('button[type="submit"]');
     $(form).find('input[type=checkbox]:not(:checked)').each(function() {
         formData += '&' + encodeURIComponent($(this).attr('name')) + '=0';
     });
@@ -61,9 +45,9 @@ $(document).on('submit', '#form-profile', function(e) {
         data: formData,
         success: function(response) {
             notification('success', 'Profile updated successfully');
-            $(form).find('button[type="submit"]').removeClass('bg-blue-400 hover:bg-blue-700')
-            $(form).find('button[type="submit"]').addClass('bg-[#142132]')
-            $(form).find('button[type="submit"]').attr('disabled', 'disabled');
+            button.removeClass('bg-blue-400 hover:bg-blue-700')
+            button.addClass('bg-[#142132]')
+            button.attr('disabled', 'disabled');
             updateOriginalFormState();
         },
         error: function(response) {
