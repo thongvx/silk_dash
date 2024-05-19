@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\VideoCacheKeys;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 
 class Folder extends Model
 {
@@ -22,4 +24,11 @@ class Folder extends Model
         return $this->hasMany(Video::class);
     }
     // Các phương thức, quan hệ và logic thêm có thể được định nghĩa ở đây
+    public function deleteCacheFolder()
+    {
+        $keys = Redis::keys(VideoCacheKeys::All_Folder_For_User->value . $this->user_id . '*');
+        foreach ($keys as $key) {
+            Redis::del($key);
+        }
+    }
 }

@@ -73,6 +73,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('premium', $data);
     });
     Route::resource('/setting', \App\Http\Controllers\Setting\SettingController::class);
+
+    Route::post('/updatesetting', [\App\Http\Controllers\Setting\SettingController::class, 'update']);
+
     Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);

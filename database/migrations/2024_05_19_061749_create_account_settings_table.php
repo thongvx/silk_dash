@@ -16,18 +16,16 @@ class CreateAccountSettingsTable extends Migration
         Schema::create('account_settings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('setting_key');
-            $table->text('setting_value')->nullable();
             $table->integer('videoType');
             $table->integer('earningModes');
             $table->boolean('adblock');
             $table->boolean('showTitle');
             $table->string('logo');
             $table->string('logoLink')->nullable();
-            $table->string('position');
+            $table->string('position')->nullable();
             $table->string('poster');
             $table->boolean('blockDirect');
-            $table->string('domain');
+            $table->string('domain')->nullable();
             $table->boolean('publicVideo');
             $table->boolean('premiumMode');
             $table->boolean('captionsMode');

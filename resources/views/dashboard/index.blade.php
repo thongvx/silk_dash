@@ -376,7 +376,7 @@
                             <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div>
-                                        <img src="../assets/img/icons/flags/US.png" alt="Country flag"/>
+                                        <img src="" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
                                         <p class="mb-0 text-xs font-semibold leading-tight">
@@ -413,7 +413,7 @@
                             <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div>
-                                        <img src="../assets/img/icons/flags/DE.png" alt="Country flag"/>
+                                        <img src="" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
                                         <p class="mb-0 text-xs font-semibold leading-tight">
@@ -450,7 +450,7 @@
                             <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
                                 <div class="flex items-center px-2 py-1">
                                     <div>
-                                        <img src="../assets/img/icons/flags/GB.png" alt="Country flag"/>
+                                        <img src="" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
                                         <p class="mb-0 text-xs font-semibold leading-tight">
@@ -487,7 +487,7 @@
                             <td class="p-2 align-middle bg-transparent border-0 w-3/10 whitespace-nowrap">
                                 <div class="flex items-center px-2 py-1">
                                     <div>
-                                        <img src="../assets/img/icons/flags/BR.png" alt="Country flag"/>
+                                        <img src="" alt="Country flag"/>
                                     </div>
                                     <div class="ml-6">
                                         <p class="mb-0 text-xs font-semibold leading-tight">

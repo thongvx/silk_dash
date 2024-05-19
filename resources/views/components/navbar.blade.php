@@ -62,7 +62,7 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" alt="" loading="lazy"
+                        <img src="" alt="" loading="lazy"
                           class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
                       </div>
                       <div class="flex flex-col justify-center">
@@ -82,7 +82,7 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/small-logos/logo-spotify.svg" alt="" loading="lazy"
+                        <img src="" alt="" loading="lazy"
                           class="inline-flex items-center justify-center mr-4 text-sm text-white bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
                       </div>
                       <div class="flex flex-col justify-center">

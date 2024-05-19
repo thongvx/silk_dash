@@ -23,8 +23,6 @@ class AccountSettingFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'setting_key' => $this->faker->word,
-            'setting_value' => $this->faker->sentence,
             'videoType' => $this->faker->numberBetween(1, 3),
             'earningModes' => $this->faker->numberBetween(1, 3),
             'adblock' => $this->faker->boolean,

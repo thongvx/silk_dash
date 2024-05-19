@@ -7,6 +7,13 @@
     <link rel="icon" type="image/png" href="../assets/img/logo3.png" />
     <title>Stream Silk</title>
     @vite('resources/css/app.css')
+    <style>
+        @font-face {
+            font-family: 'Material Symbols Outlined';
+            src: url('{{ asset('assets/fonts/materialsymbolsoutlined.woff2') }}') format('woff2');
+            font-display: swap;
+        }
+    </style>
 </head>
     <body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default
     text-slate-500 backdrop-blur-[2px]"
@@ -26,7 +33,7 @@
                     </div>
                 </div>
                 <div class="md:w-6/12 w-full flex justify-center">
-                    <div class="flex -mx-3 rounded-2xl md:w-7/12 w-8/12 backdrop-blur-xl bg-white/20">
+                    <div class="flex -mx-3 rounded-2xl md:w-7/12 w-8/12 backdrop-blur-md bg-black/40">
                         <div class="relative w-full flex flex-col items-center min-w-0 break-words border-0 shadow-none lg:py4">
                             <div class="py-6 pb-0 mb-0 text-white text-center">
                                 <h4 class="font-semibold text-3xl">Welcome back</h4>
@@ -37,17 +44,26 @@
                                     @csrf
                                     <div class="mb-4">
                                         <label >Email</label>
-                                        <input type="email" name="email" value="{{ old('email') }}" placeholder="Email"
-                                               class="autofill:bg-yellow-200 @error('email') @enderror mt-1 focus:shadow-primary-outline text-sm leading-5.6 w-full
-                                               appearance-none rounded-xl border border-solid border-gray-300 bg-clip-padding p-3 font-normal outline-none transition-all
-                                               bg-transparent placeholder:text-white focus:border-fuchsia-300 focus:outline-none" />
+                                        <div class="rounded-xl flex items-center bg-black/70 hover:bg-black">
+                                            <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">email</i>
+                                            <input type="email" name="email" value="{{ old('email') }}" placeholder="Email"
+                                                   class="autofill:bg-yellow-200 @error('email') @enderror focus:shadow-primary-outline text-sm leading-5.6 w-full
+                                                   appearance-none rounded-xl bg-clip-padding p-3 font-normal outline-none transition-all
+                                                   bg-transparent placeholder:text-gray-400 focus:border-fuchsia-300 focus:outline-none" />
+                                        </div>
                                         @error('email')
                                         <span class="error invalid-feedback text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="mb-4">
                                         <label>Password</label>
-                                        <input type="password" name="password" placeholder="Password" class=" @error('password') @enderror  mt-1 focus:shadow-primary-outline text-sm leading-5.6 w-full appearance-none rounded-xl border border-solid border-gray-300 bg-transparent bg-clip-padding p-3 font-normal outline-none transition-all placeholder:text-white focus:border-fuchsia-300 focus:outline-none" />
+                                        <div class="rounded-xl flex items-center bg-black/70 hover:bg-black">
+                                            <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">key</i>
+                                            <input type="password" name="password" placeholder="Password"
+                                                   class=" @error('password') @enderror  focus:shadow-primary-outline text-sm leading-5.6 w-full appearance-none rounded-xl
+                                                   bg-transparent bg-clip-padding p-3 font-normal outline-none transition-all
+                                                   placeholder:text-gray-400 focus:border-fuchsia-300 focus:outline-none" />
+                                        </div>
                                         @error('password')
                                         <span class="error invalid-feedback text-red-500">{{ $message }}</span>
                                         @enderror
@@ -64,7 +80,7 @@
                                         <label for="remember" class="ml-2 font-normal cursor-pointer select-none text-sm text-white" for="rememberMe">I forgot my password</label>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center text-white align-middle transition-all bg-blue-500 border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25">Sign in</button>
+                                        <button type="submit" class="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center text-white align-middle transition-all bg-blue-400 hover:bg-blue-700 border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25">Sign in</button>
                                     </div>
                                 </form>
                             </div>

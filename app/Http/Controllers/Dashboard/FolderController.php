@@ -48,6 +48,7 @@ class FolderController
         $folder->user_id = $user->id;
         $folder->number_file = 0;
         $folder->save();
+        $folder->deleteCacheFolder();
 
         // Return a response
         return response()->json(['message' => 'Folder created successfully', 'folder' => $folder]);
@@ -70,6 +71,8 @@ class FolderController
         // Update the folder
         $folder->name_folder = $request->newfolderName;
         $folder->save();
+        //delete cache
+        $folder->deleteCacheFolder();
 
         // Return a response
         return response()->json(['name' => $folder->name_folder]);
@@ -87,6 +90,7 @@ class FolderController
 
         // Delete the folder
         $folder->delete();
+        $folder->deleteCacheFolder();
 
         // Return a response
         return response()->json(['message' => 'Folder deleted successfully']);

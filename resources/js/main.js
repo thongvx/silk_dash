@@ -20,6 +20,39 @@ $(document).on('change', 'input[type="checkbox"]', function() {
         $(this).val(0);
     }
 });
+var originalFormState = $('#form-setting, #form-profile').serialize();
+export function updateOriginalFormState() {
+    originalFormState = $('#form-setting, #form-profile').serialize();
+}
+$(document).on('change keyup', 'form', function() {
+    var currentFormState = $(this).serialize();
+    if (currentFormState !== originalFormState) {
+        // Form has changed
+        $(this).find('button[type="submit"]').addClass('bg-blue-400 hover:bg-blue-700')
+        $(this).find('button[type="submit"]').removeClass('bg-[#142132]')
+        $(this).find('button[type="submit"]').removeAttr('disabled');
+    } else {
+        // Form has not changed, revert to original state
+        $(this).find('button[type="submit"]').removeClass('bg-blue-400 hover:bg-blue-700')
+        $(this).find('button[type="submit"]').addClass('bg-[#142132]')
+        $(this).find('button[type="submit"]').attr('disabled', 'disabled');
+    }
+});
+
+$(document).on('change', 'form', function() {
+    var currentFormState = $(this).serialize();
+    if (currentFormState !== originalFormState) {
+        // Form has changed
+        $(this).find('button[type="submit"]').addClass('bg-blue-400 hover:bg-blue-700')
+        $(this).find('button[type="submit"]').removeClass('bg-[#142132]')
+        $(this).find('button[type="submit"]').removeAttr('disabled');
+    } else {
+        // Form has not changed, revert to original state
+        $(this).find('button[type="submit"]').removeClass('bg-blue-400 hover:bg-blue-700')
+        $(this).find('button[type="submit"]').addClass('bg-[#142132]')
+        $(this).find('button[type="submit"]').attr('disabled', 'disabled');
+    }
+});
 export function notification(type, message) {
     let icon = '';
     let bg = ''
@@ -60,7 +93,6 @@ export function notification(type, message) {
     let interval = setInterval(() => {
         value++;
         progressBar.css('width', value + '%');
-        console.log('a')
         if (value == 92) {
             clearInterval(interval);
             $('.box-noti').remove();
@@ -103,6 +135,7 @@ function loadContent(data_content) {
         },
         success: function(response) {
             $('#box-content').html(response);
+            updateOriginalFormState();
         }
     });
 }

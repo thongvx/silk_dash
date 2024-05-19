@@ -192,15 +192,15 @@
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                            value="2.5"    {{$setting -> earningModes == 2.5 ? 'checked' : ''}}>
+                            value="3"    {{$setting -> earningModes == 3 ? 'checked' : ''}}>
 
-                            <label for="2.5" class="ml-3">$2.5 per 10k views: 3 Popunders on pre-roll</label>
+                            <label for="3" class="ml-3">$2.5 per 10k views: 3 Popunders on pre-roll</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="text-center mt-3 my-10">
-                <button type="submit" class="px-10 py-2 rounded-lg bg-blue-400 text-white" disabled>Save</button>
+                <button type="submit" class="px-10 py-2 rounded-lg bg-[#142132] text-white" disabled>Save</button>
             </div>
         </div>
     </form>

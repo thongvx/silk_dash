@@ -2,19 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\Folder;
 use App\Models\Video;
 use Illuminate\Support\Facades\Redis;
 use Prettus\Repository\Eloquent\BaseRepository;
+use App\Enums\VideoCacheKeys;
 
 class VideoRepo extends BaseRepository
 {
-    private string $cachePrefix = 'video:';
     public function model()
     {
         return Video::class;
     }
-    public function getAllUserVideo($userId, $tab, $search ,$column , $direction, $folderId, $limit, $columns = ['*']){
+    public function getAllUserVideo($userId, $tab, $search ,$column , $direction, $folderId, $limit, $columns = ['*'], $page){
 
         $query = $this->query()
             ->where('user_id', $userId)
@@ -24,14 +23,13 @@ class VideoRepo extends BaseRepository
             $query->where('title', 'LIKE', '%' . $search . '%');
         }
         //Tạo cache key
-//        $cacheKey = $this->cachePrefix . $userId . 'get_all' . $limit . '.' . implode(',', $columns);
+        $cacheKey = VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $userId . 'get_all' . $limit . '.' . implode(',', $columns).'direction' . $direction .'column'.$column. 'folderId'.$folderId . '.page'. $page;
 
         //Lấy cache
-        //Todo: bỏ comment đoạn này khi triển khai thực tế để ăn cache, hiện dev thì để lấy từ db luôn test cho nó dễ
-//        $video = Redis::get($cacheKey);
-//        if (isset($video)){
-//            return unserialize($video);
-//        }
+        $video = Redis::get($cacheKey);
+        if (isset($video)){
+            return unserialize($video);
+        }
 
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
         if ($tab == 'processing') {
@@ -45,7 +43,7 @@ class VideoRepo extends BaseRepository
         $videos = $query->orderBy($column1, $direction)
             ->paginate($limit);
 
-//        Redis::setex($cacheKey, 259200, serialize($video));
+        Redis::setex($cacheKey, 259200, serialize($videos));
         return $videos;
     }
     public function searchVideos($userId, $searchTerm,$limit,$column,$direction, $columns = ['*'], )

@@ -33,21 +33,37 @@ class SettingController
     }
 
     // Update setting
-    public function update($userid ,Request $request)
+    public function update(Request $request)
     {
         $data = $request->all();
+        error_log(print_r($request ->all(), true));
         $validator = Validator::make($data, [
             'domain' => 'nullable|max:255',
+            'logo' => 'nullable|file|max:2048',
+            'poster' => 'nullable|file|max:2048',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-
-        $setting = $this->accountRepo->getAllSetting($userid);
+        $user = Auth::user();
+        $setting = $this->accountRepo->getAllSetting($user->id);
         if ($setting) {
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $filename = $file->getClientOriginalName();
+                $path = $file->storeAs('logo', $filename, 'public');
+                $data['logo'] = $path;
+            }
+            if ($request->hasFile('poster')) {
+                $file = $request->file('poster');
+                $filename = $file->getClientOriginalName();
+                $path = $file->storeAs('poster', $filename, 'public');
+                $data['poster'] = $path;
+            }
+
             $setting->update($data);
         }
-        return response()->json(['message' => 'setting update successfully']);
+        return response()->json(['message' => $data], 200);
     }
 }

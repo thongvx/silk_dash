@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\AccountSetting;
+use App\Models\Folder;
 
 class RegisterController extends Controller
 {
@@ -63,10 +65,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        Folder::create([
+            'user_id' => $user->id,
+            'name_folder' => 'Single Video',
+            'number_file' => 0,
+            'soft_delete' => 0,
+        ]);
+        AccountSetting::create([
+            'user_id' => $user->id,
+            'earningModes' => 1,
+            'videoType' => 1,
+            'adblock' => 0,
+            'showTitle' => 0,
+            'logo' => '',
+            'logoLink' => '',
+            'position' => '',
+            'poster' => '',
+            'blockDirect' => 0,
+            'domain' => '',
+            'publicVideo' => 0,
+            'premiumMode' => 0,
+            'captionsMode' => 0,
+            'disableDownload' => 0,
+            'gridPoster' => 1,
+        ]);
+        return $user;
     }
 }

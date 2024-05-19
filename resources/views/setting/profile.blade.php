@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-4 mb-10">
-                    <button type="submit" class="px-10 py-2 rounded-lg bg-blue-400 text-white" disabled>Save</button>
+                    <button type="submit" class="px-10 py-2 rounded-lg bg-[#142132] text-white" disabled>Save</button>
                 </div>
             </div>
         </form>

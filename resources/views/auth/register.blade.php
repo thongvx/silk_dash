@@ -13,13 +13,6 @@
             src: url('{{ asset('assets/fonts/materialsymbolsoutlined.woff2') }}') format('woff2');
             font-display: swap;
         }
-        input:-webkit-autofill {
-            background-color: #e21010 !important;
-        }
-
-        input::-moz-placeholder {
-            background-color: #e70707 !important; /* Màu nền khi có placeholder */
-        }
     </style>
 </head>
 <body class="m-0  bg-cover bg-center bg-no-repeat font-sans antialiased font-normal text-start text-base leading-default
@@ -40,7 +33,7 @@ style="background-image: url('{{asset('image/background.jpeg')}}')">
                 </div>
             </div>
             <div class="md:w-6/12 w-full flex justify-center">
-                <div class="flex -mx-3 rounded-2xl lg:w-7/12 md:w-9/12 w-11/12 backdrop-blur-xl bg-white/20">
+                <div class="flex -mx-3 rounded-2xl lg:w-7/12 md:w-9/12 w-11/12 backdrop-blur-md bg-black/40">
                     <div class="relative w-full flex flex-col items-center min-w-0 break-words border-0 shadow-none lg:py4">
                         <div class="py-6 pb-0 mb-0 text-white text-center">
                             <h4 class="font-semibold text-3xl">Create Account</h4>
@@ -51,10 +44,10 @@ style="background-image: url('{{asset('image/background.jpeg')}}')">
                                 @csrf
                                 <div class="mb-4">
                                     <label >Name</label>
-                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">person</i>
+                                    <div class="rounded-xl flex items-center bg-black/70 hover:bg-black">
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">person</i>
                                         <input type="text" name="name"
-                                               class="@error('name') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               class="@error('name') is-invalid @enderror bg-transparent text-white placeholder:text-gray-400 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Full name">
                                     </div>
                                     @error('name')
@@ -66,10 +59,10 @@ style="background-image: url('{{asset('image/background.jpeg')}}')">
 
                                 <div class="mb-4">
                                     <label >Email</label>
-                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">email</i>
+                                    <div class="rounded-xl flex items-center bg-black/70 hover:bg-black">
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">email</i>
                                         <input type="email" name="email"
-                                               class="@error('email') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               class="@error('email') is-invalid @enderror bg-transparent text-white placeholder:text-gray-400 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Full name">
                                     </div>
                                     @error('email')
@@ -81,10 +74,10 @@ style="background-image: url('{{asset('image/background.jpeg')}}')">
 
                                 <div class="mb-4">
                                     <label >Password</label>
-                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">key</i>
+                                    <div class="rounded-xl flex items-center bg-black/70 hover:bg-black">
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">key</i>
                                         <input type="password" name="password"
-                                               class="@error('password') is-invalid @enderror bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               class="@error('password') is-invalid @enderror bg-transparent text-white placeholder:text-gray-400 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Full name">
                                     </div>
                                     @error('password')
@@ -96,10 +89,10 @@ style="background-image: url('{{asset('image/background.jpeg')}}')">
 
                                 <div class="mb-4">
                                     <label >Retype Password</label>
-                                    <div class="rounded-xl flex items-center backdrop-blur-3xl hover:bg-black/20">
-                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1">key</i>
+                                    <div class="rounded-xl flex items-center bg-black/70 hover:bg-black">
+                                        <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">key</i>
                                         <input type="password" name="password_confirmation"
-                                               class="bg-transparent text-white placeholder:text-white w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
+                                               class="bg-transparent text-white placeholder:text-gray-400 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200" value="{{ old('name') }}"
                                                placeholder="Retype password">
                                     </div>
                                 </div>

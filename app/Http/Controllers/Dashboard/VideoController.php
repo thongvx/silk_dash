@@ -48,8 +48,11 @@ class VideoController
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
         $limit = $request->input('limit', 20);
+        $page = $request->input('page', 1);
 
-        return $this->videoRepo->getAllUserVideo($userId, $tab, $search, $column, $direction, $folderId, $limit);
+        $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $search, $column, $direction, $folderId, $limit, ['*'], $page);
+
+        return $videos;
     }
     // Convert video sizes
     private function convertVideoSizes($videos)
@@ -95,6 +98,9 @@ class VideoController
         $video->title = $request->title;
         $video->save();
 
+        //delete cache
+        $video->deleteCache();
+
         return response()->json(['message' => 'Video title updated successfully']);
     }
     // delete video
@@ -110,7 +116,11 @@ class VideoController
             $video = $this->videoRepo->find($id);
             if ($video) {
                 $video->delete();
+                $video->deleteCache();
+            }else {
+                return response()->json(['message' => 'Video not found: ' . $id], 404);
             }
+
         }
 
         return response()->json(['message' => 'Videos deleted successfully']);

@@ -13,8 +13,6 @@ class AccountSetting extends Model
 
     protected $fillable = [
         'user_id',
-        'setting_key',
-        'setting_value',
         'earningModes' ,
         'videoType',
         'adblock',
