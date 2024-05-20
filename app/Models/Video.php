@@ -55,7 +55,6 @@ class Video extends Model
 
    public function deleteCache()
     {
-       Redis::del(VideoCacheKeys::GET_PLAYER_FOR_VIDEO->value . $this->slug);
         $keys = Redis::keys(VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $this->user_id . '*');
         foreach ($keys as $key) {
             Redis::del($key);

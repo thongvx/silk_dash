@@ -23,7 +23,7 @@ class VideoRepo extends BaseRepository
             $query->where('title', 'LIKE', '%' . $search . '%');
         }
         //Tạo cache key
-        $cacheKey = VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $userId . 'get_all' . $limit . '.' . implode(',', $columns).'direction' . $direction .'column'.$column. 'folderId'.$folderId . '.page'. $page;
+        $cacheKey = VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $userId .'tab'. $tab . 'get_all' . $limit . '.' . implode(',', $columns).'direction' . $direction .'column'.$column. 'folderId'.$folderId . '.page'. $page;
 
         //Lấy cache
         $video = Redis::get($cacheKey);
