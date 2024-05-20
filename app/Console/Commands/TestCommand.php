@@ -29,9 +29,9 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $dowloader = DownloadFactory::create('https://drive.google.com/file/d/1Bdb3d94-gl61-TSpLKLAtwhQ97_e1pFx/view');
+        $dowloader = DownloadFactory::create('https://e61.etvp.cc/uploads/cShGp5cjErBm1UwG6hDwjkfObm4sFd0WfOt.mp4');
         $dowloader->download();
-        Redis::del('uploadProgress.https://drive.google.com/file/d/1Bdb3d94-gl61-TSpLKLAtwhQ97_e1pFx/view');
-        echo Redis::get('uploadProgress.https://drive.google.com/file/d/1Bdb3d94-gl61-TSpLKLAtwhQ97_e1pFx/view');
+        Redis::del('uploadProgress.https://e61.etvp.cc/uploads/cShGp5cjErBm1UwG6hDwjkfObm4sFd0WfOt.mp4');
+        echo Redis::get('uploadProgress.https://e61.etvp.cc/uploads/cShGp5cjErBm1UwG6hDwjkfObm4sFd0WfOt.mp4');
     }
 }

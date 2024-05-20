@@ -31,12 +31,14 @@ class OtherLinkDownload implements DownloadInterface
                 $downloadTotal, $downloadedBytes,
                 $uploadTotal, $uploadedBytes
             ) use (&$lastProgressDisplayTime) {
-//                if (time() - $lastProgressDisplayTime >= 1) {
+                if (time() - $lastProgressDisplayTime >= 1 && $downloadTotal) {
                     $progress = round($downloadedBytes / $downloadTotal * 100);
                     echo 'Download progress: ' . $progress . "%\n";
                     Redis::setex('uploadProgress.'.$this->url, 30 * 60, $progress);
                     $lastProgressDisplayTime = time();
-//                }
+                }
+                if($downloadedBytes == $downloadTotal && $downloadTotal)
+                    echo 'Download progress: 100' . "%\n";
             }
         ]);
     }

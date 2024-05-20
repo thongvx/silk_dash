@@ -37,14 +37,16 @@ class GoogleDriverDownload implements DownloadInterface
             'progress' => function (
                 $downloadTotal, $downloadedBytes,
             ) use (&$lastProgressDisplayTime) {
-//                if (time() - $lastProgressDisplayTime >= 1) {
+                if (time() - $lastProgressDisplayTime >= 1 && $downloadTotal) {
                     if ($downloadTotal > 0) {
                         $progress = round($downloadedBytes / $downloadTotal * 100);
                         echo 'Download progress: ' . $progress . "\n";
                         Redis::setex('uploadProgress.'.$this->url, 30 * 60, $progress);
                     }
                     $lastProgressDisplayTime = time();
-//                }
+                }
+                if($downloadedBytes == $downloadTotal && $downloadTotal)
+                    echo 'Download progress: 100' . "%\n";
             }
         ]);
     }

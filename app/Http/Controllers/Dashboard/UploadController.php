@@ -8,6 +8,7 @@ use App\Factories\DownloadFactory;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\EncoderTask;
+use App\Models\Transfer;
 use App\Repositories\VideoRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -111,7 +112,36 @@ class UploadController
             Redis::setex($key, 3600, 'error: '.$e->getMessage());
         }
     }
-
+    public function postTransfer(Request $request)
+    {
+        $user_id = Auth::user();
+        $transfer_priority = User::where('id', $user_id)->first()->transfer_priority;
+        $link = $request->input('link');
+        $folder_id = $request->input('folder_id');
+        $arrLink = explode("\r\n", $link);
+        if(count($arrLink) == 1) {
+            $arrLink = explode("\n", $link);
+        }
+        //upload DB
+        foreach ($arrLink as $url) {
+            // Prepare a new Transfer record for each link
+            $records[] = [
+                'user_id' => Auth::user(),
+                'url' => $link,
+                'slug' => uniqid(),
+                'title' => '0',
+                'priority' => $transfer_priority,
+                'status' => '0',
+                'sv_transfer' => '0',
+                'folder_id' => $folder_id,
+                'progress' => '0',
+                'size_download' => '0',
+                'size' => '0',
+            ];
+        }
+        Transfer::insert($records);
+        return true;
+    }
     public function getProgress(Request $request)
     {
         $progressKey = 'uploadProgress.'.$request->input('key');

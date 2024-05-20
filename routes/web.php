@@ -31,6 +31,9 @@ Route::get('/finishEncoder', [\App\Http\Controllers\admin\encoderController::cla
 //-------------------------storageController-------------------------------------------------------
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\storageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::class, 'finishStorage']);
+//-------------------------transferController-------------------------------------------------------
+Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
+Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
 
 Route::get('/t/{slug}', [\App\Http\Controllers\play\playController::class, 'play']);
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
@@ -40,11 +43,12 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'upload'])->name('upload');
+    Route::post('/postTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'postTransfer'])->name('post.link.transfer');
     Route::get('/video', [\App\Http\Controllers\Dashboard\VideoController::class, 'index'])->name('video.index');
     Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('video.control');
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
-    Route::post('uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
+    Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
     Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
 
