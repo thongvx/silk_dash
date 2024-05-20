@@ -93,6 +93,21 @@ class UploadController
             }
         }
         $video = Video::create($videoData);
+        //check transfer
+        $dataTransfer = Transfer::where('user_id', $userId)->where('slug', $videoInfo['slug'])->first();
+        if($dataTransfer){
+            $dataTransfer->status = 2;
+            $dataTransfer->progress = 100;
+            $dataTransfer->size_download = $videoSize;
+            $dataTransfer->size = $videoSize;
+            $dataTransfer->save();
+            Redis::set('transfer'.$videoInfo['userId'].'-'.$videoInfo['slug'], json_encode([
+                'status' => 2,
+                'progress' => 100,
+                'size_download' => $videoSize,
+                'size' => $videoSize,
+            ]));
+        }
         return response()->json(['status' => 'success', 'message' => 'Upload success']);
     }
     public function remoteUploadDirect(Request $request)
@@ -153,5 +168,11 @@ class UploadController
 
         return $progress;
     }
-
+    //-------------------------------get progress transfer-----------------------------------------
+    public function getProgressTransfer()
+    {
+        $user_id = Auth::user();
+        $data = Redis::keys('transfer'.$user_id.'.*');
+        return json_encode($data);
+    }
 }

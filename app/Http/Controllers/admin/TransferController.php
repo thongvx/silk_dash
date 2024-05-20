@@ -33,6 +33,12 @@ class TransferController extends Controller
             ));
             $response = curl_exec($curl);
             curl_close($curl);
+            Redis::set('transfer'.$data->user_id.'-'.$data->slug, json_encode([
+                'status' => 1,
+                'progress' => 0,
+                'size_download' => 0,
+                'size' => 0,
+            ]));
             return true;
         }
     }
@@ -44,11 +50,40 @@ class TransferController extends Controller
         $progress = $request->progress;
         $size_download = $request->size_download;
         $size = $request->size;
-        Redis::get('transfer'.$user_id.'-'.$slug, json_encode([
+        Redis::set('transfer'.$user_id.'-'.$slug, json_encode([
+            'status' => 1,
+            'progress' => $progress,
+            'size_download' => $size_download,
+            'size' => $size,
+        ]));
+        return json_encode([
+            'status' => 1,
             'progress' => $progress,
             'size_download' => $size_download,
             'size' => $size,
         ]);
     }
+    //-------------------------------update failed transfer----------------------------------------
+    public function updateFailedTransfer(Request $request)
+    {
+        $user_id = $request->user_id;
+        $slug = $request->slug;
+        $data = Transfer::where('user_id', $user_id)->where('slug', $slug)->first();
+        $data->status = 19;
+        $data->save();
+        Redis::set('transfer'.$user_id.'-'.$slug, json_encode([
+            'status' => 19,
+            'progress' => 0,
+            'size_download' => 0,
+            'size' => 0,
+        ]));
+        return json_encode([
+            'status' => 19,
+            'progress' => 0,
+            'size_download' => 0,
+            'size' => 0,
+        ]);
+    }
+
     //=============================================================================================
 }

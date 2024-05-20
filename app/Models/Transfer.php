@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 
 class Transfer extends Model
 {
@@ -28,5 +29,15 @@ class Transfer extends Model
         'size_download',
         'size',
     ];
-
+    protected static function boot(){
+        parent::boot();
+        static::created(function(){
+            Redis::set('transfer'.$this->user_id.'-'.$this->slug, json_encode([
+                'status' => 0,
+                'progress' => $this->progress,
+                'size_download' => $this->size_download,
+                'size' => $this->size,
+            ]));
+        });
+    }
 }
