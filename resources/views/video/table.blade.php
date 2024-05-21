@@ -69,7 +69,7 @@
                                class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
                     </td>
                     <td class="pl-2 w-[25rem] video-title">
-                        <a href="{{$video -> slug }}">{{ $video->title }}</a>
+                        <a href="{{$video -> slug }}" target="_black" class="hover:text-[#009FB2]">{{ $video->title }}</a>
                     </td>
                     <td class="text-center px-2 videoID">{{ $video->slug }}</td>
                     <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} flex justify-center items-center" poster>

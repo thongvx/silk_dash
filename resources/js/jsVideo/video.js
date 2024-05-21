@@ -1,3 +1,5 @@
+import {updateOriginalFormState} from "../main.js";
+
 var fixedVideoCard = $("[fixed-video-card]");
 
 export function btn_video(){
@@ -13,11 +15,13 @@ export function btn_video(){
     }
 }
 
-export function fixedBox () {
+export function fixedBox (box) {
     fixedVideoCard.toggleClass("opacity-0");
     fixedVideoCard.toggleClass("opacity-1");
     fixedVideoCard.toggleClass("hidden");
     fixedVideoCard.toggleClass("block");
+    console.log($('#'+box))
+    updateOriginalFormState(box);
 }
 export function checkAll() {
     return $('table').find('tbody .checkbox:checked');

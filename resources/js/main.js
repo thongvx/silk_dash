@@ -22,8 +22,12 @@ $(document).on('change', 'input[type="checkbox"]', function() {
 });
 var originalFormState = $('#form-setting, #form-profile').serialize();
 
-export function updateOriginalFormState() {
-    originalFormState = $('#form-setting, #form-profile').serialize();
+export function updateOriginalFormState(box) {
+    if(box){
+        originalFormState = $('#'+box+' form').serialize();
+    }else{
+        originalFormState = $('#form-setting, #form-profile').serialize();
+    }
 }
 $(document).on('change keyup', 'form', function() {
     const button = $(this).find('button[type="submit"]');
@@ -36,14 +40,15 @@ $(document).on('change keyup', 'form', function() {
             return false; // Exit the loop as soon as a file input with files is found
         }
     });
+    console.log(currentFormState, originalFormState)
     if (currentFormState !== originalFormState || hasFile) {
         // Form has changed
-        button.addClass('bg-blue-400 hover:bg-blue-700')
+        button.addClass('bg-[#01545e] hover:bg-[#009fb2]')
         button.removeClass('bg-[#142132]')
         button.removeAttr('disabled');
     } else {
         // Form has not changed, revert to original state
-        button.removeClass('bg-blue-400 hover:bg-blue-700')
+        button.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
         button.addClass('bg-[#142132]')
         button.attr('disabled', 'disabled');
     }

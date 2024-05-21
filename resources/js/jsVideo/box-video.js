@@ -30,16 +30,17 @@ const formEdit = `<div class="edit" id="edit">
                                    focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
                                         </div>
                                     </div>
-                                    <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132] hover:bg-[#009FB2]">Submit</button>
+                                    <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132]" disabled>Submit</button>
                                 </form>
                         </div>`
 $(document).on('click', '.btn-edit', function() {
-    fixedBox()
+    const box = 'edit'
     const tr = $(this).closest('tr');
     const videoId = tr.data('videoid')
     $('tbody .checkbox').prop('checked', false)
     tr.find('.checkbox').prop('checked', true)
     $('#fixed-box-control').append(formEdit)
+    fixedBox(box)
     $('#edit .video-title').text(tr.find('.video-title').text())
     $('#edit [url-video]').text('https://streamsilk.com/play/'+tr.find('.videoID').text())
     $('#edit [url-video]').attr('href','https://streamsilk.com/play/'+tr.find('.videoID').text())
