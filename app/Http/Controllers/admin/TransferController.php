@@ -34,6 +34,8 @@ class TransferController extends Controller
             $response = curl_exec($curl);
             curl_close($curl);
             Redis::set('transfer'.$data->user_id.'-'.$data->slug, json_encode([
+                'slug' => $data->slug,
+                'url' => $data->url,
                 'status' => 1,
                 'progress' => 0,
                 'size_download' => 0,
@@ -50,13 +52,18 @@ class TransferController extends Controller
         $progress = $request->progress;
         $size_download = $request->size_download;
         $size = $request->size;
+        $url = $request->url;
         Redis::set('transfer'.$user_id.'-'.$slug, json_encode([
+            'slug' => $slug,
+            'url' => $url,
             'status' => 1,
             'progress' => $progress,
             'size_download' => $size_download,
             'size' => $size,
         ]));
         return json_encode([
+            'slug' => $slug,
+            'url' => $url,
             'status' => 1,
             'progress' => $progress,
             'size_download' => $size_download,
@@ -68,16 +75,21 @@ class TransferController extends Controller
     {
         $user_id = $request->user_id;
         $slug = $request->slug;
+        $url = $request->url;
         $data = Transfer::where('user_id', $user_id)->where('slug', $slug)->first();
         $data->status = 19;
         $data->save();
         Redis::set('transfer'.$user_id.'-'.$slug, json_encode([
+            'slug' => $slug,
+            'url' => $url,
             'status' => 19,
             'progress' => 0,
             'size_download' => 0,
             'size' => 0,
         ]));
         return json_encode([
+            'slug' => $slug,
+            'url' => $url,
             'status' => 19,
             'progress' => 0,
             'size_download' => 0,
