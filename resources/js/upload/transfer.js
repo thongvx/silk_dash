@@ -28,7 +28,7 @@ $(document).on('submit', '#transferLink', function(event) {
 
     });
 
-    fetch('/uploadRemote', {
+    fetch('/postTransfer', {
         method: 'POST',
         body: formData,
         headers: {
