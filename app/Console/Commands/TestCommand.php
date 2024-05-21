@@ -29,8 +29,10 @@ class TestCommand extends Command
      */
     public function handle()
     {
-
-
+        $dowloader = DownloadFactory::create('https://e61.etvp.cc/uploads/cShGp5cjErBm1UwG6hDwjkfObm4sFd0WfOt.mp4');
+        $dowloader->download();
+        Redis::del('uploadProgress.https://e61.etvp.cc/uploads/cShGp5cjErBm1UwG6hDwjkfObm4sFd0WfOt.mp4');
+        echo Redis::get('uploadProgress.https://e61.etvp.cc/uploads/cShGp5cjErBm1UwG6hDwjkfObm4sFd0WfOt.mp4');
         $video = Video::create([
             'slug' => 'example-slug123',
             'user_id' => 1, // replace with actual user id
@@ -50,10 +52,7 @@ class TestCommand extends Command
 
             'soft_delete' => false,
         ]);
-
-
     }
-
     function disguiseM3U8AsImage($m3u8FilePath, $originalImageFilePath)
     {
         // Đọc nội dung của file m3u8 và file ảnh gốc

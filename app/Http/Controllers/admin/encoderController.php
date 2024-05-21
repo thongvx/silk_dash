@@ -33,9 +33,6 @@ class encoderController
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'GET',
-                CURLOPT_HTTPHEADER => array(
-                    'Cookie: XSRF-TOKEN=eyJpdiI6IlBzVlBKVEdndTZpemhIWjRGT1FkS1E9PSIsInZhbHVlIjoieHhlOFN0WEZzT0pjVlZJL1JObmkyUnk0KzRra0V6OFAwQTk4SWdyRHliT2N2Ylp1bHJFWnlLQXMxZ0RPdEk4eFJkQXRLUDhkVjZnT0V4aWhiZlk4dS9hZFVXbGthV1plUTJPbys4NDhXNHhhR1ZMMkExMFFDUFFFdzNEd1BYTVUiLCJtYWMiOiIwNTBjNWYwZGNjZWQ3MjdiZDkyMDYyMDkwMjFkOTkzYzg0Yjg5NmU0MWRkNjdkODYzYjYwM2JmZmVlZDExMzlmIn0%3D; laravel_session=eyJpdiI6IlR0VXppL1RPcGFrd3hMWFdLTnFUeWc9PSIsInZhbHVlIjoiZWJHK01GWHE1cjZTTTI2ZjIvbjVET216ZnZ1Q3JMU3YycWVTNFRES0tZWHBzbk1pOWdoam1tK1ZEZlRUMUt6RS9ESUlNOFEybnYxVnFiV0QwM1ozNlFWWVRzVXJ5dlVXNVNFcVpoUHdFMGNlaGpyNit2Vms3TEV6M29xeG5xOWciLCJtYWMiOiJlNDFkNDQ0MjczZjNlZDJkMzExMTIwZGZhNWUwYzZlNGRhNTc4MzdjNDE5ZGYzNjdmYmJkMDNiMjYxNTE0NTRiIn0%3D'
-                ),
             ));
             $response = curl_exec($curl);
             curl_close($curl);

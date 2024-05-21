@@ -8,23 +8,24 @@ use App\Factories\DownloadFactory;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\EncoderTask;
-use App\Repositories\FolderRepo;
+use App\Models\Transfer;
+use App\Repositories\VideoRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class UploadController
 {
-    protected  $folderRepo;
+    protected  $videoRepo;
     //Trả về giao diện upload
-    public function __construct(FolderRepo $videoRepo){
-        $this->folderRepo = $videoRepo;
+    public function __construct(VideoRepo $videoRepo){
+        $this->videoRepo = $videoRepo;
     }
     public function upload(Request $request){
 
         //Lam giau thong tin
         $user = Auth::user();
         $data['title'] = 'Upload';
-        $data['folders'] = $this->folderRepo->getAllFolders($user->id);
+        $data['folders'] = $this->videoRepo->getAllFolders($user->id);
         return view('upload.upload', $data);
 
     }
@@ -92,6 +93,21 @@ class UploadController
             }
         }
         $video = Video::create($videoData);
+        //check transfer
+        $dataTransfer = Transfer::where('user_id', $userId)->where('slug', $videoInfo['slug'])->first();
+        if($dataTransfer){
+            $dataTransfer->status = 2;
+            $dataTransfer->progress = 100;
+            $dataTransfer->size_download = $videoSize;
+            $dataTransfer->size = $videoSize;
+            $dataTransfer->save();
+            Redis::set('transfer'.$videoInfo['userId'].'-'.$videoInfo['slug'], json_encode([
+                'status' => 2,
+                'progress' => 100,
+                'size_download' => $videoSize,
+                'size' => $videoSize,
+            ]));
+        }
         return response()->json(['status' => 'success', 'message' => 'Upload success']);
     }
     public function remoteUploadDirect(Request $request)
@@ -111,7 +127,36 @@ class UploadController
             Redis::setex($key, 3600, 'error: '.$e->getMessage());
         }
     }
-
+    public function postTransfer(Request $request)
+    {
+        $user_id = Auth::user();
+        $transfer_priority = User::where('id', $user_id)->first()->transfer_priority;
+        $link = $request->input('link');
+        $folder_id = $request->input('folder_id');
+        $arrLink = explode("\r\n", $link);
+        if(count($arrLink) == 1) {
+            $arrLink = explode("\n", $link);
+        }
+        //upload DB
+        foreach ($arrLink as $url) {
+            // Prepare a new Transfer record for each link
+            $records[] = [
+                'user_id' => Auth::user(),
+                'url' => $link,
+                'slug' => uniqid(),
+                'title' => '0',
+                'priority' => $transfer_priority,
+                'status' => '0',
+                'sv_transfer' => '0',
+                'folder_id' => $folder_id,
+                'progress' => '0',
+                'size_download' => '0',
+                'size' => '0',
+            ];
+        }
+        Transfer::insert($records);
+        return true;
+    }
     public function getProgress(Request $request)
     {
         $progressKey = 'uploadProgress.'.$request->input('key');
@@ -123,5 +168,11 @@ class UploadController
 
         return $progress;
     }
-
+    //-------------------------------get progress transfer-----------------------------------------
+    public function getProgressTransfer()
+    {
+        $user_id = Auth::user();
+        $data = Redis::keys('transfer'.$user_id.'.*');
+        return json_encode($data);
+    }
 }
