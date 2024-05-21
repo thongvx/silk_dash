@@ -26,6 +26,7 @@ class UploadController
         $user = Auth::user();
         $data['title'] = 'Upload';
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
+        $data['currentFolderName'] = $data['folders']->last();
         return view('upload.upload', $data);
 
     }

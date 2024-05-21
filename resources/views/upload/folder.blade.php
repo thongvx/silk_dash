@@ -34,7 +34,7 @@
                     <div
                         class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 text-white mt-2 min-h-80 max-h-80 overflow-auto">
                         @foreach($folders as $folder)
-                            <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-gradient-to-r bg-clip-text from-violet-500 to-fuchsia-500">
+                            <div  folder data-folderid="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-gradient-to-r bg-clip-text from-violet-500 to-fuchsia-500">
                                 <div class="text-center">
                                     <i class="material-symbols-outlined text-3xl">folder</i>
                                 </div>
