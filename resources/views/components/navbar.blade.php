@@ -2,10 +2,10 @@
     <nav
       class="sticky top-0 flex z-20 flex-wrap bg-[#142132] items-center justify-between px-3 py-2 lg:px-3 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
       navbar-main navbar-scroll="false">
-      <div class="flex items-center justify-between w-full px-0 sm:px-4 py-1 mx-auto flex-wrap">
+      <div class="flex items-center justify-between w-full px-0 sm:px-4 py-1 mx-auto flex-row">
         <nav>
           <!-- breadcrumb -->
-          <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
+          <ol class="flex flex-wrap pt-1 bg-transparent rounded-lg sm:mr-16 w-max">
             <li class="text-sm leading-normal">
               <a class="text-white opacity-50" href="javascript:;">Pages</a>
             </li>
@@ -17,23 +17,20 @@
         </nav>
 
         <div class="flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-          <div class="flex items-center md:ml-auto pr-4">
+          <div class="flex items-center md:ml-auto px-2">
             <form class="flex items-center relative bg-[#121520] w-full rounded-lg ease" action="/video/search" method="GET" search>
-                <label class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
-                <input type="text" id="search" name="videoID"
-                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto w-52 text-white rounded-lg bg-transparent bg-clip-padding focus:outline-none
+                <label for="search" class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
+                <input type="text" id="search" name="videoID" value="" search-input
+                  class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 lg:w-52 flex-auto text-white rounded-lg bg-transparent bg-clip-padding focus:outline-none
                          border border-solid border-[#121520]"
-                  onfocus="focused(this)" onfocusout="defocused(this)"/>
+                  />
                 <input type="submit" value="Search" class="hidden" />
             </form>
           </div>
           <ul class="items-center	flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
             <!-- online builder btn  -->
-            <!-- <li class="flex items-center">
-                <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
-              </li> -->
-            <li class="flex items-center px-4 hidden md:inline">
-              <a href="upload?tab=webupload"
+            <li class="items-center px-4 hidden md:flex">
+              <a href="/upload?tab=webupload"
                 class="flex flex-col px-0 py-2 font-semibold text-white transition-all ease-nav-brand">
                 <i class="material-symbols-outlined text-3xl">cloud_upload</i>
               </a>
@@ -135,7 +132,7 @@
                 </li>
               </ul>
             </li>
-            <li class="relative flex items-center px-4 hidden md:inline">
+            <li class="relative items-center px-4 hidden md:flex">
               <a href="javascript:;" aria-expanded="false"  dropdown-trigger
                 class="flex flex-col text-sm font-semibold text-white transition-all ease-nav-brand">
                 <span class="rounded-full border h-10 w-10 text-lg font-bold flex items-center justify-center">VD</span>

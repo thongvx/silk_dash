@@ -20,8 +20,9 @@ let addFolder = `<div class="add-folder" id="add-folder">
                             </form>
                         </div> `
 $(document).on('click', '[btn-add-folder]', function() {
-    fixedBox()
+    const box = 'add-folder'
     $('#fixed-box-control').append(addFolder)
+    fixedBox(box)
     const limit = $('[folder]:eq(0) a').data('limit')
     $('#add-folder form').on('submit', function(e) {
         e.preventDefault();
@@ -114,8 +115,9 @@ let formEditFolder = `<div class="edit" id="edit-folder">
                             </div>
                             `
 $('.btn-edit-folder').on('click', function() {
-    fixedBox()
+    const box = 'edit-folder'
     $('#fixed-box-control').append(formEditFolder)
+    fixedBox(box)
     const folder = $(this).closest('[folder]');
     const folderId = folder.find('a').data('folderid');
     $('.name-folder').text(folder.find('span:eq(0)').text())

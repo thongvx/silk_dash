@@ -33,7 +33,7 @@
                     <span>entries</span>
                 </div>
                 <div class="flex ">
-                    <button type="button" class="rounded-lg flex items-center px-1.5 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
+                    <button type="button" class="hover:bg-[#009FB2] rounded-lg flex items-center px-1.5 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
                             title="poster"  btn-poster>
                         {!!
                             request() -> get('poster')

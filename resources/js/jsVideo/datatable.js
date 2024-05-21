@@ -129,7 +129,7 @@ $(document).on('click', '.btn-page-folder', function() {
     const column = urlParams.get('column') || 'created_at';
     const direction = urlParams.get('direction') || 'asc';
     const folderId = $(this).data('folderid');
-    const limit = $(this).data('limit');
+    const limit = urlParams.get('limit') === null ? $(this).data('limit') : urlParams.get('limit');
     const box_folder = $(this).closest('[folder]');
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
     $('[folder] > a').addClass('btn-page-folder')

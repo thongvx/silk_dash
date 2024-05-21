@@ -25,7 +25,6 @@
 </main>
 @include('components.footer')
     @vite('resources/js/app.js')
-    <script src={{asset('assets/js/input-search.js')}}></script>
 @yield('scripts')
 </body>
 </html>

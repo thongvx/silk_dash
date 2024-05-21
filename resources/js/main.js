@@ -1,3 +1,4 @@
+import { Upload_FILE } from './upload/uploadFile.js';
 // Load JS
 document.onreadystatechange = function () {
     var state = document.readyState;
@@ -40,7 +41,6 @@ $(document).on('change keyup', 'form', function() {
             return false; // Exit the loop as soon as a file input with files is found
         }
     });
-    console.log(currentFormState, originalFormState)
     if (currentFormState !== originalFormState || hasFile) {
         // Form has changed
         button.addClass('bg-[#01545e] hover:bg-[#009fb2]')
@@ -143,7 +143,6 @@ function updateURLParameter(tab) {
     var newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
 }
-
 function loadContent(data_content) {
     updateURLParameter(data_content)
     var urlParams = new URLSearchParams(window.location.search);
@@ -173,6 +172,9 @@ function loadContent(data_content) {
         },
         success: function(response) {
             $('#box-content').html(response);
+            if(data_content === 'webupload'){
+                Upload_FILE()
+            }
             updateOriginalFormState();
         }
     });

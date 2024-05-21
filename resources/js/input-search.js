@@ -1,31 +1,30 @@
-function focused(input){
-    let label = input.closest('[search]').querySelector('label')
+$(document).on('focus', '[search-input]', function() {
+    let label = this.closest('[search]').querySelector('label')
     label.classList.add('-translate-y-5')
     label.classList.add('scale-75')
     label.classList.remove('translate-x-3')
     label.classList.remove('text-slate-400')
     label.classList.add('text-red-500')
-    input.classList.remove('z-20')
-    input.classList.remove('border-slate-900')
-    input.classList.add('border-red-500')
-}
-function defocused(input){
-    let label = input.closest('[search]').querySelector('label')
-    if(input.value === ''){
+    this.classList.remove('z-20')
+    this.classList.remove('border-slate-900')
+    this.classList.add('border-red-500')
+})
+$(document).on('blur', '[search-input]', function() {
+    let label = this.closest('[search]').querySelector('label')
+    if(this.value === ''){
         label.classList.remove('-translate-y-5')
         label.classList.remove('scale-75')
         label.classList.add('translate-x-3')
         label.classList.add('text-slate-400')
         label.classList.remove('text-red-500')
-        input.classList.add('z-20')
-        input.classList.add('border-slate-900')
-        input.classList.remove('border-red-500')
+        this.classList.add('z-20')
+        this.classList.add('border-slate-900')
+        this.classList.remove('border-red-500')
     }
-}
-function searchFolder(input) {
-    // Get the search keyword
-    var filter = input.value.toUpperCase();
-    var listFolder = input.closest('[list-folder]');    // Get all folder elements
+});
+$(document).on('keyup', '[search-folder]', function() {
+    var filter = this.value.toUpperCase();
+    var listFolder = this.closest('[list-folder]');    // Get all folder elements
     var folders = listFolder.querySelectorAll('[folder]');
     // Loop through all folder items
     for (var i = 0; i < folders.length; i++) {
@@ -37,4 +36,4 @@ function searchFolder(input) {
             folders[i].style.display = "none";
         }
     }
-}
+});
