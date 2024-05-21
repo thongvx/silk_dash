@@ -9,25 +9,25 @@
                     class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                     <button
                         class="{{request()->get('tab') === 'live' ? 'live tab-active !text-[#009FB2]' : 'live'}}
-                        live hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        live hover:text-[#009FB2] text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="live">
                         <span class="px-2 py-1">Live Videos</span>
                     </button>
                     <button
                         class="{{request()->get('tab') === 'processing' ? 'processing tab-active !text-[#009FB2]' : 'processing'}}
-                        processing hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        processing hover:text-[#009FB2] text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="processing">
                         <span class="px-2 py-1">Processing Videos</span>
                     </button>
                     <button
                         class="{{request()->get('tab') === 'DMCA' ? 'DMCA tab-active !text-[#009FB2]' : 'DMCA'}}
-                        DMCA hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        DMCA hover:text-[#009FB2] text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="DMCA">
                         <span class="px-2 py-1">DMCA Warnings</span>
                     </button>
                     <button
                         class="{{request()->get('tab') === 'removed' ? 'removed tab-active !text-[#009FB2]' : 'removed'}}
-                        removed hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        removed hover:text-[#009FB2] text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="removed">
                         <span class="px-2 py-1">Removed Videos</span>
                     </button>
@@ -46,8 +46,4 @@
         @include('video.folder')
     </div>
     @include('video.fixed-video')
-@endsection
-@section('scripts')
-    @vite('resources/js/jsVideo/box-video.js')
-    @vite('resources/js/jsVideo/datatable.js')
 @endsection

@@ -1,25 +1,14 @@
-function btn_video(){
-    var rows_checked = $('table').find('tbody .checkbox:checked').length;
-    if (rows_checked > 0) {
-        $('button[btn-video]').prop('disabled', false);
-        $('button[btn-video]').removeClass('cursor-not-allowed')
-        $('button[btn-video]').addClass('hover:text-[#009FB2]')
-    } else {
-        $('button[btn-video]').prop('disabled', true);
-        $('button[btn-video]').addClass('cursor-not-allowed')
-        $('button[btn-video]').removeClass('hover:text-[#009FB2]')
-    }
-}
+import {btn_video} from "./video.js";
 $(document).on('click', '[checked-All]', function () {
-    var isChecked = $(this).prop('checked');
+    const isChecked = $(this).prop('checked');
     $(this).closest('table').find('input[type="checkbox"]').prop('checked', isChecked);
     btn_video()
 })
 $(document).on('click', '.checkbox',function(){
-    var table = this.closest('table');
-    var rows = $(table).find('tbody .checkbox').length;
-    var rows_checked = $(table).find('tbody .checkbox:checked').length;
-    var checkBoxAll = $(table).find('[checked-All]');
+    const table = this.closest('table');
+    const rows = $(table).find('tbody .checkbox').length;
+    const rows_checked = $(table).find('tbody .checkbox:checked').length;
+    const checkBoxAll = $(table).find('[checked-All]');
     if (rows_checked < rows) {
         checkBoxAll.prop('checked', false);
     } else {
@@ -27,7 +16,8 @@ $(document).on('click', '.checkbox',function(){
     }
     btn_video()
 });// Hàm để update giá trị của URL Parameters
-function ajaxdatatable(column,direction,folderId,limit,page) {
+function ajaxdatatable(column,direction,folderId,limit,page, poster) {
+    const urlParams = new URLSearchParams(window.location.search);
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -36,13 +26,20 @@ function ajaxdatatable(column,direction,folderId,limit,page) {
             direction: direction,
             folderId: folderId,
             limit: limit,
-            page: page
+            page: page,
+            tab: urlParams.get('tab'),
+            poster: poster
         },
         beforeSend: function() {
             $('#live').html(`<div class="w-full justify-center items-center flex h-full">
-                                <div class="flex text-white my-20">
-                                    <div class="loading"></div>
-                                    <span class="ml-3">Loading</span>
+                                <div class="flex text-white my-20 items-center">
+                                    <div class="loading">
+                                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                    </div>
+                                    <span>Loading</span>
                                 </div>
                             </div>`);
         },
@@ -54,10 +51,10 @@ function ajaxdatatable(column,direction,folderId,limit,page) {
 
 }
 function highlightSortedColumn() {
-    var sortColumn = document.querySelectorAll("[aria-sort]");
-    var Table = $("#datatable")[0];
-    var sortColumntable = Table.dataset.columnTable
-    var sortDirectionTable = Table.dataset.columnDirection
+    const sortColumn = document.querySelectorAll("[aria-sort]");
+    const Table = $("#datatable")[0];
+    const sortColumntable = Table.dataset.columnTable
+    const sortDirectionTable = Table.dataset.columnDirection
     sortColumn.forEach(function (element) {
         if ($(element).data('column') === sortColumntable) {
             $(element).attr('aria-sort', sortDirectionTable);
@@ -66,60 +63,83 @@ function highlightSortedColumn() {
         }
     });
 }
-function updateURLParameterVideo(column,direction,folderId,limit,page) {
-    var urlParams = new URLSearchParams(window.location.search);
+function updateURLParameterVideo(column,direction,folderId,limit,page, poster) {
+    const urlParams = new URLSearchParams(window.location.search);
     column ? urlParams.set('column', column): '';
     direction ? urlParams.set('direction', direction): '';
     folderId ? urlParams.set('folderId', folderId) : '';
     limit ? urlParams.set('limit', limit) : '';
     page ? urlParams.set('page', page) : '';
-    var newUrl = window.location.pathname + '?' + urlParams.toString();
+    poster ? urlParams.set('poster', poster) : '';
+    const newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
-    ajaxdatatable(column,direction,folderId,limit,page)
+    ajaxdatatable(column,direction,folderId,limit,page, poster)
 }
 
 $(document).on('click', '.sortable-column', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var column = $(this).data('column');
-    var direction = $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc';
-    var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
-    var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
-    var page= '';
-    updateURLParameterVideo(column,direction,folderId,limit,page)
+    const urlParams = new URLSearchParams(window.location.search);
+    const column = $(this).data('column');
+    const direction = $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc';
+    const folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
+    const limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
+    const page= '';
+    const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
+    updateURLParameterVideo(column,direction,folderId,limit,page, poster)
 });
 $(document).on('click', '.page', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
-    var direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
-    var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
-    var limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
-    var page = $(this).data('page');
-    updateURLParameterVideo(column,direction,folderId,limit,page)
+    const urlParams = new URLSearchParams(window.location.search);
+    const column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
+    const direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
+    const folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
+    const limit = urlParams.get('limit') === null ? '20' : urlParams.get('limit');
+    const page = $(this).data('page');
+    const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
+    updateURLParameterVideo(column,direction,folderId,limit,page, poster)
 });
 $(document).on('change', '#limit', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
-    var direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
-    var folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
-    var limit = $(this).val();
-    var page = '';
-    updateURLParameterVideo(column,direction,folderId,limit,page)
+    const urlParams = new URLSearchParams(window.location.search);
+    const column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
+    const direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
+    const folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
+    const limit = $(this).val();
+    const page = '';
+    const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
+    updateURLParameterVideo(column,direction,folderId,limit,page,poster)
+});
+$(document).on('click', '[btn-poster]', function() {
+    $(this).toggleClass('bg-[#142132]')
+    $(this).toggleClass('bg-[#009FB2]')
+    $('[poster]').toggleClass('hidden')
+    const urlParams = new URLSearchParams(window.location.search);
+    var poster
+    if($(this).text().indexOf('show') !== -1) {
+        $(this).html(`<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i>hide poster`)
+        poster = 'show'
+        urlParams.set('poster', poster)
+    }else{
+        $(this).html(`<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility</i>show poster`)
+        poster = ''
+        urlParams.delete('poster')
+    }
+    const newUrl = window.location.pathname + '?' + urlParams.toString();
+    history.pushState(null, '', newUrl);
 });
 $(document).on('click', '.btn-page-folder', function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
-    var direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
-    var folderId = $(this).data('folderid');
-    var limit = $(this).data('limit');
-    $('.btn-page-folder').addClass('btn-page-folder')
-    $(this).removeClass('btn-page-folder')
-    var page = '';
+    const urlParams = new URLSearchParams(window.location.search);
+    const column = urlParams.get('column') || 'created_at';
+    const direction = urlParams.get('direction') || 'asc';
+    const folderId = $(this).data('folderid');
+    const limit = $(this).data('limit');
     const box_folder = $(this).closest('[folder]');
+    const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
+    $('[folder] > a').addClass('btn-page-folder')
+    $(this).removeClass('btn-page-folder')
     box_folder.prependTo(box_folder.closest('.list-folder'));
     $('[folder]').addClass('bg-[#121520]')
     $('[folder]').removeClass('bg-gradient-to-r')
     $(box_folder).removeClass("bg-[#121520]")
     $(box_folder).addClass("bg-gradient-to-r")
     $('#currentFolderName').text($(this).find('span').text())
-    updateURLParameterVideo(column,direction,folderId,limit,page)
+    btn_video()
+    updateURLParameterVideo(column,direction,folderId,limit,'',poster)
 })
