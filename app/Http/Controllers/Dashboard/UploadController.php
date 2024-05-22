@@ -196,8 +196,16 @@ class UploadController
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
     {
-        $user_id = Auth::user();
-        $data = Redis::get('transfer'.$user_id.'.*');
+        $user = Auth::user();
+        $keys = Redis::keys('transfer'.$user->user_id.'-*');
+        // Process the retrieved keys
+        $data = [];
+        foreach ($keys as $key) {
+            $key = str_replace('laravel_database_', '', $key);
+            $value = Redis::get($key);
+            $value = json_decode($value, true);
+            $data[$key] = $value;
+        }
         return json_encode($data);
     }
 }
