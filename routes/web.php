@@ -35,6 +35,7 @@ Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::cla
 Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
 Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
 Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateFailedTransfer']);
+Route::get('/deleteTaskTransfer', [\App\Http\Controllers\admin\TransferController::class, 'deleteTaskTransfer']);
 
 Route::get('/t/{slug}', [\App\Http\Controllers\play\playController::class, 'play']);
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');

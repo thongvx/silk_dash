@@ -96,6 +96,11 @@ class TransferController extends Controller
             'size' => 0,
         ]);
     }
-
+    //-------------------------------delete task transfer------------------------------------------
+    public function deleteTaskTransfer()
+    {
+        $data = Transfer::where('status', 2)->orderBy('created_at', 'asc')->delete();
+        Redis::set('transfer'.$user_id.'-'.$slug);
+    }
     //=============================================================================================
 }
