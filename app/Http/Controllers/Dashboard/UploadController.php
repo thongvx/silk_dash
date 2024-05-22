@@ -174,7 +174,7 @@ class UploadController
     public function getProgressTransfer()
     {
         $user_id = Auth::user();
-        $data = Redis::keys('transfer'.$user_id.'.*');
+        $data = Redis::get('transfer'.$user_id.'.*');
         return json_encode($data);
     }
 }
