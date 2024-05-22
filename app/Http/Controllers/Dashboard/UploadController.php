@@ -152,10 +152,12 @@ class UploadController
     }
     public function postTransfer(Request $request)
     {
-        $user_id = Auth::user();
-        $transfer_priority = User::where('id', $user_id)->first()->transfer_priority;
-        $link = $request->input('link');
-        $folder_id = $request->input('folder_id');
+        $user = Auth::user();
+        $transfer_priority = $user->transfer_priority;
+        if($transfer_priority)
+            $transfer_priority = 0;
+        $link = $request->url;
+        $folder_id = $request->FolderID;
         $arrLink = explode("\r\n", $link);
         if(count($arrLink) == 1) {
             $arrLink = explode("\n", $link);
@@ -164,8 +166,8 @@ class UploadController
         foreach ($arrLink as $url) {
             // Prepare a new Transfer record for each link
             $records[] = [
-                'user_id' => Auth::user(),
-                'url' => $link,
+                'user_id' => $user->user_id,
+                'url' => $url,
                 'slug' => uniqid(),
                 'title' => '0',
                 'priority' => $transfer_priority,
@@ -194,8 +196,16 @@ class UploadController
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
     {
-        $user_id = Auth::user();
-        $data = Redis::get('transfer'.$user_id.'.*');
+        $user = Auth::user();
+        $keys = Redis::keys('transfer'.$user->user_id.'-*');
+        // Process the retrieved keys
+        $data = [];
+        foreach ($keys as $key) {
+            $key = str_replace('laravel_database_', '', $key);
+            $value = Redis::get($key);
+            $value = json_decode($value, true);
+            $data[$key] = $value;
+        }
         return json_encode($data);
     }
 }
