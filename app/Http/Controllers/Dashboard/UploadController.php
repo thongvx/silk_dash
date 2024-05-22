@@ -178,10 +178,11 @@ class UploadController
         $keys = Redis::keys('transfer'.$user->user_id.'-*');
         // Process the retrieved keys
         $data = [];
-        foreach ($keys as $value => $key) {
+        foreach ($keys as $key) {
             $key = str_replace('laravel_database_', '', $key);
             $value = Redis::get($key);
-            $data[$value][$key] = $value;
+            $value = json_decode($value, true);
+            $data[$key] = $value;
         }
         return json_encode($data);
     }
