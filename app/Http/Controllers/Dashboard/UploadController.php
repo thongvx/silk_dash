@@ -147,7 +147,7 @@ class UploadController
             // Prepare a new Transfer record for each link
             $records[] = [
                 'user_id' => $user->user_id,
-                'url' => $link,
+                'url' => $url,
                 'slug' => uniqid(),
                 'title' => '0',
                 'priority' => $transfer_priority,
