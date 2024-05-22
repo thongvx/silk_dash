@@ -51,7 +51,7 @@ setInterval(function() {
             var bar = $(this).find('.bar');
             if(bar.text() == '100%') return;
             var encodedUrl = encodeURIComponent(url);
-            fetch('/uploadRemoteStatus?key=' + encodedUrl, {
+            fetch('/getProgressTransfer?key=' + encodedUrl, {
                 method: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
