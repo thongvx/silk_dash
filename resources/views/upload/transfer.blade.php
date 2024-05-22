@@ -18,13 +18,13 @@
             <div class="mt-2 lg:mx-32 shadow-lg flex justify-center relative rounded-lg bg-[#142132] hover:bg-[#009FB2]">
                 <textarea name="url" id="" class='w-full bg-transparent rounded-xl px-3 py-2 text-white' rows="8"></textarea>
                 <input class="hidden" type="text" id="userID" name="userID" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
-                <input class="hidden" type="text" id="folderPost" name="FolderID" value="single videos">
+                <input class="hidden" type="text" id="folderPost" name="FolderID" value="{{ $currentFolderName-> id }}">
             </div>
             <button type="submit" class='font-semibold hover:text-indigo-600 dark:hover:text-indigo-600 mt-4 dark:text-white rounded-lg px-6 py-1.5 shadow-lg shadow-gray-400/50 dark:shadow-slate-900 bg-gray-100 dark:bg-gray-900'>Submit</button>
         </form>
     </div>
     <div class='-mb-12 bg-slate-900 mx-6 rounded-xl flex justify-between items-center px-3'>
-        <h3 class='py-4  dark:text-white font-bold'>Save To <span id="folderName" class="italic text-[#009FB2]">Single Videos( Default Folder)</span></h3>
+        <h3 class='py-4  dark:text-white font-bold'>Save To <span id="folderName" class="italic text-[#009FB2]">{{ $currentFolderName-> name_folder }}( Default Folder)</span></h3>
         <div class="changefolder text-[#009FB2] font-bold cursor-pointer" change-folder>
             Change Folder
         </div>

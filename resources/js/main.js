@@ -72,11 +72,10 @@ function loadContent(data_content) {
     var urlParams = new URLSearchParams(window.location.search);
     $('.tab-lifted').removeClass('tab-active !text-[#009FB2]')
     $('.'+data_content).addClass('tab-active !text-[#009FB2]')
-    var url = page === 'video' ? '/loadPageVideo' : '/loadPage';
     // Sử dụng hàm
     $.ajax({
         url: url,
-        type: 'GET',
+        type: '/loadPage',
         data: {
             tab: data_content,
             page: page,

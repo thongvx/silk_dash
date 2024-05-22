@@ -14,7 +14,7 @@
             </div>
             <div class="folder" id="list-folder">
                 <h5 class="mb-0 text-green-400 text-lg font-semibold">Choose folder to move selected to</h5>
-                <div class="mt-3">
+                <div class="mt-3" list-folder>
                     <div class="grid grid-cols-3 md:flex items-center w-full">
                         <div class="col-span-2 relative flex flex-wrap mr-3 items-stretch transition-all rounded-lg ease">
                                 <span

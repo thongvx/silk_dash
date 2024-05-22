@@ -66,7 +66,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
-    Route::get('/loadPageVideo', [\App\Helpers\ModelHelpers::class, 'loadPagevideo']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
