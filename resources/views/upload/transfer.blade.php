@@ -13,11 +13,10 @@
             </label>
         </div>
         <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
-        <form class='from-current pb-8' id="transferLink" method="POST" action="/remoteUpload">
+        <form class='from-current pb-8' id="transferLink" method="POST" action="">
             @csrf
             <div class="mt-2 lg:mx-32 shadow-lg flex justify-center relative rounded-lg bg-[#142132] hover:bg-[#009FB2]">
                 <textarea name="url" id="" class='w-full bg-transparent rounded-xl px-3 py-2 text-white' rows="8"></textarea>
-                <input class="hidden" type="text" id="userID" name="userID" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
                 <input class="hidden" type="text" id="folderPost" name="FolderID" value="{{ $currentFolderName-> id }}">
             </div>
             <button type="submit" class='font-semibold hover:text-indigo-600 dark:hover:text-indigo-600 mt-4 dark:text-white rounded-lg px-6 py-1.5 shadow-lg shadow-gray-400/50 dark:shadow-slate-900 bg-gray-100 dark:bg-gray-900'>Submit</button>
@@ -38,10 +37,40 @@
         </div>
     </div>
     <hr class="h-px my-3 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
-    <div class="text-center text-emerald-500 font-bold">
-        No Active Tasks
-    </div>
     <div id="list-upload">
+        @if($getProgressTransfer && is_string($getProgressTransfer))
+            @php
+                $decodedTransfer = json_decode($getProgressTransfer, true);
+            @endphp
+            @if(is_array($decodedTransfer))
+                @foreach ($decodedTransfer as $key => $value)
+                    <div class="mx-3 mb-3 info-link" id="{{ $value['slug'] }}">
+                        <div class="text-white pb-2 flex justify-between">
+                            <div class="title-file">{{ $value['url'] }}</div>
+                            <div class="size">{{ \App\Models\File::formatSizeUnits($value['size_download']) }} / {{ \App\Models\File::formatSizeUnits($value['size']) }}</div>
+                        </div>
+                        <div class="progress bg-gray-600 h-3.5 rounded-lg">
+                            <div class="bar {{ $value['progress'] == 100 ? 'bg-green-500' : 'bg-orange-500' }} h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center"
+                                 style="width:{{ $value['progress'] }}%">{{ $value['progress'] }}%
+                            </div>
+                        </div>
+                        @if($value['status'] == 2)
+                            <div class="text-teal-500 mt-3 status">
+                                transfer successfully
+                            </div>
+                        @endif
+                        <div class="text-white mt-3">
+                            <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote</button>
+                            <button class="px-4 py-1 rounded-lg bg-blue-500">Retry</button>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="text-center text-emerald-500 font-bold">
+                    No Active Tasks
+                </div>
+            @endif
+        @endif
     </div>
 
 </div>

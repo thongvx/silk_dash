@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Http\Controllers\Dashboard\VideoController;
 use App\Http\Controllers\Setting\AccountController;
+use App\Http\Controllers\Dashboard\UploadController;
 use App\Repositories\FolderRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +14,14 @@ class ModelHelpers
     protected $videoController;
     protected $AccountController;
     protected $folderRepo;
+    protected $uploadController;
 
-    public function __construct(VideoController $videoController, AccountController $AccountController, FolderRepo $folderRepo)
+    public function __construct(VideoController $videoController, AccountController $AccountController, FolderRepo $folderRepo, UploadController $uploadController)
     {
         $this->videoController = $videoController;
         $this->AccountController = $AccountController;
         $this->folderRepo = $folderRepo;
+        $this->uploadController = $uploadController;
     }
     public static function genVideoId(){
         $id = uniqid();
@@ -35,8 +38,7 @@ class ModelHelpers
                 $data = $this->videoController->getVideoData($request);
                 return view($page.'.'.$tab, $data);
             case 'upload':
-                $currentFolderName = $this->folderRepo->getAllFolders($user->id)->last();
-                return view($page.'.'.$tab, compact('currentFolderName'));
+                return $this->uploadController->upload($tab);
             default:
                 return view($page.'.'.$tab);
         }

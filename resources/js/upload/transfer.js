@@ -3,7 +3,6 @@ $(document).on('submit', '#transferLink', function(event) {
 
     var form = event.target.closest('form')
     var formData = new FormData(form);
-
     var urls = form.elements.url.value;
     urls = urls.split("\n");
     urls.forEach(function(url, index) {
@@ -43,29 +42,43 @@ $(document).on('submit', '#transferLink', function(event) {
             console.error('Error:', error);
         });
 });
+
 setInterval(function() {
     if ($('.info-link').length == 0) return;
     if($('[transfer]')){
         $('.info-link').each(function() {
             var url = $(this).find('.title-file').text();
             var bar = $(this).find('.bar');
-            if(bar.text() == '100%') return;
-            var encodedUrl = encodeURIComponent(url);
-            fetch('/getProgressTransfer?key=' + encodedUrl, {
-                method: 'GET',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            var status = $(this).find('.status');
+            $.ajax({
+                url: '/getProgressTransfer',
+                type: 'GET',
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    for (var key in data) {
+                        if (data[key].url == url) {
+                            bar.css('width', data[key].progress + '%');
+                            bar.text(data[key].progress + '%');
+                            if(data[key].status === 0){
+                                status.text('pending');
+                            }else if(data[key].status === 3){
+                                status.text('transfer failed');
+                            } else if(data[key].status === 2){
+                                status.text('transfer success');
+                            } else{
+                                status.text('');
+                            }
+                            if (data[key].progress == 100) {
+                                bar.removeClass('bg-orange-500').addClass('bg-green-500');
+                            }
+                        }
+                    }
+
                 },
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                error: function(response) {
+                    console.log(response);
+                }
+            });
         });
     }
-
 }, 5000);
-

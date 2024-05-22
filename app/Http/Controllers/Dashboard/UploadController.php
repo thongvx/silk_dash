@@ -20,17 +20,37 @@ class UploadController
     public function __construct(FolderRepo $folderRepo){
         $this->folderRepo = $folderRepo;
     }
-    public function upload(Request $request){
+    public function index()
+    {
+        $user = Auth::user();
 
-        //Lam giau thong tin
+        $data=[
+            'title' => 'Upload',
+            'folders' =>$this->folderRepo->getAllFolders($user->id),
+            'currentFolderName' => $this->folderRepo->getAllFolders($user->id)->last(),
+            'getProgressTransfer' => $this->getProgressTransfer(),
+        ];
+        return view('upload.upload', $data);
+    }
+    public function upload($tab)
+    {
         $user = Auth::user();
         $data['title'] = 'Upload';
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $data['folders']->last();
-        return view('upload.upload', $data);
+        switch ($tab) {
+            case 'transfer':
+                $data['getProgressTransfer'] = $this->getProgressTransfer();
+                return view('upload.transfer', $data);
+            case 'FTP':
+                return view('upload.FTP', $data);
+            case 'clone':
+                return view('upload.clone', $data);
+            default:
+                return view('upload.webupload', $data);
+        }
 
     }
-
     //Xử lý gọi vào hàm này để đẩy video lên
     public function uploadVideo(Request $request){
         $videoInfo = $request->all();
