@@ -175,7 +175,7 @@ class UploadController
     public function getProgressTransfer()
     {
         $user_id = Auth::user();
-        $keys = Redis::keys('transfer'.$user_id.'.*');
+        $keys = Redis::keys('transfer'.$user_id.'-*');
         // Process the retrieved keys
         foreach ($keys as $key) {
             $key = str_replace('laravel_database_', '', $key);
