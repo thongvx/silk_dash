@@ -134,8 +134,10 @@ class UploadController
     {
         $user = Auth::user();
         $transfer_priority = $user->transfer_priority;
-        $link = $request->input('link');
-        $folder_id = $request->input('folder_id');
+        if($transfer_priority)
+            $transfer_priority = 0;
+        $link = $request->url;
+        $folder_id = $request->FolderID;
         $arrLink = explode("\r\n", $link);
         if(count($arrLink) == 1) {
             $arrLink = explode("\n", $link);
