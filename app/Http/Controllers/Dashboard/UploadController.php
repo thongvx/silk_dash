@@ -102,6 +102,8 @@ class UploadController
             $dataTransfer->size = $videoSize;
             $dataTransfer->save();
             Redis::set('transfer'.$videoInfo['userId'].'-'.$videoInfo['slug'], json_encode([
+                'slug' => $videoInfo['slug'],
+                'url' => $dataTransfer->url,
                 'status' => 2,
                 'progress' => 100,
                 'size_download' => $videoSize,
@@ -172,7 +174,7 @@ class UploadController
     public function getProgressTransfer()
     {
         $user_id = Auth::user();
-        $data = Redis::keys('transfer'.$user_id.'.*');
+        $data = Redis::get('transfer'.$user_id.'.*');
         return json_encode($data);
     }
 }
