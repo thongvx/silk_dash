@@ -179,6 +179,7 @@ class UploadController
         // Process the retrieved keys
         foreach ($keys as $key) {
             $key = str_replace('laravel_database_', '', $key);
+            echo $key . '</br>';
             $value = Redis::get($key);
             echo $value. '</br>';
         }
