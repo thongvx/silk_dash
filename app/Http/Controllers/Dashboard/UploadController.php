@@ -132,8 +132,8 @@ class UploadController
     }
     public function postTransfer(Request $request)
     {
-        $user_id = Auth::user();
-        $transfer_priority = User::where('id', $user_id)->first()->transfer_priority;
+        $user = Auth::user();
+        $transfer_priority = $user->transfer_priority;
         $link = $request->input('link');
         $folder_id = $request->input('folder_id');
         $arrLink = explode("\r\n", $link);
@@ -144,7 +144,7 @@ class UploadController
         foreach ($arrLink as $url) {
             // Prepare a new Transfer record for each link
             $records[] = [
-                'user_id' => Auth::user(),
+                'user_id' => $user->user_id,
                 'url' => $link,
                 'slug' => uniqid(),
                 'title' => '0',
