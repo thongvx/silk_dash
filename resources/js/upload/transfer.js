@@ -1,14 +1,27 @@
-import {formatFileSize} from "../main.js";
+import {formatFileSize, notification} from "../main.js";
 $(document).on('submit', '#transferLink', function(event) {
     event.preventDefault();
 
     var form = event.target.closest('form')
+    var button = $(form).find('button[type="submit"]');
     var formData = new FormData(form);
     var urls = form.elements.url.value;
     urls = urls.split("\n");
+    // Mảng để lưu trữ các URL hợp lệ
+    var validUrls = [];
+
+    // Biểu thức chính quy để kiểm tra URL hợp lệ
+    var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
     urls.forEach(function(url, index) {
         if(url != ''){
             url = url.trim();
+            // Kiểm tra xem URL có hợp lệ không
+            if (!urlRegex.test(url)) {
+                notification('warning', 'The entered URL is invalid: ' + url)
+                return;
+            }
+            validUrls.push(url);
             // Thêm một tiến trình upload mới vào danh sách
             var div_progress = `<div class="mx-3 mb-5 info-link" id="">
                                         <div class="text-white pb-2 flex justify-between">
@@ -27,6 +40,7 @@ $(document).on('submit', '#transferLink', function(event) {
         }
 
     });
+    formData.set('url', validUrls.join('\n'));
 
     fetch('/postTransfer', {
         method: 'POST',
@@ -41,6 +55,9 @@ $(document).on('submit', '#transferLink', function(event) {
         .then(data => {
             console.error(data);
             form.reset();
+            button.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
+            button.addClass('bg-[#142132]')
+            button.attr('disabled', 'disabled');
         })
         .catch(error => {
             console.error('Error:', error);
