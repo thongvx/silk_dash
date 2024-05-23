@@ -14,10 +14,10 @@ class encoderController
     public function startEncoderTask ()
     {
         $data = EncoderTask::where('status', 0)->orderBy('priority', 'desc')->first();
-        if($data){
+        $svEncoder = SvEncoder::where('active', 1)->where('encoder', '<', 2)->first();
+        if($data && $svEncoder){
             $data->increment('status');
             //select sv encoder
-            $svEncoder = SvEncoder::where('active', 1)->where('encoder', '<', 2)->first();
             if($data->sv_upload == $svEncoder->name)
                 $statusEncoder = 2;
             else
@@ -25,7 +25,7 @@ class encoderController
             //call encoder
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://'.$svEncoder->name.'.streamsilk.com/addEncoderTask?status='.$statusEncoder.'&slug='.$data->slug.'&sv='.$data->sv_upload.'&format='.$data->format.'&quality='.$data->quality,
+                CURLOPT_URL => 'https://'.$svEncoder->name.'.streamsilk.com/addEncoderTask?slug='.$data->slug.'&quality='.$data->quality.'&format='.$data->format.'&status='.$statusEncoder.'&svUpload='.$data->sv_upload,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
