@@ -32,10 +32,9 @@ class UploadController
         ];
         return view('upload.upload', $data);
     }
-    public function upload(Request $request)
+    public function upload($tab)
     {
         $user = Auth::user();
-        $tab = $request->tab;
         $data['title'] = 'Upload';
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $data['folders']->last();
