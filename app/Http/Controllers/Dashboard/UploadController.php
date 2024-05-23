@@ -23,7 +23,6 @@ class UploadController
     public function index()
     {
         $user = Auth::user();
-
         $data=[
             'title' => 'Upload',
             'folders' =>$this->folderRepo->getAllFolders($user->id),
