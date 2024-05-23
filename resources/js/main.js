@@ -27,11 +27,12 @@ $(document).on('change', 'input[type="checkbox"]', function() {
         $(this).val(0);
     }
 });
-var originalFormState = $('#form-setting, #form-profile').serialize();
+var originalFormState = $('#form-setting, #form-profile, #transferLink').serialize();
 
 export function updateOriginalFormState(box) {
     if(box){
         originalFormState = $('#'+box+' form').serialize();
+        console.log(originalFormState)
     }else{
         originalFormState = $('#form-setting, #form-profile').serialize();
     }
@@ -47,6 +48,7 @@ $(document).on('change keyup', 'form', function() {
             return false; // Exit the loop as soon as a file input with files is found
         }
     });
+    console.log(currentFormState, originalFormState)
     if (currentFormState !== originalFormState || hasFile) {
         // Form has changed
         button.addClass('bg-[#01545e] hover:bg-[#009fb2]')
@@ -181,7 +183,11 @@ function loadContent(data_content) {
             if(data_content === 'webupload'){
                 Upload_FILE()
             }
-            updateOriginalFormState();
+            if (data_content === 'transfer'){
+                updateOriginalFormState('transferLink')
+            }else{
+                updateOriginalFormState()
+            }
         }
     });
 }

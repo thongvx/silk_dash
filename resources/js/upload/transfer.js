@@ -10,7 +10,7 @@ $(document).on('submit', '#transferLink', function(event) {
         if(url != ''){
             url = url.trim();
             // Thêm một tiến trình upload mới vào danh sách
-            var div_progress = `<div class="mx-3 mb-3 info-link" id="">
+            var div_progress = `<div class="mx-3 mb-5 info-link" id="">
                                         <div class="text-white pb-2 flex justify-between">
                                             <div class="title-file">${url}</div>
                                             <div class="size"></div>
@@ -35,9 +35,12 @@ $(document).on('submit', '#transferLink', function(event) {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
     })
-        .then(response => response.json())
+        .then(response => {
+            response.json()
+        })
         .then(data => {
             console.error(data);
+            form.reset();
         })
         .catch(error => {
             console.error('Error:', error);
@@ -66,16 +69,21 @@ setInterval(function() {
                         bar.text(Object.values(data)[indexurl].progress + '%');
                         size.text(formatFileSize(Object.values(data)[indexurl].size_download)+' / '+formatFileSize(Object.values(data)[indexurl].size));
                         if(Object.values(data)[indexurl].status === 0){
-                            status.text('pending');
-                        }else if(Object.values(data)[indexurl].status === 3){
-                            status.text('transfer failed');
+                            status.text('Pending');
+                            bar.removeClass('bg-green-500 bg-orange-500 bg-red-500').addClass('bg-blue-500');
+                            status.removeClass('text-red-500 text-green-500 text-orange-500').addClass('text-blue-500');
+                        }else if(Object.values(data)[indexurl].status === 19){
+                            status.text('Transfer Failed');
+                            bar.removeClass('bg-green-500 bg-orange-500 bg-blue-500').addClass('bg-red-500');
+                            status.removeClass('text-blue-500 text-green-500 text-orange-500').addClass('text-red-500');
                         } else if(Object.values(data)[indexurl].status === 2){
-                            status.text('transfer success');
+                            status.text('Transfer successfully');
+                            bar.removeClass('bg-orange-500 bg-red-500 bg-blue-500').addClass('bg-green-500');
+                            status.removeClass('text-blue-500 text-red-500 text-orange-500').addClass('text-green-500');
                         } else{
-                            status.text('');
-                        }
-                        if (Object.values(data)[indexurl].progress == 100) {
-                            bar.removeClass('bg-orange-500').addClass('bg-green-500');
+                            status.text('Transferring');
+                            bar.removeClass('bg-green-500 bg-red-500 bg-blue-500').addClass('bg-orange-500');
+                            status.removeClass('text-blue-500 text-red-500 text-green-500').addClass('text-orange-500');
                         }
                         urls.splice(indexurl, 1, '');
                     }else{
@@ -84,13 +92,16 @@ setInterval(function() {
                 })
                 urls.forEach(function(url, index) {
                     if(url != ''){
-                        var div_progress = `<div class="mx-3 mb-3 info-link" id="">
+                        var div_progress = `<div class="mx-3 mb-5 info-link" id="">
                                 <div class="text-white pb-2 flex justify-between">
                                     <div class="title-file">${Object.values(data)[index].url}</div>
                                     <div class="size">${Object.values(data)[index].size_download} / ${formatFileSize(Object.values(data)[index].size)}</div>
                                 </div>
                                 <div class="progress bg-gray-600 h-3.5 rounded-lg">
                                     <div class="bar bg-orange-500 h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center" style="width: ${Object.values(data)[index].progress}%">${Object.values(data)[index].progress}%</div>
+                                </div>
+                                <div class="text-orange-500 mt-3 status">
+                                    Transferring
                                 </div>
                                 <div class="text-white mt-3">
                                     <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote</button>

@@ -15,11 +15,13 @@
         <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
         <form class='from-current pb-8' id="transferLink" method="POST" action="">
             @csrf
-            <div class="mt-2 lg:mx-32 shadow-lg flex justify-center relative rounded-lg bg-[#142132] hover:bg-[#009FB2]">
-                <textarea name="url" id="" class='w-full bg-transparent rounded-xl px-3 py-2 text-white' rows="8"></textarea>
+            <div class="mt-2 lg:mx-32 shadow-lg flex justify-center relative rounded-lg bg-[#142132]  hover:bg-[#01545e]">
+                <textarea name="url" id=""
+                          class='outline-none w-full bg-transparent rounded-xl px-3 py-2 text-white focus:bg-[#01545e]'
+                          rows="8"></textarea>
                 <input class="hidden" type="text" id="folderPost" name="FolderID" value="{{ $currentFolderName-> id }}">
             </div>
-            <button type="submit" class='font-semibold hover:text-indigo-600 dark:hover:text-indigo-600 mt-4 dark:text-white rounded-lg px-6 py-1.5 shadow-lg shadow-gray-400/50 dark:shadow-slate-900 bg-gray-100 dark:bg-gray-900'>Submit</button>
+            <button type="submit" disabled class='mt-5 px-10 py-2 rounded-lg bg-[#142132] text-white'>Submit</button>
         </form>
     </div>
     <div class='-mb-12 bg-slate-900 mx-6 rounded-xl flex justify-between items-center px-3'>
@@ -42,9 +44,9 @@
             @php
                 $decodedTransfer = json_decode($getProgressTransfer, true);
             @endphp
-            @if(is_array($decodedTransfer))
+            @if(is_array($decodedTransfer)&& count($decodedTransfer) > 0)
                 @foreach ($decodedTransfer as $key => $value)
-                    <div class="mx-3 mb-3 info-link" id="{{ $value['slug'] }}">
+                    <div class="mx-3 mb-5 info-link" id="{{ $value['slug'] }}">
                         <div class="text-white pb-2 flex justify-between">
                             <div class="title-file">{{ $value['url'] }}</div>
                             <div class="size">{{ \App\Models\File::formatSizeUnits($value['size_download']) }} / {{ \App\Models\File::formatSizeUnits($value['size']) }}</div>
@@ -56,7 +58,7 @@
                         </div>
                         @if($value['status'] == 2)
                             <div class="text-teal-500 mt-3 status">
-                                transfer successfully
+                                Transfer successfully
                             </div>
                         @endif
                         <div class="text-white mt-3">
