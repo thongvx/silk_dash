@@ -73,4 +73,7 @@ class Kernel extends HttpKernel
         'permission' => PermissionMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
     ];
+    protected $routeMiddleware = [
+        'check.reset.token' => \App\Http\Middleware\CheckResetToken::class,
+    ];
 }

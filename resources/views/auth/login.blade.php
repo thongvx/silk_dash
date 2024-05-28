@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="md:w-6/12 w-full flex justify-center">
-                    <div class="flex -mx-3 rounded-2xl md:w-7/12 w-8/12 backdrop-blur-md bg-black/40">
+                    <div class="flex -mx-3 rounded-2xl lg:w-7/12 sm:w-10/12 w-11/12 backdrop-blur-md bg-black/40">
                         <div class="relative w-full flex flex-col items-center min-w-0 break-words border-0 shadow-none lg:py4">
                             <div class="py-6 pb-0 mb-0 text-white text-center">
                                 <h4 class="font-semibold text-3xl">Welcome back</h4>
@@ -68,17 +68,20 @@
                                         <span class="error invalid-feedback text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="flex items-center mb-0.5 text-left min-h-6">
-                                        <input name="remember" id="remember" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
-                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
-                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
-                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
-                                                         bg-left bg-no-repeat align-top transition-all after:absolute
-                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
-                                                         after:content-[''] checked:border-green-500/95 checked:bg-green-500/95
-                                                         checked:bg-none checked:bg-right" type="checkbox">
-                                        <label for="remember" class="ml-2 font-normal cursor-pointer select-none text-sm text-white" for="rememberMe">I forgot my password</label>
+                                    <div class="flex items-center mb-0.5 text-left min-h-6 justify-between">
+                                        <div>
+                                            <input name="remember" id="remember" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100" type="checkbox">
+                                            <label for="remember" class="ml-2 font-normal cursor-pointer select-none text-sm text-white">Remember me</label>
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('password.request') }}" class="text-transparent bg-clip-text bg-fuchsia-500 text-sm">Forgot your password?</a>
+                                        </div>
                                     </div>
+
                                     <div class="text-center">
                                         <button type="submit" class="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center text-white align-middle transition-all bg-blue-400 hover:bg-blue-700 border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25">Sign in</button>
                                     </div>
@@ -86,7 +89,7 @@
                             </div>
                             <div class="border-black/12.5 rounded-b-2xl border-t-0 border-solid p-6 text-center pt-0 px-1 sm:px-6">
                                 <p class="mx-auto mb-6 leading-normal text-sm text-white">
-                                    Don't have an account? <a href="{{ route('register') }}" class="font-semibold text-[#009FB2]">Sign up</a>
+                                    Don't have an account? <a href="{{ route('register') }}" class="font-semibold text-transparent bg-clip-text bg-fuchsia-500">Sign up</a>
                                 </p>
                             </div>
                         </div>

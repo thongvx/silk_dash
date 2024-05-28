@@ -41,6 +41,7 @@ Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class
 
 Auth::routes();
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
 
