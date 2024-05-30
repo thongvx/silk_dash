@@ -70,7 +70,7 @@ class UploadController
             'folder_id' => $videoInfo['folder'],
             'title' => $videoInfo['title'],
             'poster' => '0',
-            'grid_poster' => '0',
+            'grid_poster_3' => '0',
             'is_sub' => 0,
             'total_play' => 0,
             'size' => $videoSize,
@@ -79,6 +79,8 @@ class UploadController
             'format' => $videoInfo['format'],
             'origin' => 0,
             'soft_delete' => 0,
+            'stream' => 0,
+            'grid_poster_5' => '0',
         ];
         if($video){
             //create video exist
