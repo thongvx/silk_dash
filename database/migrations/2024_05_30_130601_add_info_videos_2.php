@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('videos', function (Blueprint $table) {
-            // Thêm cột mới;
-            $table->string('stream', 200)->nullable();
-            $table->string('grid_poster_5', 500)->nullable();
+            // edit;
+            $table->renameColumn('grid_poster', 'grid_poster_3');
         });
     }
 
