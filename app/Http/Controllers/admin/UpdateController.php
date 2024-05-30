@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\video;
+use App\Models\Video;
 
 class UpdateController extends Controller
 {
@@ -19,7 +19,7 @@ class UpdateController extends Controller
         $poster_3 = base64_decode($poster_3);
         $poster_5 = base64_decode($poster_5);
         //update poster
-        $video = video::where('slug', $slug)->first();
+        $video = Video::where('slug', $slug)->first();
         if($video){
             $video->poster = $poster;
             $video->grid_poster_3 = $poster_3;
