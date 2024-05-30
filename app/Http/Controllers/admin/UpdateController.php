@@ -15,6 +15,7 @@ class UpdateController extends Controller
         $poster = $request->poster;
         $poster_3 = $request->poster_3;
         $poster_5 = $request->poster_5;
+        $poster = base64_decode($poster);
         $poster_3 = base64_decode($poster_3);
         $poster_5 = base64_decode($poster_5);
         //update poster
@@ -25,6 +26,9 @@ class UpdateController extends Controller
             $video->grid_poster_5 = $poster_5;
             $video->save();
             return response()->json(['status' => 'success']);
+        }
+        else{
+            return response()->json(['status' => 'error']);
         }
     }
     //=============================================================================================
