@@ -15,7 +15,7 @@ return new class extends Migration
             // Thêm cột mới;
             $table->string('stream', 200)->nullable();
             $table->string('grid_poster_5', 500)->nullable();
-            $table->renameColumn('grid_poster_4', 'grid_poster');
+            $table->renameColumn('grid_poster', 'grid_poster_3');
         });
     }
 
