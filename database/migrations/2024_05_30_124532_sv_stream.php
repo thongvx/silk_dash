@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('provider', 20)->nullable();
             $table->boolean('in_data')->default(true);
             $table->boolean('active')->default(true);
+            $table->timestamps();
         });
     }
 

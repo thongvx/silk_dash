@@ -29,6 +29,7 @@ return new class extends Migration
             $table->float('out_speed')->nullable();
             $table->string('provider', 20)->nullable();
             $table->boolean('active')->default(true);
+            $table->timestamps();
         });
     }
 

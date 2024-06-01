@@ -36,7 +36,6 @@ return new class extends Migration
             $table->integer('earning')->nullable();
             $table->integer('premium')->nullable();
             $table->text('note')->nullable();
-            $table->text('setting')->nullable();
             $table->integer('active')->nullable();
         });
     }
