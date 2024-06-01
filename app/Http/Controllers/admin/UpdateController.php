@@ -48,11 +48,12 @@ class UpdateController extends Controller
         //check video
         $check_duplicate = md5($videoInfo['duration'].$videoSize.$videoInfo['quality']);
         $video = Video::where('check_duplicate', $check_duplicate)->first();
+        $title = base64_decode($videoInfo['title']);
         $videoData = [
             'slug' => $videoInfo['slug'],
             'user_id' => $userId,
             'folder_id' => $videoInfo['folder'],
-            'title' => $videoInfo['title'],
+            'title' => $title,
             'poster' => '0',
             'grid_poster_3' => '0',
             'is_sub' => 0,
