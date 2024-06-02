@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('video', function (Blueprint $table) {
+        Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('slug', 20)->unique();
             $table->string('middle_slug', 20)->index();
@@ -24,14 +24,17 @@ return new class extends Migration
             $table->string('fhd', 10)->nullable();
             $table->string('title', 500)->comment('file name');
             $table->string('poster')->nullable();
-            $table->string('grid_poster')->nullable();
-            $table->boolean('is_sub')->nullable()->comment('check xem có sub hay không');
+            $table->string('grid_poster', 500)->nullable();
+            $table->string('grid_poster_3', 500)->nullable();
+            $table->string('grid_poster_5', 500)->nullable();
+            $table->boolean('is_sub')->nullable();
             $table->integer('total_play')->nullable();
-            $table->bigInteger('size')->nullable()->comment('kich co file');
+            $table->bigInteger('size')->nullable();
             $table->integer('duration')->nullable();
             $table->string('quality', 5)->nullable();
             $table->string('format', 5)->nullable();
             $table->string('check_duplicate', 50)->index();
+            $table->string('stream', 200)->nullable();
             $table->boolean('origin')->nullable();
             $table->boolean('soft_delete')->nullable();
             $table->timestamps();

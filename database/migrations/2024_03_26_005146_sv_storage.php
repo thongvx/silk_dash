@@ -31,7 +31,7 @@ return new class extends Migration
             $table->integer('in_data')->nullable()->comment('???');
             $table->string('provider', 20)->nullable();
             $table->boolean('active')->default(true);
-
+            $table->timestamps();
         });
     }
 

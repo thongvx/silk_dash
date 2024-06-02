@@ -23,18 +23,19 @@ Route::get('/play', function () {
 });
 
 
-Route::get('/uploadvideo', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadVideo']);
-
 //-------------------------encoderController-------------------------------------------------------
 Route::get('/startEncoderTask', [\App\Http\Controllers\admin\encoderController::class, 'startEncoderTask']);
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\encoderController::class, 'finishEncoder']);
 //-------------------------storageController-------------------------------------------------------
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\storageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::class, 'finishStorage']);
-//-------------------------transferController-------------------------------------------------------
+//-------------------------transferController------------------------------------------------------
 Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
 Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
 Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateFailedTransfer']);
+//-------------------------updateController--------------------------------------------------------
+Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
+Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
 
 Route::get('/t/{slug}', [\App\Http\Controllers\play\playController::class, 'play']);
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');

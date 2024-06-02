@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             // Thêm cột mới;
             $table->integer('user_id')->nullable();
-            $table->string('key_api', 15)->nullable();
-            $table->text('website')->nullable();
-            $table->text('skype')->nullable();
-            $table->text('telegram')->nullable();
-            $table->text('support')->nullable();
+            $table->string('key_api', 25)->nullable();
+            $table->string('website', 50)->nullable();
+            $table->string('skype', 100)->nullable();
+            $table->string('telegram',100)->nullable();
+            $table->string('support', 200)->nullable();
             $table->integer('dmca')->nullable();
             $table->integer('last_upload')->nullable();
             $table->integer('uploaded')->nullable();
             $table->integer('video')->nullable();
             $table->integer('play')->nullable();
             $table->bigInteger('storage')->nullable();
-            $table->text('domain')->nullable();
+            $table->string('domain', 50)->nullable();
             $table->integer('max_transfer')->nullable();
             $table->integer('max_torrent')->nullable();
             $table->integer('encoder_priority')->nullable();

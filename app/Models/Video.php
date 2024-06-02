@@ -24,7 +24,7 @@ class Video extends Model
         'fhd',
         'title',
         'poster',
-        'grid_poster',
+        'grid_poster_3',
         'is_sub',
         'total_play',
         'size',
@@ -34,6 +34,8 @@ class Video extends Model
         'check_duplicate',
         'origin',
         'soft_delete',
+        'stream',
+        'grid_poster_5',
     ];
     protected static function boot()
     {

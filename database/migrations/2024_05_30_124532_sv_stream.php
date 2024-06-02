@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sv_encoders', function (Blueprint $table) {
+        Schema::create('sv_stream', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 10)->nullable();
-            $table->string('ip', 15)->nullable();
+            $table->string('ip', 20)->nullable();
+            $table->string('domain', 50)->nullable();
             $table->string('pass', 20)->nullable();
             $table->integer('port')->nullable();
-            $table->integer('upload')->nullable();
-            $table->integer('encoder')->nullable();
-            $table->integer('transfer')->nullable();
-            $table->integer('torrent')->nullable();
+            $table->integer('number_video')->nullable();
             $table->float('cpu')->nullable();
             $table->float('space')->nullable();
             $table->float('used_space')->nullable();
@@ -28,6 +26,7 @@ return new class extends Migration
             $table->float('in_speed')->nullable();
             $table->float('out_speed')->nullable();
             $table->string('provider', 20)->nullable();
+            $table->boolean('in_data')->default(true);
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sv_encoder');
+        //
     }
 };
