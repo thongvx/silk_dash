@@ -27,14 +27,14 @@ $(document).on('change', 'input[type="checkbox"]', function() {
         $(this).val(0);
     }
 });
-var originalFormState = $('#form-setting, #form-profile, #transferLink').serialize();
+var originalFormState = $('#form-setting, #form-profile, #transferLink, #form').serialize();
 
 export function updateOriginalFormState(box) {
     if(box){
         originalFormState = $('#'+box+' form').serialize();
         console.log(originalFormState)
     }else{
-        originalFormState = $('#form-setting, #form-profile').serialize();
+        originalFormState = $('#form-setting, #form-profile, #transferLink, #form').serialize();
     }
 }
 $(document).on('change keyup', 'form', function() {
@@ -48,7 +48,6 @@ $(document).on('change keyup', 'form', function() {
             return false; // Exit the loop as soon as a file input with files is found
         }
     });
-    console.log(currentFormState, originalFormState)
     if (currentFormState !== originalFormState || hasFile) {
         // Form has changed
         button.addClass('bg-[#01545e] hover:bg-[#009fb2]')

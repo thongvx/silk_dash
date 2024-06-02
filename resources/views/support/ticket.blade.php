@@ -5,11 +5,13 @@
         </h5>
     </div>
     <div class="text-white">
-        <button type="button" btn-video disabled class="bg-[#142132] rounded-lg hover:bg-[#009FB2] cursor-pointer px-2  items-center flex"
-                title="folder">
+        <button
+            class="{{request()->get('tab') === 'newticket' ? 'newticket tab-active !text-[#009FB2]' : 'newticket'}}
+                   tab-lifted  ticket text-white tab-lifted  bg-[#142132] rounded-lg hover:bg-[#009FB2] cursor-pointer px-2  items-center flex"
+            data-content="newticket">
             <i btn-move
                class="material-symbols-outlined opacity-1 text-3xl mr-3">add</i>
-            <span>Create new ticket</span>
+            <span class="px-2 py-1">new ticket</span>
         </button>
     </div>
 </div>

@@ -8,8 +8,8 @@
                 <div
                     class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                     <button
-                        class="{{request()->get('tab') === 'ticket' ? 'ticket tab-active !text-[#009FB2]' : 'ticket'}}
-                        ticket hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="{{strpos(request()->get('tab'), 'ticket') !== false ? 'ticket tab-active !text-[#009FB2]' : 'ticket'}}
+                        ticket newticket hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="ticket">
                         <span class="px-2 py-1">Ticket</span>
                     </button>
@@ -29,7 +29,7 @@
                 <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
                     <div
                         class="border-[#121520] rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
-                        <div class="lg:min-h-[calc(100vh-11em)]">
+                        <div class="lg:h-[calc(100vh-11em)] h-[calc(100vh-12.5em)]">
                             <div class="rounded-xl">
                                 <div class="relative rounded-xl">
                                     <div class="px-2 pt-4 md:p-4">

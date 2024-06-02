@@ -18,7 +18,7 @@
 <body class="m-0  font-sans antialiased font-normal text-start text-base leading-default">
     <main class="mt-0 transition-all duration-200 ease-in-out pb-20">
         <!-- Navbar -->
-        <nav class="fixed top-0 flex z-20 backdrop-blur-xl bg-white/20 items-center px-3 py-2 lg:px-20 w-full text-[#009FB2] shadow-lg shadow-black/10"
+        <nav class="fixed top-0 flex z-20 backdrop-blur-xl bg-white/20 items-center px-3 py-2 lg:px-20 w-full text-[#009FB2]"
             navbar-main navbar-scroll="false">
             <div class="flex items-center justify-between w-full px-0 py-1 mx-auto flex-wrap">
                 <div class="h-10">
