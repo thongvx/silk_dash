@@ -94,7 +94,7 @@ class UploadController
                 'size' => '0',
             ];
         }
-        Transfer::insert($records);
+        Transfer::create($records);
         return true;
     }
     public function getProgress(Request $request)
