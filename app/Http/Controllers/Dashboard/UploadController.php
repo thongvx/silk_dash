@@ -94,7 +94,10 @@ class UploadController
                 'size' => '0',
             ];
         }
-        Transfer::create($records);
+        Transfer::firstOrCreate(
+            ['user_id' => $user->user_id, 'url' => $url],
+            $records
+        );
         return true;
     }
     public function getProgress(Request $request)
