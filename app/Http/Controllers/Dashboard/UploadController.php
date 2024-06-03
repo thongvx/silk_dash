@@ -94,8 +94,7 @@ class UploadController
                 'size' => '0',
             ];
         }
-        Transfer::firstOrCreate(
-            ['user_id' => $user->user_id, 'url' => $url],
+        Transfer::insert(
             $records
         );
         return true;
