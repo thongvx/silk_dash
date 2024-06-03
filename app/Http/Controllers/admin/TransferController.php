@@ -61,14 +61,6 @@ class TransferController extends Controller
             'size_download' => $size_download,
             'size' => $size,
         ]));
-        return json_encode([
-            'slug' => $slug,
-            'url' => $url,
-            'status' => 1,
-            'progress' => $progress,
-            'size_download' => $size_download,
-            'size' => $size,
-        ]);
     }
     //-------------------------------update failed transfer----------------------------------------
     public function updateFailedTransfer(Request $request)
@@ -86,14 +78,6 @@ class TransferController extends Controller
             'size_download' => 0,
             'size' => 0,
         ]));
-        return json_encode([
-            'slug' => $slug,
-            'url' => $data->url,
-            'status' => 19,
-            'progress' => 0,
-            'size_download' => 0,
-            'size' => 0,
-        ]);
     }
 
     //=============================================================================================

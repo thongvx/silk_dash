@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('transfer', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('user_id')->nullable();
-            $table->string('slug', 20)->nullable();
+            $table->integer('user_id')->index();
+            $table->string('slug', 20)->unique();
             $table->string('title', 500)->nullable();
             $table->integer('priority')->nullable();
             $table->string('url', 500)->nullable();
-            $table->integer('status')->nullable();
+            $table->smallInteger('status')->nullable();
             $table->string('sv_transfer', 5)->nullable();
             $table->integer('folder_id')->nullable();
             $table->integer('progress')->nullable();
