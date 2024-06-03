@@ -53,7 +53,7 @@ class TransferController extends Controller
         $size_download = $request->size_download;
         $size = $request->size;
         $url = $request->url;
-        Redis::set('transfer'.$user_id.'-'.$slug, json_encode([
+        Redis::setex('transfer'.$user_id.'-'.$slug, 1800, json_encode([
             'slug' => $slug,
             'url' => $url,
             'status' => 1,
@@ -61,14 +61,6 @@ class TransferController extends Controller
             'size_download' => $size_download,
             'size' => $size,
         ]));
-        return json_encode([
-            'slug' => $slug,
-            'url' => $url,
-            'status' => 1,
-            'progress' => $progress,
-            'size_download' => $size_download,
-            'size' => $size,
-        ]);
     }
     //-------------------------------update failed transfer----------------------------------------
     public function updateFailedTransfer(Request $request)
@@ -78,7 +70,7 @@ class TransferController extends Controller
         $data = Transfer::where('user_id', $user_id)->where('slug', $slug)->first();
         $data->status = 19;
         $data->save();
-        Redis::set('transfer'.$user_id.'-'.$slug, json_encode([
+        Redis::setex('transfer'.$user_id.'-'.$slug, 1800, json_encode([
             'slug' => $slug,
             'url' => $data->url,
             'status' => 19,
@@ -86,14 +78,6 @@ class TransferController extends Controller
             'size_download' => 0,
             'size' => 0,
         ]));
-        return json_encode([
-            'slug' => $slug,
-            'url' => $data->url,
-            'status' => 19,
-            'progress' => 0,
-            'size_download' => 0,
-            'size' => 0,
-        ]);
     }
 
     //=============================================================================================

@@ -32,12 +32,7 @@ class Transfer extends Model
     protected static function boot(){
         parent::boot();
         static::created(function(){
-            Redis::set('transfer'.$this->user_id.'-'.$this->slug, json_encode([
-                'status' => 0,
-                'progress' => $this->progress,
-                'size_download' => $this->size_download,
-                'size' => $this->size,
-            ]));
+
         });
     }
 }
