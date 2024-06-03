@@ -25,6 +25,7 @@ return new class extends Migration
             $table->bigInteger('size_download')->nullable();
             $table->bigInteger('size')->nullable();
             $table->timestamps();
+
         });
     }
 

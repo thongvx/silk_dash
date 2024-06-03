@@ -29,16 +29,12 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        Redis::set('transfer'.'1'.'-'.'dsanfjahsfjhbaijk', json_encode([
-            'slug' => 'dsanfjahsfjhbaijk',
-            'url' => 'dsanfjahsfjhbaijk',
-            'status' => 1,
-            'progress' => 12,
-            'size_download' => 12,
-            'size' => 123,
-        ]));
-        $keys = Redis::keys('transfer'.'1'.'-*');
-        var_dump($keys);
+        Redis::set('ahihi1', 'ahihi1');
+        Redis::set('ahihi2', 'ahihi1');
+        var_dump(Redis::keys('ahihi*'));
+        Redis::del(Redis::keys('ahihi*'));
+        var_dump(Redis::keys('ahihi*'));
+
     }
     function disguiseM3U8AsImage($m3u8FilePath, $originalImageFilePath)
     {

@@ -100,9 +100,7 @@ class UploadController
                 'size' => '0',
             ];
         }
-        Transfer::insert(
-            $records
-        );
+        Transfer::upsert($records, ['user_id', 'url'], []);
         return true;
     }
 
