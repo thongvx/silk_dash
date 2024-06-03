@@ -12,22 +12,26 @@ use Illuminate\Support\Facades\Redis;
 
 class UploadController
 {
-    protected  $folderRepo;
+    protected $folderRepo;
+
     //Trả về giao diện upload
-    public function __construct(FolderRepo $folderRepo){
+    public function __construct(FolderRepo $folderRepo)
+    {
         $this->folderRepo = $folderRepo;
     }
+
     public function index()
     {
         $user = Auth::user();
-        $data=[
+        $data = [
             'title' => 'Upload',
-            'folders' =>$this->folderRepo->getAllFolders($user->id),
+            'folders' => $this->folderRepo->getAllFolders($user->id),
             'currentFolderName' => $this->folderRepo->getAllFolders($user->id)->last(),
             'getProgressTransfer' => $this->getProgressTransfer(),
         ];
         return view('upload.upload', $data);
     }
+
     public function upload($tab)
     {
         $user = Auth::user();
@@ -53,6 +57,7 @@ class UploadController
         $url = $request->input('url');
         $this->remoteUpload($url);
     }
+
     //Cho phép người dùng upload từ url
     public function remoteUpload($url)
     {
@@ -61,20 +66,21 @@ class UploadController
             $download->download();
 
         } catch (\Exception $e) {
-            $key = 'uploadProgress.'.$url;
-            Redis::setex($key, 3600, 'error: '.$e->getMessage());
+            $key = 'uploadProgress.' . $url;
+            Redis::setex($key, 3600, 'error: ' . $e->getMessage());
         }
     }
+
     public function postTransfer(Request $request)
     {
         $user = Auth::user();
         $transfer_priority = $user->transfer_priority;
-        if($transfer_priority)
+        if ($transfer_priority)
             $transfer_priority = 0;
         $link = $request->url;
         $folder_id = $request->FolderID;
         $arrLink = explode("\r\n", $link);
-        if(count($arrLink) == 1) {
+        if (count($arrLink) == 1) {
             $arrLink = explode("\n", $link);
         }
         //upload DB
@@ -99,9 +105,10 @@ class UploadController
         );
         return true;
     }
+
     public function getProgress(Request $request)
     {
-        $progressKey = 'uploadProgress.'.$request->input('key');
+        $progressKey = 'uploadProgress.' . $request->input('key');
         $progress = Redis::get($progressKey);
 
         if ($progress === null) {
@@ -110,19 +117,17 @@ class UploadController
 
         return $progress;
     }
+
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
     {
         $user = Auth::user();
-        $keys = Redis::keys('transfer'.$user->user_id.'-*');
-        // Process the retrieved keys
-        $data = [];
-        foreach ($keys as $key) {
-            $key = str_replace('laravel_database_', '', $key);
-            $value = Redis::get($key);
-            $value = json_decode($value, true);
-            $data[$key] = $value;
-        }
+        $keys = Redis::keys('transfer' . $user->user_id . '-*');
+
+        $data = array_map(function ($key) {
+            return json_decode(Redis::get($key), true);
+        }, $keys);
+
         return json_encode($data);
     }
 }
