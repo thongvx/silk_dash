@@ -29,6 +29,7 @@
     </div>
     <div class="max-h-[calc(100vh-30em)] lg:max-h-[calc(100vh-14em)]  overflow-scroll">
         <div class="w-full overflow-hidden list-folder ">
+            @if($currentFolderName -> name_folder != 'root')
             <div folder
                 class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-gradient-to-r from-[#009FB2] to-[#4CBE1F]">
                 <a class="w-full" href="javascript:;" data-folderid="{{$currentFolderName -> id}}" data-limit="{{$videos->perPage()}}">
@@ -59,8 +60,9 @@
                     </span>
                 </li>
             </div>
+            @endif
             @foreach($folders as $folder)
-                @if ($folder -> name_folder != $currentFolderName -> name_folder)
+                @if ($folder -> name_folder != $currentFolderName -> name_folder && $folder -> name_folder != 'root')
                     <div folder
                         class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#121520] hover:bg-gradient-to-r from-[#009FB2] to-[#4CBE1F]">
                         <a class="w-full btn-page-folder" href="javascript:;" data-folderid="{{$folder->id}}" data-limit="{{$videos->perPage()}}">

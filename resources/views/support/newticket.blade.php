@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] mt-3">
-    <form action="" id="form" class="text-white">
+    <form action="" id="ticket-form" class="text-white">
         @csrf
         <div class="flex flex-col">
             <label for="topic" class="mb-2">Topic *</label>
@@ -30,7 +30,7 @@
                 Subject *
             </label>
             <div class="mt-2 text-white rounded-lg flex items-center px-2 hover:bg-[#00424a] bg-[#142132]/70">
-                <input type="text" id="Subject" name="Subject" value=""
+                <input type="text" id="Subject" name="subject" value=""
                        class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                        placeholder="Subject">
             </div>

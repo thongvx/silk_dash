@@ -73,10 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
         $data['title'] = 'report';
         return view('report.report', $data);
     });
-    route::get('support',function (){
-        $data['title'] = 'Support';
-        return view('support.support', $data);
-    });
+    Route::resource('/support', \App\Http\Controllers\Support\TicketController::class);
+
     route::get('premium',function (){
         $data['title'] = 'Premium';
         return view('premium', $data);

@@ -15,6 +15,8 @@ import './jsVideo/box-video.js';
 import './jsVideo/folder.js';
 //report
 import './report/report.js';
+//support
+import './support/ticket.js';
 //setting
 import './setting/setting.js';
 //dmca

@@ -3,9 +3,10 @@
         <div class="px-2 pt-4 md:p-4">
             <div class="mb-2" id='title'>
                 <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                    <i class="material-symbols-outlined">folder</i>
-                    <i class="material-symbols-outlined">navigate_next</i>
-                    <span id="currentFolderName">{{ $currentFolderName -> name_folder }}</span>
+                    <i class="material-symbols-outlined cursor-pointer btn-folder-root" data-folderid="{{$folders->last()->id}}">folder</i>
+                    <span class="flex items-center {{$currentFolderName -> name_folder == 'root' ? 'hidden' : ''}}" id="currentFolderName">
+                        <i class="material-symbols-outlined">navigate_next</i>{{ $currentFolderName -> name_folder }}
+                    </span>
                 </h5>
             </div>
             <div class="flex justify-between items-center w-full mb-3">

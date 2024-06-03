@@ -72,7 +72,7 @@ class RegisterController extends Controller
         ]);
         Folder::create([
             'user_id' => $user->id,
-            'name_folder' => 'Single Video',
+            'name_folder' => 'root',
             'number_file' => 0,
             'soft_delete' => 0,
         ]);

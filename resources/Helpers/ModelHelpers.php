@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace resources\Helpers;
 
 use App\Http\Controllers\Dashboard\UploadController;
 use App\Http\Controllers\Dashboard\VideoController;
@@ -16,6 +16,7 @@ class ModelHelpers
     protected $AccountController;
     protected $folderRepo;
     protected $uploadController;
+
     protected $TicketController;
 
     public function __construct(VideoController $videoController, AccountController $AccountController, FolderRepo $folderRepo, UploadController $uploadController, TicketController $TicketController)
@@ -28,6 +29,7 @@ class ModelHelpers
     }
     public static function genVideoId(){
         $id = uniqid();
+
     }
     public function loadPage(Request $request){
         $tab = $request->input('tab');

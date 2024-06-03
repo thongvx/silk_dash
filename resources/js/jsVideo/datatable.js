@@ -124,7 +124,7 @@ $(document).on('click', '[btn-poster]', function() {
     const newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
 });
-$(document).on('click', '.btn-page-folder', function() {
+$(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const column = urlParams.get('column') || 'created_at';
     const direction = urlParams.get('direction') || 'asc';
@@ -139,7 +139,16 @@ $(document).on('click', '.btn-page-folder', function() {
     $('[folder]').removeClass('bg-gradient-to-r')
     $(box_folder).removeClass("bg-[#121520]")
     $(box_folder).addClass("bg-gradient-to-r")
-    $('#currentFolderName').text($(this).find('span').text())
+    if ($(this).data('folderid') === 'root') {
+        $('#currentFolderName').html()
+        $('#currentFolderName').addClass('hidden')
+    } else {
+        $('#currentFolderName').removeClass('hidden')
+        $('#currentFolderName').html(
+            `<i class="material-symbols-outlined">navigate_next</i>${$(this).find('span').text()}`
+        )
+    }
+
     btn_video()
     updateURLParameterVideo(column,direction,folderId,limit,'',poster)
 })
