@@ -28,7 +28,7 @@ class playController
                 //check stream
                 //if($data->stream == 0){
                     $svStream = $this->selectSvStream();
-                    Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sto480, $data->sto720, $data->sto1080));
+                    //Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sto480, $data->sto720, $data->sto1080));
                     $data->stream = $svStream;
                     $data->save();
 //                }
@@ -41,7 +41,8 @@ class playController
 //                        ->orderBy('out_speed', 'asc')
 //                        ->value('domain');
 //                }
-                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$data->pathStream.'/'.$data->middle_slug.'/master.m3u8';
+                $arrPath = explode('-', $data->pathStream);
+                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
                 return view('play', ['urlPlay' => $urlPlay]);
             }
         }

@@ -33,6 +33,7 @@ class TestCommand extends Command
     {
         Queue::push(new CreateHlsJob('665b3ed64fdc5', 'ss01', 'st01-9', 'st01-9', 'st01-E', '19'));
         echo 'done roi nha';
+
     }
     function disguiseM3U8AsImage($m3u8FilePath, $originalImageFilePath)
     {
