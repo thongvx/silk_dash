@@ -5,10 +5,12 @@ namespace App\Http\Controllers\play;
 
 use App\Factories\DownloadFactory;
 use App\Models\Video;
-use App\Models\SvStorage;
+use App\Models\SvStream;
 use App\Models\EncoderTask;
+use App\Jobs\CreateHlsJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Queue;
 
 class playController
 {
@@ -23,8 +25,23 @@ class playController
                 return view('play', ['urlPlay' => $urlPlay]);
             }
             else{
-                //play storage
-                $urlPlay = 'https://user.streamsilk.com/data/'.$slug.'/'.$slug.'.m3u8';
+                //check stream
+                if($data->stream == 0){
+                    $svStream = $this->selectSvStream();
+                    Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sto480, $data->sto720, $data->sto1080));
+                    $data->stream = $svStream;
+                    $data->save();
+                }
+                else{
+                    $Stream = $data->sv_stream;
+                    $arrStream = explode('-', $Stream);
+                    $svStream = SvStream::whereIn('domain', $arrStream)
+                        ->where('out_speed', '<', 700)
+                        ->where('active', 1)
+                        ->orderBy('out_speed', 'asc')
+                        ->value('domain');
+                }
+                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$data->pathStream.'/'.$data->middle_slug.'/master.m3u8';
                 return view('play', ['urlPlay' => $urlPlay]);
             }
         }
@@ -32,4 +49,11 @@ class playController
             echo '404 Not Found';
         }
     }
+    //-------------------------------select sv stream-----------------------------------------------------
+    function selectSvStream()
+    {
+        $svStream = SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('domain');
+        return $svStream;
+    }
+    //====================================================================================================
 }

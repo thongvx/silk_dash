@@ -19,6 +19,7 @@ class Video extends Model
         'middle_slug',
         'user_id',
         'folder_id',
+        'pathStream',
         'sd',
         'hd',
         'fhd',
