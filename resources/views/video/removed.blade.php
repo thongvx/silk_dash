@@ -1,11 +1,6 @@
 <div class="rounded-xl">
     <div class="relative rounded-xl">
         <div class="px-2 pt-4 md:p-4">
-            <div class="mb-2" id='title'>
-                <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                    Removed Videos
-                </h5>
-            </div>
             <div class="flex justify-between items-center w-full mb-3">
                 <div class="text-sm bg-[#142132] rounded-lg p-2">
                     <label for="limit">Show:</label>

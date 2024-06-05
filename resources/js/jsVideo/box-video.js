@@ -77,6 +77,8 @@ $(document).on('click', '.btn-edit', function() {
             },
             error: function(response) {
                 fixedBox()
+                $('#edit').remove();
+                tr.find('.checkbox').prop('checked', false)
                 notification('error', 'An error occurred while editing the video title.')
             }
         });

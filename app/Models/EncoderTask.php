@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Enums\VideoCacheKeys;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,15 @@ class EncoderTask extends Model
     protected static function boot()
     {
         parent::boot();
+        static::created(function ($encoderTask) {
+            Redis::del(Redis::keys(VideoCacheKeys::ALL_ENCODER_TASKS->value . $encoderTask->user_id . '*'));
+        });
+        static::updated(function ($encoderTask) {
+            Redis::del(Redis::keys(VideoCacheKeys::ALL_ENCODER_TASKS->value . $encoderTask->user_id . '*'));
+        });
+        static::deleted(function ($encoderTask) {
+            Redis::del(Redis::keys(VideoCacheKeys::ALL_ENCODER_TASKS->value . $encoderTask->user_id . '*'));
+        });
     }
 
 }

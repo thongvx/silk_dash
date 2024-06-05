@@ -2,7 +2,7 @@
     <div class="relative rounded-xl">
         <div class="px-2 pt-4 md:p-4">
             <div class="mb-2" id='title'>
-                <h5 class="items-center text-slate-400 flex">
+                <h5 class="items-center text-white flex">
                     <i class="material-symbols-outlined cursor-pointer btn-folder-root hover:text-[#009FB2]" data-folderid="{{$folders->last()->id}}">folder</i>
                     <span class="flex items-center {{$currentFolderName -> name_folder == 'root' ? 'hidden' : ''}}" id="currentFolderName">
                         <i class="material-symbols-outlined">navigate_next</i>{{ $currentFolderName -> name_folder }}

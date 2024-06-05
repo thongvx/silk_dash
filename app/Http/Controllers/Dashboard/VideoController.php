@@ -62,9 +62,8 @@ class VideoController
     private function convertVideoSizes($videos)
     {
         foreach ($videos as $video) {
-            if (property_exists($video, 'size')) {
                 $video->size = $this->convertFileSize($video->size);
-            }
+
         }
     }
     // Convert file size
