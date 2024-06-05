@@ -1,11 +1,5 @@
-<div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-    <div class="mb-2 text-[#009FB2]" id='title'>
-        <h5 class="text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-            Player Settings
-        </h5>
-    </div>
-</div>
-<div>
+
+<div class="mt-5">
     <div class="flex justify-center">
         <h5 class="text-white md:w-3/4 w-full text-center">
             To add your custom domain, ensure your authoritative DNS servers, or nameservers have been changed. These are your assigned nameservers.

@@ -2,8 +2,8 @@
     <div class="relative rounded-xl">
         <div class="px-2 pt-4 md:p-4">
             <div class="mb-2" id='title'>
-                <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                    <i class="material-symbols-outlined cursor-pointer btn-folder-root" data-folderid="{{$folders->last()->id}}">folder</i>
+                <h5 class="items-center text-slate-400 flex">
+                    <i class="material-symbols-outlined cursor-pointer btn-folder-root hover:text-[#009FB2]" data-folderid="{{$folders->last()->id}}">folder</i>
                     <span class="flex items-center {{$currentFolderName -> name_folder == 'root' ? 'hidden' : ''}}" id="currentFolderName">
                         <i class="material-symbols-outlined">navigate_next</i>{{ $currentFolderName -> name_folder }}
                     </span>
@@ -12,7 +12,7 @@
             <div class="flex justify-between items-center w-full mb-3">
                 <div class="text-sm bg-[#142132] rounded-lg p-2">
                     <label for="limit">Show:</label>
-                    <select name="limit" class="bg-transparent outline-transparent"
+                    <select name="limit" class="bg-transparent outline-transparent outline-none"
                             id="limit">
                         <option value="10"
                                 class="limit" {{ $videos->perPage() == 10 ? 'selected' : '' }}>
@@ -38,8 +38,8 @@
                             title="poster"  btn-poster>
                         {!!
                             request() -> get('poster')
-                            ? '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i>hide poster'
-                            : '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility</i>show poster'
+                            ? '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i><span class="hidden sm:block">hide poster</span>'
+                            : '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility</i><span class="hidden sm:block">show poster</span>'
                         !!}
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"

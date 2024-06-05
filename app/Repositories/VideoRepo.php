@@ -32,13 +32,6 @@ class VideoRepo extends BaseRepository
         }
 
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
-        if ($tab == 'processing') {
-            $query->where('quality', 'none');
-        } elseif ($tab == 'DMCA' || $tab == 'remove') {
-            $query->where('soft_delete', '1');
-        } else {
-            $query->where('soft_delete', '0');
-        }
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
         $videos = $query->orderBy($column1, $direction)
             ->paginate($limit);

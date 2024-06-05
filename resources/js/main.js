@@ -150,7 +150,7 @@ function updateURLParameter(tab) {
     var newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
 }
-function loadContent(data_content) {
+export function loadContent(data_content) {
     updateURLParameter(data_content)
     var urlParams = new URLSearchParams(window.location.search);
     $('.tab-lifted').removeClass('tab-active !text-[#009FB2]')

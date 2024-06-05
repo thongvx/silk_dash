@@ -1,4 +1,6 @@
 import {btn_video} from "./video.js";
+import {loadContent} from "../main.js";
+
 $(document).on('click', '[checked-All]', function () {
     const isChecked = $(this).prop('checked');
     $(this).closest('table').find('input[type="checkbox"]').prop('checked', isChecked);
@@ -18,6 +20,7 @@ $(document).on('click', '.checkbox',function(){
 });// Hàm để update giá trị của URL Parameters
 function ajaxdatatable(column,direction,folderId,limit,page, poster) {
     const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab');
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -27,10 +30,10 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster) {
             folderId: folderId,
             limit: limit,
             page: page,
-            tab: urlParams.get('tab'),
+            tab: tab,
             poster: poster
         },
-        beforeSend: function() {
+        beforeSend: function () {
             $('#live').html(`<div class="w-full justify-center items-center flex h-full">
                                 <div class="flex text-white my-20 items-center">
                                     <div class="loading">
@@ -43,12 +46,11 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster) {
                                 </div>
                             </div>`);
         },
-        success: function(response) {
+        success: function (response) {
             $('#live').html(response);
             highlightSortedColumn()
         }
     });
-
 }
 function highlightSortedColumn() {
     const sortColumn = document.querySelectorAll("[aria-sort]");
@@ -113,11 +115,11 @@ $(document).on('click', '[btn-poster]', function() {
     const urlParams = new URLSearchParams(window.location.search);
     var poster
     if($(this).text().indexOf('show') !== -1) {
-        $(this).html(`<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i>hide poster`)
+        $(this).html(`<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i><span class="hidden sm:block">hide poster</span>`)
         poster = 'show'
         urlParams.set('poster', poster)
     }else{
-        $(this).html(`<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility</i>show poster`)
+        $(this).html(`<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility</i><span class="hidden sm:block">show poster</span>`)
         poster = ''
         urlParams.delete('poster')
     }
@@ -132,14 +134,17 @@ $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
     const limit = urlParams.get('limit') === null ? $(this).data('limit') : urlParams.get('limit');
     const box_folder = $(this).closest('[folder]');
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
+    if(urlParams.get('tab') ==='processing'){
+        loadContent('live')
+    }
     $('[folder] > a').addClass('btn-page-folder')
     $(this).removeClass('btn-page-folder')
     box_folder.prependTo(box_folder.closest('.list-folder'));
     $('[folder]').addClass('bg-[#121520]')
-    $('[folder]').removeClass('bg-gradient-to-r')
+    $('[folder]').removeClass('bg-[#009FB2]')
     $(box_folder).removeClass("bg-[#121520]")
-    $(box_folder).addClass("bg-gradient-to-r")
-    if ($(this).data('folderid') === 'root') {
+    $(box_folder).addClass("bg-[#009FB2]")
+    if ($(this).find('span').text() === '') {
         $('#currentFolderName').html()
         $('#currentFolderName').addClass('hidden')
     } else {
@@ -148,7 +153,6 @@ $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
             `<i class="material-symbols-outlined">navigate_next</i>${$(this).find('span').text()}`
         )
     }
-
     btn_video()
     updateURLParameterVideo(column,direction,folderId,limit,'',poster)
 })

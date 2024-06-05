@@ -5,11 +5,12 @@
         <thead class="sticky top-0 z-10">
             <tr class="bg-[#142132] transition-colors text-md">
                 <th class="flex justify-center item-center py-2">
-                    <input type="checkbox" class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
+                    <input type="checkbox" class="checkbox w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all
+                                  after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center
+                                  after:text-white after:opacity-0 after:transition-all after:content-['✓'] checked:border-0
+                                  checked:border-transparent checked:after:opacity-100"
                            checked-All>
                 </th>
                 <th data-column="title" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
@@ -57,62 +58,65 @@
             </tr>
         </thead>
         <tbody>
-        @if($videos->count() == 0)
-            <tr class="my-3 h-12 bg-[#142132]">
-                <td class="text-center" colspan="9">No data available in table</td>
-            </tr>
-        @else
-            @foreach($videos as $index => $video)
-                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" data-videoid="{{ $video->id }}">
-                    <td class="flex items-center justify-center h-[inherit] px-2">
-                        <input type="checkbox"
-                               class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
-                    </td>
-                    <td class="pl-2 w-[25rem] video-title">
-                        <a href="{{$video -> slug }}" target="_black" class="hover:text-[#009FB2]">{{ $video->title }}</a>
-                    </td>
-                    <td class="text-center px-2 videoID">{{ $video->slug }}</td>
-                    <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} flex justify-center items-center" poster>
-                        <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
-                    </td>
-                    <td class="text-center w-max">{{ $video->size }}</td>
-                    <td class="text-center w-max">{{ $video->total_play }}</td>
-                    <td class="pl-2 w-24">{{ $video->created_at }}</td>
-                    <td class="text-center w-max">{{ $video->is_sub }}</td>
-                    <td class="relative">
-                        <li class="list-none">
-                            <a
-                                href="javascript:" dropdown-trigger
-                                aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
-                            <ul dropdown-menu
-                                class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
+        @forelse($videos as $index => $video)
+            <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" data-videoid="{{ $video->id }}">
+                <td class="flex items-center justify-center h-[inherit] px-2">
+                    <input type="checkbox"
+                           class="checkbox w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all
+                                  after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center
+                                  after:text-white after:opacity-0 after:transition-all after:content-['✓'] checked:border-0
+                                  checked:border-transparent checked:after:opacity-100">
+                </td>
+                <td class="pl-2 w-[25rem] video-title">
+                    <a href="{{$video -> slug }}" target="_black" class="hover:text-[#009FB2]">{{ $video->title }}</a>
+                </td>
+                <td class="text-center px-2 videoID">{{ $video->slug }}</td>
+                <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} flex justify-center items-center" poster>
+                    <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
+                </td>
+                <td class="text-center w-max">{{ $video->size }}</td>
+                <td class="text-center w-max">{{ $video->total_play }}</td>
+                <td class="pl-2 w-24">{{ $video->created_at }}</td>
+                <td class="text-center w-max">{{ $video->is_sub }}</td>
+                <td class="relative">
+                    <li class="list-none">
+                        <a
+                            href="javascript:" dropdown-trigger
+                            aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
+                        <ul dropdown-menu
+                            class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
                                              shadow-lg shadow-slate-900 duration-250 before:sm:right-3 before:text-lg pointer-events-none absolute right-1 top-12 lg:top-12
                                              origin-top list-none rounded-lg  bg-clip-padding text-white z-10
                                              px-2 py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:-top-2 before:z-10
                                              before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                                <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex"><i
-                                        class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
-                                    Edit File
-                                </li>
-                                <li class="relative my-3 hover:text-[#009FB2] items-center flex"><i
-                                        class="material-symbols-outlined opacity-1 mr-2">content_copy</i>
-                                    Clone
-                                </li>
-                                <li class="relative btn-delete hover:text-[#009FB2] items-center flex"><i
-                                        class="material-symbols-outlined opacity-1 mr-2">delete</i>
-                                    Delete
-                                </li>
-                            </ul>
-                        </li>
-                    </td>
-                </tr>
-            @endforeach
-        @endif
+                            <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex"><i
+                                    class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
+                                Edit File
+                            </li>
+                            <li class="relative my-3 hover:text-[#009FB2] items-center flex"><i
+                                    class="material-symbols-outlined opacity-1 mr-2">content_copy</i>
+                                Clone
+                            </li>
+                            <li class="relative btn-delete hover:text-[#009FB2] items-center flex"><i
+                                    class="material-symbols-outlined opacity-1 mr-2">delete</i>
+                                Delete
+                            </li>
+                        </ul>
+                    </li>
+                </td>
+            </tr>
+        @empty
+            <tr class="my-3 h-12 bg-[#142132]">
+                <td class="text-center" colspan="9">No data available in table</td>
+            </tr>
+        @endforelse
         </tbody>
     </table>
 </div>
 <div class="button-table pt-4 text-white text-sm flex justify-between items-center">
-    <div class="dataTables_info bg-[#142132] rounded-lg">
+    <div class="dataTables_info bg-[#142132] rounded-lg hidden sm:block">
         <p class="p-2">
             Showing
             <span class="font-medium">{{$videos->firstItem()  }}</span>
@@ -123,11 +127,11 @@
             results
         </p>
     </div>
-    <div class="pagination flex items-center">
+    <div class="pagination flex items-center pb-3 sm:pb-0">
         {{-- Previous Page Link --}}
         @if ($videos->onFirstPage())
             <span
-                class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
+                class="opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
         @else
             <li class="page list-none page-item" data-page="{{ $videos->currentPage() -1 }}">
                 <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
@@ -138,8 +142,8 @@
 
         {{-- Pagination Elements --}}
         @if ($videos->currentPage() > 2)
-            <li class="page list-none " data-page="1">
-                <a class="hover:bg-[#009FB2] text-white mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
+            <li class="page list-none" data-page="1">
+                <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)">1</a>
             </li>
             @if ($videos->currentPage() > 3)
@@ -149,7 +153,7 @@
 
         @for ($i = max(1, $videos->currentPage() - 1); $i <= min($videos->lastPage(), $videos->currentPage() + 1); $i++)
             <li class="page list-none page-item" data-page="{{ $i }}">
-                <a class="text-white mx-1 py-2 px-3 w-max rounded-lg {{ ($videos->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed ' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
+                <a class="mx-1 py-2 px-3 w-max rounded-lg {{ ($videos->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed text-white' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
                    href="javascript:void(0)">{{ $i }}</a>
             </li>
         @endfor
@@ -159,7 +163,7 @@
                 <li class="list-none page-item disabled px-2"><span class="page-link">...</span></li>
             @endif
             <li class="page list-none page-item" data-page="{{ $videos->lastPage() }}">
-                <a class="hover:bg-[#009FB2] text-white mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
+                <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)">{{ $videos->lastPage() }}</a>
             </li>
         @endif

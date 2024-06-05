@@ -1,6 +1,6 @@
 <div class="flex justify-between items-center w-full mb-3">
     <div class="mb-2" id='title'>
-        <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+        <h5 class="items-center text-white flex">
             <span>Ticket</span>
         </h5>
     </div>

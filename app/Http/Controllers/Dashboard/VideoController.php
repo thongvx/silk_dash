@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Repositories\VideoRepo;
 use App\Repositories\FolderRepo;
+use App\Repositories\EncoderTaskRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,11 +12,14 @@ class VideoController
 {
     protected $videoRepo;
     protected $folderRepo;
+    protected $encoderTaskRepo;
 
-    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo)
+
+    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo)
     {
         $this->videoRepo = $videoRepo;
         $this->folderRepo = $folderRepo;
+        $this->encoderTaskRepo = $encoderTaskRepo;
     }
 
     // Get video data
@@ -24,8 +28,7 @@ class VideoController
         $user = Auth::user();
         $folderId = $request->query('folderId');
         $folders = $this->folderRepo->getAllFolders($user->id);
-        $folderId = $folderId ?? $folders->first()->id;
-
+        $folderId = $folderId ?? $folders->last()->id;
         $data = [
             'title' => 'Video',
             'folders' => $folders,
@@ -37,7 +40,6 @@ class VideoController
         ];
 
         $this->convertVideoSizes($data['videos']);
-
         return $data;
     }
     // Get videos
@@ -49,16 +51,20 @@ class VideoController
         $direction = $request->input('direction', 'asc');
         $limit = $request->input('limit', 20);
         $page = $request->input('page', 1);
-
-        $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $search, $column, $direction, $folderId, $limit, ['*'], $page);
-
+        if ($tab == 'processing') {
+            $videos =  $this->encoderTaskRepo->getAllEncoderTasks($userId);
+        } else {
+            $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $search, $column, $direction, $folderId, $limit, ['*'], $page);
+        }
         return $videos;
     }
     // Convert video sizes
     private function convertVideoSizes($videos)
     {
         foreach ($videos as $video) {
-            $video->size = $this->convertFileSize($video->size);
+            if (property_exists($video, 'size')) {
+                $video->size = $this->convertFileSize($video->size);
+            }
         }
     }
     // Convert file size
@@ -83,7 +89,12 @@ class VideoController
     public function control(Request $request)
     {
         $data = $this->getVideoData($request);
-        return view('video.table', $data);
+        $tab = $request->input('tab');
+        if ($tab != 'processing') {
+            return view('video.table', $data);
+        }else {
+            return response('');
+        }
     }
 
     // update video

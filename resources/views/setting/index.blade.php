@@ -14,6 +14,12 @@
                         <span class="px-2 py-1">Profile</span>
                     </button>
                     <button
+                        class="{{request()->get('tab') === 'activities' ? 'activities tab-active !text-[#009FB2]' : 'activities'}}
+                        activities hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        data-content="activities">
+                        <span class="px-2 py-1">Activity</span>
+                    </button>
+                    <button
                         class="{{request()->get('tab') === 'accountsetting' ? 'accountsetting tab-active !text-[#009FB2]' : 'accountsetting'}}
                         ticket hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="accountsetting">

@@ -28,6 +28,8 @@ class AccountController extends Controller
                 return view('setting.customdomain', compact('setting'));
             case 'customads':
                 return view('setting.customads', compact('setting'));
+            case 'activities':
+                return view('setting.activities', compact('setting'));
             default:
                 return view('setting.profile', compact('setting'));
         }
