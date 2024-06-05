@@ -42,7 +42,8 @@ class playController
                         ->value('domain');
                 }
                 $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$data->pathStream.'/'.$data->middle_slug.'/master.m3u8';
-                return view('play', ['urlPlay' => $urlPlay]);
+                //return view('play', ['urlPlay' => $urlPlay]);
+                echo $svStream;
             }
         }
         else{
