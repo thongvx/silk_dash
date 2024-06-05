@@ -26,24 +26,23 @@ class playController
             }
             else{
                 //check stream
-                if($data->stream == 0){
+                //if($data->stream == 0){
                     $svStream = $this->selectSvStream();
                     Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sto480, $data->sto720, $data->sto1080));
                     $data->stream = $svStream;
                     $data->save();
-                }
-                else{
-                    $Stream = $data->sv_stream;
-                    $arrStream = explode('-', $Stream);
-                    $svStream = SvStream::whereIn('domain', $arrStream)
-                        ->where('out_speed', '<', 700)
-                        ->where('active', 1)
-                        ->orderBy('out_speed', 'asc')
-                        ->value('domain');
-                }
+//                }
+//                else{
+//                    $Stream = $data->sv_stream;
+//                    $arrStream = explode('-', $Stream);
+//                    $svStream = SvStream::whereIn('domain', $arrStream)
+//                        ->where('out_speed', '<', 700)
+//                        ->where('active', 1)
+//                        ->orderBy('out_speed', 'asc')
+//                        ->value('domain');
+//                }
                 $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$data->pathStream.'/'.$data->middle_slug.'/master.m3u8';
-                //return view('play', ['urlPlay' => $urlPlay]);
-                echo $svStream;
+                return view('play', ['urlPlay' => $urlPlay]);
             }
         }
         else{
@@ -53,7 +52,7 @@ class playController
     //-------------------------------select sv stream-----------------------------------------------------
     function selectSvStream()
     {
-        $svStream = SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('domain');
+        $svStream = SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('name');
         return $svStream;
     }
     //====================================================================================================
