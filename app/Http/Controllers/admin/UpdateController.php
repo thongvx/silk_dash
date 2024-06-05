@@ -53,6 +53,7 @@ class UpdateController extends Controller
             'slug' => $videoInfo['slug'],
             'user_id' => $userId,
             'folder_id' => $videoInfo['folder'],
+            'pathStream' => '0',
             'title' => $title,
             'poster' => '0',
             'grid_poster_3' => '0',
