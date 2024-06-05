@@ -5,10 +5,12 @@ namespace App\Http\Controllers\play;
 
 use App\Factories\DownloadFactory;
 use App\Models\Video;
-use App\Models\SvStorage;
+use App\Models\SvStream;
 use App\Models\EncoderTask;
+use App\Jobs\CreateHlsJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Queue;
 
 class playController
 {
@@ -23,8 +25,15 @@ class playController
                 return view('play', ['urlPlay' => $urlPlay]);
             }
             else{
-                //play storage
-                $urlPlay = 'https://user.streamsilk.com/data/'.$slug.'/'.$slug.'.m3u8';
+                //check stream
+                if($data->stream == '0'){
+                    $svStream = $this->selectSvStream();
+                    Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->path, $data->sto480, $data->sto720, $data->sto1080));
+                }
+                else{
+                    $svStream = $data->sv_stream;
+                }
+                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$slug.'/'.$slug.'.m3u8';
                 return view('play', ['urlPlay' => $urlPlay]);
             }
         }
@@ -32,4 +41,11 @@ class playController
             echo '404 Not Found';
         }
     }
+    //-------------------------------select sv stream-----------------------------------------------------
+    function selectSvStream()
+    {
+        $svStream = SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('domain');
+        return $svStream;
+    }
+    //====================================================================================================
 }

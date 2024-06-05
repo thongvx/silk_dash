@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('cpu')->nullable();
             $table->float('space')->nullable();
             $table->float('used_space')->nullable();
+            $table->float('percent_space')->nullable();
             $table->integer('max_speed')->nullable();
             $table->float('in_speed')->nullable();
             $table->float('out_speed')->nullable();

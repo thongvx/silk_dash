@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('middle_slug', 20)->index();
             $table->integer('user_id')->index();
             $table->string('folder_id', 15)->nullable();
+            $table->string('pathStream', 10)->nullable();
             $table->string('sd', 10)->nullable();
             $table->string('hd', 10)->nullable();
             $table->string('fhd', 10)->nullable();
             $table->string('title', 500)->comment('file name');
             $table->string('poster')->nullable();
-            $table->string('grid_poster', 500)->nullable();
             $table->string('grid_poster_3', 500)->nullable();
             $table->string('grid_poster_5', 500)->nullable();
             $table->boolean('is_sub')->nullable();
