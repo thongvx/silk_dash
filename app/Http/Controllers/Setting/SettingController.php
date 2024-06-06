@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AccountRepo;
+use App\Repositories\ActivityRepo;
 use Illuminate\Support\Facades\Validator;
 
 
 class SettingController
 {
     private $accountRepo;
-    public function __construct(AccountRepo $accountRepo)
+    private $activityRepo;
+    public function __construct(AccountRepo $accountRepo, ActivityRepo $activityRepo)
     {
         $this->accountRepo = $accountRepo;
+        $this->activityRepo = $activityRepo;
     }
     public function index(Request $request)
     {
@@ -22,6 +25,7 @@ class SettingController
         $data=[
             'title' => 'setting',
             'setting' => $this->accountRepo->getAllSetting($user->id),
+            'activities' => $this->activityRepo->getAllActivity($user->id),
         ];
         return view('setting.index', $data);
     }

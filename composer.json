@@ -10,7 +10,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "infyomlabs/laravel-ui-adminlte": "^5.2",
         "laravel/framework": "^10.10",
-        "laravel/horizon": "^5.24",
+        "laravel/horizon": "*",
         "laravel/sanctum": "^3.3",
         "phpmailer/phpmailer": "^6.9",
         "predis/predis": "^2.2",

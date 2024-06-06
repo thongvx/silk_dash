@@ -4,21 +4,25 @@ namespace App\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\AccountRepo;
+use App\Repositories\ActivityRepo;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
     protected $accountRepo;
+    protected $activityRepo;
 
-    public function __construct(AccountRepo $accountRepo)
+    public function __construct(AccountRepo $accountRepo, ActivityRepo $activityRepo)
     {
         $this->accountRepo = $accountRepo;
+        $this->activityRepo = $activityRepo;
     }
     public function index($tab)
     {
         $user = Auth::user();
-        $setting = $this->accountRepo->getAllSetting($user->id);
-
+        $userid = $user->id;
+        $setting = $this->accountRepo->getAllSetting($userid);
+        $activities = $this->activityRepo->getAllActivity($userid);
         switch ($tab) {
             case 'accountsetting':
                 return view('setting.accountsetting', compact('setting'));
@@ -29,7 +33,7 @@ class AccountController extends Controller
             case 'customads':
                 return view('setting.customads', compact('setting'));
             case 'activities':
-                return view('setting.activities', compact('setting'));
+                return view('setting.activities', compact('activities'));
             default:
                 return view('setting.profile', compact('setting'));
         }
