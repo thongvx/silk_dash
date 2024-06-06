@@ -7,6 +7,8 @@ use App\Models\Video;
 use Illuminate\Console\Command;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Queue;
+use App\Jobs\CreateHlsJob;
 
 class TestCommand extends Command
 {
@@ -29,11 +31,8 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        Redis::set('ahihi1', 'ahihi1');
-        Redis::set('ahihi2', 'ahihi1');
-        var_dump(Redis::keys('ahihi*'));
-        Redis::del(Redis::keys('ahihi*'));
-        var_dump(Redis::keys('ahihi*'));
+        Queue::push(new CreateHlsJob('665b3ed64fdc5', 'ss01', 'st01-9', 'st01-9', 'st01-E', '19'));
+        echo 'done roi nha';
 
     }
     function disguiseM3U8AsImage($m3u8FilePath, $originalImageFilePath)
