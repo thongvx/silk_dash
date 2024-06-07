@@ -34,7 +34,7 @@ class TestCommand extends Command
     {
         $stream = 'ss01';
         $arrStream = explode('-', $stream);
-        $svStream = SvStream::whereIn('name', $arrStream)
+        $svStream = SvStream::where('name', $stream)
             ->where('out_speed', '<', 700)
             ->where('active', 1)
             ->orderBy('out_speed', 'asc')
