@@ -28,7 +28,7 @@ class playController
                 //check stream
                 //if($data->stream == 0){
                     $svStream = $this->selectSvStream();
-                    Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sto480, $data->sto720, $data->sto1080));
+                    Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sd, $data->hd, $data->fhd));
                     $data->stream = $svStream;
                     $data->save();
 //                }
