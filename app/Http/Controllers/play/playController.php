@@ -31,6 +31,7 @@ class playController
                     Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sd, $data->hd, $data->fhd));
                     $data->stream = $svStream;
                     $data->save();
+                    echo 1;
                 }
                 else{
                     $Stream = $data->sv_stream;
@@ -41,11 +42,13 @@ class playController
                         Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sd, $data->hd, $data->fhd));
                         $data->stream = $data->stream .'-'. $svStream;
                         $data->save();
+                        echo 2;
                     }
+                    echo 3;
                 }
-                $arrPath = explode('-', $data->pathStream);
-                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
-                return view('play', ['urlPlay' => $urlPlay]);
+//                $arrPath = explode('-', $data->pathStream);
+//                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
+//                return view('play', ['urlPlay' => $urlPlay]);
             }
         }
         else{
