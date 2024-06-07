@@ -46,9 +46,9 @@ class playController
                     }
                     echo 3;
                 }
-//                $arrPath = explode('-', $data->pathStream);
-//                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
-//                return view('play', ['urlPlay' => $urlPlay]);
+                $arrPath = explode('-', $data->pathStream);
+                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
+                return view('play', ['urlPlay' => $urlPlay]);
             }
         }
         else{
@@ -64,11 +64,11 @@ class playController
     //-------------------------------check connect sv stream----------------------------------------------
     function checkConnectSvStream($arrStream)
     {
-        $svStream = SvStream::whereIn('domain', $arrStream)
+        $svStream = SvStream::whereIn('name', $arrStream)
             ->where('out_speed', '<', 700)
             ->where('active', 1)
             ->orderBy('out_speed', 'asc')
-            ->value('domain');
+            ->value('name');
         return $svStream;
     }
     //====================================================================================================
