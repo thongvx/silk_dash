@@ -16,6 +16,7 @@ class ActivityRepo extends BaseRepository
     {
         return $this->query()
             ->where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 }
