@@ -33,7 +33,7 @@ class playController
                     $data->save();
                 }
                 else{
-                    $Stream = $data->sv_stream;
+                    $Stream = $data->stream;
                     $arrStream = explode('-', $Stream);
                     $svStream = $this->checkConnectSvStream($arrStream);
                     if(!empty($svStream)){
@@ -45,8 +45,7 @@ class playController
                 }
                 $arrPath = explode('-', $data->pathStream);
                 $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
-                //return view('play', ['urlPlay' => $urlPlay]);
-                echo $svStream;
+                return view('play', ['urlPlay' => $urlPlay]);
             }
         }
         else{
