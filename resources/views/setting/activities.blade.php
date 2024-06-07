@@ -1,5 +1,5 @@
 <div class="mt-4">
-    <div>
+    <div class="max-h-[calc(100vh-18em)] sm:max-h-[calc(100vh-14.5em)] overflow-auto">
          @foreach($activities as $activity)
             <div class="mb-5 bg-[#142132] rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                 <div class="font-normal">
