@@ -7,6 +7,7 @@ use App\Models\Activity;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Client;
 
 class LoginController extends Controller
 {
@@ -74,16 +75,18 @@ class LoginController extends Controller
         $ip = request()->ip();
         $time = now();
 
-        // You can use a service like https://ipstack.com/ to get the location based on the IP address
         $location = $this->getLocation($ip);
+        $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $this->parseUserAgent($_SERVER['HTTP_USER_AGENT']) : ['os' => 'Unknown OS', 'browser' => 'Unknown Browser'];
 
         Activity::create([
             'user_id' => $user->id,
             'ip_address' => $ip,
+            'user_agent' => json_encode($userAgent),
             'login_time' => $time,
             'location' => $location,
         ]);
     }
+
     protected function getLocation($ip)
     {
         $client = new Client();
@@ -91,11 +94,28 @@ class LoginController extends Controller
         $response = $client->get("http://ip-api.com/json/{$ip}");
 
         $locationData = json_decode($response->getBody());
+        error_log(print_r($locationData, true));
 
         // You can customize this based on the data you need
-        $location = $locationData->city . ', ' . $locationData->regionName . ', ' . $locationData->country;
+        $city = property_exists($locationData, 'city') ? $locationData->city : '';
+        $regionName = property_exists($locationData, 'regionName') ? $locationData->regionName : '';
+        $country = property_exists($locationData, 'country') ? $locationData->country : '';
+
+        $location = $city . ', ' . $regionName . ', ' . $country;
 
         return $location;
+    }
+    protected function parseUserAgent($userAgent)
+    {
+        $result = new \WhichBrowser\Parser($userAgent);
+
+        $os = $result->os->toString();
+        $browser = $result->browser->toString();
+
+        return [
+            'os' => $os ? $os : 'Unknown OS',
+            'browser' => $browser ? $browser : 'Unknown Browser',
+        ];
     }
     public function logout(Request $request)
     {

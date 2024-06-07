@@ -17,7 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('ip_address')->nullable();
-            $table->string('country')->nullable();
+            $table->string('user_agent')->nullable();
             $table->timestamp('login_time');
             $table->string('location')->nullable();
             $table->timestamps();
