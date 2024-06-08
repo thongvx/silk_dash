@@ -46,13 +46,22 @@
 
     </div>
 </div>
+<script src="https://cdn.rawgit.com/sitexw/BlockAdBlock/master/blockadblock.js"></script>
 <script>
     checksandbox();
-    if (checkAdBlocker()) {
-        console.log('Adblock is enabled!');
-    } else {
-        console.log('Adblock is disabled!');
-    }
+    var blockAdBlock = new BlockAdBlock({
+        checkOnLoad: true,
+        resetOnEnd: true
+    });
+    blockAdBlock.onDetected(function() {
+        console.log("AdBlock is enabled.");
+        // Handle AdBlock detection here
+    });
+
+    blockAdBlock.onNotDetected(function() {
+        console.log("AdBlock is not enabled.");
+        // Handle normal operation here
+    });
     player();
     async function player() {
         var playerInstance = jwplayer("video_player");
