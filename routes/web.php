@@ -89,6 +89,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
 });
 
+Route::middleware(['role:admin'])->prefix('admin')->group(function () {
+
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about', [App\Http\Controllers\AboutController::class, 'index'])->name('about');
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
