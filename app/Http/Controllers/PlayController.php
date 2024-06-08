@@ -64,7 +64,10 @@ class PlayController
                                             'urlPlay' => $urlPlay,
                                             'poster' => $poster,
                                             'title' => $title,
-                                            'data_setting' => $data_setting,
+                                            'logo' => $data_setting->logo,
+                                            'logo_link' => $data_setting->logo_link,
+                                            'position' => $data_setting->position,
+                                            'show_title' => $data_setting->show_title,
                                           ]);
             }
         }

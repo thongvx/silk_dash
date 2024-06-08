@@ -51,14 +51,14 @@
     async function player() {
         var playerInstance = jwplayer("video_player");
         var poster = '<?= $poster ?>';
-        var logo = '<?= $data_setting->logo ?>';
+        var logo = '<?= $logo ?>';
         if(logo == '0')
             var check_logo = false;
         else
             var check_logo = true;
-        var url_logo_link = '<?= $data_setting->logo_link ?>';
-        var position = '<?= $data_setting->position ?>';
-        var show_title = '<?= $data_setting->show_title ?>';
+        var url_logo_link = '<?= $logo_link ?>';
+        var position = '<?= $position ?>';
+        var show_title = '<?= $show_title ?>';
         if(show_title == '0')
             var title = '';
         else
