@@ -50,13 +50,14 @@
     player();
     async function player() {
         var playerInstance = jwplayer("video_player");
+        var poster = '<?= $poster ?>';
         playerInstance.setup({
             width: "100%",
             height: "100%",
             autostart: false,
             controls: true,
             mute: false,
-            image: '',
+            image: poster,
             primary: "hlsjs",
             preload: true,
             aspectratio: "16:9",

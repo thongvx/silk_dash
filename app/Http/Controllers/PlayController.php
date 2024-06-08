@@ -7,6 +7,7 @@ use App\Jobs\CreateHlsJob;
 use App\Models\EncoderTask;
 use App\Models\SvStream;
 use App\Models\Video;
+use App\Models\AccountSetting;
 use Illuminate\Support\Facades\Queue;
 
 class PlayController
@@ -19,6 +20,16 @@ class PlayController
             $title = $data->title;
             if($data->check_duplicate == 0)
                 $data = Video::where('slug', $data->middle_slug)->first();
+            //get setting user
+            $data_setting = AccountSetting::where('user_id', $user_id)->first();
+            //check poster
+            if($data_setting->gridPoster == 5)
+                $poster = $data->grid_poster_5;
+            elseif($data_setting->gridPoster == 3)
+                $poster = $data->grid_poster_3;
+            else
+                $poster = $data->poster;
+            //check stream
             if($data->origin == 0){
                 //play origin
                 $svUpload = EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload');
@@ -49,7 +60,11 @@ class PlayController
                 }
                 $arrPath = explode('-', $data->pathStream);
                 $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
-                return view('play', ['urlPlay' => $urlPlay]);
+                return view('play', [
+                                            'urlPlay' => $urlPlay,
+                                            'poster' => $poster,
+                                            'title' => $title,
+                                          ]);
             }
         }
         else{
