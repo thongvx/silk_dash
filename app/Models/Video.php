@@ -45,7 +45,7 @@ class Video extends Model
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
             if (!$model->isDirty('total_play' && !$model->isDirty('quality'))) {
-                $this->deleteCache();
+                $model->deleteCache();
             }
         });
 
