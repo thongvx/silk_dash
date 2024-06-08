@@ -77,13 +77,13 @@ class VideoController
     public function index(Request $request)
     {
         $data = $this->getVideoData($request);
-        return view('video.index', $data);
+        return view('dashboard.video.index', $data);
     }
     // Control
     public function control(Request $request)
     {
         $data = $this->getVideoData($request);
-        return view('video.table', $data);
+        return view('dashboard.video.table', $data);
     }
 
     // update video
@@ -145,7 +145,7 @@ class VideoController
             'direction' => $request->input('direction', 'asc'),
         ];
 
-        return view('video.search', $data);
+        return view('dashboard.video.search', $data);
     }
     //mover video
     public function moveVideos(Request $request)

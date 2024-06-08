@@ -3,7 +3,7 @@
         <div class="px-2 pt-4 md:p-4">
             <div class="mb-2" id='title'>
                 <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                    DMCA Warnings
+                    Removed Videos
                 </h5>
             </div>
             <div class="flex justify-between items-center w-full mb-3">
@@ -49,7 +49,7 @@
             </div>
             <div id="live"
                  class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
-                @include('video.table')
+                @include('dashboard.video.table')
             </div>
         </div>
     </div>

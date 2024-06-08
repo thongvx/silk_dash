@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
     <div class="flex flex-wrap -mx-3 flex-col-reverse lg:flex-row">
@@ -35,7 +35,7 @@
                                     <div class="px-2 pt-4 md:p-4">
                                         <div id="box-content" support
                                              class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
-                                            @include(request()->path() . '.' . request()->get('tab'))
+                                            @include('dashboard.'.request()->path() . 'result-type' . request()->get('tab'))
                                         </div>
                                     </div>
                                 </div>

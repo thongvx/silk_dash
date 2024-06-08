@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
     <div class="flex flex-wrap -mx-3 flex-col-reverse lg:flex-row">
@@ -40,7 +40,8 @@
                                             <span>entries</span>
                                         </div>
                                     </div>
-                                    <div class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
+                                    <div
+                                        class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
                                         <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
                                             <table id="datatable" datatable data-page-size="10" data-column-table="id"
                                                    data-column-direction="asc"
@@ -55,19 +56,22 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="my-3 h-12 bg-[#142132]">
-                                                        <td class="text-center">1</td>
-                                                        <td><a href="/dmca/1" class="hover:text-[#009FB2]">copyright@govinet.com</a></td>
-                                                        <td class="text-center">
-                                                            <button class="bg-emerald-400 px-3 py-1 rounded-md">open</button>
-                                                        </td>
-                                                        <td class="text-center">04/01/2022</td>
-                                                        <td class="text-center">04/02/2022</td>
-                                                    </tr>
+                                                <tr class="my-3 h-12 bg-[#142132]">
+                                                    <td class="text-center">1</td>
+                                                    <td><a href="/dmca/1" class="hover:text-[#009FB2]">copyright@govinet.com</a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="bg-emerald-400 px-3 py-1 rounded-md">open
+                                                        </button>
+                                                    </td>
+                                                    <td class="text-center">04/01/2022</td>
+                                                    <td class="text-center">04/02/2022</td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="button-table pt-4 text-white text-sm flex justify-between items-center">
+                                        <div
+                                            class="button-table pt-4 text-white text-sm flex justify-between items-center">
                                             <div class="dataTables_info bg-[#142132] rounded-lg">
                                                 <p class="p-2">
                                                     Showing
@@ -92,9 +96,9 @@
                                                 </li>
 
 
-
                                                 {{-- Next Page Link --}}
-                                                <span class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Next</span>
+                                                <span
+                                                    class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Next</span>
                                             </div>
                                         </div>
 

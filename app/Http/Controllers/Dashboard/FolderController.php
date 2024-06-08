@@ -18,7 +18,7 @@ class FolderController
     {
         $user = Auth::user();
         $folders = $this->folderRepo->getAllFolders($user->id);
-        return view('video.folder', $folders);
+        return view('dashboard.video.folder', $folders);
     }
     // Get all folders
     public function show($id)

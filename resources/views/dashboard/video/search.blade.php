@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
     <div class="flex flex-wrap -mx-3 flex-col-reverse lg:flex-row">
         <div class="w-full max-w-full px-3 mt-0 text-white lg:flex-none ">
             <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full rounded-xl">
                 <div
-                    class="border-[#121520] rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
+                        class="border-[#121520] rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
                     <div class="lg:min-h-[calc(100vh-8em)]" id="box-content" page-video>
                         <div class="rounded-xl">
                             <div class="relative rounded-xl">
@@ -42,8 +42,9 @@
                                             <span>entries</span>
                                         </div>
                                         <div class="flex ">
-                                            <button type="button" class="rounded-lg flex items-center px-1.5 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
-                                                    title="poster"  btn-poster>
+                                            <button type="button"
+                                                    class="rounded-lg flex items-center px-1.5 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
+                                                    title="poster" btn-poster>
                                                 {!!
                                                     request() -> get('poster')
                                                     ? '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i>hide poster'
@@ -69,7 +70,8 @@
                                     <div id="live"
                                          class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
                                         <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-                                            <table id="datatable" datatable data-page-size="10" data-column-table="{{ $column }}"
+                                            <table id="datatable" datatable data-page-size="10"
+                                                   data-column-table="{{ $column }}"
                                                    data-column-direction="{{ $direction }}"
                                                    class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
                                                 <thead class="sticky top-0 z-10">
@@ -82,7 +84,8 @@
                                                       checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
                                                                checked-All>
                                                     </th>
-                                                    <th data-column="title" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
+                                                    <th data-column="title"
+                                                        class='pl-2 sortable-column cursor-pointer relative' aria-sort>
                     <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                           data-direction="asc">▲</span>
                                                         <a href="javascript:void(0)">Filename</a>
@@ -95,21 +98,26 @@
                                                     <th class="text-center" poster>
                                                         Poster
                                                     </th>
-                                                    <th data-column="size" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                                                    <th data-column="size"
+                                                        class='pl-2 pr-6 sortable-column cursor-pointer relative'
+                                                        aria-sort>
                     <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                           data-direction="asc">▲</span>
                                                         <a href="javascript:void(0)">Filesize</a>
                                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                                               data-direction="desc">▼</span>
                                                     </th>
-                                                    <th data-column="total_play" class='pl-2 sortable-column pr-6 cursor-pointer relative' aria-sort>
+                                                    <th data-column="total_play"
+                                                        class='pl-2 sortable-column pr-6 cursor-pointer relative'
+                                                        aria-sort>
                     <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                           data-direction="asc">▲</span>
                                                         <a href="javascript:void(0)">Views</a>
                                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                                               data-direction="desc">▼</span>
                                                     </th>
-                                                    <th data-column="created_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
+                                                    <th data-column="created_at"
+                                                        class='pl-2 sortable-column cursor-pointer relative' aria-sort>
                     <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                           data-direction="asc">▲</span>
                                                         <a href="javascript:void(0)">Uploaded</a>
@@ -121,7 +129,7 @@
                                                     </th>
                                                     <th>
                                                         <h6
-                                                            class="antialiased tracking-normal font-sans text-base text-inherit flex py-5 items-center justify-between px-2 font-semibold leading-none">
+                                                                class="antialiased tracking-normal font-sans text-base text-inherit flex py-5 items-center justify-between px-2 font-semibold leading-none">
                                                         </h6>
                                                     </th>
                                                 </tr>
@@ -129,11 +137,13 @@
                                                 <tbody>
                                                 @if($videos->count() == 0)
                                                     <tr class="my-3 h-12 bg-[#142132]">
-                                                        <td class="text-center" colspan="9">No data available in table</td>
+                                                        <td class="text-center" colspan="9">No data available in table
+                                                        </td>
                                                     </tr>
                                                 @else
                                                     @foreach($videos as $index => $video)
-                                                        <tr class="my-3 h-12 {{ $index % 2 == 0 ? '' : 'bg-[#142132]' }}" data-videoid="{{ $video->id }}">
+                                                        <tr class="my-3 h-12 {{ $index % 2 == 0 ? '' : 'bg-[#142132]' }}"
+                                                            data-videoid="{{ $video->id }}">
                                                             <td class="flex items-center justify-center h-[inherit] px-2">
                                                                 <input type="checkbox"
                                                                        class="checkbox w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border                                                    border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full                                                    after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']                                                    checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100">
@@ -142,8 +152,10 @@
                                                                 <a href="{{$video -> slug }}">{{ $video->title }}</a>
                                                             </td>
                                                             <td class="text-center px-2 videoID">{{ $video->slug }}</td>
-                                                            <td class="{{request()->get('poster') ? '' : 'hidden'}} flex justify-center items-center" poster>
-                                                                <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
+                                                            <td class="{{request()->get('poster') ? '' : 'hidden'}} flex justify-center items-center"
+                                                                poster>
+                                                                <img class="h-10 my-2 px-2" src="{{ $video->poster }}"
+                                                                     alt="" loading="lazy">
                                                             </td>
                                                             <td class="text-center w-max">{{ $video->size }}</td>
                                                             <td class="text-center w-max">{{ $video->total_play }}</td>
@@ -152,24 +164,28 @@
                                                             <td class="relative">
                                                                 <li class="list-none">
                                                                     <a
-                                                                        href="javascript:" dropdown-trigger
-                                                                        aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
+                                                                            href="javascript:" dropdown-trigger
+                                                                            aria-expanded="false"><i
+                                                                                class="material-symbols-outlined">more_vert</i></a>
                                                                     <ul dropdown-menu
                                                                         class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
                                              shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-3 before:text-lg pointer-events-none absolute right-1 top-12 lg:top-12
                                              origin-top list-none rounded-lg  bg-clip-padding text-white z-10
                                              px-2 py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
                                              before:inline-block before:font-normal before:text-[#1a2035] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                                                                        <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex"><i
-                                                                                class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
+                                                                        <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex">
+                                                                            <i
+                                                                                    class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
                                                                             Edit File
                                                                         </li>
-                                                                        <li class="relative my-3 hover:text-[#009FB2] items-center flex"><i
-                                                                                class="material-symbols-outlined opacity-1 mr-2">content_copy</i>
+                                                                        <li class="relative my-3 hover:text-[#009FB2] items-center flex">
+                                                                            <i
+                                                                                    class="material-symbols-outlined opacity-1 mr-2">content_copy</i>
                                                                             Clone
                                                                         </li>
-                                                                        <li class="relative btn-delete hover:text-[#009FB2] items-center flex"><i
-                                                                                class="material-symbols-outlined opacity-1 mr-2">delete</i>
+                                                                        <li class="relative btn-delete hover:text-[#009FB2] items-center flex">
+                                                                            <i
+                                                                                    class="material-symbols-outlined opacity-1 mr-2">delete</i>
                                                                             Delete
                                                                         </li>
                                                                     </ul>
@@ -197,9 +213,10 @@
                                                 {{-- Previous Page Link --}}
                                                 @if ($videos->onFirstPage())
                                                     <span
-                                                        class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
+                                                            class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
                                                 @else
-                                                    <li class="page list-none page-item" data-page="{{ $videos->currentPage() -1 }}">
+                                                    <li class="page list-none page-item"
+                                                        data-page="{{ $videos->currentPage() -1 }}">
                                                         <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                                                            href="javascript:void(0)" rel="prev">Previous</a>
                                                     </li>
@@ -213,7 +230,8 @@
                                                            href="javascript:void(0)">1</a>
                                                     </li>
                                                     @if ($videos->currentPage() > 3)
-                                                        <li class="list-none page-item disabled px-2"><span class="page-link">...</span></li>
+                                                        <li class="list-none page-item disabled px-2"><span
+                                                                    class="page-link">...</span></li>
                                                     @endif
                                                 @endif
 
@@ -226,9 +244,11 @@
 
                                                 @if ($videos->currentPage() < $videos->lastPage() - 1)
                                                     @if ($videos->currentPage() < $videos->lastPage() - 2)
-                                                        <li class="list-none page-item disabled px-2"><span class="page-link">...</span></li>
+                                                        <li class="list-none page-item disabled px-2"><span
+                                                                    class="page-link">...</span></li>
                                                     @endif
-                                                    <li class="page list-none page-item" data-page="{{ $videos->lastPage() }}">
+                                                    <li class="page list-none page-item"
+                                                        data-page="{{ $videos->lastPage() }}">
                                                         <a class="hover:bg-[#009FB2] text-white mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                                                            href="javascript:void(0)">{{ $videos->lastPage() }}</a>
                                                     </li>
@@ -236,7 +256,8 @@
 
                                                 {{-- Next Page Link --}}
                                                 @if ($videos->hasMorePages())
-                                                    <li class="page list-none page-item" data-page="{{ $videos->currentPage() +1 }}">
+                                                    <li class="page list-none page-item"
+                                                        data-page="{{ $videos->currentPage() +1 }}">
                                                         <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                                                            href="javascript:void(0)" rel="next">Next</a>
                                                     </li>
@@ -256,5 +277,5 @@
             </div>
         </div>
     </div>
-    @include('video.fixed-video')
+    @include('dashboard.video.fixed-video')
 @endsection

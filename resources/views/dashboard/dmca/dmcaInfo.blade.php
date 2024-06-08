@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
     <div class="flex flex-wrap -mx-3 flex-col-reverse lg:flex-row">
@@ -28,9 +28,18 @@
                                     </div>
                                 </div>
                                 <div class="flex justify-center mt-8">
-                                    <button btn-clone-reported class="bg-[#142132] px-6 py-0.5 rounded-md text-sky-600 hover:bg-sky-600 hover:text-white">Clone reported videos</button>
-                                    <button btn-delete-reported class="bg-[#142132] px-6 py-0.5 rounded-md text-rose-600 hover:bg-rose-600 hover:text-white mx-6">Delete all reported videos</button>
-                                    <button btn-mark-reported class="bg-[#142132] px-6 py-0.5 rounded-md text-emerald-400 hover:bg-emerald-600 hover:text-white">Mark as resolved</button>
+                                    <button btn-clone-reported
+                                            class="bg-[#142132] px-6 py-0.5 rounded-md text-sky-600 hover:bg-sky-600 hover:text-white">
+                                        Clone reported videos
+                                    </button>
+                                    <button btn-delete-reported
+                                            class="bg-[#142132] px-6 py-0.5 rounded-md text-rose-600 hover:bg-rose-600 hover:text-white mx-6">
+                                        Delete all reported videos
+                                    </button>
+                                    <button btn-mark-reported
+                                            class="bg-[#142132] px-6 py-0.5 rounded-md text-emerald-400 hover:bg-emerald-600 hover:text-white">
+                                        Mark as resolved
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +100,8 @@
         <!-- -right-90 in loc de 0-->
         <div fixed-video-card
              class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full  backdrop-blur-sm
-           min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3" id="fixed-video">
+           min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3"
+             id="fixed-video">
             <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-video-close-button>
             </div>
             <div
@@ -102,7 +112,7 @@
                         <i class="material-symbols-outlined text-3xl">close</i>
                     </button>
                 </div>
-                <div  id="fixed-box-control">
+                <div id="fixed-box-control">
                     <div class="hidden" id="clone">
                         <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Clone reported videos</h5>
                         <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
@@ -117,32 +127,37 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                        <td class="text-center px-2">Elbet Bir Gun - Capitulo 1.mp4</td>
-                                        <td class="text-center px-2">https://spatikona.com/t/JGBhcRXJEdWyjTajBVnx</td>
-                                        <td class="text-center px-2">https://spatikona.com/t/4JW6sZp04ZI8bTbjKYGi</td>
-                                    </tr>
-                                    <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                        <td class="text-center px-2">Elbet Bir Gun - Capitulo 1.mp4</td>
-                                        <td class="text-center px-2">https://spatikona.com/t/JGBhcRXJEdWyjTajBVnx</td>
-                                        <td class="text-center px-2">https://spatikona.com/t/4JW6sZp04ZI8bTbjKYGi</td>
-                                    </tr>
-                                    <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                        <td class="text-center px-2">Elbet Bir Gun - Capitulo 1.mp4</td>
-                                        <td class="text-center px-2">https://spatikona.com/t/JGBhcRXJEdWyjTajBVnx</td>
-                                        <td class="text-center px-2">https://spatikona.com/t/4JW6sZp04ZI8bTbjKYGi</td>
-                                    </tr>
+                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
+                                    <td class="text-center px-2">Elbet Bir Gun - Capitulo 1.mp4</td>
+                                    <td class="text-center px-2">https://spatikona.com/t/JGBhcRXJEdWyjTajBVnx</td>
+                                    <td class="text-center px-2">https://spatikona.com/t/4JW6sZp04ZI8bTbjKYGi</td>
+                                </tr>
+                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
+                                    <td class="text-center px-2">Elbet Bir Gun - Capitulo 1.mp4</td>
+                                    <td class="text-center px-2">https://spatikona.com/t/JGBhcRXJEdWyjTajBVnx</td>
+                                    <td class="text-center px-2">https://spatikona.com/t/4JW6sZp04ZI8bTbjKYGi</td>
+                                </tr>
+                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
+                                    <td class="text-center px-2">Elbet Bir Gun - Capitulo 1.mp4</td>
+                                    <td class="text-center px-2">https://spatikona.com/t/JGBhcRXJEdWyjTajBVnx</td>
+                                    <td class="text-center px-2">https://spatikona.com/t/4JW6sZp04ZI8bTbjKYGi</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="delete hidden" id="delete-report">
                         <form action="" class="px-8">
-                            <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected video?</h5>
+                            <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected
+                                video?</h5>
                             <input type="text" class="hidden" name="videos-report" value="">
                             <div class="flex justify-center mt-3 text-white ">
-                                <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
-                                <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Delete</button>
+                                <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4"
+                                        fixed-video-close-button>Cancel
+                                </button>
+                                <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">
+                                    Delete
+                                </button>
                             </div>
                         </form>
                     </div>

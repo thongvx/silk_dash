@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
     <div class="mt-10 grid grid-cols-3 gap-4 items-center">
@@ -27,7 +27,9 @@
                             $ 0.00
                         </h5>
                     </div>
-                    <button class="button-payout px-4 py-2 rounded-3xl bg-[#142132] hover:bg-[#009FB2] text-white mt-6" report>Request payout</button>
+                    <button class="button-payout px-4 py-2 rounded-3xl bg-[#142132] hover:bg-[#009FB2] text-white mt-6"
+                            report>Request payout
+                    </button>
                 </div>
             </div>
         </div>
@@ -65,24 +67,30 @@
                         <input type="date" name="to" id="to" class="outline-none bg-transparent">
                     </div>
                     <div class="ml-4">
-                        <button type="button" class="bg-[#142132] hover:bg-[#009FB2] rounded-3xl px-3 py-1.5">Yesterday</button>
+                        <button type="button" class="bg-[#142132] hover:bg-[#009FB2] rounded-3xl px-3 py-1.5">
+                            Yesterday
+                        </button>
                         <span class="mx-3">-</span>
                         <button type="button" class="bg-[#009FB2] rounded-3xl px-3 py-1.5">Last 7 days</button>
                         <span class="mx-3">-</span>
-                        <button type="button" class="bg-[#142132] hover:bg-[#009FB2] rounded-3xl px-3 py-1.5">last 30 days</button>
+                        <button type="button" class="bg-[#142132] hover:bg-[#009FB2] rounded-3xl px-3 py-1.5">last 30
+                            days
+                        </button>
                     </div>
                 </div>
                 <div class="items-end">
-                    <button class="bg-[#142132] hover:bg-[#009FB2] px-6 py-1.5 rounded-2xl text-xl" type="submit">Apply</button>
+                    <button class="bg-[#142132] hover:bg-[#009FB2] px-6 py-1.5 rounded-2xl text-xl" type="submit">
+                        Apply
+                    </button>
                 </div>
             </form>
             <div class="table-earning">
-                @include('report.dataEarning')
+                @include('dashboard.report.dataEarning')
             </div>
         </div>
     </div>
     <div class="text-white bg-[#121520] mt-6 rounded-lg p-4">
-        @include('report.payment')
+        @include('dashboard.report.payment')
     </div>
 
     <div fixed-payout>
@@ -119,12 +127,16 @@
                                 <label for="amount" class="mr-3">
                                     Amount:
                                 </label>
-                                <input type="number" min="100" max="2000" name="amount" id="amount" class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="100"/>
+                                <input type="number" min="100" max="2000" name="amount" id="amount"
+                                       class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
+                                       placeholder="100"/>
                                 <h5>
                                     USD
                                 </h5>
                             </div>
-                            <button class="bg-green-300 rounded-xl px-5 py-2 h-max ml-3 hover:bg-green-500" disabled>Submit</button>
+                            <button class="bg-green-300 rounded-xl px-5 py-2 h-max ml-3 hover:bg-green-500" disabled>
+                                Submit
+                            </button>
                         </form>
                     </div>
                 </div>

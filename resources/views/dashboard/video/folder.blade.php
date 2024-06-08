@@ -33,7 +33,7 @@
                 class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-gradient-to-r from-[#009FB2] to-[#4CBE1F]">
                 <a class="w-full" href="javascript:;" data-folderid="{{$currentFolderName -> id}}" data-limit="{{$videos->perPage()}}">
                     <h5>
-                        <span name-folder>{{ $currentFolderName -> name_folder }}</span> - {{ $currentFolderName -> number_file }} files
+                        <span name-folder>{{ $currentFolderName->name_folder }}</span> - {{ $currentFolderName -> number_file }} files
                     </h5>
                 </a>
                 <li class="list-none pl-4">

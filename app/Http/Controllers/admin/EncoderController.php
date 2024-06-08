@@ -9,7 +9,7 @@ use App\Models\SvEncoder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
-class encoderController
+class EncoderController
 {
     public function startEncoderTask ()
     {

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home.home');
+    return view('dashboard.home.home');
 });
 
 Route::get('/play', function () {
@@ -24,11 +24,11 @@ Route::get('/play', function () {
 
 
 //-------------------------encoderController-------------------------------------------------------
-Route::get('/startEncoderTask', [\App\Http\Controllers\admin\encoderController::class, 'startEncoderTask']);
-Route::get('/finishEncoder', [\App\Http\Controllers\admin\encoderController::class, 'finishEncoder']);
+Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'startEncoderTask']);
+Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
 //-------------------------storageController-------------------------------------------------------
-Route::get('/startStorageTask', [\App\Http\Controllers\admin\storageController::class, 'startStorageTask']);
-Route::get('/finishStorage', [\App\Http\Controllers\admin\storageController::class, 'finishStorage']);
+Route::get('/startStorageTask', [\App\Http\Controllers\admin\StorageController::class, 'startStorageTask']);
+Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::class, 'finishStorage']);
 //-------------------------transferController------------------------------------------------------
 Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
 Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
@@ -37,7 +37,7 @@ Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferControl
 Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
 Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
 
-Route::get('/t/{slug}', [\App\Http\Controllers\play\playController::class, 'play']);
+Route::get('/t/{slug}', [\App\Http\Controllers\Play\PlayController::class, 'play']);
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
 Auth::routes();
@@ -50,9 +50,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/getProgressTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgressTransfer']);
 
     Route::resource('/video', \App\Http\Controllers\Dashboard\VideoController::class);
-    Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('video.control');
-    Route::post('/video/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple'])->name('video.destroyMultiple');
-    Route::post('/videos/move', [\App\Http\Controllers\Dashboard\VideoController::class, 'moveVideos'])->name('video.move');
+    Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('dashboard.video.control');
+    Route::post('/video/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple'])->name('dashboard.video.destroyMultiple');
+    Route::post('/videos/move', [\App\Http\Controllers\Dashboard\VideoController::class, 'moveVideos'])->name('dashboard.video.move');
     Route::resource('folder', \App\Http\Controllers\Dashboard\FolderController::class);
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     route::get('report',function (){
         $data['title'] = 'report';
-        return view('report.report', $data);
+        return view('dashboard.report.report', $data);
     });
     route::get('support',function (){
         $data['title'] = 'Support';

@@ -10,7 +10,7 @@ use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
-class storageController
+class StorageController
 {
     public function startStorageTask ()
     {

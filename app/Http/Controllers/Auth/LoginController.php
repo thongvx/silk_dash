@@ -41,7 +41,7 @@ class LoginController extends Controller
     public function redirectTo()
     {
         if (auth()->user()->hasRole('admin')) {
-            return route('adminHome');
+            return route('dashboard');
         }
 
         return route('dashboard');
