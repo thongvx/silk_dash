@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\play;
+namespace App\Http\Controllers\Play;
 
 
 use App\Models\Video;
