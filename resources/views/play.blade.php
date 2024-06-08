@@ -56,8 +56,13 @@
             var check_logo = false;
         else
             var check_logo = true;
-        var urlLogoLink = '<?= $data_setting->logo_link ?>';
+        var url_logo_link = '<?= $data_setting->logo_link ?>';
         var position = '<?= $data_setting->position ?>';
+        var show_title = '<?= $data_setting->show_title ?>';
+        if(show_title == '0')
+            var title = '';
+        else
+            var title = '<?= $title ?>';
         playerInstance.setup({
             width: "100%",
             height: "100%",
@@ -74,11 +79,11 @@
             sources: [{ file: '{{ $urlPlay }}', type: "hls" }],
             logo: {
                 "file": logo,
-                "link": urlLogoLink,
+                "link": url_logo_link,
                 "hide": check_logo,
                 "position": position
             },
-            title : 'title',
+            title : title,
             tracks: [{
                 file: '',
                 label: "captions",
