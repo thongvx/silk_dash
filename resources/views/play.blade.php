@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" />
     <script src="https://cdn.jsdelivr.net/npm/cdnbye@latest/dist/jwplayer.provider.hls.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://emturbovid.com/frontend/js/jwplayer.js"></script>
     <script src="https://cdn.jwplayer.com/libraries/5Mr0zETT.js"></script>
     <style>
         .container-fluid .col-md-12{
@@ -47,16 +46,30 @@
     </div>
 </div>
 <script>
+    checksandbox();
     player();
     async function player() {
         var playerInstance = jwplayer("video_player");
+        var poster = '<?= $poster ?>';
+        var logo = '<?= $logo ?>';
+        if(logo == '0')
+            var check_logo = false;
+        else
+            var check_logo = true;
+        var url_logo_link = '<?= $logo_link ?>';
+        var position = '<?= $position ?>';
+        var show_title = '<?= $show_title ?>';
+        if(show_title == '0')
+            var title = '';
+        else
+            var title = '<?= $title ?>';
         playerInstance.setup({
             width: "100%",
             height: "100%",
             autostart: false,
             controls: true,
             mute: false,
-            image: '',
+            image: poster,
             primary: "hlsjs",
             preload: true,
             aspectratio: "16:9",
@@ -65,12 +78,12 @@
             skin: { active: "rgb(221,51,51)", },
             sources: [{ file: '{{ $urlPlay }}', type: "hls" }],
             logo: {
-                "file": '',
-                "link": '',
-                "hide": '',
-                "position": ''
+                "file": logo,
+                "link": url_logo_link,
+                "hide": check_logo,
+                "position": position
             },
-            title : 'title',
+            title : title,
             tracks: [{
                 file: '',
                 label: "captions",
@@ -88,7 +101,7 @@
         });
     }
     function checksandbox(){
-        function r(){window.location.href='https://emturbovid.com/sandbox'}
+        function r(){window.location.href='https://google.com'}
         try{if(window.frameElement.hasAttribute("sandbox"))r();return}catch(t){}
         try{document.domain=document.domain}catch(t){try{if(-1!=t.toString().toLowerCase().indexOf("sandbox"))r();return}catch(t){}}
         try{if(!window.navigator.plugins["namedItem"]("Chrome PDF Viewer")) return false}catch(e){return false}
@@ -100,7 +113,6 @@
         document.body.appendChild(e);
         setTimeout(function(){e.parentNode.removeChild(e)},150);
     }
-
 
     function svgLabel(a) {
         if (a == '360p') {
@@ -132,6 +144,7 @@
             $('.jw-settings-quality').attr('aria-checked', true);
         },"qSwitch");
     }
+
 </script>
 
 </body>

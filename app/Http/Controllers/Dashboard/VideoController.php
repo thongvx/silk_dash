@@ -62,8 +62,7 @@ class VideoController
     private function convertVideoSizes($videos)
     {
         foreach ($videos as $video) {
-                $video->size = $this->convertFileSize($video->size);
-
+            $video->size = $this->convertFileSize($video->size);
         }
     }
     // Convert file size
@@ -82,7 +81,7 @@ class VideoController
     public function index(Request $request)
     {
         $data = $this->getVideoData($request);
-        return view('video.index', $data);
+        return view('dashboard.video.index', $data);
     }
     // Control
     public function control(Request $request)
@@ -155,7 +154,7 @@ class VideoController
             'direction' => $request->input('direction', 'asc'),
         ];
 
-        return view('video.search', $data);
+        return view('dashboard.video.search', $data);
     }
     //mover video
     public function moveVideos(Request $request)

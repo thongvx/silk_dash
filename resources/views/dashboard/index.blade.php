@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
 @section('content')
     <div class="flex flex-wrap -mx-3">
@@ -165,7 +165,7 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                    class="border-black/12.5 bg-[#121520] shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                class="border-black/12.5 bg-[#121520] shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
                     <h6 class="text-[#009FB2] font-bold">Statistics</h6>
                     <p class="mb-0 text-sm leading-normal">
@@ -189,7 +189,7 @@
                 </div>
                 <div class="grid grid-cols-1 gap-4 px-4 mt-3 h-[calc(380px)] overflow-auto">
                     <div
-                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                        class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -202,7 +202,7 @@
                         </div>
                     </div>
                     <div
-                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                        class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -215,7 +215,7 @@
                         </div>
                     </div>
                     <div
-                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
+                        class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
                         <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
                         <div>
                             <h6 class="text-red-500 font-bold">
@@ -236,7 +236,7 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                    class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#121520] border-black-125 rounded-2xl bg-clip-border">
+                class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#121520] border-black-125 rounded-2xl bg-clip-border">
                 <div class="p-4 pb-0 mb-0 rounded-t-4">
                     <div class="flex justify-between">
                         <h6 class="mb-2 text-[#009FB2] font-bold text-lg">Top 10 viewed videos today</h6>
@@ -244,7 +244,7 @@
                 </div>
                 <div class="overflow-auto h-[calc(25vh)]">
                     <table
-                            class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
+                        class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
                         <tbody>
                         <tr>
                             <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
@@ -255,7 +255,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -270,7 +270,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -285,7 +285,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -300,7 +300,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -315,7 +315,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -330,7 +330,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -345,7 +345,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -360,7 +360,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -375,7 +375,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -390,7 +390,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <h6 class="mb-0 text-sm leading-normal">3400</h6>
                                 </div>
@@ -403,13 +403,13 @@
         </div>
         <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
             <div
-                    class="border-black/12.5 shadow-xl bg-[#121520] relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                class="border-black/12.5 shadow-xl bg-[#121520] relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="p-4 pb-0 rounded-t-4">
                     <h6 class="mb-0 text-[#009FB2] font-bold text-lg">Top Country</h6>
                 </div>
                 <div class="overflow-auto">
                     <table
-                            class="items-center w-full mb-4 align-top border-collapse border-gray-200 ">
+                        class="items-center w-full mb-4 align-top border-collapse border-gray-200 ">
                         <tbody>
                         <tr>
                             <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
@@ -440,7 +440,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <p class="mb-0 text-xs font-semibold leading-tight">
                                         Bounce:</p>
@@ -477,7 +477,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <p class="mb-0 text-xs font-semibold leading-tight">
                                         Bounce:</p>
@@ -514,7 +514,7 @@
                                 </div>
                             </td>
                             <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
+                                class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
                                 <div class="flex-1 text-center">
                                     <p class="mb-0 text-xs font-semibold leading-tight">
                                         Bounce:</p>
@@ -567,6 +567,6 @@
 @endsection
 
 @section('scripts')
-{{--    @vite('resources/js/chart/filechart.js')--}}
-{{--    @vite('resources/js/chart/charts.js')--}}
+    {{--    @vite('resources/js/chart/filechart.js')--}}
+    {{--    @vite('resources/js/chart/charts.js')--}}
 @endsection

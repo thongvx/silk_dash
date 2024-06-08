@@ -29,7 +29,7 @@ class UploadController
             'currentFolderName' => $this->folderRepo->getAllFolders($user->id)->last(),
             'getProgressTransfer' => $this->getProgressTransfer(),
         ];
-        return view('upload.upload', $data);
+        return view('dashboard.upload.upload', $data);
     }
 
     public function upload($tab)
@@ -41,13 +41,13 @@ class UploadController
         switch ($tab) {
             case 'transfer':
                 $data['getProgressTransfer'] = $this->getProgressTransfer();
-                return view('upload.transfer', $data);
+                return view('dashboard.upload.transfer', $data);
             case 'FTP':
-                return view('upload.FTP', $data);
+                return view('dashboard.upload.FTP', $data);
             case 'clone':
-                return view('upload.clone', $data);
+                return view('dashboard.upload.clone', $data);
             default:
-                return view('upload.webupload', $data);
+                return view('dashboard.upload.webupload', $data);
         }
 
     }
