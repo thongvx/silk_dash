@@ -65,9 +65,9 @@ class PlayController
                                             'poster' => $poster,
                                             'title' => $title,
                                             'logo' => $data_setting->logo,
-                                            'logo_link' => $data_setting->logo_link,
+                                            'logo_link' => $data_setting->logoLink,
                                             'position' => $data_setting->position,
-                                            'show_title' => $data_setting->show_title,
+                                            'show_title' => $data_setting->showTitle,
                                           ]);
             }
         }
