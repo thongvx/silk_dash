@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\play;
 
 
-use App\Factories\DownloadFactory;
 use App\Models\Video;
 use App\Models\SvStream;
 use App\Models\EncoderTask;
 use App\Jobs\CreateHlsJob;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Queue;
 
