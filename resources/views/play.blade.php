@@ -46,22 +46,9 @@
 
     </div>
 </div>
-<script src="https://cdn.rawgit.com/sitexw/BlockAdBlock/master/blockadblock.js"></script>
 <script>
     checksandbox();
-    var blockAdBlock = new BlockAdBlock({
-        checkOnLoad: true,
-        resetOnEnd: true
-    });
-    blockAdBlock.onDetected(function() {
-        console.log("AdBlock is enabled.");
-        // Handle AdBlock detection here
-    });
-
-    blockAdBlock.onNotDetected(function() {
-        console.log("AdBlock is not enabled.");
-        // Handle normal operation here
-    });
+    detectAdBlock();
     player();
     async function player() {
         var playerInstance = jwplayer("video_player");
@@ -129,16 +116,16 @@
         setTimeout(function(){e.parentNode.removeChild(e)},150);
     }
 
-    function checkAdBlocker() {
-        var testAd = document.createElement('div');
-        testAd.innerHTML = '&nbsp;';
-        testAd.className = 'adsbox';
-        document.body.appendChild(testAd);
-        if (testAd.offsetHeight === 0) {
-            return true;
+    async function detectAdBlock() {
+        let adBlockEnabled = false
+        const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+        try {
+            await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
+        } catch (e) {
+            adBlockEnabled = true
+        } finally {
+            console.log(`AdBlock Enabled: ${adBlockEnabled}`)
         }
-        document.body.removeChild(testAd);
-        return false;
     }
 
     function svgLabel(a) {
