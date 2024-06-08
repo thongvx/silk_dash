@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('email');
             $table->string('topic');
             $table->string('subject');
             $table->string('status')->default('open');

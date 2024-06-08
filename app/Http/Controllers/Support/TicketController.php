@@ -58,12 +58,14 @@ class TicketController
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'email' => 'required|email',
             'topic' => 'required|string',
             'subject' => 'required|string',
         ]);
 
         $ticket = new Ticket;
         $ticket->user_id = Auth::user()->id;
+        $ticket->email = $validated['email'];
         $ticket->topic = $validated['topic'];
         $ticket->subject = $validated['subject'];
 
