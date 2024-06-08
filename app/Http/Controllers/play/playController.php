@@ -12,10 +12,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Queue;
 
-class playController
+class PlayController
 {
     public function play($slug)
     {
+
         $data = Video::where('slug', $slug)->first();
         if(!empty($data) && $data->soft_delete == 0){
             if($data->origin == 0){
