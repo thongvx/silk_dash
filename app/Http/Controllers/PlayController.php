@@ -17,6 +17,8 @@ class PlayController
         if(!empty($data) && $data->soft_delete == 0){
             $user_id = $data->user_id;
             $title = $data->title;
+            if($data->check_duplicate == 0)
+                $data = Video::where('slug', $data->middle_slug)->first();
             if($data->origin == 0){
                 //play origin
                 $svUpload = EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload');
@@ -24,8 +26,6 @@ class PlayController
                 return view('play', ['urlPlay' => $urlPlay]);
             }
             else{
-                if($data->check_duplicate == 0)
-                    $data = Video::where('slug', $data->middle_slug)->first();
                 //check stream
                 if($data->pathStream == 0)
                     $data->pathStream = $this->selectPathStream($data->sd, $data->hd, $data->fhd);
