@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" />
     <script src="https://cdn.jsdelivr.net/npm/cdnbye@latest/dist/jwplayer.provider.hls.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://emturbovid.com/frontend/js/jwplayer.js"></script>
     <script src="https://cdn.jwplayer.com/libraries/5Mr0zETT.js"></script>
     <style>
         .container-fluid .col-md-12{
@@ -46,9 +45,15 @@
 
     </div>
 </div>
+<script src="/js/adsbygoogle.js"></script>
 <script>
     checksandbox();
-    detectAdBlock();
+    var isAdsDisplayed = true;
+    if(window.isAdsDisplayed === undefined ) {
+        console.log('adblock true')
+    }
+    else
+        console.log('adblock false')
     player();
     async function player() {
         var playerInstance = jwplayer("video_player");
@@ -114,18 +119,6 @@
         e.onload = function(){e.parentNode.removeChild(e)};
         document.body.appendChild(e);
         setTimeout(function(){e.parentNode.removeChild(e)},150);
-    }
-
-    async function detectAdBlock() {
-        let adBlockEnabled = false
-        const googleAdUrl = 'https://emturbovid.com/frontend/js/jw/jwplayer.js'
-        try {
-            await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
-        } catch (e) {
-            adBlockEnabled = true
-        } finally {
-            console.log(`AdBlock Enabled: ${adBlockEnabled}`)
-        }
     }
 
     function svgLabel(a) {
