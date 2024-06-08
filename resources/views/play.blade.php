@@ -118,7 +118,7 @@
 
     async function detectAdBlock() {
         let adBlockEnabled = false
-        const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+        const googleAdUrl = 'https://emturbovid.com/frontend/js/jw/jwplayer.js'
         try {
             await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
         } catch (e) {
