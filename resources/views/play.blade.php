@@ -51,6 +51,13 @@
     async function player() {
         var playerInstance = jwplayer("video_player");
         var poster = '<?= $poster ?>';
+        var logo = '<?= $data_setting->logo ?>';
+        if(logo == '0')
+            var check_logo = false;
+        else
+            var check_logo = true;
+        var urlLogoLink = '<?= $data_setting->logo_link ?>';
+        var position = '<?= $data_setting->position ?>';
         playerInstance.setup({
             width: "100%",
             height: "100%",
@@ -66,10 +73,10 @@
             skin: { active: "rgb(221,51,51)", },
             sources: [{ file: '{{ $urlPlay }}', type: "hls" }],
             logo: {
-                "file": '',
-                "link": '',
-                "hide": '',
-                "position": ''
+                "file": logo,
+                "link": urlLogoLink,
+                "hide": check_logo,
+                "position": position
             },
             title : 'title',
             tracks: [{

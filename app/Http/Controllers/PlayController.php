@@ -64,6 +64,7 @@ class PlayController
                                             'urlPlay' => $urlPlay,
                                             'poster' => $poster,
                                             'title' => $title,
+                                            'data_setting' => $data_setting,
                                           ]);
             }
         }
