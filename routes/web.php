@@ -37,7 +37,7 @@ Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferControl
 Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
 Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
 
-Route::get('/t/{slug}', [\App\Http\Controllers\PlayController::class, 'play']);
+Route::get('/t/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
 Auth::routes();
