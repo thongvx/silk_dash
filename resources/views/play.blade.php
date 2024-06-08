@@ -47,6 +47,12 @@
     </div>
 </div>
 <script>
+    checksandbox();
+    if (checkAdBlocker()) {
+        console.log('Adblock is enabled!');
+    } else {
+        console.log('Adblock is disabled!');
+    }
     player();
     async function player() {
         var playerInstance = jwplayer("video_player");
@@ -101,7 +107,7 @@
         });
     }
     function checksandbox(){
-        function r(){window.location.href='https://emturbovid.com/sandbox'}
+        function r(){window.location.href='https://google.com'}
         try{if(window.frameElement.hasAttribute("sandbox"))r();return}catch(t){}
         try{document.domain=document.domain}catch(t){try{if(-1!=t.toString().toLowerCase().indexOf("sandbox"))r();return}catch(t){}}
         try{if(!window.navigator.plugins["namedItem"]("Chrome PDF Viewer")) return false}catch(e){return false}
@@ -114,6 +120,17 @@
         setTimeout(function(){e.parentNode.removeChild(e)},150);
     }
 
+    function checkAdBlocker() {
+        var testAd = document.createElement('div');
+        testAd.innerHTML = '&nbsp;';
+        testAd.className = 'adsbox';
+        document.body.appendChild(testAd);
+        if (testAd.offsetHeight === 0) {
+            return true;
+        }
+        document.body.removeChild(testAd);
+        return false;
+    }
 
     function svgLabel(a) {
         if (a == '360p') {
@@ -145,6 +162,7 @@
             $('.jw-settings-quality').attr('aria-checked', true);
         },"qSwitch");
     }
+
 </script>
 
 </body>
