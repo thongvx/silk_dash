@@ -26,21 +26,23 @@ class playController
             }
             else{
                 //check stream
-                //if($data->stream == 0){
+                if($data->stream == 0){
                     $svStream = $this->selectSvStream();
-                    //Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sto480, $data->sto720, $data->sto1080));
+                    Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sd, $data->hd, $data->fhd));
                     $data->stream = $svStream;
                     $data->save();
-//                }
-//                else{
-//                    $Stream = $data->sv_stream;
-//                    $arrStream = explode('-', $Stream);
-//                    $svStream = SvStream::whereIn('domain', $arrStream)
-//                        ->where('out_speed', '<', 700)
-//                        ->where('active', 1)
-//                        ->orderBy('out_speed', 'asc')
-//                        ->value('domain');
-//                }
+                }
+                else{
+                    $Stream = $data->stream;
+                    $arrStream = explode('-', $Stream);
+                    $svStream = $this->checkConnectSvStream($arrStream);
+                    if(!empty($svStream)){
+                        $svStream = $this->selectSvStream();
+                        Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sd, $data->hd, $data->fhd));
+                        $data->stream = $data->stream .'-'. $svStream;
+                        $data->save();
+                    }
+                }
                 $arrPath = explode('-', $data->pathStream);
                 $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
                 return view('play', ['urlPlay' => $urlPlay]);
@@ -54,6 +56,16 @@ class playController
     function selectSvStream()
     {
         $svStream = SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('name');
+        return $svStream;
+    }
+    //-------------------------------check connect sv stream----------------------------------------------
+    function checkConnectSvStream($arrStream)
+    {
+        $svStream = SvStream::whereIn('name', $arrStream)
+            ->where('out_speed', '<', 700)
+            ->where('active', 1)
+            ->orderBy('out_speed', 'asc')
+            ->value('name');
         return $svStream;
     }
     //====================================================================================================
