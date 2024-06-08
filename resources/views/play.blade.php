@@ -45,15 +45,8 @@
 
     </div>
 </div>
-<script src="/js/adsbygoogle.js"></script>
 <script>
     checksandbox();
-    var isAdsDisplayed = true;
-    if(window.isAdsDisplayed === undefined ) {
-        console.log('adblock true')
-    }
-    else
-        console.log('adblock false')
     player();
     async function player() {
         var playerInstance = jwplayer("video_player");
