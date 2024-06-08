@@ -46,4 +46,8 @@ class CreateHlsJob implements ShouldQueue
         curl_close($curl);
         return $response;
     }
+    public function tags()
+    {
+        return [$this->sv];
+    }
 }
