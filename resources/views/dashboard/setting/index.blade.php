@@ -53,7 +53,7 @@
                                     <div class="px-2 pt-4 md:p-4">
                                         <div id="box-content" setting
                                              class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
-                                            @include('dashboard.'.request()->path() . 'result-type' . request()->get('tab'))
+                                            @include('dashboard.'.request()->path() . '.' . request()->get('tab'))
                                         </div>
                                     </div>
                                 </div>

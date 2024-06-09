@@ -12,7 +12,6 @@ export function Upload_FILE (){
     var $uploadList = $("#list-upload-file");
     var $fileUpload = $('#file');
     if ($uploadList.length > 0 && $fileUpload.length > 0) {
-        console.log('a')
         const form = $('#form-upload-file')[0];
         var formData = new FormData(form);
         var userIDValue = formData.get('userID');

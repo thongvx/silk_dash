@@ -62,11 +62,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     route::get('dmca',function (){
         $data['title'] = 'DMCA';
-        return view('dmca.dmca', $data);
+        return view('dashboard.dmca.dmca', $data);
     });
     route::get('dmca/1',function (){
         $data['title'] = 'DMCA';
-        return view('dmca.dmcaInfo', $data);
+        return view('dashboard.dmca.dmcaInfo', $data);
     });
 
     route::get('report',function (){
@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     route::get('premium',function (){
         $data['title'] = 'Premium';
-        return view('premium', $data);
+        return view('dashboard.premium', $data);
     });
     Route::resource('/setting', \App\Http\Controllers\Setting\SettingController::class);
 

@@ -38,13 +38,13 @@ class ModelHelpers
                 return $this->AccountController->index($tab);
             case 'video':
                 $data = $this->videoController->getVideoData($request);
-                return view($page.'.'.$tab, $data);
+                return view('dashboard.'.$page.'.'.$tab, $data);
             case 'upload':
                 return $this->uploadController->upload($tab);
             case 'support':
                 return $this->TicketController->ticket($tab);
             default:
-                return view($page.'.'.$tab);
+                return view('dashboard.'.$page.'.'.$tab);
         }
     }
 }

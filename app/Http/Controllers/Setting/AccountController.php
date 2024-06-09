@@ -25,17 +25,17 @@ class AccountController extends Controller
         $activities = $this->activityRepo->getAllActivity($userid);
         switch ($tab) {
             case 'accountsetting':
-                return view('setting.accountsetting', compact('setting'));
+                return view('dashboard.setting.accountsetting', compact('setting'));
             case 'playersetting':
-                return view('setting.playersetting', compact('setting'));
+                return view('dashboard.setting.playersetting', compact('setting'));
             case 'customdomain':
-                return view('setting.customdomain', compact('setting'));
+                return view('dashboard.setting.customdomain', compact('setting'));
             case 'customads':
-                return view('setting.customads', compact('setting'));
+                return view('dashboard.setting.customads', compact('setting'));
             case 'activities':
-                return view('setting.activities', compact('activities'));
+                return view('dashboard.setting.activities', compact('activities'));
             default:
-                return view('setting.profile', compact('setting'));
+                return view('dashboard.setting.profile', compact('setting'));
         }
     }
 

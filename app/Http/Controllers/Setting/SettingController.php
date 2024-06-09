@@ -27,7 +27,7 @@ class SettingController
             'setting' => $this->accountRepo->getAllSetting($user->id),
             'activities' => $this->activityRepo->getAllActivity($user->id),
         ];
-        return view('setting.index', $data);
+        return view('dashboard.setting.index', $data);
     }
     public function show()
     {

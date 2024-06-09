@@ -33,7 +33,7 @@ class VideoController
             'title' => 'Video',
             'folders' => $folders,
             'currentFolderName' => $folders->firstWhere('id', $folderId),
-            'direction' => $request->input('direction', 'asc'),
+            'direction' => $request->input('direction', 'desc'),
             'column' => $request->input('column', 'created_at'),
             'videos' => $this->getVideos($request, $user->id, $folderId),
             'poster' => $request->input('poster'),
@@ -48,7 +48,7 @@ class VideoController
         $tab = request()->get('tab');
         $search = $request->input('search');
         $column = $request->input('column', 'created_at');
-        $direction = $request->input('direction', 'asc');
+        $direction = $request->input('direction', 'desc');
         $limit = $request->input('limit', 20);
         $page = $request->input('page', 1);
         if ($tab == 'processing') {
@@ -89,7 +89,7 @@ class VideoController
         $data = $this->getVideoData($request);
         $tab = $request->input('tab');
         if ($tab != 'processing') {
-            return view('video.table', $data);
+            return view('dashboard.video.table', $data);
         }else {
             return response('');
         }

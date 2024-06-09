@@ -23,7 +23,7 @@ class TicketController
             'title' => 'support',
             'tickets' => $tickets
         ];
-        return view('support.support', $data);
+        return view('dashboard.support.support', $data);
     }
 
     public function ticket($tab)
@@ -37,13 +37,13 @@ class TicketController
         ];
         switch ($tab) {
             case 'ticket':
-                return view('support.ticket', $data);
+                return view('dashboard.support.ticket', $data);
             case 'newticket':
-                return view('support.newticket', $tickets);
+                return view('dashboard.support.newticket', $tickets);
             case 'apiDocuments':
-                return view('support.apiDocuments');
+                return view('dashboard.support.apiDocuments');
             default:
-                return view('support.knowledge');
+                return view('dashboard.support.knowledge');
         }
     }
     //create ticket
@@ -52,7 +52,7 @@ class TicketController
         $data = [
             'title' => 'support',
         ];
-        return view('support.newticket', $data);
+        return view('dashboard.support.newticket', $data);
     }
     //store ticket
     public function store(Request $request)

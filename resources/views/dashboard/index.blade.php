@@ -4,7 +4,7 @@
     <div class="flex flex-wrap -mx-3">
         <div class="w-full text-[#009FB2] mb-6 pl-3">
             <h2 class="text-4xl font-bold italic">
-                Welcome back to {{\Illuminate\Support\Facades\Auth::user()->name}},
+                Welcome back to {{\Illuminate\Support\Facades\Auth::user()->name}}
             </h2>
         </div>
         <!-- card -->

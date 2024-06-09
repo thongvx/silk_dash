@@ -91,7 +91,7 @@ $(document).on('click', '.sortable-column', function() {
 $(document).on('click', '.page', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
-    const direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
+    const direction = urlParams.get('direction') === null ? 'desc' : urlParams.get('direction');
     const folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
     const limit = urlParams.get('limit') === null ? '20' : urlParams.get('limit');
     const page = $(this).data('page');
@@ -101,7 +101,7 @@ $(document).on('click', '.page', function() {
 $(document).on('change', '#limit', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
-    const direction = urlParams.get('direction') === null ? 'asc' : urlParams.get('direction');
+    const direction = urlParams.get('direction') === null ? 'desc' : urlParams.get('direction');
     const folderId = urlParams.get('folderId') === null ? '' : urlParams.get('folderId');
     const limit = $(this).val();
     const page = '';
@@ -129,7 +129,7 @@ $(document).on('click', '[btn-poster]', function() {
 $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const column = urlParams.get('column') || 'created_at';
-    const direction = urlParams.get('direction') || 'asc';
+    const direction = urlParams.get('direction') || 'desc';
     const folderId = $(this).data('folderid');
     const limit = urlParams.get('limit') === null ? $(this).data('limit') : urlParams.get('limit');
     const box_folder = $(this).closest('[folder]');
