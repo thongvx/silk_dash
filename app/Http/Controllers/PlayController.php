@@ -10,6 +10,7 @@ use App\Models\Video;
 use App\Models\AccountSetting;
 use App\Repositories\AccountRepo;
 use App\Repositories\VideoRepo;
+use App\Services\ServerStream\SvStreamService;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redis;
 
@@ -37,10 +38,10 @@ class PlayController
                 return view('play', ['urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload') . '.streamsilk.com/uploads/' . $slug . '.' . $video->format]);
             } else {
                 $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
-                $svStream = $video->stream == 0 ? $this->selectSvStream() : $this->checkConnectSvStream(explode('-', $video->stream));
+                $svStream = $video->stream == 0 ? SvStreamService::selectSvStream() : SvStreamService::checkConnectSvStream(explode('-', $video->stream));
 
                 if (empty($svStream)) {
-                    $svStream = $this->selectSvStream();
+                    $svStream = SvStreamService::selectSvStream();
                     Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                     $video->stream = $video->stream . '-' . $svStream;
                     $video->save();
