@@ -40,7 +40,7 @@ class PlayController
                 $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
                 $svStream = $video->stream == 0 ? SvStreamService::selectSvStream() : SvStreamService::checkConnectSvStream(explode('-', $video->stream));
 
-                if ($video->stream) {
+                if ($video->stream == 0) {
                     $svStream = SvStreamService::selectSvStream();
                     Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                     $video->stream = $video->stream . '-' . $svStream;
