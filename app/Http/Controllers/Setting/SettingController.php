@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\AccountRepo;
-use App\Repositories\ActivityRepo;
 use Illuminate\Support\Facades\Validator;
 
 

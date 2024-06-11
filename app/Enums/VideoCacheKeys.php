@@ -10,4 +10,6 @@ enum VideoCacheKeys: string
     case All_Folder_For_User = 'all_folder_for_user:';
 
     case ALL_ENCODER_TASKS = 'all_encoder_tasks:';
+
+    case GET_VIDEO_BY_SLUG = 'video_by_slug:';
 }

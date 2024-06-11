@@ -112,3 +112,5 @@ Route::get('/video/{id}/stream/dash/{segment}/info/download', [App\Http\Controll
 
 Route::get('/video/{id}/stream/hls/playlist.m3u8', [App\Http\Controllers\StreamController::class, 'hlsPlaylist']);
 
+Route::get('updateView/{videoId}', [\App\Http\Controllers\Play\VideoViewController::class, 'updateView']);
+

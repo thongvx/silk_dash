@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Enums\AccountSettingCacheKeys;
 use App\Models\AccountSetting;
+use Illuminate\Support\Facades\Redis;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class AccountRepo extends BaseRepository
@@ -12,10 +14,16 @@ class AccountRepo extends BaseRepository
         return AccountSetting::class;
     }
 
-    public function getAllSetting($userId)
+    public function getSetting($userId)
     {
-        return $this->query()
-            ->where('user_id', $userId)
-            ->first();
+        $setting = unserialize(Redis::get(AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $userId));
+        if (!$setting) {
+            $setting = $this->query()
+                ->where('user_id', $userId)
+                ->first();
+            Redis::setex(AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $userId, 2592000, serialize($setting));
+
+        }
+        return $setting;
     }
 }

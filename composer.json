@@ -10,13 +10,14 @@
         "guzzlehttp/guzzle": "^7.2",
         "infyomlabs/laravel-ui-adminlte": "^5.2",
         "laravel/framework": "^10.10",
-        "laravel/horizon": "*",
+        "laravel/horizon": "^5.24",
         "laravel/sanctum": "^3.3",
         "phpmailer/phpmailer": "^6.9",
         "predis/predis": "^2.2",
         "prettus/l5-repository": "^2.9",
         "spatie/laravel-permission": "^6.4",
-        "whichbrowser/parser": "^2.1"
+        "whichbrowser/parser": "^2.1",
+        "ext-redis": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.12",

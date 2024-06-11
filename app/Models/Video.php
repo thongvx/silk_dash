@@ -46,6 +46,7 @@ class Video extends Model
         static::saved(function ($model) {
             if (!$model->isDirty('total_play' && !$model->isDirty('quality'))) {
                 $model->deleteCache();
+                Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $model->slug);
             }
         });
 

@@ -2,106 +2,86 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Enums\VideoCacheKeys;
 use App\Jobs\CreateHlsJob;
 use App\Models\EncoderTask;
 use App\Models\SvStream;
 use App\Models\Video;
 use App\Models\AccountSetting;
+use App\Repositories\AccountRepo;
+use App\Repositories\VideoRepo;
+use App\Services\ServerStream\SvStreamService;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Redis;
 
 class PlayController
 {
+    protected VideoRepo $videoRepo;
+    protected AccountRepo $accountRepo;
+
+    public function __construct(VideoRepo $videoRepo, AccountRepo $accountRepo)
+    {
+        $this->videoRepo = $videoRepo;
+        $this->accountRepo = $accountRepo;
+    }
+
     public function play($slug)
     {
-        $data = Video::where('slug', $slug)->first();
-        if(!empty($data) && $data->soft_delete == 0){
-            $user_id = $data->user_id;
-            $title = $data->title;
-            if($data->check_duplicate == 0)
-                $data = Video::where('slug', $data->middle_slug)->first();
-            //get setting user
-            $data_setting = AccountSetting::where('user_id', $user_id)->first();
-            //check poster
-            if($data_setting->gridPoster == 5)
-                $poster = $data->grid_poster_5;
-            elseif($data_setting->gridPoster == 3)
-                $poster = $data->grid_poster_3;
-            else
-                $poster = $data->poster;
-            //check stream
-            if($data->origin == 0){
-                //play origin
-                $svUpload = EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload');
-                $urlPlay = 'https://'.$svUpload.'.streamsilk.com/uploads/'.$slug.'.'.$data->format;
-                return view('play', ['urlPlay' => $urlPlay]);
-            }
-            else{
-                //check stream
-                if($data->pathStream == 0)
-                    $data->pathStream = $this->selectPathStream($data->sd, $data->hd, $data->fhd);
+        $video = $this->videoRepo->findVideoBySlug($slug);
 
-                if($data->stream == 0){
-                    $svStream = $this->selectSvStream();
-                    Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sd, $data->hd, $data->fhd));
-                    $data->stream = $svStream;
-                    $data->save();
+        if ($video && $video->soft_delete == 0) {
+            $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
+            $data_setting = $this->accountRepo->getSetting($video->user_id);
+            $poster = $data_setting->gridPoster == 5 ? $video->grid_poster_5 : ($data_setting->gridPoster == 3 ? $video->grid_poster_3 : $video->poster);
+
+            if ($video->origin == 0) {
+                return view('play', ['urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload') . '.streamsilk.com/uploads/' . $slug . '.' . $video->format]);
+            } else {
+                $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
+
+                //Todo: sua doan nay
+                $svStream = $video->stream == 0 ? SvStreamService::selectSvStream() : SvStreamService::checkConnectSvStream(explode('-', $video->stream));
+
+                if ($video->stream == 0) {
+                    $svStream = SvStreamService::selectSvStream();
+                    Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                    $video->stream =  $svStream;
+                    $video->save();
+                }else{
+                    //Todo: sua doan nay
+                    $video->stream = $video->stream . '-' . $svStream;
+                    $video->save();
                 }
-                else{
-                    $Stream = $data->stream;
-                    $arrStream = explode('-', $Stream);
-                    $svStream = $this->checkConnectSvStream($arrStream);
-                    if(empty($svStream)){
-                        $svStream = $this->selectSvStream();
-                        Queue::push(new CreateHlsJob($data->middle_slug, $svStream, $data->pathStream, $data->sd, $data->hd, $data->fhd));
-                        $data->stream = $data->stream .'-'. $svStream;
-                        $data->save();
-                    }
-                }
-                $arrPath = explode('-', $data->pathStream);
-                $urlPlay = 'https://'.$svStream.'.streamsilk.com/data/'.$arrPath[1].'/'.$data->middle_slug.'/master.m3u8';
-                return view('play', [
-                                            'urlPlay' => $urlPlay,
-                                            'poster' => $poster,
-                                            'title' => $title,
-                                            'logo' => $data_setting->logo,
-                                            'logo_link' => $data_setting->logoLink,
-                                            'position' => $data_setting->position,
-                                            'show_title' => $data_setting->showTitle,
-                                          ]);
+
+                $playData = [
+                    'urlPlay' => 'https://' . $svStream . '.streamsilk.com/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8',
+                    'poster' => $poster,
+                    'title' => $video->title,
+                    'logo' => $data_setting->logo,
+                    'logo_link' => $data_setting->logoLink,
+                    'position' => $data_setting->position,
+                    'show_title' => $data_setting->showTitle,
+                ];
+
+                return view('play', $playData);
             }
-        }
-        else{
-            echo '404 Not Found';
+        } else {
+            abort(404);
         }
     }
-    //-------------------------------select sv stream-----------------------------------------------------
+
     function selectSvStream()
     {
-        $svStream = SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('name');
-        return $svStream;
+        return SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('name');
     }
-    //-------------------------------check connect sv stream----------------------------------------------
+
     function checkConnectSvStream($arrStream)
     {
-        $svStream = SvStream::whereIn('name', $arrStream)
-            ->where('out_speed', '<', 700)
-            ->where('active', 1)
-            ->orderBy('out_speed', 'asc')
-            ->value('name');
-        return $svStream;
+        return SvStream::whereIn('name', $arrStream)->where('out_speed', '<', 700)->where('active', 1)->orderBy('out_speed', 'asc')->value('name');
     }
-    //-----------------------------select path stream-----------------------------------------------------
+
     function selectPathStream($sd, $hd, $fhd)
     {
-        $path = '0';
-        if($sd != 0)
-            $path = $sd;
-        elseif ($hd != 0)
-            $path = $hd;
-        elseif ($fhd != 0)
-            $path = $fhd;
-        return $path;
+        return $sd != 0 ? $sd : ($hd != 0 ? $hd : $fhd);
     }
-    //====================================================================================================
 }
