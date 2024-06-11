@@ -43,6 +43,9 @@ class PlayController
                 if ($video->stream == 0) {
                     $svStream = SvStreamService::selectSvStream();
                     Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                    $video->stream =  $svStream;
+                    $video->save();
+                }else{
                     $video->stream = $video->stream . '-' . $svStream;
                     $video->save();
                 }
