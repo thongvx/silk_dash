@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\AccountSettingCacheKeys;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 
 class AccountSetting extends Model
 {
@@ -29,4 +31,16 @@ class AccountSetting extends Model
         'disableDownload',
         'gridPoster',
     ];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::saved(function ($model) {
+            Redis::del(AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $model->user_id);
+        });
+    }
+
+
+
 }

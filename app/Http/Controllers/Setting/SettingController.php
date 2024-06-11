@@ -21,14 +21,14 @@ class SettingController
 
         $data=[
             'title' => 'setting',
-            'setting' => $this->accountRepo->getAllSetting($user->id),
+            'setting' => $this->accountRepo->getSetting($user->id),
         ];
         return view('setting.index', $data);
     }
     public function show()
     {
         $user = Auth::user();
-        $setting = $this->accountRepo->getAllSetting($user->id);
+        $setting = $this->accountRepo->getSetting($user->id);
         return response()->json($setting);
     }
 
@@ -47,7 +47,7 @@ class SettingController
             return response()->json(['errors' => $validator->errors()], 422);
         }
         $user = Auth::user();
-        $setting = $this->accountRepo->getAllSetting($user->id);
+        $setting = $this->accountRepo->getSetting($user->id);
         if ($setting) {
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo');

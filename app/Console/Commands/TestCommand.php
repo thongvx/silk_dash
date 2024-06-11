@@ -5,8 +5,10 @@ namespace App\Console\Commands;
 use App\Factories\DownloadFactory;
 use App\Models\SvStream;
 use App\Models\Video;
+use App\Services\ServerStream\SvStreamService;
 use Illuminate\Console\Command;
 use Faker\Factory as Faker;
+use Illuminate\Log\Logger;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Queue;
 use App\Jobs\CreateHlsJob;
@@ -32,30 +34,26 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $stream = 'ss01';
-        $arrStream = explode('-', $stream);
-        $svStream = SvStream::whereIn('name', $arrStream)
-            ->where('out_speed', '<', 700)
-            ->where('active', 1)
-            ->orderBy('out_speed', 'asc')
-            ->value('name');
-        echo $svStream;
+        //Tạo một SvStream rồi sau đó lưu vào thông qua SvStreamService
+        for ($i = 1; $i <= 10; $i++) {
+            // Tạo một SvStream
+            $svStream = new SvStream();
+            $svStream->name = 'Server Stream ' . $i;
+            $svStream->cpu = rand(1, 20); // Giả sử CPU là một số ngẫu nhiên từ 1 đến 20
+            $svStream->percent_space = rand(1, 100);
+            $svStream->out_speed = rand(100, 700);
+            $svStream->active = 1;
 
+            // Lưu SvStream thông qua SvStreamService
+            SvStreamService::upsertSvStream($svStream);
+        }
+
+        var_dump(SvStreamService::getAllStreamInfo());
+
+        $this->info('server được chọn là: ');
+        var_dump(SvStreamService::selectSvStream());
+        $this->info('Chi tiết server được chọn: ');
+        var_dump(SvStreamService::getStreamInfo(SvStreamService::selectSvStream()));
     }
-    function disguiseM3U8AsImage($m3u8FilePath, $originalImageFilePath)
-    {
-        // Đọc nội dung của file m3u8 và file ảnh gốc
-        $m3u8Content = file_get_contents($m3u8FilePath);
-        $originalImageContent = file_get_contents($originalImageFilePath);
-        $newImageFilePath = public_path('output.png');
-        // Tạo nội dung mới bằng cách nối nội dung file ảnh gốc và file m3u8
-        $newContent = $originalImageContent . $m3u8Content;
 
-        var_dump('ghi noi dung');
-        // Ghi nội dung mới vào file ảnh đã được cải trang
-        file_put_contents($newImageFilePath, $newContent);
-
-        // Trả về đường dẫn của file ảnh đã được cải trang
-        return $newImageFilePath;
-    }
 }

@@ -1,0 +1,94 @@
+<?php
+
+namespace App\Services\ServerStream;
+
+use Illuminate\Support\Facades\Redis;
+
+class SvStreamService
+{
+    public static function upsertSvStream($svStream)
+    {
+        $key = 'sv_streams:' . $svStream->name;
+
+        // Kiểm tra xem key đã tồn tại trong Redis hay chưa
+        if (Redis::exists($key)) {
+            // Nếu key đã tồn tại, cập nhật thông tin
+            Redis::hmset($key, [
+                'active' => $svStream->active,
+                'cpu' => $svStream->cpu,
+                'percent_space' => $svStream->percent_space,
+                'out_speed' => $svStream->out_speed,
+                // thêm các thuộc tính khác của $svStream ở đây
+            ]);
+        } else {
+            // Nếu key chưa tồn tại, thêm mới
+            Redis::hmset($key, [
+                'active' => $svStream->active,
+                'cpu' => $svStream->cpu,
+                'percent_space' => $svStream->percent_space,
+                'out_speed' => $svStream->out_speed,
+                // thêm các thuộc tính khác của $svStream ở đây
+            ]);
+            Redis::sadd('sv_streams', $key);
+        }
+    }
+
+    public static function selectSvStream()
+    {
+        $svStreamKeys = Redis::smembers('sv_streams');
+        foreach ($svStreamKeys as $svStreamKey) {
+            $svStream = Redis::hgetall($svStreamKey);
+            if ($svStream['active'] == 1 && $svStream['out_speed'] < 700 && $svStream['cpu'] < 10 && $svStream['percent_space'] < 95) {
+                return str_replace('sv_streams:', '', $svStreamKey);
+            }
+        }
+        return null;
+    }
+
+    public static function deleteSvStreamInRedis($svStream)
+    {
+        $key = 'sv_streams:' . $svStream->name;
+        Redis::del($key);
+        Redis::srem('sv_streams', $key);
+    }
+
+    public static function getStreamInfo($svStreamName)
+    {
+        $key = 'sv_streams:' . $svStreamName;
+        return Redis::hgetall($key);
+    }
+
+    //Get all stream server info
+    public static function getAllStreamInfo()
+    {
+        $svStreamKeys = Redis::smembers('sv_streams');
+        $svStreams = [];
+        foreach ($svStreamKeys as $svStreamKey) {
+            $svStream = Redis::hgetall($svStreamKey);
+            $svStream['name'] = str_replace('sv_streams:', '', $svStreamKey);
+            $svStreams[] = $svStream;
+        }
+        return $svStreams;
+    }
+
+    public static function checkConnectSvStream($arrStream)
+    {
+        $svStreamKeys = Redis::smembers('sv_streams');
+
+        foreach ($svStreamKeys as $svStreamKey) {
+            $svStreamName = str_replace('sv_streams:', '', $svStreamKey);
+
+            if (in_array($svStreamName, $arrStream)) {
+                $svStream = Redis::hgetall($svStreamKey);
+
+                if ($svStream['out_speed'] < 700 && $svStream['active'] == 1) {
+                    return $svStreamName;
+                }
+            }
+        }
+
+        // Nếu không tìm thấy server nào thỏa mãn, trả về null
+        return null;
+    }
+
+}

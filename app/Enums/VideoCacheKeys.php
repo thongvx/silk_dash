@@ -8,4 +8,6 @@ enum VideoCacheKeys: string
     case GET_PLAYER_FOR_VIDEO = 'player_video:';
 
     case All_Folder_For_User = 'all_folder_for_user:';
+
+    case GET_VIDEO_BY_SLUG = 'video_by_slug:';
 }

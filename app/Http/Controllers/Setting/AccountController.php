@@ -17,7 +17,7 @@ class AccountController extends Controller
     public function index($tab)
     {
         $user = Auth::user();
-        $setting = $this->accountRepo->getAllSetting($user->id);
+        $setting = $this->accountRepo->getSetting($user->id);
 
         switch ($tab) {
             case 'accountsetting':

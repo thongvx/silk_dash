@@ -13,7 +13,9 @@ class VideoRepo extends BaseRepository
     {
         return Video::class;
     }
-    public function getAllUserVideo($userId, $tab, $search ,$column , $direction, $folderId, $limit, $columns = ['*'], $page){
+
+    public function getAllUserVideo($userId, $tab, $search, $column, $direction, $folderId, $limit, $columns = ['*'], $page)
+    {
 
         $query = $this->query()
             ->where('user_id', $userId)
@@ -46,16 +48,29 @@ class VideoRepo extends BaseRepository
 //        Redis::setex($cacheKey, 259200, serialize($videos));
         return $videos;
     }
-    public function searchVideos($userId, $searchTerm,$limit,$column,$direction, $columns = ['*'], )
+
+    public function searchVideos($userId, $searchTerm, $limit, $column, $direction, $columns = ['*'],)
     {
         return $this->query()
-                    ->where('user_id', $userId)
-                    ->where(function ($query) use ($searchTerm) {
-                        $query->where('title', 'LIKE', '%' . $searchTerm . '%')
-                            ->orWhere('slug', 'LIKE', '%' . $searchTerm . '%');
-                    })
-                    ->orderBy($column, $direction)
-                    ->paginate($limit);
+            ->where('user_id', $userId)
+            ->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'LIKE', '%' . $searchTerm . '%')
+                    ->orWhere('slug', 'LIKE', '%' . $searchTerm . '%');
+            })
+            ->orderBy($column, $direction)
+            ->paginate($limit);
     }
 
+
+    public function findVideoBySlug($slug)
+    {
+        $video = unserialize(Redis::get(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug));
+
+        if (!$video) {
+            $video = $this->query()->where('slug', $slug)->first();
+            Redis::setex(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug, 259200, serialize($video));
+        }
+
+        return $video;
+    }
 }
