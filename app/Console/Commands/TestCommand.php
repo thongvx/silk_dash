@@ -34,19 +34,51 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        //Tạo một SvStream rồi sau đó lưu vào thông qua SvStreamService
-        for ($i = 1; $i <= 10; $i++) {
-            // Tạo một SvStream
-            $svStream = new SvStream();
-            $svStream->name = 'Server Stream ' . $i;
-            $svStream->cpu = rand(1, 20); // Giả sử CPU là một số ngẫu nhiên từ 1 đến 20
-            $svStream->percent_space = rand(1, 100);
-            $svStream->out_speed = rand(100, 700);
-            $svStream->active = 1;
 
-            // Lưu SvStream thông qua SvStreamService
-            SvStreamService::upsertSvStream($svStream);
-        }
+
+
+        // Tạo một SvStream
+        $svStream = new SvStream();
+        $svStream->name = 'ss02';
+        $svStream->ip = 'ss02.streamsilk.com';
+        $svStream->domain = 80;
+        $svStream->cpu = 30; // Giả sử CPU là một số ngẫu nhiên từ 1 đến 20
+        $svStream->percent_space = 0;
+        $svStream->out_speed = 0;
+        $svStream->active = 1;
+
+
+
+
+        // Lưu SvStream thông qua SvStreamService
+        SvStreamService::upsertSvStream($svStream);
+
+        // Tạo một SvStream
+        $svStream = new SvStream();
+        $svStream->name = 'ss03';
+        $svStream->ip = 'ss03.streamsilk.com';
+        $svStream->domain = 80;
+        $svStream->cpu = 5; // Giả sử CPU là một số ngẫu nhiên từ 1 đến 20
+        $svStream->percent_space = 1;
+        $svStream->out_speed = 800;
+        $svStream->active = 1;
+
+        // Lưu SvStream thông qua SvStreamService
+        SvStreamService::upsertSvStream($svStream);
+
+        // Tạo một SvStream
+        $svStream = new SvStream();
+        $svStream->name = 'ss01';
+        $svStream->ip = 'ss01.streamsilk.com';
+        $svStream->domain = 80;
+        $svStream->cpu = 0; // Giả sử CPU là một số ngẫu nhiên từ 1 đến 20
+        $svStream->percent_space = 0;
+        $svStream->out_speed = 0;
+        $svStream->active = 1;
+
+        // Lưu SvStream thông qua SvStreamService
+        SvStreamService::upsertSvStream($svStream);
+
 
         var_dump(SvStreamService::getAllStreamInfo());
 
