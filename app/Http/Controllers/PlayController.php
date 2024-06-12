@@ -39,18 +39,18 @@ class PlayController
             } else {
                 $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
 
-                //Todo: sua doan nay
-                $svStream = $video->stream == 0 ? SvStreamService::selectSvStream() : SvStreamService::checkConnectSvStream(explode('-', $video->stream));
-
                 if ($video->stream == 0) {
                     $svStream = SvStreamService::selectSvStream();
                     Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                     $video->stream =  $svStream;
                     $video->save();
                 }else{
-                    //Todo: sua doan nay
-                    $video->stream = $video->stream . '-' . $svStream;
-                    $video->save();
+                    $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
+                    if ($svStream === null) {
+                        $svStream = SvStreamService::selectSvStream();
+                        $video->stream = $video->stream . '-' . $svStream;
+                        $video->save();
+                    }
                 }
 
                 $playData = [
