@@ -35,7 +35,11 @@ class PlayController
             $poster = $data_setting->gridPoster == 5 ? $video->grid_poster_5 : ($data_setting->gridPoster == 3 ? $video->grid_poster_3 : $video->poster);
             $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
             if ($video->origin == 0) {
-                return view('play', ['urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload') . '.streamsilk.com/uploads/' . $slug . '.' . $video->format]);
+                $playData = [
+                    'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload') . '.streamsilk.com/uploads/' . $slug . '.' . $video->format,
+                    'poster' => $poster,
+                ];
+                return view('playOrigin', $playData);
             } else {
                 $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
 
