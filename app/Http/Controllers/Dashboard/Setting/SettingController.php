@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Setting;
+namespace App\Http\Controllers\Dashboard\Setting;
 
+use App\Repositories\ActivityRepo;
+use App\Repositories\AccountRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\AccountRepo;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -23,7 +24,7 @@ class SettingController
 
         $data=[
             'title' => 'setting',
-            'setting' => $this->accountRepo->getAllSetting($user->id),
+            'setting' => $this->accountRepo->getSetting($user->id),
             'activities' => $this->activityRepo->getAllActivity($user->id),
         ];
         return view('dashboard.setting.index', $data);
@@ -31,7 +32,7 @@ class SettingController
     public function show()
     {
         $user = Auth::user();
-        $setting = $this->accountRepo->getAllSetting($user->id);
+        $setting = $this->accountRepo->getSetting($user->id);
         return response()->json($setting);
     }
 
@@ -50,7 +51,7 @@ class SettingController
             return response()->json(['errors' => $validator->errors()], 422);
         }
         $user = Auth::user();
-        $setting = $this->accountRepo->getAllSetting($user->id);
+        $setting = $this->accountRepo->getSetting($user->id);
         if ($setting) {
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo');

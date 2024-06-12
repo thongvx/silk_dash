@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
+use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
@@ -44,7 +45,7 @@ class LoginController extends Controller
     public function redirectTo()
     {
         if (auth()->user()->hasRole('admin')) {
-            return route('dashboard');
+            return route('admin');
         }
 
         return route('dashboard');
@@ -62,7 +63,7 @@ class LoginController extends Controller
             // User is authenticated, now we can record the activity
             $this->recordActivity();
 
-            return redirect()->intended($this->redirectTo);
+            return redirect()->intended($this->redirectTo());
         }
 
         return back()->withErrors([

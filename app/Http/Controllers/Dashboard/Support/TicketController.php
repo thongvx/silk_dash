@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Support;
+namespace App\Http\Controllers\Dashboard\Support;
 
-use Illuminate\Http\Request;
-use App\Repositories\TicketRepo;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Ticket;
+use App\Repositories\TicketRepo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class TicketController
 {
     protected $ticketRepo;

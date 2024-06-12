@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Setting;
+namespace App\Http\Controllers\Dashboard\Setting;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\AccountRepo;
@@ -21,7 +21,7 @@ class AccountController extends Controller
     {
         $user = Auth::user();
         $userid = $user->id;
-        $setting = $this->accountRepo->getAllSetting($userid);
+        $setting = $this->accountRepo->getSetting($userid);
         $activities = $this->activityRepo->getAllActivity($userid);
         switch ($tab) {
             case 'accountsetting':

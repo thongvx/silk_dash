@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Notifications\NotificationService;
 use App\Repositories\VideoRepo;
 use App\Repositories\FolderRepo;
 use App\Repositories\EncoderTaskRepo;
@@ -13,13 +14,15 @@ class VideoController
     protected $videoRepo;
     protected $folderRepo;
     protected $encoderTaskRepo;
+    protected $notificationService;
 
 
-    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo)
+    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo, NotificationService $notificationService)
     {
         $this->videoRepo = $videoRepo;
         $this->folderRepo = $folderRepo;
         $this->encoderTaskRepo = $encoderTaskRepo;
+        $this->notificationService = $notificationService;
     }
 
     // Get video data
@@ -54,7 +57,7 @@ class VideoController
         if ($tab == 'processing') {
             $videos =  $this->encoderTaskRepo->getAllEncoderTasks($userId);
         } else {
-            $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $search, $column, $direction, $folderId, $limit, ['*'], $page);
+            $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $column, $direction, $folderId, $limit, ['*'], $page);
         }
         return $videos;
     }
@@ -126,6 +129,9 @@ class VideoController
             if ($video) {
                 $video->delete();
                 $video->deleteCache();
+                $subject = 'Video Deleted: ' . $video->slug;
+                $message = 'This video with ID: ' . $video->slug . ' (' . $video->title .')'. ' has been deleted.';
+                $this->notificationService->addNotification(Auth::id(), $subject, $message, 'delete');
             }else {
                 return response()->json(['message' => 'Video not found: ' . $id], 404);
             }

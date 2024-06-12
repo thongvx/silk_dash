@@ -1,6 +1,5 @@
 import { checkAll, fixedBox , btn_video } from './video.js';
-import { notification } from '../main.js';
-
+import { notification, updateURLParameter } from '../main.js';
 var fixedVideoCloseButton = $("[fixed-video-close-button]");
 //edit video
 const formEdit = `<div class="edit" id="edit">
@@ -184,14 +183,14 @@ $(document).on('click', '[btn-export]', function() {
 //move video to folder
 $(document).on('click', '[btn-move]', function() {
     fixedBox()
-    $('#move').toggle("hidden");
+    $('#move').show();
     $('[folder]').removeClass('text-transparent bg-gradient-to-r')
     $('[folder]').filter(function() {
         return $(this).find('h5').text().indexOf($('#currentFolderName').text()) !== -1;
     }).addClass('bg-gradient-to-r text-transparent');
     checkAll()
 });
-
+const formMove = ``
 var newFolderId = null;
 $(document).on('click', '#fixed-video [folder]', function() {
     $(this).addClass('text-transparent bg-gradient-to-r')
@@ -201,9 +200,12 @@ $(document).on('click', '#fixed-video [folder]', function() {
     const videoIDs = rows.map((index, row) => {
         return $(row).closest('tr').data('videoid');
     }).get();
+    let bntSubmit = $(this).closest('#move').find('button[type="submit"]');
+    bntSubmit.addClass('bg-[#01545e] hover:bg-[#009fb2]')
+    bntSubmit.removeClass('bg-[#142132]')
+    bntSubmit.removeAttr('disabled');
     $('#move form').on('submit', function(e) {
         e.preventDefault();
-        let bntSubmit = $(this).find('button[type="submit"]');
         $.ajax({
             url: '/videos/move',
             type: 'POST',
@@ -226,14 +228,17 @@ $(document).on('click', '#fixed-video [folder]', function() {
                 bntSubmit.prop('disabled', true);
             },
             success: function(response) {
-                fixedBox ()
+                console.log('a')
+                fixedBox()
                 $('#move').addClass('hidden')
                 videoIDs.forEach(function(videoID) {
                     $('tr[data-videoid="' + videoID + '"]').remove();
                 });
                 btn_video()
-                bntSubmit.prop('disabled', false);
-                notification('success', 'Video title has been successfully edited.')
+                bntSubmit.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
+                bntSubmit.addClass('bg-[#142132]')
+                bntSubmit.html('Move To Folder')
+                notification('success', 'Video has been successfully moved.')
             },
             error: function(response) {
                 fixedBox()

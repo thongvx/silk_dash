@@ -17,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/example', function () {
+        // Your code here
+    });
+});
+Route::middleware(['role:admin'])->prefix('admin')->group(function () {
+    Route::get('/example', function () {
+        // Your code here
+    });
+   Route::resource('/user',\App\Http\Controllers\admin\UsersAdminController::class);
+});

@@ -70,7 +70,7 @@
                         <div
                             class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 text-white mt-2 min-h-80 max-h-80 overflow-auto">
                             @foreach($folders as $folder)
-                                <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-gradient-to-r bg-clip-text from-violet-500 to-fuchsia-500">
+                                <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-gradient-to-r bg-clip-text  from-[#009fb2] to-[#009fb2]">
                                     <div class="text-center">
                                         <i class="material-symbols-outlined text-3xl">folder</i>
                                     </div>
@@ -81,8 +81,8 @@
                             @endforeach
                         </div>
                         <form class="pt-2 w-max text-white">
-                            <button move-to-folder type="submit"
-                                class="bg-[#142132] rounded-lg hover:bg-gradient-to-r from-yellow-600 to-rose-400 w-max font-semibold text-md py-2.5 px-5">
+                            <button move-to-folder type="submit" disabled
+                                class="bg-[#142132] rounded-lg w-max font-semibold text-md py-2.5 px-5">
                                 Move To Folder
                             </button>
                         </form>

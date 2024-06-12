@@ -60,36 +60,58 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
     Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'download']);
 
-    route::get('dmca',function (){
+    Route::get('dmca',function (){
         $data['title'] = 'DMCA';
         return view('dashboard.dmca.dmca', $data);
     });
-    route::get('dmca/1',function (){
+    Route::get('dmca/1',function (){
         $data['title'] = 'DMCA';
         return view('dashboard.dmca.dmcaInfo', $data);
     });
 
-    route::get('report',function (){
+    Route::get('report',function (){
         $data['title'] = 'report';
         return view('dashboard.report.report', $data);
     });
-    Route::resource('/support', \App\Http\Controllers\Support\TicketController::class);
+    Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
 
-    route::get('premium',function (){
+    Route::get('premium',function (){
         $data['title'] = 'Premium';
         return view('dashboard.premium', $data);
     });
-    Route::resource('/setting', \App\Http\Controllers\Setting\SettingController::class);
+    Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);
+    Route::get('affiliate',function (){
+        $data['title'] = 'Affiliate';
+        return view('dashboard.affiliate', $data);
+    });
 
-    Route::post('/updatesetting', [\App\Http\Controllers\Setting\SettingController::class, 'update']);
+    Route::post('/notifications/readall', [\App\Http\Controllers\Dashboard\NotificationController::class, 'readAll'])->name('notifications.readall');
+    Route::post('/notifications/deleteall', [\App\Http\Controllers\Dashboard\NotificationController::class, 'deleteAll'])->name('notifications.deleteall');
+    Route::post('/notifications/read/{id}', [\App\Http\Controllers\Dashboard\NotificationController::class, 'read'])->name('notifications.read');
+
+    Route::post('/updatesetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
 
     Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
 });
 
-Route::middleware(['role:admin'])->prefix('admin')->group(function () {
-
+Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\admin\HomeAdminController::class, 'index'])->name('admin');
+    Route::get('/compute', function (){
+        $title = 'Users';
+        return view('admin.compute.compute', compact('title'));
+    });
+    Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
+    Route::resource('/manageTask', \App\Http\Controllers\admin\ManageTaskController::class);
+    Route::get('/statistic', function (){
+        $title = 'Users';
+        return view('admin.statistic.statistic', compact('title'));
+    });
+    Route::get('/support', function (){
+        $title = 'Users';
+        return view('admin.support.cases', compact('title'));
+    });
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

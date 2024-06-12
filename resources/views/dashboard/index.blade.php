@@ -184,49 +184,29 @@
         <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
             <div class="border-black/12.5 bg-[#121520] shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl
                       border-0 border-solid bg-clip-border pb-3">
-                <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
+                <div class="flex justify-between items-center border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
                     <h6 class="text-[#009FB2] font-bold">Notification</h6>
+                    <a href="" class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">View All</a>
                 </div>
-                <div class="grid grid-cols-1 gap-4 px-4 mt-3 h-[calc(380px)] overflow-auto">
-                    <div
-                        class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
-                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
-                        <div>
-                            <h6 class="text-red-500 font-bold">
-                                Error encoder video GoPNmF4T0oEjnennbwt5
-                            </h6>
-                            <p class="italic">
-                                The video GoPNmF4T0oEjnennbwt5(PETS-036.mp4) has been deleted. Because I can not
-                                encode the video
-                            </p>
+                <div class="px-4 mt-3 h-[calc(380px)] overflow-auto">
+                    @forelse($notifications as $notification)
+                        <div
+                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
+                            <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
+                            <div>
+                                <h6 class="text-red-500 font-bold">
+                                    {{ $notification->subject }}
+                                </h6>
+                                <p class="italic">
+                                    {{ $notification->message }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div
-                        class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
-                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
-                        <div>
-                            <h6 class="text-red-500 font-bold">
-                                Error encoder video GoPNmF4T0oEjnennbwt5
-                            </h6>
-                            <p class="italic">
-                                The video GoPNmF4T0oEjnennbwt5(PETS-036.mp4) has been deleted. Because I can not
-                                encode the video
-                            </p>
+                    @empty
+                        <div class="my-3 text-white text-center">
+                            No notifications
                         </div>
-                    </div>
-                    <div
-                        class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm">
-                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
-                        <div>
-                            <h6 class="text-red-500 font-bold">
-                                Error encoder video GoPNmF4T0oEjnennbwt5
-                            </h6>
-                            <p class="italic">
-                                The video GoPNmF4T0oEjnennbwt5(PETS-036.mp4) has been deleted. Because I can not
-                                encode the video
-                            </p>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

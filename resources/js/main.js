@@ -144,10 +144,17 @@ export function notification(type, message) {
         }
     }, decreaseInterval);
 }
-function updateURLParameter(tab) {
+export function updateURLParameter(tab, column, direction, folderId, limit, page, poster, status) {
     var urlParams = new URLSearchParams(window.location.search);
-    tab ? urlParams.set('tab', tab) : '';
-    var newUrl = window.location.pathname + '?' + urlParams.toString();
+    tab ? urlParams.set('tab', tab) : urlParams.delete('tab');
+    column ? urlParams.set('column', column) : urlParams.delete('column');
+    direction ? urlParams.set('direction', direction): urlParams.delete('direction');
+    folderId ? urlParams.set('folderId', folderId) : urlParams.delete('folderId');
+    limit ? urlParams.set('limit', limit) : urlParams.delete('limit');
+    page ? urlParams.set('page', page) : urlParams.delete('page');
+    poster ? urlParams.set('poster', poster) : urlParams.delete('poster');
+    status ? urlParams.set('status', status) : urlParams.delete('status');
+    const newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
 }
 export function loadContent(data_content) {

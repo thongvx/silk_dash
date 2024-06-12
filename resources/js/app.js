@@ -1,6 +1,7 @@
 import './main.js';
 import './sidebar.js';
 import './input-search.js'
+import './notification.js';
 //dashboard
 import './chart/filechart.js';
 import './chart/charts.js';

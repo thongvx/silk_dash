@@ -38,98 +38,64 @@
             <!-- notifications -->
 
             <li class="relative flex items-center pr-2">
-              <p class="hidden transform-dropdown-show"></p>
-              <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger
-                aria-expanded="false">
-                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/>
-                  </svg>
-              </a>
-
+                <div class="relative">
+                  <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger
+                    aria-expanded="false">
+                      <svg class="w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"/>
+                      </svg>
+                  </a>
+                    <span class="{{ $notifications->where('read', 0)->count() > 0 ? 'block' : 'hidden'}} absolute top-0 right-0" no-read>
+                        <span class="ml-3 relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                        </span>
+                    </span>
+                </div>
               <ul dropdown-menu
                 class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
                        shadow-lg shadow-slate-900 duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10
                        origin-top list-none rounded-lg border-none bg-clip-padding
-                       px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10
+                       text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:-top-4 before:z-10
                        before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
-                       lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                <!-- add show class on dropdown open js -->
-                <li class="relative mb-2">
-                  <a class="dark:hover:bg-slate-900 ease py-1.5 clear-both block w-full whitespace-nowrap rounded-lg bg-transparent px-4 duration-300 hover:bg-gray-200 hover:text-slate-700 lg:transition-colors"
-                    href="javascript:;">
-                    <div class="flex py-1">
-                      <div class="my-auto">
-                        <img src="" alt="" loading="lazy"
-                          class="inline-flex items-center justify-center mr-4 text-sm text-white h-9 w-9 max-w-none rounded-xl" />
-                      </div>
-                      <div class="flex flex-col justify-center">
-                        <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span
-                            class="font-semibold">New message</span> from Laur</h6>
-                        <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                          <i class="mr-1 fa fa-clock"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-
-                <li class="relative mb-2">
-                  <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700"
-                    href="javascript:;">
-                    <div class="flex py-1">
-                      <div class="my-auto">
-                        <img src="" alt="" loading="lazy"
-                          class="inline-flex items-center justify-center mr-4 text-sm text-white bg-gradient-to-tl from-zinc-800 to-zinc-700 dark:bg-gradient-to-tl dark:from-slate-750 dark:to-gray-850 h-9 w-9 max-w-none rounded-xl" />
-                      </div>
-                      <div class="flex flex-col justify-center">
-                        <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white"><span
-                            class="font-semibold">New album</span> by Travis Scott</h6>
-                        <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                          <i class="mr-1 fa fa-clock"></i>
-                          1 day
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-
-                <li class="relative">
-                  <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700"
-                    href="javascript:;">
-                    <div class="flex py-1">
-                      <div
-                        class="inline-flex items-center justify-center my-auto mr-4 text-sm text-white transition-all duration-200 ease-nav-brand bg-gradient-to-tl from-slate-600 to-slate-300 h-9 w-9 rounded-xl">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
-                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
-                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                              <g transform="translate(1716.000000, 291.000000)">
-                                <g transform="translate(453.000000, 454.000000)">
-                                  <path class="color-background"
-                                    d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-                                    opacity="0.593633743"></path>
-                                  <path class="color-background"
-                                    d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z">
-                                  </path>
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
-                      </div>
-                      <div class="flex flex-col justify-center">
-                        <h6 class="mb-1 text-sm font-normal leading-normal dark:text-white">Payment successfully
-                          completed</h6>
-                        <p class="mb-0 text-xs leading-tight text-slate-400 dark:text-white/80">
-                          <i class="mr-1 fa fa-clock"></i>
-                          2 days
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
+                       lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block" notification>
+                  @if($notifications->count() > 0)
+                      <li class="flex items-center justify-between text-white font-bold px-2 my-3">
+                          <h4 class="text-xl">Notifications</h4>
+                          <a href="javascript:;" class="hover:text-emerald-400" btn-read-all>
+                              <i class="material-symbols-outlined mr-3 text-3xl hover:text-[#009FB2]">select_check_box</i>
+                          </a>
+                      </li>
+                  @endif
+                  <div class=" max-h-64 overflow-auto">
+                  @forelse($notifications as $notification)
+                      <!-- add show class on dropdown open js -->
+                      <li class="relative {{ $notification->read == 0 ? 'bg-[#142132]' :'' }}">
+                          <a class="flex items-center rounded-lg px-2 text-white shadow-lg drop-shadow-sm py-3"
+                             href="javascript:;" data-id="{{ $notification->id }}" btn-read>
+                              <i class="material-symbols-outlined mr-3 text-3xl text-red-500">
+                                  {{ $notification->type == 'delete' ? 'delete' : 'error' }}
+                              </i>
+                              <div>
+                                  <h6 class="text-white font-bold w-max">
+                                      {{ $notification->subject }}
+                                  </h6>
+                                  <span class="text-slate-400 text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                              </div>
+                          </a>
+                      </li>
+                  @empty
+                      <li class="my-3 text-white text-center">
+                          No notifications
+                      </li>
+                @endforelse
+              </div>
+                  @if($notifications->count() > 0)
+                     <li class="flex items-center justify-between text-white font-bold px-2 my-3">
+                          <a href="javascript:;" class="hover:text-emerald-500">View All</a>
+                          <a href="javascript:;" class="hover:text-red-500" btn-delete-noti>Clear All</a>
+                      </li>
+                  @endif
               </ul>
             </li>
             <li class="relative items-center px-4 hidden md:flex">
@@ -141,7 +107,7 @@
                 class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
                        shadow-lg shadow-slate-900 duration-250 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-12
                        origin-top list-none rounded-lg border-none bg-clip-padding
-                       pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-10
+                       pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:-top-4 before:z-10
                        before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
                        lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
                 <li class="relative mb-1">
@@ -153,6 +119,9 @@
                         <p class="mb-0 text-xs leading-tight text-white/80">
                             {{\Illuminate\Support\Facades\Auth::user()->email}}
                         </p>
+                      <p class="mb-0 text-sm leading-tight {{\Illuminate\Support\Facades\Auth::user()->premium == 1 ? 'text-indigo-500' : 'text-emerald-500' }}">
+                          {{\Illuminate\Support\Facades\Auth::user()->premium == 1 ? 'Premium' : 'Free' }}
+                      </p>
                       </div>
                     </div>
                   </a>
@@ -168,7 +137,6 @@
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="setting">My Account</span>
                   </a>
                 </li>
-
                 <li class="relative mb-2">
                   <a class=" pl-2 pr-12 menu-sidebar text-white opacity-80 hover:bg-[#009FB2] py-1.5 text-sm ease-nav-brand my-0 flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors"
                     href="/premium">

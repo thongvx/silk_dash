@@ -51,7 +51,7 @@
     <div class="text-end mt-3">
         <a href="/setting?tab=accountsetting"
            class="rounded-lg bg-orange-500 px-2 py-2 text-white text-sm">
-            <i class="material-icons text-lg mr-2">settings</i>Earning Mode
+           <i class="material-symbols-outlined text-lg mr-2">settings</i>Earning Mode
         </a>
     </div>
     <div class="text-white bg-[#121520] mt-3 rounded-lg p-4">

@@ -1,5 +1,5 @@
 import {btn_video} from "./video.js";
-import {loadContent} from "../main.js";
+import { updateURLParameter} from "../main.js";
 
 $(document).on('click', '[checked-All]', function () {
     const isChecked = $(this).prop('checked');
@@ -21,6 +21,7 @@ $(document).on('click', '.checkbox',function(){
 function ajaxdatatable(column,direction,folderId,limit,page, poster) {
     const urlParams = new URLSearchParams(window.location.search);
     const tab = urlParams.get('tab');
+    updateURLParameter(tab,column,direction,folderId,limit,page,poster)
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -65,18 +66,6 @@ function highlightSortedColumn() {
         }
     });
 }
-function updateURLParameterVideo(column,direction,folderId,limit,page, poster) {
-    const urlParams = new URLSearchParams(window.location.search);
-    column ? urlParams.set('column', column): '';
-    direction ? urlParams.set('direction', direction): '';
-    folderId ? urlParams.set('folderId', folderId) : '';
-    limit ? urlParams.set('limit', limit) : '';
-    page ? urlParams.set('page', page) : '';
-    poster ? urlParams.set('poster', poster) : '';
-    const newUrl = window.location.pathname + '?' + urlParams.toString();
-    history.pushState(null, '', newUrl);
-    ajaxdatatable(column,direction,folderId,limit,page, poster)
-}
 
 $(document).on('click', '.sortable-column', function() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -86,7 +75,7 @@ $(document).on('click', '.sortable-column', function() {
     const limit = urlParams.get('limit') === null ? '' : urlParams.get('limit');
     const page= '';
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
-    updateURLParameterVideo(column,direction,folderId,limit,page, poster)
+    ajaxdatatable(column,direction,folderId,limit,page, poster)
 });
 $(document).on('click', '.page', function() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -96,7 +85,7 @@ $(document).on('click', '.page', function() {
     const limit = urlParams.get('limit') === null ? '20' : urlParams.get('limit');
     const page = $(this).data('page');
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
-    updateURLParameterVideo(column,direction,folderId,limit,page, poster)
+    ajaxdatatable(column,direction,folderId,limit,page, poster)
 });
 $(document).on('change', '#limit', function() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -106,7 +95,7 @@ $(document).on('change', '#limit', function() {
     const limit = $(this).val();
     const page = '';
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
-    updateURLParameterVideo(column,direction,folderId,limit,page,poster)
+    ajaxdatatable(column,direction,folderId,limit,page, poster)
 });
 $(document).on('click', '[btn-poster]', function() {
     $(this).toggleClass('bg-[#142132]')
@@ -135,7 +124,7 @@ $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
     const box_folder = $(this).closest('[folder]');
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
     if(urlParams.get('tab') ==='processing'){
-        loadContent('live')
+        ajaxdatatable(column,direction,folderId,limit,'', poster)
     }
     $('[folder] > a').addClass('btn-page-folder')
     $(this).removeClass('btn-page-folder')
@@ -154,5 +143,5 @@ $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
         )
     }
     btn_video()
-    updateURLParameterVideo(column,direction,folderId,limit,'',poster)
+    ajaxdatatable(column,direction,folderId,limit,'', poster)
 })

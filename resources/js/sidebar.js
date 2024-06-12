@@ -5,27 +5,27 @@ var sidenav_trigger = $("[sidenav-trigger]");
 var sidenav_close_button = $("[sidenav-close]");
 var a_menu = $('.menu-sidebar')
 
-sidenav_trigger.on("click", function() {
-  if (sidenav.attr("aria-expanded") == "false") {
-    sidenav.attr("aria-expanded", "true");
-  } else {
-    sidenav.attr("aria-expanded", "false");
-  }
-  sidenav.toggleClass("translate-x-0");
-  sidenav.toggleClass("ml-6");
-  sidenav.toggleClass("shadow-xl");
+sidenav_trigger.on("click", function () {
+    if (sidenav.attr("aria-expanded") == "false") {
+        sidenav.attr("aria-expanded", "true");
+    } else {
+        sidenav.attr("aria-expanded", "false");
+    }
+    sidenav.toggleClass("translate-x-0");
+    sidenav.toggleClass("ml-6");
+    sidenav.toggleClass("shadow-xl");
 });
 const path = window.location.pathname
-a_menu.filter(function(){
+a_menu.filter(function () {
     let menu = $(this).find('span').attr('name');
     let index = path.indexOf(menu)
-    return index > 0
+    return index > 0;
 }).addClass('bg-[#009FB2]')
-sidenav_close_button.on("click", function() {
-  sidenav_trigger.click();
+sidenav_close_button.on("click", function () {
+    sidenav_trigger.click();
 });
 if (!localStorage.getItem('minisidebar')) {
-  localStorage.setItem('minisidebar', false);
+    localStorage.setItem('minisidebar', false);
 }
 var buttonMiniSidebar = $("[button-mini-sidebar]");
 var accountPages = $("[account-pages]");
@@ -40,7 +40,7 @@ var iconMenu = $("[icon-menu]");
 var setMiniMenu = localStorage.getItem('minisidebar');
 
 function addclass() {
- setMiniMenu = localStorage.getItem('minisidebar');
+    setMiniMenu = localStorage.getItem('minisidebar');
     buttonMiniSidebar.toggleClass('-rotate-180');
     nameWeb.toggleClass('xl:max-w-0 xl:opacity-0');
     logo.toggleClass('px-2 py-4 xl:scale-75 justify-center')
@@ -54,8 +54,9 @@ function addclass() {
     a_menu.toggleClass('px-4')
     a_menu.toggleClass('px-2')
 }
+
 // JavaScript
-buttonMiniSidebar.on("click", function() {
+buttonMiniSidebar.on("click", function () {
     var miniSidebarStatus = $(this).attr('mini-sidebar');
 
     // Đảo ngược giá trị của mini-sidebar
@@ -72,7 +73,7 @@ buttonMiniSidebar.on("click", function() {
     xhr.open("POST", "/update-minimenu", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader("X-CSRF-TOKEN", $('meta[name="csrf-token"]').attr('content'));
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             console.log("Cookie has been updated.");
         }
@@ -81,10 +82,10 @@ buttonMiniSidebar.on("click", function() {
     addclass()
 });
 
-window.addEventListener("click", function(e) {
-  if (!sidenav[0].contains(e.target) && !sidenav_trigger[0].contains(e.target)) {
-    if (sidenav.attr("aria-expanded") == "true") {
-      sidenav_trigger.click();
+window.addEventListener("click", function (e) {
+    if (!sidenav[0].contains(e.target) && !sidenav_trigger[0].contains(e.target)) {
+        if (sidenav.attr("aria-expanded") == "true") {
+            sidenav_trigger.click();
+        }
     }
-  }
 });

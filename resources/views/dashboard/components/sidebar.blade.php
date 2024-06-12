@@ -85,7 +85,15 @@
             <li class="{{$minimenu === 'true' ? 'xl:hidden' :''}} w-full mt-4 mb-2" account-pages>
                 <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages</h6>
             </li>
-
+            <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
+                <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
+                   href="/affiliate">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
+                        <i class="material-symbols-outlined opacity-1">attach_money</i>
+                    </div>
+                    <span class="{{$minimenu === 'true' ? 'xl:max-w-0 xl:hidden' :''}} ml-3 opacity-1 pointer-events-none ease" name-menu name="affiliate">Affiliate</span>
+                </a>
+            </li>
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
                 <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
                    href="/setting?tab=profile">
