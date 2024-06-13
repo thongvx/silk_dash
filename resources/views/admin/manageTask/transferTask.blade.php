@@ -3,13 +3,13 @@
         <div class="pt-4 md:p-4">
             <div class="mb-2 flex justify-between">
                 <h5 class="text-white">
-                    Encoder: {{ $transfers->total() }}
+                    Transfer: {{ $transfers->total() }}
                 </h5>
             </div>
             <div class="flex justify-between items-center w-full mb-3">
                 <div class="text-sm bg-[#142132] rounded-lg p-2">
                     <label for="limit">Show:</label>
-                    <select name="limit" class="bg-transparent outline-transparent"
+                    <select name="limit" class="bg-transparent outline-none"
                             id="limit">
                         <option value="20"
                                 class="limit" {{ $transfers->perPage() == 20 ? 'selected' : '' }}>
@@ -199,6 +199,7 @@
                             @endif
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

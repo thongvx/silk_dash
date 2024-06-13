@@ -69,8 +69,8 @@
                                   after:text-white after:opacity-0 after:transition-all after:content-['✓'] checked:border-0
                                   checked:border-transparent checked:after:opacity-100">
                 </td>
-                <td class="pl-2 w-[25rem] video-title">
-                    <a href="{{route('play', $video->slug)}}" target="_black" class="hover:text-[#009FB2]">{{ $video->title }}</a>
+                <td class="px-2 max-w-[20rem] video-title truncate">
+                    <a href="{{route('play', $video->slug)}}" target="_black" class="hover:text-[#009FB2] ">{{ $video->title }}</a>
                 </td>
                 <td class="text-center px-2 videoID">{{ $video->slug }}</td>
                 <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} flex justify-center items-center" poster>

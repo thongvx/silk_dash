@@ -32,7 +32,6 @@ class ManagetaskRepo
                 break;
         }
         if (Auth::user()->hasRole('admin')) {
-
             $encoder = $query->orderBy($column1, $direction)->paginate($limit);
         } else {
             $encoder = $query->where('user_id', Auth::user()->id)->orderBy($column1, $direction)->paginate($limit);

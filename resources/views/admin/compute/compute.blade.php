@@ -9,10 +9,10 @@
             <div
               class="tabs tabs-lifted z-[1] -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
               <button
-                  class="{{request()->get('tab') === 'sto' ? 'sto tab-active !text-[#009FB2]' : 'sto'}}
+                  class="{{request()->get('tab') === 'storage' ? 'storage tab-active !text-[#009FB2]' : 'storage'}}
                     hover:text-[#009FB2] text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                  data-content="sto">
-                <span class="px-2 py-1">Sto</span>
+                  data-content="storage">
+                <span class="px-2 py-1">Storage</span>
               </button>
               <button
                 class="{{request()->get('tab') === 'encoder' ? 'encoder tab-active !text-[#009FB2]' : 'encoder'}}
@@ -33,10 +33,10 @@
                 <span class="px-2 py-1">Streaming system</span>
               </button>
             </div>
-            <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
+            <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
               <div
-                class="border-base-300 rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top">
-                <div id="box-content" class="tab-content-video">
+                class="border-base-300 rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top box-datatable">
+                <div class="tab-content-video"  id="box-content">
                     @include(request()->path() . '.' . request()->get('tab'))
                 </div>
               </div>

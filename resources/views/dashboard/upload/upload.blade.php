@@ -30,7 +30,7 @@
                     <i class="material-symbols-outlined mr-3 py-1">content_copy</i>Clone Upload
                 </button>
             </div>
-            <div class="mt-3 sm:mt-0 rounded-b-box rounded-se-box relative">
+            <div class="mt-3 sm:mt-0 rounded-b-xl rounded-tr-xl relative">
                 <div
                         class=""
                         id="box-content" file-upload>

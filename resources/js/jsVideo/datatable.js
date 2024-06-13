@@ -53,9 +53,10 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster) {
         }
     });
 }
-function highlightSortedColumn() {
+export function highlightSortedColumn() {
     const sortColumn = document.querySelectorAll("[aria-sort]");
     const Table = $("#datatable")[0];
+    console.log(Table)
     const sortColumntable = Table.dataset.columnTable
     const sortDirectionTable = Table.dataset.columnDirection
     sortColumn.forEach(function (element) {
@@ -129,9 +130,9 @@ $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
     $('[folder] > a').addClass('btn-page-folder')
     $(this).removeClass('btn-page-folder')
     box_folder.prependTo(box_folder.closest('.list-folder'));
-    $('[folder]').addClass('bg-[#121520]')
+    $('[folder]').addClass('bg-[#142132]')
     $('[folder]').removeClass('bg-[#009FB2]')
-    $(box_folder).removeClass("bg-[#121520]")
+    $(box_folder).removeClass("bg-[#142132]")
     $(box_folder).addClass("bg-[#009FB2]")
     if ($(this).find('span').text() === '') {
         $('#currentFolderName').html()

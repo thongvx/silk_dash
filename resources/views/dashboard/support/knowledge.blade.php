@@ -6,7 +6,7 @@
 <div class="flex justify-between items-center w-full mb-3">
     <div class="text-sm rounded-lg p-2">
         <label for="limit">Show:</label>
-        <select name="limit" class="bg-transparent outline-transparent"
+        <select name="limit" class="bg-transparent outline-none"
                 id="limit">
             <option value="10"
                     class="limit" >

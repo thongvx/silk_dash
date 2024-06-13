@@ -20,7 +20,7 @@ class UsersAdminController
     {
         $tab = request()->get('tab');
         $data = [
-            'users' => $this->userRepo->getAllUsers($tab, 'created_at', 'desc', 20, 15, ['*'], 1),
+            'users' => $this->userRepo->getAllUsers($tab, 'created_at', 'desc', 20, 15, ['*']),
             'title' => 'Users',
         ];
         return view('admin.user.user', $data);
@@ -35,10 +35,10 @@ class UsersAdminController
     {
         $tab = request()->get('tab');
         $data = [
-            'users' => $this->userRepo->getAllUsers($tab, 'created_at', 'desc', 20, 15, ['*'], 1),
+            'users' => $this->userRepo->getAllUsers($tab, 'created_at', 'desc', 20, 15, ['*']),
             'title' => 'Users',
         ];
-        return view('admin.user.table', $data);
+        return view('admin.user.boxuser', $data);
     }
     public function show(User $user)
     {

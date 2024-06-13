@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Http\Controllers\admin\ManagetaskController;
+use App\Http\Controllers\admin\ComputeController;
 use App\Http\Controllers\Dashboard\Setting\AccountController;
 use App\Http\Controllers\Dashboard\Support\TicketController;
 use App\Http\Controllers\Dashboard\UploadController;
@@ -14,38 +15,36 @@ use Illuminate\Support\Facades\Auth;
 
 class ModelHelpers
 {
-    protected $videoController;
-    protected $AccountController;
-    protected $folderRepo;
-    protected $uploadController;
-    protected $TicketController;
+    protected $controllers;
 
-    protected $managetaskController;
-
-    public function __construct(VideoController $videoController, AccountController $AccountController, FolderRepo $folderRepo, UploadController $uploadController, TicketController $TicketController, ManagetaskController $managetaskController)
+    public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController, TicketController $TicketController, ManagetaskController $managetaskController, ComputeController $computeController)
     {
-        $this->videoController = $videoController;
-        $this->AccountController = $AccountController;
-        $this->folderRepo = $folderRepo;
-        $this->uploadController = $uploadController;
-        $this->TicketController = $TicketController;
-
-        $this->managetaskController = $managetaskController;
-    }
-    public static function genVideoId(){
-        $id = uniqid();
+        $this->controllers = [
+            'setting' => $AccountController,
+            'video' => $videoController,
+            'upload' => $uploadController,
+            'support' => $TicketController,
+            'manageTask' => $managetaskController,
+            'compute' => $computeController,
+        ];
     }
     public function loadPage(Request $request){
         $tab = $request->input('tab');
         $page = $request->input('page');
-
+        if ($tab == 'encodingTask') {
+            $folder = 'encoder';
+        }elseif ($tab == 'transferTask') {
+            $folder = 'transfer';
+        }else
+            $folder = '';
         $user = Auth::user();
         if (strpos($page, 'admin') !== false) {
             switch ($page) {
-                case 'setting':
-                    return $this->AccountController->index($tab);
                 case strpos($page, 'manageTask') !== false:
-                    $data = $this->managetaskController->manageControler($request);
+                    $data = $this->controllers['manageTask']->manageControler($request);
+                    return view($page.'.'.$tab, $data);
+                case strpos($page, 'compute') !== false:
+                    $data = $this->controllers['compute']->computeControler($request);
                     return view($page.'.'.$tab, $data);
                 default:
                     return view($page.'.'.$tab);
@@ -53,14 +52,14 @@ class ModelHelpers
         }else{
             switch ($page) {
                 case 'setting':
-                    return $this->AccountController->index($tab);
+                    return $this->controllers['setting']->index($tab);
                 case 'video':
-                    $data = $this->videoController->getVideoData($request);
+                    $data = $this->controllers['video']->getVideoData($request);
                     return view('dashboard.'.$page.'.'.$tab, $data);
                 case 'upload':
-                    return $this->uploadController->upload($tab);
+                    return $this->controllers['upload']->upload($tab);
                 case 'support':
-                    return $this->TicketController->ticket($tab);
+                    return $this->controllers['support']->ticket($tab);
                 default:
                     return view('dashboard.'.$page.'.'.$tab);
             }

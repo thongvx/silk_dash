@@ -40,12 +40,12 @@
                             <span class="px-2 py-1">Delete</span>
                         </button>
                     </div>
-                    <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
+                    <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
                         <div
-                            class="border-base-300 rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top border-none undefined">
+                            class="border-base-300 rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top border-none undefined">
                             <div class="tab-content-video">
                                 <div class="rounded-xl" id="box-user">
-                                    @include('admin.user.table')
+                                    @include('admin.user.boxuser')
                                 </div>
                             </div>
                         </div>

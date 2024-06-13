@@ -36,9 +36,9 @@
                                 Download Link
                             </button>
                         </div>
-                        <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative">
+                        <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative">
                             <div
-                                class="border-[#142132] rounded-b-box rounded-se-box gap-2 bg-[#142132] bg-top py-4 pl-4 [border-width:var(--tab-border)] undefined">
+                                class="border-[#142132] rounded-b-xl rounded-tr-xl gap-2 bg-[#142132] bg-top py-4 pl-4 [border-width:var(--tab-border)] undefined">
                                 <div id="EmbedLink" class="tab-content-export">
                                     <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>

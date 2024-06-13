@@ -1,52 +1,48 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Admin;
 
 use App\Models\Svencoder;
+use App\Models\SvStorage;
 use App\Models\Svstream;
-use App\Models\Svsto;
 use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Illuminate\Contracts\Auth\Guard;
 
-class ComputerRepo
+class ComputeRepo
 {
-    protected $auth;
 
-    public function __construct(Guard $auth)
-    {
-        parent::__construct(app());
-        $this->auth = $auth;
-    }
-
-
-    public function getAllEncoders()
+    public function getAllSvEncoders($column, $direction, $limit)
     {
         $user = Auth::user();
-        if ($this->auth->user()->hasRole('admin')) {
-            $encoder = SvEncoder::query()->get();
-        }else{
-            $encoder = SvEncoder::query()->where('user_id', $user->id)->get();
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        if ($user->hasRole('admin')) {
+            $svEncoder = SvEncoder::query()->orderBy($column1, $direction)->paginate($limit);
         }
 
-        return $encoder;
+        return $svEncoder;
     }
 
-    public function getAllStreams()
+    public function getAllSvStreams($column, $direction, $limit)
     {
-        if ($this->auth->user()->hasRole('admin')) {
-            return Svstream::query()->get();
+        $user = Auth::user();
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        if ($user->hasRole('admin')) {
+            $svStreams = SvStream::query()->orderBy($column1, $direction)->paginate($limit);
         }
 
-        return null;
+        return $svStreams;
     }
 
-    public function getAllStis()
+    public function getALlSvStorages($column, $direction, $limit)
     {
-        if ($this->auth->user()->hasRole('admin')) {
-            return Svsti::query()->get();
+        $user = Auth::user();
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        if ($user->hasRole('admin')) {
+            $svStorage = SvStorage::query()->orderBy($column1, $direction)->paginate($limit);
         }
-
-        return null;
+        return $svStorage;
     }
+
+
 }

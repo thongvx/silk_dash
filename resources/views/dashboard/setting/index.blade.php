@@ -44,9 +44,9 @@
                         <span class="px-2 py-1">Custom Ads</span>
                     </button>
                 </div>
-                <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
+                <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
                     <div
-                        class="border-[#121520] rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
+                        class="border-[#121520] rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
                         <div class="lg:min-h-[calc(100vh-11em)]">
                             <div class="rounded-xl">
                                 <div class="relative rounded-xl">

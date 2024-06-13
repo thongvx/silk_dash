@@ -3,7 +3,7 @@
         <div class="px-2 pt-4 md:p-4">
             <div class="mb-2 flex justify-between items-center">
                 <h5 class="text-white" id="sever">
-                    Sever : {{ $encoders->total() }}
+                    Sever : {{ $storages->total() }}
                 </h5>
                 <div class="bg-[#142132] px-5 py-1 rounded-lg hover:text-[#009FB2] cursor-pointer" title="edit">
                     <a href="javascript:;" class="flex items-center text-sm">
@@ -19,15 +19,15 @@
                         <select name="limit" class="bg-transparent outline-none"
                                 id="limit">
                             <option value="20"
-                                    class="limit" {{ $encoders->perPage() == 20 ? 'selected' : '' }}>
+                                    class="limit" {{ $storages->perPage() == 20 ? 'selected' : '' }}>
                                 20
                             </option>
                             <option value="50"
-                                    class="limit" {{ $encoders->perPage() == 50 ? 'selected' : '' }}>
+                                    class="limit" {{ $storages->perPage() == 50 ? 'selected' : '' }}>
                                 50
                             </option>
                             <option value="100"
-                                    class="limit" {{ $encoders->perPage() == 100 ? 'selected' : '' }}>
+                                    class="limit" {{ $storages->perPage() == 100 ? 'selected' : '' }}>
                                 100
                             </option>
                         </select>
@@ -39,7 +39,7 @@
                     <div class="px-0 pt-0">
                         <div class="px-0 pt-0 overflow-auto h-[calc(100vh-25em)] ">
                             <table id="datatable" datatable data-page-size="10" data-column-table="{{ $column }}"
-                                   data-column-direction="{{ $direction }}" data-total="{{ $encoders->total() }}"
+                                   data-column-direction="{{ $direction }}" data-total="{{ $storages->total() }}"
                                    class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-center !border-t-0">
                                 <thead class="sticky top-0 z-10">
                                 <tr class="bg-[#142132] transition-colors text-md">
@@ -130,20 +130,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse( $encoders as $index => $encoder )
+                                @forelse( $storages as $index => $storage )
                                     <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                        <td class="sorting_1">{{ $encoder->id }}</td>
-                                        <td class="domain text-success" onclick="edit(this)">{{ $encoder->domain }}</td>
-                                        <td class="name text-success">{{ $encoder->name }}</td>
-                                        <td class="ip text-success">{{ $encoder->ip }}</td>
-                                        <td>{{ $encoder->pass }}</td>
-                                        <td>{{ $encoder->cpu }}</td>
-                                        <td class="space">{{ $encoder->space }}</td>
-                                        <td>{{ $encoder->used_space }}</td>
-                                        <td class="BW">{{ $encoder->provider }}</td>
-                                        <td>{{ $encoder->used_bw }}</td>
-                                        <td>{{ $encoder->in_speed }}</td>
-                                        <td>{{ $encoder->out_speed }}</td>
+                                        <td class="sorting_1">{{ $storage->id }}</td>
+                                        <td class="domain text-success" onclick="edit(this)">{{ $storage->domain }}</td>
+                                        <td class="name text-success">{{ $storage->name }}</td>
+                                        <td class="ip text-success">{{ $storage->ip }}</td>
+                                        <td>{{ $storage->pass }}</td>
+                                        <td>{{ $storage->cpu }}</td>
+                                        <td class="space">{{ $storage->space }}</td>
+                                        <td>{{ $storage->used_space }}</td>
+                                        <td class="BW">{{ $storage->provider }}</td>
+                                        <td>{{ $storage->used_bw }}</td>
+                                        <td>{{ $storage->in_speed }}</td>
+                                        <td>{{ $storage->out_speed }}</td>
                                     </tr>
 
                                 @empty
@@ -158,21 +158,21 @@
                             <div class="dataTables_info bg-[#142132] rounded-lg hidden sm:block">
                                 <p class="p-2">
                                     Showing
-                                    <span class="font-medium">{{$encoders->firstItem()  }}</span>
+                                    <span class="font-medium">{{$storages->firstItem()  }}</span>
                                     to
-                                    <span class="font-medium">{{$encoders->lastItem()  }}</span>
+                                    <span class="font-medium">{{$storages->lastItem()  }}</span>
                                     of
-                                    <span class="font-medium">{{$encoders->total()  }}</span>
+                                    <span class="font-medium">{{$storages->total()  }}</span>
                                     results
                                 </p>
                             </div>
                             <div class="pagination flex items-center pb-3 sm:pb-0">
                                 {{-- Previous Page Link --}}
-                                @if ($encoders->onFirstPage())
+                                @if ($storages->onFirstPage())
                                     <span
                                         class="opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
                                 @else
-                                    <li class="page-datatable list-none page-item" data-page="{{ $encoders->currentPage() -1 }}">
+                                    <li class="page-datatable list-none page-item" data-page="{{ $storages->currentPage() -1 }}">
                                         <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                                            href="javascript:void(0)" rel="prev">Previous</a>
                                     </li>
@@ -180,37 +180,37 @@
 
 
                                 {{-- Pagination Elements --}}
-                                @if ($encoders->currentPage() > 2)
+                                @if ($storages->currentPage() > 2)
                                     <li class="page-datatable list-none" data-page="1">
                                         <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                                            href="javascript:void(0)">1</a>
                                     </li>
-                                    @if ($encoders->currentPage() > 3)
+                                    @if ($storages->currentPage() > 3)
                                         <li class="list-none page-item disabled px-2"><span class="page-link">...</span></li>
                                     @endif
                                 @endif
 
-                                @for ($i = max(1, $encoders->currentPage() - 1); $i <= min($encoders->lastPage(), $encoders->currentPage() + 1); $i++)
+                                @for ($i = max(1, $storages->currentPage() - 1); $i <= min($storages->lastPage(), $storages->currentPage() + 1); $i++)
                                     <li class="page-datatable list-none page-item" data-page="{{ $i }}">
-                                        <a class="mx-1 py-2 px-3 w-max rounded-lg {{ ($encoders->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed text-white' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
+                                        <a class="mx-1 py-2 px-3 w-max rounded-lg {{ ($storages->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed text-white' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
                                            href="javascript:void(0)">{{ $i }}</a>
                                     </li>
                                 @endfor
 
-                                @if ($encoders->currentPage() < $encoders->lastPage() - 1)
-                                    @if ($encoders->currentPage() < $encoders->lastPage() - 2)
+                                @if ($storages->currentPage() < $storages->lastPage() - 1)
+                                    @if ($storages->currentPage() < $storages->lastPage() - 2)
                                         <li class=" list-none page-item disabled px-2"><span
                                                 class="page-link">...</span></li>
                                     @endif
-                                    <li class="page-datatable list-none page-item" data-page="{{ $encoders->lastPage() }}">
+                                    <li class="page-datatable list-none page-item" data-page="{{ $storages->lastPage() }}">
                                         <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
-                                           href="javascript:void(0)">{{ $encoders->lastPage() }}</a>
+                                           href="javascript:void(0)">{{ $storages->lastPage() }}</a>
                                     </li>
                                 @endif
 
                                 {{-- Next Page Link --}}
-                                @if ($encoders->hasMorePages())
-                                    <li class="page-datatable list-none page-item" data-page="{{ $encoders->currentPage() +1 }}">
+                                @if ($storages->hasMorePages())
+                                    <li class="page-datatable list-none page-item" data-page="{{ $storages->currentPage() +1 }}">
                                         <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                                            href="javascript:void(0)" rel="next">Next</a>
                                     </li>

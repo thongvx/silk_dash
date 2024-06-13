@@ -2,6 +2,7 @@ import '../main.js';
 import '../sidebar.js';
 import '../input-search.js'
 import '../notification.js';
+import '../control-datatable.js';
 //user
 import './user.js';
 //manage Task

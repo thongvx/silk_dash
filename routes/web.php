@@ -94,23 +94,22 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
+    Route::post('/datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
+
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\HomeAdminController::class, 'index'])->name('admin');
-    Route::get('/compute', function (){
-        $title = 'Users';
-        return view('admin.compute.compute', compact('title'));
-    });
+    Route::get('/compute', [\App\Http\Controllers\admin\ComputeController::class, 'index'])->name('compute');
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
-    Route::resource('/manageTask', \App\Http\Controllers\admin\ManageTaskController::class);
+    Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::get('/statistic', function (){
         $title = 'Users';
         return view('admin.statistic.statistic', compact('title'));
     });
     Route::get('/support', function (){
-        $title = 'Users';
-        return view('admin.support.cases', compact('title'));
+        $title = 'support';
+        return view('admin.support.support', compact('title'));
     });
 });
 

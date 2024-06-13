@@ -3,9 +3,9 @@
 @section('content')
     <div class="flex flex-wrap -mx-3 flex-col-reverse lg:flex-row">
         <div class="w-full max-w-full px-3 mt-0 text-white lg:flex-none">
-            <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
+            <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
                 <div
-                    class="rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top">
+                    class="rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top">
                     <div class="min-h-[calc(100vh-16em)]">
                         <div class="text-center pt-10">
                             <h4 class="text-[#009FB2]">StreamSilk Partner Program</h4>

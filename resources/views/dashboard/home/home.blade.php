@@ -66,7 +66,7 @@
                 </div>
                 <div class="md:w-6/12 w-full flex justify-center relative">
                     <div class="bg-[#e0fcff]"  style="background-image: url({{asset('assets/img/background-homepage.svg')}})"></div>
-                    <img src="{{asset('assets/img/image-homepage.jpg')}}" alt="">
+                    <img src="../image/image-homepage.webp" alt="">
                 </div>
             </div>
             <div class="relative w-full px-20">
@@ -106,7 +106,7 @@
                      style="background-image: url({{asset('assets/img/background-homepage.svg')}})">
                     <div class="grid grid-cols-2 gap-10 mt-6 items-center">
                         <div class="py-8 px-4">
-                            <img src="../image/Extensive.png" alt="" style="transform: rotateY(-180deg)">
+                            <img src="../image/Extensive.webp" alt="" style="transform: rotateY(-180deg)">
                         </div>
                         <div class="text-[#005f6a] flex items-center flex-col">
                             <h4 class="mt-4 h-14 text-5xl font-semibold">Extensive statistics</h4>

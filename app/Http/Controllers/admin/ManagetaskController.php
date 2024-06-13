@@ -16,38 +16,29 @@ class ManageTaskController extends Controller
     }
     public function index(Request $request){
         $tab = $request->input('tab', 'encoder');
-
-        $data = [
-            'title' => 'Manage Task',
-        ];
-
+        $data['title'] = 'Manage Task';
+        $status = $request->input('status', 'all');
+        $column = $request->input('column', 'created_at');
+        $direction = $request->input('direction', 'desc');
         if ($tab == 'encodingTask') {
-            $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder','created_at', 'desc', 20, 'all');
-        } else if ($tab == 'transferTask') {
-            $data['transfers'] = $this->manageTaskRepo->getAllTransfer('transfer', 'created_at', 'desc', 20);
+            $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder',$column, $direction , 20, $status);
+        } else{
+            $data['transfers'] = $this->manageTaskRepo->getAllTransfer('transfer', $column, $direction , 20);
         }
         return view('admin.manageTask.manageTask', $data);
     }
     public function manageControler(Request $request)
     {
         $tab = $request->input('tab');
-        $page = $request->input('page');
-
-        $data = [
-            'title' => 'Manage Task',
-            'encoders' => $this->manageTaskRepo->getAllEncoders($tab, 'created_at', 'desc', 20, 'all'),
-            'transfers' => $this->manageTaskRepo->getAllTransfer($tab, 'created_at', 'desc', 20)
-        ];
+        $data['title'] = 'Manage Task';
+        $status = $request->input('status', 'all');
+        $column = $request->input('column', 'created_at');
+        $direction = $request->input('direction', 'desc');
+        if ($tab == 'encodingTask') {
+            $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder',$column, $direction , 20, $status);
+        } else{
+            $data['transfers'] = $this->manageTaskRepo->getAllTransfer('transfer', $column, $direction , 20);
+        }
         return $data;
-    }
-    public function store(Request $request)
-    {
-        $tab = request()->get('tab');
-        $status = request()->get('status');
-        $data = [
-            'title' => 'Manage Task',
-            'encoders' => $this->manageTaskRepo->getAllEncoders($tab, 'created_at', 'desc', 20, $status)
-        ];
-        return view('admin.manageTask.encodertaskTable', $data);
     }
 }

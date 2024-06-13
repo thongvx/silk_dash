@@ -1,4 +1,4 @@
-<div id="transfer" class="bg-[#121520] p-4 border-[#121520] rounded-b-box rounded-se-box gap-2 bg-top [border-width:var(--tab-border)]" transfer_link>
+<div id="transfer" class="bg-[#121520] p-4 border-[#121520] rounded-b-xl rounded-tr-xl gap-2 bg-top [border-width:var(--tab-border)]" transfer_link>
     <div class="col-span-full text-center">
         <div class="noti text-white italic">
             <h4 class="mb-3">Click the button below to create your FTP account</h4>

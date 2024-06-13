@@ -13,7 +13,7 @@ class UserRepo
         return User::class;
     }
 
-    public function getAllUsers($tab, $column , $direction, $limit, $page)
+    public function getAllUsers($tab, $column , $direction, $columns, $limit)
     {
         $query = User::query()
                 ->whereDoesntHave('roles', function ($query) {

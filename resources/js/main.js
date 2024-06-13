@@ -186,6 +186,7 @@ export function loadContent(data_content) {
         },
         success: function(response) {
             $('#box-content').html(response);
+            $('#sever').text('Server: '+ $('#datatable').data('total'))
             if(data_content === 'webupload'){
                 Upload_FILE()
             }

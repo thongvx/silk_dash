@@ -1,15 +1,51 @@
 @extends('dashboard.layouts.app')
 
 @section('content')
-    <div class="mt-10 grid grid-cols-3 gap-4 items-center">
-        <!-- card1 -->
-        <div class="px-3 mb-6 xl:mb-0">
-            <div
-                class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
-                <div class='flex items-center justify-center py-2.5'>
-                    <div class='font-semibold text-center'>
-                        <h3 class='text-lg text-[#009FB2]'>Today earning</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white mt-3">
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-4">
+        <div class=" grid grid-cols-1 lg:grid-cols-2 gap-4 lg:col-span-3">
+            <!-- card1 -->
+            <div class="px-3 xl:mb-0">
+                <div
+                    class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    <div class='flex items-center justify-between py-2.5'>
+                        <h3 class='text-lg text-slate-400'>User watching</h3>
+                        <h5 class="mb-0 font-bold text-2xl text-white">
+                            2000
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!-- card1 -->
+            <div class="px-3 xl:mb-0">
+                <div
+                    class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    <div class='flex items-center justify-between py-2.5'>
+                        <h3 class='text-lg text-slate-400'>Today earning</h3>
+                        <h5 class="mb-0 font-bold text-2xl text-white">
+                            $ 0
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!-- card1 -->
+            <div class="px-3 xl:mb-0">
+                <div
+                    class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    <div class='flex items-center justify-between py-2.5'>
+                        <h3 class='text-lg text-slate-400'>Yesterday earning</h3>
+                        <h5 class="mb-0 font-bold text-2xl text-white">
+                            $ 0
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <!-- card1 -->
+            <div class="px-3 xl:mb-0">
+                <div
+                    class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    <div class='flex items-center justify-between py-2.5'>
+                        <h3 class='text-lg text-slate-400'>Total Withdrawals</h3>
+                        <h5 class="mb-0 font-bold text-2xl text-white">
                             $ 0
                         </h5>
                     </div>
@@ -17,12 +53,12 @@
             </div>
         </div>
         <!-- card1 -->
-        <div class="px-3 mb-6 xl:mb-0">
+        <div class="px-3 xl:mb-0 lg:col-span-1">
             <div
-                class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                 <div class='flex flex-col items-center justify-center py-2.5'>
                     <div class='font-semibold text-center'>
-                        <h3 class='text-lg text-[#009FB2]'>Total balance</h3>
+                        <h3 class='text-lg text-slate-400'>Total balance</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white mt-3">
                             $ 0.00
                         </h5>
@@ -33,20 +69,6 @@
                 </div>
             </div>
         </div>
-        <!-- card1 -->
-        <div class="px-3 mb-6 xl:mb-0">
-            <div
-                class=' mt-2 shadow-xl drop-shadow-sm bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
-                <div class='flex items-center justify-center py-2.5'>
-                    <div class='font-semibold text-center'>
-                        <h3 class='text-lg text-[#009FB2]'>Total Withdrawals</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white mt-3">
-                            $ 0
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="text-end mt-3">
         <a href="/setting?tab=accountsetting"
@@ -54,7 +76,7 @@
            <i class="material-symbols-outlined text-lg mr-2">settings</i>Earning Mode
         </a>
     </div>
-    <div class="text-white bg-[#121520] mt-3 rounded-lg p-4">
+    <div class="text-white bg-[#121520] mt-3 rounded-lg p-4 hidden">
         <div class="date">
             <form action="" class="flex font-bold justify-between items-center">
                 <div class="flex">
@@ -64,7 +86,7 @@
                     </div>
                     <div class="bg-teal-500	w-max px-3 py-1.5 rounded-lg">
                         <label for="from">To:</label>
-                        <input type="date" name="to" id="to" class="outline-none bg-transparent">
+                        <label for="to"></label><input type="date" name="to" id="to" class="outline-none bg-transparent">
                     </div>
                     <div class="ml-4">
                         <button type="button" class="bg-[#142132] hover:bg-[#009FB2] rounded-3xl px-3 py-1.5">
@@ -87,6 +109,33 @@
             <div class="table-earning">
                 @include('dashboard.report.dataEarning')
             </div>
+
+        </div>
+    </div>
+    <div class="grid mt-3" box-lifted>
+        <div
+            class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start grid flex-col items-start">
+            <button
+                class="yesterday tab-active !text-[#009FB2] text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                data-content="yesterday">
+                Yesterday
+            </button>
+            <button
+                class="last-7-days text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                data-content="last-7-days">
+                Last 7 days
+            </button>
+            <button
+                class="last-30-days text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                data-content="last-30-days">
+                last 30 days
+            </button>
+        </div>
+        <div class="rounded-b-xl rounded-tr-xl relative bg-[#121520] grid">
+            @include('dashboard.report.dataEarning')
         </div>
     </div>
     <div class="text-white bg-[#121520] mt-6 rounded-lg p-4">

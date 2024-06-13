@@ -1,5 +1,5 @@
 <div class="rounded-xl">
-    <div class="relative rounded-xl">
+    <div class="relative">
         <div class="px-2 pt-4 md:p-4">
             <div class="mb-2" id='title'>
                 <h5 class="items-center text-white flex">
@@ -12,7 +12,7 @@
             <div class="flex justify-between items-center w-full mb-3">
                 <div class="text-sm bg-[#142132] rounded-lg p-2">
                     <label for="limit">Show:</label>
-                    <select name="limit" class="bg-transparent outline-transparent outline-none"
+                    <select name="limit" class="bg-transparent outline-none outline-none"
                             id="limit">
                         <option value="10"
                                 class="limit" {{ $videos->perPage() == 10 ? 'selected' : '' }}>

@@ -35,10 +35,10 @@
                         </button>
 
                     </div>
-                    <div class="mt-3 md:mt-0 rounded-b-box rounded-se-box relative  max-w-full w-full">
-                        <div class="border-base-300 rounded-b-box rounded-se-box gap-2 bg-[#121520] bg-top">
+                    <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
+                        <div class="border-base-300 rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top">
                             <div class="tab-content-video">
-                                <div class="rounded-xl"  id="box-content">
+                                <div class="rounded-xl box-datatable" id="box-content">
                                     @include(request()->path() . '.' . request()->get('tab'))
                                 </div>
                             </div>
