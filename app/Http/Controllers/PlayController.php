@@ -33,14 +33,15 @@ class PlayController
             $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
             $data_setting = $this->accountRepo->getSetting($video->user_id);
             $poster = $data_setting->gridPoster == 5 ? $video->grid_poster_5 : ($data_setting->gridPoster == 3 ? $video->grid_poster_3 : $video->poster);
-
+            $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
             if ($video->origin == 0) {
-                return view('play', ['urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload') . '.streamsilk.com/uploads/' . $slug . '.' . $video->format]);
+                $playData = [
+                    'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->where('quality', 480)->value('sv_upload') . '.streamsilk.com/storage/' . $slug . '.' . $video->format,
+                    'poster' => $poster,
+                ];
+                return view('playOrigin', $playData);
             } else {
                 $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
-
-                //Todo: sua doan nay
-                $svStream = $video->stream == 0 ? SvStreamService::selectSvStream() : SvStreamService::checkConnectSvStream(explode('-', $video->stream));
 
                 if ($video->stream == 0) {
                     $svStream = SvStreamService::selectSvStream();
@@ -48,9 +49,12 @@ class PlayController
                     $video->stream =  $svStream;
                     $video->save();
                 }else{
-                    //Todo: sua doan nay
-                    $video->stream = $video->stream . '-' . $svStream;
-                    $video->save();
+                    $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
+                    if ($svStream === null) {
+                        $svStream = SvStreamService::selectSvStream();
+                        $video->stream = $video->stream . '-' . $svStream;
+                        $video->save();
+                    }
                 }
 
                 $playData = [
