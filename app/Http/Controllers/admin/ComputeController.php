@@ -17,7 +17,7 @@ class ComputeController extends Controller
     private function getData(Request $request, string $tab)
     {
         $data['column'] = $request->input('column', 'created_at');
-        $data['direction'] = $request->input('direction', 'desc');
+        $data['direction'] = $request->input('direction', 'asc');
         $data['limit'] = $request->input('limit', 20);
         $data['title'] = 'Compute';
 
@@ -47,5 +47,12 @@ class ComputeController extends Controller
         $tab = $request->input('tab');
         return $this->getData($request, $tab);
 
+    }
+
+    public function create(Request $request)
+    {
+        $tab = $request->input('tab');
+        $data = $this->getData($request, $tab);
+        return view('admin.compute.create', $data);
     }
 }

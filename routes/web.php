@@ -100,7 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\HomeAdminController::class, 'index'])->name('admin');
-    Route::get('/compute', [\App\Http\Controllers\admin\ComputeController::class, 'index'])->name('compute');
+    Route::resource('/compute', \App\Http\Controllers\admin\ComputeController::class);
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::get('/statistic', function (){

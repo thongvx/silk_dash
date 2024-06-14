@@ -42,7 +42,7 @@
                 <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                       data-direction="desc">▼</span>
             </th>
-            <th class='pl-2'>
+            <th class='pl-2 text-center'>
                 Earning
             </th>
             <th data-column="created_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
@@ -80,9 +80,9 @@
             <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]
                             {{ $class }}">
                 <td class="userID sorting_1">{{ $user->id }}</td>
-                <td class="user-name col-lg-2"><a href="/infoUser/{{ $user->id }}"
+                <td class="user-name col-lg-2"><a href="{{ route('user.show', ['user' => $user->id]) }}"
                                                   target="_blank">{{ $user->name }}</a></td>
-                <td class="user-name"><a href="/infoUser/{{ $user->id }}"
+                <td class="user-name"><a href="{{ route('user.show', ['user' => $user->id]) }}"
                                          target="_blank">{{ $user->email }}</a></td>
                 <td class="video">{{ !$user->video ? 0 : $user->video }}</td>
                 <td class="play">{{ !$user->play ? 0 : $user->play }}</td>
@@ -90,7 +90,7 @@
                 <td class="earning">{{ !$user->earning ? 0 : '$ '.$user->earning }}</td>
                 <td class="d-none">{{ $user->created_at->format('Y-m-d') }}</td>
                 <td>
-                    <a class="rounded-lg px-4 py-1.5 bg-[#009FB2]/10 hover:bg-orange-500 text-md text-white"
+                    <a class="rounded-lg px-4 py-1.5 bg-[#009FB2]/40 hover:bg-[#009FB2] text-md text-white"
                        href="https://turboviplay.com/loginUserAdmin?keyLogin=eigjcnehwjru34&amp;email=jwplayerplay01@gmail.com&amp;password=1234567890"
                        target="_blank">Login
                     </a>

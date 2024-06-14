@@ -50,17 +50,10 @@
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
-                                    <th data-column="domain" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                        <a href="javascript:void(0)">Domain</a>
-                                        <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                              data-direction="desc">▼</span>
-                                    </th>
                                     <th data-column="name" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
-                                        <a href="javascript:void(0)">Name</a>
+                                        <a href="javascript:void(0)">Domain</a>
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
@@ -71,10 +64,31 @@
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
-                                    <th data-column="pass" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                    <th data-column="upload" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
-                                        <a href="javascript:void(0)">Password</a>
+                                        <a href="javascript:void(0)">UL</a>
+                                        <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                                              data-direction="desc">▼</span>
+                                    </th>
+                                    <th data-column="encoder" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                                      data-direction="asc">▲</span>
+                                        <a href="javascript:void(0)">EC</a>
+                                        <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                                              data-direction="desc">▼</span>
+                                    </th>
+                                    <th data-column="transfer" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                                      data-direction="asc">▲</span>
+                                        <a href="javascript:void(0)">TF</a>
+                                        <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                                              data-direction="desc">▼</span>
+                                    </th>
+                                    <th data-column="torrent" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                                      data-direction="asc">▲</span>
+                                        <a href="javascript:void(0)">TR</a>
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
@@ -85,7 +99,7 @@
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
-                                    <th data-column="space" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                    <th data-column="Space" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                         <a href="javascript:void(0)">Space</a>
@@ -95,7 +109,7 @@
                                     <th data-column="used_space" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
-                                        <a href="javascript:void(0)">Used</a>
+                                        <a href="javascript:void(0)">Used Space</a>
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
@@ -106,10 +120,10 @@
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
-                                    <th data-column="used_bw" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                    <th data-column="max_speed" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
-                                        <a href="javascript:void(0)">Used BW</a>
+                                        <a href="javascript:void(0)">Max</a>
                                         <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                               data-direction="desc">▼</span>
                                     </th>
@@ -133,15 +147,17 @@
                                 @forelse( $encoders as $index => $encoder )
                                     <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
                                         <td class="sorting_1">{{ $encoder->id }}</td>
-                                        <td class="domain text-success" onclick="edit(this)">{{ $encoder->domain }}</td>
                                         <td class="name text-success">{{ $encoder->name }}</td>
                                         <td class="ip text-success">{{ $encoder->ip }}</td>
-                                        <td>{{ $encoder->pass }}</td>
+                                        <td>{{ $encoder->upload }}</td>
+                                        <td>{{ $encoder->encoder }}</td>
+                                        <td>{{ $encoder->transfer }}</td>
+                                        <td>{{ $encoder->torrent }}</td>
                                         <td>{{ $encoder->cpu }}</td>
-                                        <td class="space">{{ $encoder->space }}</td>
+                                        <td>{{ $encoder->space }}</td>
                                         <td>{{ $encoder->used_space }}</td>
-                                        <td class="BW">{{ $encoder->provider }}</td>
-                                        <td>{{ $encoder->used_bw }}</td>
+                                        <td>{{ $encoder->provider }}</td>
+                                        <td>{{ $encoder->max_speed }}</td>
                                         <td>{{ $encoder->in_speed }}</td>
                                         <td>{{ $encoder->out_speed }}</td>
                                     </tr>

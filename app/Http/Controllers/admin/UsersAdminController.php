@@ -6,15 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\Admin\UserRepo;
+use App\Repositories\AccountRepo;
 use Illuminate\Support\Facades\Auth;
 
 class UsersAdminController
 {
-    protected $userRepo;
+    protected $userRepo, $accountRepo;
 
-    public function __construct( UserRepo $userRepo)
+    public function __construct( UserRepo $userRepo, AccountRepo $accountRepo)
     {
         $this->userRepo = $userRepo;
+        $this->accountRepo = $accountRepo;
     }
     public function index(Request $request)
     {
@@ -40,14 +42,23 @@ class UsersAdminController
         ];
         return view('admin.user.boxuser', $data);
     }
-    public function show(User $user)
+    public function show($user)
     {
-        return view('users.show', compact('user'));
+        $data = [
+            'title' => 'User Detail',
+            'users' => $this->userRepo->getUserById($user),
+            'settings' => $this->accountRepo->getSetting($user),
+        ];
+        return view('admin.user.inforuser', $data);
     }
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $data = [
+            'user' => $user,
+            'title' => 'Edit User',
+        ];
+        return view('admin.edit', compact('user'));
     }
 
     public function update(Request $request, User $user)

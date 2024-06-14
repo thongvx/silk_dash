@@ -52,7 +52,8 @@ class UserRepo
 
     public function getUserById($id)
     {
-        return User::find($id);
+        $user = User::query()->where('id', $id)->first();
+        return $user;
     }
 
     // Add more methods as needed

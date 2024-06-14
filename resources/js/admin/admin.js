@@ -7,7 +7,8 @@ import '../control-datatable.js';
 import './user.js';
 //manage Task
 import './manage-task.js';
-
+//Compute
+import './compute.js';
 
 var a_menu = $('.menu-sidebar')
 a_menu.filter(function () {

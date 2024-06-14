@@ -5,9 +5,9 @@
                 <h5 class="text-white" id="sever">
                     Sever : {{ $storages->total() }}
                 </h5>
-                <div class="bg-[#142132] px-5 py-1 rounded-lg hover:text-[#009FB2] cursor-pointer" title="edit">
+                <div class="bg-[#142132] px-5 py-1 rounded-lg hover:text-[#009FB2] cursor-pointer"  btn-add-sever>
                     <a href="javascript:;" class="flex items-center text-sm">
-                        <i btn-edit class="material-symbols-outlined opacity-1 text-2xl">add</i>
+                        <i class="material-symbols-outlined opacity-1 text-2xl">add</i>
                         Add
                     </a>
                 </div>

@@ -1,6 +1,6 @@
 
 <div class="mt-5">
-    <form id="form-setting" useID="{{$setting -> user_id}}">
+    <form id="form-setting">
         @csrf
         <div class="text-[#009FB2]">
             <div class="grid grid-cols-4 gap-4 ">
@@ -164,7 +164,7 @@
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                           value="1"    {{$setting -> earningModes == 1 ? 'checked' : ''}}>
+                           value="1"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
 
                             <label for="1" class="ml-3">No Earning: 1 Popunder on pre-roll (per page)</label>
                         </div>
@@ -174,7 +174,7 @@
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                            value="2"    {{$setting -> earningModes == 2 ? 'checked' : ''}}>
+                            value="2"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
 
                             <label for="2" class="ml-3">$1 per 10k views:  2 Popunders on pre-roll </label>
                         </div>
@@ -185,7 +185,7 @@
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                            value="3"    {{$setting -> earningModes == 3 ? 'checked' : ''}}>
+                            value="3"  {{$setting -> earningModes == 3 ? 'checked' : ''}}>
 
                             <label for="3" class="ml-3">$2.5 per 10k views: 3 Popunders on pre-roll</label>
                         </div>
