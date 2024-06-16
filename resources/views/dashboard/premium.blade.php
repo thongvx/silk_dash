@@ -12,7 +12,7 @@
                                 <div class="px-2 pt-4 md:p-4  rounded-xl">
                                     <div class="mb-2" id='title'>
                                         <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                                            <span>DMCA</span>
+                                            <span>Premium</span>
                                         </h5>
                                     </div>
 
