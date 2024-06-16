@@ -169,13 +169,13 @@
                 <div class="mb-0 rounded-t-2xl p-6 pt-4 pb-0 flex justify-between">
                     <h6 class="text-[#009FB2] font-bold">Statistics</h6>
                     <div class="text-white">
-                        <button class="rounded-lg px-4 py-0.5 bg-[#142132] switchButton" data-chart="day">Day</button>
-                        <button class="rounded-lg px-4 py-0.5 bg-[#009FB2] switchButton" data-chart="week">Week</button>
-                        <button class="rounded-lg px-4 py-0.5 bg-[#142132] switchButton" data-chart="month">Month</button>
+                        <button class="rounded-lg px-4 py-1 bg-[#142132] switchButton" data-chart="day">Day</button>
+                        <button class="rounded-lg px-4 py-1 bg-[#009FB2] switchButton" data-chart="week">Week</button>
+                        <button class="rounded-lg px-4 py-1 bg-[#142132] switchButton" data-chart="month">Month</button>
                     </div>
                 </div>
-                <div>
-                    <canvas id="chart-line" height="350"></canvas>
+                <div class="h-80">
+                    <canvas id="chart-line"></canvas>
                 </div>
             </div>
         </div>
@@ -187,7 +187,7 @@
                     <h6 class="text-[#009FB2] font-bold">Notification</h6>
                     <a href="" class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">View All</a>
                 </div>
-                <div class="px-4 mt-3 h-80 overflow-auto">
+                <div class="px-4 pb-1 mt-4 h-72 overflow-auto">
                     @forelse($notifications as $notification)
                         <div
                             class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
@@ -215,13 +215,13 @@
     <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div
-                class="relative flex flex-col min-w-0 pb-3 px-2 break-words border-0 border-solid shadow-xl bg-[#121520] border-black-125 rounded-2xl bg-clip-border">
+                class="relative flex flex-col min-w-0 pb-3 px-2 break-wordsborder-0 border-solid shadow-xl bg-[#121520] border-black-125 rounded-2xl bg-clip-border">
                 <div class="p-4 pb-0 mb-0 rounded-t-4">
                     <div class="flex justify-between">
                         <h6 class="mb-2 text-[#009FB2] font-bold text-lg">Top 10 viewed videos today</h6>
                     </div>
                 </div>
-                <div class="overflow-auto h-80">
+                <div class="overflow-auto h-[calc(30vh)]">
                     <table
                         class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
                         <tbody>
@@ -382,11 +382,11 @@
         </div>
         <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
             <div
-                class="border-black/12.5  pb-4 px-2 shadow-xl bg-[#121520] relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                class="border-black/12.5  pb-3 px-2 shadow-xl bg-[#121520] relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="p-4 pb-0 rounded-t-4">
                     <h6 class="mb-0 text-[#009FB2] font-bold text-lg">Top Country</h6>
                 </div>
-                <div class="overflow-auto  h-80">
+                <div class="overflow-auto  h-[calc(30vh)]">
                     <table
                         class="items-center w-full mb-4 align-top border-collapse border-gray-200 ">
                         <tbody>
@@ -584,3 +584,7 @@
     </div>
 @endsection
 
+@section('scripts')
+    {{--    @vite('resources/js/chart/filechart.js')--}}
+    {{--    @vite('resources/js/chart/charts.js')--}}
+@endsection
