@@ -2,12 +2,10 @@
 
 namespace App\Repositories\Admin;
 
-use App\Models\Svencoder;
+use App\Models\SvEncoder;
 use App\Models\SvStorage;
-use App\Models\Svstream;
+use App\Models\SvStream;
 use Illuminate\Support\Facades\Auth;
-use Prettus\Repository\Eloquent\BaseRepository;
-use Illuminate\Contracts\Auth\Guard;
 
 class ComputeRepo
 {

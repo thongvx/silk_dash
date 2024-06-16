@@ -36,10 +36,10 @@ class DatatableController
             case '/admin/manageTask':
                 if ($tab == 'encodingTask') {
                     $data['encoders'] = $this->manageTaskRepo->getAllEncoders($tab,$data['column'], $data['direction'], $data['limit'], $status);
-                    return view('admin.managetask'.'.'.$tab, $data);
+                    return view('admin.manageTask'.'.'.$tab, $data);
                 } else if ($tab == 'transferTask') {
                     $data['transfers'] = $this->manageTaskRepo->getAllTransfer($tab, $data['column'], $data['direction'], $data['limit']);
-                    return view('admin.managetask'.'.'.$tab, $data);
+                    return view('admin.manageTask'.'.'.$tab, $data);
                 }
                 break;
             case '/admin/compute':
