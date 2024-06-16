@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Spatie\Permission\Models\Role;
-
+use WhichBrowser\Parser;
 class LoginController extends Controller
 {
     /*
