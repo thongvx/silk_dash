@@ -174,10 +174,8 @@
                         <button class="rounded-lg px-4 py-1 bg-[#142132] switchButton" data-chart="month">Month</button>
                     </div>
                 </div>
-                <div class="flex-auto p-4">
-                    <div>
-                        <canvas id="chart-line" height="350"></canvas>
-                    </div>
+                <div class="h-80">
+                    <canvas id="chart-line"></canvas>
                 </div>
             </div>
         </div>
@@ -189,7 +187,7 @@
                     <h6 class="text-[#009FB2] font-bold">Notification</h6>
                     <a href="" class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">View All</a>
                 </div>
-                <div class="px-4 mt-3 h-[calc(380px)] overflow-auto">
+                <div class="px-4 pb-1 mt-4 h-72 overflow-auto">
                     @forelse($notifications as $notification)
                         <div
                             class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">

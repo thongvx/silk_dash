@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Http\Controllers\admin\ManagetaskController;
+use App\Http\Controllers\admin\ManageTaskController;
 use App\Http\Controllers\admin\ComputeController;
 use App\Http\Controllers\Dashboard\Setting\AccountController;
 use App\Http\Controllers\Dashboard\Support\TicketController;
@@ -17,14 +17,14 @@ class ModelHelpers
 {
     protected $controllers;
 
-    public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController, TicketController $TicketController, ManagetaskController $managetaskController, ComputeController $computeController)
+    public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController, TicketController $TicketController, ManageTaskController $manageTaskController, ComputeController $computeController)
     {
         $this->controllers = [
             'setting' => $AccountController,
             'video' => $videoController,
             'upload' => $uploadController,
             'support' => $TicketController,
-            'manageTask' => $managetaskController,
+            'manageTask' => $manageTaskController,
             'compute' => $computeController,
         ];
     }
