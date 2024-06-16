@@ -2,9 +2,9 @@ import './main.js';
 import './sidebar.js';
 import './input-search.js'
 import './notification.js';
-//dashboard
 import './chart/filechart.js';
-import './chart/charts.js';
+//dashboard
+import './user-dashboard.js';
 //upload
 import './upload/upload.js';
 import './upload/uploadFile.js';
@@ -16,6 +16,7 @@ import './jsVideo/box-video.js';
 import './jsVideo/folder.js';
 //report
 import './report/report.js';
+import './daterangepicker/datepicker.min.js'
 //support
 import './support/ticket.js';
 //setting

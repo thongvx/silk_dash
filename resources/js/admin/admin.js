@@ -3,6 +3,8 @@ import '../sidebar.js';
 import '../input-search.js'
 import '../notification.js';
 import '../control-datatable.js';
+import '../chart/filechart.js';
+import '../chart/charts.js';
 //user
 import './user.js';
 //manage Task

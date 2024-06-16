@@ -1,5 +1,3 @@
-// chart 2
-
 if ($("#chart-line").length) {
     var last24HoursData = Array.from({length: 24}, () => Math.floor(Math.random() * 100));
     var last24HoursLabels = [];

@@ -76,66 +76,74 @@
            <i class="material-symbols-outlined text-lg mr-2">settings</i>Earning Mode
         </a>
     </div>
-    <div class="text-white bg-[#121520] mt-3 rounded-lg p-4 hidden">
-        <div class="date">
-            <form action="" class="flex font-bold justify-between items-center">
-                <div class="flex">
-                    <div class="bg-teal-500	w-max px-3 py-1.5 rounded-lg mr-3">
-                        <label for="from">From:</label>
-                        <input type="date" name="from" id="from" class="outline-none bg-transparent">
-                    </div>
-                    <div class="bg-teal-500	w-max px-3 py-1.5 rounded-lg">
-                        <label for="from">To:</label>
-                        <label for="to"></label><input type="date" name="to" id="to" class="outline-none bg-transparent">
-                    </div>
-                    <div class="ml-4">
-                        <button type="button" class="bg-[#142132] hover:bg-[#009FB2] rounded-3xl px-3 py-1.5">
-                            Yesterday
-                        </button>
-                        <span class="mx-3">-</span>
-                        <button type="button" class="bg-[#009FB2] rounded-3xl px-3 py-1.5">Last 7 days</button>
-                        <span class="mx-3">-</span>
-                        <button type="button" class="bg-[#142132] hover:bg-[#009FB2] rounded-3xl px-3 py-1.5">last 30
-                            days
-                        </button>
+    <div class="text-white mt-3 lg:mt-0 pb-4 grid grid-cols-7 gap-4">
+        <div class="date col-span-7 lg:col-span-2  bg-[#121520] rounded-lg py-6">
+            <form action="" id="date-report" class="flex font-bold flex-col justify-center items-center h-full">
+                <h4>Select date</h4>
+                <div class="w-full px-6">
+                    <div date-rangepicker class="flex items-center flex-col">
+                        <div class="w-full">
+                            <span class="mx-4 text-white">From</span>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                    </svg>
+                                </div>
+                                <input name="start" type="text" autocomplete="off" class="bg-[#142132] placeholder:text-gray-500 text-white text-sm rounded-lg outline-none
+                                focus:ring-blue-500 block w-full ps-10 p-2.5" placeholder="Select date start">
+                            </div>
+                        </div>
+                        <div class="w-full mt-3">
+                            <span class="mx-4 text-white">To</span>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                    </svg>
+                                </div>
+                                <input name="end" type="text" autocomplete="off" class="bg-[#142132] placeholder:text-gray-500 text-white text-sm rounded-lg outline-none
+                                 focus:ring-blue-500 block w-full ps-10 p-2.5" placeholder="Select date end">
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="items-end">
-                    <button class="bg-[#142132] hover:bg-[#009FB2] px-6 py-1.5 rounded-2xl text-xl" type="submit">
+                <div class="items-end mt-4 w-full px-6">
+                    <button class="bg-[#142132] hover:bg-[#009FB2] px-6 py-1.5 rounded-lg text-lg w-full" type="submit">
                         Apply
                     </button>
                 </div>
             </form>
-            <div class="table-earning">
-                @include('dashboard.report.dataEarning')
+        </div>
+        <div class="grid col-span-7 lg:col-span-5" box-lifted>
+            <div
+                class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start grid flex-col items-start">
+                <button
+                    class="yesterday tab-chart-report text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                    data-content="yesterday">
+                    Yesterday
+                </button>
+                <button
+                    class="last-7-days tab-chart-report tab-active !text-[#009FB2] text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                    data-content="last-7-days">
+                    Last 7 days
+                </button>
+                <button
+                    class="last-30-days tab-chart-report text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                    data-content="last-30-days">
+                    last 30 days
+                </button>
             </div>
-
-        </div>
-    </div>
-    <div class="grid mt-3" box-lifted>
-        <div
-            class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start grid flex-col items-start">
-            <button
-                class="yesterday tab-active !text-[#009FB2] text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
-                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                data-content="yesterday">
-                Yesterday
-            </button>
-            <button
-                class="last-7-days text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
-                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                data-content="last-7-days">
-                Last 7 days
-            </button>
-            <button
-                class="last-30-days text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
-                    h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                data-content="last-30-days">
-                last 30 days
-            </button>
-        </div>
-        <div class="rounded-b-xl rounded-tr-xl relative bg-[#121520] grid">
-            @include('dashboard.report.dataEarning')
+            <div class="rounded-b-xl rounded-tr-xl relative bg-[#121520] grid">
+                <div class="flex-auto">
+                    <div>
+                        <canvas id="chart-bars" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="text-white bg-[#121520] mt-6 rounded-lg p-4">
