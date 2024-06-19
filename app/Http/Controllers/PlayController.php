@@ -55,6 +55,7 @@ class PlayController
                         $video->stream = $video->stream . '-' . $svStream;
                         $video->save();
                     }
+                    Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                 }
 
                 $playData = [
