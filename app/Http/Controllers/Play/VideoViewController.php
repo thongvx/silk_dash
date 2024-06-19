@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Play;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class VideoViewController
 {
-    public function updateView($videoId)
+    public function updateView($videoId,  Request $request)
     {
+        $country = $request->header('CF-IPCountry');
+        echo $country; die;
         $sessionKey = 'video_viewed_' . $videoId;
 
         // Tạo một key duy nhất cho mỗi video
