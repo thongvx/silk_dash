@@ -5,6 +5,7 @@
             <tr class="bg-[#142132] transition-colors text-md">
                 <th class="py-2.5 px-3">Date</th>
                 <th class="py-2.5 px-3">Views</th>
+                <th class="py-2.5 px-3">Download</th>
                 <th class="py-2.5 px-3">Paid Views</th>
                 <th class="py-2.5 px-3">VPN ADS Views</th>
                 <th class="py-2.5 px-3">Revenue</th>
@@ -12,12 +13,13 @@
         </thead>
         <tbody>
             <tr class="my-3 h-12 bg-[#142132]">
-                <td class="text-center" colspan="5">No data available in table</td>
+                <td class="text-center" colspan="6">No data available in table</td>
             </tr>
         </tbody>
         <tfoot>
             <tr class="bg-[#142132]">
                 <th class="py-1.5 px-3">Total</th>
+                <th class="py-1.5 px-3">0</th>
                 <th class="py-1.5 px-3">0</th>
                 <th class="py-1.5 px-3">0</th>
                 <th class="py-1.5 px-3">0</th>

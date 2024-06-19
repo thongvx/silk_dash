@@ -115,12 +115,11 @@
                 <span class="font-semibold">4% more</span> in 2024
               </p>
             </div>
-              <div class=" h-80">
+              <div class="h-80">
                   <canvas id="chart-line"></canvas>
               </div>
             </div>
           </div>
-        </div>
 
         <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
           <div class="border-black/12.5 bg-[#121520] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl
@@ -294,13 +293,13 @@
 
       <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
-          <div class="relative flex flex-col min-w-0 break-wordsborder-0 border-solid shadow-xl bg-[#121520] dark:shadow-dark-xl border-black-125 rounded-2xl bg-clip-border">
+          <div class="relative flex flex-col min-w-0 px-2 pb-3 bg-[#121520] rounded-2xl">
             <div class="p-4 pb-0 mb-0 rounded-t-4">
               <div class="flex justify-between">
                 <h6 class="mb-2 text-[#009FB2] font-bold text-lg">Top 10 viewed videos today</h6>
               </div>
             </div>
-            <div class="overflow-auto h-[calc(25vh)]">
+            <div class="overflow-auto h-80">
               <table class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
                 <tbody>
                   <tr>
@@ -459,7 +458,7 @@
           </div>
         </div>
         <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
-          <div class="border-black/12.5 bg-[#121520] px-2 pb-3 relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+          <div class="bg-[#121520] px-2 pb-3 relative flex min-w-0 flex-col rounded-2xl ">
             <div class="p-4 pb-0 rounded-t-4">
               <h6 class="mb-2 text-[#009FB2] font-bold text-lg">Top Country</h6>
             </div>

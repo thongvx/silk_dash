@@ -69,10 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard.dmca.dmcaInfo', $data);
     });
 
-    Route::get('report',function (){
-        $data['title'] = 'report';
-        return view('dashboard.report.report', $data);
-    });
+    Route::resource('report', \App\Http\Controllers\Dashboard\Report\ReportController::class);
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
 
     Route::get('premium',function (){
@@ -102,6 +99,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\HomeAdminController::class, 'index'])->name('admin');
     Route::resource('/compute', \App\Http\Controllers\admin\ComputeController::class);
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
+    Route::get('/login-as/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'loginAs'])->name('admin.login-as');
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::get('/statistic', function (){
         $title = 'Users';

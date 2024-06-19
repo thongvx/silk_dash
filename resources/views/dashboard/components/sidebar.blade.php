@@ -6,11 +6,11 @@
     <div class="h-19">
         <i class="material-symbols-outlined absolute top-0 right-0 p-4 opacity-50 cursor-pointer text-white xl:hidden font-bold" sidenav-close>close</i>
         <a class="{{$minimenu === 'true' ? 'px-2 py-4 xl:scale-75' :'px-6 py-4'}} flex m-0 text-sm whitespace-nowrap items-center" target="_blank" logo>
-            <img src="../assets/img/logo3.png"
+            <img src="{{asset('image/logo/logo1.png')}}"
                  class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-12" alt="main_logo" />
             <span class="{{$minimenu === 'true' ? 'xl:max-w-0 xl:opacity-0' :''}} ml-1 font-semibold transition-all duration-200 ease-nav-brand" name-web>
-        <img src="../assets/img/name-web3.png"
-             class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
+        <img src="{{asset('image/logo/name-web1.png')}}"
+             class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-16" alt="main_logo" />
       </span>
         </a>
     </div>
@@ -56,7 +56,7 @@
 
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
                 <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
-                   href="/report">
+                   href="/report?tab=date-table">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1 text-3xl">show_chart</i>
                     </div>

@@ -1,6 +1,10 @@
+import './jquery.fileupload.js'
+import {uploadState} from "../main.js";
+
 var size1, size2, size3, size4;
 var $ = window.$; // use the global jQuery instance
 const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
 function niceBytes(x){
     let l = 0, n = parseInt(x, 10) || 0;
     while(n >= 1024 && ++l){
@@ -45,6 +49,7 @@ export function Upload_FILE (){
                 document.getElementById('list-upload-file').insertAdjacentHTML('beforebegin', div_progress);
                 $('#form-upload-file').addClass('hidden');
                 data.submit();
+                uploadState.isUploading = true;
             },
             progress: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -64,12 +69,13 @@ export function Upload_FILE (){
                 $("#" + data._progress.theId + " .title-file").removeClass('col-lg-8');
                 if(data._response.textStatus === "success"){
                     $("#" + data._progress.theId + " .size").text("Uploaded Successfully!");
-                    $("#" + data._progress.theId + " .size").addClass('text-success')
+                    $("#" + data._progress.theId + " .size").addClass('text-teal-400')
                 }else{
                     $("#" + data._progress.theId + " .size").text("Upload Failed!");
-                    $("#" + data._progress.theId + " .size").addClass('text-danger')
+                    $("#" + data._progress.theId + " .size").addClass('text-rose-500')
                 }
                 $("#file").val('')
+                uploadState.isUploading = false;
             },
 
         });
@@ -79,3 +85,14 @@ $(document).ready(function() {
      Upload_FILE()
 });
 
+
+window.addEventListener('beforeunload', function (e) {
+    if (uploadState.isUploading) {
+        var userResponse = confirm('A video is currently uploading. Do you want to continue switching tabs?');
+        if (userResponse == true) {
+            uploadState.isUploading = false;
+        } else {
+            e.preventDefault();
+        }
+    }
+});

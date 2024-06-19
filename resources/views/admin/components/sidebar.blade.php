@@ -1,8 +1,8 @@
 <!-- sidenav  -->
 <aside
-    class="fixed  inset-y-0 lg:sticky lg:top-0 lg:inset-x-0 flex-wrap items-center justify-between block p-0 my-4 lg:my-0
-         antialiased transition-transform duration-200 -translate-x-full border-0 shadow-xl max-w-64 lg:max-w-full
-         ease-nav-brand z-20 xl:mx-6 rounded-2xl lg:rounded-lg xl:left-0 xl:translate-x-0 bg-[#121520]"
+    class="fixed inset-y-0 xl:sticky xl:top-0 xl:inset-x-0 flex-wrap items-center justify-between block p-0 my-4 xl:my-0
+         antialiased transition-transform duration-200 -translate-x-full border-0 shadow-xl max-w-64 xl:max-w-full
+         ease-nav-brand z-20 xl:mx-6 rounded-2xl xl:rounded-lg xl:left-0 xl:translate-x-0 bg-[#121520]"
     aria-expanded="false">
     <div class="h-19 lg:hidden">
         <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white xl:hidden"
@@ -21,7 +21,7 @@
     <hr class="lg:hidden h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>
 
     <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
-        <ul class="flex flex-col lg:flex-row pl-0 mb-0">
+        <ul class="flex flex-col xl:flex-row pl-0 mb-0">
             <li class="my-1.5 w-full">
                 <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="/admin/dashboard">
@@ -42,7 +42,7 @@
                     </div>
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="email">Mail</span>
                 </a>
-                <ul class="text-sm transform-dropdown bg-[#121520] shadow-lg shadow-slate-900 duration-250 min-w-48 pointer-events-none absolute top-10 z-30
+                <ul class="text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none absolute top-10 z-30
  origin-top list-none rounded-lg border-none bg-clip-padding pr-2 py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
  lg:absolute lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                     <li class="my-1.5 w-full">
@@ -99,9 +99,9 @@
                     </div>
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="manageTask">Manage Task</span>
                 </a>
-                <ul class="text-sm transform-dropdown bg-[#121520] shadow-lg shadow-slate-900 duration-250 min-w-48 pointer-events-none absolute top-10 z-20
- origin-top list-none rounded-lg border-none bg-clip-padding pr-2 py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
- lg:absolute lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
+                <ul class="pl-4 xl:pl-2 text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none xl:absolute top-10 z-20
+ origin-top list-none rounded-lg border-none bg-clip-padding pr-2 xl:py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
+lg:left-auto lg:block lg:cursor-pointer h-0" dropdown-menu>
                     <li class="my-1.5 w-full">
                         <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/manageTask?tab=encodingTask&status=all">
@@ -165,7 +165,7 @@
                     </div>
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="support">Support</span>
                 </a>
-                <ul class="text-sm transform-dropdown bg-[#121520] shadow-lg shadow-slate-900 duration-250 min-w-48 pointer-events-none absolute top-10 z-30
+                <ul class="text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none absolute top-10 z-30
  origin-top list-none rounded-lg border-none bg-clip-padding pr-2 py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
  lg:absolute lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                     <li class="my-1.5 w-full">

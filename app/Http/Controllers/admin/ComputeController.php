@@ -4,16 +4,21 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\Admin\ComputeRepo;
+use App\Services\ServerStream\SvStreamService;
+use App\Services\ServerStorage\SvStorageService;
+use App\Services\ServerEncoder\SvEncoderService;
 
 class ComputeController extends Controller
 {
-    protected $computeRepo;
+    protected $svStreamService, $svStorageService, $svEncoderService;
 
-    public function __construct( ComputeRepo $computeRepo)
+    public function __construct( SvStreamService $svStreamService, SvStorageService $svStorageService, SvEncoderService $svEncoderService)
     {
-        $this->computeRepo = $computeRepo;
+        $this->svStreamService = $svStreamService;
+        $this->svStorageService = $svStorageService;
+        $this->svEncoderService = $svEncoderService;
     }
+
     private function getData(Request $request, string $tab)
     {
         $data['column'] = $request->input('column', 'created_at');
@@ -22,16 +27,16 @@ class ComputeController extends Controller
         $data['title'] = 'Compute';
 
         if ($tab == 'encoder') {
-            $data['encoders'] = $this->computeRepo->getAllSvEncoders($data['column'], $data['direction'] , $data['limit']);
+            $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'] , $data['limit']);
             $data['total'] = $data['encoders']->total();
         } elseif ($tab == 'storage') {
-            $data['storages'] = $this->computeRepo->getALlSvStorages($data['column'], $data['direction'] , $data['limit']);
+            $data['storages'] = $this->svStorageService->getALlSvStorages($data['column'], $data['direction'] , $data['limit']);
             $data['total'] = $data['storages']->total();
         } elseif ($tab == 'stream') {
-            $data['streams'] = $this->computeRepo->getAllSvStreams($data['column'], $data['direction'] , $data['limit']);
+            $data['streams'] = $this->svStreamService->getAllSvStreams($data['column'], $data['direction'] , $data['limit']);
             $data['total'] = $data['streams']->total();
         } else {
-            $data['encoders'] = $this->computeRepo->getAllSvEncoders($data['column'], $data['direction'], $data['limit']);
+            $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'], $data['limit']);
             $data['total'] = $data['encoders']->total();
         }
 

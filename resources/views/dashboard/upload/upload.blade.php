@@ -41,6 +41,6 @@
     </div>
     @include('dashboard.upload.folder')
 @endsection
-@section('scripts')
-    <script src="{{asset('assets/js/upload/jquery.fileupload.js')}}" async></script>
-@endsection
+{{--@section('scripts')--}}
+{{--    <script src="{{asset('assets/js/upload/jquery.fileupload.js')}}" async></script>--}}
+{{--@endsection--}}

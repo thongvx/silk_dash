@@ -3,6 +3,7 @@ import './sidebar.js';
 import './input-search.js'
 import './notification.js';
 import './chart/filechart.js';
+import './search/select2.full.min.js'
 //dashboard
 import './user-dashboard.js';
 //upload
@@ -23,3 +24,5 @@ import './support/ticket.js';
 import './setting/setting.js';
 //dmca
 import './dmca/dmca.js';
+//premium
+import './premium.js';

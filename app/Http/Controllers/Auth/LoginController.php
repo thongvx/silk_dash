@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Spatie\Permission\Models\Role;
 use WhichBrowser\Parser;
+
 class LoginController extends Controller
 {
     /*
@@ -47,6 +48,7 @@ class LoginController extends Controller
         if (auth()->user()->hasRole('admin')) {
             return route('admin');
         }
+
 
         return route('dashboard');
     }

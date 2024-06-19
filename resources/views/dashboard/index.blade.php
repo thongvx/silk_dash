@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="flex flex-wrap -mx-3">
-        <div class="w-full text-[#009FB2] mb-6 pl-3">
+        <div class="w-full mb-4 pl-3 text-transparent bg-clip-text bg-gradient-to-b from-[#0692C6] to-[#00D9E1]">
             <h2 class="text-4xl font-bold italic">
-                Welcome back to {{\Illuminate\Support\Facades\Auth::user()->name}}
+                Welcome back to {{\Illuminate\Support\Facades\Auth::user()->name}} !
             </h2>
         </div>
         <!-- card -->
@@ -75,6 +75,9 @@
                                         <span class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center flex">
                                             <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> +55%
                                         </span>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-0 text-white">40 Day</h5>
                                     </div>
                                 </div>
                             </div>
@@ -384,7 +387,7 @@
             <div
                 class="border-black/12.5  pb-3 px-2 shadow-xl bg-[#121520] relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="p-4 pb-0 rounded-t-4">
-                    <h6 class="mb-0 text-[#009FB2] font-bold text-lg">Top Country</h6>
+                    <h6 class="mb-2 text-[#009FB2] font-bold text-lg">Top Country</h6>
                 </div>
                 <div class="overflow-auto  h-[calc(30vh)]">
                     <table

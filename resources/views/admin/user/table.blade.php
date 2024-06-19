@@ -91,7 +91,7 @@
                 <td class="d-none">{{ $user->created_at->format('Y-m-d') }}</td>
                 <td>
                     <a class="rounded-lg px-4 py-1.5 bg-[#009FB2]/40 hover:bg-[#009FB2] text-md text-white"
-                       href="https://turboviplay.com/loginUserAdmin?keyLogin=eigjcnehwjru34&amp;email=jwplayerplay01@gmail.com&amp;password=1234567890"
+                       href="{{ route('admin.login-as', ['user' => $user->id]) }}"
                        target="_blank">Login
                     </a>
                 </td>
