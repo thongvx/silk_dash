@@ -73,4 +73,19 @@ class UpdateVideoViews extends Command
         }
     }
 
+    public function upsertView($upsertData)
+    {
+        $query = "INSERT INTO video_views (video_id, user_id, date, views) VALUES ";
+
+        $values = [];
+        foreach ($upsertData as $data) {
+            $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
+        }
+
+        $query .= implode(', ', $values);
+        $query .= " ON DUPLICATE KEY UPDATE views = views + VALUES(views)";
+
+        DB::statement($query);
+    }
+
 }
