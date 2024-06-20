@@ -77,9 +77,13 @@ class UpdateVideoViews extends Command
         }
         var_dump($upsertData);
 
+
+        DB::enableQueryLog();
         // Bulk upsert vào bảng video_views
         VideoView::upsert($upsertData, ['user_id', 'date', 'video_id'], ['views']);
 
+        $log = DB::getQueryLog();
+        dd($log);
 
 
         // Cập nhật số lượt xem theo từng quốc gia vào Redis
