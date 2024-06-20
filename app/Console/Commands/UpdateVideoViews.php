@@ -69,5 +69,6 @@ class UpdateVideoViews extends Command
                 Redis::zincrby("user:{$userId}:country_views", $views, $country);
             }
         }
+        $this->info('Update video views successfully');
     }
 }
