@@ -7,22 +7,22 @@ use Illuminate\Support\Facades\Redis;
 
 class VideoViewController
 {
-    public function updateView($videoId,  Request $request)
+    public function updateView($slug, Request $request)
     {
-        $country = $request->header('CF-IPCountry');
-        echo $country; die;
-        $sessionKey = 'video_viewed_' . $videoId;
+        $keyPerIp = "user_views:{$request->ip()}";
+        $views = Redis::get($keyPerIp) ?: 0;
 
-        // Tạo một key duy nhất cho mỗi video
-        $key = "video_views:{$videoId}";
+        //1 ngày 1 ip chỉ được tính 2 view thôi
+        if ($views < 2) {
+            $views++;
+            Redis::setex($keyPerIp, 24 * 60 * 60, $views);
 
-        // Tăng số lượt xem trong Redis
-        if (!session()->has($sessionKey)) {
+            //Lấy country truy cập hệ thống ở đây
+            $country = $request->header('CF-IPCountry');
+
+            //Tăng view cho video
+            $key = "video_views:{$slug}:{$country}";
             Redis::incr($key);
-            session([$sessionKey => 1]);
-            return response()->json(['success' => true]);
-        }else{
-            return response()->json(['success' => false]);
         }
     }
 
