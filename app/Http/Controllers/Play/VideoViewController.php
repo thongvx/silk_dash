@@ -10,6 +10,7 @@ class VideoViewController
     public function updateView($slug, Request $request)
     {
         $keyPerIp = "user_views:{$request->ip()}";
+        var_dump($keyPerIp); die;
         $views = Redis::get($keyPerIp) ?: 0;
 
         var_dump($keyPerIp);
