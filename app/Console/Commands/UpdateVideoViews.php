@@ -66,14 +66,17 @@ class UpdateVideoViews extends Command
                     $upsertData[] = [
                         'video_id' => $videoId,
                         'user_id' => $userId,
-                        'views' => DB::raw("views + {$views}"),
+                        'views' => $views,
                         'date' => $date,
                     ];
                 }
             }
         }
 
+        // Bulk upsert vào bảng video_views
         VideoView::upsert($upsertData, ['video_id', 'user_id', 'date'], ['views']);
+
+
 
         // Cập nhật số lượt xem theo từng quốc gia vào Redis
         foreach ($countryViews as $userId => $countries) {
@@ -81,5 +84,8 @@ class UpdateVideoViews extends Command
                 Redis::zincrby("user:{$userId}:country_views", $views, $country);
             }
         }
+
+//    // Xóa các khóa trong Redis
+//    Redis::del($keys);
     }
 }
