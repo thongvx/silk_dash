@@ -58,7 +58,6 @@ class StatisticController
             $date = $now->copy()->subDays($i)->format('Y-m-d');
             $keyViewDate = "user:{$userId}:view_date:{$date}";
             $viewDate = Redis::get($keyViewDate);
-
             if (!isset($viewDate)) {
                 $viewDate = VideoView::where('video_views.user_id', $userId)
                     ->where('video_views.date', $date)
@@ -69,6 +68,39 @@ class StatisticController
             }
 
             $data[$date] = $viewDate;
+        }
+
+        return $data;
+    }
+    public function viewHour()
+    {
+        $userId = auth()->id();
+        $now = Carbon::now();
+        $data = [];
+
+        for ($i = 0; $i < 24; $i++) {
+            $hour = $now->copy()->subHours($i)->format('H');
+            $date = $now->format('Y-m-d');
+            $keyViewHour = "user:{$userId}:view_hour:{$date}:{$hour}";
+            $viewHour = Redis::get($keyViewHour);
+
+            if (!isset($viewHour) || $i == 0) {
+                $viewHour = VideoView::where('video_views.user_id', $userId)
+                    ->whereDate('video_views.date', $date)
+                    ->sum('video_views.views');
+                Redis::setex($keyViewHour, 86400, serialize($viewHour));
+            } else {
+                $viewHour = unserialize($viewHour);
+                $previousHour = $now->copy()->subHours($i + 1)->format('H');
+                $keyPreviousHour = "user:{$userId}:view_hour:{$date}:{$previousHour}";
+                $previousViewHour = Redis::get($keyPreviousHour);
+                if (isset($previousViewHour)) {
+                    $previousViewHour = unserialize($previousViewHour);
+                    $viewHour -= $previousViewHour;
+                }
+            }
+
+            $data[$hour] = $viewHour;
         }
 
         return $data;

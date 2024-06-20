@@ -26,9 +26,10 @@ class HomeController extends Controller
         $data['topCountries'] = $this->statisticController->topCountry();
         $viewDates = $this->statisticController->viewDate();
 
+
         // Lấy số lượt xem của ngày hôm nay, 7 ngày và 30 ngày
         $data['dates'] = [
-            'day' => $viewDates[Carbon::now()->format('Y-m-d')],
+            'day' => implode(',', $this->statisticController->viewHour()),
             'week' => implode(',', array_slice($viewDates, 0, 7)),
             'month' => implode(',', array_slice($viewDates, 0, 30)),
         ];
