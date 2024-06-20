@@ -33,12 +33,17 @@ class UpdateVideoViews extends Command
         $upserts = [];
 
         $userViewKey = Redis::keys('user_views*');
-        var_dump($userViewKey);
+
+        foreach ($userViewKey as $key) {
+            $views = Redis::get($key);
+            var_dump($key . " : " .$views);
+        }
+
         foreach ($keys as $key) {
             $views = Redis::get($key);
             $viewInfo = explode(':', $key);
-            var_dump($key);
-            var_dump($viewInfo);
+            var_dump($key . " : " .$views);
+
         }
     }
 }
