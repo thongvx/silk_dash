@@ -13,8 +13,19 @@ class StatisticController
     {
         $userId = auth()->id();
 
-        // Lấy ra top quốc gia trong ngày
+// Lấy ra top 10 quốc gia trong ngày
         $topCountries = Redis::zrevrange("user:{$userId}:country_views", 0, 9, 'WITHSCORES');
+
+// Lấy tổng số lượt xem
+        $totalViews = array_sum($topCountries);
+
+// Tính tỉ lệ cho từng quốc gia
+        foreach ($topCountries as $country => &$views) {
+            $views = [
+                'views' => $views,
+                'ratio' => $views / $totalViews,
+            ];
+        }
 
         return response()->json($topCountries);
     }
