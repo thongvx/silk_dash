@@ -1,12 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Play;
+namespace App\Http\Controllers;
 
+use App\Repositories\VideoRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class VideoViewController
 {
+    protected VideoRepo $videoRepo;
+
+    public function __construct(VideoRepo $videoRepo)
+    {
+        $this->videoRepo = $videoRepo;
+    }
     public function updateView($slug, Request $request)
     {
         $keyPerIp = "user_views:{$request->ip()}";
@@ -24,7 +31,12 @@ class VideoViewController
             $country = $request->header('CF-IPCountry');
 
             //Tăng view cho video
-            $key = "video_views:{$slug}:{$country}";
+
+            $video = $this->videoRepo->findVideoBySlug($slug);
+            if (!$video){
+                return response()->json(['status' => 'fail']);
+            }
+            $key = "video_views:{$video->id}:{$video->user_id}:{$country}";
             Redis::incr($key);
             return response()->json(['status' => 'success']);
         }

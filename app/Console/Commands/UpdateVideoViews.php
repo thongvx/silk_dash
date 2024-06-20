@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\VideoView;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
@@ -29,21 +31,43 @@ class UpdateVideoViews extends Command
     {
         $keys = Redis::keys('video_views*');
 
-        $updates = [];
-        $upserts = [];
+        $chunks = array_chunk($keys, 20);
+        $date = Carbon::today()->format('Y-m-d');
 
-        $userViewKey = Redis::keys('user_views*');
+        foreach ($chunks as $chunk) {
+            $upsertData = [];
+            $countryViews = [];
 
-        foreach ($userViewKey as $key) {
-            $views = Redis::get($key);
-            var_dump($key . " : " .$views);
+            foreach ($chunk as $key) {
+                $views = Redis::get($key);
+                $viewInfo = explode(':', $key);
+                $videoId = $viewInfo[1];
+                $userId = $viewInfo[2];
+                $country = $viewInfo[3];
+
+                $upsertData[] = [
+                    'video_id' => $videoId,
+                    'user_id' => $userId,
+                    'views' => DB::raw("views + {$views}"),
+                    'date' => $date,
+                ];
+
+                // Tính toán tổng số lượt xem theo từng quốc gia
+                if (!isset($countryViews[$userId][$country])) {
+                    $countryViews[$userId][$country] = 0;
+                }
+                $countryViews[$userId][$country] += $views;
+            }
+
+            VideoView::upsert($upsertData, ['video_id', 'user_id', 'date'], ['views']);
+
+
         }
-
-        foreach ($keys as $key) {
-            $views = Redis::get($key);
-            $viewInfo = explode(':', $key);
-            var_dump($key . " : " .$views);
-
+        // Cập nhật số lượt xem theo từng quốc gia vào Redis
+        foreach ($countryViews as $userId => $countries) {
+            foreach ($countries as $country => $views) {
+                Redis::zincrby("user:{$userId}:country_views", $views, $country);
+            }
         }
     }
 }

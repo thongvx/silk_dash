@@ -14,8 +14,9 @@ class VideoView extends Model
     protected $fillable = [
         'video_id',
         'user_id',
-        'country',
         'views',
         'date',
     ];
+    public $timestamps = false;
+
 }
