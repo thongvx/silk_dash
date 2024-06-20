@@ -74,7 +74,7 @@ class UpdateVideoViews extends Command
         }
 
         // Bulk upsert vào bảng video_views
-        VideoView::upsert($upsertData, ['video_id', 'user_id', 'date'], ['views']);
+        VideoView::upsert($upsertData, ['user_id', 'date', 'video_id'], ['views']);
 
 
 

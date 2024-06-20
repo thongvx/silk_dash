@@ -13,7 +13,7 @@ return new class extends Migration {
 
         Schema::table('video_views', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->after('views');
-            $table->index(['user_id', 'views']);
+            $table->unique(['user_id', 'date', 'video_id']);
         });
 
     }
