@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\UserData;
+use App\Models\ReportData;
 use Carbon\Carbon;
 
 class ReportRepo
@@ -14,7 +14,7 @@ class ReportRepo
 
         switch ($tab) {
             case 'date':
-                $data = UserData::where('userid', $userId)
+                $data = ReportData::where('userid', $userId)
                         ->where('date', '>=', $startDate->format('Y-m-d'))
                         ->where('date', '<=', $endDate->format('Y-m-d'))
                         ->selectRaw('date, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
@@ -23,7 +23,7 @@ class ReportRepo
                         ->get();
                 break;
             default:
-                $data = UserData::where('userid', $userId)
+                $data = ReportData::where('userid', $userId)
                     ->when($country, function ($query, $country) {
                         return $query->where('country', $country);
                     })
