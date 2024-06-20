@@ -13,6 +13,9 @@ Hướng dẫn cho người mới:
 
 Code xong nhớ commit lên git nha
 
+Thêm lệnh này vào cron:
+php /home/domain/public_html/artisan update:video-views
+
 
   
 

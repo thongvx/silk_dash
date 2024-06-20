@@ -33,12 +33,14 @@ class UpdateVideoViews extends Command
         $date = Carbon::today()->format('Y-m-d');
         $countryViews = [];
 
-        foreach (array_chunk($keys, 20) as $chunk) {
+        foreach (array_chunk($keys, 50) as $chunk) {
             $upsertData = $this->prepareUpsertData($chunk, $date, $countryViews);
             $this->upsertView($upsertData);
         }
 
         $this->updateCountryViewsInRedis($countryViews);
+
+        Redis::del($keys);
     }
 
     private function prepareUpsertData($chunk, $date, &$countryViews)
