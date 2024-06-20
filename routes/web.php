@@ -134,5 +134,9 @@ Route::get('/video/{id}/stream/dash/{segment}/info/download', [App\Http\Controll
 
 Route::get('/video/{id}/stream/hls/playlist.m3u8', [App\Http\Controllers\StreamController::class, 'hlsPlaylist']);
 
-Route::get('updateView/{videoId}', [\App\Http\Controllers\Play\VideoViewController::class, 'updateView']);
+Route::get('updateView/{videoId}', [\App\Http\Controllers\VideoViewController::class, 'updateView']);
+Route::prefix('statistic')->group(function () {
+    Route::get('topCountry', [\App\Http\Controllers\Dashboard\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
+    Route::get('topVideo', [\App\Http\Controllers\Dashboard\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
+});
 
