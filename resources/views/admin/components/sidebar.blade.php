@@ -101,7 +101,7 @@
                 </a>
                 <ul class="pl-4 xl:pl-2 text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none xl:absolute top-10 z-20
  origin-top list-none rounded-lg border-none bg-clip-padding pr-2 xl:py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
-lg:left-auto lg:block lg:cursor-pointer h-0" dropdown-menu>
+lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                     <li class="my-1.5 w-full">
                         <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/manageTask?tab=encodingTask&status=all">
@@ -213,12 +213,12 @@ lg:left-auto lg:block lg:cursor-pointer h-0" dropdown-menu>
             </li>
             <li class="my-1.5 w-full">
                 <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
-                   href="">
+                   href="/admin/payment">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                         <i class="material-symbols-outlined opacity-1">payments</i>
                     </div>
-                    <span class="ml-1 duration-300 opacity-1 pointer-events-none ease">Payment</span>
+                    <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="payment">Payment</span>
                 </a>
             </li>
             <li class="my-1.5 w-full">

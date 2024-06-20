@@ -110,6 +110,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
         $title = 'support';
         return view('admin.support.support', compact('title'));
     });
+    Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

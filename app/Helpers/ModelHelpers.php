@@ -65,8 +65,7 @@ class ModelHelpers
                 case 'support':
                     return $this->controllers['support']->ticket($tab);
                 case 'report':
-                    $report = $this->controllers['report']->getReportData($request);
-                    return view('dashboard.'.$page.'.'.$tab, $report);
+                    return $this->controllers['report']->store($request);
                 default:
                     return view('dashboard.'.$page.'.'.$tab);
             }

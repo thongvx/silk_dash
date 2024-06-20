@@ -1,3 +1,5 @@
+import {loadContent, uploadState} from "../main.js";
+
 var fixedPayoutCard = $("[fixed-payout-card]");
 var fixedVideoCloseButton = $("[fixed-payout-close-button]");
 
@@ -27,9 +29,7 @@ export function updateURLParameterReport(tab, date, country) {
     history.pushState(null, '', newUrl);
 }
 
-function loadReport(formData, date, country){
-    var urlParams = new URLSearchParams(window.location.search);
-    const tab = urlParams.get('tab');
+function loadReport(formData,tab, date, country){
     updateURLParameterReport(tab, date, country)
     $.ajax({
         type: 'POST',
@@ -45,24 +45,43 @@ function loadReport(formData, date, country){
         }
     });
 }
+$(document).on('change', '.btn-country', function () {
+    console.log($(this).val())
+})
 $(document).on('click', '#get-data-report button[type=submit]', function (event) {
     event.preventDefault();
     var submitButton = $(this);
+    $('[btn-date-report]').removeClass('bg-[#009fb2]').addClass('bg-[#121520]');
+    submitButton.addClass('bg-[#009fb2]').removeClass('bg-[#121520]');
     const form = submitButton.closest('form')[0];
     var formData = new FormData(form);
-    const date = submitButton.data('date');
-    if( $(this).data('start-date') ){
-        formData.set('startDate', submitButton.data('start-date'));
-        formData.set('endDate', submitButton.data('end-date'));
-    };
+    var urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab');
+    const date = submitButton.data('tab');
+
+    formData.append('tab', tab);
+    formData.append('date', date);
     const country = formData.get('country');
-    loadReport(formData, date, country);
+    loadReport(formData,tab, date, country);
 })
-// $(document).on('click', '.btn-date-report', function () {
-//     console.log($(this).data('start-date'))
-//     const form = $('#get-data-report')[0];
-//     var formData = new FormData(form);
-//     formData.set('startDate', $(this).data('start-date'));
-//     formData.set('endDate', $(this).data('end-date'));
-//
-// })
+$(document).on('click', '.tab-report', function (event) {
+    var urlParams = new URLSearchParams(window.location.search);
+    const tab = $(this).data('content') ;
+    const date = urlParams.get('date') ?? '';
+    const country = urlParams.get('country') ?? '' ;
+    const form = $('#get-data-report')[0];
+    var formData = new FormData(form);
+    formData.append('tab', tab);
+    formData.append('date', date);
+    loadReport(formData,tab, date, country);
+})
+$(document).on('click', 'li.select2-results__option', function (event) {
+    var listItems = document.querySelectorAll('ul.select2-selection__rendered li');
+    listItems.forEach(function(listItem, index) {
+        // Skip the last item
+        if (index === listItems.length - 1) return;
+
+        var text = listItem.textContent;
+        console.log(text);
+    });
+})
