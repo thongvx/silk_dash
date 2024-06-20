@@ -23,7 +23,7 @@ class StatisticController
         foreach ($topCountries as $country => &$views) {
             $views = [
                 'views' => $views,
-                'ratio' => $views / $totalViews,
+                'ratio' => intval($views) / $totalViews,
             ];
         }
 
