@@ -9,18 +9,22 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\ServerStream\SvStreamService;
 use App\Services\ServerStorage\SvStorageService;
 use App\Services\ServerEncoder\SvEncoderService;
+use App\Http\Controllers\Dashboard\VideoController;
+
 class DatatableController
 {
-    protected $userRepo, $manageTaskRepo, $svStreamService, $svStorageService, $svEncoderService;
+    protected $userRepo, $manageTaskRepo, $svStreamService, $svStorageService, $svEncoderService, $videoController;
 
 
-    public function __construct( UserRepo $userRepo, ManagetaskRepo $manageTaskRepo, SvStreamService $svStreamService, SvStorageService $svStorageService, SvEncoderService $svEncoderService)
+    public function __construct( UserRepo $userRepo, ManagetaskRepo $manageTaskRepo, SvStreamService $svStreamService,
+                                 SvStorageService $svStorageService, SvEncoderService $svEncoderService, VideoController $videoController)
     {
         $this->userRepo = $userRepo;
         $this->manageTaskRepo = $manageTaskRepo;
         $this->svStreamService = $svStreamService;
         $this->svStorageService = $svStorageService;
         $this->svEncoderService = $svEncoderService;
+        $this->videoController = $videoController;
     }
     public function datatableControl(Request $request)
     {
@@ -55,6 +59,8 @@ class DatatableController
                     $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'], $data['limit']);
                 }
                 return view('admin.compute'.'.'.$tab, $data);
+            case '/video':
+                return $this->videoController->control($request);
             default:
                 break;
         }

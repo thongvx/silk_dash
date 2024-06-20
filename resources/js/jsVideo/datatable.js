@@ -78,7 +78,7 @@ $(document).on('click', '.sortable-column', function() {
     const poster = urlParams.get('poster') === null ? '' : urlParams.get('poster');
     ajaxdatatable(column,direction,folderId,limit,page, poster)
 });
-$(document).on('click', '.page', function() {
+$(document).on('click', '.page-datatable', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const column = urlParams.get('column') === null ? 'created_at' : urlParams.get('column');
     const direction = urlParams.get('direction') === null ? 'desc' : urlParams.get('direction');

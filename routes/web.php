@@ -92,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
-    Route::post('/datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
+    Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
 
 });
 

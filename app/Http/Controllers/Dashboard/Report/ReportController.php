@@ -15,12 +15,12 @@ class ReportController extends Controller
     {
         $this->reportRepo = $reportRepo;
     }
-    private function getReportData(Request $request)
+    public function getReportData(Request $request)
     {
         $user = Auth::user();
         $userId = $user->id;
-        $tab = $request->input('tab', 'date-table');
-        $startDate = $request->input('startDate', date('Y-m-d', strtotime('-1')));
+        $tab = $request->input('tab', 'date');
+        $startDate = $request->input('startDate', date('Y-m-d', strtotime('-7 day')));
         $endDate = $request->input('endDate', date('Y-m-d'));
         $country = $request->input('country', null);
         $data = [
@@ -28,6 +28,7 @@ class ReportController extends Controller
             'startDate' => $startDate,
             'endDate' => $endDate,
             'country' => $country,
+            'tab' => $tab,
             'report' => $this->reportRepo->getAllData($userId, $tab, $startDate, $endDate, $country),
         ];
         return $data;
@@ -43,10 +44,11 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $report = $this->getReportData($request);
-        if ($request->input('tab') == 'date-table') {
-            return view('dashboard.report.date-table', $report);
+        $tab = $request->input('tab', 'date');
+        if ($tab == 'date') {
+            return view('dashboard.report.date', $report);
         } else {
-            return view('dashboard.report.country-table', $report);
+            return view('dashboard.report.country', $report);
         }
     }
 

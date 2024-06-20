@@ -4,6 +4,7 @@ import './input-search.js'
 import './notification.js';
 import './chart/filechart.js';
 import './search/select2.full.min.js'
+// import './control-datatable.js'
 //dashboard
 import './user-dashboard.js';
 //upload

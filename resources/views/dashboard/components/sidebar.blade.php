@@ -56,7 +56,7 @@
 
             <li class="{{$minimenu === 'true' ? 'xl:w-max' :''}} mt-2.5 w-full" li-menu>
                 <a class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors"
-                   href="/report?tab=date-table">
+                   href="/report?tab=date">
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                         <i class="material-symbols-outlined opacity-1 text-3xl">show_chart</i>
                     </div>

@@ -74,18 +74,22 @@
         <div class="py-6">
             <form class="grid grid-cols-3 gap-x-8 font-bold flex-col justify-center items-center h-full" id="get-data-report">
                 <div class="col-span-full">
-                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2]"
+                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2] yesterday"
                             data-start-date="{{ date('Y-m-d', strtotime('-1 day')) }}"
-                            data-end-date="{{ date('Y-m-d', strtotime('-1 day')) }}" btn-date-report>Yesterday</button>
-                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2]"
+                            data-end-date="{{ date('Y-m-d', strtotime('-1 day')) }}"
+                            data-tab="yesterday" btn-date-report>Yesterday</button>
+                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2] today"
                             data-start-date="{{ date('Y-m-d') }}"
-                            data-end-date="{{ date('Y-m-d') }}" btn-date-report>Today</button>
-                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2]"
-                            data-start-date="{{ date('Y-m-d') }}"
-                            data-end-date="{{ date('Y-m-d', strtotime('-7 day')) }}" btn-date-report>7 days</button>
-                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2]"
-                            data-start-date="{{ date('Y-m-d') }}"
-                            data-end-date="{{ date('Y-m-d', strtotime('-30 day')) }}" btn-date-report>30 days</button>
+                            data-end-date="{{ date('Y-m-d') }}"
+                            data-tab="today" btn-date-report>Today</button>
+                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2] 7days"
+                            data-start-date="{{ date('Y-m-d', strtotime('-7 day')) }}"
+                            data-end-date="{{ date('Y-m-d') }}"
+                            data-tab="7days" btn-date-report>7 days</button>
+                    <button type="submit" class="px-6 py-1 rounded-lg bg-[#121520] hover:bg-[#009fb2] 30days"
+                            data-start-date="{{ date('Y-m-d', strtotime('-30 day')) }}"
+                            data-end-date="{{ date('Y-m-d') }}"
+                            data-tab="30days" btn-date-report>30 days</button>
                 </div>
                 <div class="col-span-full lg:col-span-2 rounded-lg mt-3 flex">
                     <div date-rangepicker class="w-full flex items-center flex-row">
@@ -112,7 +116,7 @@
                                  focus:ring-blue-500 block w-full ps-10 p-2.5" placeholder="Select date end">
                             </div>
                         </div>
-                        <button class="ml-3 px-6 py-2 rounded-lg bg-[#121520] hover:bg-[#009fb2]">Apply</button>
+                        <button type="submit" class="ml-3 px-6 py-2 rounded-lg bg-[#121520] hover:bg-[#009fb2]">Apply</button>
                     </div>
                 </div>
                 <div class="col-span-full lg:col-span-1 rounded-lg">
@@ -322,20 +326,22 @@
             <div
                 class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start grid flex-col items-start">
                 <button
-                    class="date-table tab-lifted text-white tab-active !text-[#009FB2]  hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    class="{{request()->get('tab') === 'date' ? 'date tab-active !text-[#009FB2]' : 'date'}}
+                     tab-lifted text-white  hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
                     h-auto text-lg px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                    data-content="date-table">
+                    data-content="date">
                     Date
                 </button>
                 <button
-                    class="country-table tab-lifted text-white hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
+                    class="{{request()->get('tab') === 'country' ? 'country tab-active !text-[#009FB2]' : 'country'}}
+                     tab-lifted text-white  hover:text-[#009FB2] tab-export [--tab-border-color:#121520] tab font-bold
                     h-auto text-lg px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                    data-content="country-table">
+                    data-content="country">
                    Country
                 </button>
             </div>
             <div class="rounded-b-xl rounded-tr-xl relative bg-[#121520] grid" id="box-content">
-                @include('dashboard.report.'.request()->get('tab', 'date-table'))
+                @include('dashboard.report.'.request()->get('tab', 'date'))
             </div>
         </div>
     </div>
