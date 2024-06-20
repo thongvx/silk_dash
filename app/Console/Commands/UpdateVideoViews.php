@@ -33,11 +33,10 @@ class UpdateVideoViews extends Command
 
         $chunks = array_chunk($keys, 20);
         $date = Carbon::today()->format('Y-m-d');
+        $countryViews = [];
+        $tempData = [];
 
         foreach ($chunks as $chunk) {
-            $upsertData = [];
-            $countryViews = [];
-
             foreach ($chunk as $key) {
                 $views = Redis::get($key);
                 $viewInfo = explode(':', $key);
@@ -45,12 +44,11 @@ class UpdateVideoViews extends Command
                 $userId = $viewInfo[2];
                 $country = $viewInfo[3];
 
-                $upsertData[] = [
-                    'video_id' => $videoId,
-                    'user_id' => $userId,
-                    'views' => DB::raw("views + {$views}"),
-                    'date' => $date,
-                ];
+                // Tính toán tổng số lượt xem theo từng video_id, user_id và date
+                if (!isset($tempData[$videoId][$userId][$date])) {
+                    $tempData[$videoId][$userId][$date] = 0;
+                }
+                $tempData[$videoId][$userId][$date] += $views;
 
                 // Tính toán tổng số lượt xem theo từng quốc gia
                 if (!isset($countryViews[$userId][$country])) {
@@ -58,17 +56,30 @@ class UpdateVideoViews extends Command
                 }
                 $countryViews[$userId][$country] += $views;
             }
-
-            VideoView::upsert($upsertData, ['video_id', 'user_id', 'date'], ['views']);
-
-
         }
+
+        // Chuyển dữ liệu từ mảng tạm thời vào mảng $upsertData
+        $upsertData = [];
+        foreach ($tempData as $videoId => $users) {
+            foreach ($users as $userId => $dates) {
+                foreach ($dates as $date => $views) {
+                    $upsertData[] = [
+                        'video_id' => $videoId,
+                        'user_id' => $userId,
+                        'views' => DB::raw("views + {$views}"),
+                        'date' => $date,
+                    ];
+                }
+            }
+        }
+
+        VideoView::upsert($upsertData, ['video_id', 'user_id', 'date'], ['views']);
+
         // Cập nhật số lượt xem theo từng quốc gia vào Redis
         foreach ($countryViews as $userId => $countries) {
             foreach ($countries as $country => $views) {
                 Redis::zincrby("user:{$userId}:country_views", $views, $country);
             }
         }
-        $this->info('Update video views successfully');
     }
 }
