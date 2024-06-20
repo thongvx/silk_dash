@@ -1,11 +1,11 @@
 if ($("#chart-line").length) {
-    var last24HoursData = Array.from({length: 24}, () => Math.floor(Math.random() * 100));
+    var last24HoursData = [];
     var last24HoursLabels = [];
 
-    var last7DaysData = Array.from({length: 7}, () => Math.floor(Math.random() * 100));
+    var last7DaysData = $('.week').data('date').split(',').reverse();
     var last7DaysLabels = [];
 
-    var last30DaysData = Array.from({length: 30}, () => Math.floor(Math.random() * 100));
+    var last30DaysData = [];
     var last30DaysLabels = [];
 
     for (var i = 0; i < 30; i++) {
@@ -109,23 +109,24 @@ if ($("#chart-line").length) {
             },
         },
     });
-
     $(".switchButton").click(function () {
         $('.switchButton').removeClass('bg-[#009FB2]').addClass('bg-[#142132]')
         $(this).addClass('bg-[#009FB2]').removeClass('bg-[#142132]')
-        const data = $(this).data('chart');
-        switch (data) {
+        const type = $(this).data('chart');
+        const date = $(this).data('date').split(',').reverse();
+        console.log(date)
+        switch (type) {
             case 'day':
                 myChart.data.labels = last24HoursLabels;
-                myChart.data.datasets[0].data = last24HoursData;
+                myChart.data.datasets[0].data = date;
                 break;
             case 'week':
                 myChart.data.labels = last7DaysLabels;
-                myChart.data.datasets[0].data = last7DaysData;
+                myChart.data.datasets[0].data = date;
                 break;
             case 'month':
                 myChart.data.labels = last30DaysLabels;
-                myChart.data.datasets[0].data = last30DaysData;
+                myChart.data.datasets[0].data = date;
                 break;
         }
         myChart.update();

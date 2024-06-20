@@ -137,5 +137,6 @@ Route::get('updateView/{videoId}', [\App\Http\Controllers\VideoViewController::c
 Route::prefix('statistic')->group(function () {
     Route::get('topCountry', [\App\Http\Controllers\Dashboard\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
     Route::get('topVideo', [\App\Http\Controllers\Dashboard\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
+    Route::get('viewDate', [\App\Http\Controllers\Dashboard\StatisticController::class, 'viewDate'])->name('statistic.viewDate');
 });
 

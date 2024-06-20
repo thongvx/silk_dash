@@ -26,7 +26,7 @@ class VideoController
     }
 
     // Get video data
-    private function getVideoData(Request $request)
+    public function getVideoData(Request $request)
     {
         $user = Auth::user();
         $folderId = $request->get('folderId');
