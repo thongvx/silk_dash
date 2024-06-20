@@ -12,8 +12,10 @@ class VideoViewController
         $keyPerIp = "user_views:{$request->ip()}";
         $views = Redis::get($keyPerIp) ?: 0;
 
+        var_dump($keyPerIp);
         //1 ngày 1 ip chỉ được tính 2 view thôi
         if ($views < 2) {
+            var_dump('views: '. $views);
             $views++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);
 
@@ -23,6 +25,9 @@ class VideoViewController
             //Tăng view cho video
             $key = "video_views:{$slug}:{$country}";
             Redis::incr($key);
+            var_dump('da tang view');
+        }else{
+            var_dump('da vuot qua so luong view');
         }
     }
 
