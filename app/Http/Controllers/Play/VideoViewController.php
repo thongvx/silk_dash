@@ -26,7 +26,9 @@ class VideoViewController
             //Tăng view cho video
             $key = "video_views:{$slug}:{$country}";
             Redis::incr($key);
+            return response()->json(['status' => 'success']);
         }
+        return response()->json(['status' => 'fail']);
     }
 
 }
