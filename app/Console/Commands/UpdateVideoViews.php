@@ -80,7 +80,7 @@ class UpdateVideoViews extends Command
 
         DB::enableQueryLog();
         // Bulk upsert vào bảng video_views
-        VideoView::upsert($upsertData, ['user_id', 'date', 'video_id'], ['views']);
+        $this->upsertView($upsertData);
 
         $log = DB::getQueryLog();
         dd($log);
@@ -96,4 +96,20 @@ class UpdateVideoViews extends Command
 //    // Xóa các khóa trong Redis
 //    Redis::del($keys);
     }
+
+    public function upsertView($upsertData)
+    {
+        $query = "INSERT INTO video_views (video_id, user_id, date, views) VALUES ";
+
+        $values = [];
+        foreach ($upsertData as $data) {
+            $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
+        }
+
+        $query .= implode(', ', $values);
+        $query .= " ON DUPLICATE KEY UPDATE views = views + VALUES(views)";
+
+        DB::statement($query);
+    }
+
 }
