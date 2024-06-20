@@ -4,8 +4,10 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\EncoderTask;
+use App\Models\SvStream;
 use App\Models\Transfer;
 use App\Models\User;
+use App\Services\ServerStream\SvStreamService;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Support\Facades\Redis;
@@ -121,6 +123,19 @@ class UpdateController extends Controller
             ]));
         }
         return response()->json(['status' => 'success', 'message' => 'Upload success']);
+    }
+    //------------------------update info sv stream------------------------------------------------
+    function updateInfoStream(Request $request)
+    {
+        $svStream = new SvStream();
+        $svStream->name = $request->sv;
+        $svStream->domain = $request->domain;
+        $svStream->cpu = $request->cpu;
+        $svStream->percent_space = $request->percent_space;
+        $svStream->out_speed = $request->out_speed;
+        $svStream->active = 1;
+
+        SvStreamService::upsertSvStream($svStream);
     }
     //=============================================================================================
 }
