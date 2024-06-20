@@ -37,7 +37,9 @@ class UpdateVideoViews extends Command
         $tempData = [];
 
         foreach ($chunks as $chunk) {
+            $this->info('vào chuck');
             foreach ($chunk as $key) {
+                $this->info('duyệt từng chuck');
                 $views = Redis::get($key);
                 $viewInfo = explode(':', $key);
                 $videoId = $viewInfo[1];
@@ -49,6 +51,7 @@ class UpdateVideoViews extends Command
                     $tempData[$videoId][$userId][$date] = 0;
                 }
                 $tempData[$videoId][$userId][$date] += $views;
+
 
                 // Tính toán tổng số lượt xem theo từng quốc gia
                 if (!isset($countryViews[$userId][$country])) {
@@ -72,6 +75,7 @@ class UpdateVideoViews extends Command
                 }
             }
         }
+        var_dump($upsertData);
 
         // Bulk upsert vào bảng video_views
         VideoView::upsert($upsertData, ['user_id', 'date', 'video_id'], ['views']);

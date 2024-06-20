@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Redis;
 class StatisticController
 {
 
-    public function topCountry(){
+    public function topCountry()
+    {
         $userId = auth()->id();
 
         // Lấy ra top quốc gia trong ngày
@@ -27,11 +28,12 @@ class StatisticController
         // Lấy ra top 10 video được xem nhiều nhất trong ngày
 
         //Todo: Thêm cái cache vào!
-        $topVideos = VideoView::where('user_id', $userId)
-            ->where('date', $date)
-            ->orderBy('views', 'desc')
+        $topVideos = VideoView::where('video_views.user_id', $userId)
+            ->where('video_views.date', $date)
+            ->join('videos', 'video_views.video_id', '=', 'videos.id')
+            ->orderBy('video_views.views', 'desc')
             ->take(10)
-            ->get();
+            ->get(['video_views.*', 'videos.title', 'videos.slug', 'videos.poster']);
 
         return response()->json($topVideos);
 
