@@ -80,4 +80,14 @@ class UsersAdminController
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }
+
+    public function loginAs(User $user)
+    {
+        if (Auth::user()->hasRole('admin')) {
+            Auth::login($user);
+            return redirect()->route('dashboard');
+        } else {
+            abort(403);
+        }
+    }
 }

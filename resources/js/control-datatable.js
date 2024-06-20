@@ -1,5 +1,7 @@
 
 //updateURLParameter
+import {btn_video} from "./jsVideo/video.js";
+
 function updateURLParameter(tab, column, direction, folderId, limit, page, poster, status) {
     var urlParams = new URLSearchParams(window.location.search);
     tab ? urlParams.set('tab', tab) : urlParams.delete('tab');
@@ -18,14 +20,14 @@ function updateURLParameter(tab, column, direction, folderId, limit, page, poste
 export function getUrlParams() {
     const urlParams = new URLSearchParams(window.location.search);
     return {
-        column: urlParams.get('column') || '',
-        direction: urlParams.get('direction') || '',
-        folderId: urlParams.get('folderId') || '',
-        poster: urlParams.get('poster') || '',
-        limit: urlParams.get('limit') || '',
-        page: urlParams.get('page') || '',
-        status: urlParams.get('status') || '',
-        tab: urlParams.get('tab') || ''
+        column: urlParams.get('column') || null,
+        direction: urlParams.get('direction') || null,
+        folderId: urlParams.get('folderId') || null,
+        poster: urlParams.get('poster') || null,
+        limit: urlParams.get('limit') || null,
+        page: urlParams.get('page') || null,
+        status: urlParams.get('status') || null,
+        tab: urlParams.get('tab') || null
     };
 }
 
@@ -48,7 +50,7 @@ export function loadDatatable(tab,column, direction, folderId, poster, limit, pa
     const path = window.location.pathname;
     // Sử dụng hàm
     $.ajax({
-        url: '/datatable',
+        url: '/control-datatable',
         type: 'POST',
         data: {
             tab: tab,
@@ -62,7 +64,7 @@ export function loadDatatable(tab,column, direction, folderId, poster, limit, pa
             path: path
         },
         beforeSend: function () {
-            $('#box-datatable, .box-datatable').html(`<div class="w-full justify-center items-center flex h-full">
+            $('#box-datatable, .box-datatable, #live').html(`<div class="w-full justify-center items-center flex h-full">
                                         <div class="flex text-white my-20 items-center">
                                             <div class="loading">
                                                 <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -75,7 +77,7 @@ export function loadDatatable(tab,column, direction, folderId, poster, limit, pa
                                     </div>`);
         },
         success: function (response) {
-            $('#box-datatable, .box-datatable').html(response);
+            $('#box-datatable, .box-datatable, #live').html(response);
             $('#total-encoder').text('Encoder: '+ $('#datatable').data('total'))
             $('#sever').text('Server: '+ $('#datatable').data('total'))
             highlightSortedColumn();
@@ -108,3 +110,30 @@ $(document).on('change', '#limit', function() {
     params.limit = $(this).val();
     loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status);
 });
+//folder
+// $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {
+//     const params = getUrlParams();
+//     params.folderId = $(this).data('folderid');
+//     const box_folder = $(this).closest('[folder]');
+//     if(params.tab ==='processing'){
+//         loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status);
+//     }
+//     $('[folder] > a').addClass('btn-page-folder')
+//     $(this).removeClass('btn-page-folder')
+//     box_folder.prependTo(box_folder.closest('.list-folder'));
+//     $('[folder]').addClass('bg-[#142132]')
+//     $('[folder]').removeClass('bg-[#009FB2]')
+//     $(box_folder).removeClass("bg-[#142132]")
+//     $(box_folder).addClass("bg-[#009FB2]")
+//     if ($(this).find('span').text() === '') {
+//         $('#currentFolderName').html()
+//         $('#currentFolderName').addClass('hidden')
+//     } else {
+//         $('#currentFolderName').removeClass('hidden')
+//         $('#currentFolderName').html(
+//             `<i class="material-symbols-outlined">navigate_next</i>${$(this).find('span').text()}`
+//         )
+//     }
+//     btn_video()
+//     loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status);
+// })

@@ -26,10 +26,10 @@ class VideoController
     }
 
     // Get video data
-    public function getVideoData(Request $request)
+    private function getVideoData(Request $request)
     {
         $user = Auth::user();
-        $folderId = $request->query('folderId');
+        $folderId = $request->get('folderId');
         $folders = $this->folderRepo->getAllFolders($user->id);
         $folderId = $folderId ?? $folders->last()->id;
         $data = [
@@ -49,7 +49,6 @@ class VideoController
     private function getVideos(Request $request, $userId, $folderId)
     {
         $tab = request()->get('tab');
-        $search = $request->input('search');
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'desc');
         $limit = $request->input('limit', 20);

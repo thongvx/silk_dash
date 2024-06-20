@@ -133,7 +133,7 @@
             <span
                 class="opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
         @else
-            <li class="page list-none page-item" data-page="{{ $videos->currentPage() -1 }}">
+            <li class="page-datatable list-none page-item" data-page="{{ $videos->currentPage() -1 }}">
                 <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)" rel="prev">Previous</a>
             </li>
@@ -142,7 +142,7 @@
 
         {{-- Pagination Elements --}}
         @if ($videos->currentPage() > 2)
-            <li class="page list-none" data-page="1">
+            <li class="page-datatable list-none" data-page="1">
                 <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)">1</a>
             </li>
@@ -152,7 +152,7 @@
         @endif
 
         @for ($i = max(1, $videos->currentPage() - 1); $i <= min($videos->lastPage(), $videos->currentPage() + 1); $i++)
-            <li class="page list-none page-item" data-page="{{ $i }}">
+            <li class="page-datatable list-none page-item" data-page="{{ $i }}">
                 <a class="mx-1 py-2 px-3 w-max rounded-lg {{ ($videos->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed text-white' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
                    href="javascript:void(0)">{{ $i }}</a>
             </li>
@@ -162,7 +162,7 @@
             @if ($videos->currentPage() < $videos->lastPage() - 2)
                 <li class="list-none page-item disabled px-2"><span class="page-link">...</span></li>
             @endif
-            <li class="page list-none page-item" data-page="{{ $videos->lastPage() }}">
+            <li class="page-datatable list-none page-item" data-page="{{ $videos->lastPage() }}">
                 <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)">{{ $videos->lastPage() }}</a>
             </li>
@@ -170,7 +170,7 @@
 
         {{-- Next Page Link --}}
         @if ($videos->hasMorePages())
-            <li class="page list-none page-item" data-page="{{ $videos->currentPage() +1 }}">
+            <li class="page-datatable list-none page-item" data-page="{{ $videos->currentPage() +1 }}">
                 <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                    href="javascript:void(0)" rel="next">Next</a>
             </li>

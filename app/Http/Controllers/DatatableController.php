@@ -5,20 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Admin\UserRepo;
 use App\Repositories\Admin\ManagetaskRepo;
-use App\Repositories\Admin\ComputeRepo;
 use Illuminate\Support\Facades\Auth;
-use function Symfony\Component\String\b;
+use App\Services\ServerStream\SvStreamService;
+use App\Services\ServerStorage\SvStorageService;
+use App\Services\ServerEncoder\SvEncoderService;
+use App\Http\Controllers\Dashboard\VideoController;
 
 class DatatableController
 {
-    protected $userRepo, $manageTaskRepo, $computeRepo;
+    protected $userRepo, $manageTaskRepo, $svStreamService, $svStorageService, $svEncoderService, $videoController;
 
 
-    public function __construct( UserRepo $userRepo, ManagetaskRepo $manageTaskRepo, ComputeRepo $computeRepo)
+    public function __construct( UserRepo $userRepo, ManagetaskRepo $manageTaskRepo, SvStreamService $svStreamService,
+                                 SvStorageService $svStorageService, SvEncoderService $svEncoderService, VideoController $videoController)
     {
         $this->userRepo = $userRepo;
         $this->manageTaskRepo = $manageTaskRepo;
-        $this->computeRepo = $computeRepo;
+        $this->svStreamService = $svStreamService;
+        $this->svStorageService = $svStorageService;
+        $this->svEncoderService = $svEncoderService;
+        $this->videoController = $videoController;
     }
     public function datatableControl(Request $request)
     {
@@ -44,15 +50,17 @@ class DatatableController
                 break;
             case '/admin/compute':
                 if ($tab == 'encoder') {
-                    $data['encoders'] = $this->computeRepo->getAllSvEncoders($data['column'], $data['direction'] , $data['limit']);
+                    $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'] , $data['limit']);
                 } elseif ($tab == 'storage') {
-                    $data['storages'] = $this->computeRepo->getALlSvStorages($data['column'], $data['direction'] , $data['limit']);
+                    $data['storages'] = $this->svStorageService->getALlSvStorages($data['column'], $data['direction'] , $data['limit']);
                 } elseif ($tab == 'stream') {
-                    $data['streams'] = $this->computeRepo->getAllSvStreams($data['column'], $data['direction'] , $data['limit']);
+                    $data['streams'] = $this->svStreamService->getAllSvStreams($data['column'], $data['direction'] , $data['limit']);
                 } else {
-                    $data['encoders'] = $this->computeRepo->getAllSvEncoders($data['column'], $data['direction'], $data['limit']);
+                    $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'], $data['limit']);
                 }
                 return view('admin.compute'.'.'.$tab, $data);
+            case '/video':
+                return $this->videoController->control($request);
             default:
                 break;
         }

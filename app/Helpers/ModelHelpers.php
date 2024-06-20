@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard\Setting\AccountController;
 use App\Http\Controllers\Dashboard\Support\TicketController;
 use App\Http\Controllers\Dashboard\UploadController;
 use App\Http\Controllers\Dashboard\VideoController;
+use App\Http\Controllers\Dashboard\Report\ReportController;
 use App\Repositories\FolderRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,9 @@ class ModelHelpers
 {
     protected $controllers;
 
-    public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController, TicketController $TicketController, ManageTaskController $manageTaskController, ComputeController $computeController)
+    public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController,
+                                TicketController $TicketController, ManageTaskController $manageTaskController, ComputeController $computeController,
+                                ReportController $ReportController)
     {
         $this->controllers = [
             'setting' => $AccountController,
@@ -26,6 +29,7 @@ class ModelHelpers
             'support' => $TicketController,
             'manageTask' => $manageTaskController,
             'compute' => $computeController,
+            'report' => $ReportController
         ];
     }
     public function loadPage(Request $request){
@@ -60,6 +64,8 @@ class ModelHelpers
                     return $this->controllers['upload']->upload($tab);
                 case 'support':
                     return $this->controllers['support']->ticket($tab);
+                case 'report':
+                    return $this->controllers['report']->store($request);
                 default:
                     return view('dashboard.'.$page.'.'.$tab);
             }

@@ -2,7 +2,9 @@
 
 namespace App\Services\ServerStream;
 
+use App\Models\SvStream;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Auth;
 
 class SvStreamService
 {
@@ -67,6 +69,23 @@ class SvStreamService
             $svStream = Redis::hgetall($svStreamKey);
             $svStream['name'] = str_replace('sv_streams:', '', $svStreamKey);
             $svStreams[] = $svStream;
+        }
+        return $svStreams;
+    }
+
+    public function getAllSvStreams($column, $direction, $limit)
+    {
+        $user = Auth::user();
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        $cacheKey = 'svStreams:'.$column1.':'.$direction.':'.$limit;
+        $svStreams = Redis::get($cacheKey);
+        if (!$svStreams) {
+            if ($user->hasRole('admin')) {
+                $svStreams = SvStream::query()->orderBy($column1, $direction)->paginate($limit);
+                Redis::setex($cacheKey, 259200, serialize($svStreams));
+            }
+        } else {
+            $svStreams = unserialize($svStreams);
         }
         return $svStreams;
     }

@@ -130,7 +130,7 @@
                 <!-- add show class on dropdown open js -->
                 <li class="relative my-2">
                   <a class="menu-sidebar pl-2 pr-12 text-white opacity-80 hover:bg-[#009FB2] py-1.5 text-sm ease-nav-brand my-0  flex items-center whitespace-nowrap font-semibold rounded-lg transition-colors"
-                    href="/setting">
+                    href="/setting?tab=profile">
                     <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                       <i class="material-symbols-outlined opacity-1">person</i>
                     </div>

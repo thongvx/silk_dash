@@ -198,10 +198,24 @@ export function loadContent(data_content) {
         }
     });
 }
+// check upload
+export var uploadState = {
+    isUploading: false
+};
 $(document).on('click', '.tab-lifted', function() {
     var data_content = $(this).data('content');
-    loadContent(data_content);
+    if (uploadState.isUploading) {
+        var userResponse = confirm('A video is currently uploading. Do you want to continue switching tabs?');
+        if (userResponse == true) {
+            window.stop();
+            loadContent(data_content);
+            uploadState.isUploading = false;
+        }
+    } else{
+        loadContent(data_content)
+    }
 });
+
 $(document).on('click', '.tab-export', function() {
     var data_content = $(this).data('content');
     $('.tab-export').removeClass('tab-active !text-[#009FB2]')
