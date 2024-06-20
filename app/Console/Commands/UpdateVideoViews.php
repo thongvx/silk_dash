@@ -69,7 +69,7 @@ class UpdateVideoViews extends Command
                     $upsertData[] = [
                         'video_id' => $videoId,
                         'user_id' => $userId,
-                        'views' => DB::raw("views + {$views}"),
+                        'views' => $views,
                         'date' => $date,
                     ];
                 }
