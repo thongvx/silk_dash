@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Redis;
 class StatisticController
 {
 
-    //Get top 10 daily countries
-
     public function topCountry()
     {
         $userId = auth()->id();
@@ -19,13 +17,18 @@ class StatisticController
         $topCountries = Redis::zrevrange("user:{$userId}:country_views", 0, 9, 'WITHSCORES');
 
         $totalViews = array_sum($topCountries);
-        foreach ($topCountries as $country => $views) {
-            $topCountries[$country] = [
-                'views' => $views,
-                'percentage' => ($views / $totalViews) * 100,
-            ];
+        if($totalViews > 0){
+            foreach ($topCountries as $country => $views) {
+                $topCountries[$country] = [
+                    'views' => $views,
+                    'percentage' => (intval($views) / intval($totalViews)) * 100,
+                ];
+            }
+            return $topCountries;
+        }else{
+            return [];
         }
-        return $topCountries;
+
     }
 
     //Get top 10 daily videos
@@ -50,61 +53,31 @@ class StatisticController
         return $topVideos;
     }
 
+    //get date views
     public function viewDate()
     {
         $userId = auth()->id();
-        $now = Carbon::now();
-        $data = [];
+        $views = [
+            'today',
+            '7days',
+            '30days',
+        ];
 
-        for ($i = 0; $i <= 30; $i++) {
-            $date = $now->copy()->subDays($i)->format('Y-m-d');
-            $keyViewDate = "user:{$userId}:view_date:{$date}";
-            $viewDate = Redis::get($keyViewDate);
-            if (!isset($viewDate)) {
-                $viewDate = VideoView::where('video_views.user_id', $userId)
-                    ->where('video_views.date', $date)
-                    ->sum('video_views.views');
-                Redis::setex($keyViewDate, 2764800, serialize($viewDate));
-            } else {
-                $viewDate = unserialize($viewDate);
-            }
+        // Get today's views
+        $date = Carbon::today()->format('Y-m-d');
+        $views['today'] = Redis::get("user:{$userId}:date_views:{$date}") ?? 0;
 
-            $data[$date] = $viewDate;
-        }
+        // Get views for the past 7 days
+        $views['7days'] = collect(range(0, 6))->mapWithKeys(function ($day) use ($userId) {
+            $date = Carbon::today()->subDays($day)->format('Y-m-d');
+            return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
+        });
 
-        return $data;
-    }
-    public function viewHour()
-    {
-        $userId = auth()->id();
-        $now = Carbon::now();
-        $data = [];
-
-        for ($i = 0; $i < 24; $i++) {
-            $hour = $now->copy()->subHours($i)->format('H');
-            $date = $now->format('Y-m-d');
-            $keyViewHour = "user:{$userId}:view_hour:{$date}:{$hour}";
-            $viewHour = Redis::get($keyViewHour);
-
-            if (!isset($viewHour) || $i == 0) {
-                $viewHour = VideoView::where('video_views.user_id', $userId)
-                    ->whereDate('video_views.date', $date)
-                    ->sum('video_views.views');
-                Redis::setex($keyViewHour, 86400, serialize($viewHour));
-            } else {
-                $viewHour = unserialize($viewHour);
-                $previousHour = $now->copy()->subHours($i + 1)->format('H');
-                $keyPreviousHour = "user:{$userId}:view_hour:{$date}:{$previousHour}";
-                $previousViewHour = Redis::get($keyPreviousHour);
-                if (isset($previousViewHour)) {
-                    $previousViewHour = unserialize($previousViewHour);
-                    $viewHour -= $previousViewHour;
-                }
-            }
-
-            $data[$hour] = $viewHour;
-        }
-
-        return $data;
+        // Get views for the past 30 days
+        $views['30days'] = collect(range(0, 29))->mapWithKeys(function ($day) use ($userId) {
+            $date = Carbon::today()->subDays($day)->format('Y-m-d');
+            return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
+        });
+        return $views;
     }
 }
