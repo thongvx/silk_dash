@@ -10,6 +10,7 @@ class StatisticController
 {
 
     //Get top 10 daily countries
+
     public function topCountry()
     {
         $userId = auth()->id();
