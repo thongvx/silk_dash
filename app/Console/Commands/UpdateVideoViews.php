@@ -41,6 +41,7 @@ class UpdateVideoViews extends Command
         $this->updateCountryViewsInRedis($countryViews);
 
         Redis::del($keys);
+        $this->info('Video views updated successfully');
     }
 
     private function prepareUpsertData($chunk, $date, &$countryViews)
