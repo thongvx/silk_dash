@@ -38,4 +38,29 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Profile updated successfully']);
     }
+
+    public function regenerateToken(Request $request)
+    {
+        $user = $request->user();
+
+        // Xóa tất cả token hiện tại của người dùng
+        $user->tokens()->delete();
+
+        // Tạo một token mới
+        $newToken = $user->createToken('api-token', ['*'])->plainTextToken;
+
+        return response()->json(['token' => $newToken]);
+    }
+
+    public function getUserInfo(Request $request)
+    {
+        $user = Auth::user();
+        if ($request->wantsJson()) {
+            // Nếu là API, trả về dữ liệu dạng JSON
+            return response()->json($user);
+        } else {
+            // Nếu không phải API, trả về view
+            return $user->name;
+        }
+    }
 }
