@@ -2,7 +2,7 @@ if ($("#chart-line").length) {
     var last24HoursData = [];
     var last24HoursLabels = [];
 
-    var last7DaysData = $('.week').data('date').split(',').reverse();
+    var last7DaysData = $('.week').data('date');
     var last7DaysLabels = [];
 
     var last30DaysData = [];
@@ -113,7 +113,7 @@ if ($("#chart-line").length) {
         $('.switchButton').removeClass('bg-[#009FB2]').addClass('bg-[#142132]')
         $(this).addClass('bg-[#009FB2]').removeClass('bg-[#142132]')
         const type = $(this).data('chart');
-        const date = $(this).data('date').split(',').reverse();
+        const date = $(this).data('date');
         console.log(date)
         switch (type) {
             case 'day':
