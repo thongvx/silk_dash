@@ -39,7 +39,7 @@ function stickyNav() {
   }
 }
 function focused(input){
-    let label = input.closest('[search]').querySelector('label')
+    let label = input.closest('[select2]').querySelector('label')
     label.classList.add('-translate-y-5')
     label.classList.add('scale-75')
     label.classList.remove('translate-x-3')
@@ -50,7 +50,7 @@ function focused(input){
     input.classList.add('border-red-500')
 }
 function defocused(input){
-    let label = input.closest('[search]').querySelector('label')
+    let label = input.closest('[select2]').querySelector('label')
     if(input.value === ''){
       label.classList.remove('-translate-y-5')
       label.classList.remove('scale-75')

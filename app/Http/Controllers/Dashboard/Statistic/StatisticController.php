@@ -36,12 +36,11 @@ class StatisticController
     {
         $userId = auth()->id();
         $date = Carbon::today()->format('Y-m-d');
-
         // Lấy ra top 10 video được xem nhiều nhất trong ngày
         $keyTopVideos = "user:{$userId}:top_videos:{$date}";
-        $topVideos = Redis::get($keyTopVideos);
-        if (isset($topVideos)){
-            return unserialize($topVideos);
+        $Video = Redis::get($keyTopVideos);
+        if (isset($Video)){
+            return unserialize($Video);
         }
         $topVideos = VideoView::where('video_views.user_id', $userId)
             ->where('video_views.date', $date)
@@ -49,10 +48,9 @@ class StatisticController
             ->orderBy('video_views.views', 'desc')
             ->take(10)
             ->get(['video_views.*', 'videos.title', 'videos.slug', 'videos.poster']);
-        redis::setex($keyTopVideos, 5184000, serialize($topVideos));
+        redis::setex($keyTopVideos, 86400, serialize($topVideos));
         return $topVideos;
     }
-
     //get date views
     public function viewDate()
     {
@@ -62,7 +60,6 @@ class StatisticController
             '7days',
             '30days',
         ];
-
         // Get today's views
         $date = Carbon::today()->format('Y-m-d');
         $views['today'] = Redis::get("user:{$userId}:date_views:{$date}") ?? 0;
@@ -79,5 +76,10 @@ class StatisticController
             return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
         });
         return $views;
+    }
+    public function updateViews($videoid)
+    {
+        $userId = auth()->id();
+
     }
 }

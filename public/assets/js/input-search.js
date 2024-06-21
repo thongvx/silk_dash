@@ -1,5 +1,5 @@
 function focused(input){
-    let label = input.closest('[search]').querySelector('label')
+    let label = input.closest('[select2]').querySelector('label')
     label.classList.add('-translate-y-5')
     label.classList.add('scale-75')
     label.classList.remove('translate-x-3')
@@ -10,7 +10,7 @@ function focused(input){
     input.classList.add('border-red-500')
 }
 function defocused(input){
-    let label = input.closest('[search]').querySelector('label')
+    let label = input.closest('[select2]').querySelector('label')
     if(input.value === ''){
         label.classList.remove('-translate-y-5')
         label.classList.remove('scale-75')
@@ -23,14 +23,14 @@ function defocused(input){
     }
 }
 function searchFolder(input) {
-    // Get the search keyword
+    // Get the select2 keyword
     var filter = input.value.toUpperCase();
     var listFolder = input.closest('[list-folder]');    // Get all folder elements
     var folders = listFolder.querySelectorAll('[folder]');
     // Loop through all folder items
     for (var i = 0; i < folders.length; i++) {
         var title = folders[i].querySelector('[name-folder]').innerText;
-        // If the folder title doesn't match the search keyword, hide it
+        // If the folder title doesn't match the select2 keyword, hide it
         if (title.toUpperCase().indexOf(filter) > -1) {
             folders[i].style.display = "";
         } else {

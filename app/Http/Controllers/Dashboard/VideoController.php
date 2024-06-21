@@ -144,7 +144,7 @@ class VideoController
 
         return response()->json(['message' => 'Videos deleted successfully']);
     }
-    // search video
+    // select2 video
     public function show(Request $request)
     {
         $user = Auth::user();
@@ -164,7 +164,7 @@ class VideoController
             'direction' => $request->input('direction', 'asc'),
         ];
 
-        return view('dashboard.video.search', $data);
+        return view('dashboard.video.select2', $data);
     }
     //mover video
     public function moveVideos(Request $request)

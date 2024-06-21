@@ -6,7 +6,7 @@
             <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
                 <div
                     class="rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top">
-                    <div class="min-h-[calc(100vh-8em)] px-6 pb-4">
+                    <div class="min-h-[calc(100vh-9em)] px-6 pb-4">
                         <div class="text-center pt-6">
                             <h4 class="text-[#009FB2]">StreamSilk Partner Program</h4>
                             <p>Earn money by hosting and sharing your content with StreamSilk Partner.</p>

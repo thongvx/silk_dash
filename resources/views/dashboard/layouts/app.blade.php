@@ -27,6 +27,9 @@
     <!-- end cards -->
 </main>
 @include('dashboard.components.footer')
+<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+<script src="{{ asset('assets/js/select2/select2.min.js') }}"></script>
 @vite('resources/js/app.js')
 @yield('scripts')
 </body>

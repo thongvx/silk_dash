@@ -181,7 +181,7 @@ return [
         |
         | Params :
         |
-        | - search : Searched value
+        | - select2 : Searched value
         |   Ex: http://prettus.local/?search=lorem
         |
         | - searchFields : Fields in which research should be carried out
@@ -203,7 +203,7 @@ return [
         |   http://prettus.local/?search=lorem&orderBy=id&sortedBy=asc
         |   http://prettus.local/?search=lorem&orderBy=id&sortedBy=desc
         |
-        | - searchJoin: Specifies the search method (AND / OR), by default the
+        | - searchJoin: Specifies the select2 method (AND / OR), by default the
         |               application searches each parameter with OR
         |   EX:
         |   http://prettus.local/?search=lorem&searchJoin=and
@@ -211,7 +211,7 @@ return [
         |
         */
         'params'             => [
-            'search'       => 'search',
+            'select2'       => 'select2',
             'searchFields' => 'searchFields',
             'filter'       => 'filter',
             'orderBy'      => 'orderBy',

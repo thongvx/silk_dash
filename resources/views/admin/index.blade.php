@@ -604,5 +604,7 @@
       </div>
     </div>
 @endsection
-
+@section('scripts')
+    <script src="{{ asset('assets/js/chart/filechart.js') }}"></script>
+@endsection
 
