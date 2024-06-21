@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Dashboard\Statistic\StatisticController;
 use App\Repositories\NotificationRepo;
 use Illuminate\Support\Facades\Auth;
-use App\http\Controllers\Dashboard\StatisticController;
-use Carbon\Carbon;
 
 class HomeController extends Controller
 {

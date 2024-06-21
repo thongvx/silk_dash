@@ -83,9 +83,9 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard.affiliate', $data);
     });
 
-    Route::post('/notifications/readall', [\App\Http\Controllers\Dashboard\NotificationController::class, 'readAll'])->name('notifications.readall');
-    Route::post('/notifications/deleteall', [\App\Http\Controllers\Dashboard\NotificationController::class, 'deleteAll'])->name('notifications.deleteall');
-    Route::post('/notifications/read/{id}', [\App\Http\Controllers\Dashboard\NotificationController::class, 'read'])->name('notifications.read');
+    Route::post('/notifications/readall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'readAll'])->name('notifications.readall');
+    Route::post('/notifications/deleteall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'deleteAll'])->name('notifications.deleteall');
+    Route::post('/notifications/read/{id}', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'read'])->name('notifications.read');
 
     Route::post('/updatesetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
 
@@ -135,8 +135,8 @@ Route::get('/video/{id}/stream/hls/playlist.m3u8', [App\Http\Controllers\StreamC
 
 Route::get('updateView/{videoId}', [\App\Http\Controllers\VideoViewController::class, 'updateView']);
 Route::prefix('statistic')->group(function () {
-    Route::get('topCountry', [\App\Http\Controllers\Dashboard\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
-    Route::get('topVideo', [\App\Http\Controllers\Dashboard\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
-    Route::get('viewDate', [\App\Http\Controllers\Dashboard\StatisticController::class, 'viewDate'])->name('statistic.viewDate');
+    Route::get('topCountry', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
+    Route::get('topVideo', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
+    Route::get('viewDate', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'viewDate'])->name('statistic.viewDate');
 });
 

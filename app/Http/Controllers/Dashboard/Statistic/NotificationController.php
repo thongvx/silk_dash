@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Statistic;
 
 use App\Repositories\NotificationRepo;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController
