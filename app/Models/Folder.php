@@ -23,6 +23,24 @@ class Folder extends Model
     {
         return $this->hasMany(Video::class);
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        //Đại diện cho hành vi thêm và sửa
+        static::saved(function ($model) {
+            if ($model->isDirty('number_file')) {
+                $model->deleteCacheFolder();
+            }
+        });
+
+        static::deleted(function ($model) {
+            if (!$model->isDirty('number_file')) {
+                $model-> deleteCacheFolder();
+            }
+
+        });
+    }
     // Các phương thức, quan hệ và logic thêm có thể được định nghĩa ở đây
     public function deleteCacheFolder()
     {

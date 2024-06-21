@@ -25,22 +25,6 @@
                     </select>
                     <span>entries</span>
                 </div>
-                <div class="grid grid-cols-3 grid-flow-col gap-2">
-                    <button type="button" btn-video disabled class="cursor-not-allowed"
-                            title="delete">
-                        <i btn-delete class="material-symbols-outlined opacity-1 text-3xl">delete</i>
-                    </button>
-                    <button type="button" btn-video disabled class="cursor-not-allowed"
-                            title="export">
-                        <i btn-export
-                           class="material-symbols-outlined opacity-1 text-3xl">ios_share</i>
-                    </button>
-                    <button type="button" btn-video disabled class="cursor-not-allowed"
-                            title="folder">
-                        <i btn-move
-                           class="material-symbols-outlined opacity-1 text-3xl">folder_open</i>
-                    </button>
-                </div>
             </div>
             <div id="live"
                  class="tab-content flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">

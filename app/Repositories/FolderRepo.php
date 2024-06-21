@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Enums\VideoCacheKeys;
 use App\Models\Folder;
+use App\Models\Video;
 use Illuminate\Support\Facades\Redis;
 use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -39,5 +40,15 @@ class FolderRepo extends BaseRepository
     public function getFolderName($folderId)
     {
         return Folder::findOrFail($folderId);
+    }
+    public function updateNumberOfFiles($folderId)
+    {
+        $folder = $this->find($folderId);
+        if ($folder) {
+            $folder->number_file = Video::where('folder_id', $folderId)
+                                        ->where('soft_delete', 0)
+                                        ->count();
+            $folder->save();
+        }
     }
 }
