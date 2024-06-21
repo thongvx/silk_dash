@@ -50,7 +50,7 @@
                 <th class="px-1 text-center">
                     Note
                 </th>
-                <th>
+                <th class="{{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
                     <h6
                         class="antialiased tracking-normal font-sans text-base text-inherit flex py-5 items-center justify-between px-2 font-semibold leading-none">
                     </h6>
@@ -80,7 +80,7 @@
                 <td class="text-center w-max">{{ $video->total_play }}</td>
                 <td class="pl-2 w-24">{{ $video->created_at }}</td>
                 <td class="text-center w-max">{{ $video->is_sub }}</td>
-                <td class="relative">
+                <td class="relative {{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
                     <li class="list-none">
                         <a
                             href="javascript:" dropdown-trigger

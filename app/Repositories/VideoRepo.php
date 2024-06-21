@@ -16,8 +16,7 @@ class VideoRepo extends BaseRepository
     public function getAllUserVideo($userId, $tab ,$column , $direction, $folderId, $limit, $columns = ['*'], $page){
 
         $query = $this->query()
-            ->where('user_id', $userId)
-            ->where('folder_id', $folderId);
+            ->where('user_id', $userId);
         //Tạo cache key
         $columnsString = is_array($columns) ? implode(',', $columns) : $columns;
         $cacheKey = VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $userId .'tab'. $tab . 'get_all' . $limit . '.' . $columnsString .'direction' . $direction .'column'.$column. 'folderId'.$folderId . '.page'. $page;
@@ -29,6 +28,12 @@ class VideoRepo extends BaseRepository
 
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
+        if ($tab == 'removed'){
+            $query->where('soft_delete', 1);
+        } else {
+            $query->where('soft_delete', 0)
+                  ->where('folder_id', $folderId);
+        }
         $videos = $query->orderBy($column1, $direction)
             ->paginate($limit);
 

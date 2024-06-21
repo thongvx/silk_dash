@@ -126,11 +126,16 @@ class VideoController
         foreach ($ids as $id) {
             $video = $this->videoRepo->find($id);
             if ($video) {
-                $video->delete();
+                $folderId = $video->folder_id;
+                $video->soft_delete = 1;
+                $video->save();
                 $video->deleteCache();
                 $subject = 'Video Deleted: ' . $video->slug;
                 $message = 'This video with ID: ' . $video->slug . ' (' . $video->title .')'. ' has been deleted.';
                 $this->notificationService->addNotification(Auth::id(), $subject, $message, 'delete');
+
+                // Update the number of files in the folder
+                $this->folderRepo->updateNumberOfFiles($folderId);
             }else {
                 return response()->json(['message' => 'Video not found: ' . $id], 404);
             }
@@ -175,8 +180,12 @@ class VideoController
         foreach ($validated['video_ids'] as $videoId) {
             $video = $this->videoRepo->find($videoId);
             if ($video) {
+                $oldFolderId = $video->folder_id;
                 $video->folder_id = $validated['folder_id'];
                 $video->save();
+
+                $this->folderRepo->updateNumberOfFiles($oldFolderId);
+                $this->folderRepo->updateNumberOfFiles($validated['folder_id']);
             }
         }
 

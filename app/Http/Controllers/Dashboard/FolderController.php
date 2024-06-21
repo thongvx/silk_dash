@@ -96,4 +96,5 @@ class FolderController
         return response()->json(['message' => 'Folder deleted successfully']);
     }
     // Rest of your code...
+
 }
