@@ -69,18 +69,18 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-             'key_api' => bin2hex(random_bytes(8)),
-             'max_transfer' => 10,
-             'max_torrent' => 10,
-             'encoder_priority' => 0,
-             'transfer_priority' => 0,
-             'torrent_priority' => 0,
-             'stream_priority' => 0,
-             'earning' => 0,
-             'premium'  => 0,
-             'active' => 0,
         ]);
         $user->user_id = $user->id;
+        $user->key_api = bin2hex(random_bytes(8));
+        $user->max_transfer = 10;
+        $user->max_torrent = 10;
+        $user->encoder_priority = 0;
+        $user->transfer_priority = 0;
+        $user->torrent_priority = 0;
+        $user->stream_priority = 0;
+        $user->earning = 0;
+        $user->premium = 0;
+        $user->active = 0;
         $user->save();
 
         Folder::create([
