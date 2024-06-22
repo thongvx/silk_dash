@@ -69,7 +69,20 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+             'key_api' => bin2hex(random_bytes(8)),
+             'max_transfer' => 10,
+             'max_torrent' => 10,
+             'encoder_priority' => 0,
+             'transfer_priority' => 0,
+             'torrent_priority' => 0,
+             'stream_priority' => 0,
+             'earning' => 0,
+             'premium'  => 0,
+             'active' => 0,
         ]);
+        $user->user_id = $user->id;
+        $user->save();
+
         Folder::create([
             'user_id' => $user->id,
             'name_folder' => 'root',
@@ -78,16 +91,16 @@ class RegisterController extends Controller
         ]);
         AccountSetting::create([
             'user_id' => $user->id,
-            'earningModes' => 1,
+            'earningModes' => 0,
             'videoType' => 1,
             'adblock' => 0,
             'showTitle' => 0,
-            'logo' => '',
-            'logoLink' => '',
-            'position' => '',
-            'poster' => '',
+            'logo' => 0,
+            'logoLink' => 0,
+            'position' => 0,
+            'poster' => 0,
             'blockDirect' => 0,
-            'domain' => '',
+            'domain' => 0,
             'publicVideo' => 0,
             'premiumMode' => 0,
             'captionsMode' => 0,
