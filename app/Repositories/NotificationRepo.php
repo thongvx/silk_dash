@@ -31,7 +31,13 @@ class NotificationRepo
     }
     public function deleteAllNotifications($userId)
     {
-        return $this->model->where('user_id', $userId)->delete();
+        $notifications = $this->model->where('user_id', $userId)->get();
+
+        foreach ($notifications as $notification) {
+            $notification->delete();
+            $notification->save();
+        }
+        return true;
     }
     // Add more methods as needed
 }

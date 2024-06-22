@@ -79,6 +79,7 @@ class VideoController
 
         return round($sizeInBytes, 2) . ' ' . $units[$i];
     }
+
     // view index video
     public function index(Request $request)
     {
@@ -98,33 +99,47 @@ class VideoController
     }
 
     // update video
-    public function update($id, Request $request)
+    public function update($id,Request $request)
     {
-        $video = $this->videoRepo->find($id);
+        $video = $this->videoRepo->findWhere(['slug' => $id])->first();
+        if (!$video) {
+            $video = $this->videoRepo->findWhere(['id' => $id])->first();
+        }
 
         if (!$video) {
             return response()->json(['message' => 'Video not found'], 404);
         }
 
-        $video->title = $request->title;
+        $video->title = $request->newTitle;
         $video->save();
+        $data=[
+            'msg' => 'Ok',
+            'status' => '200',
+            'sever_time' => date('Y-m-d H:i:s'),
+            'file' => [
+                "New title" => $video->title,
+                "videoID" => $video->slug,
+            ],
+        ];
 
-        //delete cache
-        $video->deleteCache();
-
-        return response()->json(['message' => 'Video title updated successfully']);
+        return response()->json($data);
     }
     // delete video
     public function destroyMultiple(Request $request)
     {
-        $ids = $request->ids;
-
+        $ids = $request->videoID;
+        if (!is_array($ids)) {
+            $ids = [$ids];
+        }
         if (!$ids || !is_array($ids)) {
             return response()->json(['message' => 'No video IDs provided'], 400);
         }
 
         foreach ($ids as $id) {
-            $video = $this->videoRepo->find($id);
+            $video = $this->videoRepo->findWhere(['slug' => $id])->first();
+            if (!$video) {
+                $video = $this->videoRepo->findWhere(['id' => $id])->first();
+            }
             if ($video) {
                 $folderId = $video->folder_id;
                 $video->soft_delete = 1;
@@ -154,8 +169,6 @@ class VideoController
         $direction = $request->input('direction', 'asc');
         $videos = $this->videoRepo->searchVideos($user->id, $searchTerm, $limit, $column, $direction);
         $folders = $this->folderRepo->getAllFolders($user->id);
-
-
         $data = [
             'title' => 'Search Results',
             'videos' => $videos,
@@ -192,5 +205,97 @@ class VideoController
         // Return a response...
         return response()->json(['message' => 'Videos moved successfully!']);
     }
+    public function findVideoBySlug(Request $request)
+    {
+        $user = Auth::user();
+        $slug = $request->input('videoID');
+        $limit = $request->input('limit', 20);
+        $column = $request->input('column', 'created_at');
+        $direction = $request->input('direction', 'asc');
+        $video = $this->videoRepo->searchVideos($user->id, $slug, $limit, $column, $direction)->first();
+        $data=[
+            'msg' => 'Ok',
+            'status' => '200',
+            'sever_time' => date('Y-m-d H:i:s'),
+            'file' => [
+                "title" => $video->title,
+                "poster" => $video->poster,
+                "sub" => $video->is_sub,
+                "view" => $video->total_play,
+                "date_uploaded" => $video->created_at->format('m/d/Y H:i:s'),
+                "size" => $this->convertFileSize($video->size),
+                "duration" => $video->duration,
+                "quality" => $video->quality,
+            ],
+        ];
+        return response()->json($data);
+    }
+    public function getListFile(Request $request){
+        $user = Auth::user();
+        $folderName = $request->get('nameFolder', 'root');
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 50);
+        $folders = $this->folderRepo->getFolder($folderName);
+        $folderId = $folders->id;
+        $videos = $this->videoRepo->getAllUserVideo($user->id, 'live', 'created_at', 'desc', $folderId, $limit, ['*'], $page);
+        $videoData = [];
+        foreach ($videos as $video) {
+            $videoData[] = [
+                "title" => $video->title,
+                "folder" => $folderName,
+                "video_id" => $video->slug,
+                "embedLink" => "https://user.streamsilk.com/t/".$video->slug,
+                "poster" => $video->poster,
+                "view" => $video->total_play,
+                "size" => $this->convertFileSize($video->size),
+                "date_uploaded" => $video->created_at->format('m/d/Y H:i:s'),
+            ];
+        }
+        $data = [
+            "msg" => "ok",
+            "status" => 200,
+            "sever_time" => date('Y-m-d H:i:s'),
+            "total_video" => $videos->total(),
+            "page" => $videos->currentPage(),
+            'show' => $videos->firstItem() . ' to ' . $videos->lastItem() . ' of ' . $videos->total(),
+            "file" => $videoData
+        ];
 
+        return response()->json($data);
+    }
+    public function cloneVideo(Request $request)
+    {
+        // Tìm video dựa trên ID
+        $video = $this->videoRepo->findWhere(['slug' => $request->videoID])->first();
+        $folderName = $request->get('nameFolder', 'root');
+        $folders = $this->folderRepo->getFolder($folderName);
+        $folderId = $folders->id;
+
+        // Kiểm tra xem video có tồn tại không
+        if (!$video) {
+            return response()->json(['message' => 'Video not found'], 404);
+        }
+
+        // Tạo một bản sao của video
+        $clonedVideo = $video->replicate();
+        $clonedVideo->title = $video->title . ' (Clone)';
+        $clonedVideo->folder_id = $folderId;
+        $clonedVideo->slug = uniqid();
+        // Lưu bản sao vào cơ sở dữ liệu
+        $clonedVideo->save();
+        $this->folderRepo->updateNumberOfFiles($folderId);
+        $data = [
+            "msg" => "ok",
+            "status" => 200,
+            "sever_time" => date('Y-m-d H:i:s'),
+            "file Clone" => [
+                "title" => $clonedVideo->title,
+                "folder" => $folderName,
+                "video_id" => $clonedVideo->slug,
+                "embedLink" => "https://user.streamsilk.com/t/".$clonedVideo->slug,
+            ]
+        ];
+
+        return response()->json($data);
+    }
 }

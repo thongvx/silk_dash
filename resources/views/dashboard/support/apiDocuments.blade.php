@@ -7,10 +7,15 @@
         <a href="#list_file"><h5>List Files</h5></a>
         <a href="#info_video"><h5>Infor Video</h5></a>
         <a href="#file-rename"><h5>Rename File</h5></a>
-        <a href="#copy"><h5>Copy File</h5></a>
+        <a href="#copy"><h5>Clone File</h5></a>
     </div>
     <script>hljs.highlightAll();</script>
     <div class="col-span-4 lg:col-span-3 px-0 pt-0 overflow-auto max-h-[calc(100vh-14em)]">
+        <div class="sticky top-0 z-30 pb-3 bg-[#121520]">
+            <span id="token">
+                Token: <button class="ml-3 rounded-lg px-3 py-1 bg-[#009fb2]/50 hover:bg-[#009fb2]" btn-get-token>Get token</button>
+            </span>
+        </div>
         <div>
             <div id="add_link" class="mb-10">
                 <h3 class="pb-3 text-[#009FB2] text-lg">REMOTE UPLOAD</h3>
@@ -19,7 +24,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                        https://api.turboviplay.com/uploadUrl?keyApi={your_key_api}&amp;url={upload_url}&amp;nameFolder={name_folder}&amp;newTitle={title_video}
+                        https://user.streamsilk.com/api/upload/uploadUrl?url={upload_url}&amp;nameFolder={name_folder}
                     </h5>
                 </div>
                 <h4>Parameters</h4>
@@ -35,25 +40,36 @@
                         </thead>
                         <tbody class="font-normal">
                             <tr>
-                                <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                                <td class="pl-3 py-1 border border-slate-600">Your api key</td>
-                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                            </tr>
-                            <tr>
                                 <td class="pl-3 py-1 border border-slate-600">url</td>
                                 <td class="pl-3 py-1 border border-slate-600">URL to upload</td>
                                 <td class="pl-3 py-1 border border-slate-600">Yes</td>
                             </tr>
                             <tr>
                                 <td class="pl-3 py-1 border border-slate-600">nameFolder</td>
-                                <td class="pl-3 py-1 border border-slate-600">To upload inside a folder</td>
+                                <td class="pl-3 py-1 border border-slate-600">To upload inside a folder (Defaul: root)</td>
                                 <td class="pl-3 py-1 border border-slate-600">No</td>
                             </tr>
-                            <tr>
-                                <td class="pl-3 py-1 border border-slate-600">newTitle</td>
-                                <td class="pl-3 py-1 border border-slate-600">To set new title</td>
-                                <td class="pl-3 py-1 border border-slate-600">No</td>
-                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>Headers</h4>
+                <div class="bg-[#142132] my-3">
+                    <table data-page-size="10"
+                           class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
+
+                        <thead>
+                        <tr>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Description</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Required</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-normal">
+                        <tr>
+                            <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                            <td class="pl-3 py-1 border border-slate-600">Token</td>
+                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -62,14 +78,17 @@
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
 <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
-  "msg": "OK",
-  "server_time": 2017-08-11 04:30:07,
-  "new_title": "",
-  "folder": "",
-  "status": 200,
-  "total_slots": 10,
-  "used_slots": 0
- }</code>
+    "msg": "ok",
+    "status": 200,
+    "sever_time": "2024-06-22 07:32:54",
+    "total_upload": 1,
+    "result": {
+        "Name Folder": "Name Folder",
+        "videoID": [
+            "66767e26439e1",
+        ]
+    }
+}</code>
 </pre>
                 </div>
             </div>
@@ -159,7 +178,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                    https://api.turboviplay.com/listFile?keyApi={Your_key_api}&amp;page={page}&amp;perPage={Max_video}&amp;folder={name_folder}
+                    https://user.streamsilk.com/api/file/listFile?page={page}&amp;limit={Max_video}&amp;nameFolder={name_folder}
                 </h5>
                 </div>
                 <h4>Parameters</h4>
@@ -175,24 +194,40 @@
                         </thead>
                         <tbody class="font-normal">
                         <tr>
-                            <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your api key</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
-                        <tr>
                             <td class="pl-3 py-1 border border-slate-600">page</td>
                             <td class="pl-3 py-1 border border-slate-600">page number Example: 2</td>
                             <td class="pl-3 py-1 border border-slate-600">No</td>
                         </tr>
                         <tr>
-                            <td class="pl-3 py-1 border border-slate-600">perPage</td>
+                            <td class="pl-3 py-1 border border-slate-600">limit</td>
                             <td class="pl-3 py-1 border border-slate-600">number of results per page (Defaul: 50; Max 500)</td>
                             <td class="pl-3 py-1 border border-slate-600">No</td>
                         </tr>
                         <tr>
                             <td class="pl-3 py-1 border border-slate-600">folder</td>
-                            <td class="pl-3 py-1 border border-slate-600">Name Folder (Defaul:single videos)</td>
+                            <td class="pl-3 py-1 border border-slate-600">Name Folder (Defaul: root)</td>
                             <td class="pl-3 py-1 border border-slate-600">No</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>Headers</h4>
+                <div class="bg-[#142132] my-3">
+                    <table data-page-size="10"
+                           class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
+
+                        <thead>
+                        <tr>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Description</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Required</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-normal">
+                        <tr>
+                            <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                            <td class="pl-3 py-1 border border-slate-600">Token</td>
+                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
                         </tr>
                         </tbody>
                     </table>
@@ -204,7 +239,9 @@
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "ok",
     "status": 200,
-    "total_video": 2,
+    "total_video": 42,
+    "page": 3,
+    "show": "40 to 42 of 42",
     "file": [
         {
             "title": "abc.mp4",
@@ -213,6 +250,7 @@
             "embedLink": "https://emturbovid.com/t/fjre48lv7ddvE7NFpPcS",
             "poster": "https://ver1.sptvp.com/poster/1/6E/fjre48lv7ddvE7NFpPcS.png",
             "view": 0,
+            "size": "81.41 MB",
             "date_uploaded": 07/28/2021 01:33:11
         },
         {
@@ -222,6 +260,7 @@
             "embedLink": "https://emturbovid.com/t/rtjgnkDM9W3BkKmmUcj",
             "poster": "https://ver1.sptvp.com/poster/A/FF/rtjgnkDM9W3BkKmmUcj.png",
             "view": 1,
+            "size": "81.41 MB",
             "date_uploaded": 08/08/2021 10:53:04
         }
     ]
@@ -235,7 +274,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                    https://api.turboviplay.com/infoFile?keyApi={your_key_api}&amp;videoID={id_video}</h5>
+                    https://user.streamsilk.com/api/file/infoFile?videoID={id_video}</h5>
                 </div>
                 <h4>Parameters</h4>
                 <div class="bg-[#142132] my-3">
@@ -250,17 +289,33 @@
                         </tr>
                         </thead>
                         <tbody class="font-normal">
-                        <tr>
-                            <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your api key</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
-                        <tr>
-                            <td class="pl-3 py-1 border border-slate-600">videoID</td>
-                            <td class="pl-3 py-1 border border-slate-600">id video</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">videoID</td>
+                                <td class="pl-3 py-1 border border-slate-600">id video</td>
+                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                            </tr>
 
+                        </tbody>
+                    </table>
+                </div>
+                <h4>Headers</h4>
+                <div class="bg-[#142132] my-3">
+                    <table data-page-size="10"
+                           class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
+
+                        <thead>
+                        <tr>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Description</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Required</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-normal">
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                                <td class="pl-3 py-1 border border-slate-600">Token</td>
+                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -291,7 +346,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                    https://api.turboviplay.com/renameFile?keyApi={your_key_api}&amp;videoID={id_video}&amp;newTitle={new_title_video}</h5>
+                    https://user.streamsilk.com/api/file/renameFile/{id_video}&amp;newTitle={new_title_video}</h5>
                 </div>
                 <h4>Parameters</h4>
                 <div class="bg-[#142132] my-3">
@@ -306,11 +361,6 @@
                         </tr>
                         </thead>
                         <tbody class="font-normal">
-                        <tr>
-                            <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your api key</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
                         <tr>
                             <td class="pl-3 py-1 border border-slate-600">videoID</td>
                             <td class="pl-3 py-1 border border-slate-600">id video</td>
@@ -324,26 +374,50 @@
                         </tbody>
                     </table>
                 </div>
+                <h4>Header</h4>
+                <div class="bg-[#142132] my-3">
+                    <table data-page-size="10"
+                           class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
+
+                        <thead>
+                        <tr>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Description</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Required</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-normal">
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                                <td class="pl-3 py-1 border border-slate-600">Token</td>
+                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
-  "msg": "OK",
-  "server_time": 2017-08-11 04:30:07,
-  "status": 200,
-  "result": true
+    "msg": "Ok",
+    "status": "200",
+    "sever_time": "2024-06-22 08:04:08",
+    "file": {
+        "New title": "test5",
+        "sub": "664999e98159b",
+    }
 }</code>
 </pre>
             </div>
             <!-- /.end-file-name -->
             <div class="mt-10" id="copy">
-                <h3 class="pb-3  text-[#009FB2] text-lg">COPY VIDEO</h3>
-                <h4 class="text-primary">Copy my video</h4>
+                <h3 class="pb-3  text-[#009FB2] text-lg">Clone File</h3>
+                <h4 class="text-primary">Clone my file</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                    https://api.turboviplay.com/copyVideo?keyApi={your_key_api}&amp;videoID={id_video}&amp;folder={folder_video}</h5>
+                    https://user.streamsilk.com/api/cloneFile?videoID={id_video}&amp;nameFolder={folder_name}</h5>
                 </div>
                 <h4>Parameters</h4>
                 <div class="bg-[#142132] my-3">
@@ -351,32 +425,47 @@
                            class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
 
                         <thead>
+                            <tr>
+                                <th class="py-2.5 px-3 border border-slate-600">Parameter</th>
+                                <th class="py-2.5 px-3 border border-slate-600">Description</th>
+                                <th class="py-2.5 px-3 border border-slate-600">Required</th>
+                            </tr>
+                            </thead>
+                            <tbody class="font-normal">
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">videoID</td>
+                                <td class="pl-3 py-1 border border-slate-600">id video</td>
+                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                            </tr>
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">folder</td>
+                                <td class="pl-3 py-1 border border-slate-600">your name folder</td>
+                                <td class="pl-3 py-1 border border-slate-600">No (Defaul: root)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>Header</h4>
+                <div class="bg-[#142132] my-3">
+                    <table data-page-size="10"
+                           class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
+
+                        <thead>
                         <tr>
-                            <th class="py-2.5 px-3 border border-slate-600">Parameter</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
                             <th class="py-2.5 px-3 border border-slate-600">Description</th>
                             <th class="py-2.5 px-3 border border-slate-600">Required</th>
                         </tr>
                         </thead>
                         <tbody class="font-normal">
                         <tr>
-                            <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your api key</td>
+                            <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                            <td class="pl-3 py-1 border border-slate-600">Token</td>
                             <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
-                        <tr>
-                            <td class="pl-3 py-1 border border-slate-600">videoID</td>
-                            <td class="pl-3 py-1 border border-slate-600">id video</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
-                        <tr>
-                            <td class="pl-3 py-1 border border-slate-600">folder</td>
-                            <td class="pl-3 py-1 border border-slate-600">your name folder</td>
-                            <td class="pl-3 py-1 border border-slate-600">No (Defaul: single videos)</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
             <!-- /.end-copy -->
             <!-- list folder -->
@@ -386,27 +475,26 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                    https://api.turboviplay.com/listFolder?keyApi={your_key_api}</h5>
+                    https://user.streamsilk.com/api/folder/listFolder</h5>
                 </div>
-                <h4>Parameters</h4>
+                <h4>Headers</h4>
                 <div class="bg-[#142132] my-3">
                     <table data-page-size="10"
                            class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
 
                         <thead>
                         <tr>
-                            <th class="py-2.5 px-3 border border-slate-600">Parameter</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
                             <th class="py-2.5 px-3 border border-slate-600">Description</th>
                             <th class="py-2.5 px-3 border border-slate-600">Required</th>
                         </tr>
                         </thead>
                         <tbody class="font-normal">
-                        <tr>
-                            <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your api key</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
-
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                                <td class="pl-3 py-1 border border-slate-600">Token</td>
+                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -415,12 +503,26 @@
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
-    "userID": 1000,
-    "nameFolder": "single videos",
-    "idFolder": "kjgnfslkdfjiwe",
-    "numberFile": 33,
-    "updateFile": 1682337404,
-    "creatAt": 1630491363
+    "msg": "oke",
+    "sever_time": "2024-06-22 06:28:29",
+    "status": "200",
+    "total_folder": 2,
+    "folders": [
+        {
+            "id": 1,
+            "name": "folder1",
+            "number_file": 41,
+            "created_at": "2024-06-03 17:30:32",
+            "updated_at": "2024-06-22 06:16:22"
+        },
+        {
+            "id": 2,
+            "name": "folder2",
+            "number_file": 171,
+            "created_at": "2024-05-19 06:19:09",
+            "updated_at": "2024-06-21 03:25:43"
+        },
+    ]
 }</code>
 </pre>
             </div>
@@ -432,13 +534,12 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                    https://api.turboviplay.com/newFolder?keyApi={your_key_api}&amp;nameFolder={name new folder}</h5>
+                    https://user.streamsilk.com/api/folder/createFolder?nameFolder={name new folder}</h5>
                 </div>
                 <h4>Parameters</h4>
                 <div class="bg-[#142132] my-3">
                     <table data-page-size="10"
                            class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
-
                         <thead>
                         <tr>
                             <th class="py-2.5 px-3 border border-slate-600">Parameter</th>
@@ -448,15 +549,30 @@
                         </thead>
                         <tbody class="font-normal">
                         <tr>
-                            <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your api key</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
-                        <tr>
                             <td class="pl-3 py-1 border border-slate-600">nameFolder</td>
                             <td class="pl-3 py-1 border border-slate-600">Your name new folder</td>
                             <td class="pl-3 py-1 border border-slate-600">Yes</td>
                         </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>Headers</h4>
+                <div class="bg-[#142132] my-3">
+                    <table data-page-size="10"
+                           class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
+                        <thead>
+                        <tr>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Description</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Required</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-normal">
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                                <td class="pl-3 py-1 border border-slate-600">Token</td>
+                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -465,10 +581,13 @@
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
-    "msg": "OK",
-    "server_time": 2017-08-11 04:30:07,
-    "status": 200,
-    "result": true
+    "msg": "ok",
+    "sever_time": "2024-06-22 06:42:27",
+    "status": "200",
+    "folder": {
+        "id": 88,
+        "name": "new folder"
+    }
 }</code>
 </pre>
             </div>
@@ -480,7 +599,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
-                    https://api.turboviplay.com/editNameFolder?keyApi={your_key_api}&amp;oldNameFolder={old name my folder}&amp;newNameFolder={name new folder}
+                    https://user.streamsilk.com/api/folder/renameFolder/{folderID}?newNameFolder={name new folder}
                     </h5>
                 </div>
                 <h4>Parameters</h4>
@@ -497,13 +616,8 @@
                         </thead>
                         <tbody class="font-normal">
                         <tr>
-                            <td class="pl-3 py-1 border border-slate-600">keyApi</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your api key</td>
-                            <td class="pl-3 py-1 border border-slate-600">Yes</td>
-                        </tr>
-                        <tr>
-                            <td class="pl-3 py-1 border border-slate-600">oldNameFolder</td>
-                            <td class="pl-3 py-1 border border-slate-600">Your name old folder</td>
+                            <td class="pl-3 py-1 border border-slate-600">folderID</td>
+                            <td class="pl-3 py-1 border border-slate-600">Your folderID</td>
                             <td class="pl-3 py-1 border border-slate-600">Yes</td>
                         </tr>
                         <tr>
@@ -514,15 +628,39 @@
                         </tbody>
                     </table>
                 </div>
+                <h4>Headers</h4>
+                <div class="bg-[#142132] my-3">
+                    <table data-page-size="10"
+                           class="text-sm table-auto border-collapse w-full min-w-max text-white text-left border border-slate-500">
+
+                        <thead>
+                        <tr>
+                            <th class="py-2.5 px-3 border border-slate-600">Headers</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Description</th>
+                            <th class="py-2.5 px-3 border border-slate-600">Required</th>
+                        </tr>
+                        </thead>
+                        <tbody class="font-normal">
+                            <tr>
+                                <td class="pl-3 py-1 border border-slate-600">Authorization</td>
+                                <td class="pl-3 py-1 border border-slate-600">Token</td>
+                                <td class="pl-3 py-1 border border-slate-600">Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
-    "msg": "OK",
-    "server_time": 2017-08-11 04:30:07,
-    "status": 200,
-    "result": true
+    "msg": "oke",
+    "sever_time": "2024-06-22 06:55:08",
+    "status": "200",
+    "folder": {
+        "id": 88,
+        "name": "new name folder"
+    }
 }</code>
 </pre>
             </div>

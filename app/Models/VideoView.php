@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\VideoCacheKeys;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redis;
@@ -28,26 +27,12 @@ class VideoView extends Model
 
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
-            if ($model->isDirty('views')) {
-                $model->deleteCacheViews();
-            }
+            Redis::del("user:{$model->user_id}:top_videos:" . Carbon::today()->format('Y-m-d'));
         });
 
         static::deleted(function ($model) {
-            if (!$model->isDirty('views')) {
-                $model->deleteCacheViews();
-            }
-
+            Redis::del("user:{$model->user_id}:top_videos:" . Carbon::today()->format('Y-m-d'));
         });
     }
 
-    public function deleteCacheViews()
-    {
-        $userId = auth()->id();
-        $date = Carbon::today()->format('Y-m-d');
-        $keys = Redis::keys("user:{$userId}:top_videos:{$date}");
-        if (!empty($keys)) {
-            Redis::del($keys);
-        }
-    }
 }

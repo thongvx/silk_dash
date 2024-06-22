@@ -14,6 +14,28 @@ class FolderController
     {
         $this->folderRepo = $folderRepo;
     }
+    public function getAllFolders()
+    {
+        $userId = Auth::id();
+        $folders = $this->folderRepo->getAllFolders($userId);
+        $listFolder = [];
+        foreach ($folders as $folder) {
+            $listFolder[] = [
+                'id' => $folder->id,
+                'name' => $folder->name_folder,
+                'number_file' => $folder->number_file,
+                'created_at' => $folder->created_at->format('Y-m-d H:i:s'),
+                'updated_at' => $folder->updated_at->format('Y-m-d H:i:s')
+            ];
+        }
+        $data = [
+            'msg' => 'oke',
+            'sever_time' => date('Y-m-d H:i:s'),
+            'status' => '200',
+            'folders' => $listFolder
+        ];
+        return $data;
+    }
     public function index()
     {
         $user = Auth::user();
@@ -37,21 +59,40 @@ class FolderController
     // create a new folder
     public function store(Request $request)
     {
+        if ($request->nameFolder == null){
+            return response()->json(
+                [
+                    'msg'=>'ok',
+                    'sever_time' => date('Y-m-d H:i:s'),
+                    'status' => '400',
+                    'result' => 'false'
+                ]
+            );
+        }
         // Validate the request data
         $request->validate([
-            'folderName' => 'required|string|max:255',
+            'nameFolder' => 'required|string|max:255',
         ]);
         $user = Auth::user();
         // Create a new folder
         $folder = new Folder;
-        $folder->name_folder = $request->folderName;
+        $folder->name_folder = $request->nameFolder;
         $folder->user_id = $user->id;
         $folder->number_file = 0;
         $folder->save();
-        $folder->deleteCacheFolder();
 
         // Return a response
-        return response()->json(['message' => 'Folder created successfully', 'folder' => $folder]);
+        return response()->json(
+                [
+                    'msg'=>'ok',
+                    'sever_time' => date('Y-m-d H:i:s'),
+                    'status' => '200',
+                    'folder' => [
+                        'id' => $folder->id,
+                        'name' => $folder->name_folder,
+                    ]
+                ]
+            );
     }
     // edit a new folder
     public function update(Request $request, $id)
@@ -65,17 +106,24 @@ class FolderController
         }
 
         $request->validate([
-            'newfolderName' => 'required|string|max:255',
+            'newNameFolder' => 'required|string|max:255',
         ]);
 
         // Update the folder
-        $folder->name_folder = $request->newfolderName;
+        $folder->name_folder = $request->newNameFolder;
         $folder->save();
-        //delete cache
-        $folder->deleteCacheFolder();
 
         // Return a response
-        return response()->json(['name' => $folder->name_folder]);
+        return response()->json(
+            [
+                'msg' => 'oke',
+                'sever_time' => date('Y-m-d H:i:s'),
+                'status' => '200',
+                'folder' => [
+                    'id' => $folder->id,
+                    'name' => $folder->name_folder,
+                ],
+            ]);
     }
     // Delete a folder
     public function destroy($id)
@@ -90,8 +138,6 @@ class FolderController
 
         // Delete the folder
         $folder->delete();
-        $folder->deleteCacheFolder();
-
         // Return a response
         return response()->json(['message' => 'Folder deleted successfully']);
     }

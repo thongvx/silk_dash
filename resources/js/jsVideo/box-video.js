@@ -24,7 +24,7 @@ const formEdit = `<div class="edit" id="edit">
                                             New video title
                                         </h5>
                                         <div class="col-span-2 pr-2">
-                                            <input id="" name="new-name" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
+                                            <input id="" name="newTitle" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
                                    border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
                                    focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
                                         </div>
@@ -45,13 +45,13 @@ $(document).on('click', '.btn-edit', function() {
     $('#edit [url-video]').attr('href','https://streamsilk.com/play/'+tr.find('.videoID').text())
     $('#edit form').on('submit', function(e) {
         e.preventDefault();
-        const newTitle = $(this).find('input[name="new-name"]').val();
+        const newTitle = $(this).find('input[name="newTitle"]').val();
         const bntSubmit = $(this).find('button[type="submit"]');
         $.ajax({
             url: '/video/' + videoId,
             type: 'PATCH',
             data: {
-                title: newTitle
+                newTitle: newTitle
             },
             beforeSend: function() {
                 bntSubmit.html(`
@@ -100,7 +100,7 @@ function ajaxremove(videoIDs, bntSubmit){
         url: '/video/multiple',
         type: 'POST',
         data: {
-            ids: videoIDs
+            videoID: videoIDs
         },
         beforeSend: function() {
             bntSubmit.html(`

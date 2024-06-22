@@ -16,18 +16,18 @@ class StatisticController
         // Lấy ra top 10 quốc gia trong ngày
         $topCountries = Redis::zrevrange("user:{$userId}:country_views", 0, 9, 'WITHSCORES');
 
-        $totalViews = array_sum($topCountries);
-        if($totalViews > 0){
-            foreach ($topCountries as $country => $views) {
-                $topCountries[$country] = [
-                    'views' => $views,
-                    'percentage' => (intval($views) / intval($totalViews)) * 100,
-                ];
-            }
-            return $topCountries;
-        }else{
+        $totalViews = Redis::zscore("user:{$userId}:country_views", 'total');
+        if ($totalViews <= 0) {
             return [];
         }
+
+        foreach ($topCountries as $country => $views) {
+            $topCountries[$country] = [
+                'views' => $views,
+                'percentage' => ($views / $totalViews) * 100,
+            ];
+        }
+        return $topCountries;
 
     }
 
@@ -76,10 +76,5 @@ class StatisticController
             return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
         });
         return $views;
-    }
-    public function updateViews($videoid)
-    {
-        $userId = auth()->id();
-
     }
 }

@@ -6,14 +6,16 @@ use App\Models\Ticket;
 use App\Repositories\TicketRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\ProfileController;
 
 class TicketController
 {
-    protected $ticketRepo;
+    protected $ticketRepo, $profileController;
 
-    public function __construct(TicketRepo $ticketRepo)
+    public function __construct(TicketRepo $ticketRepo, ProfileController $profileController)
     {
         $this->ticketRepo = $ticketRepo;
+        $this->profileController = $profileController;
     }
     public function index()
     {
@@ -22,7 +24,7 @@ class TicketController
         $tickets = $this->ticketRepo->getAllTickets($userId);
         $data = [
             'title' => 'support',
-            'tickets' => $tickets
+            'tickets' => $tickets,
         ];
         return view('dashboard.support.support', $data);
     }
