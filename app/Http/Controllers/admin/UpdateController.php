@@ -88,16 +88,17 @@ class UpdateController extends Controller
             //create encoder task 480
             $encoderTask480 = new EncoderTask();
             $encoderTask480->insertEncoderTask($videoData, $encoderPriority, 480);
-            $encoderTask480->save();
+            if($user->active > 1)
+                $encoderTask480->save();
             //create encoder task 720
-            if($videoInfo['quality'] > 480){
+            if($videoInfo['quality'] > 480 || $user->active == 1){
                 $encoderTask720 = new EncoderTask();
                 $encoderTask720->insertEncoderTask($videoData, $encoderPriority, 720);
                 $encoderTask720->save();
                 $videoData['hd'] = '0';
             }
             //create encoder task 1080
-            if($videoInfo['quality'] > 720){
+            if($videoInfo['quality'] > 720 && $user->active > 1){
                 $encoderTask1080 = new EncoderTask();
                 $encoderTask1080->insertEncoderTask($videoData, $encoderPriority, 1080);
                 $encoderTask1080->save();
