@@ -2,8 +2,6 @@ import './main.js';
 import './sidebar.js';
 import './input-search.js'
 import './notification.js';
-import './chart/filechart.js';
-import './search/select2.full.min.js'
 // import './control-datatable.js'
 //dashboard
 import './user-dashboard.js';
@@ -18,7 +16,6 @@ import './jsVideo/box-video.js';
 import './jsVideo/folder.js';
 //report
 import './report/report.js';
-import './daterangepicker/datepicker.min.js'
 //support
 import './support/ticket.js';
 //setting

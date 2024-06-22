@@ -3,9 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Video;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Prettus\Repository\Eloquent\BaseRepository;
 use App\Enums\VideoCacheKeys;
+
 
 class VideoRepo extends BaseRepository
 {
@@ -53,16 +55,4 @@ class VideoRepo extends BaseRepository
             ->paginate($limit);
     }
 
-
-    public function findVideoBySlug($slug)
-    {
-        $video = unserialize(Redis::get(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug));
-
-        if (!$video) {
-            $video = $this->query()->where('slug', $slug)->first();
-            Redis::setex(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug, 259200, serialize($video));
-        }
-
-        return $video;
-    }
 }

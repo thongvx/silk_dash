@@ -78,7 +78,13 @@ class UploadController
         if ($transfer_priority)
             $transfer_priority = 0;
         $link = $request->url;
-        $folder_id = $request->FolderID;
+        if($request->has('FolderID')) {
+            $folder_id = $request->FolderID;
+            $folderName = $this->folderRepo->find($folder_id)->name_folder;
+        } else {
+            $folderName = $request->get('nameFolder', 'root');
+            $folder_id = $this->folderRepo->getFolder($folderName)->id;
+        }
         $arrLink = explode("\r\n", $link);
         if (count($arrLink) == 1) {
             $arrLink = explode("\n", $link);
@@ -87,7 +93,7 @@ class UploadController
         foreach ($arrLink as $url) {
             // Prepare a new Transfer record for each link
             $records[] = [
-                'user_id' => $user->user_id,
+                'user_id' => $user->id,
                 'url' => $url,
                 'slug' => uniqid(),
                 'title' => '0',
@@ -101,19 +107,21 @@ class UploadController
             ];
         }
         Transfer::upsert($records, ['user_id', 'url'], []);
-        return true;
-    }
-
-    public function getProgress(Request $request)
-    {
-        $progressKey = 'uploadProgress.' . $request->input('key');
-        $progress = Redis::get($progressKey);
-
-        if ($progress === null) {
-            return response()->json(['error' => 'Progress not found'], 404);
+        $videoID = [];
+        foreach ($records as $record) {
+            $videoID[] = $record['slug'];
         }
-
-        return $progress;
+        $data = [
+            "msg" => "ok",
+            "status" => 200,
+            "sever_time" => date('Y-m-d H:i:s'),
+            "total_upload" => count($arrLink),
+            "result" => [
+                "Name Folder" => $folderName,
+                "videoID" => $videoID,
+            ],
+        ];
+        return response()->json($data);
     }
 
     //-------------------------------get progress transfer-----------------------------------------

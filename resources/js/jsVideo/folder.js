@@ -32,7 +32,7 @@ $(document).on('click', '[btn-add-folder]', function() {
             url: '/folder',
             type: 'POST',
             data: {
-                folderName: folderName
+                nameFolder: folderName
             },
             beforeSend: function() {
                 bntSubmit.html(`
@@ -52,10 +52,10 @@ $(document).on('click', '[btn-add-folder]', function() {
                 fixedBox()
                 notification('success', 'Add folder successfully')
                 $('[folder]:eq(0)').after(`<div folder
-                                            class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#121520] hover:bg-gradient-to-r from-[#009FB2] to-[#4CBE1F]">
+                                            class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#142132] hover:bg-[#009FB2] from-[#009FB2] to-[#4CBE1F]">
                                             <a class="w-full btn-page-folder" href="javascript:;" data-folderid="${data.folder.id}" data-limit="${limit}">
                                                 <h5>
-                                                    <span name-folder>${data.folder.name_folder}</span> - ${data.folder.number_file} files
+                                                    <span name-folder>${data.folder.name}</span> - 0 files
                                                 </h5>
                                             </a>
                                             <li class="list-none pl-4">
@@ -129,7 +129,7 @@ $('.btn-edit-folder').on('click', function() {
             url: '/folder/' + folderId,
             type: 'PATCH',
             data: {
-                newfolderName: newfolderName
+                newNameFolder: newfolderName
             },
             beforeSend: function() {
                 bntSubmit.html(`
@@ -145,7 +145,7 @@ $('.btn-edit-folder').on('click', function() {
                 `)
             },
             success: function(data) {
-                folder.find('span:eq(0)').text(data.name)
+                folder.find('span:eq(0)').text(data.folder.name)
                 $('#edit-folder').remove()
                 fixedBox()
                 notification('success', 'Edit folder successfully')

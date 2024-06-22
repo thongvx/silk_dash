@@ -236,22 +236,15 @@
                 </div>
                 <div class="overflow-auto h-[calc(30vh)]">
                     <table
-                        class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
+                        class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
                         <tbody>
                         @forelse( $topVideos as $video )
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap ">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            {{ $video->title }}
-                                        </div>
-                                    </div>
+                            <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] text-white">
+                                <td class="p-2  max-w-[4rem] truncate">
+                                    <a href="{{route('play', $video->video_id)}}" target="_black" class="hover:text-[#009FB2] ">{{ $video->video_id }}</a>
                                 </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap ">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal">{{ $video->views }}</h6>
-                                    </div>
+                                <td class="p-2 text-center">
+                                    {{ $video->views }}
                                 </td>
                             </tr>
                         @empty
@@ -272,19 +265,19 @@
                 </div>
                 <div class="overflow-auto  h-[calc(30vh)]">
                     <table
-                        class="items-center w-full mb-4 align-top border-separate border-gray-200 ">
+                        class="text-center text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
                         <thead class="bg-[#142132] transition-colors text-sm">
-                        <tr class="text-white">
-                            <th class="p-2 ">
-                                Country
-                            </th>
-                            <th class="p-2">
-                                Views
-                            </th>
-                            <th class="p-2">
-                                Bounce
-                            </th>
-                        </tr>
+                            <tr class="text-white">
+                                <th class="p-2 ">
+                                    Country
+                                </th>
+                                <th class="p-2">
+                                    Views
+                                </th>
+                                <th class="p-2">
+                                    Bounce
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
                         @forelse ($topCountries as $country => $data)
@@ -324,6 +317,5 @@
 @endsection
 
 @section('scripts')
-    {{--    @vite('resources/js/chart/filechart.js')--}}
-    {{--    @vite('resources/js/chart/charts.js')--}}
+    <script src="{{ asset('assets/js/chart/filechart.js') }}"></script>
 @endsection

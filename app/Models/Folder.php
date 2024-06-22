@@ -29,15 +29,11 @@ class Folder extends Model
 
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
-            if ($model->isDirty('number_file')) {
-                $model->deleteCacheFolder();
-            }
+            $model->deleteCacheFolder();
         });
 
         static::deleted(function ($model) {
-            if (!$model->isDirty('number_file')) {
-                $model-> deleteCacheFolder();
-            }
+            $model-> deleteCacheFolder();
 
         });
     }

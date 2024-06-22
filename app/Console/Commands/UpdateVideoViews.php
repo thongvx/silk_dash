@@ -83,6 +83,7 @@ class UpdateVideoViews extends Command
         $values = [];
         foreach ($upsertData as $data) {
             $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
+            Redis::del("user:{$data['user_id']}:top_videos:{$data['date']}");
         }
 
         $query .= implode(', ', $values);

@@ -24,3 +24,16 @@ $(document).on('submit', '#ticket-form', function(e) {
         }
     });
 })
+
+$(document).on('click', '[btn-get-token]', function() {
+    $.ajax({
+        type: 'GET',
+        url: '/regenerateToken',
+        success: function(response) {
+            $('#token').text('Token: ' + response.token);
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+})

@@ -16,6 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware('auth:sanctum')->group(function (){
     Route::get('me', [\App\Http\Controllers\Auth\ProfileController::class, 'getUserInfo'])->name('user.me');
-    Route::get('videos', [\App\Http\Controllers\Dashboard\VideoController::class, 'getVideoData']);
+
+    Route::prefix('file')->group(function () {
+        Route::get('listFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'getListFile']);
+        Route::get('infoFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'findVideoBySlug']);
+        Route::get('renameFile/{id}', [\App\Http\Controllers\Dashboard\VideoController::class, 'update']);
+        Route::get('deleteFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple']);
+        Route::get('cloneFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'cloneVideo']);
+    });
+    Route::prefix('folder')->group(function () {
+        Route::get('listFolder', [\App\Http\Controllers\Dashboard\FolderController::class, 'getAllFolders']);
+        Route::get('renameFolder/{id}', [\App\Http\Controllers\Dashboard\FolderController::class, 'update']);
+        Route::get('createFolder', [\App\Http\Controllers\Dashboard\FolderController::class, 'store']);
+    });
+    Route::prefix('upload')->group(function () {
+        Route::get('uploadUrl', [\App\Http\Controllers\Dashboard\UploadController::class, 'postTransfer']);
+    });
 });
+
 
