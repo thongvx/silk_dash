@@ -33,6 +33,7 @@ class SvStreamService
             ]);
             Redis::sadd('sv_streams', $key);
         }
+        Redis::expire($key, 120);
     }
 
     public static function selectSvStream()
