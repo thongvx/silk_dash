@@ -33,7 +33,7 @@ class TransferController extends Controller
             ));
             $response = curl_exec($curl);
             curl_close($curl);
-            Redis::set('transfer'.$data->user_id.'-'.$data->slug, json_encode([
+            Redis::setex('transfer'.$data->user_id.'-'.$data->slug, 1800, json_encode([
                 'slug' => $data->slug,
                 'url' => $data->url,
                 'status' => 1,

@@ -114,7 +114,7 @@ class UpdateController extends Controller
             $dataTransfer->size_download = $videoSize;
             $dataTransfer->size = $videoSize;
             $dataTransfer->save();
-            Redis::set('transfer'.$videoInfo['userId'].'-'.$videoInfo['slug'], json_encode([
+            Redis::setex('transfer'.$videoInfo['userId'].'-'.$videoInfo['slug'], 300, json_encode([
                 'slug' => $videoInfo['slug'],
                 'url' => $dataTransfer->url,
                 'status' => 2,
