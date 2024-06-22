@@ -55,4 +55,16 @@ class VideoRepo extends BaseRepository
             ->paginate($limit);
     }
 
+    public function findVideoBySlug($slug)
+    {
+        $video = unserialize(Redis::get(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug));
+
+        if (!$video) {
+            $video = $this->query()->where('slug', $slug)->first();
+            Redis::setex(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug, 259200, serialize($video));
+        }
+
+        return $video;
+    }
+
 }

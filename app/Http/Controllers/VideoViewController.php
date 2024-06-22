@@ -36,8 +36,10 @@ class VideoViewController
             if (!$video){
                 return response()->json(['status' => 'fail']);
             }
+            $totalViewKey = "total:{$video->user_id}";
             $key = "video_views:{$video->id}:{$video->user_id}:{$country}";
             Redis::incr($key);
+            Redis::incr($totalViewKey);
             return response()->json(['status' => 'success']);
         }
         return response()->json(['status' => 'fail']);

@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('report_data', function (Blueprint $table) {
+        Schema::create('reports_data', function (Blueprint $table) {
             $table->id();
-            $table->integer('userid');
+            $table->integer('user_id');
+            $table->integer('views')->default(0);
+            $table->integer('download')->default(0);
+            $table->integer('paid_views')->default(0);
+            $table->integer('vpn_ads_views')->default(0);
+            $table->decimal('revenue', 8, 2)->default(0.00);
+            $table->decimal('cpm', 8, 2)->default(0.00);
             $table->date('date');
-            $table->string('country');
-            $table->integer('views');
-            $table->integer('download');
-            $table->integer('paid_views');
-            $table->integer('vpn_ads_views');
-            $table->decimal('revenue', 8, 2);
-            $table->timestamps();
+
+            $table->unique(['user_id', 'date']);
+
         });
     }
 
