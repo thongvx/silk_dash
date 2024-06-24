@@ -7,7 +7,7 @@
     <meta name="google" content="notranslate">
     <link rel="icon" href="https://user.streamsilk.com/image/logo/logo1.png">
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
-    <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}"></link>
+    <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
