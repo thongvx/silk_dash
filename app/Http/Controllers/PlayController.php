@@ -36,7 +36,9 @@ class PlayController
             if ($video->origin == 0) {
                 $playData = [
                     'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->value('sv_upload') . '.streamsilk.com/storage/' . $slug . '.' . $video->format,
+                    'videoID' => $video->slug,
                     'poster' => $poster,
+                    'title' => $video->title,
                 ];
                 return view('playOrigin', $playData);
             } else {

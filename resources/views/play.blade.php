@@ -7,7 +7,7 @@
     <meta name="google" content="notranslate">
     <link rel="icon" href="https://user.streamsilk.com/image/logo/logo1.png">
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
-    <script src="{{asset('/assets/jwplayer/css/player.css')}}"></script>
+    <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}"></link>
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
@@ -17,8 +17,10 @@
     </style>
 </head>
 <body>
-<div id="pop1" class="div_pop"></div>
-<div id="pop" class="div_pop"></div>
+<div class="preloader">
+    <div class="preloader-icon"></div>
+    <span>Loading...</span>
+</div>
 <div class="container-fluid">
     <div id="video_player">
 
@@ -27,8 +29,8 @@
 <script>
     var t = 0;
     var playID = 0;
-    var videoID = {{ $videoID }};
-    var urlPlay = {{ $urlPlay }};
+    var videoID ="{{ $videoID }}";
+    var urlPlay = "{{ $urlPlay }}";
     var iframe = {{ $iframe }};
     var typeVideo = {{ $videoType }};
     var premium = {{ $premium }};
@@ -59,11 +61,11 @@
             width: '100%',
             height: '100%',
             skin: { active: "rgb(221,51,51)", },
-            image: {{ $poster }},
+            image: "{{ $poster }}",
             logo: {
                 "file": urlLogo,
                 "link": "{{ $logo_link }}",
-                "position": {{ $position }}
+                "position": "{{ $position }}"
             },
             title : title,
             localization: {
