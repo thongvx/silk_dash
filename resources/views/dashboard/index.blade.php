@@ -31,7 +31,7 @@
                                         </span>
                                     </h3>
                                     <h5 class="mb-0 text-white text-xl">
-                                        400
+                                        {{ $userWatching }}
                                     </h5>
                                 </div>
                             </div>
@@ -50,10 +50,10 @@
                                 <div class='text-md lg:text-lg w-full flex flex-col mt-3 items-end'>
                                     <h3 class='text-slate-400'>Storage</h3>
                                     <div class="flex items-center text-xl">
-                                        <h5 class="mb-0 text-white">5.1 GB</h5>
+                                        <h5 class="mb-0 text-white">{{ \Illuminate\Support\Facades\Auth::user()->storage }} GB</h5>
                                         <span
                                             class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
-                                            255 file
+                                            {{ $totalFile }} file
                                         </span>
                                     </div>
                                 </div>
@@ -100,10 +100,10 @@
                                     <h3 class='text-slate-400'>Total Balance</h3>
                                     <div class="flex items-center text-xl">
                                         <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                            <span class='text-slate-400 text-lg mr-0.5'>$</span>53,000
+                                            <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ $totalBalance }}
                                         </h5>
                                         <span
-                                            class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
+                                            class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center hidden">
                                             <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_up</i> +55%
                                         </span>
                                     </div>
@@ -111,22 +111,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <!-- card2 -->
-                    <div class="hidden px-2 py-2 rounded-xl mb-6 xl:mb-0 bg-[#142132]">
-                        <div class='flex items-center justify-between'>
-                            <div
-                                class='py-1.5 px-2 rounded-full border border-white leading-none'>
-                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">leaderboard
-                                </i>
-                            </div>
-                            <div class='text-md lg:text-lg w-full flex flex-col mt-3 text-end'>
-                                <h3 class='text-[#009FB2] font-bold '>Today’s Earning</h3>
-                                <h5 class="mb-0 text-white">
-                                    $53,000 <span class="text-sm font-bold leading-normal">+55%</span>
-                                </h5>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="lg:w-5/12 w-full max-w-full px-1.5 lg:px-0 lg:pl-3 mt-4 lg:mt-0">
@@ -138,13 +122,26 @@
                                 <div class=''>
                                     <div class='text-md w-full flex items-center justify-between'>
                                         <h3 class='text-slate-400'>Yesterday’s Earning</h3>
+                                        @php
+                                            if ( $earnings['2days'] != 0)
+                                            $bounce1 = round(($earnings['yesterday'] - $earnings['2days']) / $earnings['2days'] * 100, 2);
+                                            else
+                                            $bounce1 = 0;
+                                        @endphp
+                                        @if($earnings['yesterday'] > $earnings['2days'] && $earnings['2days'] != 0)
                                         <span
                                             class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
-                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_up</i> +55%
+                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_up</i> +{{ $bounce1 }}%
                                         </span>
+                                        @else
+                                            <span
+                                                class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center flex">
+                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> {{ $bounce1 }}%
+                                        </span>
+                                        @endif
                                     </div>
                                     <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>53,000
+                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ $earnings['yesterday'] }}
                                     </h5>
                                 </div>
                             </div>
@@ -153,13 +150,26 @@
                                 <div class=''>
                                     <div class='text-md w-full flex items-center justify-between'>
                                         <h3 class='text-slate-400'>Today’s Earning</h3>
-                                        <span
-                                            class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
-                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_up</i> +55%
+                                        @php
+                                        if ($earnings['yesterday'] != 0)
+                                            $bounce2 = round(($earnings['today'] - $earnings['yesterday']) / $earnings['yesterday'] * 100, 2);
+                                        else
+                                            $bounce2 = 0;
+                                        @endphp
+                                        @if($earnings['today'] > $earnings['yesterday'] && $earnings['yesterday'] != 0)
+                                            <span
+                                                class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
+                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_up</i> +{{ $bounce2 }}%
                                         </span>
+                                        @else
+                                            <span
+                                                class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center flex">
+                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> {{ $bounce2 }}%
+                                        </span>
+                                        @endif
                                     </div>
                                     <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>53,000
+                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ $earnings['today'] }}
                                     </h5>
                                 </div>
                             </div>
@@ -241,7 +251,7 @@
                         @forelse( $topVideos as $video )
                             <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] text-white">
                                 <td class="p-2  max-w-[4rem] truncate">
-                                    <a href="{{route('play', $video->video_id)}}" target="_black" class="hover:text-[#009FB2] ">{{ $video->video_id }}</a>
+                                    <a href="{{route('play', $video->video_id)}}" target="_black" class="hover:text-[#009FB2] ">{{ $video->title }}</a>
                                 </td>
                                 <td class="p-2 text-center">
                                     {{ $video->views }}
@@ -285,7 +295,7 @@
                                 <td class="p-2">
                                     <div class="flex items-center px-2 py-1">
                                         <div class="text-white">
-                                            {{ $country }}
+                                            {{ $data['country'] }}
                                         </div>
                                     </div>
                                 </td>

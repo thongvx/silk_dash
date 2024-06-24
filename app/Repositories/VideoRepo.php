@@ -66,5 +66,4 @@ class VideoRepo extends BaseRepository
 
         return $video;
     }
-
 }

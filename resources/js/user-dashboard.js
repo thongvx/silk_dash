@@ -25,9 +25,6 @@ if ($("#chart-line").length) {
         last24HoursLabels.push(label);
     }
 // Reverse the arrays to have the oldest date first
-    last24HoursLabels = last24HoursLabels.reverse();
-    last7DaysLabels = last7DaysLabels.reverse();
-    last30DaysLabels = last30DaysLabels.reverse();
 
     var ctx1 = $("#chart-line").get(0).getContext("2d");
 

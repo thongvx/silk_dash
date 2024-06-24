@@ -35,7 +35,6 @@ class NotificationRepo
 
         foreach ($notifications as $notification) {
             $notification->delete();
-            $notification->save();
         }
         return true;
     }

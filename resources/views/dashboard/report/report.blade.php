@@ -9,8 +9,13 @@
                     class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>User watching</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white">
-                            2000
+                        <h5 class="mb-0 font-bold text-2xl text-white flex items-center justify-end">
+                            {{ $userWatching }}
+                            <span class="ml-3 relative flex h-3 w-3">
+                              <span
+                                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                            </span>
                         </h5>
                     </div>
                 </div>
@@ -22,7 +27,7 @@
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>Today earning</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white">
-                            $ 0
+                            <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ $earnings['today'] }}
                         </h5>
                     </div>
                 </div>
@@ -34,7 +39,7 @@
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>Yesterday earning</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white">
-                            $ 0
+                            <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ $earnings['yesterday'] }}
                         </h5>
                     </div>
                 </div>
@@ -46,7 +51,7 @@
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>Total Withdrawals</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white">
-                            $ 0
+                            <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ number_format($totalWithdrawals, 0, '.', ',') }}
                         </h5>
                     </div>
                 </div>
@@ -60,7 +65,7 @@
                     <div class='font-semibold text-center'>
                         <h3 class='text-lg text-slate-400'>Total balance</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white mt-3">
-                            $ 0.00
+                            <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
                         </h5>
                     </div>
                     <button class="button-payout px-4 py-2 rounded-3xl bg-[#142132] hover:bg-[#009FB2] text-white mt-6"
@@ -88,12 +93,12 @@
                             px-6 py-1 rounded-lg hover:bg-[#009fb2] yesterday"
                             data-start-date="{{ date('Y-m-d', strtotime('-7 day')) }}"
                             data-end-date="{{ date('Y-m-d') }}"
-                            data-tab="7days" btn-date-report>7 days</button>
+                            data-tab="week" btn-date-report>7 days</button>
                     <button type="submit" class="{{request()->get('date') === '30days' ? 'bg-[#009fb2]' : 'bg-[#121520]'}}
                             px-6 py-1 rounded-lg hover:bg-[#009fb2] yesterday"
                             data-start-date="{{ date('Y-m-d', strtotime('-30 day')) }}"
                             data-end-date="{{ date('Y-m-d') }}"
-                            data-tab="30days" btn-date-report>30 days</button>
+                            data-tab="month" btn-date-report>30 days</button>
                 </div>
                 <div class="col-span-full lg:col-span-2 rounded-lg mt-3 flex">
                     <div date-rangepicker class="w-full flex items-center flex-row">
@@ -377,24 +382,25 @@
                         </h5>
                         <div class="text-white mt-3 flex justify-between items-center">
                             <h5>
-                                Your USDT Address: aaaaaaaaaaaaaa<br>
-                                Network: Ethereum
+                                Your USDT Address: {{\Illuminate\Support\Facades\Auth::user()->usdt_address}}<br>
+                                Network: {{\Illuminate\Support\Facades\Auth::user()->network}}
                             </h5>
                             <a href="" class="rounded-xl bg-blue-400 px-5 py-2 h-max">Change</a>
                         </div>
-                        <form class="text-white mt-3 flex justify-between">
+                        <form class="text-white mt-3 flex justify-between" id="request-payment" method="POST" action="{{route('request.payment')}}">
+                            @csrf
                             <div class="bg-[#142132] rounded-lg flex w-full px-3 items-center">
                                 <label for="amount" class="mr-3">
                                     Amount:
                                 </label>
-                                <input type="number" min="100" max="2000" name="amount" id="amount"
+                                <input type="number" min="100" max="{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}" name="amount" id="amount"
                                        class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
                                        placeholder="100"/>
                                 <h5>
                                     USD
                                 </h5>
                             </div>
-                            <button class="bg-green-300 rounded-xl px-5 py-2 h-max ml-3 hover:bg-green-500" disabled>
+                            <button type="submit" class="bg-green-300 rounded-xl px-5 py-2 h-max ml-3 hover:bg-green-500">
                                 Submit
                             </button>
                         </form>

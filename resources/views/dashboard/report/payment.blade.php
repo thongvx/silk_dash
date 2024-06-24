@@ -13,9 +13,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="my-3 h-12 bg-[#142132]">
-            <td class="text-center" colspan="4">No data available in table</td>
-        </tr>
+        @forelse($payments as $payment)
+            <tr class="my-3 h-12 font-medium odd:bg-transparent even:bg-[#142132] {{ $payment->status == 0 ? 'text-orange-400' : 'text-emerald-500' }}">
+                <td class="text-center">{{ $payment->created_at }}</td>
+                <td class="text-center">{{ $payment->transaction_ID }}</td>
+                <td class="text-center">{{ $payment->amount }}</td>
+                <td class="text-center">{{ $payment->status == 0 ? 'pending' : 'paid' }}</td>
+            </tr>
+        @empty
+            <tr class="my-3 h-12 bg-[#142132]">
+                <td class="text-center" colspan="4">No data available in table</td>
+            </tr>
+        @endforelse
+
         </tbody>
         <tfoot>
         <tr class="bg-[#142132]">
