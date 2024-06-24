@@ -1,5 +1,5 @@
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-    <div class="mb-2 text-[#009FB2]" id='title'>
+    <div class="mb-2 text-[#009FB2] hidden" id='title'>
         <h5 class="text-white flex justify-center">
             Api key: iCDR9HRrRY
         </h5>
@@ -69,6 +69,28 @@
                             <input type="text" name="telegram" value="{{\Illuminate\Support\Facades\Auth::user()->telegram}}"
                                class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                placeholder="telegram">
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 gap-4 items-center mt-6">
+                    <h5 class="col-span-1 text-end">
+                        USDT Address
+                    </h5>
+                    <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
+                        <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">paid</i>
+                        <input type="text" name="usdt_address" value="{{\Illuminate\Support\Facades\Auth::user()->usdt_address}}"
+                               class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                               placeholder="USDT Address">
+                    </div>
+                </div>
+                <div class="grid grid-cols-4 gap-4 items-center mt-6">
+                    <h5 class="col-span-1 text-end">
+                        Network
+                    </h5>
+                    <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
+                        <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">public</i>
+                        <input type="text" name="network" value="{{\Illuminate\Support\Facades\Auth::user()->network}}"
+                               class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                               placeholder="Network">
                     </div>
                 </div>
                 <div class="text-center mt-4 mb-10">

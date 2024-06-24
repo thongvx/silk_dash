@@ -14,10 +14,11 @@ class ProfileController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'password' => 'required|min:6',
             'website' => 'nullable|url',
             'skype' => 'max:255',
             'telegram' => 'max:255',
+            'usdt_address'=> 'max:255',
+            'network'=> 'max:255',
         ]);
 
         if ($validator->fails()) {
@@ -28,12 +29,11 @@ class ProfileController extends Controller
         $user = Auth::user();
         $user->name = $request->input('name', $user->name);
         $user->email = $request->input('email', $user->email);
-        if ($request->filled('password')) {
-            $user->password = bcrypt($request->input('password'));
-        }
         $user->website = $request->input('website', $user->website);
         $user->skype = $request->input('skype', $user->skype);
         $user->telegram = $request->input('telegram', $user->telegram);
+        $user->usdt_address = $request->input('usdt_address', $user->usdt_address);
+        $user->network = $request->input('network', $user->network);
         $user->save();
 
         return response()->json(['message' => 'Profile updated successfully']);

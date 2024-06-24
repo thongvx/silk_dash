@@ -8,22 +8,24 @@
                 <th class="py-2.5 px-3">Download</th>
                 <th class="py-2.5 px-3">Paid Views</th>
                 <th class="py-2.5 px-3">VPN ADS Views</th>
+                <th class="py-2.5 px-3">CPM</th>
                 <th class="py-2.5 px-3">Profit</th>
             </tr>
         </thead>
         <tbody>
         @forelse ($report as $data)
-            <tr class="my-3 h-12 bg-[#142132]">
+            <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
                 <td class="text-center">{{ $data->date }}</td>
                 <td class="text-center">{{ $data->views }}</td>
                 <td class="text-center">{{ $data->download }}</td>
                 <td class="text-center">{{ $data->paid_views }}</td>
                 <td class="text-center">{{ $data->vpn_ads_views }}</td>
+                <td class="text-center">{{ $data->cpm }}</td>
                 <td class="text-center">{{ $data->revenue }} $</td>
             </tr>
         @empty
             <tr class="my-3 h-12 bg-[#142132]">
-                <td class="text-center" colspan="6">No data available in table</td>
+                <td class="text-center" colspan="7">No data available in table</td>
             </tr>
         @endforelse
         </tbody>
@@ -34,7 +36,8 @@
                 <th class="py-1.5 px-3">{{ $report->sum('download') }}</th>
                 <th class="py-1.5 px-3">{{ $report->sum('paid_views') }}</th>
                 <th class="py-1.5 px-3">{{ $report->sum('vpn_ads_views') }}</th>
-                <th class="py-1.5 px-3">{{ $report->sum('revenue') }} $</th>
+                <th class="py-1.5 px-3"></th>
+                <th class="py-1.5 px-3">{{ number_format($report->sum('revenue'), 2, '.', ',') }} $</th>
             </tr>
         </tfoot>
     </table>

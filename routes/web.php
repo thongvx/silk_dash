@@ -71,6 +71,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::resource('report', \App\Http\Controllers\Dashboard\Report\ReportController::class);
+    Route::post('/request-payment', [\App\Http\Controllers\Dashboard\Report\PaymentController::class, 'store'])->name('request.payment');
+
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
 
     Route::get('premium',function (){
@@ -94,7 +96,6 @@ Route::group(['middleware' => 'auth'], function () {
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
-
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
@@ -138,6 +139,5 @@ Route::get('updateView/{videoId}', [\App\Http\Controllers\VideoViewController::c
 Route::prefix('statistic')->group(function () {
     Route::get('topCountry', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
     Route::get('topVideo', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
-    Route::get('viewDate', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'viewDate'])->name('statistic.viewDate');
 });
 

@@ -34,7 +34,7 @@ class CalculateDailyRevenue extends Command
 
         // Lấy dữ liệu từ bảng video_views
         $videoViews = DB::table('video_views')
-            ->select('user_id', DB::raw('count(*) as views'))
+            ->select('user_id', DB::raw('sum(views) as views'))
             ->where('date', $today)
             ->groupBy('user_id')
             ->get();

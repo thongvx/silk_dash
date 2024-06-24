@@ -28,7 +28,6 @@ class PlayController
     public function play($slug)
     {
         $video = $this->videoRepo->findVideoBySlug($slug);
-
         if ($video && $video->soft_delete == 0) {
             $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
             $data_setting = $this->accountRepo->getSetting($video->user_id);
@@ -60,7 +59,11 @@ class PlayController
 
                 $playData = [
                     'urlPlay' => 'https://' . $svStream . '.streamsilk.com/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8',
+                    'videoID' => $video->slug,
                     'poster' => $poster,
+                    'iframe' => $data_setting->blockDirect,
+                    'videoType' => $data_setting->videoType,
+                    'premium' => $data_setting->premiumMode,
                     'title' => $video->title,
                     'logo' => $data_setting->logo,
                     'logo_link' => $data_setting->logoLink,

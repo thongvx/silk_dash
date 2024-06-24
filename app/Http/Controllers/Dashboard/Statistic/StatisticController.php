@@ -12,22 +12,33 @@ class StatisticController
     public function topCountry()
     {
         $userId = auth()->id();
-
+        $date = Carbon::today()->format('Y-m-d');
         // Lấy ra top 10 quốc gia trong ngày
-        $topCountries = Redis::zrevrange("user:{$userId}:country_views", 0, 9, 'WITHSCORES');
-
-        $totalViews = Redis::zscore("user:{$userId}:country_views", 'total');
+        $topCountries = Redis::zrevrange("user:{$userId}:country_views{$date}", 0, 9, 'WITHSCORES');
+        $totalViews = 0;
+        $countryViewsKey = "user:{$userId}:country_views{$date}";
+        $countries = Redis::zrange($countryViewsKey, 0, -1);
+        foreach ($countries as $country) {
+            $views = Redis::zscore($countryViewsKey, $country);
+            $totalViews += $views;
+        }
         if ($totalViews <= 0) {
             return [];
         }
 
+        $totalViews = intval($totalViews);
+
+        $result = [];
+
         foreach ($topCountries as $country => $views) {
-            $topCountries[$country] = [
+            $views = intval($views);
+            $result[] = [
+                'country' => $country,
                 'views' => $views,
-                'percentage' => ($views / $totalViews) * 100,
+                'percentage' => round(($views / $totalViews) * 100, 2),
             ];
         }
-        return $topCountries;
+        return $result;
 
     }
 
@@ -50,31 +61,5 @@ class StatisticController
             ->get(['video_views.*', 'videos.title', 'videos.slug', 'videos.poster']);
         redis::setex($keyTopVideos, 86400, serialize($topVideos));
         return $topVideos;
-    }
-    //get date views
-    public function viewDate()
-    {
-        $userId = auth()->id();
-        $views = [
-            'today',
-            '7days',
-            '30days',
-        ];
-        // Get today's views
-        $date = Carbon::today()->format('Y-m-d');
-        $views['today'] = Redis::get("user:{$userId}:date_views:{$date}") ?? 0;
-
-        // Get views for the past 7 days
-        $views['7days'] = collect(range(0, 6))->mapWithKeys(function ($day) use ($userId) {
-            $date = Carbon::today()->subDays($day)->format('Y-m-d');
-            return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
-        });
-
-        // Get views for the past 30 days
-        $views['30days'] = collect(range(0, 29))->mapWithKeys(function ($day) use ($userId) {
-            $date = Carbon::today()->subDays($day)->format('Y-m-d');
-            return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
-        });
-        return $views;
     }
 }

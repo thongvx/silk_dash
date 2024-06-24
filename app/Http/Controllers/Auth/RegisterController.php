@@ -70,7 +70,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $user->user_id = $user->id;
         $user->key_api = bin2hex(random_bytes(8));
         $user->max_transfer = 10;
         $user->max_torrent = 10;

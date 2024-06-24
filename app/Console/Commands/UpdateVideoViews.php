@@ -41,6 +41,10 @@ class UpdateVideoViews extends Command
         $this->updateCountryViewsInRedis($countryViews);
 
         Redis::del($keys);
+        $keyTopViews = Redis::keys('user:*:top_videos:*');
+        foreach ($keyTopViews as $key) {
+            Redis::del($key);
+        }
         $this->info('Video views updated successfully');
     }
 
@@ -69,9 +73,10 @@ class UpdateVideoViews extends Command
 
     private function updateCountryViewsInRedis($countryViews)
     {
+        $date = Carbon::today()->format('Y-m-d');
         foreach ($countryViews as $userId => $countries) {
             foreach ($countries as $country => $views) {
-                Redis::zincrby("user:{$userId}:country_views", $views, $country);
+                Redis::zincrby("user:{$userId}:country_views:{$date}", $views, $country);
             }
         }
     }
@@ -83,7 +88,7 @@ class UpdateVideoViews extends Command
         $values = [];
         foreach ($upsertData as $data) {
             $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
-            Redis::del("user:{$data['user_id']}:top_videos:{$data['date']}");
+            Redis::del("user:{$data['user_id']}:top_videos:*");
         }
 
         $query .= implode(', ', $values);
