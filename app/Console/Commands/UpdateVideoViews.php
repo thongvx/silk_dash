@@ -40,7 +40,7 @@ class UpdateVideoViews extends Command
 
         $this->updateCountryViewsInRedis($countryViews);
 
-//        Redis::del($keys);
+        Redis::del($keys);
         $keyTopViews = Redis::keys('user:*:top_videos:*');
         foreach ($keyTopViews as $key) {
             Redis::del($key);
