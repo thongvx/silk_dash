@@ -62,30 +62,4 @@ class StatisticController
         redis::setex($keyTopVideos, 86400, serialize($topVideos));
         return $topVideos;
     }
-    //get date views
-    public function viewDate()
-    {
-        $userId = auth()->id();
-        $views = [
-            'today',
-            '7days',
-            '30days',
-        ];
-        // Get today's views
-        $date = Carbon::today()->format('Y-m-d');
-        $views['today'] = Redis::get("user:{$userId}:date_views:{$date}") ?? 0;
-
-        // Get views for the past 7 days
-        $views['7days'] = collect(range(0, 6))->mapWithKeys(function ($day) use ($userId) {
-            $date = Carbon::today()->subDays($day)->format('Y-m-d');
-            return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
-        });
-
-        // Get views for the past 30 days
-        $views['30days'] = collect(range(0, 29))->mapWithKeys(function ($day) use ($userId) {
-            $date = Carbon::today()->subDays($day)->format('Y-m-d');
-            return [$date => Redis::get("user:{$userId}:date_views:{$date}") ?? 0];
-        });
-        return $views;
-    }
 }
