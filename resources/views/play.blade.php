@@ -78,12 +78,12 @@
             if(player.getDuration()< 600){
                 if(currentPercentagePlayed >= 50 && !hasReachedOneTenth){
                     hasReachedOneTenth = true;
-                    increasePlayCount();
+                    increasePlayCount(videoID);
                 }
             }else{
                 if (currentPercentagePlayed >= 10 && !hasReachedOneTenth) {
                     hasReachedOneTenth = true;
-                    increasePlayCount();
+                    increasePlayCount(videoID);
                 }
             }
 
