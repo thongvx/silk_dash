@@ -114,10 +114,8 @@
         }
     });
     function increasePlayCount(videoID) {
-        // Tạo URL API bằng cách nối videoID vào cuối
         var apiUrl = "https://user.streamsilk.com/updateView/" + videoID;
 
-        // Thực hiện yêu cầu GET đến API
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
