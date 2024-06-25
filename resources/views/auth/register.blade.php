@@ -82,7 +82,7 @@ style="background-image: url('{{asset('image/background.webp')}}')">
                                     </div>
                                     @error('password')
                                     <span class="font-italic  error invalid-feedback text-red-500" role="alert">
-                                        {{ $message }}\
+                                        {{ $message }}
                                     </span>
                                     @enderror
                                 </div>
@@ -100,7 +100,7 @@ style="background-image: url('{{asset('image/background.webp')}}')">
                                 <div class="row">
                                     <div class="col-8">
                                         <div class="icheck-primary">
-                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
+                                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" required class="w-4 h-4 ease rounded-md checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']

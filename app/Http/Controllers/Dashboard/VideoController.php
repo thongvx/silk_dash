@@ -68,7 +68,7 @@ class VideoController
         }
     }
     // Convert file size
-    private function convertFileSize($sizeInBytes)
+    public function convertFileSize($sizeInBytes)
     {
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
         $i = 0;

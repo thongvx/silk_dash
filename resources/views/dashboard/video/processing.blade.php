@@ -87,7 +87,23 @@
                                         @php
                                             $quality = $qualities[$i] ?? null;
                                             $status = $statuses[$i] ?? null;
-                                            $bgColor = $status == '1' ? 'bg-orange-500' : ($status == '2' ? 'bg-green-500' : ($status == '0' ? 'bg-blue-500' : ($status == '19' ? 'bg-red-500' : 'bg-transparent')));
+                                            switch ($status) {
+                                                case '1':
+                                                    $bgColor = 'bg-orange-500';
+                                                    break;
+                                                case '4, 6':
+                                                    $bgColor = 'bg-green-500';
+                                                    break;
+                                                case '0':
+                                                    $bgColor = 'bg-blue-500';
+                                                    break;
+                                                case '19':
+                                                    $bgColor = 'bg-red-500';
+                                                    break;
+                                                default:
+                                                    $bgColor = 'bg-transparent';
+                                                    break;
+                                            }
                                         @endphp
                                         @if($quality)
                                             <span class="rounded-lg px-2 py-1 mx-1.5 {{ $bgColor }}">{{ $quality }}</span>

@@ -50,7 +50,7 @@
                                 <div class='text-md lg:text-lg w-full flex flex-col mt-3 items-end'>
                                     <h3 class='text-slate-400'>Storage</h3>
                                     <div class="flex items-center text-xl">
-                                        <h5 class="mb-0 text-white">{{ \Illuminate\Support\Facades\Auth::user()->storage }} GB</h5>
+                                        <h5 class="mb-0 text-white">{{ $storage }}</h5>
                                         <span
                                             class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
                                             {{ $totalFile }} file

@@ -9,7 +9,7 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
                     <div class="w-full pr-3 text-white">
                         <div class="flex box-img">
-                            <img src="{{ $setting -> logo == null || $setting -> logo == '' || $setting -> logo == 0 ? '' : Storage::url($setting->logo) }}" alt="" class="{{$setting -> logo == null || $setting -> logo == '' ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
+                            <img src="{{ optional($setting->logo) ? '' : Storage::url($setting->logo) }}" alt="" class="{{optional($setting->logo) ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
                             <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full items-center relative">
                                 <input name="logo" type="file" id="file-logo" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img cursor-pointer w-full h-full">
@@ -77,7 +77,7 @@
                 <div class="col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal">
                     <div class="w-full pr-3 text-white">
                         <div class="flex box-img">
-                            <img src="{{ $setting -> poster == null || $setting -> poster == '' || $setting -> poster == 0 ? '' : Storage::url($setting->poster) }}" alt="" class="{{$setting -> poster == null || $setting -> logo == '' ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
+                            <img src="{{ optional($setting->poster) ? '' : Storage::url($setting->poster) }}" alt="" class="{{optional($setting->poster) ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
                             <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full relative">
                                 <input name="poster" type="file" id="file-poster" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img cursor-pointer w-full h-full">

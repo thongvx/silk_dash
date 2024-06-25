@@ -23,7 +23,7 @@ class TicketController
         $userId = $user->id;
         $tickets = $this->ticketRepo->getAllTickets($userId);
         $data = [
-            'title' => 'support',
+            'title' => 'Support',
             'tickets' => $tickets,
         ];
         return view('dashboard.support.support', $data);
@@ -35,7 +35,7 @@ class TicketController
         $userId = $user->id;
         $tickets = $this->ticketRepo->getAllTickets($userId);
         $data = [
-            'title' => 'support',
+            'title' => 'Support',
             'tickets' => $tickets
         ];
         switch ($tab) {

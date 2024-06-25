@@ -49,9 +49,9 @@ class StatisticController
         $date = Carbon::today()->format('Y-m-d');
         // Lấy ra top 10 video được xem nhiều nhất trong ngày
         $keyTopVideos = "user:{$userId}:top_videos:{$date}";
-        $Video = Redis::get($keyTopVideos);
-        if (isset($Video)){
-            return unserialize($Video);
+        $topVideos = Redis::get($keyTopVideos);
+        if (isset($topVideos)){
+            return unserialize($topVideos);
         }
         $topVideos = VideoView::where('video_views.user_id', $userId)
             ->where('video_views.date', $date)

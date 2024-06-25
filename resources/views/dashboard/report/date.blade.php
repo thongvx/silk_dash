@@ -13,15 +13,15 @@
             </tr>
         </thead>
         <tbody>
-        @forelse ($report as $data)
+        @forelse ($reports as $report)
             <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                <td class="text-center">{{ $data->date }}</td>
-                <td class="text-center">{{ $data->views }}</td>
-                <td class="text-center">{{ $data->download }}</td>
-                <td class="text-center">{{ $data->paid_views }}</td>
-                <td class="text-center">{{ $data->vpn_ads_views }}</td>
-                <td class="text-center">{{ $data->cpm }}</td>
-                <td class="text-center">{{ $data->revenue }} $</td>
+                <td class="text-center">{{ $report->date }}</td>
+                <td class="text-center">{{ $report->views }}</td>
+                <td class="text-center">{{ $report->download }}</td>
+                <td class="text-center">{{ $report->paid_views }}</td>
+                <td class="text-center">{{ $report->vpn_ads_views }}</td>
+                <td class="text-center">{{ $report->cpm }}</td>
+                <td class="text-center">{{ $report->revenue }} $</td>
             </tr>
         @empty
             <tr class="my-3 h-12 bg-[#142132]">
@@ -32,12 +32,12 @@
         <tfoot>
             <tr class="bg-[#142132] text-center">
                 <th class="py-1.5 px-3">Total</th>
-                <th class="py-1.5 px-3">{{ $report->sum('views') }}</th>
-                <th class="py-1.5 px-3">{{ $report->sum('download') }}</th>
-                <th class="py-1.5 px-3">{{ $report->sum('paid_views') }}</th>
-                <th class="py-1.5 px-3">{{ $report->sum('vpn_ads_views') }}</th>
+                <th class="py-1.5 px-3">{{ $reports->sum('views') }}</th>
+                <th class="py-1.5 px-3">{{ $reports->sum('download') }}</th>
+                <th class="py-1.5 px-3">{{ $reports->sum('paid_views') }}</th>
+                <th class="py-1.5 px-3">{{ $reports->sum('vpn_ads_views') }}</th>
                 <th class="py-1.5 px-3"></th>
-                <th class="py-1.5 px-3">{{ number_format($report->sum('revenue'), 2, '.', ',') }} $</th>
+                <th class="py-1.5 px-3">{{ number_format($reports->sum('revenue'), 2, '.', ',') }} $</th>
             </tr>
         </tfoot>
     </table>
