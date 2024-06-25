@@ -16,7 +16,7 @@ class VideoViewController
     }
     public function updateView($slug, Request $request)
     {
-        $domainName = $request->getHost();
+        $origin = $request->headers->get('Origin') ?: $request->headers->get('Referer');
 
         $keyPerIp = "user_views:{$request->ip()}";
 
