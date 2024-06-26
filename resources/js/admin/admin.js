@@ -17,6 +17,5 @@ a_menu.filter(function () {
     const urlTab = urlParams.get('tab');
     let tab = $(this).find('.tab-menu').attr('tab');
     let indexTab = urlTab.indexOf(tab)
-    console.log(indexTab)
     return indexTab >= 0
 }).addClass('bg-[#009FB2]')

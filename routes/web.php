@@ -104,7 +104,10 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::resource('/compute', \App\Http\Controllers\admin\ComputeController::class);
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
     Route::get('/login-as/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'loginAs'])->name('admin.login-as');
+
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
+    Route::post('/manageTask/retryEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryEncoder'])->name('retryEncoder');
+
     Route::get('/statistic', function (){
         $title = 'Users';
         return view('admin.statistic.statistic', compact('title'));
