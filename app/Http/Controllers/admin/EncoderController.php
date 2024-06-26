@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
-
-use App\Factories\DownloadFactory;
 use App\Models\EncoderTask;
 use App\Models\SvEncoder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redis;
+use App\Jobs\CreateEncoderJob;
 
 class EncoderController
 {
@@ -23,19 +23,7 @@ class EncoderController
             else
                 $statusEncoder = 0;
             //call encoder
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://'.$svEncoder->name.'.streamsilk.com/addEncoderTask?slug='.$data->slug.'&quality='.$data->quality.'&format='.$data->format.'&status='.$statusEncoder.'&svUpload='.$data->sv_upload,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-            ));
-            $response = curl_exec($curl);
-            curl_close($curl);
+            Queue::push(new CreateEncoderJob($data->slug, $svEncoder->name, $data->quality, $data->format, $statusEncoder, $data->sv_upload));
 
             $svEncoder->increment('encoder');
         }
@@ -54,5 +42,13 @@ class EncoderController
             $svEncoder->decrement('encoder');
             $svEncoder->save();
         }
+    }
+    public function deleteFinishedEncoderTask()
+    {
+        $data = EncoderTask::select('slug')
+            ->groupBy('slug')
+            ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 4')
+            ->first();
+        var_dump($data);
     }
 }

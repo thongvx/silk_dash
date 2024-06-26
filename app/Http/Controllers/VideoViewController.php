@@ -16,16 +16,13 @@ class VideoViewController
     }
     public function updateView($slug, Request $request)
     {
-        $origin = $request->headers->get('Origin');
-        $referer = $request->headers->get('Referer');
-
         $keyPerIp = "user_views:{$request->ip()}";
 
         $views = Redis::get($keyPerIp) ?: 0;
 
 
         //1 ngày 1 ip chỉ được tính 2 view thôi
-        if ($views < 2 && (parse_url($origin, PHP_URL_HOST) == 'user.streamsilk.com' || parse_url($referer, PHP_URL_HOST) == 'user.streamsilk.com')) {
+        if ($views < 2) {
 
             $views++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);

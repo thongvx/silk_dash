@@ -26,6 +26,7 @@ Route::get('/play', function () {
 //-------------------------encoderController-------------------------------------------------------
 Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'startEncoderTask']);
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
+Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
 //-------------------------storageController-------------------------------------------------------
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\StorageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::class, 'finishStorage']);
