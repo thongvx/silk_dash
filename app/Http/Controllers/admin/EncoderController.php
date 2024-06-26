@@ -55,4 +55,12 @@ class EncoderController
             $svEncoder->save();
         }
     }
+    public function deleteFinishedEncoderTask()
+    {
+        $data = EncoderTask::select('slug')
+            ->groupBy('slug')
+            ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 4')
+            ->get();
+        var_dump($data);
+    }
 }
