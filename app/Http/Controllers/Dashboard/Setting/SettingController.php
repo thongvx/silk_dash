@@ -23,7 +23,7 @@ class SettingController
         $user = Auth::user();
 
         $data=[
-            'title' => 'setting',
+            'title' => 'Setting',
             'setting' => $this->accountRepo->getSetting($user->id),
             'activities' => $this->activityRepo->getAllActivity($user->id),
         ];

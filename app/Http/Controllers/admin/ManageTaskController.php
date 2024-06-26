@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Admin\ManagetaskRepo;
+use Illuminate\Support\Facades\DB; // Thêm dòng này
+use function Laravel\Prompts\table;
 
 class ManageTaskController extends Controller
 {
@@ -40,5 +42,24 @@ class ManageTaskController extends Controller
             $data['transfers'] = $this->manageTaskRepo->getAllTransfer('transfer', $column, $direction , 20);
         }
         return $data;
+    }
+
+    public function retryEncoder(Request $request)
+    {
+        $encoderId = $request->input('encoderId');
+
+        $encoder = DB::table('encoder_task')->where('id', $encoderId)->first();
+        // Check if the encoder exists
+        if ($encoder) {
+            // Set the status and storage values to 0
+            DB::table('encoder_task')->where('id', $encoderId)->update([
+                'status' => 0,
+                'sv_storage' => 0,
+                'sv_encoder' => 0
+            ]);
+        } else {
+            // Throw an exception if the encoder does not exist
+            throw new \Exception('Encoder not found');
+        }
     }
 }

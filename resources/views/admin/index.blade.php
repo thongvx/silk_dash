@@ -22,7 +22,7 @@
                                 </span>
                           </h3>
                           <h5 class="mb-0 text-2xl text-white text-end">
-                              1000
+                              {{ $userWatching }}
                           </h5>
                       </div>
                   </div>
@@ -40,7 +40,7 @@
               <div>
                 <h3 class='text-md text-slate-400'>Total Storage</h3>
                 <h5 class="mb-0 text-2xl text-white text-end">
-                  5.1 GB
+                  {{ $storage }}
                 </h5>
               </div>
             </div>
@@ -59,7 +59,7 @@
                       <div>
                           <h3 class='text-md text-slate-400'>Total Users</h3>
                           <h5 class="mb-0 text-2xl text-white text-end">
-                              700
+                              {{ $users }}
                           </h5>
                       </div>
                   </div>
@@ -77,7 +77,7 @@
               <div>
                 <h3 class='text-md text-slate-400'>Today’s Earning</h3>
                 <h5 class="mb-0 text-2xl text-white text-end">
-                  $53,000
+                  ${{ $todayEarning }}
                 </h5>
               </div>
             </div>
@@ -95,7 +95,7 @@
               <div>
                 <h3 class='text-md text-slate-400'>Total Balance</h3>
                 <h5 class="mb-0 text-2xl text-white text-end">
-                  $53,000
+                  $ {{ $totalBalance }}
                 </h5>
               </div>
             </div>

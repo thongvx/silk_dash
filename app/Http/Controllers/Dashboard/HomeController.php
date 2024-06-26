@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\NotificationRepo;
 use App\Repositories\VideoRepo;
 use App\Repositories\ReportRepo;
+use App\Http\Controllers\Dashboard\VideoController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard\Statistic\StatisticController;
@@ -13,15 +14,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 class HomeController extends Controller
 {
-    protected $notificationRepo, $statisticController, $videoRepo, $reportRepo;
+    protected $notificationRepo, $statisticController, $videoRepo, $reportRepo, $videoController;
 
     public function __construct(NotificationRepo $notificationRepo, StatisticController $statisticController,
-                                VideoRepo $videoRepo, ReportRepo $reportRepo)
+                                VideoRepo $videoRepo, ReportRepo $reportRepo, VideoController $videoController)
     {
         $this->notificationRepo = $notificationRepo;
         $this->statisticController = $statisticController;
         $this->videoRepo = $videoRepo;
         $this->reportRepo = $reportRepo;
+        $this->videoController = $videoController;
     }
 
     public function dashboard()
@@ -29,10 +31,11 @@ class HomeController extends Controller
         $data['title'] = 'Dashboard';
         $user = Auth::user();
         $data['userWatching'] = Redis::get("total:{$user->id}") ?? 0;
-        $data['totalFile'] = $this->videoRepo->where('user_id', $user->id)->where('soft_delete', 0)->count();
+        $data['totalFile'] = $user->video;
         $data['notifications'] = $this->notificationRepo->getAllNotifications($user->id);
         $data['topVideos'] = $this->statisticController->topVideo();
         $data['topCountries'] = $this->statisticController->topCountry();
+        $data['storage'] = $this->videoController->convertFileSize($user->storage);
         $earningToday = 0;
         $countryViewsKey = "user:{$user->id}:country_views";
         $countries = Redis::zrange($countryViewsKey, 0, -1);
@@ -40,8 +43,8 @@ class HomeController extends Controller
             $views = Redis::zscore($countryViewsKey, $country);
             $earningToday += $views;
         }
-        $Today = Carbon::today();
-        $totalBalancekey = "user:{$user->id}:total_balance:{$Today}";
+        $today = Carbon::today();
+        $totalBalancekey = "user:{$user->id}:total_balance:{$today}";
         $totalBalance = Redis::get($totalBalancekey);
         if(isset($totalBalance)){
             $data['totalBalance'] = $totalBalance;
@@ -51,18 +54,18 @@ class HomeController extends Controller
             $data['totalBalance'] = $totalBalance;
         }
         $data['dates'] = [
-            'day' => $earningToday*0.4,
-            'week' => $this->reportRepo->getAllData($user->id, 'date', Carbon::now()->subWeek(), $Today, null)->map(function($item) {
+            'day' => $earningToday*0.4/1000,
+            'week' => $this->reportRepo->getAllData($user->id, 'date', Carbon::tomorrow()->subWeek(), $today, null)->map(function($item) {
                 return $item['views'];
             }),
-            'month' => $this->reportRepo->getAllData($user->id, 'date', Carbon::now()->subMonth(), $Today, null)->map(function($item) {
+            'month' => $this->reportRepo->getAllData($user->id, 'date', Carbon::tomorrow()->subMonth(), $today, null)->map(function($item) {
                 return $item['views'];
             }),
         ];
         $data['earnings'] = [
-            'today' => $earningToday*0.4,
+            'today' => $earningToday*0.4/1000,
             'yesterday' => $this->reportRepo->getAllData($user->id, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
-            '2days' => $this->reportRepo->getAllData($user->id, 'date', $Today->subDays(2), $Today->subDays(2), null)[0]['revenue'] ?? 0,
+            '2days' => $this->reportRepo->getAllData($user->id, 'date', $today->subDays(2), $today->subDays(2), null)[0]['revenue'] ?? 0,
         ];
         return view('dashboard.index', $data);
     }

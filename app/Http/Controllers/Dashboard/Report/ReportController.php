@@ -24,26 +24,62 @@ class ReportController extends Controller
         $userId = $user->id;
         $tab = $request->get('tab');
         $date = $request->input('date');
-        $Today = Carbon::today();
-        $totalProfitkey = "user:{$userId}:total_profit:{$Today}";
-        $totalWithdrawalskey = "user:{$userId}:total_withdrawal:{$Today}";
+        $today = Carbon::today();
+        $totalProfitkey = "user:{$userId}:total_profit:{$today}";
+        $totalWithdrawalskey = "user:{$userId}:total_withdrawal:{$today}";
         $totalProfit = Redis::get($totalProfitkey);
         $totalWithdrawals = Redis::get($totalWithdrawalskey);
-        $earningToday = 0;
-        $countryViewsKey = "user:{$userId}:country_views";
-        $countries = Redis::zrange($countryViewsKey, 0, -1);
-        foreach ($countries as $country) {
-            $views = Redis::zscore($countryViewsKey, $country);
-            $earningToday += $views;
+        $earningToday = array_sum(array_map(function ($country) use ($userId) {
+            return Redis::zscore("user:{$userId}:country_views", $country);
+        }, Redis::zrange("user:{$userId}:country_views", 0, -1)));
+        if($date == 'today'){
+            $data_today = [
+                [
+                    'date' => $today->format('Y-m-d'),
+                    'cpm' => 0.4,
+                    'views' => $earningToday,
+                    'download' => 0,
+                    'paid_views' => 0,
+                    'vpn_ads_views' => 0,
+                    'revenue' => $earningToday*0.4
+                ],
+            ];
+            $data['reports'] = collect(array_map(function ($item) {
+                return (object) $item;
+            }, $data_today));
+        }else{
+            $dateRange = $this->getDateRange($date, $request);
+            $country = $request->input('country', null);
+            $data['reports'] = $this->reportRepo->getAllData($userId, $tab, $dateRange['startDate'], $dateRange['endDate'], $country);
+            $data['startDate'] = $dateRange['startDate'];
+            $data['endDate'] = $dateRange['endDate'];
+            $data['country'] = $country;
         }
+        $data = array_merge($data ,[
+            'title' => 'Report',
+            'tab' => $tab,
+            'userWatching' => Redis::get("total:{$userId}") ?? 0,
+            'totalProfit' => floatval($totalProfit ?? $this->reportRepo->where('user_id', $userId)->sum('revenue')),
+            'totalWithdrawals' => floatval($totalWithdrawals ?? Db::table('payment')->where('user_id', $userId)->sum('amount')),
+            'payments' => $this->reportRepo->getPayment($userId),
+            'earnings' => [
+                'today' => floatval($earningToday)*0.4,
+                'yesterday' => $this->reportRepo->getAllData($userId, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
+            ],
+        ]);
 
-        $earningToday = intval($earningToday);
+        Redis::setex($totalProfitkey, 86400, $data['totalProfit']);
+        Redis::setex($totalWithdrawalskey, 86400, $data['totalWithdrawals']);
+
+        return $data;
+    }
+
+    private function getDateRange($date, $request)
+    {
         switch ($date)
         {
-            case 'today':
             case 'yesterday':
-                $startDate = Carbon::parse($date);
-                $endDate = Carbon::parse($date);
+                $startDate = $endDate = Carbon::parse($date);
                 break;
             case 'week':
                 $startDate = Carbon::today()->subWeek();
@@ -57,55 +93,15 @@ class ReportController extends Controller
                 $startDate = $request->input('startDate', Carbon::today()->subWeek());
                 $endDate = $request->input('endDate', Carbon::yesterday());
         }
-        $country = $request->input('country', null);
 
-        if(isset($earningToday) && isset($totalProfit) && isset($totalWithdrawals)){
-            return $data = [
-                'title' => 'Report',
-                'startDate' => $startDate,
-                'endDate' => $endDate,
-                'country' => $country,
-                'tab' => $tab,
-                'report' => $this->reportRepo->getAllData($userId, $tab, $startDate, $endDate, $country),
-                'userWatching' => Redis::get("total:{$userId}") ?? 0,
-                'totalProfit' => floatval($totalProfit),
-                'totalWithdrawals' => floatval($totalWithdrawals),
-                'payments' => $this->reportRepo->getPayment($userId),
-                'earnings' => [
-                    'today' => floatval($earningToday)*0.4,
-                    'yesterday' => $this->reportRepo->getAllData($userId, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'],
-                ],
-            ];
-        }
-        $totalProfit = $this->reportRepo->where('user_id', $userId)->sum('revenue');
-        $totalWithdrawals = Db::table('payment')->where('user_id', $userId)->sum('amount');
-        $data = [
-            'title' => 'Report',
-            'startDate' => $startDate,
-            'endDate' => $endDate,
-            'country' => $country,
-            'tab' => $tab,
-            'report' => $this->reportRepo->getAllData($userId, $tab, $startDate, $endDate, $country),
-            'userWatching' => Redis::get("total:{$userId}") ?? 0,
-            'totalProfit' => floatval($totalProfit),
-            'totalWithdrawals' => floatval($totalWithdrawals),
-            'payments' => $this->reportRepo->getPayment($userId),
-            'earnings' => [
-                'today' => floatval($earningToday)*0.4,
-                'yesterday' => $this->reportRepo->getAllData($userId, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'],
-            ],
-        ];
-        Redis::setex($totalProfitkey, 86400, $totalProfit);
-        Redis::setex($totalWithdrawalskey, 86400, $totalWithdrawals);
-
-        return $data;
+        return ['startDate' => $startDate, 'endDate' => $endDate];
     }
 
     public function index(Request $request)
     {
-        $report = $this->getReportData($request);
+        $data = $this->getReportData($request);
 
-        return view('dashboard.report.report', $report);
+        return view('dashboard.report.report', $data);
     }
 
     public function store(Request $request)

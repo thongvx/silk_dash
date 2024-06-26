@@ -39,11 +39,12 @@ class UpdateVideoViews extends Command
         }
 
         $this->updateCountryViewsInRedis($countryViews);
+        $keysToDelete = array_merge($keys, Redis::keys('total:*'), Redis::keys('user:*:top_videos:*'));
 
-        Redis::del($keys);
-        $keyTopViews = Redis::keys('user:*:top_videos:*');
-        foreach ($keyTopViews as $key) {
-            Redis::del($key);
+        foreach ($keysToDelete as $key) {
+            if (Redis::exists($key)) {
+                Redis::del($key);
+            }
         }
         $this->info('Video views updated successfully');
     }

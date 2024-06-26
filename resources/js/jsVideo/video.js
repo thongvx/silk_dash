@@ -20,7 +20,6 @@ export function fixedBox (box) {
     fixedVideoCard.toggleClass("opacity-1");
     fixedVideoCard.toggleClass("hidden");
     fixedVideoCard.toggleClass("block");
-    console.log($('#'+box))
     updateOriginalFormState(box);
 }
 export function checkAll() {
@@ -31,7 +30,7 @@ export function checkAll() {
 $(document).on('click', '[btn-cancel], [fixed-video-close-button]', function() {
     fixedBox ()
     $('#move,#export, #delete-report, #clone').css("display",'none')
-    $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video, #add-sever').remove()
+    $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video, #add-sever, #retry-encoder').remove()
     btn_video()
 });
 //move video to folder

@@ -20,7 +20,6 @@ class EncoderTaskRepo extends BaseRepository
     {
         $cacheKey = VideoCacheKeys::ALL_ENCODER_TASKS->value . $userId . 'get_all' .'direction' . $direction .'column'.$column . '.page'. $page;
 
-        // Create a subquery
         $encoderTasks = Redis::get($cacheKey);
         if (isset($encoderTasks)){
             return unserialize($encoderTasks);

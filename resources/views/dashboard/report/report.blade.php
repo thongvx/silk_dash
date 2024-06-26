@@ -26,7 +26,7 @@
                     class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>Today earning</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white">
+                        <h5 class="mb-0 font-bold text-2xl text-white  flex items-start">
                             <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ $earnings['today'] }}
                         </h5>
                     </div>
@@ -38,7 +38,7 @@
                     class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>Yesterday earning</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white">
+                        <h5 class="mb-0 font-bold text-2xl text-white  flex items-start">
                             <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ $earnings['yesterday'] }}
                         </h5>
                     </div>
@@ -50,7 +50,7 @@
                     class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>Total Withdrawals</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white">
+                        <h5 class="mb-0 font-bold text-2xl text-white  flex items-start">
                             <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ number_format($totalWithdrawals, 0, '.', ',') }}
                         </h5>
                     </div>
@@ -64,7 +64,7 @@
                 <div class='flex flex-col items-center justify-center py-2.5'>
                     <div class='font-semibold text-center'>
                         <h3 class='text-lg text-slate-400'>Total balance</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white mt-3">
+                        <h5 class="mb-0 font-bold text-2xl text-white mt-3  flex items-start">
                             <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
                         </h5>
                     </div>
