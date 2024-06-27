@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\VideoRepo;
+use App\Services\StatisticService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -30,13 +31,14 @@ class VideoViewController
             //Lấy country truy cập hệ thống ở đây
             $country = $request->header('CF-IPCountry');
 
+
             //Tăng view cho video
 
             $video = $this->videoRepo->findVideoBySlug($slug);
             if (!$video){
                 return response()->json(['status' => 'fail']);
             }
-            $totalViewKey = "total:{$video->user_id}";
+            $totalViewKey = "total:{$video->user_id}:{$country}";
             $key = "video_views:{$video->id}:{$video->user_id}:{$country}";
             Redis::incr($key);
             Redis::incr($totalViewKey);

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\StatisticService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -49,7 +50,10 @@ class CalculateDailyRevenue extends Command
             $vpnAdsView = 0;
             $download = 0;
             $paidView = ($videoView->views - $vpnAdsView) + $download;
-            $cpm = 0.4;
+            $valueArr = StatisticService::calculateValue($videoView->user_id);
+            $value = array_sum($valueArr);
+
+            $cpm = $value / $videoView->views * 1000;
             $batchData[] = [
                 'user_id' => $videoView->user_id,
                 'views' => $videoView->views,
@@ -58,7 +62,7 @@ class CalculateDailyRevenue extends Command
                 'vpn_ads_views' => $vpnAdsView,
                 'paid_views' => $paidView,
                 'download' => $download,
-                'revenue' => $cpm * $paidView / 1000,
+                'revenue' => $value,
             ];
 
             // Nếu đã đủ số lượng dòng dữ liệu trong lô, hoặc đã duyệt hết dữ liệu
@@ -75,4 +79,5 @@ class CalculateDailyRevenue extends Command
 
         return 0;
     }
+
 }
