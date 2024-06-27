@@ -46,8 +46,8 @@ class EncoderController
     }
     public function deleteFinishedEncoderTask()
     {
-        $data = EncoderTask::select('slug')
-            ->groupBy('slug')
+        $data = EncoderTask::select('slug', 'sv_upload', 'format')
+            ->groupBy('slug', 'sv_upload', 'format')
             ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 4')
             ->first();
         if($data){
