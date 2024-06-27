@@ -109,7 +109,7 @@ class UploadController
             Redis::setex('transfer'.$user->id.'-'.$slug, 1800, json_encode([
                 'slug' => $slug,
                 'url' => $url,
-                'status' => 1,
+                'status' => 0,
                 'progress' => 0,
                 'size_download' => 0,
                 'size' => 0,
