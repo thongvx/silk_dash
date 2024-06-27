@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redis;
 use App\Jobs\CreateEncoderJob;
+use App\Jobs\DeleteFileUploadJob;
 
 class EncoderController
 {
@@ -49,6 +50,9 @@ class EncoderController
             ->groupBy('slug')
             ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 4')
             ->first();
-        var_dump($data);
+        if($data){
+            Queue::push(new DeleteFileUploadJob($data->slug, $data->sv_upload, $data->format));
+            EncoderTask::where('slug', $data->slug)->delete();
+        }
     }
 }

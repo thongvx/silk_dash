@@ -4,11 +4,14 @@ namespace App\Http\Controllers\admin;
 
 
 use App\Factories\DownloadFactory;
+use App\Jobs\CreatStorageJob;
 use App\Models\EncoderTask;
 use App\Models\SvStorage;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redis;
+
 
 class StorageController
 {
@@ -20,21 +23,8 @@ class StorageController
             //select sv encoder
             $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 96)->where('out_speed', '<', 700)->inRandomOrder()->first();
 
-            //call encoder
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'http://'.$svStorage->name.'.streamsilk.com/startStorageTask?slug='.$data->slug.'&sv='.$data->sv_encoder.'&quality='.$data->quality,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
-            ));
-            $response = curl_exec($curl);
-            echo $response;
-            curl_close($curl);
+            //call sto
+            Queue::push(new CreatStorageJob($data->slug, $svStorage->name, $data->quality, $data->sv_encoder));
         }
     }
     public function finishStorage(Request $request)
