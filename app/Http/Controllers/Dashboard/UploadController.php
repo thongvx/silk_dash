@@ -92,10 +92,11 @@ class UploadController
         //upload DB
         foreach ($arrLink as $url) {
             // Prepare a new Transfer record for each link
+            $slug = uniqid();
             $records[] = [
                 'user_id' => $user->id,
                 'url' => $url,
-                'slug' => uniqid(),
+                'slug' => $slug,
                 'title' => '0',
                 'priority' => $transfer_priority,
                 'status' => '0',
@@ -105,6 +106,14 @@ class UploadController
                 'size_download' => '0',
                 'size' => '0',
             ];
+            Redis::setex('transfer'.$user->id.'-'.$slug, 1800, json_encode([
+                'slug' => $slug,
+                'url' => $url,
+                'status' => 1,
+                'progress' => 0,
+                'size_download' => 0,
+                'size' => 0,
+            ]));
         }
         Transfer::upsert($records, ['user_id', 'url'], []);
         $videoID = [];
