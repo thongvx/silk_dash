@@ -128,7 +128,7 @@
                                  focus:ring-blue-500 block w-full ps-10 p-2.5" placeholder="Select date end">
                             </div>
                         </div>
-                        <button type="submit" class="ml-3 px-6 py-2 rounded-lg bg-[#121520] hover:bg-[#009fb2]">Apply</button>
+                        <button type="submit" class="text-white ml-3 px-6 py-2 rounded-lg bg-[#121520] hover:bg-[#009fb2]">Apply</button>
                     </div>
                 </div>
                 <div class="col-span-full lg:col-span-1 rounded-lg">
@@ -191,34 +191,39 @@
                 <div>
                     <div class="payout" id="payout">
                         <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Request Payout</h5>
-                        <h5 class="text-center text-white">
-                            *Min payout: $100<br>
-                            (We only pay via USDT - we do not charge any network fees)
-                        </h5>
+                        <h4 class="text-4xl text-center font-bold flex items-start justify-center">
+                            <span class="text-slate-400 text-2xl">$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
+                        </h4>
                         <div class="text-white mt-3 flex justify-between items-center">
                             <h5>
                                 Your USDT Address: {{\Illuminate\Support\Facades\Auth::user()->usdt_address}}<br>
                                 Network: {{\Illuminate\Support\Facades\Auth::user()->network}}
                             </h5>
-                            <a href="" class="rounded-xl bg-blue-400 px-5 py-2 h-max">Change</a>
+
                         </div>
-                        <form class="text-white mt-3 flex justify-between" id="request-payment" method="POST" action="{{route('request.payment')}}">
+                        <h5 class="text-start text-slate-400 text-md italic">
+                            *Update your USDT address in your profile.
+                        </h5>
+                        <form class="text-white mt-6 flex justify-between" id="request-payment" method="POST" action="{{route('request.payment')}}">
                             @csrf
                             <div class="bg-[#142132] rounded-lg flex w-full px-3 items-center">
                                 <label for="amount" class="mr-3">
                                     Amount:
                                 </label>
-                                <input type="number" min="100" max="{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}" name="amount" id="amount"
+                                <input type="number" min="50" max="{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}" name="amount" id="amount"
                                        class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
                                        placeholder="100"/>
                                 <h5>
                                     USD
                                 </h5>
                             </div>
-                            <button type="submit" class="bg-green-300 rounded-xl px-5 py-2 h-max ml-3 hover:bg-green-500">
+                            <button type="submit" class="bg-[#009fb2]/60 rounded-xl px-5 py-2 h-max ml-3 hover:bg-[#009fb2]">
                                 Submit
                             </button>
                         </form>
+                        <h5 class="text-start text-slate-400 text-lg italic">
+                            *Minimal payout is <span class="text-[#009FB2]">$50</span><br>
+                        </h5>
                     </div>
                 </div>
             </div>

@@ -60,7 +60,6 @@ class ReportController extends Controller
             return Redis::zscore("user:{$userId}:country_views:{$today->format('Y-m-d')}", $country);
         }, Redis::zrange("user:{$userId}:country_views:{$today->format('Y-m-d')}", 0, -1)));
         $data['title'] = 'Report';
-        $data['tab'] = $tab;
         $data['userWatching'] = Redis::get("watching_users:{$userId}") ?? 0;
         $data['totalProfit'] = floatval($totalProfit ?? $this->reportRepo->where('user_id', $userId)->sum('revenue'));
         $data['totalWithdrawals'] = floatval($totalWithdrawals ?? Db::table('payment')->where('user_id', $userId)->sum('amount'));
@@ -68,10 +67,10 @@ class ReportController extends Controller
         Redis::setex($totalWithdrawalskey, 86400, $data['totalWithdrawals']);
         $dateRange = self::getDateRange($date, $request);
         if($date == 'today'){
-            $data['startDate'] = $data['endDate'] = $today->format('m/d/Y');;
+            $data['startDate'] = $data['endDate'] = date("m/d/Y", strtotime($today));
         } else{
-            $data['startDate'] = $dateRange['startDate']->format('m/d/Y');
-            $data['endDate'] = $dateRange['endDate']->format('m/d/Y');
+            $data['startDate'] = date("m/d/Y", strtotime($dateRange['startDate']));
+            $data['endDate'] = date("m/d/Y", strtotime($dateRange['endDate']));
         }
         $data['countries'] = explode(',', $country);
         $data['AllCountries'] = collect(Redis::get('allCountries') ?? CountryTier::all());
