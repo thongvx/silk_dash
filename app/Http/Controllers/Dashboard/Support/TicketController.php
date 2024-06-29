@@ -85,9 +85,11 @@ class TicketController
         $url_file = '0';
         if ($request->hasFile('fileticket')){
             $file = $request->file('fileticket');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/fileTicket', $filename);
-            $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
+            if ($file->isValid()) {
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->storeAs('public/fileTicket', $filename);
+                $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
+            }
         }
 
         $dataMessage = [
