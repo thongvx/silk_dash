@@ -35,7 +35,7 @@ class PlayController
             $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
             if ($video->origin == 0) {
                 $playData = [
-                    'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->value('sv_upload') . '.streamsilk.com/storage/' . $slug . '.' . $video->format,
+                    'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->value('sv_upload') . '.encosilk.cc/storage/' . $slug . '.' . $video->format,
                     'videoID' => $video->slug,
                     'poster' => $poster,
                     'title' => $video->title,
