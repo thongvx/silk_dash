@@ -76,5 +76,37 @@ class TicketController
 
         return response()->json(['message' => 'Ticket created successfully']);
     }
+    public function postTickket(Request $request)
+    {
+        $user = Auth::user();
+        $topic = $request->topic;
+        $subject = $request->subject;
+        $message = $request->message;
+        $url_file = '0';
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/fileTicket', $filename);
+            $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
+        }
 
+        $dataMessage = [
+            'type' => 2,
+            'message' => $message,
+            'url_file' => $url_file,
+        ];
+
+        $dataMessage = json_encode($dataMessage);
+        //create ticket
+        $dataTicke = [
+            'user_id' => $user->id,
+            'subject' => $subject,
+            'topic' => $topic,
+            'status' => 1,
+            'message' => $dataMessage,
+            'url_file' => 0,
+        ];
+        Ticket::create($dataTicke);
+        return redirect('https://streamsilk.com/support?tab=ticket');
+    }
 }
