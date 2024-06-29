@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="px-0 pt-0 overflow-auto pb-3">
-    <form action="" id="ticket-form" class="text-white">
+    <form action="/postTickket" method="POST" enctype="multipart/form-data" class="text-white">
         @csrf
         <div>
             <label for="user" class="text-slate-400">
@@ -67,7 +67,7 @@
         </div>
         <div class="flex my-6 justify-between">
             <div class="bg-[#142132] rounded-lg text-center flex relative h-max box-img">
-                <input name="file-attach" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
+                <input name="file" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
                        class="absolute opacity-0 file-img cursor-pointer w-full">
                 <label for="file-attach" class="w-full px-10 py-2">Choose file</label>
             </div>

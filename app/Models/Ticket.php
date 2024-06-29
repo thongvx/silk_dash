@@ -9,13 +9,14 @@ class Ticket extends Model
 {
     use HasFactory;
 
-    protected $table = 'tickets';
+    protected $table = 'ticket';
 
     protected $fillable = [
         'user_id',
-        'email',
-        'topic',
         'subject',
+        'topic',
         'status',
+        'message',
+        'url_file',
     ];
 }

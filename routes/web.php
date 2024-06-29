@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/request-payment', [\App\Http\Controllers\Dashboard\Report\PaymentController::class, 'store'])->name('request.payment');
 
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
-
+    Route::post('/postTickket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTickket']);
     Route::get('premium',function (){
         $data['title'] = 'Premium';
         return view('dashboard.premium', $data);
@@ -117,6 +117,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
         $title = 'support';
         return view('admin.support.support', compact('title'));
     });
+
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
 });
 
