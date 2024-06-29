@@ -29,7 +29,6 @@ class ReportRepo extends BaseRepository
                 $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
                     return $startDate->copy()->addDays($item)->format('Y-m-d');
                 });
-
                 $reportData = $this->query()->where('user_id', $userId)
                     ->whereIn('date', $dates)
                     ->selectRaw('date, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
@@ -42,16 +41,20 @@ class ReportRepo extends BaseRepository
                 });
                 break;
             default:
+                $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
+                    return $startDate->copy()->addDays($item)->format('Y-m-d');
+                });
                 $reportData = $this->query()->where('user_id', $userId)
-                    ->when($country, function ($query, $country) {
-                        return $query->where('country', $country);
-                    })
-                    ->where('date', '>=', $startDate->format('Y-m-d'))
-                    ->where('date', '<=', $endDate->format('Y-m-d'))
-                    ->selectRaw('country, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
-                    ->groupBy('country')
-                    ->orderBy('country', 'desc')
-                    ->get();
+                    ->whereIn('date', $dates)
+                    ->selectRaw('date, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
+                    ->groupBy('date')
+                    ->orderBy('date', 'desc')
+                    ->get()
+                    ->keyBy('date');
+                $reportData = $dates->map(function($date) use ($reportData) {
+                    return $reportData->get($date, ['date' => $date, 'cpm' => 0, 'views' => 0, 'download' => 0, 'paid_views' => 0, 'vpn_ads_views' => 0, 'revenue' => 0]);
+                });
+                break;
         }
         Redis::setex($reportDatakey, 259200, serialize($reportData));
         return $reportData;

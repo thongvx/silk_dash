@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\AccountSetting;
 use App\Models\Folder;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -106,6 +107,7 @@ class RegisterController extends Controller
             'disableDownload' => 0,
             'gridPoster' => 1,
         ]);
+        event(new Registered($user));
         return $user;
     }
 }

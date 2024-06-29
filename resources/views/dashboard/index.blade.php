@@ -100,7 +100,7 @@
                                     <h3 class='text-slate-400'>Total Balance</h3>
                                     <div class="flex items-center text-xl">
                                         <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                            <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ $totalBalance }}
+                                            <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
                                         </h5>
                                         <span
                                             class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center hidden">
@@ -141,7 +141,7 @@
                                         @endif
                                     </div>
                                     <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ $earnings['yesterday'] }}
+                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ round($earnings['yesterday'], 2) }}
                                     </h5>
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                                         @endif
                                     </div>
                                     <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ $earnings['today'] }}
+                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ round($earnings['today'], 2) }}
                                     </h5>
                                 </div>
                             </div>
@@ -251,7 +251,7 @@
                         @forelse( $topVideos as $video )
                             <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] text-white">
                                 <td class="p-2  max-w-[4rem] truncate">
-                                    <a href="{{route('play', $video->video_id)}}" target="_black" class="hover:text-[#009FB2] ">{{ $video->title }}</a>
+                                    <a href="{{route('play', $video->slug)}}" target="_black" class="hover:text-[#009FB2] ">{{ $video->title }}</a>
                                 </td>
                                 <td class="p-2 text-center">
                                     {{ $video->views }}

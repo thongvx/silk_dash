@@ -37,9 +37,8 @@ class UpdateVideoViews extends Command
             $upsertData = $this->prepareUpsertData($chunk, $date, $countryViews);
             $this->upsertView($upsertData);
         }
-
         $this->updateCountryViewsInRedis($countryViews);
-        $keysToDelete = array_merge($keys, Redis::keys('total:*'), Redis::keys('user:*:top_videos:*'));
+        $keysToDelete = array_merge($keys, Redis::keys('watching_users:*'), Redis::keys('user:*:top_videos:*'));
 
         foreach ($keysToDelete as $key) {
             if (Redis::exists($key)) {

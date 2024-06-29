@@ -31,6 +31,9 @@ $(document).on('submit', '#transferLink', function(event) {
                                         <div class="progress bg-gray-600 h-3.5 rounded-lg">
                                             <div class="bar bg-orange-500 h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center" style="width:0">0</div>
                                         </div>
+                                        <div class="text-orange-500 mt-3 status">
+                                            Pending
+                                        </div>
                                         <div class="text-white mt-3">
                                             <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote</button>
                                             <button class="px-4 py-1 rounded-lg bg-blue-500">Retry</button>
@@ -81,7 +84,6 @@ setInterval(function() {
                     var size = $(this).find('.size');
                     var indexurl = urls.indexOf(link);
                     if (indexurl > -1) {
-                        console.log(Object.values(data)[indexurl])
                         bar.css('width', Object.values(data)[indexurl].progress + '%');
                         bar.text(Object.values(data)[indexurl].progress + '%');
                         size.text(formatFileSize(Object.values(data)[indexurl].size_download)+' / '+formatFileSize(Object.values(data)[indexurl].size));

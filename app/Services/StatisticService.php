@@ -9,9 +9,15 @@ class StatisticService
 {
     public static function getAllCountries()
     {
-        //Todo: thêm cache ở đây
+        $countriesKey = 'countries';
+        $countryMap = Redis::get($countriesKey);
+        if (isset($countryMap) && $countryMap !== null) {
+            return unserialize($countryMap);
+        }
         $countries = CountryTier::all();
+        Redis::set('allCountries', serialize($countries));
         $countryMap = $countries->pluck('cpm', 'code');
+        Redis::set($countriesKey, serialize($countryMap));
         return $countryMap;
     }
 
@@ -19,18 +25,17 @@ class StatisticService
     {
         $keys = Redis::keys("total:{$userId}:*");
         $result = [];
+        $allCountries = self::getAllCountries();
 
         foreach ($keys as $key) {
             $totalViews = Redis::get($key);
             $country = explode(':', $key)[2];
 
-            if (isset(self::getAllCountries()[$country])) {
-                $cpm = self::getAllCountries()[$country];
-                $revenue = $totalViews * $cpm;
+            $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
+            $revenue = ($totalViews / 1000) * $cpm;
 
-                // Add the revenue to the result array with the country code as the key
-                $result[$country] = $revenue;
-            }
+            // Add the revenue to the result array with the country code as the key
+            $result[$country] = $revenue;
         }
 
         return $result;

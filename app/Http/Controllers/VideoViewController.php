@@ -17,13 +17,17 @@ class VideoViewController
     }
     public function updateView($slug, Request $request)
     {
+        $origin = $request->headers->get('Origin');
+        $referer = $request->headers->get('Referer');
+
         $keyPerIp = "user_views:{$request->ip()}";
+
 
         $views = Redis::get($keyPerIp) ?: 0;
 
 
         //1 ngày 1 ip chỉ được tính 2 view thôi
-        if ($views < 2) {
+        if ($views < 2 ) {
 
             $views++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);
@@ -38,10 +42,12 @@ class VideoViewController
             if (!$video){
                 return response()->json(['status' => 'fail']);
             }
+            $watchingUserKey ="watching_users:{$video->user_id}";
             $totalViewKey = "total:{$video->user_id}:{$country}";
             $key = "video_views:{$video->id}:{$video->user_id}:{$country}";
             Redis::incr($key);
             Redis::incr($totalViewKey);
+            Redis::incr($watchingUserKey);
             return response()->json(['status' => 'success']);
         }
         return response()->json(['status' => 'fail']);
