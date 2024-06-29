@@ -85,11 +85,13 @@ class TicketController
         $url_file = '0';
         if ($request->hasFile('file')){
             $file = $request->file('file');
-            if ($file->isValid()) {
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $file->storeAs('public/fileTicket', $filename);
-                $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
-            }
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('fileTicket', $filename, 'public');
+            $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
+            echo $url_file;
+        }
+        else{
+            echo 'error';
         }
 
         $dataMessage = [
@@ -108,7 +110,7 @@ class TicketController
             'message' => $dataMessage,
             'url_file' => $url_file,
         ];
-        Ticket::create($dataTicke);
-        return redirect('https://streamsilk.com/support?tab=ticket');
+        //Ticket::create($dataTicke);
+        //return redirect('https://streamsilk.com/support?tab=ticket');
     }
 }
