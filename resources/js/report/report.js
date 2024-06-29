@@ -51,7 +51,9 @@ function loadReport(formData,tab, date, country){
                             </div>`);
         },
         success: function (response) {
-            $('#box-content').html(response);
+            $('#box-content').html(response.view);
+            $('input[name="startDate"]').val(response.data.startDate);
+            $('input[name="endDate"]').val(response.data.endDate);
         },
         error: function (response) {
             console.log(response);

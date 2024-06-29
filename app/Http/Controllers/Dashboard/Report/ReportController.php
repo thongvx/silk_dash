@@ -67,8 +67,12 @@ class ReportController extends Controller
         Redis::setex($totalProfitkey, 86400, $data['totalProfit']);
         Redis::setex($totalWithdrawalskey, 86400, $data['totalWithdrawals']);
         $dateRange = self::getDateRange($date, $request);
-        $data['startDate'] = $dateRange['startDate'];
-        $data['endDate'] = $dateRange['endDate'];
+        if($date == 'today'){
+            $data['startDate'] = $data['endDate'] = $today->format('m/d/Y');;
+        } else{
+            $data['startDate'] = $dateRange['startDate']->format('m/d/Y');
+            $data['endDate'] = $dateRange['endDate']->format('m/d/Y');
+        }
         $data['countries'] = explode(',', $country);
         $data['AllCountries'] = collect(Redis::get('allCountries') ?? CountryTier::all());
         $data['payments'] = $this->reportRepo->getPayment($userId);
@@ -160,10 +164,15 @@ class ReportController extends Controller
         $tab = $request->get('tab');
         $report = $this->getAllReportData($request);
         if ($tab == 'date') {
-            return view('dashboard.report.date', $report);
+            $view = view('dashboard.report.date', $report)->render();
         } else {
-            return view('dashboard.report.country', $report);
+            $view = view('dashboard.report.country', $report)->render();
         }
+
+        return response()->json([
+            'data' => $report,
+            'view' => $view,
+        ]);
     }
 
 
