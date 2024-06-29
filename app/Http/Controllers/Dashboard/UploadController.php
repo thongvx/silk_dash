@@ -3,21 +3,28 @@
 namespace App\Http\Controllers\Dashboard;
 
 
+use App\Models\Video;
 use App\Repositories\FolderRepo;
 use Illuminate\Support\Facades\Auth;
 use App\Factories\DownloadFactory;
 use App\Models\Transfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
+use App\Repositories\VideoRepo;
+use App\Repositories\AccountRepo;
 
 class UploadController
 {
     protected $folderRepo;
+    protected VideoRepo $videoRepo;
+    protected AccountRepo $accountRepo;
 
     //Trả về giao diện upload
-    public function __construct(FolderRepo $folderRepo)
+    public function __construct(FolderRepo $folderRepo, VideoRepo $videoRepo, AccountRepo $accountRepo)
     {
         $this->folderRepo = $folderRepo;
+        $this->videoRepo = $videoRepo;
+        $this->accountRepo = $accountRepo;
     }
 
     public function index()
@@ -132,7 +139,71 @@ class UploadController
         ];
         return response()->json($data);
     }
-
+    public function cloneVideo(Request $request)
+    {
+        $user = Auth::user();
+        $transfer_priority = $user->transfer_priority;
+        if ($transfer_priority)
+            $transfer_priority = 0;
+        $link = $request->url;
+        if($request->has('FolderID')) {
+            $folder_id = $request->FolderID;
+            $folderName = $this->folderRepo->find($folder_id)->name_folder;
+        } else {
+            $folderName = $request->get('nameFolder', 'root');
+            $folder_id = $this->folderRepo->getFolder($folderName)->id;
+        }
+        $arrLink = explode("\r\n", $link);
+        if (count($arrLink) == 1) {
+            $arrLink = explode("\n", $link);
+        }
+        $result = [];
+        foreach ($arrLink as $url){
+            $checkUrl = strpos($url, 'ttps://');
+            if($checkUrl != 0){
+                $arrUrl = explode('/', $url);
+                $slugClone = $arrUrl[count($arrUrl) - 1];
+            }
+            else
+                $slugClone = $url;
+            //info video
+            $video = $this->videoRepo->findVideoBySlug($slugClone);
+            if($video){
+                //check user public video
+                $data_setting = $this->accountRepo->getSetting($video->user_id);
+                if($data_setting->publicVideo == 1){
+                    $videoData = [
+                        'slug' => uniqid(),
+                        'user_id' => $video->user_id,
+                        'folder_id' => $folder_id,
+                        'pathStream' => '0',
+                        'title' => $video->title.'-clone',
+                        'poster' => $video->poster,
+                        'grid_poster_3' => $video->grid_poster_3,
+                        'is_sub' => 0,
+                        'total_play' => 0,
+                        'size' => $video->size,
+                        'duration' => $video->duration,
+                        'quality' => $video->quality,
+                        'format' => $video->format,
+                        'origin' => 1,
+                        'soft_delete' => 0,
+                        'stream' => 0,
+                        'grid_poster_5' => $video->grid_poster_5,
+                        'middle_slug' => $video->middle_slug,
+                        'sd' => '0',
+                        'hd' => '0',
+                        'fhd' => '0',
+                        'sv_upload' => $video->sv_upload,
+                        'check_duplicate' => 0,
+                    ];
+                    $video = Video::create($videoData);
+                    $result[] = ['slug' => $videoData['slug'], 'title' => $videoData['title']];
+                }
+            }
+        }
+        return $request;
+    }
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
     {
