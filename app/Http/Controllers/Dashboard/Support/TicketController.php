@@ -83,8 +83,8 @@ class TicketController
         $subject = $request->subject;
         $message = $request->message;
         $url_file = '0';
-        if ($request->hasFile('file')){
-            $file = $request->file('file');
+        if ($request->hasFile('fileticket')){
+            $file = $request->file('fileticket');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->storeAs('public/fileTicket', $filename);
             $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
@@ -102,9 +102,9 @@ class TicketController
             'user_id' => $user->id,
             'subject' => $subject,
             'topic' => $topic,
-            'status' => 1,
+            'status' => 'pendding',
             'message' => $dataMessage,
-            'url_file' => 0,
+            'url_file' => $url_file,
         ];
         Ticket::create($dataTicke);
         return redirect('https://streamsilk.com/support?tab=ticket');

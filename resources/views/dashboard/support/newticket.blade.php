@@ -67,7 +67,7 @@
         </div>
         <div class="flex my-6 justify-between">
             <div class="bg-[#142132] rounded-lg text-center flex relative h-max box-img">
-                <input name="file" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
+                <input name="fileticket" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
                        class="absolute opacity-0 file-img cursor-pointer w-full">
                 <label for="file-attach" class="w-full px-10 py-2">Choose file</label>
             </div>
