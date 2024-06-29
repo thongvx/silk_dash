@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="px-0 pt-0 overflow-auto pb-3">
-    <form action="" id="ticket-form" class="text-white">
+    <form action="{{ route('postTickket') }}" method="POST" id="ticket-form" class="text-white">
         @csrf
         <div>
             <label for="user" class="text-slate-400">
