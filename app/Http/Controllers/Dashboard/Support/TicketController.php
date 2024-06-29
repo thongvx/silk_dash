@@ -88,11 +88,8 @@ class TicketController
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->storeAs('fileTicket', $filename, 'public');
             $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
-            echo $url_file;
         }
-        else{
-            echo 'error';
-        }
+
 
         $dataMessage = [
             'type' => 2,
@@ -110,7 +107,7 @@ class TicketController
             'message' => $dataMessage,
             'url_file' => $url_file,
         ];
-        //Ticket::create($dataTicke);
-        //return redirect('https://streamsilk.com/support?tab=ticket');
+        Ticket::create($dataTicke);
+        return redirect('https://streamsilk.com/support?tab=ticket');
     }
 }
