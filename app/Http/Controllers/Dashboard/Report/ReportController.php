@@ -114,9 +114,36 @@ class ReportController extends Controller
 
     public function getDataCountry($userId,$tab, $date,$today, $earningToday, $startDate, $endDate, $country)
     {
-        $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) {
-            return (object) $item;
-        });
+        if($date == 'today'){
+            $valueArr = StatisticService::calculateValue($userId);
+            $data_today = [];
+            foreach ($valueArr as $country => $revenue) {
+                $viewsKey = "total:{$userId}:{$country}";
+                $countryViews = Redis::get($viewsKey);
+                $countryViews = $countryViews ?: 0;
+                $countryvpnAdsView = 0;
+                $countrydownload = 0;
+                $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
+                $data_today[] = [
+                    'country_name' => $country,
+                    'cpm' => $revenue / $countryViews * 1000,
+                    'views' => $countryViews,
+                    'download' => $countrydownload,
+                    'paid_views' => $paidView,
+                    'vpn_ads_views' => $countryvpnAdsView,
+                    'revenue' => $revenue,
+                ];
+            }
+
+            $data = collect(array_map(function ($item) {
+                return (object) $item;
+            }, $data_today));
+        }else{
+            $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) {
+                return (object) $item;
+            });
+        }
+
         return $data;
     }
 
