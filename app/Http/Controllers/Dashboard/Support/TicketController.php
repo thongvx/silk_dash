@@ -83,8 +83,8 @@ class TicketController
         $subject = $request->subject;
         $message = $request->message;
         $url_file = '0';
-        if ($request->hasFile('fileticket')){
-            $file = $request->file('fileticket');
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
             if ($file->isValid()) {
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $file->storeAs('public/fileTicket', $filename);
