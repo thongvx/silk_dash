@@ -9,6 +9,7 @@ import './user-dashboard.js';
 import './upload/upload.js';
 import './upload/uploadFile.js';
 import './upload/transfer.js';
+import './upload/clone.js';
 //video
 import './jsVideo/video.js';
 import './jsVideo/datatable.js';

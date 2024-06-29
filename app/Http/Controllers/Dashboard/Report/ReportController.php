@@ -58,7 +58,7 @@ class ReportController extends Controller
         $totalWithdrawals = Redis::get($totalWithdrawalskey);
         $earningToday = array_sum(array_map(function ($country) use ($userId, $today) {
             return Redis::zscore("user:{$userId}:country_views:{$today->format('Y-m-d')}", $country);
-        }, Redis::zrange("user:{$userId}:country_views:{$today->format('Y-m-d')}", 0, -1)));
+        }, Redis::zrange("user:{$userId}:country_views:{$today->format('Y-m-d')}", 0, -1))) ?? 0;
         $data['title'] = 'Report';
         $data['userWatching'] = Redis::get("watching_users:{$userId}") ?? 0;
         $data['totalProfit'] = floatval($totalProfit ?? $this->reportRepo->where('user_id', $userId)->sum('revenue'));
@@ -72,7 +72,7 @@ class ReportController extends Controller
             $data['startDate'] = date("m/d/Y", strtotime($dateRange['startDate']));
             $data['endDate'] = date("m/d/Y", strtotime($dateRange['endDate']));
         }
-        $data['countries'] = explode(',', $country);
+        $data['countries'] = is_string($country) ? explode(',', $country) : [];;
         $data['AllCountries'] = collect(Redis::get('allCountries') ?? CountryTier::all());
         $data['payments'] = $this->reportRepo->getPayment($userId);
         $data['earnings'] = [
@@ -119,23 +119,27 @@ class ReportController extends Controller
     {
         if($date == 'today'){
             $valueArr = StatisticService::calculateValue($userId);
+            $AllCountries = collect(Redis::get('allCountries') ?? CountryTier::all())->keyBy('code');
             $data_today = [];
-            foreach ($valueArr as $country => $revenue) {
-                $viewsKey = "total:{$userId}:{$country}";
-                $countryViews = Redis::get($viewsKey);
-                $countryViews = $countryViews ?: 0;
-                $countryvpnAdsView = 0;
-                $countrydownload = 0;
-                $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
-                $data_today[] = [
-                    'country_name' => $country,
-                    'cpm' => $revenue / $countryViews * 1000,
-                    'views' => $countryViews,
-                    'download' => $countrydownload,
-                    'paid_views' => $paidView,
-                    'vpn_ads_views' => $countryvpnAdsView,
-                    'revenue' => $revenue,
-                ];
+            foreach ($valueArr as $country_code => $revenue) {
+                if($AllCountries->has($country_code)){
+                    $viewsKey = "total:{$userId}:{$country_code}";
+                    $countryViews = Redis::get($viewsKey);
+                    $countryViews = $countryViews ?: 0;
+                    $countryvpnAdsView = 0;
+                    $countrydownload = 0;
+                    $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
+                    $data_today[] = [
+                        'date' => $today->format('Y-m-d'),
+                        'country_name' => $AllCountries->get($country_code)->name,
+                        'cpm' => $revenue / $countryViews * 1000,
+                        'views' => $countryViews,
+                        'download' => $countrydownload,
+                        'paid_views' => $paidView,
+                        'vpn_ads_views' => $countryvpnAdsView,
+                        'revenue' => $revenue,
+                    ];
+                }
             }
 
             $data = collect(array_map(function ($item) {

@@ -3,56 +3,58 @@ import { notification, updateURLParameter } from '../main.js';
 var fixedVideoCloseButton = $("[fixed-video-close-button]");
 //edit video
 const formEdit = `<div class="edit" id="edit">
-                                <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Edit file details</h5>
+                                <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Rename file</h5>
                                 <form class="text-white mt-3" action="">
-                                    <div class="grid grid-cols-3 gap-4 items-center">
-                                        <h5>
-                                            Video title
-                                        </h5>
-                                        <div class="col-span-2 pr-2 video-title"></div>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-4 items-center my-4">
-                                        <h5>
-                                            Video URL
-                                        </h5>
-                                        <a class="col-span-2 hover:text-[#009FB2]" url-video href="">
-                                            https://cdnwish.com/2aw9nl106nz1
-                                        </a>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-4 items-center">
-                                        <h5>
-                                            New video title
-                                        </h5>
-                                        <div class="col-span-2 pr-2">
-                                            <input id="" name="newTitle" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
-                                   border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
-                                   focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
-                                        </div>
+                                    <div id="list-file" class="max-h-80 overflow-auto">
+
                                     </div>
                                     <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132]" disabled>Submit</button>
                                 </form>
                         </div>`
-$(document).on('click', '.btn-edit', function() {
+$(document).on('click', '[btn-edit]', function() {
     const box = 'edit'
-    const tr = $(this).closest('tr');
-    const videoId = tr.data('videoid')
-    $('tbody .checkbox').prop('checked', false)
-    tr.find('.checkbox').prop('checked', true)
     $('#fixed-box-control').append(formEdit)
     fixedBox(box)
-    $('#edit .video-title').text(tr.find('.video-title').text())
-    $('#edit [url-video]').text('https://streamsilk.com/play/'+tr.find('.videoID').text())
-    $('#edit [url-video]').attr('href','https://streamsilk.com/play/'+tr.find('.videoID').text())
+    const tr = $(this).closest('tr');
+    const rows = checkAll()
+    const videoIDs =
+    rows.map((index, row) => {
+        const div_rename_file = `<div class="my-3 bg-[#142132] px-2 py-3 rounded-lg">
+                                            <div class="grid grid-cols-3 gap-4 items-center">
+                                                <h5>
+                                                    Video title
+                                                </h5>
+                                                <div class="col-span-2 pr-2 video-title">
+                                                ${$(row).closest('tr').find('.video-title').text()}
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 grid grid-cols-3 gap-4 items-center">
+                                                <h5>
+                                                    New video title
+                                                </h5>
+                                                <div class="col-span-2 pr-2">
+                                                    <input id="" name="${ $(row).closest('tr').data('videoid') }" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
+                                           border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
+                                           focus:border-[#009FB2] focus:outline-none focus:transition-shadow" placeholder="title"/>
+                                                </div>
+                                            </div>
+                                        </div>`
+        $('#list-file').append(div_rename_file)
+        return $(row).closest('tr').data('videoid');
+    }).get()
     $('#edit form').on('submit', function(e) {
         e.preventDefault();
         const newTitle = $(this).find('input[name="newTitle"]').val();
         const bntSubmit = $(this).find('button[type="submit"]');
+        var form = $(this).closest('form')[0];
+        var formData = new FormData(form);
+        formData.append('videoIds', videoIDs)
         $.ajax({
-            url: '/video/' + videoId,
-            type: 'PATCH',
-            data: {
-                newTitle: newTitle
-            },
+            url: '/video/edit/multiple',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
             beforeSend: function() {
                 bntSubmit.html(`
                      <div class="flex text-white items-center">
@@ -68,11 +70,16 @@ $(document).on('click', '.btn-edit', function() {
                 bntSubmit.prop('disabled', true);
             },
             success: function(response) {
-                tr.find('.video-title').text(newTitle)
+                response.forEach(function(video) {
+                    // Find the corresponding row in the table
+                    var row = $('tr[data-videoid="' + video.id + '"]');
+                    // Update the title in the row
+                    row.find('.video-title').text(video.newTitle);
+                });
                 fixedBox ()
                 $('#edit').remove();
                 tr.find('.checkbox').prop('checked', false)
-                notification('success', 'Video title has been successfully edited.')
+                notification('success', 'Video titles updated successfully!')
             },
             error: function(response) {
                 fixedBox()
@@ -145,18 +152,6 @@ $(document).on('click', '[btn-delete]', function() {
         ajaxremove(videoIDs, bntSubmit)
     });
 });
-$(document).on('click', '.btn-delete', function() {
-    fixedBox()
-    $('#fixed-box-control').append(formDelete)
-    const tr = $(this).closest('tr');
-    const videoIDs = [];
-    videoIDs.push(tr.data('videoid'));
-    $('#delete-video form').on('submit', function(e) {
-        const bntSubmit = $(this).find('button[type="submit"]');
-        e.preventDefault();
-        ajaxremove(videoIDs, bntSubmit)
-    });
-});
 
 //export video
 $(document).on('click', '[btn-export]', function() {
@@ -168,12 +163,12 @@ $(document).on('click', '[btn-export]', function() {
         const tr = row.closest('tr');
         $('#EmbedLink textarea').val(
             $('#EmbedLink textarea').val() +
-            'https://streamsilk.com/play/'+
+            'https://streamsilk.com/t/'+
             $(tr).find('.videoID').text()+'\n'
         );
         $('#Embedcode textarea').val(
             $('#Embedcode textarea').val() +
-            `<iframe src="https://streamsilk.com/play/${$(tr).find('.videoID').text()}" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>`+'\n'
+            `<iframe src="https://streamsilk.com/t/${$(tr).find('.videoID').text()}" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>`+'\n'
         );
         console.log(index, tr)
         console.log($(tr).find('.videoID').text())

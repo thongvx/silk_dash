@@ -298,4 +298,42 @@ class VideoController
 
         return response()->json($data);
     }
+    //rename video
+    public function updateMultipleTitles(Request $request)
+    {
+        // Validate the request...
+        $ids = $request->videoIds;
+        if (!is_array($ids)) {
+            $ids = explode(',', $ids);
+        }
+        if (!$ids || !is_array($ids)) {
+            return response()->json(['message' => 'No video IDs provided'], 400);
+        }
+
+        $updatedVideos = [];
+
+        // Update the titles of the videos...
+        foreach ($ids as $index => $id) {
+            $video = $this->videoRepo->findWhere(['id' => $id])->first();
+            $newTitle = $request->input($id);
+            // Check if the new title is not null
+            if ($newTitle === null) {
+                continue;
+            }
+
+            if ($video) {
+                $video->title = $newTitle;
+                $video->save();
+
+                $updatedVideos[] = [
+                    'id' => $video->id,
+                    'newTitle' => $newTitle
+                ];
+            } else {
+                return response()->json(['message' => 'Video not found: ' . $id], 404);
+            }
+        }
+
+        return response()->json($updatedVideos);
+    }
 }

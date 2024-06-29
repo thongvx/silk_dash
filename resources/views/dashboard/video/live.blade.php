@@ -43,6 +43,10 @@
                         !!}
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"
+                            title="edit">
+                        <i btn-edit class="material-symbols-outlined opacity-1 text-3xl">edit_square</i>
+                    </button>
+                    <button type="button" btn-video disabled class="cursor-not-allowed px-2"
                             title="delete">
                         <i btn-delete class="material-symbols-outlined opacity-1 text-3xl">delete</i>
                     </button>

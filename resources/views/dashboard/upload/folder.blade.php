@@ -13,28 +13,24 @@
                 </button>
             </div>
             <div class="folder" id="list-folder">
-                <h5 class="mb-0 text-green-400 text-lg font-semibold">Choose folder to move selected to</h5>
+                <h5 class="mb-0 text-[#009fb2] text-lg font-semibold">Choose folder to move selected to</h5>
                 <div class="mt-3" list-folder>
-                    <div class="grid grid-cols-3 md:flex items-center w-full">
-                        <div class="col-span-2 relative flex flex-wrap mr-3 items-stretch transition-all rounded-lg ease">
+                    <div class="items-center w-full">
+                        <div
+                            class="relative flex flex-wrap mr-3 items-stretch transition-all rounded-lg ease">
                                 <span
                                     class="text-sm ease leading-5.6 absolute z-10 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
-                                  <i class="fas fa-search"></i>
+                                  <i class="fa fa-search"></i>
                                 </span>
                             <input type="text" search-folder
-                                   class="pl-9 text-sm focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
-                                   placeholder="Search folder" />
-                        </div>
-                        <div class="rounded-lg bg-gradient-to-r from-blue-400 to-green-500 text-white">
-                            <button class="w-max font-semibold text-sm md:text-base	 py-2 px-1.5 md:px-3">
-                                Filter Folders
-                            </button>
+                                   class="pl-9 text-sm focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg bg-[#142132] text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
+                                   placeholder="Search folder"/>
                         </div>
                     </div>
                     <div
                         class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 text-white mt-2 min-h-80 max-h-80 overflow-auto">
                         @foreach($folders as $folder)
-                            <div  folder data-folderid="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-gradient-to-r bg-clip-text from-violet-500 to-fuchsia-500">
+                            <div  folder data-folder-id="{{$folder -> id}}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-[#009fb2] bg-clip-text">
                                 <div class="text-center">
                                     <i class="material-symbols-outlined text-3xl">folder</i>
                                 </div>

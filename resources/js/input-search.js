@@ -1,5 +1,5 @@
-$(document).on('focus', '[select2-input]', function() {
-    let label = this.closest('[select2]').querySelector('label')
+$(document).on('focus', '[search-input]', function() {
+    let label = this.closest('[search]').querySelector('label')
     label.classList.add('-translate-y-5')
     label.classList.add('scale-75')
     label.classList.remove('translate-x-3')
@@ -9,8 +9,8 @@ $(document).on('focus', '[select2-input]', function() {
     this.classList.remove('border-slate-900')
     this.classList.add('border-red-500')
 })
-$(document).on('blur', '[select2-input]', function() {
-    let label = this.closest('[select2]').querySelector('label')
+$(document).on('blur', '[search-input]', function() {
+    let label = this.closest('[search]').querySelector('label')
     if(this.value === ''){
         label.classList.remove('-translate-y-5')
         label.classList.remove('scale-75')
@@ -22,7 +22,7 @@ $(document).on('blur', '[select2-input]', function() {
         this.classList.remove('border-red-500')
     }
 });
-$(document).on('keyup', '[select2-folder]', function() {
+$(document).on('keyup', '[search-folder]', function() {
     var filter = this.value.toUpperCase();
     var listFolder = this.closest('[list-folder]');    // Get all folder elements
     var folders = listFolder.querySelectorAll('[folder]');
