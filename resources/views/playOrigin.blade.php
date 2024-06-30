@@ -56,7 +56,7 @@
         player.on('time', function(event) {
             var currentPercentagePlayed = (event.position / player.getDuration()) * 100;
             if(player.getDuration()< 600){
-                if(currentPercentagePlayed >= 50 && !hasReachedOneTenth){
+                if(currentPercentagePlayed >= 60 && !hasReachedOneTenth){
                     hasReachedOneTenth = true;
                     increasePlayCount();
                 }

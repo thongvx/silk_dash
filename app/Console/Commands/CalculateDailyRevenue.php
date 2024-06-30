@@ -6,6 +6,7 @@ use App\Services\StatisticService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 
 class CalculateDailyRevenue extends Command
 {
@@ -72,6 +73,26 @@ class CalculateDailyRevenue extends Command
 
                 // Làm rỗng lô dữ liệu để chuẩn bị cho lô tiếp theo
                 $batchData = [];
+            }
+            foreach ($valueArr as $country => $revenue) {
+                // Lấy views và downloads từ Redis
+                $viewsKey = "total:{$videoView->user_id}:{$country}";
+                $countryViews = Redis::get($viewsKey) ?: 0;
+                $countryvpnAdsView = 0;
+                $countrydownload = 0;
+                $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
+                // Tạo mới dữ liệu trong bảng country_statistics
+                DB::table('country_statistics')->insert([
+                    'user_id' => $videoView->user_id,
+                    'date' => $today,
+                    'country_code' => $country,
+                    'views' => $countryViews,
+                    'paid_views' => $paidView,
+                    'vpn_ads_views' => $countryvpnAdsView,
+                    'download' => $countrydownload,
+                    'revenue' => $revenue,
+
+                ]);
             }
         }
         $this->info('Daily revenue calculated successfully.');

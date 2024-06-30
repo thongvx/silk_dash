@@ -50,11 +50,6 @@
                 <th class="px-1 text-center">
                     Note
                 </th>
-                <th class="{{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
-                    <h6
-                        class="antialiased tracking-normal font-sans text-base text-inherit flex py-5 items-center justify-between px-2 font-semibold leading-none">
-                    </h6>
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -80,36 +75,10 @@
                 <td class="text-center w-max">{{ $video->total_play }}</td>
                 <td class="pl-2 w-24">{{ $video->created_at }}</td>
                 <td class="text-center w-max">{{ $video->is_sub }}</td>
-                <td class="relative {{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
-                    <li class="list-none">
-                        <a
-                            href="javascript:" dropdown-trigger
-                            aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
-                        <ul dropdown-menu
-                            class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
-                                             shadow-lg shadow-slate-900 duration-250 before:sm:right-3 before:text-lg pointer-events-none absolute right-1 top-12 lg:top-12
-                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10
-                                             px-2 py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:-top-2 before:z-10
-                                             before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                            <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex"><i
-                                    class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
-                                Edit File
-                            </li>
-                            <li class="relative my-3 hover:text-[#009FB2] items-center flex"><i
-                                    class="material-symbols-outlined opacity-1 mr-2">content_copy</i>
-                                Clone
-                            </li>
-                            <li class="relative btn-delete hover:text-[#009FB2] items-center flex"><i
-                                    class="material-symbols-outlined opacity-1 mr-2">delete</i>
-                                Delete
-                            </li>
-                        </ul>
-                    </li>
-                </td>
             </tr>
         @empty
             <tr class="my-3 h-12 bg-[#142132]">
-                <td class="text-center" colspan="9">No data available in table</td>
+                <td class="text-center" colspan="8">No data available in table</td>
             </tr>
         @endforelse
         </tbody>

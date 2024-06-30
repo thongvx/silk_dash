@@ -41,5 +41,6 @@ class Payment extends Model
         $today = Carbon::today();
         Redis::del("user:{$this->user_id}:payment");
         Redis::del("user:{$this->user_id}:total_withdrawal:$today");
+        Redis::del("user:{$this->user_id}:total_profit:$today");
     }
 }

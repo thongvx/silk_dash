@@ -31,13 +31,11 @@ class ReportData extends Model
 
         // Define the behavior for create and update
         static::saved(function ($model) {
-            $today = date('Y-m-d');
-            Redis::del("user:{$model->user_ID}:total_profit:{$today}");
+            Redis::del("user:{$model->user_ID}:total_profit");
         });
 
         static::deleted(function ($model) {
-            $today = date('Y-m-d');
-            Redis::del("user:{$model->user_ID}:total_profit:{$today}");
+            Redis::del("user:{$model->user_ID}:total_profit");
         });
 
     }

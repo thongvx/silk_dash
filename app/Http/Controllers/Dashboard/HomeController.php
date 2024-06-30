@@ -30,42 +30,44 @@ class HomeController extends Controller
     {
         $data['title'] = 'Dashboard';
         $user = Auth::user();
-        $data['userWatching'] = Redis::get("total:{$user->id}") ?? 0;
+        $data['userWatching'] = Redis::get("watching_users:{$user->id}") ?? 0;
         $data['totalFile'] = $user->video;
+        $totalProfitkey = "user:{$user->id}:total_profit";
+        $data['totalProfit'] = floatval(Redis::get($totalProfitkey) ?? $this->reportRepo->where('user_id', $user->id)->sum('revenue'));
+        $totalWithdrawalskey = "user:{$user->id}:total_withdrawal";
+        $data['totalWithdrawals'] = floatval(Redis::get($totalWithdrawalskey) ?? Db::table('payment')->where('user_id', $user->id)->sum('amount'));
+        Redis::setex($totalProfitkey, 86400, $data['totalProfit']);
+        Redis::setex($totalWithdrawalskey, 86400, $data['totalWithdrawals']);
         $data['notifications'] = $this->notificationRepo->getAllNotifications($user->id);
         $data['topVideos'] = $this->statisticController->topVideo();
         $data['topCountries'] = $this->statisticController->topCountry();
         $data['storage'] = $this->videoController->convertFileSize($user->storage);
+        $today = Carbon::today();
         $earningToday = 0;
-        $countryViewsKey = "user:{$user->id}:country_views";
+        $countryViewsKey = "user:{$user->id}:country_views:{$today->format('Y-m-d')}";
         $countries = Redis::zrange($countryViewsKey, 0, -1);
         foreach ($countries as $country) {
             $views = Redis::zscore($countryViewsKey, $country);
             $earningToday += $views;
         }
-        $today = Carbon::today();
-        $totalBalancekey = "user:{$user->id}:total_balance:{$today}";
-        $totalBalance = Redis::get($totalBalancekey);
-        if(isset($totalBalance)){
-            $data['totalBalance'] = $totalBalance;
-        }else{
-            $totalBalance = Db::table('payment')->where('user_id', $user->id)->sum('amount');
-            Redis::setex($totalBalancekey, 86400, $totalBalance);
-            $data['totalBalance'] = $totalBalance;
-        }
+        $monthData = $this->reportRepo->getAllData($user->id, 'date', Carbon::tomorrow()->subMonth(), $today, null);
         $data['dates'] = [
             'day' => $earningToday*0.4/1000,
-            'week' => $this->reportRepo->getAllData($user->id, 'date', Carbon::tomorrow()->subWeek(), $today, null)->map(function($item) {
-                return $item['views'];
+            'month' => $monthData->map(function($item, $index) use ($earningToday) {
+                return $index === 0 ? $earningToday : $item['views'];
             }),
-            'month' => $this->reportRepo->getAllData($user->id, 'date', Carbon::tomorrow()->subMonth(), $today, null)->map(function($item) {
-                return $item['views'];
-            }),
+            'week' => $monthData->map(function($item, $index) use ($earningToday) {
+                return $index === 0 ? $earningToday : $item['views'];
+            })->slice(0, 7),
         ];
         $data['earnings'] = [
             'today' => $earningToday*0.4/1000,
-            'yesterday' => $this->reportRepo->getAllData($user->id, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
-            '2days' => $this->reportRepo->getAllData($user->id, 'date', $today->subDays(2), $today->subDays(2), null)[0]['revenue'] ?? 0,
+            'yesterday' => $monthData->filter(function($item) {
+                return $item['date'] == Carbon::yesterday()->format('Y-m-d');
+            })[0]['revenue'] ?? 0,
+            '2days' => $monthData->filter(function($item) {
+                    return $item['date'] == Carbon::today()->subDay(2)->format('Y-m-d');
+                })[0]['revenue'] ?? 0,
         ];
         return view('dashboard.index', $data);
     }

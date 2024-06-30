@@ -40,16 +40,16 @@
                                 <div class="col-span-full sm:col-span-4 bg-[#142132] text-center">
                                     <div class="grid grid-cols-4 h-full items-center pt-4">
                                         <div>
-                                            <h4>30$</h4>
+                                            <h4>33$</h4>
                                         </div>
                                         <div>
-                                            <h4>30$</h4>
+                                            <h4>33$</h4>
                                         </div>
                                         <div>
-                                            <h4>30$</h4>
+                                            <h4>33$</h4>
                                         </div>
                                         <div>
-                                            <h4>30$</h4>
+                                            <h4>33$</h4>
                                         </div>
                                         <div class="col-span-full text-start text-xs pl-4 py-4">
                                             <h4>Australia, Germany, United Kingdom, United States</h4>
@@ -64,16 +64,16 @@
                                 <div class="col-span-full sm:col-span-4 bg-[#142132] text-center">
                                     <div class="grid grid-cols-4 h-full items-center pt-4">
                                         <div>
-                                            <h4>20$</h4>
+                                            <h4>22$</h4>
                                         </div>
                                         <div>
-                                            <h4>20$</h4>
+                                            <h4>22$</h4>
                                         </div>
                                         <div>
-                                            <h4>20$</h4>
+                                            <h4>22$</h4>
                                         </div>
                                         <div>
-                                            <h4>20$</h4>
+                                            <h4>22$</h4>
                                         </div>
                                         <div class="col-span-full text-start text-xs pl-4 py-4">
                                             <h4>Austria, Canada, Finland, France, Norway
@@ -89,16 +89,16 @@
                                 <div class="col-span-full sm:col-span-4 bg-[#142132] text-center">
                                     <div class="grid grid-cols-4 h-full items-center pt-4">
                                         <div>
-                                            <h4>13$</h4>
+                                            <h4>15$</h4>
                                         </div>
                                         <div>
-                                            <h4>13$</h4>
+                                            <h4>15$</h4>
                                         </div>
                                         <div>
-                                            <h4>13$</h4>
+                                            <h4>15$</h4>
                                         </div>
                                         <div>
-                                            <h4>13$</h4>
+                                            <h4>15$</h4>
                                         </div>
                                         <div class="col-span-full text-start text-xs pl-4 py-4">
                                             <h4>Belgium, Croatia, Ireland, Italy, Netherlands, New Zealand, Spain, Sweden, Switzerland
@@ -114,16 +114,16 @@
                                 <div class="col-span-full sm:col-span-4 bg-[#142132] text-center">
                                     <div class="grid grid-cols-4 h-full items-center pt-4">
                                         <div>
-                                            <h4>10$</h4>
+                                            <h4>11$</h4>
                                         </div>
                                         <div>
-                                            <h4>10$</h4>
+                                            <h4>11$</h4>
                                         </div>
                                         <div>
-                                            <h4>10$</h4>
+                                            <h4>11$</h4>
                                         </div>
                                         <div>
-                                            <h4>10$</h4>
+                                            <h4>11$</h4>
                                         </div>
                                         <div class="col-span-full text-start text-xs pl-4 py-4">
                                             <h4>Bosnia-Herzegovina, Brazil, Chile, Colombia, Cyprus, Czech Republic, Greece, Hong Kong, Hungary, Japan, Mexico, Romania, Serbia, Slovak Republic, Thailand, United Arab Emirates, Bulgaria
@@ -134,15 +134,15 @@
                             </div>
                         </div>
                         <div class="px-4 text-sm text-slate-400">
-                            <h4>Earn a fixed amount per 10.000 downloads or streams. The payment amount is defined by the origin country referred to in the Tier table above. Every other country that is not listed in table is paid 6$/10k views (All durations).</h4>
+                            <h4>Earn a fixed amount per 10.000 downloads or streams. The payment amount is defined by the origin country referred to in the Tier table above. Every other country that is not listed in table is paid 8$/10k views (All durations).</h4>
                         </div>
                         <div class="pl-7 mt-5">
                             <ul class="list-disc grid grid-cols-2 gap-x-5 gap-y-3">
-                                <li>5% of video must be watched to be counted as paid. If below 5 minutes 90% required to be watched.</li>
-                                <li>Minimum payout amount - 25$</li>
+                                <li>10% of video must be watched to be counted as paid. If below 10 minutes 60% required to be watched.</li>
+                                <li>Minimum payout amount - 50$</li>
                                 <li>Rewards are not counted if advertising is being blocked.</li>
                                 <li>2 Views or Downloads are counted per 24 hours per user ip</li>
-                                <li>Payout Methods: Payeer, Bitcoin, Bitcoin Cash, Litecoin, Ethereum, XRP (Ripple), USDT (TRC20), TRX (Tron)</li>
+                                <li>Payout Methods: USDT (TRC-20 or ERC-20)</li>
                                 <li>Payout's are made every Monday</li>
                             </ul>
                         </div>

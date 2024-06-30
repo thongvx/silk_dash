@@ -42,10 +42,10 @@ Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::c
 Route::get('/t/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
-Auth::routes();
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
-Route::group(['middleware' => 'auth'], function () {
+Auth::routes(['verify' => true]);
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'index'])->name('index');
@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/video/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple'])->name('dashboard.video.destroyMultiple');
     Route::post('/videos/move', [\App\Http\Controllers\Dashboard\VideoController::class, 'moveVideos'])->name('dashboard.video.move');
     Route::resource('folder', \App\Http\Controllers\Dashboard\FolderController::class);
+    Route::post('/video/edit/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'updateMultipleTitles']);
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
     Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);

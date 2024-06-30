@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 
-use App\Models\Video;
 use App\Repositories\FolderRepo;
 use Illuminate\Support\Facades\Auth;
 use App\Factories\DownloadFactory;
@@ -16,8 +15,8 @@ use App\Repositories\AccountRepo;
 class UploadController
 {
     protected $folderRepo;
-    protected VideoRepo $videoRepo;
-    protected AccountRepo $accountRepo;
+    protected $videoRepo;
+    protected $accountRepo;
 
     //Trả về giao diện upload
     public function __construct(FolderRepo $folderRepo, VideoRepo $videoRepo, AccountRepo $accountRepo)
@@ -148,7 +147,6 @@ class UploadController
         $link = $request->url;
         if($request->has('FolderID')) {
             $folder_id = $request->FolderID;
-            $folderName = $this->folderRepo->find($folder_id)->name_folder;
         } else {
             $folderName = $request->get('nameFolder', 'root');
             $folder_id = $this->folderRepo->getFolder($folderName)->id;
@@ -159,10 +157,9 @@ class UploadController
         }
         $result = [];
         foreach ($arrLink as $url){
-            $checkUrl = strpos($url, 'ttps://');
-            if($checkUrl != 0){
-                $arrUrl = explode('/', $url);
-                $slugClone = $arrUrl[count($arrUrl) - 1];
+            $checkUrl = strpos($url, 'https://');
+            if($checkUrl == 0){
+                $slugClone = basename($url);
             }
             else
                 $slugClone = $url;
@@ -172,37 +169,31 @@ class UploadController
                 //check user public video
                 $data_setting = $this->accountRepo->getSetting($video->user_id);
                 if($data_setting->publicVideo == 1){
-                    $videoData = [
-                        'slug' => uniqid(),
-                        'user_id' => $video->user_id,
-                        'folder_id' => $folder_id,
-                        'pathStream' => '0',
-                        'title' => $video->title.'-clone',
-                        'poster' => $video->poster,
-                        'grid_poster_3' => $video->grid_poster_3,
-                        'is_sub' => 0,
-                        'total_play' => 0,
-                        'size' => $video->size,
-                        'duration' => $video->duration,
-                        'quality' => $video->quality,
-                        'format' => $video->format,
-                        'origin' => 1,
-                        'soft_delete' => 0,
-                        'stream' => 0,
-                        'grid_poster_5' => $video->grid_poster_5,
-                        'middle_slug' => $video->middle_slug,
-                        'sd' => '0',
-                        'hd' => '0',
-                        'fhd' => '0',
-                        'sv_upload' => $video->sv_upload,
-                        'check_duplicate' => 0,
+                    $newVideo = $video->replicate();
+                    $newVideo->slug = uniqid();
+                    $newVideo->title = $video->title.'-clone';
+                    $newVideo->folder_id = $folder_id;
+                    $newVideo->pathStream = '0';
+                    $newVideo->is_sub = 0;
+                    $newVideo->total_play = 0;
+                    $newVideo->origin = 1;
+                    $newVideo->soft_delete = 0;
+                    $newVideo->stream = 0;
+                    $newVideo->sd = '0';
+                    $newVideo->hd = '0';
+                    $newVideo->fhd = '0';
+                    $newVideo->check_duplicate = 0;
+                    // Lưu video mới
+                    $newVideo->save();
+                    $result[] = [
+                        'slug' => $newVideo->slug,
+                        'title' => $newVideo->title,
+                        'size' => self::convertFileSize($newVideo->size),
                     ];
-                    $video = Video::create($videoData);
-                    $result[] = ['slug' => $videoData['slug'], 'title' => $videoData['title']];
                 }
             }
         }
-        return $request;
+        return $result;
     }
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
@@ -215,5 +206,16 @@ class UploadController
         }, $keys);
 
         return json_encode($data);
+    }
+    private function convertFileSize($sizeInBytes)
+    {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $i = 0;
+        while ($sizeInBytes > 1024) {
+            $sizeInBytes /= 1024;
+            $i++;
+        }
+
+        return round($sizeInBytes, 2) . ' ' . $units[$i];
     }
 }
