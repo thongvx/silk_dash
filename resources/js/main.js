@@ -253,3 +253,13 @@ $(document).on('click', function (e) {
     }
 });
 
+// cclipboard-copy
+$(document).on('click', '[clipboard-copy]', function() {
+    var div = $(this).closest('div').find('.text-clipboard');
+    var text = $(div)[0].innerText;
+    navigator.clipboard.writeText(text).then(function() {
+        notification('success', 'Copied to clipboard');
+    }, function(err) {
+        notification('error', 'Failed to copy to clipboard');
+    });
+});

@@ -36,11 +36,11 @@ text-slate-500 backdrop-blur-[2px]" style="background-image: url('{{asset('image
                         <p class="mt-10 mb-6 w-3/5 text-center">If you do not receive the email within the next 5 minutes, use the button below to resend verification email.</p>
 
                         <div class="flex justify-center">
-                            <a href="#" class="rounded-full bg-[#009FB2]/80 text-white px-10 py-2 text-lg hover:bg-[#009fb2] font-bold"
+                            <a href="#" class="rounded-full bg-[#009FB2]/80 text-white px-10 py-2 text-lg hover:bg-[#009fb2] font-medium"
                                onclick="event.preventDefault(); document.getElementById('resend-form').submit();">
                                 Resend Verification Email
                             </a>
-                            <a href="#"  class="ml-4 rounded-full bg-indigo-500 text-white px-10 py-2 text-lg hover:bg-indigo-700 font-bold"
+                            <a href="#"  class="ml-4 rounded-full bg-indigo-500 text-white px-10 py-2 text-lg hover:bg-indigo-700 font-medium"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Login other acc?
                             </a>

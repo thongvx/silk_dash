@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('website', 50)->nullable();
             $table->string('skype', 100)->nullable();
             $table->string('telegram',100)->nullable();
-            $table->string('support', 200)->nullable();
+            $table->string('supportAdmin', 200)->nullable();
             $table->integer('dmca')->nullable();
             $table->integer('last_upload')->nullable();
             $table->integer('uploaded')->nullable();

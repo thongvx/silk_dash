@@ -114,7 +114,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
         $title = 'Users';
         return view('admin.statistic.statistic', compact('title'));
     });
-    Route::resource('/cases', \App\Http\Controllers\admin\TicketAdminController::class);
+    Route::resource('/supportAdmin', \App\Http\Controllers\admin\TicketAdminController::class);
 
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
 });

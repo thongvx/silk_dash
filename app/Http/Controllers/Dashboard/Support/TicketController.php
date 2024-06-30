@@ -61,19 +61,41 @@ class TicketController
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'ticketID' => 'required|email',
+            'ticketID' => 'required|integer',
             'message' => 'required|string',
+            'file' => 'mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:2048',
         ]);
-        $ticket = $this->ticketRepo->find($validated['email']);
-        $ticket = new Ticket;
-        $ticket->user_id = Auth::user()->id;
-        $ticket->email = $validated['email'];
-        $ticket->topic = $validated['topic'];
-        $ticket->subject = $validated['subject'];
+        // Tìm ticket cần cập nhật
+        $ticket = $this->ticketRepo->find($validated['ticketID']);
+        $url_file = '0';
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('fileTicket', $filename, 'public');
+            $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
+        }
+        // Giả sử $newMessage là tin nhắn mới bạn muốn thêm vào
+        $newMessage = [
+            'type' => 2,
+            'message' => $validated['message'],
+            'url_file' => $url_file,
+            'date' => Carbon::now(),
+        ];
 
+        // Giải mã tin nhắn hiện tại từ JSON thành mảng
+        $currentMessages = json_decode($ticket->message, true);
+
+        // Thêm tin nhắn mới vào cuối mảng
+        $currentMessages[] = $newMessage;
+
+        // Mã hóa lại mảng tin nhắn thành JSON
+        $updatedMessages = json_encode($currentMessages);
+
+        // Cập nhật cột message
+        $ticket->message = $updatedMessages;
         $ticket->save();
 
-        return response()->json(['message' => 'Ticket created successfully']);
+        return redirect()->back();
     }
     //show ticket
     public function show($ticketID)
@@ -104,10 +126,12 @@ class TicketController
 
 
         $dataMessage = [
-            'type' => 2,
-            'message' => $message,
-            'url_file' => $url_file,
-            'date' => Carbon::now(),
+            [
+                'type' => 2,
+                'message' => $message,
+                'url_file' => $url_file,
+                'date' => Carbon::now(),
+            ]
         ];
 
         $dataMessage = json_encode($dataMessage);

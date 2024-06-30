@@ -30,7 +30,9 @@ class Ticket extends Model
         });
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
-            $model->deleteCacheTicket();
+            if ($model->wasChanged('message')) {
+                $model->deleteCacheTicketById();
+            }
         });
 
         static::deleted(function ($model) {
@@ -42,6 +44,13 @@ class Ticket extends Model
     public function deleteCacheTicket()
     {
         $keys = Redis::keys(TicketCacheKeys::ALL_TICKET_FOR_USER ->value . $this->user_id . '*');
+        foreach ($keys as $key) {
+            Redis::del($key);
+        }
+    }
+    public function deleteCacheTicketById()
+    {
+        $keys = Redis::keys(TicketCacheKeys::TICKET_BY_ID->value . $this->user_id . 'ticketID' . $this->id);
         foreach ($keys as $key) {
             Redis::del($key);
         }

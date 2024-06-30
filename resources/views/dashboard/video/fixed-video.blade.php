@@ -40,13 +40,13 @@
                             <div
                                 class="border-[#142132] rounded-b-xl rounded-tr-xl gap-2 bg-[#142132] bg-top py-4 pl-4 [border-width:var(--tab-border)] undefined">
                                 <div id="EmbedLink" class="tab-content-export">
-                                    <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
+                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>
                                 <div id="Embedcode" class="tab-content-export hidden">
-                                    <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"> </textarea>
+                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"> </textarea>
                                 </div>
                                 <div id="Download" class="tab-content-export hidden">
-                                    <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
+                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>
                             </div>
                         </div>

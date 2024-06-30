@@ -32,7 +32,9 @@
             @forelse($tickets as $ticket)
                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
                     <td class="px-2">{{ $ticket -> id }}</td>
-                    <td class="px-2"><a href="{{ route('support.show', ['support' => $ticket->id]) }}">{{ $ticket -> subject }}</a></td>
+                    <td class="px-2">
+                        <a href="{{ route('support.show', ['support' => $ticket->id]) }}">{{ $ticket -> subject }}</a>
+                    </td>
                     <td class="px-2">{{ $ticket -> topic }}</td>
                     <td class="px-2">
                         @if($ticket -> status === 'completed')

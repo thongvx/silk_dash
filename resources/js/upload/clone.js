@@ -32,7 +32,7 @@ $(document).on('submit', '#clone', function (event) {
                                                     <div class="mt-3">
                                                         <label for="link" class="text-white">Embed Link:</label>
                                                         <div class="relative mt-2">
-                                                            <textarea rows='2'  class="w-full bg-[#142132] outline-none pl-3 pr-4 text-white py-2 rounded-lg">https://streamsilk.com/t/${ item.slug }</textarea>
+                                                            <textarea rows='2'  class="w-full bg-[#142132] outline-none pl-3 pr-4 text-white py-2 rounded-lg text-clipboard">https://streamsilk.com/t/${ item.slug }</textarea>
                                                             <i class="material-symbols-outlined absolute text-white right-2 top-2 cursor-pointer hover:text-[#009FB2] text-md" clipboard-copy>content_copy</i>
                                                         </div>
                                                     </div>
@@ -44,7 +44,7 @@ $(document).on('submit', '#clone', function (event) {
                                                     <div class="mt-3">
                                                         <label for="link" class="text-white">Embed Links:</label>
                                                         <div class="relative mt-2">
-                                                            <textarea rows='4' class="w-full bg-[#142132] outline-none pl-3 pr-4 text-white py-2 rounded-lg">${embedLinksString}</textarea>
+                                                            <textarea rows='4' class="w-full bg-[#142132] outline-none pl-3 pr-4 text-white py-2 rounded-lg text-clipboard">${embedLinksString}</textarea>
                                                             <i class="material-symbols-outlined absolute text-white right-2 top-2 cursor-pointer hover:text-[#009FB2] text-md" clipboard-copy>content_copy</i>
                                                         </div>
                                                     </div>

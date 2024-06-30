@@ -10,8 +10,8 @@ if ($("#chart-line").length) {
 
     for (var i = 0; i < 30; i++) {
         var d = new Date();
-        d.setDate(d.getDate() - i);
-        var label = (d.getMonth() + 1) + '/' + d.getDate(); // Month/Date format
+        d.setUTCDate(d.getUTCDate() - i);
+        var label = (d.getUTCMonth() + 1) + '/' + d.getUTCDate(); // Month/Date format
 
         if (i < 7) {
             last7DaysLabels.push(label);
@@ -25,7 +25,8 @@ if ($("#chart-line").length) {
         last24HoursLabels.push(label);
     }
 // Reverse the arrays to have the oldest date first
-
+    last7DaysLabels = last7DaysLabels.reverse();
+    last30DaysLabels = last30DaysLabels.reverse();
     var ctx1 = $("#chart-line").get(0).getContext("2d");
 
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);

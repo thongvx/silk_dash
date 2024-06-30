@@ -7,20 +7,6 @@
                         Cases
                     </h5>
                 </div>
-                <div class="flex items-center text-sm md:px-4 px-2">
-                    <div
-                        class="hover:bg-[#009FB2] bg-[#142132] hover:border-none cursor-pointer px-5 py-1 rounded-xl mr-4 w-max">
-                        <a href="javascript:" class="flex items-center"><i btn-edit
-                                                 class="material-symbols-outlined opacity-1 text-xl">add</i>
-                            Create New Case</a>
-                    </div>
-                    <div
-                        class="hover:bg-[#009FB2] bg-[#142132] hover:border-none cursor-pointer px-5 py-1 rounded-xl w-max">
-                        <a href="javascript:" class="flex items-center"><i btn-edit
-                                                 class="material-symbols-outlined opacity-1 text-xl">add</i>
-                            Create New Notification</a>
-                    </div>
-                </div>
             </div>
             <div
                 class="mt-3 flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
@@ -61,7 +47,7 @@
                                     <td class="px-2">{{ $ticket -> id }}</td>
                                     <td class="px-2">{{ $ticket -> user_id }}</td>
                                     <td class="px-2">
-                                        <a href="{{ route('support.show', ['support' => $ticket->subject, 'user_id' => $ticket -> user_id]) }}">{{ $ticket -> subject }}</a>
+                                        <a href="{{ route('supportAdmin.show', ['supportAdmin' => $ticket->id, 'user_id' => $ticket -> user_id]) }}">{{ $ticket -> subject }}</a>
                                     </td>
                                     <td class="px-2">{{ $ticket -> topic }}</td>
                                     <td class="px-2">

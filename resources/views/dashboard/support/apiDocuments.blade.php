@@ -23,7 +23,7 @@
                 <h4>Request</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                         https://user.streamsilk.com/api/upload/uploadUrl?url={upload_url}&amp;nameFolder={name_folder}
                     </h5>
                 </div>
@@ -75,7 +75,6 @@
                 </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
-                    <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
 <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "ok",
@@ -99,7 +98,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="!bg-[#142132] rounded-xl shadow-md font-normal">
-                            <code class="language-html !bg-[#142132] !py-0 break-all">&lt;html lang="en"&gt;
+                            <code class="language-html !bg-[#142132] !py-0 break-all text-clipboard">&lt;html lang="en"&gt;
 &lt;head&gt;
     &lt;meta charset="utf-8"&gt;
     &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
@@ -177,7 +176,7 @@
                 <h4 class="text-primary">List All File</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                     https://user.streamsilk.com/api/file/listFile?page={page}&amp;limit={Max_video}&amp;nameFolder={name_folder}
                 </h5>
                 </div>
@@ -234,7 +233,6 @@
                 </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
-                    <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "ok",
@@ -273,7 +271,7 @@
                 <h4 class="text-primary">Get file info</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                     https://user.streamsilk.com/api/file/infoFile?videoID={id_video}</h5>
                 </div>
                 <h4>Parameters</h4>
@@ -321,7 +319,6 @@
                 </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
-                    <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "ok",
@@ -345,7 +342,7 @@
                 <h4 class="text-primary">Rename Your File</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                     https://user.streamsilk.com/api/file/renameFile/{id_video}&amp;newTitle={new_title_video}</h5>
                 </div>
                 <h4>Parameters</h4>
@@ -397,7 +394,6 @@
                 </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
-                    <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "Ok",
@@ -416,7 +412,7 @@
                 <h4 class="text-primary">Clone my file</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                     https://user.streamsilk.com/api/cloneFile?videoID={id_video}&amp;nameFolder={folder_name}</h5>
                 </div>
                 <h4>Parameters</h4>
@@ -474,7 +470,7 @@
                 <h4 class="text-primary">Get list folder</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                     https://user.streamsilk.com/api/folder/listFolder</h5>
                 </div>
                 <h4>Headers</h4>
@@ -500,7 +496,6 @@
                 </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
-                    <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "oke",
@@ -533,7 +528,7 @@
                 <h4 class="text-primary">Creat my folder</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                     https://user.streamsilk.com/api/folder/createFolder?nameFolder={name new folder}</h5>
                 </div>
                 <h4>Parameters</h4>
@@ -578,7 +573,6 @@
                 </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
-                    <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "ok",
@@ -598,7 +592,7 @@
                 <h4 class="text-primary">Rename my folder</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
-                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3">
+                    <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
                     https://user.streamsilk.com/api/folder/renameFolder/{folderID}?newNameFolder={name new folder}
                     </h5>
                 </div>
@@ -651,7 +645,6 @@
                 </div>
                 <h4 class="text-xl font-medium text-white mb-2">Response</h4>
                 <div class="relative">
-                    <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">{
     "msg": "oke",

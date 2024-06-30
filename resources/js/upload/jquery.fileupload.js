@@ -23,7 +23,7 @@
 }(function ($) {
     'use strict';
 
-    // Detect file input support, based on
+    // Detect file input supportAdmin, based on
     // http://viljamis.com/blog/2012/file-upload-support-on-mobile/
     $.support.fileInput = !(new RegExp(
         // Handle devices which give false positives for the feature detection:
@@ -36,14 +36,14 @@
         $('<input type="file">').prop('disabled'));
 
     // The FileReader API is not actually used, but works as feature detection,
-    // as some Safari versions (5?) support XHR file uploads via the FormData API,
+    // as some Safari versions (5?) supportAdmin XHR file uploads via the FormData API,
     // but not non-multipart XHR file uploads.
     // window.XMLHttpRequestUpload is not available on IE10, so we check for
     // window.ProgressEvent instead to detect XHR2 file upload capability:
     $.support.xhrFileUpload = !!(window.ProgressEvent && window.FileReader);
     $.support.xhrFormDataFileUpload = !!window.FormData;
 
-    // Detect support for Blob slicing (required for chunked uploads):
+    // Detect supportAdmin for Blob slicing (required for chunked uploads):
     $.support.blobSlice = window.Blob && (Blob.prototype.slice ||
         Blob.prototype.webkitSlice || Blob.prototype.mozSlice);
 
@@ -78,7 +78,7 @@
 
         options: {
             // The drop target element(s), by the default the complete document.
-            // Set to null to disable drag & drop support:
+            // Set to null to disable drag & drop supportAdmin:
             dropZone: $(document),
             // The paste target element(s), by the default undefined.
             // Set to a DOM node or jQuery object to enable file pasting:
@@ -136,7 +136,7 @@
             multipart: true,
             // To upload large files in smaller chunks, set the following option
             // to a preferred maximum chunk size. If set to 0, null or undefined,
-            // or the browser does not support the required Blob API, files will
+            // or the browser does not supportAdmin the required Blob API, files will
             // be uploaded as a whole.
             maxChunkSize: undefined,
             // When a non-multipart upload or a chunked multipart upload has been
@@ -1179,7 +1179,7 @@
                     return $.Deferred().resolve([]).promise();
                 }
                 // If the files property is not available, the browser does not
-                // support the File API and we add a pseudo File object with
+                // supportAdmin the File API and we add a pseudo File object with
                 // the input value as name with path information removed:
                 files = [{name: value.replace(/^.*\\/, '')}];
             } else if (files[0].name === undefined && files[0].fileName) {
