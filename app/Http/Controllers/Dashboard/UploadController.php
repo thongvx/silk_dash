@@ -191,7 +191,8 @@ class UploadController
                         'size' => self::convertFileSize($newVideo->size),
                     ];
                 }
-            }
+            } else
+                return response()->json(['msg' => 'Video not found', 'status' => 404]);
         }
         return $result;
     }

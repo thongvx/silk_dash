@@ -30,7 +30,7 @@ export function checkAll() {
 $(document).on('click', '[btn-cancel], [fixed-video-close-button]', function() {
     fixedBox ()
     $('#move,#export, #delete-report, #clone').css("display",'none')
-    $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video, #add-sever, #retry-encoder').remove()
+    $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video, #add-sever, #retry-encoder, #subtitles').remove()
     btn_video()
 });
 //move video to folder

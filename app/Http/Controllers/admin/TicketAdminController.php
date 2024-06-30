@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Support;
+namespace App\Http\Controllers\admin;
 
 use App\Models\Ticket;
 use App\Repositories\TicketRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ProfileController;
-use Carbon\Carbon;
-class TicketController
+
+class TicketAdminController
 {
     protected $ticketRepo, $profileController;
 
@@ -19,14 +19,12 @@ class TicketController
     }
     public function index()
     {
-        $user = Auth::user();
-        $userId = $user->id;
-        $tickets = $this->ticketRepo->getAllTickets($userId);
+        $tickets = $this->ticketRepo->all();
         $data = [
             'title' => 'Support',
             'tickets' => $tickets,
         ];
-        return view('dashboard.support.support', $data);
+        return view('admin.support.support', $data);
     }
 
     public function ticket($tab)
@@ -42,7 +40,7 @@ class TicketController
             case 'ticket':
                 return view('dashboard.support.ticket', $data);
             case 'newticket':
-                return view('dashboard.support.newticket', $data);
+                return view('dashboard.support.newticket', $tickets);
             case 'apiDocuments':
                 return view('dashboard.support.apiDocuments');
             default:
@@ -60,37 +58,53 @@ class TicketController
     //store ticket
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'ticketID' => 'required|email',
-            'message' => 'required|string',
-        ]);
-        $ticket = $this->ticketRepo->find($validated['email']);
-        $ticket = new Ticket;
-        $ticket->user_id = Auth::user()->id;
-        $ticket->email = $validated['email'];
-        $ticket->topic = $validated['topic'];
-        $ticket->subject = $validated['subject'];
+        $userID = $request->user_id;
+        $topic = $request->topic;
+        $subject = $request->subject;
+        $message = $request->message;
+        $url_file = '0';
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('fileTicket', $filename, 'public');
+            $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
+        }
 
-        $ticket->save();
 
-        return response()->json(['message' => 'Ticket created successfully']);
+        $dataMessage = [
+            'type' => 1,
+            'message' => $message,
+            'url_file' => $url_file,
+        ];
+
+        $dataMessage = json_encode($dataMessage);
+        //create ticket
+        $dataTicke = [
+            'user_id' => $userID,
+            'subject' => $subject,
+            'topic' => $topic,
+            'status' => 'pendding',
+            'message' => $dataMessage,
+            'url_file' => $url_file,
+        ];
+        Ticket::create($dataTicke);
+        return redirect('https://streamsilk.com/admin/support?tab=cases');
     }
     //show ticket
-    public function show($ticketID)
+    public function show($subject,Request $request)
     {
-        $user = Auth::user();
-        $userId = $user->id;
-        $ticket = $this->ticketRepo->getTicket($ticketID,$userId);
+        $userId = $request->user_id;
+        $ticket = $this->ticketRepo->getTicket($subject, $userId);
         $data = [
             'title' => 'Support',
-            'tickets' => $ticket,
-            'userId' => $userId,
+            'ticket' => $ticket,
+            'user_id' => $userId,
         ];
-        return view('dashboard.support.infoTicket', $data);
+        return view('admin.support.infoCase', $data);
     }
     public function postTickket(Request $request)
     {
-        $user = Auth::user();
+        $userID = $request->user_id;
         $topic = $request->topic;
         $subject = $request->subject;
         $message = $request->message;
@@ -107,13 +121,12 @@ class TicketController
             'type' => 2,
             'message' => $message,
             'url_file' => $url_file,
-            'date' => Carbon::now(),
         ];
 
         $dataMessage = json_encode($dataMessage);
         //create ticket
         $dataTicke = [
-            'user_id' => $user->id,
+            'user_id' => $userID,
             'subject' => $subject,
             'topic' => $topic,
             'status' => 'pendding',
@@ -121,6 +134,6 @@ class TicketController
             'url_file' => $url_file,
         ];
         Ticket::create($dataTicke);
-        return redirect('https://streamsilk.com/support?tab=ticket');
+        return redirect('https://streamsilk.com/admin/support?tab=cases');
     }
 }

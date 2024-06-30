@@ -16,7 +16,7 @@ class TicketRepo extends BaseRepository
 
     public function getAllTickets($userId)
     {
-        $limit = 10;
+        $limit = 20;
         $key = TicketCacheKeys::ALL_TICKET_FOR_USER ->value . $userId . 'limit' . $limit;
         $tickets = Redis::get($key);
         if (isset($tickets)) {
@@ -29,5 +29,20 @@ class TicketRepo extends BaseRepository
 
         return $tickets;
     }
+    public function getTicket($ticketID, $userId)
+    {
+        $key = TicketCacheKeys::TICKET_BY_ID->value . $userId . 'ticketID' . $ticketID;
+        $tickets = Redis::get($key);
+        if (isset($tickets)) {
+            return unserialize($tickets);
+        }
 
+        $tickets = $this->model->where('user_id', $userId)
+                    ->where('id', $ticketID)
+                    ->first();
+
+        Redis::setex($key, 259200, serialize($tickets));
+        return $tickets;
+
+    }
 }
