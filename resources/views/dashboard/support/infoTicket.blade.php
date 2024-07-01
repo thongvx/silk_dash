@@ -29,6 +29,7 @@
                                             @php
                                                 $currentDate = null;
                                                 $data = json_decode($tickets->message, true);
+                                                $previousType = null;
                                             @endphp
                                             <div class="lg:max-h-[calc(100vh-20em)] max-h-[calc(100vh-22em)] overflow-auto pb-2 px-2 overscroll-y-auto snap-y"  id="box-message">
                                                 @foreach($data as $value)
@@ -48,8 +49,25 @@
                                                         @endphp
                                                     @endif
                                                     <div class="flex flex-col {{ $value['type'] == 2 ? 'items-end' : 'items-start'}} snap-end">
+                                                        @if($value['type'] == 2)
+                                                            <div class="message-class {{ $value['type'] == 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}}
+                                                                px-3 py-2 rounded-full mb-2 max-w-64 w-max" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
+                                                                <h4>
+                                                                    {{ Auth::user()->name }}
+                                                                </h4>
+                                                            </div>
+                                                        @else
+                                                            <div class="message-class {{ $value['type'] == 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}}
+                                                                px-3 py-2 rounded-full mb-2 max-w-64 w-max" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
+                                                                <h4>StreamSilk</h4>
+                                                            </div>
+                                                            @php
+                                                                $previousType = $value['type'];
+                                                            @endphp
+                                                        @endif
+
                                                         @if($value['url_file'] != 0)
-                                                            <div class="max-w-64 mb-2">
+                                                            <div class="max-w-64 mb-2 rounded-xl">
                                                                 <img src="{{ $value['url_file'] }}" alt="File Image">
                                                             </div>
                                                         @endif

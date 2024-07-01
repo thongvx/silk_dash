@@ -8,6 +8,7 @@ use App\Repositories\FolderRepo;
 use App\Repositories\EncoderTaskRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class VideoController
 {
@@ -177,7 +178,7 @@ class VideoController
             'direction' => $request->input('direction', 'asc'),
         ];
 
-        return view('dashboard.video.select2', $data);
+        return view('dashboard.video.search', $data);
     }
     //mover video
     public function moveVideos(Request $request)
@@ -336,4 +337,14 @@ class VideoController
 
         return response()->json($updatedVideos);
     }
+    // Setting video
+    public function editVideo($slug)
+    {
+        $data = [
+            'title' => 'Setting Video',
+            'video' => $this->videoRepo->findWhere(['slug' => $slug])->first(),
+        ];
+        return view('dashboard.video.settingVideo', $data);
+    }
+
 }

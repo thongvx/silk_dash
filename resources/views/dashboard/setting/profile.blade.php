@@ -1,5 +1,5 @@
 <div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
-    <div class="mb-2 text-[#009FB2] hidden" id='title'>
+    <div class="mb-2 text-[#009FB2]" id='title'>
         <h5 class="text-white flex justify-center">
             Api key: iCDR9HRrRY
         </h5>
