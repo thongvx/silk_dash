@@ -20,7 +20,7 @@
                         <span class="px-2 py-1">API documents</span>
                     </button>
                     <button
-                        class="{{request()->get('tab') === 'knowledge' ? 'knowledge tab-active !text-[#009FB2]' : 'knowledge'}}
+                        class="hidden {{request()->get('tab') === 'knowledge' ? 'knowledge tab-active !text-[#009FB2]' : 'knowledge'}}
                         knowledge hover:text-[#009FB2]  text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="knowledge">
                         <span class="px-2 py-1">Knowledge Base</span>

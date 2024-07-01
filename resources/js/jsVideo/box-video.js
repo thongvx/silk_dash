@@ -243,7 +243,69 @@ $(document).on('click', '#fixed-video [folder]', function() {
     });
 });
 
-
-
+const formSubtitles = `<div class="subtitles" id="subtitles">
+                                <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Subtitle</h5>
+                                <div id="list-file" class="max-h-80 overflow-auto my-3">
+                                     <div class="text-white">
+                                        <span>dgasdgsd</span>
+                                     </div>
+                                </div>
+                                <div class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132] w-max text-white cursor-pointer hover:bg-[#009fb2]" btn-add-sub>Add Subtitles</div>
+                                <form class="text-white mt-3 hidden" action="" id="add-sub">
+                                    <h4>Add Subtitles</h4>
+                                    <div class="bg-[#142132] rounded-lg text-center flex relative h-max box-img  hover:text-[#009fb2]">
+                                        <input name="file-sub" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
+                                               class="absolute opacity-0 file-img cursor-pointer w-full">
+                                        <label for="file-attach" class="w-full py-2 cursor-pointer text-center">Choose File Subtitles</label>
+                                    </div>
+                                    <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132]" disabled>Submit</button>
+                                </form>
+                            </div>`
+$(document).on('click', '[btn-subtitles]', function() {
+    const box = 'edit'
+    $('#fixed-box-control').append(formSubtitles)
+    fixedBox(box)
+    $('[btn-add-sub]').click(function() {
+        $('#subtitles form').removeClass('hidden')
+        $(this).addClass('hidden')
+        $('#subtitles form').on('submit', function(e) {
+            e.preventDefault();
+            const bntSubmit = $(this).find('button[type="submit"]');
+            var form = $(this).closest('form')[0];
+            var formData = new FormData(form);
+            $.ajax({
+                url: '/addsubtitles',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function() {
+                    bntSubmit.html(`
+                     <div class="flex text-white items-center">
+                        <div class="loading">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </div>
+                        <span>process</span>
+                    </div>
+                `)
+                    bntSubmit.prop('disabled', true);
+                },
+                success: function(response) {
+                    fixedBox ()
+                    $('#subtitles').remove();
+                    notification('success', 'Add subtitles successfully!')
+                },
+                error: function(response) {
+                    fixedBox()
+                    $('#subtitles').remove();
+                    notification('error', 'An error occurred while add subtitles the video title.')
+                }
+            });
+        });
+    })
+})
 
 

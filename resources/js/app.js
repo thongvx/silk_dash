@@ -17,7 +17,7 @@ import './jsVideo/box-video.js';
 import './jsVideo/folder.js';
 //report
 import './report/report.js';
-//support
+//supportAdmin
 import './support/ticket.js';
 //setting
 import './setting/setting.js';

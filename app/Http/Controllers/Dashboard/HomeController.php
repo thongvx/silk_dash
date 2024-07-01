@@ -55,10 +55,10 @@ class HomeController extends Controller
             'day' => $earningToday*0.4/1000,
             'month' => $monthData->map(function($item, $index) use ($earningToday) {
                 return $index === 0 ? $earningToday : $item['views'];
-            }),
+            })->reverse()->values(),
             'week' => $monthData->map(function($item, $index) use ($earningToday) {
                 return $index === 0 ? $earningToday : $item['views'];
-            })->slice(0, 7),
+            })->slice(0, 7)->reverse()->values(),
         ];
         $data['earnings'] = [
             'today' => $earningToday*0.4/1000,

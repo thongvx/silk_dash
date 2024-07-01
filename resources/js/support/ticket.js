@@ -37,3 +37,4 @@ $(document).on('click', '[btn-get-token]', function() {
         }
     });
 })
+

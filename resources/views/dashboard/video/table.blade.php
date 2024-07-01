@@ -74,7 +74,7 @@
                 <td class="text-center w-max">{{ $video->size }}</td>
                 <td class="text-center w-max">{{ $video->total_play }}</td>
                 <td class="pl-2 w-24">{{ $video->created_at }}</td>
-                <td class="text-center w-max">{{ $video->is_sub }}</td>
+                <td class="text-center w-max" btn-subtitles>{{ $video->is_sub }}</td>
             </tr>
         @empty
             <tr class="my-3 h-12 bg-[#142132]">

@@ -10,8 +10,8 @@
                    tab-lifted  ticket text-white tab-lifted  bg-[#142132] rounded-lg hover:bg-[#009FB2] cursor-pointer px-2  items-center flex"
             data-content="newticket">
             <i btn-move
-               class="material-symbols-outlined opacity-1 text-3xl mr-3">add</i>
-            <span class="px-2 py-1">new ticket</span>
+               class="material-symbols-outlined opacity-1 text-3xl mr-1">add</i>
+            <span class="px-2 py-1">New ticket</span>
         </button>
     </div>
 </div>
@@ -32,7 +32,9 @@
             @forelse($tickets as $ticket)
                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
                     <td class="px-2">{{ $ticket -> id }}</td>
-                    <td class="px-2">{{ $ticket -> subject }}</td>
+                    <td class="px-2">
+                        <a href="{{ route('support.show', ['support' => $ticket->id]) }}">{{ $ticket -> subject }}</a>
+                    </td>
                     <td class="px-2">{{ $ticket -> topic }}</td>
                     <td class="px-2">
                         @if($ticket -> status === 'completed')

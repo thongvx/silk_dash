@@ -34,12 +34,12 @@
                     <span>entries</span>
                 </div>
                 <div class="flex ">
-                    <button type="button" class="hover:bg-[#009FB2] rounded-lg flex items-center px-1.5 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
+                    <button type="button" class="hover:bg-[#009FB2] rounded-lg flex items-center px-2 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
                             title="poster"  btn-poster>
                         {!!
                             request() -> get('poster')
-                            ? '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility_off</i><span class="hidden sm:block">hide poster</span>'
-                            : '<i class="material-symbols-outlined opacity-1 text-xl mr-1">visibility</i><span class="hidden sm:block">show poster</span>'
+                            ? '<i class="material-symbols-outlined opacity-1 text-lg md:mr-1.5">visibility_off</i><span class="hidden sm:block">hide poster</span>'
+                            : '<i class="material-symbols-outlined opacity-1 text-lg md:mr-1.5">visibility</i><span class="hidden sm:block">show poster</span>'
                         !!}
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"
