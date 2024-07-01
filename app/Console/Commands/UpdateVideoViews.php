@@ -95,6 +95,41 @@ class UpdateVideoViews extends Command
         $query .= " ON DUPLICATE KEY UPDATE views = views + VALUES(views)";
 
         DB::statement($query);
+
+
+        // Chuẩn bị dữ liệu cho câu lệnh SQL
+        // Bật query log
+        DB::connection()->enableQueryLog();
+
+
+        $cases = [];
+        $ids = [];
+        $params = [];
+        foreach ($upsertData as $data) {
+            $cases[] = "WHEN ? THEN ?";
+            $params[] = $data['video_id'];
+            $params[] = $data['views'];
+            $ids[] = $data['video_id'];
+        }
+
+        // Tạo câu lệnh SQL
+        $ids = implode(',', $ids);
+        $cases = implode(' ', $cases);
+        $query = "UPDATE `videos` SET `total_play` = `total_play` + CASE `id` {$cases} END WHERE `id` in ({$ids})";
+
+        echo 'chay vao day';
+        // Thực thi câu lệnh SQL
+        DB::update($query, $params);
+
+// Lấy và hiển thị query log
+        $queries = DB::getQueryLog();
+        foreach ($queries as $query) {
+            $this->line('Query: ' . $query['query']);
+            $this->line('Bindings: ' . implode(', ', $query['bindings']));
+            $this->line('Time: ' . $query['time']);
+        }
+
+
     }
 
 }

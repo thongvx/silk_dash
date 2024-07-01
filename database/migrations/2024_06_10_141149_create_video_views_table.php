@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('video_views', function (Blueprint $table) {
             $table->unsignedBigInteger('video_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('views')->default(0);
             $table->date('date')->default(date('Y-m-d'));
+
+            $table->unique(['user_id', 'date', 'video_id']);
         });
     }
 

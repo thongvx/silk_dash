@@ -17,10 +17,33 @@ Thêm lệnh này vào cron:
 php /home/domain/public_html/artisan update:video-views
 
 
-  
 
-https://188.40.34.53:8090                     
+
+
+Visit: https://134.19.178.62:8090                     
 Panel username: admin                              
-Panel password: SDfFBCvfC92zMLoB
+Panel password: bhWQtEdrkXHdUDnN   
+
+Visit: https://134.19.178.61:8090                     
+Panel username: admin                              
+Panel password: sz6GES3TVZsJPw08
 
 
+//Cài triển khai horizon
+sudo apt-get update
+sudo apt-get install supervisor
+
+sudo nano /etc/supervisor/conf.d/horizon.conf
+
+cấu hình thên vào file trên như sau
+[program:horizon]
+process_name=%(program_name)s
+command=php /home/user.streamsilk.com/public_html/artisan horizon
+autostart=true
+autorestart=true
+user=root
+redirect_stderr=true
+stopwaitsecs=3600
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start horizon
