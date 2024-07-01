@@ -86,9 +86,19 @@ class UpdateVideoViews extends Command
         $query = "INSERT INTO video_views (video_id, user_id, date, views) VALUES ";
 
         $values = [];
+
+        $cases = [];
+        $ids = [];
+        $pr = [];
         foreach ($upsertData as $data) {
             $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
+            //Todo: ??
             Redis::del("user:{$data['user_id']}:top_videos:*");
+
+            $cases[] = "WHEN ? THEN ?";
+            $pr[] = $data['video_id'];
+            $pr[] = $data['views'];
+            $ids[] = $data['video_id'];
         }
 
         $query .= implode(', ', $values);
@@ -97,21 +107,6 @@ class UpdateVideoViews extends Command
         DB::statement($query);
 
 
-        // Chuẩn bị dữ liệu cho câu lệnh SQL
-        // Bật query log
-        DB::connection()->enableQueryLog();
-
-
-        $cases = [];
-        $ids = [];
-        $params = [];
-        foreach ($upsertData as $data) {
-            $cases[] = "WHEN ? THEN ?";
-            $params[] = $data['video_id'];
-            $params[] = $data['views'];
-            $ids[] = $data['video_id'];
-        }
-
         // Tạo câu lệnh SQL
         $ids = implode(',', $ids);
         $cases = implode(' ', $cases);
@@ -119,15 +114,8 @@ class UpdateVideoViews extends Command
 
         echo 'chay vao day';
         // Thực thi câu lệnh SQL
-        DB::update($query, $params);
+        DB::update($query, $pr);
 
-// Lấy và hiển thị query log
-        $queries = DB::getQueryLog();
-        foreach ($queries as $query) {
-            $this->line('Query: ' . $query['query']);
-            $this->line('Bindings: ' . implode(', ', $query['bindings']));
-            $this->line('Time: ' . $query['time']);
-        }
 
 
     }
