@@ -40,7 +40,6 @@ class SettingController
     public function update(Request $request)
     {
         $data = $request->all();
-        error_log(print_r($request ->all(), true));
         $validator = Validator::make($data, [
             'domain' => 'nullable|max:255',
             'logo' => 'nullable|file|max:2048',

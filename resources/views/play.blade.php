@@ -35,13 +35,13 @@
     var typeVideo = {{ $videoType }};
     var premium = {{ $premium }};
     var enablePlay = 'yes';
+    var logo = "{{ $logo }}";
     //logo
-    var logo = {{ $logo }};
-    if(logo == "no"){
+    if(logo === "no" || logo === "" || logo === '0'){
         var urlLogo = "";
     }
     else{
-        var urlLogo = {{ $logo_link }};
+        var urlLogo = "{{ asset(Storage::url($logo)) }}";
     }
     //poster
     //title
