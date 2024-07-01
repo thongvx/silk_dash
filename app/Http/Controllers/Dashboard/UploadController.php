@@ -196,6 +196,11 @@ class UploadController
         }
         return $result;
     }
+    //-------------------------------upload sub----------------------------------------------------
+    public function uploadSub(Request $request)
+    {
+
+    }
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
     {
