@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 
+use App\Models\Video;
 use App\Repositories\FolderRepo;
 use Illuminate\Support\Facades\Auth;
 use App\Factories\DownloadFactory;
@@ -199,7 +200,55 @@ class UploadController
     //-------------------------------upload sub----------------------------------------------------
     public function uploadSub(Request $request)
     {
-
+        $request = $request->all();
+        $user = Auth::user();
+        $dataVideo = Video::where('slug', $request['slug'])->first();
+        $folderPath = storage_path('app/public/subtitles/'.$request->slug);
+        //create folder
+        if(!file_exists($folderPath)){
+            mkdir($folderPath, 0777, true);
+        }
+        //upload file sub
+        if ($request->hasFile('file-sub')){
+            $fileSub = $request->file('file-sub');
+            $filenameSub = $request->slug . '-' . $request->subtitle . '.' . $fileSub->getClientOriginalExtension;
+            //delete file sub old
+            if(file_exists($folderPath.'/'.$filenameSub)){
+                $cmd = 'rm -rf '.$folderPath.'/'.$filenameSub;
+                shell_exec($cmd);
+            }
+            $fileSub->storeAs('subtitles', $filenameSub, 'public');
+            $url_file_sub = 'https://streamsilk.com/storage/subtitles/'.$request->slug.'/'.$filenameSub;
+            $dataSub = [
+                'kind' => 'captions',
+                'file' => $url_file_sub,
+                'label' => $request->subtitle,
+            ];
+            //file sub all
+            if(!file_exists($folderPath.'/'.$request->slug.'.json')){
+               $dataSub = json_encode($dataSub);
+               file_put_contents($folderPath.'/'.$request->slug.'.json', $dataSub);
+            }
+            else{
+                $jsonContent = file_get_contents($folderPath.'/'.$request->slug.'.json');
+                $dataSubOld = json_decode($jsonContent, true);
+                $dataSubOld[] = $dataSub;
+                $dataSubOld = json_encode($dataSubOld);
+                file_put_contents($folderPath.'/'.$request->slug.'.json', $dataSubOld);
+            }
+            $dataVideo->is_sub = 1;
+        }
+        //chane poster
+        if ($request->hasFile('file-poster')){
+            $filePoster = $request->file('file-poster');
+            $filenamePoster = $request->slug . '-' . $request->subtitle . '.' . $filePoster->getClientOriginalExtension;
+            $filePoster->storeAs('subtitles', $filenamePoster, 'public');
+            $url_file_poster = 'https://streamsilk.com/storage/poster/'.$filenamePoster;
+        }
+        $dataVideo->poster = $url_file_poster;
+        $dataVideo->title = $request->title;
+        $dataVideo->save();
+        return response()->json(['msg' => 'Upload success', 'status' => 200]);
     }
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
