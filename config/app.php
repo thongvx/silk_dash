@@ -188,4 +188,6 @@ return [
     ])->toArray(),
     'google_api_key' => env('API_KEY', 'AIzaSyBw5Dl-jfZdcZR8O5YJdGKQy3dhmO9OZs8'),
 
+    'telegram_bot_token' => env('TELEGRAM_BOT_TOKEN', '7269584257:AAHxv2FBJijpzWT_ZQgVgZg1oK2cMaZFVxk'),
+
 ];

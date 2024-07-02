@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\TelegramService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\NotificationRepo;
@@ -14,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('bot', function ($app) {
+            return new TelegramService();
+        });
     }
 
     /**
