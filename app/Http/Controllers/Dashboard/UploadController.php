@@ -211,7 +211,7 @@ class UploadController
         //upload file sub
         if ($request->hasFile('file-sub')){
             $fileSub = $request->file('file-sub');
-            $filenameSub = $slug . '-' . $request->subtitle . '.' . $fileSub->getClientOriginalExtension;
+            $filenameSub = $slug . '-' . $request->subtitle . '.' . $fileSub->getClientOriginalExtension();
             //delete file sub old
             if(file_exists($folderPath.'/'.$filenameSub)){
                 $cmd = 'rm -rf '.$folderPath.'/'.$filenameSub;
