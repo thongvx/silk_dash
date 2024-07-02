@@ -18,6 +18,7 @@ return new class extends Migration
                 $table->string('name', 10)->nullable();
                 $table->string('ip', 20)->nullable();
                 $table->string('ip_lan', 20)->nullable();
+                $table->string('ipv6', 100)->nullable();
                 $table->string('domain', 50)->nullable();
                 $table->string('pass', 50)->nullable();
                 $table->integer('port')->nullable();
