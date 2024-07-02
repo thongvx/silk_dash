@@ -10,11 +10,6 @@
                         <div class="rounded-xl">
                             <div class="relative rounded-xl">
                                 <div class="px-2 pt-4 md:p-4  rounded-xl">
-                                    <div class="mb-2" id='title'>
-                                        <h5 class="items-center text-transparent flex bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                                            <span>DMCA</span>
-                                        </h5>
-                                    </div>
                                     <div class="flex justify-between items-center w-full mb-3">
                                         <div class="text-sm bg-[#142132] rounded-lg p-2">
                                             <label for="limit">Show:</label>
@@ -57,15 +52,7 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr class="my-3 h-12 bg-[#142132]">
-                                                    <td class="text-center">1</td>
-                                                    <td><a href="/dmca/1" class="hover:text-[#009FB2]">copyright@govinet.com</a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button class="bg-emerald-400 px-3 py-1 rounded-md">open
-                                                        </button>
-                                                    </td>
-                                                    <td class="text-center">04/01/2022</td>
-                                                    <td class="text-center">04/02/2022</td>
+                                                    <td class="text-center" colspan="5">No data available in table</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

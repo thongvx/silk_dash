@@ -87,6 +87,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view('dashboard.premium', $data);
     });
     Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);
+    Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
+    Route::post('/update-player', [\App\Http\Controllers\Dashboard\Setting\PlayerSettingController::class, 'update'])->name('update.player');
+
     Route::get('affiliate',function (){
         $data['title'] = 'Affiliate';
         return view('dashboard.affiliate', $data);
@@ -98,7 +101,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::post('/updatesetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
 
-    Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     Route::get('/regenerateToken', [App\Http\Controllers\Auth\ProfileController::class, 'regenerateToken'])->name('regenerate.token');
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);

@@ -19,10 +19,12 @@ class Folder extends Model
         'number_file', // Số lượng file
         'soft_delete', // Cờ soft delete
     ];
+
     public function videos()
     {
         return $this->hasMany(Video::class);
     }
+
     protected static function boot()
     {
         parent::boot();
@@ -33,10 +35,11 @@ class Folder extends Model
         });
 
         static::deleted(function ($model) {
-            $model-> deleteCacheFolder();
+            $model->deleteCacheFolder();
 
         });
     }
+
     // Các phương thức, quan hệ và logic thêm có thể được định nghĩa ở đây
     public function deleteCacheFolder()
     {

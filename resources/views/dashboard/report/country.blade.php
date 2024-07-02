@@ -36,7 +36,7 @@
             <th class="py-1.5 px-3">{{ $reports->sum('download') }}</th>
             <th class="py-1.5 px-3">{{ $reports->sum('paid_views') }}</th>
             <th class="py-1.5 px-3">{{ $reports->sum('vpn_ads_views') }}</th>
-            <th class="py-1.5 px-3">{{ $reports->avg('cpm') }}</th>
+            <th class="py-1.5 px-3">{{ number_format($reports->avg('cpm'), 2) }}</th>
             <th class="py-1.5 px-3">{{ $reports->sum('revenue') }} $</th>
         </tr>
         </tfoot>

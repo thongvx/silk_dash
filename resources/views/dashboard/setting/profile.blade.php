@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="col-span-2 md:col-span-1 gap-4 ">
-                    <h1 class="text-white text-2xl mb-3 ">FTP Credentials</h1>
+                    <h1 class="text-white text-2xl mb-3 ">API and FTP Credentials</h1>
                     <div class="items-center flex">
                         <h5 class="text-stat w-20 mr-3">
                             API Key

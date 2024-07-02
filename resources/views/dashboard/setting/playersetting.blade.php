@@ -1,6 +1,5 @@
 <div class="mt-2">
-    <form id="form-setting" action="" useID="{{$setting -> user_id}}">
-        @csrf
+    <form id="form-player-setting">
         <div class="grid grid-cols-2 gap-x-8 gap-y-10 text-slate-400 font-medium px-2 md:px-4 overflow-auto max-h-[calc(100vh-23em)] md:max-h-[calc(100vh-17em)]">
             <div class="col-span-2 md:col-span-1 gap-4 ">
                 <div class="w-full">
@@ -11,7 +10,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                               value="{{$setting -> showTitle}}" name="showTitle" {{$setting -> showTitle == 1 ? 'checked' : ''}}>
+                               value="{{$playerSettings->show_title}}" name="show_title" {{$playerSettings->show_title == 1 ? 'checked' : ''}}>
                         <label for="embeds" class="ml-3">
                             Show title
                         </label>
@@ -22,7 +21,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                               value="" name="show_logo">
+                               value="{{$playerSettings->show_logo}}" name="show_logo" {{$playerSettings->show_logo == 1 ? 'checked' : ''}}>
                         <label for="embeds" class="ml-3">
                             Show Logo
                         </label>
@@ -33,7 +32,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                               value="{{$setting -> showTitle}}" name="" {{$setting -> showTitle == 1 ? 'checked' : ''}}>
+                               value="{{$playerSettings->show_poster}}" name="show_poster" {{$playerSettings->show_poster == 1 ? 'checked' : ''}}>
                         <label for="embeds" class="ml-3">
                             Show poster
                         </label>
@@ -44,7 +43,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                               value="" name="">
+                               value="{{$playerSettings->show_download}}" name="show_download" {{$playerSettings->show_download == 1 ? 'checked' : ''}}>
                         <label for="embeds" class="ml-3">
                             Show Download Button
                         </label>
@@ -55,7 +54,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                               value="" name="">
+                               value="{{$playerSettings->show_preview}}" name="show_preview" {{$playerSettings->show_preview == 1 ? 'checked' : ''}}>
                         <label for="embeds" class="ml-3">
                             Show Preview
                         </label>
@@ -66,7 +65,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                               value="" name="">
+                               value="{{$playerSettings->infinite_loop}}" name="infinite_loop" {{$playerSettings->infinite_loop == 1 ? 'checked' : ''}}>
                         <label for="embeds" class="ml-3">
                             Infinite Loop
                         </label>
@@ -77,45 +76,45 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                               value="{{$setting -> adblock}}"   name="adblock" {{$setting -> adblock == 1 ? 'checked' : ''}}>
+                               value="{{$playerSettings->disable_adblock}}"   name="disable_adblock" {{$playerSettings->disable_adblock == 1 ? 'checked' : ''}}>
                         <label for="adblock" class="ml-3">
                             Force to disable adblocker
                         </label>
                     </div>
                     <div class="items-center mt-3 w-full">
-                        <div class="mt-2 flex items-center">
-                            <label for="block" class="w-40">
-                                Thumbnail Gird Size
+                        <div class="mt-2 md:flex items-center">
+                            <label for="block" class="w-60">
+                                Thumbnail/Poster Gird Size
                             </label>
                             <div class="flex justify-between">
                                 <div>
-                                    <input type="radio" id="1" name="gridPoster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                    <input type="radio" id="1" name="thumbnail_grid" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                           value="1" {{$setting -> gridPoster == 1 ? 'checked' : ''}}>
+                                           value="1" {{$playerSettings->thumbnail_grid == 1 ? 'checked' : ''}}>
 
                                     <label for="1" class="ml-3">1x1</label>
                                 </div>
                                 <div class="mx-8">
-                                    <input type="radio" id="4" name="gridPoster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                    <input type="radio" id="4" name="thumbnail_grid" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                           value="4" {{$setting -> gridPoster == 4 ? 'checked' : ''}}>
+                                           value="4" {{$playerSettings->thumbnail_grid == 4 ? 'checked' : ''}}>
 
                                     <label for="4" class="ml-3">4x4</label>
                                 </div>
 
                                 <div>
-                                    <input type="radio" id="5" name="gridPoster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                    <input type="radio" id="5" name="thumbnail_grid" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                           value="5" {{$setting -> gridPoster == 5 ? 'checked' : ''}}>
+                                           value="5" {{$playerSettings->thumbnail_grid == 5 ? 'checked' : ''}}>
 
                                     <label for="5" class="ml-3">5x5</label>
                                 </div>
@@ -127,7 +126,7 @@
                             <label for="block" class="w-40">
                                 Primary Color
                             </label>
-                            <input type="color"  name=""  value=""
+                            <input type="color"  name="premium_color"  value="{{ $playerSettings->premium_color }}"
                                    class=" text-white placeholder:text-gray-400/80 placeholder:font-normal
                                    w-full mx-1 p-0 bg-transparent h-8 appearance-none outline-none autofill:bg-yellow-200 rounded-lg">
                         </div>
@@ -137,7 +136,7 @@
                             <label for="block" class="w-40">
                                 Embed Width
                             </label>
-                            <input type="text"  name="" value="800"
+                            <input type="text"  name="embed_width"  value="{{ $playerSettings->embed_width }}"
                                    class="py-1.5 hover:bg-[#142132] bg-[#142132]/70 text-white placeholder:text-gray-400/80 placeholder:font-normal
                                    w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200 rounded-lg">
                         </div>
@@ -147,7 +146,7 @@
                             <label for="block" class="w-40">
                                 Embed Height
                             </label>
-                            <input type="text"  name="" value="800"
+                            <input type="text"  name="embed_height"  value="{{ $playerSettings->embed_height }}"
                                    class="py-1.5 hover:bg-[#142132] bg-[#142132]/70 text-white placeholder:text-gray-400/80 placeholder:font-normal
                                    w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200 rounded-lg">
                         </div>
@@ -159,18 +158,18 @@
                     <h1 class="text-white text-2xl mb-3 ">Customize Logo</h1>
                     <div class="items-center w-full">
                         <div class="flex box-img">
-                            <img src="{{ in_array($setting->logo, ['', null, 0]) ? '' : Storage::url($setting->logo) }}" alt="" class="{{ in_array($setting->logo, ['', null, 0]) ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
+                            <img src="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? '' : Storage::url($playerSettings->logo_link) }}" alt="" class="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
                             <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full items-center relative">
                                 <input name="logo" type="file" id="file-logo" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img cursor-pointer w-full h-full">
                                 <label for="file-logo" class="w-full">choose file</label>
                             </div>
                             <div btn-delete-selected class="hidden items-center rounded-lg bg-rose-500 hover:bg-red-700 px-3 py-1 cursor-pointer mb-3 ml-3">
-                                <h4 class="w-max flex h-full items-center">Delete selected</h4>
+                                <h4 class="w-max flex h-full items-center text-white">Delete selected</h4>
                             </div>
                         </div>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power" name="power" value="{{ in_array($setting->logo, ['', null, 0]) ? '' : asset(Storage::url($setting->logo)) }}"
+                            <input type="text" id="power" value="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo_link)) }}"
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
                         </div>
@@ -181,23 +180,23 @@
                             <select name="position" class="w-full h-max text-white outline-none bg-[#142132] px-3 py-1.5 rounded-lg hover:bg-[#009FB2]"
                                     id="position">
                                 <option value="tl"
-                                        class="position" {{ $setting -> position == 'tl' ? 'selected' : ''}}>
+                                        class="position" {{ $playerSettings->position == 'tl' ? 'selected' : ''}}>
                                     Top left
                                 </option>
                                 <option value="tr"
-                                        class="position" {{ $setting -> position == 'tr' ? 'selected' : ''}}>
+                                        class="position" {{ $playerSettings->position == 'tr' ? 'selected' : ''}}>
                                     Top right
                                 </option>
                                 <option value="bl"
-                                        class="position" {{ $setting -> position == 'bl' ? 'selected' : ''}}>
+                                        class="position" {{ $playerSettings->position == 'bl' ? 'selected' : ''}}>
                                     Bottom left
                                 </option>
                                 <option value="br"
-                                        class="position" {{ $setting -> position == 'br' ? 'selected' : ''}}>
+                                        class="position" {{ $playerSettings->position == 'br' ? 'selected' : ''}}>
                                     Bottom right
                                 </option>
-                                <option value=""
-                                        class="position" {{ $setting -> position == null || $setting -> position == '' ? 'selected' : ''}}>
+                                <option value="control-bar"
+                                        class="position" {{ $playerSettings->position == 'control-bar' ? 'selected' : ''}}>
                                     Control bar
                                 </option>
                             </select>
@@ -208,7 +207,7 @@
                     <h1 class="text-white text-2xl mb-3 ">Customize Poster</h1>
                     <div class="items-center mt-3 w-full">
                         <div class="flex box-img">
-                            <img src="{{ in_array($setting->poster, ['', null, 0]) ? '' : Storage::url($setting->poster) }}" alt="" class="{{ in_array($setting->poster, ['', null, 0])  ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
+                            <img src="{{ in_array($playerSettings->poster_link, ['', null, 0]) ? '' : Storage::url($playerSettings->poster_link) }}" alt="" class="{{ in_array($playerSettings->poster_link, ['', null, 0])  ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
                             <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full relative">
                                 <input name="poster" type="file" id="file-poster" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img cursor-pointer w-full h-full">
@@ -219,7 +218,7 @@
                             </div>
                         </div>
                         <div class="rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power" name="power-poster" value=""
+                            <input type="text" id="power" name="poster_link" value=""
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
                         </div>
@@ -235,13 +234,13 @@
                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                   after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                           value="{{$setting -> captionsMode ==1 ? '0': '1'}}" {{$setting -> captionsMode ==1 ? 'checked': ''}}>
+                           value="{{$playerSettings->captionsMode ==1 ? '0': '1'}}" {{$playerSettings->captionsMode ==1 ? 'checked': ''}}>
                     <label for="embeds" class="ml-3">
                         Enable Caption/Subtitles
                     </label>
                 </div>
             </div>
-            <div class="col-span-2 md:col-span-1 gap-4 ">
+            <div class="col-span-2 md:col-span-1 gap-4 hidden">
                 <div class="w-full">
                     <h1 class="text-white text-2xl mb-3 ">Resume</h1>
                     <div class="items-center w-full">
@@ -249,7 +248,7 @@
                             Title
                         </label>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power" name="power" value="{{ in_array($setting->logo, ['', null, 0]) ? '' : asset(Storage::url($setting->logo)) }}"
+                            <input type="text" id="power"  value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo)) }}"
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
                         </div>
@@ -259,7 +258,7 @@
                             Message
                         </label>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power" name="power" value="{{ in_array($setting->logo, ['', null, 0]) ? '' : asset(Storage::url($setting->logo)) }}"
+                            <input type="text" id="power"  value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo)) }}"
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
                         </div>
@@ -270,7 +269,7 @@
                                 Yes
                             </label>
                             <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                                <input type="text" id="power" name="power" value="{{ in_array($setting->logo, ['', null, 0]) ? '' : asset(Storage::url($setting->logo)) }}"
+                                <input type="text" id="power"  value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo)) }}"
                                        class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                        placeholder="Power url">
                             </div>
@@ -280,7 +279,7 @@
                                 No
                             </label>
                             <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                                <input type="text" id="power" name="power" value="{{ in_array($setting->logo, ['', null, 0]) ? '' : asset(Storage::url($setting->logo)) }}"
+                                <input type="text" id="power"  value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo)) }}"
                                        class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                        placeholder="Power url">
                             </div>

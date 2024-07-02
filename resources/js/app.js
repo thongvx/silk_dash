@@ -21,6 +21,7 @@ import './report/report.js';
 import './support/ticket.js';
 //setting
 import './setting/setting.js';
+import './setting/player-settings.js';
 //dmca
 import './dmca/dmca.js';
 //premium
