@@ -219,11 +219,11 @@ class UploadController
             }
             else{
                 $url_file_sub = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$filenameSub;
-                $dataSub = [
+                $dataSub = [[
                     'kind' => 'captions',
                     'file' => $url_file_sub,
                     'label' => $request->subtitle,
-                ];
+                ]];
                 //file sub all
                 if(!file_exists($folderPath.'/'.$slug.'.json')){
                     $dataSub = json_encode($dataSub);
@@ -232,8 +232,8 @@ class UploadController
                 else{
                     $jsonContent = file_get_contents($folderPath.'/'.$slug.'.json');
                     $dataSubOld = json_decode($jsonContent, true);
-                    array_push($dataSubOld, $dataSub);
-                    $dataSubNew = json_encode($dataSubOld);
+                    $dataSubNew = array_merge($dataSubOld, $dataSub);
+                    $dataSubNew = json_encode($dataSubNew);
                     file_put_contents($folderPath.'/'.$slug.'.json', $dataSubNew);
                 }
             }
