@@ -232,7 +232,7 @@ class UploadController
                 else{
                     $jsonContent = file_get_contents($folderPath.'/'.$slug.'.json');
                     $dataSubOld = json_decode($jsonContent, true);
-                    array_push($dataSubOld[0], $dataSub);
+                    array_push($dataSubOld, $dataSub);
                     $dataSubNew = json_encode($dataSubOld);
                     file_put_contents($folderPath.'/'.$slug.'.json', $dataSubNew);
                 }
