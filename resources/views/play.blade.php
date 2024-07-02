@@ -57,7 +57,6 @@
             jwplayer8quality: true,
             controls: true,
             preload: true,
-            aspectratio: "16:9",
             width: '100%',
             height: '100%',
             skin: { active: "rgb(221,51,51)", },

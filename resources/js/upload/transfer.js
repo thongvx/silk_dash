@@ -29,9 +29,9 @@ $(document).on('submit', '#transferLink', function(event) {
                                             <div class="size"></div>
                                         </div>
                                         <div class="progress bg-gray-600 h-3.5 rounded-lg">
-                                            <div class="bar bg-orange-500 h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center" style="width:0">0</div>
+                                            <div class="bar bg-blue-500 h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center" style="width:0">0</div>
                                         </div>
-                                        <div class="text-orange-500 mt-3 status">
+                                        <div class="text-blue-500 mt-3 status">
                                             Pending
                                         </div>
                                         <div class="text-white mt-3">

@@ -2,194 +2,191 @@
 <div class="mt-5">
     <form id="form-setting">
         @csrf
-        <div class="text-[#009FB2]">
-            <div class="grid grid-cols-4 gap-4 ">
-                <h5 class="col-span-4 sm:col-span-1 md:text-end">
-                    Video type
-                </h5>
-                <div class="col-span-4 sm:col-span-3 md:col-span-2 flex flex-col text-white font-normal">
-                    <div class="flex justify-between">
-                        <div>
-                            <input type="radio" id="Non" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+        <div class="grid grid-cols-2 gap-x-8 gap-y-10 text-slate-400 font-medium px-2 md:px-4 overflow-auto max-h-[calc(100vh-23em)] md:max-h-[calc(100vh-17em)]">
+            <div class="col-span-2 md:col-span-1 gap-4 ">
+                <div class="mb-10">
+                    <h1 class="text-white text-2xl mb-3 ">Video type</h1>
+                    <div class="items-center flex">
+                        <input type="radio" id="Non" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                            value="1" {{$setting -> videoType == 1 ? 'checked' : ''}}
-                            >
-
-                            <label for="Non" class="ml-3">Non Adult</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="Adult" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                               value="1" {{$setting -> videoType == 1 ? 'checked' : ''}}>
+                        <label for="Non" class="ml-3">Non Adult</label>
+                    </div>
+                    <div class="items-center mt-5 flex">
+                        <input type="radio" id="Adult" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                            value="2" {{$setting -> videoType == 2 ? 'checked' : ''}}>
-
-                            <label for="Adult" class="ml-3">Adult (18+)</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" id="Both" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                               value="2" {{$setting -> videoType == 2 ? 'checked' : ''}}>
+                        <label for="Adult" class="ml-3">Adult (18+)</label>
+                    </div>
+                    <div class="items-center mt-5 flex">
+                        <input type="radio" id="Both" name="videoType" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                           value="3" {{$setting -> videoType == 3 ? 'checked' : ''}}>
-
-                            <label for="Both" class="ml-3">Both Adult & Non Adult</label>
+                               value="3" {{$setting -> videoType == 3 ? 'checked' : ''}}>
+                        <label for="Both" class="ml-3">Both Adult & Non Adult</label>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-white text-2xl mb-3 ">Access Settings</h1>
+                    <div class="items-center flex">
+                        <div class="mt-2">
+                            <input type="checkbox" id="block" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                          after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                          border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                          after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
+                                                          checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
+                            <label for="block" class="ml-3">
+                                Disable direct access
+                            </label>
                         </div>
                     </div>
-                    <div class="mt-2">
-                        <input type="checkbox" id="adblock" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
-                        value="{{$setting -> adblock}}"   name="adblock" {{$setting -> adblock == 1 ? 'checked' : ''}}>
-                        <label for="adblock" class="ml-3">
-                            Force to disable adblocker
-                        </label>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
+                            <input name="disableDownload" type="checkbox"   class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                          after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                          border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                          after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
+                                                          checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="{{$setting -> disableDownload}}" {{$setting -> disableDownload == 1 ? 'checked' : ''}}>
+                            <label for="block" class="ml-3">
+                                Disable Download
+                            </label>
+                        </div>
                     </div>
-                    <div class="mt-2">
-                        <input type="checkbox" id="embeds" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
-                        value="{{$setting -> showTitle}}"    name="showTitle" {{$setting -> showTitle == 1 ? 'checked' : ''}}>
-                        <label for="embeds" class="ml-3">
-                            Show title in embeds
-                        </label>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
+                            <input type="checkbox" id="block" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                          after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                          border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                          after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
+                                                          checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
+                            <label for="block" class="ml-3">
+                                Disable Video Embed Page
+                            </label>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-4 gap-4 mt-6">
-                <h5 class="col-span-4 sm:col-span-1 md:text-end">
-                    Access Restriction
-                </h5>
-                <div class="col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal">
-                    <h5>(Allow who will be able to access your videos)</h5>
-                    <div class="mt-2">
-                        <input type="checkbox" id="block" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
-                        name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
-                        <label for="block" class="ml-3">
-                            Block direct access & only allow embeds
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-4 gap-4 mt-6">
-                <h5 class="col-span-4 sm:col-span-1 md:text-end">
-                    Only follow (sub) domains to embed (comma seperated)
-                </h5>
-                <div class="col-span-2 text-white font-normal">
-                    <div class="mt-2">
-                        <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" name="domain" value="{{$setting -> domain}}"
-                                   class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="website">
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
+                            <input type="checkbox" type="checkbox"  name="publicVideo" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                          after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                          border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                          after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
+                                                          checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="{{$setting -> publicVideo}}" {{$setting -> publicVideo == 1 ? 'checked' : ''}}>
+                            <label for="block" class="ml-3">
+                                Disable Video Cloning
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-4 gap-4 items-center mt-6">
-                <h5 class="col-span-4 sm:col-span-1 md:text-end">
-                   Mode
-                </h5>
-                <div class="col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal grid grid-cols-2 gap-4 items-center">
-                    <div class="flex">
-                        <h5 class="mr-4">
-                            Premium Mode
-                        </h5>
-                        <input name="premiumMode" type="checkbox" id="remember" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
-                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
-                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
-                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
-                                                         bg-left bg-no-repeat align-top transition-all after:absolute
-                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
-                                                         after:content-[''] checked:border-green-500/95 checked:bg-green-500/95
-                                                         checked:bg-none checked:bg-right"
-                        value="{{$setting -> premiumMode}}" {{$setting -> premiumMode == 1 ? 'checked' : ''}}>
-                    </div>
-                    <div class="flex">
-                        <h5 class="mr-4">
-                            Disable Download
-                        </h5>
-                        <input name="disableDownload" type="checkbox"  id="remember" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
-                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
-                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
-                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
-                                                         bg-left bg-no-repeat align-top transition-all after:absolute
-                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
-                                                         after:content-[''] checked:border-green-500/95 checked:bg-green-500/95
-                                                         checked:bg-none checked:bg-right"
-                       value="{{$setting -> disableDownload}}" {{$setting -> disableDownload == 1 ? 'checked' : ''}}>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-4 gap-4 items-center mt-6">
-                <h5 class="col-span-4 sm:col-span-1 md:text-end">
-                    Public Videos
-                </h5>
-                <div class="text-white col-span-4 sm:col-span-3 md:col-span-2">
-                    <div class="mt-2">
-                        <input type="checkbox" type="checkbox"  name="publicVideo" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
-                        value="{{$setting -> publicVideo}}" {{$setting -> publicVideo == 1 ? 'checked' : ''}}>
-                        <span class="ml-3">
-                            Allow other users tranfer (copy) videos
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-4 gap-4 mt-6">
-                <h5 class="col-span-4 sm:col-span-1 md:text-end text-warning">
-                    Earning Modes
-                </h5>
-                <div class="text-white col-span-4 sm:col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]">
-                    <div class="flex justify-between flex-col p-2">
-                        <div class="mb-3">
+            <div class="col-span-2 md:col-span-1 gap-4 ">
+                <h1 class="text-white text-2xl mb-3 ">Earning Modes</h1>
+                <div>
+                    <h4 class="text-[#009FB2] text-lg">Views</h4>
+                    <div class="items-center flex">
+                        <div class="mt-2">
                             <input type="radio" id="2" name="earningModes" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                  checked:border-0 checked:border-transparent checked:after:opacity-100"
-                           value="1"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="1"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
 
-                            <label for="1" class="ml-3">No Earning: 1 Popunder on pre-roll (per page)</label>
+                            <label for="1" class="ml-3">Maximum Ads - 100% Earnings</label>
                         </div>
-                        <div class="mb-3">
+                    </div>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
                             <input type="radio" id="2" name="earningModes" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                  checked:border-0 checked:border-transparent checked:after:opacity-100"
-                            value="2"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="2"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
 
-                            <label for="2" class="ml-3">$1 per 10k views:  2 Popunders on pre-roll </label>
+                            <label for="2" class="ml-3">Medium Ads - 50% Earnings</label>
                         </div>
-
-                        <div>
+                    </div>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
                             <input type="radio" id="2.5" name="earningModes" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                  checked:border-0 checked:border-transparent checked:after:opacity-100"
-                            value="3"  {{$setting -> earningModes == 3 ? 'checked' : ''}}>
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="3"  {{$setting -> earningModes == 3 ? 'checked' : ''}}>
 
-                            <label for="3" class="ml-3">$2.5 per 10k views: 3 Popunders on pre-roll</label>
+                            <label for="3" class="ml-3">Minimal Ads - No Earnings</label>
                         </div>
                     </div>
+                </div>
+                <div class="mt-8">
+                    <h4 class="text-[#009FB2] text-lg">Download</h4>
+                    <div class="items-center flex">
+                        <div class="mt-2">
+                            <input type="radio" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="1"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
+
+                            <label for="1" class="ml-3">Maximum Ads - 100% Earnings</label>
+                        </div>
+                    </div>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
+                            <input type="radio" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="2"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
+
+                            <label for="2" class="ml-3">Medium Ads - 50% Earnings</label>
+                        </div>
+                    </div>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
+                            <input type="radio" id="2.5" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                   value="3"  {{$setting -> earningModes == 3 ? 'checked' : ''}}>
+
+                            <label for="3" class="ml-3">Minimal Ads - No Earnings</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-[#009FB2]">
+            <div class=" hidden col-span-4 sm:col-span-3 md:col-span-2 text-white font-normal grid grid-cols-2 gap-4 items-center">
+                <div class="flex">
+                    <h5 class="mr-4">
+                        Premium Mode
+                    </h5>
+                    <input name="premiumMode" type="checkbox" id="remember" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-green-500/95 checked:bg-green-500/95
+                                                         checked:bg-none checked:bg-right"
+                           value="{{$setting -> premiumMode}}" {{$setting -> premiumMode == 1 ? 'checked' : ''}}>
                 </div>
             </div>
             <div class="text-center mt-3 my-10">

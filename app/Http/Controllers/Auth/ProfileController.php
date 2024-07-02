@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Rules\MatchOldPassword;
 
 class ProfileController extends Controller
 {
@@ -37,6 +39,25 @@ class ProfileController extends Controller
         $user->save();
 
         return response()->json(['message' => 'Profile updated successfully']);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $data = $request->all();
+        // Validate the request data
+        Validator::make($data,[
+            'current-password' => ['required', new MatchOldPassword],
+            'new-password' => ['required', 'string', 'min:8'],
+            'new-password_confirmation' => ['required', 'same:new-password'],
+        ])->validate();
+
+        // Change the password
+        $user = Auth::user();
+        $user->password = Hash::make($data['new-password']);
+        $user->save();
+
+        // Return a success message
+        return response()->json(['message' => 'Password changed successfully']);
     }
 
     public function regenerateToken(Request $request)

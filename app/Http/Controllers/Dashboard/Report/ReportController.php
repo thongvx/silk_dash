@@ -98,13 +98,20 @@ class ReportController extends Controller
     {
         if($date == 'today'){
             $data_today = [];
-            $viewsKey = "total:{$userId}";
+            $totalViews = 0;
+            $countryViewsKeys = Redis::keys("total:{$userId}:*");
+            foreach ($countryViewsKeys as $key) {
+                $views = Redis::get($key);
+                $totalViews += $views;
+            }
+            $totalViews = intval($totalViews);
+            $cpm = $totalViews > 0 ? array_sum($earningToday) / $totalViews * 1000 : 0;
             $data_today[] = [
                     'date' => $today->format('Y-m-d'),
-                    'cpm' => array_sum($earningToday) ,
-                    'views' => Redis::get($viewsKey) ?: 0,
+                    'cpm' => $cpm ,
+                    'views' => $totalViews,
                     'download' => 0,
-                    'paid_views' => 0,
+                    'paid_views' => $totalViews,
                     'vpn_ads_views' => 0,
                     'revenue' => array_sum($earningToday)
             ];
@@ -121,29 +128,41 @@ class ReportController extends Controller
 
     public function getDataCountry($userId,$tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
     {
+        $data_today = [];
         if($date == 'today'){
-            $data_today = [];
-            foreach ($earningToday as $country_code => $revenue) {
-                if($AllCountries->has($country_code)){
-                    $viewsKey = "total:{$userId}:{$country_code}";
-                    $countryViews = Redis::get($viewsKey);
-                    $countryViews = $countryViews ?: 0;
-                    $countryvpnAdsView = 0;
-                    $countrydownload = 0;
-                    $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
+            $countryViewsKeys = Redis::keys("total:{$userId}:*");
+            foreach ( $countryViewsKeys as $key) {
+                $countryViews = Redis::get($key);
+                $countryViews = $countryViews ?: 0;
+                $countryvpnAdsView = 0;
+                $countrydownload = 0;
+                $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
+                $countryCode = explode(':', $key)[2];
+                $getcountry = $AllCountries->firstWhere('code', $countryCode);
+                if($country !== null){
+                    if (is_string($country)) {
+                        $country = explode(',', $country);
+                    }
+                    if (!in_array($countryCode, $country)) {
+                        continue;
+                    }
+                }
+                if ($getcountry) {
+                    $country_name = $getcountry->name;
+                    $revenue = isset($earningToday[$countryCode]) ? $earningToday[$countryCode] : 0;
+                    $cpm = $countryViews > 0 ? $revenue / $countryViews * 1000 : 0;
                     $data_today[] = [
                         'date' => $today->format('Y-m-d'),
-                        'country_name' => $AllCountries->get($country_code)->name,
-                        'cpm' => $revenue / $countryViews * 1000,
+                        'country_name' => $country_name,
+                        'cpm' => $cpm,
                         'views' => $countryViews,
                         'download' => $countrydownload,
                         'paid_views' => $paidView,
                         'vpn_ads_views' => $countryvpnAdsView,
-                        'revenue' => array_sum($earningToday),
+                        'revenue' => $revenue,
                     ];
                 }
             }
-
             $data = collect(array_map(function ($item) {
                 return (object) $item;
             }, $data_today));
