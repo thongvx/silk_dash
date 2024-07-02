@@ -217,26 +217,29 @@ class UploadController
                 $cmd = 'rm -rf '.$folderPath.'/'.$filenameSub;
                 shell_exec($cmd);
             }
-            $fileSub->storeAs('subtitles/'.$slug, $filenameSub, 'public');
-            $url_file_sub = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$filenameSub;
-            $dataSub = [
-                'kind' => 'captions',
-                'file' => $url_file_sub,
-                'label' => $request->subtitle,
-            ];
-            //file sub all
-            if(!file_exists($folderPath.'/'.$slug.'.json')){
-               $dataSub = json_encode($dataSub);
-               file_put_contents($folderPath.'/'.$slug.'.json', $dataSub);
-            }
             else{
-                $jsonContent = file_get_contents($folderPath.'/'.$slug.'.json');
-                $dataSubOld = json_decode($jsonContent, true);
-                $sizeData = count($dataSubOld);
-                $dataSubOld[$sizeData] = $dataSub;
-                $dataSubOld = json_encode($dataSubOld);
-                file_put_contents($folderPath.'/'.$slug.'.json', $dataSubOld);
+                $url_file_sub = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$filenameSub;
+                $dataSub = [
+                    'kind' => 'captions',
+                    'file' => $url_file_sub,
+                    'label' => $request->subtitle,
+                ];
+                //file sub all
+                if(!file_exists($folderPath.'/'.$slug.'.json')){
+                    $dataSub = json_encode($dataSub);
+                    file_put_contents($folderPath.'/'.$slug.'.json', $dataSub);
+                }
+                else{
+                    $jsonContent = file_get_contents($folderPath.'/'.$slug.'.json');
+                    $dataSubOld = json_decode($jsonContent, true);
+                    $sizeData = count($dataSubOld);
+                    $dataSubOld[$sizeData] = $dataSub;
+                    $dataSubOld = json_encode($dataSubOld);
+                    file_put_contents($folderPath.'/'.$slug.'.json', $dataSubOld);
+                }
             }
+            $fileSub->storeAs('subtitles/'.$slug, $filenameSub, 'public');
+
             $dataVideo->is_sub = 1;
         }
         //chane poster
