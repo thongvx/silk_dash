@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name', 10)->nullable();
             $table->string('ip', 15)->nullable();
-            $table->string('pass', 20)->nullable();
+            $table->string('pass', 50)->nullable();
             $table->integer('port')->nullable();
             $table->integer('upload')->nullable();
             $table->integer('encoder')->nullable();
