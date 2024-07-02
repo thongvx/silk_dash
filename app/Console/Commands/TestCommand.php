@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Facades\Bot;
 use App\Factories\DownloadFactory;
 use App\Models\SvStream;
 use App\Models\Video;
@@ -35,6 +36,7 @@ class TestCommand extends Command
     public function handle()
     {
 
+        Bot::send('Ahihi do ngok');
     }
 
 }
