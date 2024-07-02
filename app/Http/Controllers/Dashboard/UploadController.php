@@ -232,8 +232,8 @@ class UploadController
                 else{
                     $jsonContent = file_get_contents($folderPath.'/'.$slug.'.json');
                     $dataSubOld = json_decode($jsonContent, true);
-                    $dataSubNew = array_merge($dataSubOld, $dataSub);
-                    $dataSubNew = json_encode($dataSubNew);
+                    array_push($dataSubOld, $dataSub);
+                    $dataSubNew = json_encode($dataSubOld);
                     file_put_contents($folderPath.'/'.$slug.'.json', $dataSubNew);
                 }
             }
