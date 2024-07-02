@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @forelse ($reports as $data)
-                <tr class="my-3 h-12 bg-[#142132]">
+                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
                     <td class="text-center">{{ $data->country_name }}</td>
                     <td class="text-center">{{ $data->views }}</td>
                     <td class="text-center">{{ $data->download }}</td>
