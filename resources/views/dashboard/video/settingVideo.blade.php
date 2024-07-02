@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="grid grid-cols-4 gap-4 items-center mt-6">
                                             <h5 class="col-span-1 text-end">
-                                                Subtitlees
+                                                Subtitles
                                             </h5>
                                             <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
 
@@ -236,7 +236,7 @@
                                         </div>
                                         <div class="grid grid-cols-4 gap-4 items-center mt-6">
                                             <h5 class="col-span-1 text-end">
-                                                Upload Subtitles
+                                                Upload Subtitles <br> <span class="text-sm text-slate-400">(Upload SRT/VTT file)</span>
                                             </h5>
                                             <div class="text-white col-span-3 md:col-span-2 flex items-center">
                                                 <div class="w-full rounded-lg  text-center hover:bg-[#142132] bg-[#142132]/60 flex relative h-max box-img  hover:text-[#009fb2]">

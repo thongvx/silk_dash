@@ -76,7 +76,6 @@ $(document).on('click', '#get-data-report button', function (event) {
     const country = urlParams.get('country') ?? '';
     formData.append('tab', tab);
     formData.append('date', date);
-    formData.append('country', country);
     loadReport(formData,tab, date, country);
 })
 $(document).on('click', '.tab-report', function (event) {
@@ -88,7 +87,7 @@ $(document).on('click', '.tab-report', function (event) {
     var formData = new FormData(form);
     formData.append('tab', tab);
     formData.append('date', date);
-    formData.append('country', selectedValues);
+    formData.append('country', country);
     loadReport(formData,tab, date, country);
 })
 
@@ -103,6 +102,7 @@ $(document).on('select2:select','#btn-country', function (e) {
     const form = $('#get-data-report')[0];
     var formData = new FormData(form);
     formData.append('tab', tab);
+    formData.append('date', date)
     formData.append('country', selectedValues);
     loadReport(formData,tab, date, country);
 });
@@ -117,13 +117,14 @@ $(document).on('select2:unselect','#btn-country', function (e) {
         selectedValues.splice(index, 1);
     }
     if (selectedValues.length === 0) {
-        selectedValues = null;
+        selectedValues = [];
     }
-    const country = selectedValues ;
+    const country = selectedValues.length === 0 ? '' : selectedValues;
     const form = $('#get-data-report')[0];
     var formData = new FormData(form);
     formData.append('tab', tab);
-    formData.append('country', selectedValues);
+    formData.append('date', date);
+    formData.append('country', country);
     loadReport(formData,tab, date, country);
 
 });

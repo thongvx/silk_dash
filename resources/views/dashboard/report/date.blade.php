@@ -20,7 +20,7 @@
                 <td class="text-center">{{ $report->download }}</td>
                 <td class="text-center">{{ $report->paid_views }}</td>
                 <td class="text-center">{{ $report->vpn_ads_views }}</td>
-                <td class="text-center">{{ $report->cpm }}</td>
+                <td class="text-center">{{ number_format($report->cpm, 2) }}</td>
                 <td class="text-center">{{ $report->revenue }} $</td>
             </tr>
         @empty

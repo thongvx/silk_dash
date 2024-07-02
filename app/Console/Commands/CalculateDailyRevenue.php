@@ -93,6 +93,7 @@ class CalculateDailyRevenue extends Command
                     'revenue' => $revenue,
 
                 ]);
+                Redis::del($viewsKey);
             }
         }
         $this->info('Daily revenue calculated successfully.');

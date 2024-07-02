@@ -46,6 +46,8 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::post('/change-password', [\App\Http\Controllers\Auth\ProfileController::class, 'changePassword'])->name('change.password');
+
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'index'])->name('index');

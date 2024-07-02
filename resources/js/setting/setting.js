@@ -1,4 +1,16 @@
 import { notification, updateOriginalFormState } from '../main.js';
+
+var fixedProfileCard = $("[fixed-profile-card]");
+var fixedProfileCloseButton = $("[fixed-profile-close-button]");
+function fixedBox() {
+    fixedProfileCard.toggleClass("opacity-0");
+    fixedProfileCard.toggleClass("opacity-1");
+    fixedProfileCard.toggleClass("hidden");
+    fixedProfileCard.toggleClass("block");
+}
+fixedProfileCloseButton.on("click", function () {
+    fixedBox()
+});
 // update setting
 
 $(document).on('submit', '#form-setting', function(e) {
@@ -30,6 +42,7 @@ $(document).on('submit', '#form-setting', function(e) {
         }
     });
 });
+// update profile
 $(document).on('submit', '#form-profile', function(e) {
     e.preventDefault();
     var form = this;
@@ -66,3 +79,46 @@ $(document).on('submit', '#form-profile', function(e) {
         }
     });
 });
+//change password
+$(document).on('click', '[btn-change-password]', function() {
+    fixedBox()
+    $(document).on('submit', '#profile', function(e) {
+        e.preventDefault();
+        const button = $(this).find('button[type="submit"]');
+        var form = this;
+        var formData = new FormData(form);
+        // Post data to the server
+        $.ajax({
+            type: 'POST',
+            url: '/change-password',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                notification('success', 'Change password successfully');
+                button.removeClass('bg-blue-400 hover:bg-blue-700')
+                button.addClass('bg-[#142132]')
+                button.attr('disabled', 'disabled');
+                updateOriginalFormState();
+                $('#profile .error').hide()
+                fixedBox()
+                form.reset();
+            },
+            error: function(response) {
+                if (response.responseJSON && response.responseJSON.errors) {
+                    var errors = response.responseJSON.errors;
+                    for (var field in errors) {
+                        if (errors.hasOwnProperty(field)) {
+                            errors[field].forEach(function(error) {
+                                $('#profile .error').show()
+                                $('#profile .error').text(error)
+                            });
+                        }
+                    }
+                } else {
+                    console.log(response);
+                }
+            }
+        });
+    });
+})

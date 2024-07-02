@@ -57,7 +57,7 @@ class VideoController
         if ($tab == 'processing') {
             $videos =  $this->encoderTaskRepo->getAllEncoderTasks($userId);
         } else {
-            $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $column, $direction, $folderId, $limit, ['*'], $page);
+            $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $column, $direction, $folderId, $limit, $page, ['*']);
         }
         return $videos;
     }
