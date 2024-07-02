@@ -232,10 +232,9 @@ class UploadController
                 else{
                     $jsonContent = file_get_contents($folderPath.'/'.$slug.'.json');
                     $dataSubOld = json_decode($jsonContent, true);
-                    $sizeData = count($dataSubOld);
-                    $dataSubOld[$sizeData] = $dataSub;
-                    $dataSubOld = json_encode($dataSubOld);
-                    file_put_contents($folderPath.'/'.$slug.'.json', $dataSubOld);
+                    $dataSubNew = array_merge($dataSubOld, $dataSub);
+                    $dataSubNew = json_encode($dataSubNew);
+                    file_put_contents($folderPath.'/'.$slug.'.json', $dataSubNew);
                 }
             }
             $fileSub->storeAs('subtitles/'.$slug, $filenameSub, 'public');
