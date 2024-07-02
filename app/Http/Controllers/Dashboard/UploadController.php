@@ -248,7 +248,7 @@ class UploadController
         $dataVideo->poster = $url_file_poster;
         $dataVideo->title = $request->title;
         $dataVideo->save();
-        return response()->json(['msg' => 'Edit success', 'status' => 200]);
+        return redirect()->route('video.editVideo', ['video' => $request->slug]);
     }
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()

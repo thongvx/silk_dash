@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-wrap -mx-3 flex-col-reverse lg:flex-row">
         <div class="w-full max-w-full px-3 mt-0 text-white lg:flex-none">
-            <form class="flex flex-col font-semibold" action="">
+            <form class="flex flex-col font-semibold" action="/uploadSub" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mt-3 md:mt-0 rounded-xl relative  max-w-full w-full  bg-[#121520]">
                     <div class="pl-4 py-6" id="box-content" page-video>
