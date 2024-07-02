@@ -202,7 +202,7 @@ class UploadController
     {
         $request = $request->all();
         $user = Auth::user();
-        $dataVideo = Video::where('slug', $request['slug'])->first();
+        $dataVideo = Video::where('slug', $request->slug)->first();
         $folderPath = storage_path('app/public/subtitles/'.$request->slug);
         //create folder
         if(!file_exists($folderPath)){
