@@ -217,7 +217,7 @@ class UploadController
                 $cmd = 'rm -rf '.$folderPath.'/'.$filenameSub;
                 shell_exec($cmd);
             }
-            $fileSub->storeAs('subtitles', $filenameSub, 'public');
+            $fileSub->storeAs('subtitles/'.$slug, $filenameSub, 'public');
             $url_file_sub = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$filenameSub;
             $dataSub = [
                 'kind' => 'captions',
@@ -244,8 +244,8 @@ class UploadController
             $filenamePoster = $slug . '-' . $request->subtitle . '.' . $filePoster->getClientOriginalExtension;
             $filePoster->storeAs('subtitles', $filenamePoster, 'public');
             $url_file_poster = 'https://streamsilk.com/storage/poster/'.$filenamePoster;
+            //$dataVideo->poster = $url_file_poster;
         }
-        $dataVideo->poster = $url_file_poster;
         $dataVideo->title = $request->title;
         $dataVideo->save();
         return redirect()->route('video.editVideo', ['video' => $slug]);
