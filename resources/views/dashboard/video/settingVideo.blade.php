@@ -34,8 +34,23 @@
                                             <h5 class="col-span-1 text-end">
                                                 Subtitles
                                             </h5>
-                                            <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
-
+                                            <div class="text-white col-span-3 md:col-span-2 rounded-lg flex items-center px-2">
+                                                @if( $video->is_sub == 1)
+                                                    @foreach( $subtitles as $subtitle )
+                                                        <div class="mr-3 bg-[#142132] pl-3 pr-7 py-2 rounded-lg relative">
+                                                            <h4>
+                                                                <a href="{{ $subtitle->file }}">{{ $subtitle->label }}</a>
+                                                            </h4>
+                                                            <div class="absolute right-1 top-0">
+                                                                <div class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in
+                                                                bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25
+                                                                active:opacity-85 dark:text-white text-slate-700">
+                                                                    <i class="material-symbols-outlined font-semibold text-lg hover:text-[#009fb2]">close</i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-4 gap-4 items-center mt-6">
@@ -47,187 +62,141 @@
                                                     <option value="eng" selected>
                                                         English (eng)
                                                     </option>
-
                                                     <option value="spa">
                                                         Spanish (spa)
                                                     </option>
-
                                                     <option value="aze">
                                                         Azerbaijani (aze)
                                                     </option>
-
                                                     <option value="alb">
                                                         Albanian (alb)
                                                     </option>
-
                                                     <option value="ara">
                                                         Arabic (ara)
                                                     </option>
-
                                                     <option value="bul">
                                                         Bulgarian (bul)
                                                     </option>
-
                                                     <option value="chi">
                                                         Chinese (chi)
                                                     </option>
-
                                                     <option value="dnk">
                                                         Denmark (dnk)
                                                     </option>
-
                                                     <option value="per">
                                                         Persian (per)
                                                     </option>
-
                                                     <option value="fin">
                                                         Finland (fin)
                                                     </option>
-
                                                     <option value="fre">
                                                         French (fre)
                                                     </option>
-
                                                     <option value="ger">
                                                         German (ger)
                                                     </option>
-
                                                     <option value="gre">
                                                         Greek (gre)
                                                     </option>
-
                                                     <option value="heb">
                                                         Hebrew (heb)
                                                     </option>
-
                                                     <option value="hin">
                                                         Hindi (hin)
                                                     </option>
-
                                                     <option value="hun">
                                                         Hungarian (hun)
                                                     </option>
-
                                                     <option value="ind">
                                                         Indonesian (ind)
                                                     </option>
-
                                                     <option value="ita">
                                                         Italian (ita)
                                                     </option>
-
                                                     <option value="jpn">
                                                         Japanese (jpn)
                                                     </option>
-
                                                     <option value="kan">
                                                         Kannada (kan)
                                                     </option>
-
                                                     <option value="khm">
                                                         Khmer (khm)
                                                     </option>
-
                                                     <option value="kor">
                                                         Korean (kor)
                                                     </option>
-
                                                     <option value="mal">
                                                         Malayalam (mal)
                                                     </option>
-
                                                     <option value="may">
                                                         Malay (may)
                                                     </option>
-
                                                     <option value="nor">
                                                         Norway (nor)
                                                     </option>
-
                                                     <option value="pol">
                                                         Polish (pol)
                                                     </option>
-
                                                     <option value="por">
                                                         Portuguese (por)
                                                     </option>
-
                                                     <option value="rus">
                                                         Russian (rus)
                                                     </option>
-
                                                     <option value="sin">
                                                         Sinhala (sin)
                                                     </option>
-
                                                     <option value="slv">
                                                         Slovenian (slv)
                                                     </option>
-
                                                     <option value="srp">
                                                         Serbian (srp)
                                                     </option>
-
                                                     <option value="swe">
                                                         Sweden (swe)
                                                     </option>
-
                                                     <option value="tam">
                                                         Tamil (tam)
                                                     </option>
-
                                                     <option value="tha">
                                                         Thai (tha)
                                                     </option>
-
                                                     <option value="tur">
                                                         Turkish (tur)
                                                     </option>
-
                                                     <option value="ukr">
                                                         Ukrainian (ukr)
                                                     </option>
-
                                                     <option value="vie">
                                                         Vietnamese (vie)
                                                     </option>
-
                                                     <option value="rum">
                                                         Romanian (rum)
                                                     </option>
-
                                                     <option value="mar">
                                                         Marathi (mar)
                                                     </option>
-
                                                     <option value="aze">
                                                         Azerbaijan (aze)
                                                     </option>
-
                                                     <option value="cze">
                                                         Czech (cze)
                                                     </option>
-
                                                     <option value="slo">
                                                         Slovak (slo)
                                                     </option>
-
                                                     <option value="lit">
                                                         Lithuanian (lit)
                                                     </option>
-
                                                     <option value="kur">
                                                         Kurdish (kur)
                                                     </option>
-
                                                     <option value="dan">
                                                         Danish (dan)
                                                     </option>
-
                                                     <option value="bos">
                                                         Bosnian (bos)
                                                     </option>
-
                                                     <option value="hrv">
                                                         Croatian (hrv)
                                                     </option>
