@@ -42,7 +42,7 @@ class SvStreamService
         foreach ($svStreamKeys as $svStreamKey) {
             $svStream = Redis::hgetall($svStreamKey);
             if ($svStream['active'] == 1 && $svStream['out_speed'] < 700 && $svStream['cpu'] < 10 && $svStream['percent_space'] < 95) {
-                return str_replace('sv_streams:', '', $svStreamKey);
+                return $svStream['domain'];
             }
         }
         return null;
@@ -102,7 +102,7 @@ class SvStreamService
                 $svStream = Redis::hgetall($svStreamKey);
 
                 if ($svStream['out_speed'] < 700 && $svStream['active'] == 1) {
-                    return $svStreamName;
+                    return $svStream['domain'];
                 }
             }
         }
