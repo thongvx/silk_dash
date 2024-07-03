@@ -37,8 +37,6 @@ class PlayController
             $player_setting = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
             $poster = $data_setting->gridPoster == 5 ? $video->grid_poster_5 : ($data_setting->gridPoster == 3 ? $video->grid_poster_3 : $video->poster);
             $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
-            $jsonUrl = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$slug.'.json';
-            $subtitles = json_decode(file_get_contents($jsonUrl));
             if ($video->origin == 0) {
                 $playData = [
                     'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->value('sv_upload') . '.encosilk.cc/storage/' . $slug . '.' . $video->format,
@@ -74,7 +72,6 @@ class PlayController
                     'videoType' => $data_setting->videoType,
                     'premium' => $data_setting->premiumMode,
                     'player_setting' => $player_setting,
-                    'subtitles' => $subtitles,
                     'is_sub' => $video->is_sub,
                 ];
 

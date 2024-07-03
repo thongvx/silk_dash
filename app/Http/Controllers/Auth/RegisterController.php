@@ -121,9 +121,9 @@ class RegisterController extends Controller
             'premium_color' => 'rgb(221,51,51)',
             'embed_width' => 800,
             'embed_height' => 600,
-            'logo_link' => '',
+            'logo_link' => 0,
             'position' => 'control-bar',
-            'poster_link' => '',
+            'poster_link' => 0,
         ]);
         event(new Registered($user));
         return $user;
