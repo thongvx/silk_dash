@@ -20,6 +20,7 @@ class SvStreamService
                 'cpu' => $svStream->cpu,
                 'percent_space' => $svStream->percent_space,
                 'out_speed' => $svStream->out_speed,
+                'domain' => $svStream->domain,
                 // thêm các thuộc tính khác của $svStream ở đây
             ]);
         } else {
@@ -29,6 +30,7 @@ class SvStreamService
                 'cpu' => $svStream->cpu,
                 'percent_space' => $svStream->percent_space,
                 'out_speed' => $svStream->out_speed,
+                'domain' => $svStream->domain,
                 // thêm các thuộc tính khác của $svStream ở đây
             ]);
             Redis::sadd('sv_streams', $key);
