@@ -57,7 +57,7 @@
             aspectratio: "16:9",
             jwplayer8quality: true,
             controls: true,
-            preload: {{ $player_setting->infinite_loop == 1 ? true : false }},
+            preload: '0',
             width: '100%',
             height: '100%',
             skin: { active: "{{ $player_setting->premium_color }}", },
