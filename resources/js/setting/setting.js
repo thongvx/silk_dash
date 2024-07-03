@@ -1,4 +1,4 @@
-import { notification, updateOriginalFormState } from '../main.js';
+import { notification } from '../main.js';
 
 var fixedProfileCard = $("[fixed-profile-card]");
 var fixedProfileCloseButton = $("[fixed-profile-close-button]");
@@ -10,6 +10,7 @@ function fixedBox() {
 }
 fixedProfileCloseButton.on("click", function () {
     fixedBox()
+    $('.profile').addClass('hidden')
 });
 // update setting
 
@@ -82,7 +83,8 @@ $(document).on('submit', '#form-profile', function(e) {
 //change password
 $(document).on('click', '[btn-change-password]', function() {
     fixedBox()
-    $(document).on('submit', '#profile', function(e) {
+    $('#password').removeClass('hidden')
+    $(document).on('submit', '#password', function(e) {
         e.preventDefault();
         const button = $(this).find('button[type="submit"]');
         var form = this;
@@ -99,10 +101,10 @@ $(document).on('click', '[btn-change-password]', function() {
                 button.removeClass('bg-blue-400 hover:bg-blue-700')
                 button.addClass('bg-[#142132]')
                 button.attr('disabled', 'disabled');
-                updateOriginalFormState();
-                $('#profile .error').hide()
+                $('#password .error').hide()
                 fixedBox()
                 form.reset();
+                $('#password').addClass('hidden')
             },
             error: function(response) {
                 if (response.responseJSON && response.responseJSON.errors) {
@@ -110,8 +112,53 @@ $(document).on('click', '[btn-change-password]', function() {
                     for (var field in errors) {
                         if (errors.hasOwnProperty(field)) {
                             errors[field].forEach(function(error) {
-                                $('#profile .error').show()
-                                $('#profile .error').text(error)
+                                $('#password .error').show()
+                                $('#password .error').text(error)
+                            });
+                        }
+                    }
+                } else {
+                    console.log(response);
+                }
+            }
+        });
+    });
+})
+
+//change email
+$(document).on('click', '[btn-change-email]', function() {
+    fixedBox()
+    $('#email').removeClass('hidden')
+    $(document).on('submit', '#email', function(e) {
+        e.preventDefault();
+        const button = $(this).find('button[type="submit"]');
+        var form = this;
+        var formData = new FormData(form);
+        // Post data to the server
+        $.ajax({
+            type: 'POST',
+            url: '/change-email',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                notification('success', 'Change email successfully');
+                button.removeClass('bg-blue-400 hover:bg-blue-700')
+                button.addClass('bg-[#142132]')
+                button.attr('disabled', 'disabled');
+                $('#email .error').hide()
+                fixedBox()
+                form.reset();
+                $('#email').addClass('hidden')
+            },
+            error: function(response) {
+                if (response.responseJSON && response.responseJSON.errors) {
+                    var errors = response.responseJSON.errors;
+                    for (var field in errors) {
+                        if (errors.hasOwnProperty(field)) {
+                            errors[field].forEach(function(error) {
+                                $('#email .error').show()
+                                $('#email .error').text(error)
                             });
                         }
                     }

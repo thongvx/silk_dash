@@ -179,20 +179,20 @@
                             <label for="position" class="mr-3">Position:</label>
                             <select name="position" class="w-full h-max text-white outline-none bg-[#142132] px-3 py-1.5 rounded-lg hover:bg-[#009FB2]"
                                     id="position">
-                                <option value="tl"
-                                        class="position" {{ $playerSettings->position == 'tl' ? 'selected' : ''}}>
+                                <option value="top-left"
+                                        class="position" {{ $playerSettings->position == 'top-left' ? 'selected' : ''}}>
                                     Top left
                                 </option>
-                                <option value="tr"
-                                        class="position" {{ $playerSettings->position == 'tr' ? 'selected' : ''}}>
+                                <option value="top-right"
+                                        class="position" {{ $playerSettings->position == 'top-right' ? 'selected' : ''}}>
                                     Top right
                                 </option>
-                                <option value="bl"
-                                        class="position" {{ $playerSettings->position == 'bl' ? 'selected' : ''}}>
+                                <option value="bottom-left"
+                                        class="position" {{ $playerSettings->position == 'bottom-left' ? 'selected' : ''}}>
                                     Bottom left
                                 </option>
-                                <option value="br"
-                                        class="position" {{ $playerSettings->position == 'br' ? 'selected' : ''}}>
+                                <option value="bottom-right"
+                                        class="position" {{ $playerSettings->position == 'bottom-right' ? 'selected' : ''}}>
                                     Bottom right
                                 </option>
                                 <option value="control-bar"
@@ -228,14 +228,14 @@
             <div class="col-span-2 md:col-span-1 gap-4 ">
                 <h1 class="text-white text-2xl mb-3 ">Subtitle</h1>
                 <div class="items-center flex">
-                    <input name="captionsMode" id="captionsMode"  type="checkbox"
+                    <input name="enable_caption" id="enable_caption"  type="checkbox"
                            class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                   after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                   checked:border-0 checked:border-transparent checked:after:opacity-100"
-                           value="{{$playerSettings->captionsMode ==1 ? '0': '1'}}" {{$playerSettings->captionsMode ==1 ? 'checked': ''}}>
-                    <label for="embeds" class="ml-3">
+                           value="{{$playerSettings->enable_caption ==1 ? '0': '1'}}" {{$playerSettings->enable_caption ==1 ? 'checked': ''}}>
+                    <label for="enable_caption" class="ml-3">
                         Enable Caption/Subtitles
                     </label>
                 </div>

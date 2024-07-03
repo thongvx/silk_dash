@@ -25,6 +25,7 @@ class PlayerSetting extends Model
         'show_poster',
         'show_download',
         'show_preview',
+        'enable_caption',
         'infinite_loop',
         'disable_adblock',
         'thumbnail_grid',

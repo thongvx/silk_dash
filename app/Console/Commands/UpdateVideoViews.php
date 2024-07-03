@@ -77,6 +77,7 @@ class UpdateVideoViews extends Command
         foreach ($countryViews as $userId => $countries) {
             foreach ($countries as $country => $views) {
                 Redis::zincrby("user:{$userId}:country_views:{$date}", $views, $country);
+                Redis::expire("user:{$userId}:country_views:{$date}", 86400);
             }
         }
     }

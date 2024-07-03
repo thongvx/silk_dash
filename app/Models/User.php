@@ -30,7 +30,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'video',
         'storage',
         'last_upload',
-        'encoder_priority'
+        'encoder_priority',
+        'key_api',
+        'updated_at',
+        'created_at',
     ];
 
     /**

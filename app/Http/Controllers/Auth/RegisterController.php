@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\PlayerSetting;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -91,7 +92,7 @@ class RegisterController extends Controller
         ]);
         AccountSetting::create([
             'user_id' => $user->id,
-            'earningModes' => 0,
+            'earningModes' => 1,
             'videoType' => 1,
             'adblock' => 0,
             'showTitle' => 0,
@@ -106,6 +107,23 @@ class RegisterController extends Controller
             'captionsMode' => 0,
             'disableDownload' => 0,
             'gridPoster' => 1,
+        ]);
+        PlayerSetting::created([
+            'user_id' => $user->id,
+            'show_title' => 1,
+            'show_logo' => 1,
+            'show_poster' => 1,
+            'show_download' => 0,
+            'show_preview' => 0,
+            'infinite_loop' => 0,
+            'disable_adblock' => 0,
+            'thumbnail_grid' => 1,
+            'premium_color' => 'rgb(221,51,51)',
+            'embed_width' => 800,
+            'embed_height' => 600,
+            'logo_link' => '',
+            'position' => 'control-bar',
+            'poster_link' => '',
         ]);
         event(new Registered($user));
         return $user;
