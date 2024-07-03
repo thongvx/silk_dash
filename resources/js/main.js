@@ -27,14 +27,13 @@ $(document).on('change', 'input[type="checkbox"]', function() {
         $(this).val(0);
     }
 });
-var originalFormState = $('#form-setting, #form-profile, #transferLink, #form').serialize();
+var originalFormState = $('#form-setting, #form-profile, #transferLink, #form, #form-player-setting').serialize();
 
 export function updateOriginalFormState(box) {
     if(box){
         originalFormState = $('#'+box+' form').serialize();
-        console.log(originalFormState)
     }else{
-        originalFormState = $('#form-setting, #form-profile, #transferLink, #form').serialize();
+        originalFormState = $('#form-setting, #form-profile, #transferLink, #form, #form-player-setting').serialize();
     }
 }
 $(document).on('change keyup', 'form', function() {

@@ -2,30 +2,26 @@
 
 namespace App\Http\Controllers\Dashboard\Setting;
 
-use App\Repositories\ActivityRepo;
-use App\Repositories\AccountRepo;
 use App\Repositories\PlayerSettingsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
-class SettingController
+class PlayerSettingController
 {
-    private $accountRepo, $activityRepo, $playerSettingsRepo;
-    public function __construct(AccountRepo $accountRepo, ActivityRepo $activityRepo, PlayerSettingsRepo $playerSettingsRepo)
+    private $playerSettingsRepo;
+    public function __construct(PlayerSettingsRepo $playerSettingsRepo)
     {
-        $this->accountRepo = $accountRepo;
-        $this->activityRepo = $activityRepo;
         $this->playerSettingsRepo = $playerSettingsRepo;
     }
+
     public function index(Request $request)
     {
         $user = Auth::user();
+
         $data=[
-            'title' => 'Setting',
-            'setting' => $this->accountRepo->getSetting($user->id),
-            'activities' => $this->activityRepo->getAllActivity($user->id),
+            'title' => 'Player Setting',
             'playerSettings' => $this->playerSettingsRepo->getAllPlayerSettings($user->id),
         ];
         return view('dashboard.setting.index', $data);
@@ -33,8 +29,8 @@ class SettingController
     public function show()
     {
         $user = Auth::user();
-        $setting = $this->accountRepo->getSetting($user->id);
-        return response()->json($setting);
+        $playerSettings = $this->playerSettingsRepo->getAllPlayerSettings($user->id);
+        return response()->json($playerSettings);
     }
 
     // Update setting
@@ -42,7 +38,6 @@ class SettingController
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'domain' => 'nullable|max:255',
             'logo' => 'nullable|file|max:2048',
             'poster' => 'nullable|file|max:2048',
         ]);
@@ -51,23 +46,23 @@ class SettingController
             return response()->json(['errors' => $validator->errors()], 422);
         }
         $user = Auth::user();
-        $setting = $this->accountRepo->getSetting($user->id);
-        if ($setting) {
+        $playerSetting = $this->playerSettingsRepo->getAllPlayerSettings($user->id);
+        if ($playerSetting) {
             if ($request->hasFile('logo')) {
                 $file = $request->file('logo');
                 $filename = $file->getClientOriginalName();
-                $path = $file->storeAs('logo', $filename, 'public');
-                $data['logo'] = $path;
+                $path = $file->storeAs('logo/'.$user->id, $filename, 'public');
+                $data['logo_link'] = $path;
             }
             if ($request->hasFile('poster')) {
                 $file = $request->file('poster');
                 $filename = $file->getClientOriginalName();
-                $path = $file->storeAs('poster', $filename, 'public');
-                $data['poster'] = $path;
+                $path = $file->storeAs('poster/'.$user->id, $filename, 'public');
+                $data['poster_link'] = $path;
             }
-
-            $setting->update($data);
+            $playerSetting->update($data);
+            return response()->json(['success' => 'Player setting updated successfully']);
         }
-        return response()->json(['message' => $data], 200);
+
     }
 }

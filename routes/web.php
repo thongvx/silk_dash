@@ -46,8 +46,6 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::post('/change-password', [\App\Http\Controllers\Auth\ProfileController::class, 'changePassword'])->name('change.password');
-
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'index'])->name('index');
@@ -87,6 +85,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view('dashboard.premium', $data);
     });
     Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);
+    Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
+    Route::post('/update-player', [\App\Http\Controllers\Dashboard\Setting\PlayerSettingController::class, 'update'])->name('update.player');
+    Route::post('/change-password', [\App\Http\Controllers\Auth\ProfileController::class, 'changePassword'])->name('change.password');
+    Route::post('/change-email', [\App\Http\Controllers\Auth\ProfileController::class, 'changeEmail'])->name('change.email');
+
     Route::get('affiliate',function (){
         $data['title'] = 'Affiliate';
         return view('dashboard.affiliate', $data);
@@ -98,7 +101,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::post('/updatesetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
 
-    Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     Route::get('/regenerateToken', [App\Http\Controllers\Auth\ProfileController::class, 'regenerateToken'])->name('regenerate.token');
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);

@@ -7,6 +7,7 @@ use App\Repositories\NotificationRepo;
 use App\Repositories\VideoRepo;
 use App\Repositories\ReportRepo;
 use App\Http\Controllers\Dashboard\VideoController;
+use App\Services\StatisticService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Dashboard\Statistic\StatisticController;
@@ -43,31 +44,31 @@ class HomeController extends Controller
         $data['topCountries'] = $this->statisticController->topCountry();
         $data['storage'] = $this->videoController->convertFileSize($user->storage);
         $today = Carbon::today();
-        $earningToday = 0;
-        $countryViewsKey = "user:{$user->id}:country_views:{$today->format('Y-m-d')}";
-        $countries = Redis::zrange($countryViewsKey, 0, -1);
-        foreach ($countries as $country) {
-            $views = Redis::zscore($countryViewsKey, $country);
-            $earningToday += $views;
+        $earningToday = StatisticService::calculateValue($user->id);
+        $totalViews = 0;
+        $countryViewsKeys = Redis::keys("total:{$user->id}:*");
+        foreach ($countryViewsKeys as $key) {
+            $views = Redis::get($key);
+            $totalViews += $views;
         }
+        $totalViews = intval($totalViews);
         $monthData = $this->reportRepo->getAllData($user->id, 'date', Carbon::tomorrow()->subMonth(), $today, null);
         $data['dates'] = [
-            'day' => $earningToday*0.4/1000,
-            'month' => $monthData->map(function($item, $index) use ($earningToday) {
-                return $index === 0 ? $earningToday : $item['views'];
+            'month' => $monthData->map(function($item, $index) use ($totalViews) {
+                return $index === 0 ? $totalViews : $item['views'];
             })->reverse()->values(),
-            'week' => $monthData->map(function($item, $index) use ($earningToday) {
-                return $index === 0 ? $earningToday : $item['views'];
+            'week' => $monthData->map(function($item, $index) use ($totalViews) {
+                return $index === 0 ? $totalViews : $item['views'];
             })->slice(0, 7)->reverse()->values(),
         ];
         $data['earnings'] = [
-            'today' => $earningToday*0.4/1000,
+            'today' => array_sum($earningToday),
             'yesterday' => $monthData->filter(function($item) {
                 return $item['date'] == Carbon::yesterday()->format('Y-m-d');
             })[0]['revenue'] ?? 0,
             '2days' => $monthData->filter(function($item) {
                     return $item['date'] == Carbon::today()->subDay(2)->format('Y-m-d');
-                })[0]['revenue'] ?? 0,
+            })[0]['revenue'] ?? 0,
         ];
         return view('dashboard.index', $data);
     }

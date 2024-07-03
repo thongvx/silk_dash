@@ -60,6 +60,25 @@ class ProfileController extends Controller
         return response()->json(['message' => 'Password changed successfully']);
     }
 
+    public function changeEmail(Request $request)
+    {
+        $data = $request->all();
+        // Validate the request data
+        Validator::make($data,[
+            'password-email' => ['required', new MatchOldPassword],
+            'new_email' => ['required', 'email', 'max:255', 'unique:users,email'],
+            'new_email_confirmation' => ['required', 'same:new_email'],
+        ])->validate();
+
+        // Change the email
+        $user = Auth::user();
+        $user->email = $data['new_email'];
+        $user->save();
+
+        // Return a success message
+        return response()->json(['message' => 'Email changed successfully']);
+    }
+
     public function regenerateToken(Request $request)
     {
         $user = $request->user();
@@ -69,6 +88,8 @@ class ProfileController extends Controller
 
         // Tạo một token mới
         $newToken = $user->createToken('api-token', ['*'])->plainTextToken;
+        $user->key_api = $newToken;
+        $user->save();
 
         return response()->json(['token' => $newToken]);
     }

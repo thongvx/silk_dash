@@ -23,7 +23,8 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">email</i>
                             <input type="email" name="email" value="{{ Auth::user()->email}}"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="email">
+                                   placeholder="email" readonly>
+                            <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 cursor-pointer" btn-change-email>edit</i>
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
@@ -59,7 +60,7 @@
                                     <path fill="#ffffff" d="M248 8C111 8 0 119 0 256S111 504 248 504 496 393 496 256 385 8 248 8zM363 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5q-3.3 .7-104.6 69.1-14.8 10.2-26.9 9.9c-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3q.8-6.7 18.5-13.7 108.4-47.2 144.6-62.3c68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9a10.5 10.5 0 0 1 3.5 6.7A43.8 43.8 0 0 1 363 176.7z"/>
                                 </svg>
                             </i>
-                            <input type="text" name="telegram" value="{{\Illuminate\Support\Facades\Auth::user()->telegram}}"
+                            <input type="text" name="telegram" value="{{ Auth::user()->telegram}}"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="telegram">
                         </div>
@@ -79,49 +80,49 @@
                     </div>
                 </div>
                 <div class="col-span-2 md:col-span-1 gap-4 ">
-                    <h1 class="text-white text-2xl mb-3 ">FTP Credentials</h1>
+                    <h1 class="text-white text-2xl mb-3 ">API and FTP Credentials</h1>
                     <div class="items-center flex">
-                        <h5 class="text-stat w-20 mr-3">
+                        <h5 class="text-stat w-40 mr-3">
                             API Key
                         </h5>
                         <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
                             <input type="text" value="{{ Auth::user()->key_api }}"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Enter current password">
+                                   placeholder="key_api">
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
-                        <h5 class="text-start w-20 mr-3">
-                            User
+                        <h5 class="text-start w-40 mr-3">
+                            FTP User
                         </h5>
                         <div class="text-white w-full  rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">person</i>
                             <input type="text" value="{{ Auth::user()->name }}"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="user">
+                                   placeholder="ftp_user">
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
-                        <h5 class="text-start w-20 mr-3">
-                            Password
+                        <h5 class="text-start w-40 mr-3">
+                            FTP Password
                         </h5>
                         <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
                             <input type="password" value=""
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="password">
+                                   placeholder="ftp_password">
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
-                        <h5 class="text-start w-20 mr-3">
-                            Link
+                        <h5 class="text-start w-40 mr-3">
+                            FTP Link
                         </h5>
                         <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">link</i>
                             <input type="text" value=""
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="link">
+                                   placeholder="ftp_link">
                         </div>
                     </div>
                 </div>
@@ -175,7 +176,7 @@
                 </button>
             </div>
             <div>
-                <form class="profile text-slate-400" id="profile">
+                <form class="profile text-slate-400 hidden" id="password">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Change Password</h5>
                     <div class="items-center mt-6">
                         <h5 class="text-stat mb-2">
@@ -208,6 +209,49 @@
                             <input type="password" value="" name="new-password_confirmation"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Repeat new password">
+                        </div>
+                    </div>
+                    <span class="font-italic error invalid-feedback text-red-500" role="alert">
+                        </span>
+                    <div class="text-[#009FB2] mt-6">
+                        <div class="text-center mt-4">
+                            <button type="submit" class="px-10 py-2 rounded-lg bg-[#142132] text-white" disabled>Save</button>
+                        </div>
+                    </div>
+                </form>
+                <form class="profile text-slate-400 hidden" id="email">
+                    <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Change Email</h5>
+                    <div class="items-center mt-6">
+                        <h5 class="text-stat mb-2">
+                            Password
+                        </h5>
+                        <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
+                            <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
+                            <input type="password" value="" name="password-email"
+                                   class="bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                   placeholder="password">
+                        </div>
+                    </div>
+                    <div class="items-center mt-3">
+                        <h5 class="text-start mb-2">
+                            New Email
+                        </h5>
+                        <div class="text-white w-full  rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
+                            <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">email</i>
+                            <input type="email" value="" name="new_email"
+                                   class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                   placeholder="Enter new email">
+                        </div>
+                    </div>
+                    <div class="items-center mt-3">
+                        <h5 class="text-start mb-2">
+                            Confirm New email
+                        </h5>
+                        <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
+                            <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">email</i>
+                            <input type="email" value="" name="new_email_confirmation"
+                                   class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                   placeholder="Repeat new email">
                         </div>
                     </div>
                     <span class="font-italic error invalid-feedback text-red-500" role="alert">

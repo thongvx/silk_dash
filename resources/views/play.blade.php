@@ -14,6 +14,9 @@
         #video_player{
             height: 100vh !important;
         }
+        .preloader .preloader-icon{
+            border-top: 2px solid {{ $player_setting->premium_color }};
+        }
     </style>
 </head>
 <body>
@@ -35,19 +38,26 @@
     var typeVideo = {{ $videoType }};
     var premium = {{ $premium }};
     var enablePlay = 'yes';
-    var logo = "{{ $logo }}";
+    var urlSub = "{{ $player_setting->enable_caption }}";
     //logo
-    if(logo === "no" || logo === "" || logo === '0'){
-        var urlLogo = "";
-    }
-    else{
-        var urlLogo = "{{ asset(Storage::url($logo)) }}";
-    }
+    var urlLogo = "{{ $player_setting->show_logo == 1 ? asset(Storage::url($player_setting->logo_link)) : "" }}";
     //poster
+    var urlposter = "{{ $player_setting->show_poster == 1 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
     //title
-    var title = "{{ $show_title }}" == true ? "{{ $title }}" : "";
+    var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
     var player = jwplayer('video_player');
     var hasReachedOneTenth = false;
+    var tracks = [];
+    @if($player_setting->enable_caption == 1 && $is_sub == 1)
+        @foreach($subtitles as $sub)
+        tracks.push({
+            file: "{{ $sub->file }}",
+            label: "{{ $sub->label }}",
+            kind: "{{ $sub->kind }}",
+            default: {{ $sub->label == 'eng' ? 'true' : 'false' }}
+        });
+        @endforeach
+    @endif
     const loadPlayer = (file) => {
         const options = {
             key: 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=',
@@ -59,18 +69,21 @@
             preload: true,
             width: '100%',
             height: '100%',
-            skin: { active: "rgb(221,51,51)", },
-            image: "{{ $poster }}",
+            skin: { active: "{{ $player_setting->premium_color }}", },
+            image: urlposter,
             logo: {
                 "file": urlLogo,
-                "link": "{{ $logo_link }}",
-                "position": "{{ $position }}"
+                'hide': 1,
+                "position": "{{ $player_setting->position }}"
             },
             title : title,
             localization: {
                 locale: 'en',
             }
         };
+        if(tracks.length > 0) {
+            options.tracks = tracks;
+        }
         player.setup(options);
         player.on('time', function(event) {
             var currentPercentagePlayed = (event.position / player.getDuration()) * 100;

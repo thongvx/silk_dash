@@ -77,6 +77,7 @@ class UpdateVideoViews extends Command
         foreach ($countryViews as $userId => $countries) {
             foreach ($countries as $country => $views) {
                 Redis::zincrby("user:{$userId}:country_views:{$date}", $views, $country);
+                Redis::expire("user:{$userId}:country_views:{$date}", 86400);
             }
         }
     }
@@ -92,8 +93,6 @@ class UpdateVideoViews extends Command
         $pr = [];
         foreach ($upsertData as $data) {
             $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
-            //Todo: ??
-            Redis::del("user:{$data['user_id']}:top_videos:*");
 
             $cases[] = "WHEN ? THEN ?";
             $pr[] = $data['video_id'];
@@ -115,8 +114,6 @@ class UpdateVideoViews extends Command
         echo 'chay vao day';
         // Thực thi câu lệnh SQL
         DB::update($query, $pr);
-
-
 
     }
 
