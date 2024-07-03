@@ -32,7 +32,7 @@ class CalculateDailyRevenue extends Command
     public function handle()
     {
         // Lấy ngày hiện tại
-        $today = Carbon::now()->format('Y-m-d');
+        $today = Carbon::yesterday()->format('Y-m-d');
 
         // Lấy dữ liệu từ bảng video_views
         $videoViews = DB::table('video_views')

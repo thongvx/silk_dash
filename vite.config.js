@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/eplay.js',
                 'resources/css/vs2015.css',
                 'resources/js/admin/admin.js',
             ],
