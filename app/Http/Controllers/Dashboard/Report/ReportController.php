@@ -131,7 +131,7 @@ class ReportController extends Controller
         $data_today = [];
         if($date == 'today'){
             $countryViewsKeys = Redis::keys("total:{$userId}:*");
-            foreach ( $countryViewsKeys as $key) {
+            foreach ( $countryViewsKeys as $index => $key) {
                 $countryViews = Redis::get($key);
                 $countryViews = $countryViews ?: 0;
                 $countryvpnAdsView = 0;

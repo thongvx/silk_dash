@@ -44,7 +44,8 @@ class CalculateDailyRevenue extends Command
         // Duyệt qua từng dòng dữ liệu và thêm vào bảng report_data
         $batchSize = 20; // Số lượng dòng dữ liệu trong mỗi lô
         $batchData = []; // Mảng chứa dữ liệu của lô hiện tại
-
+        $data_country_statistics = [];
+        $data_country_statistics_size = 20;
         foreach ($videoViews as $index => $videoView) {
             // Thêm dữ liệu vào lô hiện tại
 
@@ -65,7 +66,6 @@ class CalculateDailyRevenue extends Command
                 'download' => $download,
                 'revenue' => $value,
             ];
-
             // Nếu đã đủ số lượng dòng dữ liệu trong lô, hoặc đã duyệt hết dữ liệu
             if (($index + 1) % $batchSize === 0 || $index === count($videoViews) - 1) {
                 // Chèn lô dữ liệu hiện tại vào database
@@ -74,30 +74,41 @@ class CalculateDailyRevenue extends Command
                 // Làm rỗng lô dữ liệu để chuẩn bị cho lô tiếp theo
                 $batchData = [];
             }
-            foreach ($valueArr as $country => $revenue) {
-                // Lấy views và downloads từ Redis
-                $viewsKey = "total:{$videoView->user_id}:{$country}";
-                $countryViews = Redis::get($viewsKey) ?: 0;
-                $countryvpnAdsView = 0;
-                $countrydownload = 0;
-                $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
-                // Tạo mới dữ liệu trong bảng country_statistics
-                DB::table('country_statistics')->insert([
-                    'user_id' => $videoView->user_id,
-                    'date' => $today,
-                    'country_code' => $country,
-                    'views' => $countryViews,
-                    'paid_views' => $paidView,
-                    'vpn_ads_views' => $countryvpnAdsView,
-                    'download' => $countrydownload,
-                    'revenue' => $revenue,
+        }
 
-                ]);
-                Redis::del($viewsKey);
+        $countryViewsKeys = Redis::keys("total:*:*");
+        foreach ( $countryViewsKeys as $index => $key) {
+            // Lấy views và downloads từ Redis
+            $countryViews = Redis::get($key);
+            $countryViews = $countryViews ?: 0;
+            $user_id = explode(':', $key)[1];
+            $countryvpnAdsView = 0;
+            $countrydownload = 0;
+            $countryCode = explode(':', $key)[2];
+            $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
+            $revenue =   StatisticService::calculateValue($user_id)[$countryCode];
+            // Tạo mới dữ liệu trong bảng country_statistics
+            $data_country_statistics[] = [
+                'user_id' => $user_id,
+                'date' => $today,
+                'country_code' => $countryCode,
+                'views' => $countryViews,
+                'paid_views' => $paidView,
+                'vpn_ads_views' => $countryvpnAdsView,
+                'download' => $countrydownload,
+                'revenue' => $revenue,
+            ];
+            Redis::del($key);
+            if (($index + 1) % $data_country_statistics_size === 0 || $index === count($countryViewsKeys) - 1) {
+                // Chèn lô dữ liệu hiện tại vào database
+                DB::table('country_statistics')->insert($data_country_statistics);
+
+                // Làm rỗng lô dữ liệu để chuẩn bị cho lô tiếp theo
+                $data_country_statistics = [];
             }
         }
-        $this->info('Daily revenue calculated successfully.');
 
+        $this->info('Daily revenue calculated successfully.');
 
         return 0;
     }
