@@ -66,7 +66,7 @@ class PlayController
                 }
 
                 $playData = [
-                    'urlPlay' => 'https://' . $svStream . '.streamsilk.com/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8',
+                    'urlPlay' => 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8',
                     'videoID' => $video->slug,
                     'poster' => $poster,
                     'title' => $video->title,
