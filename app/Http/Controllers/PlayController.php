@@ -43,6 +43,11 @@ class PlayController
                     'videoID' => $video->slug,
                     'poster' => $poster,
                     'title' => $video->title,
+                    'iframe' => $data_setting->blockDirect,
+                    'videoType' => $data_setting->videoType,
+                    'premium' => $data_setting->premiumMode,
+                    'player_setting' => $player_setting,
+                    'is_sub' => $video->is_sub,
                 ];
                 return view('playOrigin', $playData);
             } else {

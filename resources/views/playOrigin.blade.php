@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <meta charset="UTF-8" />
     <title>{{ $title }}</title>
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="https://user.streamsilk.com/image/logo/logo1.png">
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
@@ -13,28 +15,41 @@
         #video_player{
             height: 100vh !important;
         }
+        .preloader .preloader-icon{
+            border-top: 2px solid {{ $player_setting->premium_color }};
+        }
     </style>
 </head>
 <body>
-    <div class="preloader">
-        <div class="preloader-icon"></div>
-        <span>Loading...</span>
-    </div>
-    <div class="container-fluid">
-        <div id="video_player">
+<div class="preloader">
+    <div class="preloader-icon"></div>
+    <span>Loading...</span>
+</div>
+<div class="container-fluid">
+    <div id="video_player">
 
-        </div>
     </div>
+</div>
 <script>
     var t = 0;
     var playID = 0;
     var videoID ="{{ $videoID }}";
     var urlPlay = "{{ $urlPlay }}";
+    var iframe = {{ $iframe }};
+    var typeVideo = {{ $videoType }};
+    var premium = {{ $premium }};
     var enablePlay = 'yes';
+    var urlSub = {{ $player_setting->enable_caption }};
+    var is_sub = {{ $is_sub }};
+    //logo
+    var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
+    //poster
+    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->logo_link != 0 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
     //title
+    var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
     var player = jwplayer('video_player');
     var hasReachedOneTenth = false;
-    const loadPlayer = (file) => {
+    const loadPlayer = async (file) => {
         const options = {
             key: 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=',
             sources: [{ file, type: 'hls' }],
@@ -42,28 +57,52 @@
             aspectratio: "16:9",
             jwplayer8quality: true,
             controls: true,
-            preload: true,
-            aspectratio: "16:9",
+            preload: '0',
             width: '100%',
             height: '100%',
-            skin: { active: "rgb(221,51,51)", },
-            title : "{{ $title }}",
+            skin: { active: "{{ $player_setting->premium_color }}", },
+            image: urlposter,
+            logo: {
+                "file": urlLogo,
+                'hide': 1,
+                "position": "{{ $player_setting->position }}"
+            },
+            title : title,
             localization: {
                 locale: 'en',
             }
         };
+        if(urlSub === 1 && is_sub === 1){
+            const jsonUrl = `https://streamsilk.com/storage/subtitles/${videoID}/${videoID}.json`;
+            try {
+                const response = await fetch(jsonUrl);
+                if (!response.ok) throw new Error("Subtitle file not found");
+                const data = await response.json();
+                const tracks = data.map(item => ({
+                    file: item.file,
+                    label: item.label,
+                    kind: 'captions',
+                }));
+                // Add subtitle tracks to the player options
+                if(tracks.length > 0) {
+                    options.tracks = tracks;
+                }
+            } catch (error) {
+                console.error("Error loading subtitles:", error.message);
+            }
+        }
         player.setup(options);
         player.on('time', function(event) {
             var currentPercentagePlayed = (event.position / player.getDuration()) * 100;
             if(player.getDuration()< 600){
                 if(currentPercentagePlayed >= 60 && !hasReachedOneTenth){
                     hasReachedOneTenth = true;
-                    increasePlayCount();
+                    increasePlayCount(videoID);
                 }
             }else{
                 if (currentPercentagePlayed >= 10 && !hasReachedOneTenth) {
                     hasReachedOneTenth = true;
-                    increasePlayCount();
+                    increasePlayCount(videoID);
                 }
             }
 
@@ -94,8 +133,7 @@
         }
     });
     function increasePlayCount(videoID) {
-        var apiUrl = "https://user.streamsilk.com/updateView/" + videoID;
-
+        var apiUrl = "https://streamsilk.com/updateView/" + videoID;
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
