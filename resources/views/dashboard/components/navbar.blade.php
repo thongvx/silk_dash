@@ -115,12 +115,12 @@
                     href="javascript:;">
                     <div class="flex py-1">
                       <div class="flex flex-col justify-center">
-                        <h6 class="mb-1 text-lg font-semibold leading-normal dark:text-white">{{\Illuminate\Support\Facades\Auth::user()->name}}</h6>
+                        <h6 class="mb-1 text-lg font-semibold leading-normal dark:text-white">{{ Auth::user()->name}}</h6>
                         <p class="mb-0 text-xs leading-tight text-white/80">
-                            {{\Illuminate\Support\Facades\Auth::user()->email}}
+                            {{ Auth::user()->email}}
                         </p>
-                      <p class="mb-0 text-sm leading-tight {{\Illuminate\Support\Facades\Auth::user()->premium == 1 ? 'text-indigo-500' : 'text-emerald-500' }}">
-                          {{\Illuminate\Support\Facades\Auth::user()->premium == 1 ? 'Premium' : 'Free' }}
+                      <p class="mb-0 text-sm leading-tight {{ Auth::user()->premium == 1 ? 'text-indigo-500' : 'text-emerald-500' }}">
+                          {{ Auth::user()->premium == 1 ? 'Premium' : 'Free' }}
                       </p>
                       </div>
                     </div>

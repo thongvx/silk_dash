@@ -149,6 +149,7 @@ class UploadController
         $link = $request->url;
         if($request->has('FolderID')) {
             $folder_id = $request->FolderID;
+            $folderName = $this->folderRepo->find($folder_id)->name_folder;
         } else {
             $folderName = $request->get('nameFolder', 'root');
             $folder_id = $this->folderRepo->getFolder($folderName)->id;
@@ -191,11 +192,13 @@ class UploadController
                         'slug' => $newVideo->slug,
                         'title' => $newVideo->title,
                         'size' => self::convertFileSize($newVideo->size),
+                        'folder' => $folderName,
                     ];
                 }
             } else
                 return response()->json(['msg' => 'Video not found', 'status' => 404]);
         }
+        $this->folderRepo->updateNumberOfFiles($folder_id);
         return $result;
     }
     //-------------------------------upload sub----------------------------------------------------
@@ -252,7 +255,6 @@ class UploadController
         }
         $dataVideo->title = $request->title;
         $dataVideo->save();
-        Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
         return redirect()->route('video.editVideo', ['video' => $slug]);
     }
     //-------------------------------get progress transfer-----------------------------------------

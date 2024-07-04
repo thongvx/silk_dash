@@ -26,14 +26,22 @@ $(document).on('submit', '#ticket-form', function(e) {
 })
 
 $(document).on('click', '[btn-get-token]', function() {
+    const ab = 'jfhjkafshas'
+
     $.ajax({
         type: 'GET',
         url: '/regenerateToken',
         success: function(response) {
-            $('#token').text('Token: ' + response.token);
+            $('#token').html(`Token: ${response.token}
+                    <button class="rounded-lg ml-3 hover:text-[#009fb2] cursor-pointer" btn-get-token>
+                        <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
+                    </button>` );
+            $('#key_api').val(response.token);
+            notification('success', 'Token regenerated successfully');
         },
         error: function(response) {
             console.log(response);
+            notification('error', 'Token regenerated failed')
         }
     });
 })

@@ -18,16 +18,16 @@
 <body class="m-0  font-sans antialiased font-normal text-start text-base leading-default">
     <main class="mt-0 transition-all duration-200 ease-in-out pb-20">
         <!-- Navbar -->
-        <nav class="fixed top-0 flex z-20 backdrop-blur-xl bg-white/20 items-center px-3 py-2 lg:px-20 w-full text-[#009FB2]"
+        <nav class="fixed top-0 flex z-20 bg-white items-center px-3 py-2 lg:px-20 w-full text-[#009FB2]"
             navbar-main navbar-scroll="false">
             <div class="flex items-center justify-between w-full px-0 py-1 mx-auto flex-wrap">
-                <div class="h-10">
+                <div>
                     <a class="flex m-0 text-sm whitespace-nowrap items-center" target="_blank" logo>
-                        <img src="../assets/img/logo3.png"
-                             class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-10" alt="main_logo" />
-                        <span class=" ml-1 font-semibold transition-all duration-200 ease-nav-brand" name-web>
-                            <img src="../assets/img/name-web3.png"
-                             class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
+                        <img src="{{ asset('image/landing-page/logo4.webp') }}"
+                             class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-16" alt="main_logo" />
+                        <span class="font-semibold transition-all duration-200 ease-nav-brand" name-web>
+                            <img src="{{asset('image/landing-page/name-web-1.webp')}}"
+                             class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-14" alt="main_logo" />
                         </span>
                     </a>
                 </div>
@@ -53,20 +53,20 @@
         <!-- end Navbar -->
 
         <section>
-            <div class="relative flex items-center w-full lg:min-h-screen p-0 overflow-hidden bg-cover bg-center bg-no-repeat">
-                <div class="w-6/12 hidden md:block md:pl-20">
-                    <div class="text-[#005f6a]">
-                        <h5 class="text-6xl font-semibold">Secure & Powerful<br>
+            <div class="relative flex items-center w-full lg:min-h-screen p-0 overflow-hidden bg-cover bg-right  bg-no-repeat"
+            style='background-image: url({{ asset('image/landing-page/wave.svg') }}); background-position-y: 8rem'>
+                <div class="w-6/12 hidden md:block md:pl-20 md:-mt-20">
+                    <div class="text-blue-950">
+                        <h5 class="text-7xl font-extrabold">Secure & Powerful<br>
                             Video Streaming Platform</h5>
-                        <h6 class="text-lg mt-6">Enjoy the freedom of storing and sharing your videos online with our multi-quality support, designed to deliver an optimal viewing experience.<br> Our platform is committed to providing a seamless, high-quality video streaming service that caters to your needs.</h6>
+                        <h6 class="text-lg mt-12 italic font-medium">Our platform is committed to providing a seamless, high-quality video streaming service that caters to your needs.</h6>
                         <a href="/dashboard">
-                            <button class="px-8 py-2 rounded-full bg-[#009FB2]/90 hover:bg-[#009FB2] text-white text-2xl mt-6 italic">Get Start</button>
+                            <button class="px-12 py-4 font-semibold rounded-full bg-[#009FB2]/90 hover:bg-[#009FB2] text-white text-2xl mt-6 italic">Get Start</button>
                         </a>
                     </div>
                 </div>
-                <div class="md:w-6/12 w-full flex justify-center relative">
-                    <div class="bg-[#e0fcff]"  style="background-image: url({{asset('assets/img/background-homepage.svg')}})"></div>
-                    <img src="../image/image-homepage.webp" alt="">
+                <div class="md:w-6/12 w-full flex justify-center relative p-8 -mt-8">
+                    <img src="{{ asset('image/landing-page/Video upload-amico.svg') }}" alt="">
                 </div>
             </div>
             <div class="relative w-full px-20">

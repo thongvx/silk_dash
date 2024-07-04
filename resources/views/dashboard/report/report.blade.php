@@ -196,8 +196,8 @@
                         </h4>
                         <div class="text-white mt-3 flex justify-between items-center">
                             <h5>
-                                Your USDT Address: {{\Illuminate\Support\Facades\Auth::user()->usdt_address}}<br>
-                                Network: {{\Illuminate\Support\Facades\Auth::user()->network}}
+                                Your USDT Address: {{  Auth::user()->usdt_address }}<br>
+                                Network: {{  Auth::user()->network }}
                             </h5>
 
                         </div>
