@@ -105,6 +105,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
+
+    //embed play
+    Route::get('/e/{slug}', [\App\Http\Controllers\EmbedPlayController::class, 'ePlay'])->name('ePlay');
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {

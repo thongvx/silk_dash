@@ -13,7 +13,14 @@
     <div class="col-span-4 lg:col-span-3 px-0 pt-0 overflow-auto max-h-[calc(100vh-14em)]">
         <div class="sticky top-0 z-30 pb-3 bg-[#121520]">
             <span id="token">
-                Token: <button class="ml-3 rounded-lg px-3 py-1 bg-[#009fb2]/50 hover:bg-[#009fb2]" btn-get-token>Get token</button>
+                API Token:{{ Auth::user()->key_api }}
+                @if(Auth::user()->key_api)
+                    <button class="rounded-lg py-1 hover:text-[#009fb2]" btn-get-token>
+                        <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
+                    </button>
+                @else
+                    <button class="ml-3 rounded-lg px-3 py-1 bg-[#009fb2]/50 hover:bg-[#009fb2]" btn-get-token>Get token</button>
+                @endif
             </span>
         </div>
         <div>

@@ -90,6 +90,9 @@
                             <input type="text" value="{{ Auth::user()->key_api }}"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="key_api">
+                            <button class="rounded-lg py-1 hover:text-[#009fb2]" btn-get-token>
+                                <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
+                            </button>
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
