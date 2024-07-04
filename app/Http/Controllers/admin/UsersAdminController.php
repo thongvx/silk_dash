@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\VideoCacheKeys;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repositories\Admin\UserRepo;
 use App\Repositories\AccountRepo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class UsersAdminController
 {
@@ -89,5 +91,10 @@ class UsersAdminController
         } else {
             abort(403);
         }
+    }
+    public function getDataRedis($slug)
+    {
+        $data = Redis::get(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
+        return $data;
     }
 }
