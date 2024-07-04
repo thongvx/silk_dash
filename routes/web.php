@@ -128,7 +128,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
 });
 
-Route::get('/getDataRedis', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);
+Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);
 
 Route::get('updateView/{videoId}', [\App\Http\Controllers\VideoViewController::class, 'updateView']);
 Route::prefix('statistic')->group(function () {
