@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use App\Repositories\VideoRepo;
 use App\Repositories\AccountRepo;
+use App\Enums\VideoCacheKeys;
 
 class UploadController
 {
@@ -251,6 +252,7 @@ class UploadController
         }
         $dataVideo->title = $request->title;
         $dataVideo->save();
+        Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
         return redirect()->route('video.editVideo', ['video' => $slug]);
     }
     //-------------------------------get progress transfer-----------------------------------------
