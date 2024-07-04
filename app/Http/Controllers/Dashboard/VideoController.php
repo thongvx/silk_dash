@@ -341,7 +341,10 @@ class VideoController
     public function editVideo($slug)
     {
         $jsonUrl = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$slug.'.json';
-        $subtitles = json_decode(file_get_contents($jsonUrl));
+        if(file_exists($jsonUrl))
+            $subtitles = json_decode(file_get_contents($jsonUrl));
+        else
+            $subtitles = [];
         $languageCodes = [ 'eng' => 'English', 'spa' => 'Spanish', 'aze' => 'Azerbaijani', 'alb' => 'Albanian', 'ara' => 'Arabic', 'bul' => 'Bulgarian', 'chi' => 'Chinese', 'dnk' => 'Denmark', 'per' => 'Persian', 'fin' => 'Finland', 'fre' => 'French', 'ger' => 'German', 'gre' => 'Greek', 'heb' => 'Hebrew', 'hin' => 'Hindi', 'hun' => 'Hungarian', 'ind' => 'Indonesian', 'ita' => 'Italian', 'jpn' => 'Japanese', 'kan' => 'Kannada', 'khm' => 'Khmer', 'kor' => 'Korean', 'mal' => 'Malayalam', 'may' => 'Malay', 'nor' => 'Norway', 'pol' => 'Polish', 'por' => 'Portuguese', 'rus' => 'Russian', 'sin' => 'Sinhala', 'slv' => 'Slovenian', 'srp' => 'Serbian', 'swe' => 'Sweden', 'tam' => 'Tamil', 'tha' => 'Thai', 'tur' => 'Turkish', 'ukr' => 'Ukrainian', 'vie' => 'Vietnamese', 'rum' => 'Romanian', 'mar' => 'Marathi', 'cze' => 'Czech', 'slo' => 'Slovak', 'lit' => 'Lithuanian', 'kur' => 'Kurdish', 'dan' => 'Danish', 'bos' => 'Bosnian', 'hrv' => 'Croatian' ];
         foreach ($subtitles as $subtitle) {
             $subtitle->label = $languageCodes[$subtitle->label].' ('.$subtitle->label . ')';
