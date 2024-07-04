@@ -9,21 +9,21 @@ use App\Repositories\EncoderTaskRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Dashboard\UploadController;
+
 
 class VideoController
 {
-    protected $videoRepo;
-    protected $folderRepo;
-    protected $encoderTaskRepo;
-    protected $notificationService;
+    protected $videoRepo, $folderRepo, $encoderTaskRepo, $notificationService, $uploadController;
 
-
-    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo, NotificationService $notificationService)
+    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo,
+                                NotificationService $notificationService, UploadController $uploadController)
     {
         $this->videoRepo = $videoRepo;
         $this->folderRepo = $folderRepo;
         $this->encoderTaskRepo = $encoderTaskRepo;
         $this->notificationService = $notificationService;
+        $this->uploadController = $uploadController;
     }
 
     // Get video data
@@ -266,38 +266,24 @@ class VideoController
     }
     public function cloneVideo(Request $request)
     {
-        // Tìm video dựa trên ID
-        $video = $this->videoRepo->findWhere(['slug' => $request->videoID])->first();
-        $folderName = $request->get('nameFolder', 'root');
-        $folders = $this->folderRepo->getFolder($folderName);
-        $folderId = $folders->id;
-
-        // Kiểm tra xem video có tồn tại không
-        if (!$video) {
-            return response()->json(['message' => 'Video not found'], 404);
+        $clonedVideo = $this->uploadController->cloneVideo($request);
+        $fileClone = [];
+        foreach ($clonedVideo as $video) {
+            $fileClone[] = [
+                "title" => $video['title'],
+                "folder" => $video['folder'],
+                "video_id" => $video['slug'],
+                "embedLink" => "https://user.streamsilk.com/t/".$video['slug'],
+            ];
         }
-
-        // Tạo một bản sao của video
-        $clonedVideo = $video->replicate();
-        $clonedVideo->title = $video->title . ' (Clone)';
-        $clonedVideo->folder_id = $folderId;
-        $clonedVideo->slug = uniqid();
-        // Lưu bản sao vào cơ sở dữ liệu
-        $clonedVideo->save();
-        $this->folderRepo->updateNumberOfFiles($folderId);
         $data = [
             "msg" => "ok",
             "status" => 200,
             "sever_time" => date('Y-m-d H:i:s'),
-            "file Clone" => [
-                "title" => $clonedVideo->title,
-                "folder" => $folderName,
-                "video_id" => $clonedVideo->slug,
-                "embedLink" => "https://user.streamsilk.com/t/".$clonedVideo->slug,
-            ]
+            "file Clone" => $fileClone
         ];
 
-        return response()->json($data);
+        return $data;
     }
     //rename video
     public function updateMultipleTitles(Request $request)
@@ -340,18 +326,19 @@ class VideoController
     // Setting video
     public function editVideo($slug)
     {
-        $jsonUrl = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$slug.'.json';
-        if(file_exists($jsonUrl))
+        $video = $this->videoRepo->findVideoBySlug($slug);
+        $subtitles = [];
+        if($video->is_sub == 1){
+            $jsonUrl = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$slug.'.json';
             $subtitles = json_decode(file_get_contents($jsonUrl));
-        else
-            $subtitles = [];
-        $languageCodes = [ 'eng' => 'English', 'spa' => 'Spanish', 'aze' => 'Azerbaijani', 'alb' => 'Albanian', 'ara' => 'Arabic', 'bul' => 'Bulgarian', 'chi' => 'Chinese', 'dnk' => 'Denmark', 'per' => 'Persian', 'fin' => 'Finland', 'fre' => 'French', 'ger' => 'German', 'gre' => 'Greek', 'heb' => 'Hebrew', 'hin' => 'Hindi', 'hun' => 'Hungarian', 'ind' => 'Indonesian', 'ita' => 'Italian', 'jpn' => 'Japanese', 'kan' => 'Kannada', 'khm' => 'Khmer', 'kor' => 'Korean', 'mal' => 'Malayalam', 'may' => 'Malay', 'nor' => 'Norway', 'pol' => 'Polish', 'por' => 'Portuguese', 'rus' => 'Russian', 'sin' => 'Sinhala', 'slv' => 'Slovenian', 'srp' => 'Serbian', 'swe' => 'Sweden', 'tam' => 'Tamil', 'tha' => 'Thai', 'tur' => 'Turkish', 'ukr' => 'Ukrainian', 'vie' => 'Vietnamese', 'rum' => 'Romanian', 'mar' => 'Marathi', 'cze' => 'Czech', 'slo' => 'Slovak', 'lit' => 'Lithuanian', 'kur' => 'Kurdish', 'dan' => 'Danish', 'bos' => 'Bosnian', 'hrv' => 'Croatian' ];
-        foreach ($subtitles as $subtitle) {
-            $subtitle->label = $languageCodes[$subtitle->label].' ('.$subtitle->label . ')';
+            $languageCodes = [ 'eng' => 'English', 'spa' => 'Spanish', 'aze' => 'Azerbaijani', 'alb' => 'Albanian', 'ara' => 'Arabic', 'bul' => 'Bulgarian', 'chi' => 'Chinese', 'dnk' => 'Denmark', 'per' => 'Persian', 'fin' => 'Finland', 'fre' => 'French', 'ger' => 'German', 'gre' => 'Greek', 'heb' => 'Hebrew', 'hin' => 'Hindi', 'hun' => 'Hungarian', 'ind' => 'Indonesian', 'ita' => 'Italian', 'jpn' => 'Japanese', 'kan' => 'Kannada', 'khm' => 'Khmer', 'kor' => 'Korean', 'mal' => 'Malayalam', 'may' => 'Malay', 'nor' => 'Norway', 'pol' => 'Polish', 'por' => 'Portuguese', 'rus' => 'Russian', 'sin' => 'Sinhala', 'slv' => 'Slovenian', 'srp' => 'Serbian', 'swe' => 'Sweden', 'tam' => 'Tamil', 'tha' => 'Thai', 'tur' => 'Turkish', 'ukr' => 'Ukrainian', 'vie' => 'Vietnamese', 'rum' => 'Romanian', 'mar' => 'Marathi', 'cze' => 'Czech', 'slo' => 'Slovak', 'lit' => 'Lithuanian', 'kur' => 'Kurdish', 'dan' => 'Danish', 'bos' => 'Bosnian', 'hrv' => 'Croatian' ];
+            foreach ($subtitles as $subtitle) {
+                $subtitle->label = $languageCodes[$subtitle->label].' ('.$subtitle->label . ')';
+            }
         }
         $data = [
             'title' => 'Setting Video',
-            'video' => $this->videoRepo->findWhere(['slug' => $slug])->first(),
+            'video' => $video,
             'subtitles' => $subtitles,
         ];
         return view('dashboard.video.settingVideo', $data);

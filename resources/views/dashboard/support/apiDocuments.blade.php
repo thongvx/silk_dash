@@ -12,10 +12,10 @@
     <script>hljs.highlightAll();</script>
     <div class="col-span-4 lg:col-span-3 px-0 pt-0 overflow-auto max-h-[calc(100vh-14em)]">
         <div class="sticky top-0 z-30 pb-3 bg-[#121520]">
-            <span id="token">
-                API Token:{{ Auth::user()->key_api }}
+            <span id="token" class=" flex items-center py-1">
+                API Token: {{ Auth::user()->key_api }}
                 @if(Auth::user()->key_api)
-                    <button class="rounded-lg py-1 hover:text-[#009fb2]" btn-get-token>
+                    <button class="rounded-lg hover:text-[#009fb2] cursor-pointer ml-3" btn-get-token>
                         <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
                     </button>
                 @else
@@ -420,7 +420,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                    https://user.streamsilk.com/api/cloneFile?videoID={id_video}&amp;nameFolder={folder_name}</h5>
+                    https://user.streamsilk.com/api/cloneFile?url={embed_link}&amp;nameFolder={folder_name}</h5>
                 </div>
                 <h4>Parameters</h4>
                 <div class="bg-[#142132] my-3">
@@ -436,8 +436,8 @@
                             </thead>
                             <tbody class="font-normal">
                             <tr>
-                                <td class="pl-3 py-1 border border-slate-600">videoID</td>
-                                <td class="pl-3 py-1 border border-slate-600">id video</td>
+                                <td class="pl-3 py-1 border border-slate-600">url</td>
+                                <td class="pl-3 py-1 border border-slate-600">embed link</td>
                                 <td class="pl-3 py-1 border border-slate-600">Yes</td>
                             </tr>
                             <tr>

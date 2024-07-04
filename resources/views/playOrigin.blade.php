@@ -5,7 +5,6 @@
     <title>{{ $title }}</title>
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="https://user.streamsilk.com/image/logo/logo1.png">
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">

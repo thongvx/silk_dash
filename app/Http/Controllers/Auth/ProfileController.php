@@ -81,7 +81,7 @@ class ProfileController extends Controller
 
     public function regenerateToken(Request $request)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
         // Xóa tất cả token hiện tại của người dùng
         $user->tokens()->delete();

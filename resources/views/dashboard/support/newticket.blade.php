@@ -20,7 +20,7 @@
                 User
             </label>
             <div class="mt-2 text-white rounded-lg flex items-center px-2  bg-[#142132]/70">
-                <input type="text" id="user" name="user" value="{{\Illuminate\Support\Facades\Auth::user()->name}}"
+                <input type="text" id="user" name="user" value="{{ Auth::user()->name }}"
                        class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                        placeholder="Subject" readonly>
             </div>
@@ -30,7 +30,7 @@
                 Email *
             </label>
             <div class="mt-2 text-white rounded-lg flex items-center px-2 hover:bg-[#00424a] bg-[#142132]/70">
-                <input type="text" id="email" name="email" value="{{\Illuminate\Support\Facades\Auth::user()->email}}"
+                <input type="text" id="email" name="email" value="{{ Auth::user()->email }}"
                        class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                        placeholder="email">
             </div>
