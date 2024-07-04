@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\PlayerSettingsRepo;
 use App\Repositories\VideoRepo;
 
+
 class EmbedPlayController extends Controller
 {
     protected VideoRepo $videoRepo;
