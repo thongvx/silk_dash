@@ -95,6 +95,9 @@ class UsersAdminController
     public function getDataRedis($slug)
     {
         $data = Redis::get(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
-        return $data;
+        $data = unserialize($data);
+        $data = method_exists($data, 'toArray') ? $data->toArray() : (array) $data;
+
+        return json_encode($data);
     }
 }
