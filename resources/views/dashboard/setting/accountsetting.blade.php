@@ -38,7 +38,7 @@
                     <h1 class="text-white text-2xl mb-3 ">Access Settings</h1>
                     <div class="items-center flex">
                         <div class="mt-2">
-                            <input type="checkbox" id="block" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                            <input type="checkbox" id="blockDirect" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
                                                          after:duration-200 checked:after:translate-x-5 h-5 relative
                                                          float-left mt-1 w-10 cursor-pointer appearance-none border
                                                          border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
@@ -47,14 +47,14 @@
                                                          after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
                                                          checked:bg-none checked:bg-right"
                                    name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
-                            <label for="block" class="ml-3">
+                            <label for="blockDirect" class="ml-3">
                                 Disable direct access
                             </label>
                         </div>
                     </div>
                     <div class="items-center mt-3 flex">
                         <div class="mt-2">
-                            <input name="disableDownload" type="checkbox"   class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                            <input name="disableDownload" id="disableDownload" type="checkbox"   class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
                                                          after:duration-200 checked:after:translate-x-5 h-5 relative
                                                          float-left mt-1 w-10 cursor-pointer appearance-none border
                                                          border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
@@ -63,14 +63,14 @@
                                                          after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
                                                          checked:bg-none checked:bg-right"
                                    value="{{$setting -> disableDownload}}" {{$setting -> disableDownload == 1 ? 'checked' : ''}}>
-                            <label for="block" class="ml-3">
+                            <label for="disableDownload" class="ml-3">
                                 Disable Download
                             </label>
                         </div>
                     </div>
                     <div class="items-center mt-3 flex">
                         <div class="mt-2">
-                            <input type="checkbox" id="block" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                            <input type="checkbox" id="embed_page" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
                                                          after:duration-200 checked:after:translate-x-5 h-5 relative
                                                          float-left mt-1 w-10 cursor-pointer appearance-none border
                                                          border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
@@ -78,15 +78,15 @@
                                                          after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
                                                          after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
                                                          checked:bg-none checked:bg-right"
-                                   name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
-                            <label for="block" class="ml-3">
+                                   value="" >
+                            <label for="embed_page" class="ml-3">
                                 Disable Video Embed Page
                             </label>
                         </div>
                     </div>
                     <div class="items-center mt-3 flex">
                         <div class="mt-2">
-                            <input type="checkbox" type="checkbox"  name="publicVideo" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                            <input type="checkbox" id="publicVideo"  name="publicVideo" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
                                                          after:duration-200 checked:after:translate-x-5 h-5 relative
                                                          float-left mt-1 w-10 cursor-pointer appearance-none border
                                                          border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
@@ -95,7 +95,7 @@
                                                          after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
                                                          checked:bg-none checked:bg-right"
                                    value="{{$setting -> publicVideo}}" {{$setting -> publicVideo == 1 ? 'checked' : ''}}>
-                            <label for="block" class="ml-3">
+                            <label for="publicVideo" class="ml-3">
                                 Disable Video Cloning
                             </label>
                         </div>

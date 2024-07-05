@@ -15,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard.home.home');
+    return view('landing-page.home');
 });
-
+Route::get('/affiliate', function () {
+    return view('landing-page.affiliate');
+});
+Route::get('/premium', function () {
+    return view('landing-page.premium');
+});
 Route::get('/play', function () {
     return view('play');
 });
@@ -80,20 +85,20 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
     Route::post('/postTickket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTickket']);
-    Route::get('premium',function (){
-        $data['title'] = 'Premium';
-        return view('dashboard.premium', $data);
-    });
+//    Route::get('premium',function (){
+//        $data['title'] = 'Premium';
+//        return view('dashboard.premium', $data);
+//    });
     Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);
     Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     Route::post('/update-player', [\App\Http\Controllers\Dashboard\Setting\PlayerSettingController::class, 'update'])->name('update.player');
     Route::post('/change-password', [\App\Http\Controllers\Auth\ProfileController::class, 'changePassword'])->name('change.password');
     Route::post('/change-email', [\App\Http\Controllers\Auth\ProfileController::class, 'changeEmail'])->name('change.email');
 
-    Route::get('affiliate',function (){
-        $data['title'] = 'Affiliate';
-        return view('dashboard.affiliate', $data);
-    });
+//    Route::get('affiliate',function (){
+//        $data['title'] = 'Affiliate';
+//        return view('dashboard.affiliate', $data);
+//    });
 
     Route::post('/notifications/readall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'readAll'])->name('notifications.readall');
     Route::post('/notifications/deleteall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'deleteAll'])->name('notifications.deleteall');
