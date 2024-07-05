@@ -1,7 +1,7 @@
 @extends('landing-page.layouts.app')
 
 @section('content')
-    <section class="bg-[#142132] min-h-screen text-white ">
+    <section class="bg-[#142132] min-h-screen text-white xl:px-20 px-4 sm:px-8">
         <div class="bg-contain bg-no-repeat w-3/4 h-full fixed right-5"
              style='background-image: url({{ asset('image/affiliate/background.webp') }})'></div>
         <div class="flex justify-center relative z-index-30">
@@ -10,7 +10,7 @@
                     <h1 class="text-3xl">Affiliate</h1>
                     <h2 class="text-xl">Earn money by hosting and sharing your videos with StreamSilk</h2>
                 </div>
-                <div class="grid grid-cols-4 gap-x-10 gap-y-5 w-full px-6 xl:px-0">
+                <div class="grid grid-cols-4 gap-x-10 gap-y-5 w-full xl:px-0">
                     <div class="col-span-full sm:col-span-2 lg:col-span-1 rounded-xl px-8 py-6 bg-[#121520]/80">
                         <div class="flex justify-between items-center mt-2">
                             <h1 class="text-3xl">Tier 1</h1>
@@ -167,7 +167,7 @@
                             <img src="{{ asset('image/affiliate/revenue-animate.svg') }}" alt="" class="w-full">
                         </div>
                         <div class="col-span-full lg:col-span-1">
-                            <ul class="list-disc text-lg grid gap-y-6">
+                            <ul class="list-disc text-xl grid gap-y-6">
                                 <li>10% of video must be watched to be counted as paid. If below 10 minutes 60% required
                                     to be watched.
                                 </li>
