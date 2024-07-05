@@ -11,6 +11,9 @@
                             <h4 class="text-[#009FB2]">StreamSilk Partner Program</h4>
                             <p>Earn money by hosting and sharing your content with StreamSilk Partner.</p>
                         </div>
+                        <div>
+
+                        </div>
                         <div class="pt-4 md:p-4">
                             <div class="sm:grid grid-cols-5 text-center gap-3 mb-3 text-white hidden">
                                 <div class="col-span-1 items-center">

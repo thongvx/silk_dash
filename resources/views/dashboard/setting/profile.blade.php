@@ -189,7 +189,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
                             <input type="password" value="" name="current-password"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Enter current password">
+                                   placeholder="Enter current password" autocomplete="off">
                         </div>
                     </div>
                     <div class="items-center mt-3">
@@ -200,7 +200,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
                             <input type="password" value="" name="new-password"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Enter new password">
+                                   placeholder="Enter new password" autocomplete="off">
                         </div>
                     </div>
                     <div class="items-center mt-3">
@@ -211,7 +211,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
                             <input type="password" value="" name="new-password_confirmation"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Repeat new password">
+                                   placeholder="Repeat new password" autocomplete="off">
                         </div>
                     </div>
                     <span class="font-italic error invalid-feedback text-red-500" role="alert">
@@ -232,7 +232,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
                             <input type="password" value="" name="password-email"
                                    class="bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="password">
+                                   placeholder="password" autocomplete="off">
                         </div>
                     </div>
                     <div class="items-center mt-3">
@@ -243,7 +243,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">email</i>
                             <input type="email" value="" name="new_email"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Enter new email">
+                                   placeholder="Enter new email" autocomplete="off">
                         </div>
                     </div>
                     <div class="items-center mt-3">
@@ -254,7 +254,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">email</i>
                             <input type="email" value="" name="new_email_confirmation"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Repeat new email">
+                                   placeholder="Repeat new email" autocomplete="off">
                         </div>
                     </div>
                     <span class="font-italic error invalid-feedback text-red-500" role="alert">

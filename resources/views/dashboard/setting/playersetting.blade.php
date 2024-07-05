@@ -5,79 +5,79 @@
                 <div class="w-full">
                     <h1 class="text-white text-2xl mb-3 ">Player</h1>
                     <div class="items-center flex">
-                        <input type="checkbox" id="embeds" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                        <input type="checkbox" id="show_title" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                value="{{$playerSettings->show_title}}" name="show_title" {{$playerSettings->show_title == 1 ? 'checked' : ''}}>
-                        <label for="embeds" class="ml-3">
+                        <label for="show_title" class="ml-3">
                             Show title
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="embeds" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                        <input type="checkbox" id="show_logo" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                value="{{$playerSettings->show_logo}}" name="show_logo" {{$playerSettings->show_logo == 1 ? 'checked' : ''}}>
-                        <label for="embeds" class="ml-3">
+                        <label for="show_logo" class="ml-3">
                             Show Logo
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="embeds" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                        <input type="checkbox" id="show_poster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                value="{{$playerSettings->show_poster}}" name="show_poster" {{$playerSettings->show_poster == 1 ? 'checked' : ''}}>
-                        <label for="embeds" class="ml-3">
+                        <label for="show_poster" class="ml-3">
                             Show poster
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                        <input type="checkbox" id="show_download" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                value="{{$playerSettings->show_download}}" name="show_download" {{$playerSettings->show_download == 1 ? 'checked' : ''}}>
-                        <label for="embeds" class="ml-3">
+                        <label for="show_download" class="ml-3">
                             Show Download Button
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                        <input type="checkbox" id="show_preview" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                value="{{$playerSettings->show_preview}}" name="show_preview" {{$playerSettings->show_preview == 1 ? 'checked' : ''}}>
-                        <label for="embeds" class="ml-3">
+                        <label for="show_preview" class="ml-3">
                             Show Preview
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                        <input type="checkbox" id="infinite_loop" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                value="{{$playerSettings->infinite_loop}}" name="infinite_loop" {{$playerSettings->infinite_loop == 1 ? 'checked' : ''}}>
-                        <label for="embeds" class="ml-3">
+                        <label for="infinite_loop" class="ml-3">
                             Infinite Loop
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="adblock" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                        <input type="checkbox" id="disable_adblock" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                value="{{$playerSettings->disable_adblock}}"   name="disable_adblock" {{$playerSettings->disable_adblock == 1 ? 'checked' : ''}}>
-                        <label for="adblock" class="ml-3">
+                        <label for="disable_adblock" class="ml-3">
                             Force to disable adblocker
                         </label>
                     </div>
@@ -123,30 +123,30 @@
                     </div>
                     <div class="items-center mt-3 w-full">
                         <div class="mt-2 flex items-center">
-                            <label for="block" class="w-40">
+                            <label for="premium_color" class="w-40">
                                 Primary Color
                             </label>
-                            <input type="color"  name="premium_color"  value="{{ $playerSettings->premium_color }}"
+                            <input type="color" id="premium_color"  name="premium_color"  value="{{ $playerSettings->premium_color }}"
                                    class=" text-white placeholder:text-gray-400/80 placeholder:font-normal
                                    w-full mx-1 p-0 bg-transparent h-8 appearance-none outline-none autofill:bg-yellow-200 rounded-lg">
                         </div>
                     </div>
                     <div class="items-center mt-3 w-full">
                         <div class="mt-2 flex items-center">
-                            <label for="block" class="w-40">
+                            <label for="embed_width" class="w-40">
                                 Embed Width
                             </label>
-                            <input type="text"  name="embed_width"  value="{{ $playerSettings->embed_width }}"
+                            <input type="text" id="embed_width" name="embed_width"  value="{{ $playerSettings->embed_width }}"
                                    class="py-1.5 hover:bg-[#142132] bg-[#142132]/70 text-white placeholder:text-gray-400/80 placeholder:font-normal
                                    w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200 rounded-lg">
                         </div>
                     </div>
                     <div class="items-center mt-5 w-full">
                         <div class="mt-2 flex items-center">
-                            <label for="block" class="w-40">
+                            <label for="embed_height" class="w-40">
                                 Embed Height
                             </label>
-                            <input type="text"  name="embed_height"  value="{{ $playerSettings->embed_height }}"
+                            <input type="text" id="embed_height" name="embed_height"  value="{{ $playerSettings->embed_height }}"
                                    class="py-1.5 hover:bg-[#142132] bg-[#142132]/70 text-white placeholder:text-gray-400/80 placeholder:font-normal
                                    w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200 rounded-lg">
                         </div>

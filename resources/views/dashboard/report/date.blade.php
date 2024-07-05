@@ -20,8 +20,8 @@
                 <td class="text-center">{{ $report->download }}</td>
                 <td class="text-center">{{ $report->paid_views }}</td>
                 <td class="text-center">{{ $report->vpn_ads_views }}</td>
-                <td class="text-center">{{ number_format($report->cpm, 2) }}</td>
-                <td class="text-center">{{ $report->revenue }} $</td>
+                <td class="text-center">{{ number_format($report->cpm, 2, '.', ',') }}</td>
+                <td class="text-center">{{ number_format($report->revenue, 2, '.', ',') }} $</td>
             </tr>
         @empty
             <tr class="my-3 h-12 bg-[#142132]">
@@ -36,7 +36,7 @@
                 <th class="py-1.5 px-3">{{ $reports->sum('download') }}</th>
                 <th class="py-1.5 px-3">{{ $reports->sum('paid_views') }}</th>
                 <th class="py-1.5 px-3">{{ $reports->sum('vpn_ads_views') }}</th>
-                <th class="py-1.5 px-3"></th>
+                <th class="py-1.5 px-3">{{ number_format($reports->avg('cpm'), 2, '.', ',') }}</th>
                 <th class="py-1.5 px-3">{{ number_format($reports->sum('revenue'), 2, '.', ',') }} $</th>
             </tr>
         </tfoot>

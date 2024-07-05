@@ -27,7 +27,7 @@
                     <div class='flex items-center justify-between py-2.5'>
                         <h3 class='text-lg text-slate-400'>Today earning</h3>
                         <h5 class="mb-0 font-bold text-2xl text-white  flex items-start">
-                            <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ $earnings['today'] }}
+                            <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ number_format($earnings['today'], 2, '.', ',') }}
                         </h5>
                     </div>
                 </div>

@@ -289,7 +289,21 @@ class VideoController
     public function updateMultipleTitles(Request $request)
     {
         // Validate the request...
-        $ids = $request->videoIds;
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'videoIds' => 'required',
+            'videoIds.*' => 'exists:videos,id',
+            'append' => 'nullable|string',
+            'prepend' => 'nullable|string',
+            'replace' => 'nullable|string',
+            'with' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+
+        $ids = $data['videoIds'];
         if (!is_array($ids)) {
             $ids = explode(',', $ids);
         }
@@ -302,19 +316,26 @@ class VideoController
         // Update the titles of the videos...
         foreach ($ids as $index => $id) {
             $video = $this->videoRepo->findWhere(['id' => $id])->first();
-            $newTitle = $request->input($id);
-            // Check if the new title is not null
-            if ($newTitle === null) {
-                continue;
-            }
-
             if ($video) {
-                $video->title = $newTitle;
-                $video->save();
+                $title = $video->title;
+                // append
+                if (isset($data['append']) && $data['append'] !== '') {
+                    $title = $data['append'] . $title;
+                }
+                // Prepend
+                if (isset($data['prepend']) && $data['prepend'] !== '') {
+                    $title = $title . $data['prepend'];
+                }
 
+                // Replace
+                if (isset($data['replace']) && $data['replace'] !== '') {
+                    $title = str_replace($data['replace'], $data['with'] ?? '', $title);
+                }
+                $video->title = $title;
+                $video->save();
                 $updatedVideos[] = [
                     'id' => $video->id,
-                    'newTitle' => $newTitle
+                    'newTitle' => $title
                 ];
             } else {
                 return response()->json(['message' => 'Video not found: ' . $id], 404);

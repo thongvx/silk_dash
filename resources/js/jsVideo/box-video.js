@@ -5,8 +5,25 @@ var fixedVideoCloseButton = $("[fixed-video-close-button]");
 const formEdit = `<div class="edit" id="edit">
                                 <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Rename file</h5>
                                 <form class="text-white mt-3" action="">
-                                    <div id="list-file" class="max-h-80 overflow-auto">
-
+                                    <div class="py-1 text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
+                                        <input type="text" value="" id="append" name="append"
+                                               class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                               placeholder="Add Append">
+                                    </div>
+                                    <div class="mt-3 py-1 text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
+                                        <input type="text" value="" id="prepend" name="prepend"
+                                               class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                placeholder="Add Prepend" >
+                                    </div>
+                                    <div class="mt-3 py-1 text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
+                                        <input type="text" value="" id="replace" name="replace"
+                                               class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                placeholder="Replace Text" >
+                                    </div>
+                                    <div class="mt-3 py-1 text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
+                                        <input type="text" value="" id="with" name="with"
+                                               class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                               placeholder="Replace With" >
                                     </div>
                                     <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132]" disabled>Submit</button>
                                 </form>
@@ -17,31 +34,9 @@ $(document).on('click', '[btn-edit]', function() {
     fixedBox(box)
     const tr = $(this).closest('tr');
     const rows = checkAll()
-    const videoIDs =
-    rows.map((index, row) => {
-        const div_rename_file = `<div class="my-3 bg-[#142132] px-2 py-3 rounded-lg">
-                                            <div class="grid grid-cols-3 gap-4 items-center">
-                                                <h5>
-                                                    Video title
-                                                </h5>
-                                                <div class="col-span-2 pr-2 video-title">
-                                                ${$(row).closest('tr').find('.video-title').text()}
-                                                </div>
-                                            </div>
-                                            <div class="mt-2 grid grid-cols-3 gap-4 items-center">
-                                                <h5>
-                                                    New video title
-                                                </h5>
-                                                <div class="col-span-2 pr-2">
-                                                    <input id="" name="${ $(row).closest('tr').data('videoid') }" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
-                                           border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
-                                           focus:border-[#009FB2] focus:outline-none focus:transition-shadow" placeholder="title"/>
-                                                </div>
-                                            </div>
-                                        </div>`
-        $('#list-file').append(div_rename_file)
+    const videoIDs = rows.map((index, row) => {
         return $(row).closest('tr').data('videoid');
-    }).get()
+    }).get();
     $('#edit form').on('submit', function(e) {
         e.preventDefault();
         const newTitle = $(this).find('input[name="newTitle"]').val();
