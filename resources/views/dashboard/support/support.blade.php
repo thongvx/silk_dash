@@ -26,7 +26,7 @@
                         <span class="px-2 py-1">Knowledge Base</span>
                     </button>
                 </div>
-                <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
+                <div class="rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
                     <div
                         class="border-[#121520] rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
                         <div class="lg:h-[calc(100vh-11em)] h-[calc(100vh-12.5em)]">

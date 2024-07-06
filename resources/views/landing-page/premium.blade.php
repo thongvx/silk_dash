@@ -11,8 +11,8 @@
                         </h5>
                     </div>
                     <div class="flex items-center w-max mt-3">
-                        <button data-plan="User" class="tab-premium bg-[#121520] hover:bg-[#009FB2] px-6 sm:px-8 py-2  rounded-l-full">Premium User Plans</button>
-                        <button data-plan="Views" class="tab-premium bg-[#009FB2] px-6 sm:px-8 py-2 hover:bg-[#009FB2] rounded-r-full">Premium Views Plans</button>
+                        <button data-plan="User" class="tab-premium bg-[#121520] hover:bg-[#009FB2] px-3 sm:px-8 py-2  rounded-l-full">Premium User Plans</button>
+                        <button data-plan="Views" class="tab-premium bg-[#009FB2] px-3 sm:px-8 py-2 hover:bg-[#009FB2] rounded-r-full">Premium Views Plans</button>
                     </div>
                 </div>
                 <div class="w-full max-w-full mb-4 plan" id="Views">
@@ -132,8 +132,8 @@
                 </div>
                 <div class="w-full max-w-full mb-4 plan hidden" id="User">
                     <div
-                        class='flex flex-wrap drop-shadow-sm rounded-2xl py-2 px-3'>
-                        <div class="px-6 xl:px-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-flow-row gap-4 w-full max-w-full ">
+                        class='flex flex-wrap drop-shadow-sm rounded-2xl py-2'>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-flow-row gap-8 w-full max-w-full ">
                             <!-- card1 -->
                             <div class="">
                                 <div
