@@ -23,6 +23,12 @@ Route::get('/affiliate', function () {
 Route::get('/premium', function () {
     return view('landing-page.premium');
 });
+Route::get('/terms', function () {
+    return view('landing-page.terms');
+});
+Route::get('/copyright', function () {
+    return view('landing-page.copyright');
+});
 Route::get('/play', function () {
     return view('play');
 });
