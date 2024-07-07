@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/videos/move', [\App\Http\Controllers\Dashboard\VideoController::class, 'moveVideos'])->name('dashboard.video.move');
     Route::resource('folder', \App\Http\Controllers\Dashboard\FolderController::class);
     Route::post('/video/edit/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'updateMultipleTitles']);
-    Route::get('/video/{video}', [\App\Http\Controllers\Dashboard\VideoController::class, 'editVideo'])->name('video.editVideo');
+    Route::get('/edit-video/{video}', [\App\Http\Controllers\Dashboard\VideoController::class, 'editVideo'])->name('video.editVideo');
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
     Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);

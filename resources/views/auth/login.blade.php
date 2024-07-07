@@ -10,7 +10,7 @@
             <div class="absolute bottom-0 right-0">
                 <img src="{{ asset('image/auth/bg-bottom.png') }}" alt="" class="w-full">
             </div>
-            <div class="pl-20 z-index-20 relative hidden lg:block">
+            <div class="pl-32 z-index-20 relative hidden lg:block">
                 <div>
                     <img src="{{ asset('image/auth/Tablet-login-amico.svg') }}" alt="" class="w-full">
                 </div>
@@ -29,11 +29,11 @@
                                     @csrf
                                     <div class="mb-4 text-white">
                                         <label class="text-blue-950 font-bold">Email</label>
-                                        <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#142132]">
+                                        <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2] focus:bg-[#009fb2]">
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">email</i>
                                             <input type="email" name="email" value="{{ old('email') }}" placeholder="Email"
                                                    class="autofill:bg-yellow-200 @error('email') @enderror focus:shadow-primary-outline text-sm leading-5.6 w-full
-                                                       appearance-none rounded-xl bg-clip-padding p-3 font-normal outline-none transition-all
+                                                       appearance-none rounded-xl bg-clip-padding p-3 font-normal transition-all outline-none text-md
                                                        bg-transparent text-white placeholder:text-white focus:border-fuchsia-300 focus:outline-none"/>
                                         </div>
                                         @error('email')
@@ -42,11 +42,11 @@
                                     </div>
                                     <div class="mb-4 text-white">
                                         <label class="text-blue-950 font-bold">Password</label>
-                                        <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#142132]">
+                                        <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2] focus:bg-[#009fb2]">
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">key</i>
                                             <input type="password" name="password" placeholder="Password"
                                                    class=" @error('password') @enderror  focus:shadow-primary-outline text-sm leading-5.6 w-full appearance-none rounded-xl
-                                                       bg-transparent bg-clip-padding p-3 font-normal outline-none transition-all
+                                                       bg-transparent bg-clip-padding p-3 font-normal transition-all outline-none text-md
                                                        placeholder:text-white text-white focus:border-fuchsia-300 focus:outline-none"/>
                                         </div>
                                         @error('password')
@@ -57,7 +57,7 @@
                                         <div>
                                             <input name="remember" id="remember" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                           after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                          border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                          border-solid border-[#009FB2] bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                           after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                           checked:border-0 checked:border-transparent checked:after:opacity-100"
                                                    type="checkbox">

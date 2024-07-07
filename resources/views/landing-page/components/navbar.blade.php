@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="flex z-20 items-center py-2 xl:px-20 px-4 sm:px-8 w-full text-[#009FB2] bg-[#142132]"
      navbar-main navbar-scroll="false">
-    <div class="flex items-center justify-between w-full px-0 py-1 mx-auto flex-wrap container">
+    <div class="flex items-center justify-between w-full px-0 py-1 flex-wrap">
         <div class="flex justify-center w-full sm:block sm:w-auto scale-75 md:scale-100">
             <a class="flex m-0 text-sm whitespace-nowrap items-center" href="/" target="_blank" logo>
                 <img src="{{ asset('image/logo/logo4.webp') }}"

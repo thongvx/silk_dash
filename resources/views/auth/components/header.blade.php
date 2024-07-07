@@ -17,17 +17,35 @@
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <script>
-        var currentDropdownTrigger = null;
-        var currentDropdownMenu = null;
 
         $(document).on('click', '[dropdown-trigger]', function (e) {
             e.stopPropagation(); // Prevent click event from propagating to the document
-            $('[dropdown-menu]').toggleClass('hidden');
-            $('[navbar-main]').addClass('bg-[#142132]'); // Change navbar background color
+            $('[dropdown-trigger]').attr('aria-expanded', function (i, attr) {
+                return attr === 'true' ? 'false' : 'true';
+            });
+            if($(this).attr('aria-expanded') === 'true') {
+                $('[dropdown-menu]').removeClass('hidden');
+                $('[dropdown-menu]').addClass('bg-[#142132] text-white');
+                $('[navbar-main]').addClass('bg-[#142132]');
+            } else {
+                $('[dropdown-menu]').addClass('hidden');
+                $('[dropdown-menu]').removeClass('bg-[#142132] text-white');
+                $('[navbar-main]').removeClass('bg-[#142132]');
+
+            }
         });
 
         $(document).on('click', function (e) {
-            $('[dropdown-menu]').addClass('hidden'); // Hide dropdown
+            if($(this).attr('aria-expanded') === 'true') {
+                $('[dropdown-menu]').removeClass('hidden');
+                $('[dropdown-menu]').addClass('bg-[#142132] text-white');
+                $('[navbar-main]').addClass('bg-[#142132]');
+            } else {
+                $('[dropdown-menu]').addClass('hidden');
+                $('[dropdown-menu]').removeClass('bg-[#142132] text-white');
+                $('[navbar-main]').removeClass('bg-[#142132]');
+
+            }
         });
 
         // Prevent dropdown menu from closing when clicking inside it
