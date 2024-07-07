@@ -203,6 +203,7 @@ export var uploadState = {
 };
 $(document).on('click', '.tab-lifted', function() {
     var data_content = $(this).data('content');
+    $('[title-tab]').text(data_content)
     if (uploadState.isUploading) {
         var userResponse = confirm('A video is currently uploading. Do you want to continue switching tabs?');
         if (userResponse == true) {

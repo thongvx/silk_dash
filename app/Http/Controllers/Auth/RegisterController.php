@@ -121,7 +121,7 @@ class RegisterController extends Controller
             'premium_color' => 'rgb(221,51,51)',
             'embed_width' => 800,
             'embed_height' => 600,
-            'logo_link' => 0,
+            'logo_link' => 'https://streamsilk.com/image/logo/logo-web.webp',
             'position' => 'control-bar',
             'poster_link' => 0,
         ]);

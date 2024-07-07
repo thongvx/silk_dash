@@ -17,11 +17,24 @@
         <span>Loading</span>
     </div>
 </div>
+
 <main
     class="relative h-full transition-all duration-200 ease-in-out {{$minimenu === 'true' ? 'xl:ml-24' :'xl:ml-72'}} rounded-xl bg-[#142132]">
     @include('dashboard.components.navbar')
     <!-- cards -->
     <div class="w-full px-3 md:px-6 mx-auto">
+        <nav class="mb-2 lg:hidden">
+            <!-- breadcrumb -->
+            <ol class="flex flex-wrap pt-1 bg-transparent rounded-lg sm:mr-16 w-max">
+                <li class="text-sm leading-normal">
+                    <a class="text-white opacity-50" href="javascript:;">Pages</a>
+                </li>
+                <li
+                    class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
+                    aria-current="page">{{$title}}</li>
+            </ol>
+            <h6 class="mb-0 font-bold text-white capitalize" title-tab>{{ request()->get('tab') ?? '' }}</h6>
+        </nav>
         @yield('content')
     </div>
     <!-- end cards -->
