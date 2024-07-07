@@ -56,13 +56,15 @@ class PlayController
                 if ($video->stream == 0) {
                     $svStream = SvStreamService::selectSvStream();
                     Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
-                    $video->stream =  $svStream;
+                    $nameSvStream = explode('.', $svStream);
+                    $video->stream =  $nameSvStream[0];
                     $video->save();
                 }else{
                     $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
                     if ($svStream === null) {
                         $svStream = SvStreamService::selectSvStream();
-                        $video->stream = $video->stream . '-' . $svStream;
+                        $nameSvStream = explode('.', $svStream);
+                        $video->stream = $video->stream . '-' . $nameSvStream[0];
                         $video->save();
                     }
                     Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
