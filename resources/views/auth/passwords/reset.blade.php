@@ -4,12 +4,12 @@
     <section>
         <div class="relative grid grid-cols-2 items-center w-full px-0 overflow-hidden min-h-screen">
             <div class="absolute top-0 left-0">
-                <img src="{{ asset('image/auth/bg-top.png') }}" alt="" class="w-full hidden sm:block">
-                <img src="{{ asset('image/auth/bg-top-5.png') }}" alt="" class="h-full block sm:hidden">
+                <img src="{{ asset('image/auth/bg-top.png') }}" loading="lazy" alt="" class="w-full hidden sm:block">
+                <img src="{{ asset('image/auth/bg-top-5.png') }}" loading="lazy" alt="" class="h-full block sm:hidden">
             </div>
             <div class="col-span-2 lg:col-span-1 px-5 xl:pl-24 lg:px-0 pt-10 xl:pt-20 hidden lg:block">
                 <div>
-                    <img src="{{ asset('image/auth/reset-password-animate.svg') }}" alt="" class="w-full">
+                    <img src="{{ asset('image/auth/reset-password-animate.svg') }}" loading="lazy" alt="" class="w-full">
                 </div>
             </div>
             <div class="col-span-2 lg:col-span-1 flex justify-center h-max -mt-20">

@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-span-2 lg:col-span-1 flex justify-center relative p-8">
-                <img src="{{ asset('image/landing-page/video-upload-animate.svg') }}" alt="" class="w-full">
+                <img src="{{ asset('image/landing-page/video-upload-animate.svg') }}" loading="lazy" alt="" class="w-full">
             </div>
         </div>
         <div class="relative w-full lg:px-20 mt-10 lg:mt-0">
@@ -118,7 +118,7 @@
                  style="background-image: url({{asset('assets/img/background-homepage.svg')}})">
                 <div class="grid grid-cols-2 gap-10 mt-6 items-center">
                     <div class="col-span-full lg:col-span-1">
-                        <img src="{{ asset('image/landing-page/statistics.svg') }}" alt="">
+                        <img src="{{ asset('image/landing-page/statistics.svg') }}" loading="lazy" alt="">
                     </div>
                     <div class="col-span-full lg:col-span-1 text-[#005f6a]">
                         <h4 class="mt-4 h-14 text-4xl font-semibold">Extensive statistics</h4>

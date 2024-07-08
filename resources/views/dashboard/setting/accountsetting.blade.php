@@ -70,7 +70,7 @@
                     </div>
                     <div class="items-center mt-3 flex">
                         <div class="mt-2">
-                            <input type="checkbox" id="embed_page" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                            <input type="checkbox" id="embed_page" name="embed_page" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
                                                          after:duration-200 checked:after:translate-x-5 h-5 relative
                                                          float-left mt-1 w-10 cursor-pointer appearance-none border
                                                          border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
@@ -78,7 +78,7 @@
                                                          after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
                                                          after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
                                                          checked:bg-none checked:bg-right"
-                                   value="" >
+                                   value="{{$setting -> embed_page}}" {{$setting -> embed_page == 1 ? 'checked' : ''}} >
                             <label for="embed_page" class="ml-3">
                                 Disable Video Embed Page
                             </label>
@@ -97,6 +97,22 @@
                                    value="{{$setting -> publicVideo}}" {{$setting -> publicVideo == 1 ? 'checked' : ''}}>
                             <label for="publicVideo" class="ml-3">
                                 Disable Video Cloning
+                            </label>
+                        </div>
+                    </div>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
+                            <input type="checkbox" id="adblock"  name="adblock" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
+                                   value="{{$setting -> adblock}}" {{$setting -> adblock == 1 ? 'checked' : ''}}>
+                            <label for="adblock" class="ml-3">
+                                Disable adblocker
                             </label>
                         </div>
                     </div>

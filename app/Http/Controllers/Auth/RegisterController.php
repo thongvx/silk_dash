@@ -108,13 +108,14 @@ class RegisterController extends Controller
             'disableDownload' => 0,
             'gridPoster' => 1,
         ]);
-        PlayerSetting::created([
+        PlayerSetting::create([
             'user_id' => $user->id,
             'show_title' => 1,
             'show_logo' => 1,
             'show_poster' => 1,
             'show_download' => 0,
             'show_preview' => 0,
+            'enable_caption' => 0,
             'infinite_loop' => 0,
             'disable_adblock' => 0,
             'thumbnail_grid' => 1,
@@ -125,7 +126,7 @@ class RegisterController extends Controller
             'position' => 'control-bar',
             'poster_link' => 0,
         ]);
-        event(new Registered($user));
+//        event(new Registered($user));
         return $user;
     }
 }

@@ -5,77 +5,98 @@
                 <div class="w-full">
                     <h1 class="text-white text-2xl mb-3 ">Player</h1>
                     <div class="items-center flex">
-                        <input type="checkbox" id="show_title" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                        <input type="checkbox" id="show_title" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                                value="{{$playerSettings->show_title}}" name="show_title" {{$playerSettings->show_title == 1 ? 'checked' : ''}}>
                         <label for="show_title" class="ml-3">
                             Show title
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="show_logo" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                        <input type="checkbox" id="show_logo" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                                value="{{$playerSettings->show_logo}}" name="show_logo" {{$playerSettings->show_logo == 1 ? 'checked' : ''}}>
                         <label for="show_logo" class="ml-3">
                             Show Logo
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="show_poster" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                        <input type="checkbox" id="show_poster" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                                value="{{$playerSettings->show_poster}}" name="show_poster" {{$playerSettings->show_poster == 1 ? 'checked' : ''}}>
                         <label for="show_poster" class="ml-3">
                             Show poster
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="show_download" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                        <input type="checkbox" id="show_download" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                                value="{{$playerSettings->show_download}}" name="show_download" {{$playerSettings->show_download == 1 ? 'checked' : ''}}>
                         <label for="show_download" class="ml-3">
                             Show Download Button
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="show_preview" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                        <input type="checkbox" id="show_preview" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                                value="{{$playerSettings->show_preview}}" name="show_preview" {{$playerSettings->show_preview == 1 ? 'checked' : ''}}>
                         <label for="show_preview" class="ml-3">
                             Show Preview
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="infinite_loop" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                        <input type="checkbox" id="infinite_loop" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                                value="{{$playerSettings->infinite_loop}}" name="infinite_loop" {{$playerSettings->infinite_loop == 1 ? 'checked' : ''}}>
                         <label for="infinite_loop" class="ml-3">
                             Infinite Loop
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="disable_adblock" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                        <input type="checkbox" id="disable_adblock" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                                value="{{$playerSettings->disable_adblock}}"   name="disable_adblock" {{$playerSettings->disable_adblock == 1 ? 'checked' : ''}}>
                         <label for="disable_adblock" class="ml-3">
                             Force to disable adblocker
@@ -229,11 +250,14 @@
                 <h1 class="text-white text-2xl mb-3 ">Subtitle</h1>
                 <div class="items-center flex">
                     <input name="enable_caption" id="enable_caption"  type="checkbox"
-                           class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                  after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
-                                  checked:border-0 checked:border-transparent checked:after:opacity-100"
+                           class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
                            value="{{$playerSettings->enable_caption ==1 ? '0': '1'}}" {{$playerSettings->enable_caption ==1 ? 'checked': ''}}>
                     <label for="enable_caption" class="ml-3">
                         Enable Caption/Subtitles
@@ -248,7 +272,17 @@
                             Title
                         </label>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power"  value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo)) }}"
+                            @php
+                                $url = $playerSettings->logo;
+                                $checkUrl = strpos($url, 'https://');
+                                if($checkUrl == 0){
+                                    $slugClone = asset(Storage::url($playerSettings->logo));
+                                }
+                                else
+                                    $slugClone = $url;
+                            @endphp
+                            <input type="text" id="power"
+                                   value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' :  $slugClone}}"
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
                         </div>
@@ -258,7 +292,8 @@
                             Message
                         </label>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power"  value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo)) }}"
+                            <input type="text" id="power"
+                                   value="{{ in_array($playerSettings->logo, ['', null, 0]) ? '' : $slugClone }}"
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="Power url">
                         </div>

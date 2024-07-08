@@ -4,14 +4,14 @@
     <section>
         <div class="relative flex items-center w-full min-h-screen p-0 overflow-hidden">
             <div class="absolute top-0 left-0">
-                <img src="{{ asset('image/auth/bg-top.png') }}" alt="" class="w-full hidden sm:block">
-                <img src="{{ asset('image/auth/bg-top-5.png') }}" alt="" class="h-full block sm:hidden">
+                <img src="{{ asset('image/auth/bg-top.png') }}" loading="lazy" alt="" class="w-full hidden sm:block">
+                <img src="{{ asset('image/auth/bg-top-5.png') }}" loading="lazy" alt="" class="h-full block sm:hidden">
             </div>
             <div class="absolute top-2 -right-44 scale-75 opacity-30">
-                <img src="{{ asset('image/auth/bg-email-1.png') }}" alt="" class="h-full hidden sm:block">
+                <img src="{{ asset('image/auth/bg-email-1.png') }}" loading="lazy" alt="" class="h-full hidden sm:block">
             </div>
             <div class="absolute -bottom-24 -left-44 scale-50 opacity-45">
-                <img src="{{ asset('image/auth/bg-email-1.png') }}" alt="" class="h-full hidden sm:block">
+                <img src="{{ asset('image/auth/bg-email-1.png') }}" loading="lazy" alt="" class="h-full hidden sm:block">
             </div>
             <div class="w-full flex justify-center">
                 <div class="flex -mx-3 rounded-2xl lg:w-7/12 sm:w-10/12 w-11/12 -mt-20">

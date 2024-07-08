@@ -108,7 +108,11 @@ class VideoController
         }
 
         if (!$video) {
-            return response()->json(['message' => 'Video not found'], 404);
+            return response()->json([
+                "msg" => "No video found",
+                "status" => 404,
+                "sever_time" => date('Y-m-d H:i:s'),
+            ]);
         }
 
         $video->title = $request->newTitle;
@@ -153,12 +157,25 @@ class VideoController
                 // Update the number of files in the folder
                 $this->folderRepo->updateNumberOfFiles($folderId);
             }else {
-                return response()->json(['message' => 'Video not found: ' . $id], 404);
+                return response()->json(
+                    [
+                        'msg' => 'Error',
+                        'status' => '404',
+                        'sever_time' => date('Y-m-d H:i:s'),
+                        'result' => 'Video not found: ' . $id
+                    ]
+                );
             }
 
         }
-
-        return response()->json(['message' => 'Videos deleted successfully']);
+        return response()->json(
+            [
+                'msg' => 'Ok',
+                'status' => '200',
+                'sever_time' => date('Y-m-d H:i:s'),
+                'result' => 'Videos deleted successfully'
+            ]
+        );
     }
     // select2 video
     public function show(Request $request)
@@ -183,28 +200,41 @@ class VideoController
     //mover video
     public function moveVideos(Request $request)
     {
+
         // Validate the request...
         $validated = $request->validate([
-            'folder_id' => 'required|exists:folders,id',
-            'video_ids' => 'required|array',
-            'video_ids.*' => 'exists:videos,id',
+            'folderID' => 'required|exists:folders,id',
         ]);
-
+        $videoIDs = $request->input('videoID');
+        if (is_string($videoIDs)) {
+            $videoIDs = explode(',', $videoIDs);
+        }
+        if (!$validated) {
+            return response()->json(['message' => 'Invalid request'], 400);
+        }
         // Find the videos and update their folder_id...
-        foreach ($validated['video_ids'] as $videoId) {
-            $video = $this->videoRepo->find($videoId);
+        foreach ($videoIDs as $videoId) {
+            $video = $this->videoRepo->findWhere(['slug' => $videoId])->first();
             if ($video) {
                 $oldFolderId = $video->folder_id;
-                $video->folder_id = $validated['folder_id'];
+                $video->folder_id = $validated['folderID'];
                 $video->save();
 
                 $this->folderRepo->updateNumberOfFiles($oldFolderId);
-                $this->folderRepo->updateNumberOfFiles($validated['folder_id']);
+                $this->folderRepo->updateNumberOfFiles($validated['folderID']);
+            } else {
+                return response()->json(['message' => 'Video not found: ' . $videoId], 404);
             }
         }
 
-        // Return a response...
-        return response()->json(['message' => 'Videos moved successfully!']);
+        return response()->json(
+            [
+                'msg' => 'Success',
+                'status' => '200',
+                'sever_time' => date('Y-m-d H:i:s'),
+                'result' => 'Videos moved successfully!'
+            ]
+        );
     }
     public function findVideoBySlug(Request $request)
     {
@@ -214,6 +244,13 @@ class VideoController
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
         $video = $this->videoRepo->searchVideos($user->id, $slug, $limit, $column, $direction)->first();
+        if($video == null){
+            return response()->json([
+                "msg" => "No video found",
+                "status" => 404,
+                "sever_time" => date('Y-m-d H:i:s'),
+            ]);
+        }
         $data=[
             'msg' => 'Ok',
             'status' => '200',
@@ -238,8 +275,15 @@ class VideoController
         $limit = $request->get('limit', 50);
         $folders = $this->folderRepo->getFolder($folderName);
         $folderId = $folders->id;
-        $videos = $this->videoRepo->getAllUserVideo($user->id, 'live', 'created_at', 'desc', $folderId, $limit, ['*'], $page);
+        $videos = $this->videoRepo->getAllUserVideo($user->id, 'live', 'created_at', 'desc', $folderId, $limit, $page, ['*']);
         $videoData = [];
+        if($videos->isEmpty()){
+            return response()->json([
+                "msg" => "No video found",
+                "status" => 404,
+                "sever_time" => date('Y-m-d H:i:s'),
+            ]);
+        }
         foreach ($videos as $video) {
             $videoData[] = [
                 "title" => $video->title,
@@ -267,6 +311,13 @@ class VideoController
     public function cloneVideo(Request $request)
     {
         $clonedVideo = $this->uploadController->cloneVideo($request);
+        if($clonedVideo == null){
+            return response()->json([
+                "msg" => "No video found",
+                "status" => 404,
+                "sever_time" => date('Y-m-d H:i:s'),
+            ]);
+        }
         $fileClone = [];
         foreach ($clonedVideo as $video) {
             $fileClone[] = [

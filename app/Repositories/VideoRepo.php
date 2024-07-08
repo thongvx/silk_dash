@@ -21,7 +21,7 @@ class VideoRepo extends BaseRepository
             ->where('user_id', $userId);
         //Tạo cache key
         $columnsString = is_array($columns) ? implode(',', $columns) : $columns;
-        $cacheKey = VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $userId .'tab'. $tab . 'get_all' . $limit . '.' . $columnsString .'direction' . $direction .'column'.$column. 'folderId'.$folderId . '.page'. $page;
+        $cacheKey = VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $userId . 'tab' . $tab . 'get_all' . $limit . '.' . $columnsString . 'direction' . $direction . 'column' . $column . 'folderId' . $folderId . '.page' . $page;
         //Lấy cache
         $video = Redis::get($cacheKey);
         if (isset($video)){

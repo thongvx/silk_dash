@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('image/logo/logo1.png')}}"/>
-    <link rel="icon" type="image/png" href="{{asset('image/logo/logo1.png')}}"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('image/logo/logo4.webp')}}"/>
+    <link rel="icon" type="image/png" href="{{asset('image/logo/logo4.webp')}}"/>
     <title>Stream Silk</title>
     @vite('resources/css/app.css')
     <style>

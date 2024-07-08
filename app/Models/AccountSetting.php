@@ -30,6 +30,7 @@ class AccountSetting extends Model
         'captionsMode',
         'disableDownload',
         'gridPoster',
+        'embed_page'
     ];
 
 

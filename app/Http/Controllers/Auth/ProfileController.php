@@ -97,12 +97,20 @@ class ProfileController extends Controller
     public function getUserInfo(Request $request)
     {
         $user = Auth::user();
-        if ($request->wantsJson()) {
-            // Nếu là API, trả về dữ liệu dạng JSON
-            return response()->json($user);
-        } else {
-            // Nếu không phải API, trả về view
-            return $user->name;
-        }
+        $result = [
+            "name" => $user->name,
+            "email" => $user->email,
+            "files_total" => $user->video,
+            "storage" => $user->storage,
+            "premium" => $user->premium ?? 0,
+        ];
+        $data = [
+            "msg" => "ok",
+            "status" => 200,
+            'sever_time' => date('Y-m-d H:i:s'),
+            "result" => $result
+        ];
+        // Nếu là API, trả về dữ liệu dạng JSON
+        return response()->json($data);
     }
 }

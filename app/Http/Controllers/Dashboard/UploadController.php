@@ -147,12 +147,15 @@ class UploadController
         if ($transfer_priority)
             $transfer_priority = 0;
         $link = $request->url;
-        if($request->has('FolderID')) {
-            $folder_id = $request->FolderID;
+        if($request->has('folderID')) {
+            $folder_id = $request->folderID;
             $folderName = $this->folderRepo->find($folder_id)->name_folder;
         } else {
             $folderName = $request->get('nameFolder', 'root');
-            $folder_id = $this->folderRepo->getFolder($folderName)->id;
+            $folder_id = $this->folderRepo->getFolder($folderName)->id ?? null;
+        }
+        if ($folder_id == null) {
+            return null;
         }
         $arrLink = explode("\r\n", $link);
         if (count($arrLink) == 1) {
@@ -168,6 +171,7 @@ class UploadController
                 $slugClone = $url;
             //info video
             $video = $this->videoRepo->findVideoBySlug($slugClone);
+
             if($video){
                 //check user public video
                 $data_setting = $this->accountRepo->getSetting($video->user_id);
@@ -196,7 +200,7 @@ class UploadController
                     ];
                 }
             } else
-                return response()->json(['msg' => 'Video not found', 'status' => 404]);
+                return null;
         }
         $this->folderRepo->updateNumberOfFiles($folder_id);
         return $result;
