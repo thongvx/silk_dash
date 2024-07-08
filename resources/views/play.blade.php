@@ -42,11 +42,11 @@
     var is_sub = {{ $is_sub }};
     var infinite_loop = "{{ $player_setting->infinite_loop }}";
     // Preload
-    var preload = infinite_loop === "1" ? true : false;
+    var preload = infinite_loop === "1" ? "true" : "false";
     //logo
     var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
     //poster
-    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->logo_link != 0 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
+    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
     //title
     var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
     var player = jwplayer('video_player');
