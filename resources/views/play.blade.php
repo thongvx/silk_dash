@@ -40,6 +40,9 @@
     var enablePlay = 'yes';
     var urlSub = {{ $player_setting->enable_caption }};
     var is_sub = {{ $is_sub }};
+    var infinite_loop = "{{ $player_setting->infinite_loop }}";
+    // Preload
+    var preload = infinite_loop === "1" ? true : false;
     //logo
     var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
     //poster
@@ -56,16 +59,10 @@
             aspectratio: "16:9",
             jwplayer8quality: true,
             controls: true,
-            preload: {{ $player_setting->infinite_loop == 1 ? true : false }},
+            preload: preload,
             width: '100%',
             height: '100%',
             skin: { active: "{{ $player_setting->premium_color }}", },
-            image: urlposter,
-            logo: {
-                "file": urlLogo,
-                'hide': 1,
-                "position": "{{ $player_setting->position }}"
-            },
             title : title,
             localization: {
                 locale: 'en',
@@ -91,11 +88,17 @@
                 console.error("Error loading subtitles:", error.message);
             }
         }
-        if(urlLogo === ""){
-            delete options.logo;
+        if(urlLogo !== ""){
+            options.logo = {
+                "file": urlLogo,
+                'hide': 1,
+                "position": "{{ $player_setting->position }}",
+                "width": 100,
+                "height": 50,
+            }
         }
-        if(urlposter === ""){
-            delete options.image;
+        if(urlposter !== ""){
+            options.image = urlposter
         }
         player.setup(options);
         player.on('time', function(event) {
