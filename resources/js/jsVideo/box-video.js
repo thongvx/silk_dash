@@ -205,14 +205,14 @@ $(document).on('click', '#fixed-video [folder]', function() {
     bntSubmit.addClass('bg-[#01545e] hover:bg-[#009fb2]')
     bntSubmit.removeClass('bg-[#142132]')
     bntSubmit.removeAttr('disabled');
-    $('#move form').on('submit', function(e) {
+    $('#move form').off('submit').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
             url: '/videos/move',
             type: 'POST',
             data: {
-                folder_id: newFolderId,
-                video_ids: videoIDs
+                folderID: newFolderId,
+                videoID: videoIDs
             },
             beforeSend: function() {
                 bntSubmit.html(`
@@ -229,7 +229,6 @@ $(document).on('click', '#fixed-video [folder]', function() {
                 bntSubmit.prop('disabled', true);
             },
             success: function(response) {
-                console.log('a')
                 fixedBox()
                 $('#move').addClass('hidden')
                 videoIDs.forEach(function(videoID) {
@@ -243,7 +242,10 @@ $(document).on('click', '#fixed-video [folder]', function() {
             },
             error: function(response) {
                 fixedBox()
-                notification('error', 'An error occurred while editing the video title.')
+                bntSubmit.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
+                bntSubmit.addClass('bg-[#142132]')
+                bntSubmit.html('Move To Folder')
+                notification('error', 'An error occurred while moved the video.')
             }
         });
     });

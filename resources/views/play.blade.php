@@ -5,7 +5,7 @@
     <title>{{ $title }}</title>
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
-    <link rel="icon" href="https://user.streamsilk.com/image/logo/logo1.png">
+    <link rel="icon" href="https://user.streamsilk.com/image/logo/logo4.webp">
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
@@ -41,9 +41,9 @@
     var urlSub = {{ $player_setting->enable_caption }};
     var is_sub = {{ $is_sub }};
     //logo
-    var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "https://google.com" }}";
+    var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
     //poster
-    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->logo_link != 0 ? asset(Storage::url($player_setting->poster_link)) : "https://google.com"}}";
+    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->logo_link != 0 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
     //title
     var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
     var player = jwplayer('video_player');
@@ -56,7 +56,7 @@
             aspectratio: "16:9",
             jwplayer8quality: true,
             controls: true,
-            preload: '0',
+            preload: {{ $player_setting->infinite_loop == 1 ? true : false }},
             width: '100%',
             height: '100%',
             skin: { active: "{{ $player_setting->premium_color }}", },
@@ -73,13 +73,14 @@
         };
         if(urlSub === 1 && is_sub === 1){
             const jsonUrl = `https://streamsilk.com/storage/subtitles/${videoID}/${videoID}.json`;
+            const languageCodes = { 'eng' : 'English', 'spa' : 'Spanish', 'aze' : 'Azerbaijani', 'alb' : 'Albanian', 'ara' : 'Arabic', 'bul' : 'Bulgarian', 'chi' : 'Chinese', 'dnk' : 'Denmark', 'per' : 'Persian', 'fin' : 'Finland', 'fre' : 'French', 'ger' : 'German', 'gre' : 'Greek', 'heb' : 'Hebrew', 'hin' : 'Hindi', 'hun' : 'Hungarian', 'ind' : 'Indonesian', 'ita' : 'Italian', 'jpn' : 'Japanese', 'kan' : 'Kannada', 'khm' : 'Khmer', 'kor' : 'Korean', 'mal' : 'Malayalam', 'may' : 'Malay', 'nor' : 'Norway', 'pol' : 'Polish', 'por' : 'Portuguese', 'rus' : 'Russian', 'sin' : 'Sinhala', 'slv' : 'Slovenian', 'srp' : 'Serbian', 'swe' : 'Sweden', 'tam' : 'Tamil', 'tha' : 'Thai', 'tur' : 'Turkish', 'ukr' : 'Ukrainian', 'vie' : 'Vietnamese', 'rum' : 'Romanian', 'mar' : 'Marathi', 'cze' : 'Czech', 'slo' : 'Slovak', 'lit' : 'Lithuanian', 'kur' : 'Kurdish', 'dan' : 'Danish', 'bos' : 'Bosnian', 'hrv' : 'Croatian' };
             try {
                 const response = await fetch(jsonUrl);
                 if (!response.ok) throw new Error("Subtitle file not found");
                 const data = await response.json();
                 const tracks = data.map(item => ({
                     file: item.file,
-                    label: item.label,
+                    label: languageCodes[item.label] + ' (' + item.label + ')',
                     kind: 'captions',
                 }));
                 // Add subtitle tracks to the player options
@@ -89,6 +90,12 @@
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
             }
+        }
+        if(urlLogo === ""){
+            delete options.logo;
+        }
+        if(urlposter === ""){
+            delete options.image;
         }
         player.setup(options);
         player.on('time', function(event) {

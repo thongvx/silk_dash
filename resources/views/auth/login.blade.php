@@ -4,15 +4,15 @@
     <section>
         <div class="relative grid grid-cols-2 items-center w-full min-h-screen p-0 overflow-hidden">
             <div class="absolute top-0 left-0">
-                <img src="{{ asset('image/auth/bg-top.png') }}" alt="" class="w-full hidden sm:block">
-                <img src="{{ asset('image/auth/bg-top-5.png') }}" alt="" class="h-full block sm:hidden">
+                <img src="{{ asset('image/auth/bg-top.png') }}" loading="lazy" alt="" class="w-full hidden sm:block">
+                <img src="{{ asset('image/auth/bg-top-5.png') }}" loading="lazy" alt="" class="h-full block sm:hidden">
             </div>
             <div class="absolute bottom-0 right-0">
-                <img src="{{ asset('image/auth/bg-bottom.png') }}" alt="" class="w-full">
+                <img src="{{ asset('image/auth/bg-bottom.png') }}" loading="lazy" alt="" class="w-full lazy">
             </div>
             <div class="pl-32 z-index-20 relative hidden lg:block">
                 <div>
-                    <img src="{{ asset('image/auth/Tablet-login-amico.svg') }}" alt="" class="w-full">
+                    <img src="{{ asset('image/auth/Tablet-login-amico.svg') }}" loading="lazy" alt="" class="w-full">
                 </div>
             </div>
             <div class="col-span-full lg:col-span-1">

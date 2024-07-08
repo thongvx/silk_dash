@@ -164,7 +164,7 @@
                 <div class="mt-3 px-8 mb-10">
                     <div class="grid grid-cols-2 items-center">
                         <div class="px-5 col-span-full lg:col-span-1">
-                            <img src="{{ asset('image/affiliate/revenue-animate.svg') }}" alt="" class="w-full">
+                            <img src="{{ asset('image/affiliate/revenue-animate.svg') }}" loading="lazy" alt="" class="w-full">
                         </div>
                         <div class="col-span-full lg:col-span-1">
                             <ul class="list-disc text-xl grid gap-y-6">

@@ -11,11 +11,8 @@ class PlayerSetting extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'player_settings';
+
     public $timestamps = false;
 
     protected $fillable = [

@@ -4,11 +4,11 @@
     <section>
         <div class="relative grid grid-cols-2 items-center w-full min-h-screen p-0 overflow-hidden">
             <div class="absolute top-0 sm:-top-14 left-0">
-                <img src="{{ asset('image/auth/bg-sign-up.png') }}" alt="" class="w-full object-cover hidden sm:block">
-                <img src="{{ asset('image/auth/bg-top-5.png') }}" alt="" class="h-full object-cover block sm:hidden">
+                <img src="{{ asset('image/auth/bg-sign-up.png') }}" alt="" loading="lazy" class="w-full object-cover hidden sm:block">
+                <img src="{{ asset('image/auth/bg-top-5.png') }}" alt="" loading="lazy" class="h-full object-cover block sm:hidden">
             </div>
             <div class="absolute bottom-0 right-0">
-                <img src="{{ asset('image/auth/bg-bottom-register.png') }}" alt="" class="w-full object-cover">
+                <img src="{{ asset('image/auth/bg-bottom-register.png') }}" loading="lazy" alt="" class="w-full object-cover">
             </div>
             <div class="col-span-full lg:col-span-1">
                 <div class="flex justify-center">
@@ -112,7 +112,7 @@
             </div>
             <div class="xl:pr-18 z-index-20 relative hidden lg:block">
                 <div>
-                    <img src="{{ asset('image/auth/register-r.svg') }}" alt="" class="xl:w-4/5">
+                    <img src="{{ asset('image/auth/register-r.svg') }}" loading="lazy" alt="" class="xl:w-4/5">
                 </div>
             </div>
         </div>

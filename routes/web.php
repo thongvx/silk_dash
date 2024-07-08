@@ -23,6 +23,9 @@ Route::get('/affiliate', function () {
 Route::get('/premium', function () {
     return view('landing-page.premium');
 });
+Route::get('/api', function () {
+    return view('landing-page.api');
+});
 Route::get('/terms', function () {
     return view('landing-page.terms');
 });

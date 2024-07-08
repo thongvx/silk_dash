@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="flex z-20 items-center py-2 xl:px-20 px-4 sm:px-8 w-full text-[#009FB2] bg-[#142132]"
+<nav class="{{ request()->path() == 'api' ? 'sticky top-0' : 'flex' }} z-20 items-center py-2 xl:px-20 px-4 sm:px-8 w-full text-[#009FB2] bg-[#142132]"
      navbar-main navbar-scroll="false">
     <div class="flex items-center justify-between w-full px-0 py-1 flex-wrap">
         <div class="flex justify-center w-full sm:block sm:w-auto scale-75 md:scale-100">

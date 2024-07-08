@@ -6,6 +6,7 @@ use App\Repositories\FolderRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Folder;
+use Illuminate\Support\Facades\Validator;
 class FolderController
 {
     protected $folderRepo;
@@ -59,20 +60,21 @@ class FolderController
     // create a new folder
     public function store(Request $request)
     {
-        if ($request->nameFolder == null){
+
+        // Validate the request data
+        $validator = Validator::make($request->all(), [
+            'nameFolder' => 'required|string|max:255',
+        ]);
+        if ($validator->fails()) {
             return response()->json(
                 [
                     'msg'=>'ok',
                     'sever_time' => date('Y-m-d H:i:s'),
                     'status' => '400',
-                    'result' => 'false'
+                    'result' => $validator->errors()
                 ]
             );
         }
-        // Validate the request data
-        $request->validate([
-            'nameFolder' => 'required|string|max:255',
-        ]);
         $user = Auth::user();
         // Create a new folder
         $folder = new Folder;
@@ -97,18 +99,32 @@ class FolderController
     // edit a new folder
     public function update(Request $request, $id)
     {
-        // Fetch the folder from the database
-        $folder = $this->folderRepo->find($id);
-
         // Check if the folder exists
-        if (!$folder) {
-            return response()->json(['message' => 'Folder not found'], 404);
-        }
-
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'newNameFolder' => 'required|string|max:255',
         ]);
-
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'msg'=>'ok',
+                    'sever_time' => date('Y-m-d H:i:s'),
+                    'status' => '400',
+                    'result' => $validator->errors()
+                ]
+            );
+        }
+        // Fetch the folder from the database
+        $folder = $this->folderRepo->find($id);
+        if (!$folder) {
+            return response()->json(
+                [
+                    'msg'=>'ok',
+                    'sever_time' => date('Y-m-d H:i:s'),
+                    'status' => '400',
+                    'result' => 'Folder not found'
+                ]
+            );
+        }
         // Update the folder
         $folder->name_folder = $request->newNameFolder;
         $folder->save();
@@ -133,13 +149,27 @@ class FolderController
 
         // Check if the folder exists
         if (!$folder) {
-            return response()->json(['message' => 'Folder not found'], 404);
+            return response()->json(
+                [
+                    'msg' => 'Error',
+                    'status' => '404',
+                    'sever_time' => date('Y-m-d H:i:s'),
+                    'result' => 'Folder not found'
+                ]);
         }
 
         // Delete the folder
-        $folder->delete();
+        $folder->soft_delete = 1;
+        $folder->save();
         // Return a response
-        return response()->json(['message' => 'Folder deleted successfully']);
+        return response()->json(
+            [
+                'msg' => 'Error',
+                'status' => '404',
+                'sever_time' => date('Y-m-d H:i:s'),
+                'result' => 'Folder deleted successfully'
+            ]
+        );
     }
     // Rest of your code...
 

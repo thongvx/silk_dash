@@ -32,7 +32,7 @@
             <ul>
                 <li><a href="/premium" class="hover:text-[#009FB2] font-medium">Premium</a></li>
                 <li class="my-3"><a href="/affiliate" class="hover:text-[#009FB2] font-medium">Affiliate</a></li>
-                <li><a href="" class="hover:text-[#009FB2] font-medium">API</a></li>
+                <li><a href="/api" class="hover:text-[#009FB2] font-medium">API</a></li>
             </ul>
         </div>
     </div>
