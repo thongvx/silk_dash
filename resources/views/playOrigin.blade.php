@@ -51,7 +51,7 @@
     const loadPlayer = async (file) => {
         const options = {
             key: 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=',
-            sources: [{ file, type: 'hls' }],
+            sources: [{ file, type: 'mp4' }],
             playbackRateControls: [0.75, 1, 1.25, 1.5],
             aspectratio: "16:9",
             jwplayer8quality: true,
