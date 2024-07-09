@@ -41,6 +41,20 @@
     </div>
     @include('dashboard.upload.folder')
 @endsection
-{{--@section('scripts')--}}
-{{--    <script src="{{asset('assets/js/upload/jquery.fileupload.js')}}" async></script>--}}
-{{--@endsection--}}
+@section('scripts')
+    <script>
+        fetch('https://e02.encosilk.cc/test1', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Add any other headers here
+            },
+            body: JSON.stringify({
+                // Your request body content here
+            })
+        })
+            .then(response => response.json()) // Assuming the server responds with JSON
+            .then(data => console.log(data)) // Handling the data from the response
+            .catch(error => console.error('Error:', error)); // Handling any errors
+    </script>
+@endsection
