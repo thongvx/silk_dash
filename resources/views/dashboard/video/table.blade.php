@@ -1,4 +1,4 @@
-<div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
+<div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] lg:max-h-[calc(100vh-25em)] xl:max-h-[calc(100vh-20em)] ">
     <table id="datatable" datatable data-page-size="10" data-column-table="{{ $column }}"
            data-column-direction="{{ $direction }}"
            class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
@@ -47,7 +47,7 @@
                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                           data-direction="desc">▼</span>
                 </th>
-                <th data-column="created_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
+                <th data-column="updated_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
                     <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                           data-direction="asc">▲</span>
                     <a href="javascript:void(0)">Last Play</a>
@@ -82,7 +82,7 @@
                 <td class="text-center w-max">{{ $video->size }}</td>
                 <td class="text-center w-max">{{ $video->total_play }}</td>
                 <td class="pl-2 w-24">{{ $video->created_at }}</td>
-                <td class="pl-2 w-24">{{ $video->created_at }}</td>
+                <td class="pl-2 w-24">{{ $video->total_play != 0 ? $video->updated_at : 0 }}</td>
                 <td class="relative {{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
                     <li class="list-none">
                         <a

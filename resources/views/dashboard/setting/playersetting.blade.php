@@ -15,7 +15,7 @@
                                                          checked:bg-none checked:bg-right"
                                value="{{$playerSettings->show_title}}" name="show_title" {{$playerSettings->show_title == 1 ? 'checked' : ''}}>
                         <label for="show_title" class="ml-3">
-                            Show title
+                            Show Title
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
@@ -43,7 +43,7 @@
                                                          checked:bg-none checked:bg-right"
                                value="{{$playerSettings->show_poster}}" name="show_poster" {{$playerSettings->show_poster == 1 ? 'checked' : ''}}>
                         <label for="show_poster" class="ml-3">
-                            Show poster
+                            Show Poster
                         </label>
                     </div>
                     <div class="items-center mt-3 flex">
@@ -86,20 +86,6 @@
                                value="{{$playerSettings->infinite_loop}}" name="infinite_loop" {{$playerSettings->infinite_loop == 1 ? 'checked' : ''}}>
                         <label for="infinite_loop" class="ml-3">
                             Infinite Loop
-                        </label>
-                    </div>
-                    <div class="items-center mt-3 flex">
-                        <input type="checkbox" id="disable_adblock" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
-                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
-                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
-                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
-                                                         bg-left bg-no-repeat align-top transition-all after:absolute
-                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
-                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
-                                                         checked:bg-none checked:bg-right"
-                               value="{{$playerSettings->disable_adblock}}"   name="disable_adblock" {{$playerSettings->disable_adblock == 1 ? 'checked' : ''}}>
-                        <label for="disable_adblock" class="ml-3">
-                            Force to disable adblocker
                         </label>
                     </div>
                     <div class="items-center mt-3 w-full">

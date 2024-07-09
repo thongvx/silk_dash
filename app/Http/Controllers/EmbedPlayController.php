@@ -30,7 +30,7 @@ class EmbedPlayController extends Controller
         $data['playerSetting'] = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
         $data['accountSetting'] = $this->accountRepo->getSetting($video->user_id);
         if($data['accountSetting']->blockDirect == 1){
-            return response()->json(['status' => 'fail']);
+            return response()->view('errors.404', [], 404);
         }
         if (!$video) {
             return response()->json(['status' => 'fail']);

@@ -46,3 +46,7 @@ $(document).on('click', '[btn-get-token]', function() {
     });
 })
 
+$(document).on('click', '#list-menu-api li', function() {
+    $('#list-menu-api li').removeClass('bg-[#009fb2]');
+    this.classList.add('bg-[#009fb2]')
+})

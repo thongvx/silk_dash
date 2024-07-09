@@ -103,4 +103,25 @@ class PlayController
     {
         return $sd != 0 ? $sd : ($hd != 0 ? $hd : $fhd);
     }
+    function directPage($slug){
+        $video = $this->videoRepo->findVideoBySlug($slug);
+        $data['video'] = $video;
+        $data['playerSetting'] = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
+        $data['accountSetting'] = $this->accountRepo->getSetting($video->user_id);
+        if($data['accountSetting']->blockDirect == 1 || $video->soft_delete == 1 || !$video){
+            return response()->view('errors.404', [], 404);
+        }
+        return view('directPlay', $data);
+    }
+    function embedPage($slug)
+    {
+        $video = $this->videoRepo->findVideoBySlug($slug);
+        $data['userID'] = $video->user_id;
+        $data['accountSetting'] = $this->accountRepo->getSetting($video->user_id);
+        if($data['accountSetting']->embed_page == 1){
+            return response()->view('errors.404', [], 404);
+        } else{
+            return $this->play($slug);
+        }
+    }
 }
