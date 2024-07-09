@@ -4,7 +4,7 @@
             You can upload multiple video files per a session with total sizes up to 100 GB
         </div>
         <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
-        <form class='lg:mx-32 from-current' method="POST" id="form-upload-file" action="https://e02.encosilk.cc/upload"
+        <form class='lg:mx-32 from-current' method="POST" id="form-upload-file" action="https://e01.encosilk.cc/upload"
               enctype="multipart/form-data">
             @csrf
             <label htmlfor="file" class="rounded-xl py-10 text-[#009FB2] hover:text-white bg-[#142132] hover:bg-[#009FB2] flex justify-center flex-col h-full w-full relative ">

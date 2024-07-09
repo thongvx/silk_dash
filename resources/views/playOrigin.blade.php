@@ -41,9 +41,9 @@
     var urlSub = {{ $player_setting->enable_caption }};
     var is_sub = {{ $is_sub }};
     //logo
-    var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
+    var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "https://google.com" }}";
     //poster
-    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->logo_link != 0 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
+    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->logo_link != 0 ? asset(Storage::url($player_setting->poster_link)) : "https://google.com" }}";
     //title
     var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
     var player = jwplayer('video_player');
