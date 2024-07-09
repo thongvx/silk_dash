@@ -32,7 +32,7 @@ export function Upload_FILE (){
                         return [{name: '_token', value: tokenValue}, {name: 'userID', value: userIDValue}, {name: 'folderID', value: folderID}];
                     },
             crossDomain: true,
-            xhrFields: { withCredentials: true },
+            //xhrFields: { withCredentials: true },
             add: function (e, data) {
                 data._progress.theId = 'id_' + idSequence;
                 data._progress.name = data.originalFiles[idSequence].name;
