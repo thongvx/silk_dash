@@ -153,3 +153,7 @@ Route::prefix('statistic')->group(function () {
     Route::get('topVideo', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
 });
 
+Route::get('/test', function () {
+    return  '<iframe src="https://streamsilk.com/t/668bece206536" width="800" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="true"></iframe>';
+});
+
