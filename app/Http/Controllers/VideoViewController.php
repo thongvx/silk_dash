@@ -16,6 +16,7 @@ class VideoViewController
     }
     public function updateView($slug, Request $request)
     {
+        Redis::incr("ahihidongok");
         $origin = $request->headers->get('Origin');
         $referer = $request->headers->get('Referer');
 
