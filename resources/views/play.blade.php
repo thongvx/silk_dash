@@ -18,6 +18,15 @@
             border-top: 2px solid {{ $player_setting->premium_color }};
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q2MFXEGDES');
+    </script>
 </head>
 <body>
 <div id="pop1" class="div_pop"></div>
