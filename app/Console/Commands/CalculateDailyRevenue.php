@@ -30,10 +30,7 @@ class CalculateDailyRevenue extends Command
      *
      * @return int
      */
-    public function __construct(AccountRepo $accountRepo)
-    {
-        $this->accountRepo = $accountRepo;
-    }
+
     public function handle()
     {
         // Lấy ngày hiện tại
