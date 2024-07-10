@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
+use App\Repositories\AccountRepo;
 
 class CalculateDailyRevenue extends Command
 {
@@ -16,7 +17,7 @@ class CalculateDailyRevenue extends Command
      * @var string
      */
     protected $signature = 'revenue:calculate';
-
+    protected AccountRepo $accountRepo;
     /**
      * The console command description.
      *
@@ -29,6 +30,10 @@ class CalculateDailyRevenue extends Command
      *
      * @return int
      */
+    public function __construct(AccountRepo $accountRepo)
+    {
+        $this->accountRepo = $accountRepo;
+    }
     public function handle()
     {
         // Lấy ngày hiện tại
@@ -54,8 +59,13 @@ class CalculateDailyRevenue extends Command
             $paidView = ($videoView->views - $vpnAdsView) + $download;
             $valueArr = StatisticService::calculateValue($videoView->user_id);
             $value = array_sum($valueArr);
-
-            $cpm = $value / $videoView->views * 1000;
+            // lay trang thai earning
+            $data_setting = $this->accountRepo->getSetting($videoView->user_id);
+            if ($data_setting->earningModes == 1)
+                $earning = 2;
+            if ($data_setting->earningModes == 2)
+                $earning = 1;
+            $cpm = $value / $videoView->views * 1000 / $earning;
             $batchData[] = [
                 'user_id' => $videoView->user_id,
                 'views' => $videoView->views,
