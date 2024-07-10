@@ -22,7 +22,7 @@ class TransferController extends Controller
             $data->save();
             $curl = curl_init();
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://'.$domain.'.encosilk.com/insertDataTransfer?user_id='.$data->user_id.'&folder_id='.$data->folder_id.'&slug='.$data->slug.'&url='.$data->url,
+                CURLOPT_URL => 'https://'.$domain.'.encosilk.cc/insertDataTransfer?user_id='.$data->user_id.'&folder_id='.$data->folder_id.'&slug='.$data->slug.'&url='.$data->url,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
