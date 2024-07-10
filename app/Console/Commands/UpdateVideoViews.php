@@ -14,7 +14,7 @@ class UpdateVideoViews extends Command
      *
      * @var string
      */
-    protected $signature = 'update:video-views';
+    protected $signature = 'update:views';
 
     /**
      * The console command description.
