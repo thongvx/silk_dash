@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
     <title>Stream Silk</title>
     @vite('resources/css/app.css')
+    <link rel="preload" href="{{ asset('assets/fonts/materialsymbolsoutlined.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
     <style>
         @font-face {
             font-family: 'Material Symbols Outlined';
