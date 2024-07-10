@@ -26,7 +26,7 @@
         <div class="rows">
             <div class="text-slate-200 font-medium mt-10 text-3xl text-center">{{ $video->title }}</div>
             <div class="aspect-video mt-4">
-                <iframe src="{{ route('play', $video->slug) }}" width="100%" height="100%"></iframe>
+                <iframe src="{{ route('eplay', $video->slug) }}" width="100%" height="100%"></iframe>
             </div>
         </div>
         <div>

@@ -8,7 +8,7 @@
                         <i class="material-symbols-outlined">navigate_next</i>{{ $currentFolderName -> name_folder }}
                     </span>
                 </h5>
-                <div class="flex items-center md:ml-auto px-0 md:px-2 mt-3 md:mt-0">
+                <div class="flex items-center md:ml-auto px-0 md:px-2 mt-3 md:mt-0 xl:hidden">
                     <form class="flex items-center relative bg-[#142132] w-full rounded-lg ease" action="/video/search" method="GET" search>
                         <label for="search" class="p-1 flex bg-[#142132] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
                         <input type="text" id="search" name="videoID" value="" search-input

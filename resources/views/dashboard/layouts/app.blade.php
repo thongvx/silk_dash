@@ -23,7 +23,7 @@
     @include('dashboard.components.navbar')
     <!-- cards -->
     <div class="w-full px-3 md:px-6 mx-auto">
-        <nav class="mb-2 lg:hidden">
+        <nav class="mb-2 xl:hidden">
             <!-- breadcrumb -->
             <ol class="flex flex-wrap pt-1 bg-transparent rounded-lg sm:mr-16 w-max">
                 <li class="text-sm leading-normal">

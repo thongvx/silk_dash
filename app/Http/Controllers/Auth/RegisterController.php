@@ -107,6 +107,7 @@ class RegisterController extends Controller
             'captionsMode' => 0,
             'disableDownload' => 0,
             'gridPoster' => 1,
+            'embed_page' => 0,
         ]);
         PlayerSetting::create([
             'user_id' => $user->id,

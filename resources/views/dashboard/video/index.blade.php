@@ -20,7 +20,7 @@
                         <span class="px-2 py-1">Processing Videos</span>
                     </button>
                     <button
-                            class="{{request()->get('tab') === 'DMCA' ? 'DMCA tab-active !text-[#009FB2]' : 'DMCA'}}
+                            class="{{request()->get('tab') === 'dmca' ? 'dmca tab-active !text-[#009FB2]' : 'dmca'}}
                         DMCA hover:text-[#009FB2] text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                             data-content="dmca">
                         <span class="px-2 py-1">DMCA Warnings</span>
@@ -33,7 +33,7 @@
                     </button>
                 </div>
                 <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full  bg-[#121520]">
-                    <div class="lg:min-h-[calc(100vh-11em)]" id="box-content" page-video>
+                    <div class="lg:min-h-[calc(100vh-18em)] xl:min-h-[calc(100vh-11em)]" id="box-content" page-video>
                         @include('dashboard.'.request()->path() . '.' . request()->get('tab'))
                     </div>
                 </div>

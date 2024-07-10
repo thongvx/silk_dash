@@ -15,7 +15,7 @@
                         <div class="flex justify-between items-center mt-2">
                             <h1 class="text-3xl">Tier 1</h1>
                             <span
-                                class="px-6 py-2 font-semibold rounded-full bg-[#05ffff]/80 hover:bg-[#05ffff] text-white text-2xl italic">33$</span>
+                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">33$</span>
                         </div>
                         <h1 class="italic mt-4">Profit rates for each 10k views of your video</h1>
                         <div class="mt-5">
@@ -41,7 +41,7 @@
                         <div class="flex justify-between items-center mt-2">
                             <h1 class="text-3xl">Tier 2</h1>
                             <span
-                                class="px-6 py-2 font-semibold rounded-full bg-[#05ffff]/80 hover:bg-[#05ffff] text-white text-2xl italic">22$</span>
+                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">22$</span>
                         </div>
                         <h1 class="italic mt-4">Profit rates for each 10k views of your video</h1>
                         <div class="mt-5">
@@ -75,7 +75,7 @@
                         <div class="flex justify-between items-center mt-2">
                             <h1 class="text-3xl">Tier 3</h1>
                             <span
-                                class="px-6 py-2 font-semibold rounded-full bg-[#05ffff]/80 hover:bg-[#05ffff] text-white text-2xl italic">15$</span>
+                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">15$</span>
                         </div>
                         <h1 class="italic mt-4">Profit rates for each 10k views of your video</h1>
                         <div class="mt-5">
@@ -113,7 +113,7 @@
                         <div class="flex justify-between items-center mt-2">
                             <h1 class="text-3xl">Tier 4</h1>
                             <span
-                                class="px-6 py-2 font-semibold rounded-full bg-[#05ffff]/80 hover:bg-[#05ffff] text-white text-2xl italic">11$</span>
+                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">11$</span>
                         </div>
                         <h1 class="italic mt-4">Profit rates for each 10k views of your video</h1>
                         <div class="mt-5">
