@@ -49,22 +49,15 @@
                                                         @endphp
                                                     @endif
                                                     <div class="flex flex-col {{ $value['type'] == 2 ? 'items-end' : 'items-start'}} snap-end">
-                                                        @if($value['type'] == 2)
-                                                            <div class="message-class {{ $value['type'] == 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}}
-                                                                px-3 py-2 rounded-full mb-2 max-w-64 w-max" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
-                                                                <h4>
-                                                                    {{ Auth::user()->name }}
-                                                                </h4>
-                                                            </div>
-                                                        @else
-                                                            <div class="message-class {{ $value['type'] == 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}}
-                                                                px-3 py-2 rounded-full mb-2 max-w-64 w-max" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
-                                                                <h4>StreamSilk</h4>
-                                                            </div>
-                                                            @php
-                                                                $previousType = $value['type'];
-                                                            @endphp
-                                                        @endif
+                                                        <div class="message-class  text-slate-200 {{ $value['type'] !== $previousType ? '' : 'hidden'}}
+                                                                mb-2 rounded-full max-w-64 w-max">
+                                                            <h4>
+                                                                {{ $value['type'] == 2 ? Auth::user()->name : 'StreamSilk'}}
+                                                            </h4>
+                                                        </div>
+                                                        @php
+                                                            $previousType = $value['type'];
+                                                        @endphp
 
                                                         @if($value['url_file'] != 0)
                                                             <div class="max-w-64 mb-2 rounded-xl">

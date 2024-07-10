@@ -15,7 +15,7 @@
                     <img src="{{ asset('image/auth/Tablet-login-amico.svg') }}" loading="lazy" alt="" class="w-full">
                 </div>
             </div>
-            <div class="col-span-full lg:col-span-1">
+            <div class="col-span-full lg:col-span-1 mt-10 sm:mt-0">
                 <div class="flex justify-center">
                     <div class="flex -mx-3 rounded-2xl xl:w-7/12 sm:w-10/12 w-11/12">
                         <div
@@ -24,7 +24,7 @@
                                 <h4 class="font-semibold text-4xl">Welcome back</h4>
                                 <p class="mb-0">fill out the details below</p>
                             </div>
-                            <div class="w-11/12 p-6">
+                            <div class="w-11/12 px-0 py-6 sm:p-6">
                                 <form method="post" action="{{ url('/login') }}">
                                     @csrf
                                     <div class="mb-4 text-white">
@@ -67,7 +67,7 @@
                                         </div>
                                         <div>
                                             <a href="{{ route('password.request') }}"
-                                               class="text-[#009FB2] text-sm font-semibold">Forgot your password?</a>
+                                               class="text-[#009FB2] text-sm font-semibold">Forgot password?</a>
                                         </div>
                                     </div>
 

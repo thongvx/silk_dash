@@ -48,7 +48,7 @@
                                                          checked:bg-none checked:bg-right"
                                    name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
                             <label for="blockDirect" class="ml-3">
-                                Disable direct access
+                                Disable Direct Access
                             </label>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                                                          checked:bg-none checked:bg-right"
                                    value="{{$setting -> adblock}}" {{$setting -> adblock == 1 ? 'checked' : ''}}>
                             <label for="adblock" class="ml-3">
-                                Disable adblocker
+                                Disable Adblocker
                             </label>
                         </div>
                     </div>

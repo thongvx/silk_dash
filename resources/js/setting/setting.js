@@ -1,4 +1,4 @@
-import { notification } from '../main.js';
+import { notification, updateOriginalFormState } from '../main.js';
 
 var fixedProfileCard = $("[fixed-profile-card]");
 var fixedProfileCloseButton = $("[fixed-profile-close-button]");

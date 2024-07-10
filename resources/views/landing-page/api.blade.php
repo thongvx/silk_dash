@@ -5,13 +5,16 @@
         <div class="grid grid-cols-4 text-white">
             <div class="col-span-1 hidden lg:block">
                 <div class="fixed">
-                    <h4 class="text-white text-xl font-medium"><a href="#account_info">Account Info</a></h4>
-                    <h4 class="text-white text-xl font-medium">Upload</h4>
+                    <h4 class="text-[#05ffff] text-xl font-medium">Account Info</h4>
+                    <ul class="list-disc pl-4">
+                        <li><a href="#account_info">Account Information</a></li>
+                    </ul>
+                    <h4 class="text-[#05ffff] text-xl font-medium mt-4">Upload</h4>
                     <ul class="list-disc pl-4">
                         <li><a href="#add_link">Remote Upload</a></li>
                         <li><a href="#webupload">Web Upload</a></li>
                     </ul>
-                    <h4 class="text-white text-xl font-medium mt-4">File Management</h4>
+                    <h4 class="text-[#05ffff] text-xl font-medium mt-4">File Management</h4>
                     <ul class="list-disc pl-4">
                         <li><a href="#list_file">List Files</a></li>
                         <li><a href="#info_video">Info File</a></li>
@@ -20,7 +23,7 @@
                         <li><a href="#move">Move File</a></li>
                         <li><a href="#delete">Delete File</a></li>
                     </ul>
-                    <h4 class="text-white text-xl font-medium mt-4">Folder</h4>
+                    <h4 class="text-[#05ffff] text-xl font-medium mt-4">Folder</h4>
                     <ul class="list-disc pl-4">
                         <li><a href="#list-folder">List Folder</a></li>
                         <li><a href="#create-folder">Create Folder</a></li>
@@ -55,7 +58,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/info
+                                https://streamsilk.com/api/info
                             </h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Headers</h4>
@@ -107,7 +110,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/upload/uploadUrl?url={upload_url}&amp;nameFolder={name_folder}
+                                https://streamsilk.com/api/upload/uploadUrl?url={upload_url}&amp;nameFolder={name_folder}
                             </h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
@@ -263,7 +266,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/file/listFile?page={page}&amp;limit={Max_video}&amp;nameFolder={name_folder}
+                                https://streamsilk.com/api/file/listFile?page={page}&amp;limit={Max_video}&amp;nameFolder={name_folder}
                             </h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
@@ -362,7 +365,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/file/infoFile?videoID={id_video}</h5>
+                                https://streamsilk.com/api/file/infoFile?videoID={id_video}</h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
                         <div class="bg-[#121520] my-3">
@@ -436,7 +439,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/file/renameFile/{id_video}&amp;newTitle={new_title_video}</h5>
+                                https://streamsilk.com/api/file/renameFile/{id_video}&amp;newTitle={new_title_video}</h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
                         <div class="bg-[#121520] my-3">
@@ -509,7 +512,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/cloneFile?url={embed_link}&amp;folderID={folderID}</h5>
+                                https://streamsilk.com/api/cloneFile?url={embed_link}&amp;folderID={folderID}</h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
                         <div class="bg-[#121520] my-3">
@@ -571,13 +574,13 @@
                 "title": "title1-clone",
                 "folder": "folder_name",
                 "video_id": "668ba745b16a8654654",
-                "embedLink": "https://user.streamsilk.com/t/668ba745b16a8654654"
+                "embedLink": "https://streamsilk.com/t/668ba745b16a8654654"
             },
             {
                 "title": "title2-clone",
                 "folder": "folder_name",
                 "video_id": "668ba745b4878768",
-                "embedLink": "https://user.streamsilk.com/t/668ba745b4878768"
+                "embedLink": "https://streamsilk.com/t/668ba745b4878768"
             }
         ]
     }
@@ -593,7 +596,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/moveFile?videoID={id_video}&amp;folderID={folderID}</h5>
+                                https://streamsilk.com/api/moveFile?videoID={id_video}&amp;folderID={folderID}</h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
                         <div class="bg-[#121520] my-3">
@@ -663,7 +666,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/deleteFile?videoID={videoID}</h5>
+                                https://streamsilk.com/api/deleteFile?videoID={videoID}</h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
                         <div class="bg-[#121520] my-3">
@@ -730,7 +733,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/folder/listFolder</h5>
+                                https://streamsilk.com/api/folder/listFolder</h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Headers</h4>
                         <div class="bg-[#121520] my-3">
@@ -791,7 +794,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/folder/createFolder?nameFolder={name new folder}</h5>
+                                https://streamsilk.com/api/folder/createFolder?nameFolder={name new folder}</h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
                         <div class="bg-[#121520] my-3">
@@ -859,7 +862,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/folder/renameFolder/{folderID}?newNameFolder={name new folder}
+                                https://streamsilk.com/api/folder/renameFolder/{folderID}?newNameFolder={name new folder}
                             </h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
@@ -936,7 +939,7 @@
                         <div class="relative">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                             <h5 class="pl-3 py-3 pr-6 bg-[#121520] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                                https://user.streamsilk.com/api/folder/deleteFolder/{folderID}
+                                https://streamsilk.com/api/folder/deleteFolder/{folderID}
                             </h5>
                         </div>
                         <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
@@ -999,5 +1002,6 @@
                     <!-- /.end rename folder -->
                 </div>
             </div>
+        </div>
     </section>
 @endsection
