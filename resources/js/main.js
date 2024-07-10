@@ -232,11 +232,11 @@ $(document).on('click', '[dropdown-trigger]', function (e) {
     var newDropdownMenu = li.find('[dropdown-menu]');
 
     if (currentDropdownTrigger && currentDropdownMenu) {
-        currentDropdownMenu.addClass("opacity-0 pointer-events-none before:-top-5");
+        currentDropdownMenu.addClass("opacity-0 pointer-events-none");
         currentDropdownTrigger.attr("aria-expanded", "false");
     }
 
-    newDropdownMenu.toggleClass("opacity-0 pointer-events-none before:-top-5");
+    newDropdownMenu.toggleClass("opacity-0 pointer-events-none");
     newDropdownTrigger.attr("aria-expanded", newDropdownMenu.hasClass("opacity-0") ? "false" : "true");
 
     currentDropdownTrigger = newDropdownTrigger;
@@ -246,7 +246,7 @@ $(document).on('click', '[dropdown-trigger]', function (e) {
 // Đóng dropdown menu khi click ra ngoài
 $(document).on('click', function (e) {
     if (currentDropdownTrigger && currentDropdownMenu && !$(e.target).closest('[dropdown-trigger]').length) {
-        currentDropdownMenu.addClass("opacity-0 pointer-events-none before:-top-5");
+        currentDropdownMenu.addClass("opacity-0 pointer-events-none");
         currentDropdownTrigger.attr("aria-expanded", "false");
         currentDropdownTrigger = null;
         currentDropdownMenu = null;
