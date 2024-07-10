@@ -259,6 +259,7 @@ class UploadController
         }
         $dataVideo->title = $request->title;
         $dataVideo->save();
+        Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
         return redirect()->route('video.editVideo', ['video' => $slug]);
     }
     //-------------------------------get progress transfer-----------------------------------------

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\VideoCacheKeys;
 use App\Http\Controllers\Controller;
 use App\Models\EncoderTask;
 use App\Models\SvStream;
@@ -31,6 +32,7 @@ class UpdateController extends Controller
             $video->grid_poster_3 = $poster_3;
             $video->grid_poster_5 = $poster_5;
             $video->save();
+            Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
             return response()->json(['status' => 'success']);
         }
         else{
