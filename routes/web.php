@@ -147,7 +147,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
 
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);
 
-Route::get('updateView/{videoId}', [\App\Http\Controllers\VideoViewController::class, 'updateView']);
+Route::get('updateViewahihi/{videoId}', [\App\Http\Controllers\VideoViewController::class, 'updateView']);
 Route::prefix('statistic')->group(function () {
     Route::get('topCountry', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
     Route::get('topVideo', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
