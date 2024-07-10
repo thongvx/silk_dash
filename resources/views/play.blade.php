@@ -20,6 +20,8 @@
     </style>
 </head>
 <body>
+<div id="pop1" class="div_pop"></div>
+<div id="pop" class="div_pop"></div>
 <div class="preloader">
     <div class="preloader-icon"></div>
     <span>Loading...</span>
@@ -138,6 +140,26 @@
             $('.preloader').fadeOut();
         }
     });
+
+    document.getElementById('pop').addEventListener("click", () => {
+        var e = document.getElementById('pop');
+        e.remove();
+        window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
+        //gala
+        var newScript = document.createElement('script');
+        newScript.setAttribute('data-cfasync', 'false');
+        newScript.setAttribute('async', 'true');
+        newScript.setAttribute('type', 'text/javascript');
+        newScript.src = '//yd.alchimybegins.com/rIiWXNjqhOe8AUjQ/jqWXQ';
+        document.getElementById('video_player').appendChild(newScript);
+    });
+
+    document.getElementById('pop1').addEventListener("click", () => {
+        var e1 = document.getElementById('pop1');
+        e1.remove();
+        window.open("https://familiarpyromaniasloping.com/2009872/");
+    });
+
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateView/" + videoID;
         fetch(apiUrl)
