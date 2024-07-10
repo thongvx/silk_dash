@@ -27,6 +27,8 @@ class EncoderController
             Queue::push(new CreateEncoderJob($data->slug, $svEncoder->name, $data->quality, $data->format, $statusEncoder, $data->sv_upload));
 
             $svEncoder->increment('encoder');
+            $data->sv_encoder = $svEncoder->name;
+            $data->save();
         }
     }
     public function finishEncoder(Request $request)
