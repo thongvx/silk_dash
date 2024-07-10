@@ -1,4 +1,4 @@
-<div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] ">
+<div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] lg:max-h-[calc(100vh-25em)] xl:max-h-[calc(100vh-20em)] ">
     <table id="datatable" datatable data-page-size="10" data-column-table="{{ $column }}"
            data-column-direction="{{ $direction }}"
            class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
@@ -47,7 +47,7 @@
                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                           data-direction="desc">▼</span>
                 </th>
-                <th data-column="created_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
+                <th data-column="updated_at" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
                     <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                           data-direction="asc">▲</span>
                     <a href="javascript:void(0)">Last Play</a>
@@ -82,23 +82,25 @@
                 <td class="text-center w-max">{{ $video->size }}</td>
                 <td class="text-center w-max">{{ $video->total_play }}</td>
                 <td class="pl-2 w-24">{{ $video->created_at }}</td>
-                <td class="pl-2 w-24">{{ $video->created_at }}</td>
+                <td class="pl-2 w-24">{{ $video->total_play != 0 ? $video->updated_at : 0 }}</td>
                 <td class="relative {{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
                     <li class="list-none">
                         <a
                             href="javascript:" dropdown-trigger
                             aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
                         <ul dropdown-menu
-                            class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
-                                             shadow-lg shadow-slate-900 duration-250 before:sm:right-3 before:text-lg pointer-events-none absolute right-1 top-12 lg:top-12
-                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10
-                                             px-2 py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:-top-2 before:z-10
-                                             before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                            <li class="relative w-max btn-edit hover:text-[#009FB2] items-center flex"><i
+                            class="text-sm transform-dropdown bg-[#009FB2] before:font-awesome before:leading-default before:duration-350 before:ease
+                                             duration-250 before:sm:right-3 before:text-lg after:text-lg pointer-events-none absolute right-0
+                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10 sm:-mr-6
+                                             {{ $loop->last || $loop->iteration === $loop->count - 1  ? " bottom-12 lg:bottom-12 after:-bottom-5 after:content-['▼']": " top-12 lg:top-10 before:-top-5  before:content-['▲']"}}
+                                             px-2 py-4 text-left opacity-0 transition-all before:absolute after:absolute before:right-3 after:right-3.5 before:left-auto before:z-10
+                                             before:font-normal before:text-[#009FB2] after:text-[#009FB2] before:antialiased before:transition-all
+                                             lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                            <li class="relative w-max btn-edit hover:text-[#142132] items-center flex"><i
                                     class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
                                 <a href="{{ Route('video.editVideo', $video->slug) }}">Edit File</a>
                             </li>
-                            <li class="relative btn-delete hover:text-[#009FB2] items-center flex mt-3"><i
+                            <li class="relative btn-delete hover:text-[#142132] items-center flex mt-3"><i
                                     class="material-symbols-outlined opacity-1 mr-2">delete</i>
                                 Delete
                             </li>

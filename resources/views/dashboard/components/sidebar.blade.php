@@ -114,7 +114,7 @@
                 <form class="{{$minimenu === 'true' ? 'px-2' :'px-4'}} py-1.5 menu-sidebar hover:bg-[#009FB2] text-white opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg font-semibold transition-colors" id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="POST">
-                    <button type="submit" class="flex items-center text-red-500">
+                    <button type="submit" class="flex items-center text-red-500 w-full">
                         <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5" icon-menu>
                             <i class="material-symbols-outlined opacity-1 font-bold">logout</i>
                         </div>

@@ -3,25 +3,25 @@
 @section('content')
     <section>
         <div class="relative grid grid-cols-2 items-center w-full min-h-screen p-0 overflow-hidden">
-            <div class="absolute top-0 sm:-top-14 left-0">
+            <div class="absolute -top-2 sm:-top-14 -left-60 sm:left-0">
                 <img src="{{ asset('image/auth/bg-sign-up.png') }}" alt="" loading="lazy" class="w-full object-cover hidden sm:block">
                 <img src="{{ asset('image/auth/bg-top-5.png') }}" alt="" loading="lazy" class="h-full object-cover block sm:hidden">
             </div>
             <div class="absolute bottom-0 right-0">
                 <img src="{{ asset('image/auth/bg-bottom-register.png') }}" loading="lazy" alt="" class="w-full object-cover">
             </div>
-            <div class="col-span-full lg:col-span-1">
+            <div class="col-span-full lg:col-span-1 mt-16 sm:mt-0">
                 <div class="flex justify-center">
                     <div class="flex -mx-3 rounded-2xl xl:w-7/12 md:w-10/12 w-11/12 text-[#142132]">
                         <div class="relative w-full flex flex-col items-center min-w-0 break-words border-0 shadow-none lg:py4">
                             <div class="py-6 pb-0 mb-0 text-center">
-                                <h4 class="font-semibold text-4xl">Welcome to <span class="text-[#009FB2]">StreamSilk</span></h4>
+                                <h4 class="font-semibold text-3xl sm:text-4xl">Welcome to <span class="text-[#009FB2]">StreamSilk</span></h4>
                                 <p class="mb-0">Fill out the details below</p>
                             </div>
-                            <div class="w-11/12 p-6 text-white">
+                            <div class="w-11/12 px-0 py-3 sm:p-6 text-white">
                                 <form method="post" action="{{ route('register') }}">
                                     @csrf
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label class="text-[#142132] font-medium">Name</label>
                                         <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2]">
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">person</i>
@@ -36,7 +36,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label  class="text-[#142132] font-medium">Email</label>
                                         <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2]">
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">email</i>
@@ -51,7 +51,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label  class="text-[#142132] font-medium">Password</label>
                                         <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2]">
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">key</i>
@@ -66,7 +66,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label  class="text-[#142132] font-medium">Retype Password</label>
                                         <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2]">
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">key</i>
@@ -92,7 +92,7 @@
                                         </div>
                                         <!-- /.col -->
                                         <div class="flex justify-center">
-                                            <button type="submit"  class="inline-block w-full px-16 py-3.5 mt-6 mb-0 font-bold leading-normal text-center
+                                            <button type="submit"  class="inline-block w-full px-16 py-3.5 mt-4 mb-0 font-bold leading-normal text-center
                                                  text-white align-middle transition-all bg-[#009FB2]/70 hover:bg-[#009FB2]
                                                   border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25">
                                                 Register</button>

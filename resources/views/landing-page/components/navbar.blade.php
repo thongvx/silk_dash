@@ -27,19 +27,22 @@
             <ul class="w-full h-full items-start sm:items-center flex flex-col sm:flex-row sm:justify-end pl-0 mb-0 list-none md-max:w-full transform-dropdown" >
                 <li class="items-center pr-2 md:inline">
                     <a href="/"
-                       class="px-0 py-2 text-lg font-semibold text-white hover:text-[#009fb2]">
+                       class="px-0 py-2 text-lg font-semibold
+                       {{ request()->path() == '' ? ' text-[#009fb2]' : ' text-white hover:text-[#009fb2]' }}">
                         Home
                     </a>
                 </li>
                 <li class="items-center pr-2 md:inline sm:ml-3">
                     <a href="/affiliate"
-                       class="px-0 py-2 text-lg font-semibold text-white hover:text-[#009fb2]">
+                       class="px-0 py-2 text-lg font-semibold
+                       {{ request()->path() == 'affiliate' ? ' text-[#009fb2]' : ' text-white hover:text-[#009fb2]' }}">
                         Affiliate
                     </a>
                 </li>
                 <li class="items-center pr-2 md:inline sm:ml-3">
                     <a href="/premium"
-                       class="px-0 py-2 text-lg font-semibold text-white hover:text-[#009fb2]">
+                       class="px-0 py-2 text-lg font-semibold
+                       {{ request()->path() == 'premium' ? ' text-[#009fb2]' : ' text-white hover:text-[#009fb2]' }}">
                         Premium
                     </a>
                 </li>

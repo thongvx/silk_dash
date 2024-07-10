@@ -3,23 +3,25 @@
       class="sticky top-0 flex z-20 flex-wrap bg-[#142132] items-center justify-between px-3 py-2 lg:px-3 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
       navbar-main navbar-scroll="false">
       <div class="flex items-center justify-between w-full px-0 sm:px-4 py-1 mx-auto flex-row">
-          <a href="javascript:;" class="block lg:hidden p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
+          <a href="javascript:;" class="block xl:hidden p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
               <div class="w-6 overflow-hidden">
                   <i class="ease mb-1.5 relative block h-0.5 rounded-sm bg-white transition-all"></i>
                   <i class="ease mb-1.5 relative block h-0.5 rounded-sm bg-white transition-all"></i>
                   <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
               </div>
           </a>
-          <div class="h-19 block lg:hidden scale-75">
+          <div class="h-19 block xl:hidden scale-75">
               <a class="flex m-0 text-sm whitespace-nowrap items-center"
                  href="/" target="_blank" logo>
-                  <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand" name-web>
+                  <img src="{{asset('image/logo/logo4.webp')}}"
+                       class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-12" alt="main_logo" />
+                  <span class="ml-3 font-semibold transition-all duration-200 ease-nav-brand" name-web>
                         <img src="{{asset('image/logo/name-web1.webp')}}"
                              class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-12" alt="main_logo" />
                   </span>
               </a>
           </div>
-          <div class="block lg:hidden">
+          <div class="block xl:hidden">
               <ul class="items-center flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
                     <li class="items-center px-4">
                       <a href="javascript:;" aria-expanded="false"  dropdown-trigger
@@ -88,7 +90,7 @@
                     </li>
             </ul>
           </div>
-        <nav class="hidden lg:block">
+        <nav class="hidden xl:block">
           <!-- breadcrumb -->
           <ol class="flex flex-wrap pt-1 bg-transparent rounded-lg sm:mr-16 w-max">
             <li class="text-sm leading-normal">
@@ -101,7 +103,7 @@
             <h6 class="mb-0 font-bold text-white capitalize" title-tab>{{ request()->get('tab') ?? '' }}</h6>
         </nav>
 
-        <div class="hidden xl:flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+        <div class="hidden xl:flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:basis-auto">
           <div class="flex items-center md:ml-auto px-2">
             <form class="flex items-center relative bg-[#121520] w-full rounded-lg ease" action="/video/search" method="GET" search>
                 <label for="search" class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
