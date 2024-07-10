@@ -43,8 +43,10 @@ class VideoViewController
             }
             $watchingUserKey ="watching_users:{$video->user_id}";
             $totalViewKey = "total:{$video->user_id}:{$country}";
-            $key = "video_views:{$video->id}:{$video->user_id}:{$country}";
+            $keyWithCountry = "country_video_views:{$video->id}:{$video->user_id}:{$country}";
+            $key = "video_views:{$video->id}:{$video->user_id}";
             Redis::incr($key);
+            Redis::incr($keyWithCountry);
             Redis::incr($totalViewKey);
             Redis::incr($watchingUserKey);
             return response()->json(['status' => 'success']);

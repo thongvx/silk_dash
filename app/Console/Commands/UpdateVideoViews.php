@@ -29,16 +29,23 @@ class UpdateVideoViews extends Command
     public function handle()
     {
         $keys = Redis::keys('video_views*');
+        $keysWithContry = Redis::keys('country_video_views*');
+
         $date = Carbon::today()->format('Y-m-d');
         $countryViews = [];
 
+        foreach (array_chunk($keysWithContry, 50) as $chunk) {
+             $this->prepareUpsertCountryData($chunk, $date, $countryViews);
+        }
+
         foreach (array_chunk($keys, 50) as $chunk) {
-            $upsertData = $this->prepareUpsertData($chunk, $date, $countryViews);
+            $upsertData = $this->prepareUpsertData($chunk, $date);
             $this->upsertView($upsertData);
             //Todo: xoá view sau khi đã update xong
         }
+
         $this->updateCountryViewsInRedis($countryViews);
-        $keysToDelete = array_merge($keys, Redis::keys('watching_users:*'), Redis::keys('user:*:top_videos:*'));
+        $keysToDelete = array_merge($keys, $keysWithContry, Redis::keys('watching_users:*'), Redis::keys('user:*:top_videos:*'));
 
         foreach ($keysToDelete as $key) {
             if (Redis::exists($key)) {
@@ -48,7 +55,7 @@ class UpdateVideoViews extends Command
         $this->info('Video views updated successfully');
     }
 
-    private function prepareUpsertData($chunk, $date, &$countryViews)
+    private function prepareUpsertCountryData($chunk, $date, &$countryViews)
     {
         $upsertData = [];
         foreach ($chunk as $key) {
@@ -66,6 +73,26 @@ class UpdateVideoViews extends Command
             ];
 
             $countryViews[$userId][$country] = ($countryViews[$userId][$country] ?? 0) + $views;
+        }
+
+        return $upsertData;
+    }
+
+    private function prepareUpsertData($chunk, $date)
+    {
+        $upsertData = [];
+        foreach ($chunk as $key) {
+            $views = Redis::get($key);
+            $viewInfo = explode(':', $key);
+            $videoId = $viewInfo[1];
+            $userId = $viewInfo[2];
+
+            $upsertData[] = [
+                'video_id' => $videoId,
+                'user_id' => $userId,
+                'views' => $views,
+                'date' => $date,
+            ];
         }
 
         return $upsertData;
