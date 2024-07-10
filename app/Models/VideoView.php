@@ -21,18 +21,4 @@ class VideoView extends Model
     ];
     public $timestamps = false;
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        //Đại diện cho hành vi thêm và sửa
-        static::saved(function ($model) {
-            Redis::del("user:{$model->user_id}:top_videos:" . Carbon::today()->format('Y-m-d'));
-        });
-
-        static::deleted(function ($model) {
-            Redis::del("user:{$model->user_id}:top_videos:" . Carbon::today()->format('Y-m-d'));
-        });
-    }
-
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\VideoRepo;
-use App\Services\StatisticService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 

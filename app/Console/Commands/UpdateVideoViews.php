@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\VideoView;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
