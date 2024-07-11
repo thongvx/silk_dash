@@ -17,10 +17,11 @@ class VideoViewController
     public function updateView($slug, Request $request)
     {
         Redis::incr("ahihidongok");
-//        $origin = $request->headers->get('Origin');
-//        $referer = $request->headers->get('Referer');
+        $origin = $request->headers->get('Origin');
+        $referer = $request->headers->get('Referer');
 //
-//        $keyPerIp = "user_views:{$request->ip()}";
+        $keyPerIp = "user_views:{$request->ip()}";
+        return $keyPerIp;
 //
 //
 //        $views = Redis::get($keyPerIp) ?: 0;
