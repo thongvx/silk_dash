@@ -159,6 +159,14 @@
             },
             'prv 10s'
         );
+        player.on('play', function() {
+            setTimeout(function(){
+                if(playID == 0){
+                    playID = 1;
+                    increasePlayCount(videoID);
+                }
+            }, 30000);
+        });
     };
     $(document).ready(async () => {
         let adBlockEnabled = false
@@ -168,14 +176,7 @@
             $('.preloader').fadeOut();
         }
     });
-    player.on('play', function() {
-        setTimeout(function(){
-            if(playID == 0){
-                playID = 1;
-                increasePlayCount(videoID);
-            }
-        }, 30000);
-    });
+
     document.getElementById('pop').addEventListener("click", () => {
         var e = document.getElementById('pop');
         e.remove();

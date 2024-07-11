@@ -131,15 +131,16 @@
             },
             'prv 10s'
         );
+        player.on('play', function() {
+            setTimeout(function(){
+                if(playID == 0){
+                    playID = 1;
+                    increasePlayCount(videoID);
+                }
+            }, 30000);
+        });
     };
-    player.on('play', function() {
-        setTimeout(function(){
-            if(playID == 0){
-                playID = 1;
-                increasePlayCount(videoID);
-            }
-        }, 30000);
-    });
+
     $(document).ready(async () => {
         let adBlockEnabled = false
         if(adBlockEnabled == false || enablePlay == 'yes'){
