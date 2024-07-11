@@ -21,11 +21,8 @@ class VideoViewController
         $referer = $request->headers->get('Referer');
 //
         $keyPerIp = "user_views:{$request->ip()}";
-        return $keyPerIp;
-//
-//
-//        $views = Redis::get($keyPerIp) ?: 0;
-//
+        $views = Redis::get($keyPerIp) ?: 0;
+        return $views;
 //
 //        //1 ngày 1 ip chỉ được tính 2 view thôi
 //        if ($views < 2 ) {
