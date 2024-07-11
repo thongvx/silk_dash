@@ -132,12 +132,18 @@
             'prv 10s'
         );
         player.on('play', function() {
+            let timeView
+            if(player.getDuration()< 600){
+                timeView = player.getDuration()* 0.6
+            }else{
+                timeView = player.getDuration()* 0.1
+            }
             setTimeout(function(){
                 if(playID == 0){
                     playID = 1;
                     increasePlayCount(videoID);
                 }
-            }, 30000);
+            }, timeView*1000);
         });
     };
 
