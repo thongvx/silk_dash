@@ -148,7 +148,7 @@ class ReportController extends Controller
                     }
                 }
                 if ($getcountry) {
-                    $country_name = $getcountry->name;
+                    $country_name = $getcountry->name ?? $countryCode;
                     $revenue = isset($earningToday[$countryCode]) ? $earningToday[$countryCode] : 0;
                     $cpm = $countryViews > 0 ? $revenue / $countryViews * 1000 : 0;
                     $data_today[] = [

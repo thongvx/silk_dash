@@ -56,7 +56,7 @@ class ReportRepo extends BaseRepository
                 });
                 break;
         }
-        Redis::setex($reportDatakey, 259200, serialize($reportData));
+        Redis::setex($reportDatakey, 86400, serialize($reportData));
         return $reportData;
     }
 

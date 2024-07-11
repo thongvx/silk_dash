@@ -28,7 +28,9 @@ class ReportData extends Model
     protected static function boot()
     {
         parent::boot();
-
+        static::created(function ($model) {
+            Redis::del("user:{$model->user_id}:report_data");
+        });
         // Define the behavior for create and update
         static::saved(function ($model) {
             Redis::del("user:{$model->user_ID}:total_profit");
