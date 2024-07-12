@@ -49,6 +49,9 @@ class VerificationController extends Controller
      */
     protected function verified(Request $request)
     {
+        $user = Auth::user();
+        $user->active = 1;
+        $user->save();
         // Log out the user after verification
         Auth::logout();
 
