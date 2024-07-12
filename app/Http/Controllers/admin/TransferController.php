@@ -70,7 +70,7 @@ class TransferController extends Controller
         $data = Transfer::where('user_id', $user_id)->where('slug', $slug)->first();
         $data->status = 19;
         $data->save();
-        Redis::setex('transfer'.$user_id.'-'.$slug, 1800, json_encode([
+        Redis::setex('transfer'.$user_id.'-'.$slug, json_encode([
             'slug' => $slug,
             'url' => $data->url,
             'status' => 19,
@@ -79,6 +79,15 @@ class TransferController extends Controller
             'size' => 0,
         ]));
     }
-
+    //-------------------------------delete transfer task------------------------------------------
+    public function deleteTransferTask()
+    {
+        $data = Transfer::where('status', 2)->orderBy('priority', 'desc')->first();
+        if(!empty($data)){
+            $data->delete();
+            Redis::del('transfer'.$data->user_id.'-'.$data->slug);
+            return true;
+        }
+    }
     //=============================================================================================
 }

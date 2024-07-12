@@ -48,6 +48,7 @@ Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::cla
 Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
 Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
 Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateFailedTransfer']);
+Route::get('/deleteTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'deleteTransferTask']);
 //-------------------------updateController--------------------------------------------------------
 Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
 Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
