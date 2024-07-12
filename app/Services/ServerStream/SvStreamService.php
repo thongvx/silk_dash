@@ -41,6 +41,7 @@ class SvStreamService
     public static function selectSvStream()
     {
         $svStreamKeys = Redis::smembers('sv_streams');
+        shuffle($svStreamKeys);
         foreach ($svStreamKeys as $svStreamKey) {
             $svStream = Redis::hgetall($svStreamKey);
             if ($svStream['active'] == 1 && $svStream['out_speed'] < 900 && $svStream['cpu'] < 10 && $svStream['percent_space'] < 95) {
