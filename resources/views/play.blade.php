@@ -159,10 +159,10 @@
         });
         player.on('play', function() {
             isPaused = false;
-            if(player.getDuration()< 600){
-                totalTimeRequired = player.getDuration() * 0.6
-            }else{
+            if(player.getDuration() < 900){
                 totalTimeRequired = player.getDuration() * 0.1
+            }else{
+                totalTimeRequired = 120
             }
             clearInterval(intervalId);
             if(viewTime >= totalTimeRequired){
