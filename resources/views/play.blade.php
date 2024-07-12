@@ -73,7 +73,7 @@
     //logo
     var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
     //poster
-    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
+    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
     //title
     var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
     var player = jwplayer('video_player');
@@ -131,7 +131,7 @@
                 "height": 50,
             }
         }
-        if(urlposter !== ""){
+        if(urlposter !== "" && urlposter !== "0"){
             options.image = urlposter
         }
         player.setup(options);
