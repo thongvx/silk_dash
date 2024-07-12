@@ -127,7 +127,7 @@ class RegisterController extends Controller
             'position' => 'control-bar',
             'poster_link' => 0,
         ]);
-//        event(new Registered($user));
+//       event(new Registered($user));
         return $user;
     }
 }
