@@ -104,7 +104,7 @@ class SvStreamService
             if (in_array($svStreamName, $arrStream)) {
                 $svStream = Redis::hgetall($svStreamKey);
 
-                if ($svStream['out_speed'] < 700 && $svStream['active'] == 1) {
+                if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
                     return $svStream['domain'];
                 }
             }
