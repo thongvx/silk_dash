@@ -31,18 +31,38 @@ class StatisticService
     public static function calculateValue($userId, $earning)
     {
         $today = Carbon::today()->format('Y-m-d');
-        $keys = Redis::keys("total:{$today}:{$userId}:*");
+        $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
+        $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
         $result = [];
         $allCountries = self::getAllCountries();
-        foreach ($keys as $key) {
-            $totalViews = Redis::get($key);
-            $country = explode(':', $key)[2];
+        if($totalImpression1){
+            foreach ($totalImpression1 as $key) {
+                $totalViews = Redis::get($key);
+                $country = explode(':', $key)[2];
 
-            $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
-            $revenue = ($totalViews / 1000) * $cpm;
+                $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
+                $revenue = ($totalViews / 1000) * $cpm;
 
-            // Add the revenue to the result array with the country code as the key
-            $result[$country] = $revenue*$earning;
+                // Add the revenue to the result array with the country code as the key
+                $result[$country] = $revenue*$earning;
+            }
+        }
+        if($totalImpression2){
+            foreach ($totalImpression2 as $key) {
+                $totalViews = Redis::get($key);
+                $country = explode(':', $key)[2];
+
+                $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
+                $revenue = ($totalViews / 1000) * $cpm;
+
+                // Add the revenue to the result array with the country code as the key
+                if(isset($result[$country])){
+                    $result[$country] += $revenue*$earning;
+                }
+                else{
+                    $result[$country] = $revenue*$earning;
+                }
+            }
         }
 
         return $result;

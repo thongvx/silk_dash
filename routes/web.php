@@ -62,6 +62,10 @@ Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
+
+Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
+
+
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
@@ -123,6 +127,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //embed play
     Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('ePlay');
     Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('download');
+    //getuserID
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
