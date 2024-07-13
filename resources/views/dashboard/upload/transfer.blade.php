@@ -21,6 +21,7 @@
                           rows="8"></textarea>
                 <input class="hidden" type="text" id="folderPost" name="FolderID" value="{{ $currentFolderName-> id }}">
             </div>
+
             <button type="submit" disabled class='mt-5 px-10 py-2 rounded-lg bg-[#142132] text-white'>Submit</button>
         </form>
     </div>
@@ -35,7 +36,7 @@
     <div class="text-white pl-3 pt-3 flex justify-between items-center">
         <div class=" text-lg font-bold" transfer>Transfer</div>
         <div class="text-white">
-            <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote all pending</button>
+            <button class="px-4 py-1 rounded-lg bg-red-500 mr-3" button-remove-failed>Remote all failed</button>
         </div>
     </div>
     <hr class="h-px my-3 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none"/>

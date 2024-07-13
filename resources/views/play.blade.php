@@ -5,7 +5,7 @@
     <title>{{ $title }}</title>
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
-    <link rel="icon" href="https://user.streamsilk.com/image/logo/logo4.webp">
+    <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
@@ -68,16 +68,34 @@
     var urlSub = {{ $player_setting->enable_caption }};
     var is_sub = {{ $is_sub }};
     var infinite_loop = "{{ $player_setting->infinite_loop }}";
+    var logo_link = "{{ $player_setting->logo_link }}";
+    var logo = "{{ $player_setting->show_logo }}";
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
-    var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
+    var urlLogo
+    if(logo === '1' && logo_link !== ''){
+        if(logo_link.includes("http")){
+            urlLogo = logo_link
+        }else{
+            urlLogo = "{{ asset(Storage::url($player_setting->logo_link)) }}"
+        }
+    }else{
+        urlLogo = ""
+    }
     //poster
-    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : ""}}";
+    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
     //title
     var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
     var player = jwplayer('video_player');
-    var hasReachedOneTenth = false;
+
+    var viewTime = 0;
+    var isSeeking = false;
+    var isPaused = false;
+    var intervalId;
+    var totalTimeRequired;
+    var hasIncreasedPlayCount = false;
+
     const loadPlayer = async (file) => {
         const options = {
             key: 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=',
@@ -124,25 +142,10 @@
                 "height": 50,
             }
         }
-        if(urlposter !== ""){
+        if(urlposter !== "" && urlposter !== "0"){
             options.image = urlposter
         }
         player.setup(options);
-        player.on('time', function(event) {
-            var currentPercentagePlayed = (event.position / player.getDuration()) * 100;
-            if(player.getDuration()< 600){
-                if(currentPercentagePlayed >= 60 && !hasReachedOneTenth){
-                    hasReachedOneTenth = true;
-                    increasePlayCount(videoID);
-                }
-            }else{
-                if (currentPercentagePlayed >= 10 && !hasReachedOneTenth) {
-                    hasReachedOneTenth = true;
-                    increasePlayCount(videoID);
-                }
-            }
-
-        });
         player.addButton(
             '<svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-rewind2" viewBox="0 0 240 240" focusable="false"><path d="m 25.993957,57.778 v 125.3 c 0.03604,2.63589 2.164107,4.76396 4.8,4.8 h 62.7 v -19.3 h -48.2 v -96.4 H 160.99396 v 19.3 c 0,5.3 3.6,7.2 8,4.3 l 41.8,-27.9 c 2.93574,-1.480087 4.13843,-5.04363 2.7,-8 -0.57502,-1.174985 -1.52502,-2.124979 -2.7,-2.7 l -41.8,-27.9 c -4.4,-2.9 -8,-1 -8,4.3 v 19.3 H 30.893957 c -2.689569,0.03972 -4.860275,2.210431 -4.9,4.9 z m 163.422413,73.04577 c -3.72072,-6.30626 -10.38421,-10.29683 -17.7,-10.6 -7.31579,0.30317 -13.97928,4.29374 -17.7,10.6 -8.60009,14.23525 -8.60009,32.06475 0,46.3 3.72072,6.30626 10.38421,10.29683 17.7,10.6 7.31579,-0.30317 13.97928,-4.29374 17.7,-10.6 8.60009,-14.23525 8.60009,-32.06475 0,-46.3 z m -17.7,47.2 c -7.8,0 -14.4,-11 -14.4,-24.1 0,-13.1 6.6,-24.1 14.4,-24.1 7.8,0 14.4,11 14.4,24.1 0,13.1 -6.5,24.1 -14.4,24.1 z m -47.77056,9.72863 v -51 l -4.8,4.8 -6.8,-6.8 13,-12.99999 c 3.02543,-3.03598 8.21053,-0.88605 8.2,3.4 v 62.69999 z"></path></svg>',
             'next 10s',
@@ -159,6 +162,43 @@
             },
             'prv 10s'
         );
+        player.on('seek', function() {
+            isSeeking = true;
+        });
+        player.on('seeked', function() {
+            isSeeking = false;
+        });
+        player.on('play', function() {
+            isPaused = false;
+            if(player.getDuration() < 900){
+                totalTimeRequired = player.getDuration() * 0.1
+            }else{
+                totalTimeRequired = 120
+            }
+            clearInterval(intervalId);
+            if(viewTime >= totalTimeRequired){
+                return
+            }
+            intervalId = setInterval(function() {
+                if ( !isSeeking && !isPaused) {
+                    viewTime++;
+                    if (viewTime >= totalTimeRequired && !hasIncreasedPlayCount) {
+                        clearInterval(intervalId);
+                        increasePlayCount(videoID);
+                        hasIncreasedPlayCount = true;
+                    }
+                }
+            }, 1000);
+        });
+        player.on('pause', function() {
+            isPaused = true;
+            clearInterval(intervalId);
+        });
+
+        player.on('complete', function() {
+            isPaused = true;
+            clearInterval(intervalId);
+        });
     };
     $(document).ready(async () => {
         let adBlockEnabled = false
@@ -168,7 +208,6 @@
             $('.preloader').fadeOut();
         }
     });
-
     document.getElementById('pop').addEventListener("click", () => {
         var e = document.getElementById('pop');
         e.remove();

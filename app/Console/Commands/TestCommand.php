@@ -35,8 +35,9 @@ class TestCommand extends Command
      */
     public function handle()
     {
-
-        Bot::send('Ahihi do ngok');
+        $svStream = SvStreamService::selectSvStream();
+        echo $svStream;
+        //Bot::send('Ahihi do ngok');
     }
 
 }

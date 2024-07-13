@@ -331,7 +331,7 @@ class VideoController
             "msg" => "ok",
             "status" => 200,
             "sever_time" => date('Y-m-d H:i:s'),
-            "file Clone" => $fileClone
+            "file_clone" => $fileClone
         ];
 
         return $data;

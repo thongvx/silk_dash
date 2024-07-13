@@ -35,7 +35,7 @@ class PlayController
             $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
             $data_setting = $this->accountRepo->getSetting($video->user_id);
             $player_setting = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
-            $poster = $data_setting->gridPoster == 5 ? $video->grid_poster_5 : ($data_setting->gridPoster == 3 ? $video->grid_poster_3 : $video->poster);
+            $poster = $player_setting->thumbnail_grid == 5 ? $video->grid_poster_5 : ($player_setting->thumbnail_grid == 3 ? $video->grid_poster_3 : $video->poster);
             $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
             if ($video->origin == 0) {
                 $playData = [

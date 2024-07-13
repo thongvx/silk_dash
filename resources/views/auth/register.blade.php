@@ -42,7 +42,7 @@
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">email</i>
                                             <input type="email" name="email" autocomplete="off" value=""
                                                    class="@error('email') is-invalid @enderror bg-transparent text-white placeholder:text-gray-200 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                                   placeholder="Full name">
+                                                   placeholder="email">
                                         </div>
                                         @error('email')
                                         <span class="font-italic error invalid-feedback text-red-500" role="alert">
@@ -57,7 +57,7 @@
                                             <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">key</i>
                                             <input type="password" name="password" autocomplete="off" value=""
                                                    class="@error('password') is-invalid @enderror bg-transparent text-white placeholder:text-gray-200 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                                   placeholder="Full name">
+                                                   placeholder="password">
                                         </div>
                                         @error('password')
                                         <span class="font-italic  error invalid-feedback text-red-500" role="alert">
