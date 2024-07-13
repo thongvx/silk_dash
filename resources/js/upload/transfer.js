@@ -1,4 +1,4 @@
-import {formatFileSize, notification} from "../main.js";
+import {formatFileSize} from "../main.js";
 $(document).on('submit', '#transferLink', function(event) {
     event.preventDefault();
 
@@ -18,7 +18,14 @@ $(document).on('submit', '#transferLink', function(event) {
             url = url.trim();
             // Kiểm tra xem URL có hợp lệ không
             if (!urlRegex.test(url)) {
-                notification('warning', 'The entered URL is invalid: ' + url)
+                const div_warning = `<div class=" lg:mx-32 text-start text-orange-500 mt-3 items-center flex" id="noti-warning">
+                                                <i class="material-symbols-outlined mr-2">warning</i>
+                                                The entered URL is invalid: <span class="italic ml-2">${url}</span>
+                                            </div>`
+                button.before(div_warning);
+                setInterval(function() {
+                    $('#noti-warning').remove();
+                }, 1500);
                 return;
             }
             validUrls.push(url);
@@ -35,8 +42,8 @@ $(document).on('submit', '#transferLink', function(event) {
                                             Pending
                                         </div>
                                         <div class="text-white mt-3">
-                                            <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote</button>
-                                            <button class="px-4 py-1 rounded-lg bg-blue-500">Retry</button>
+                                            <button class="px-4 py-1 rounded-lg bg-red-600/70 hover:bg-red-600 mr-3" button-remove>Remote</button>
+                                            <button class="px-4 py-1 rounded-lg bg-blue-500/70 hover:bg-blue-500" button-retry>Retry</button>
                                         </div>
                                     </div>`;
             document.getElementById('list-upload').insertAdjacentHTML('beforebegin', div_progress);
@@ -123,8 +130,8 @@ setInterval(function() {
                                     Transferring
                                 </div>
                                 <div class="text-white mt-3">
-                                    <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote</button>
-                                    <button class="px-4 py-1 rounded-lg bg-blue-500">Retry</button>
+                                    <button class="px-4 py-1 rounded-lg bg-red-600/70 hover:bg-red-600 mr-3" button-remove>Remote</button>
+                                    <button class="px-4 py-1 rounded-lg bg-blue-500/70 hover:bg-blue-500" button-retry>Retry</button>
                                 </div>
                             </div>`;
                         document.getElementById('list-upload').insertAdjacentHTML('beforebegin', div_progress);
@@ -139,6 +146,49 @@ setInterval(function() {
 
     }
 }, 5000);
+
+//retry transfer
+$(document).on('click', '[button-retry]', function() {
+    var slug = $(this).closest('.info-link').attr('id')
+    $.ajax({
+        url: '/retryTransfer',
+        type: 'POST',
+        data: {slug: slug},
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+});
+$(document).on('click', '[button-remove]', function() {
+    var slug = $(this).closest('.info-link').attr('id')
+
+    $.ajax({
+        url: '/removeTransfer',
+        type: 'POST',
+        data: {slug: slug},
+        success: function(response) {
+            $('#'+slug).remove();
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+})
+$(document).on('click', '[button-remove-failed]', function() {
+    $.ajax({
+        url: '/removeAllTransferFailed',
+        type: 'POST',
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+})
 
 
 

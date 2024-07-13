@@ -51,7 +51,7 @@
                                                     <div class="flex flex-col {{ $value['type'] == 2 ? 'items-end' : 'items-start'}} snap-end">
                                                         <div class="message-class  text-slate-200 {{ $value['type'] !== $previousType ? '' : 'hidden'}}
                                                                 mb-2 rounded-full max-w-64 w-max">
-                                                            <h4>
+                                                            <h4 class="italic">
                                                                 {{ $value['type'] == 2 ? Auth::user()->name : 'StreamSilk'}}
                                                             </h4>
                                                         </div>

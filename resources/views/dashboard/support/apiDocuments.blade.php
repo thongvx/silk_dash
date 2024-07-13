@@ -4,57 +4,57 @@
             <h4 class="text-[#009fb2] text-xl font-medium">Account Info</h4>
             <ul class="list-disc pl-4">
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] bg-[#009fb2] cursor-pointer">
-                    <a href="#account_info" class="px-3">Account Information</a></li>
+                    <a href="#account_info" class="px-3 h-full w-full">Account Information</a></li>
             </ul>
             <h4 class="text-[#009fb2] text-xl font-medium mt-4">Upload</h4>
             <ul class="list-disc pl-4">
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#add_link" class="px-3">Remote Upload</a>
+                    <a href="#add_link" class="px-3 h-full w-full">Remote Upload</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer hidden">
-                    <a href="#webupload" class="px-3">Web Upload</a>
+                    <a href="#webupload" class="px-3 h-full w-full">Web Upload</a>
                 </li>
             </ul>
             <h4 class="text-[#009fb2] text-xl font-medium mt-4">File Management</h4>
             <ul class="list-disc pl-4">
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#list_file" class="px-3">List Files</a>
+                    <a href="#list_file" class="px-3 h-full w-full">List Files</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#info_video" class="px-3">Info File</a>
+                    <a href="#info_video" class="px-3 h-full w-full">Info File</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#file-rename" class="px-3">Rename File</a>
+                    <a href="#file-rename" class="px-3 h-full w-full">Rename File</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#copy" class="px-3">Clone File</a>
+                    <a href="#copy" class="px-3 h-full w-full">Clone File</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#move" class="px-3">Move File</a>
+                    <a href="#move" class="px-3 h-full w-full">Move File</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#delete" class="px-3">Delete File</a>
+                    <a href="#delete" class="px-3 h-full w-full">Delete File</a>
                 </li>
             </ul>
             <h4 class="text-[#009fb2] text-xl font-medium mt-4">Folder</h4>
             <ul class="list-disc pl-4">
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#list-folder" class="px-3">List Folder</a>
+                    <a href="#list-folder" class="px-3 h-full w-full">List Folder</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#create-folder" class="px-3">Create Folder</a>
+                    <a href="#create-folder" class="px-3 h-full w-full">Create Folder</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#rename-folder" class="px-3">Rename Folder</a>
+                    <a href="#rename-folder" class="px-3 h-full w-full">Rename Folder</a>
                 </li>
                 <li class="mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#delete-folder" class="px-3">Delete Folder</a>
+                    <a href="#delete-folder" class="px-3 h-full w-full">Delete Folder</a>
                 </li>
             </ul>
         </div>
     </div>
     <script>hljs.highlightAll();</script>
-    <div class="col-start-5 col-span-4 lg:col-span-3 pb-10 overflow-auto  max-h-[calc(100vh-14em)]">
+    <div class="col-start-5 col-span-4 lg:col-span-3 pb-10 overflow-auto  max-h-[calc(100vh-14em)] scroll-smooth">
         <div class="z-10 pb-3 bg-[#142132] px-4 py-2 rounded-xl">
             <h1 class="text-3xl">API Documentation</h1>
             <span id="token" class=" flex items-center">
