@@ -35,12 +35,12 @@ class VideoViewController
             if (!$video){
                 return response()->json(['status' => 'fail']);
             }
+            $userKey = "user_views:{$video->user_id}";
             $watchingUserKey ="watching_users:{$video->user_id}";
             $totalViewKey = "total:{$today}:{$video->user_id}:{$country}";
             $keyWithCountry = "country_video_views:{$video->id}:{$video->user_id}:{$country}";
             $key = "video_views:{$video->id}:{$video->user_id}";
             $data_setting = $this->accountRepo->getSetting($video->user_id);
-            $earning = 0;
             if ($data_setting->earningModes == 1){
                 $totalImpression1 = "total_impression1:{$video->user_id}:{$country}";
                 $keyWithCountryImpression1 = "country_video_impression1:{$video->id}:{$video->user_id}:{$country}";
@@ -62,6 +62,7 @@ class VideoViewController
             Redis::incr($keyWithCountry);
             Redis::incr($totalViewKey);
             Redis::incr($watchingUserKey);
+            Redis::incr($userKey);
             return response()->json(['status' => 'success']);
         }
         return response()->json(['status' => 'fail']);

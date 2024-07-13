@@ -36,40 +36,48 @@ class CalculateDailyRevenue extends Command
         // Lấy ngày hiện tại
         $today = Carbon::yesterday()->format('Y-m-d');
 
-        // Lấy dữ liệu từ bảng video_views
-        $videoViews = DB::table('video_views')
-            ->select('user_id', DB::raw('sum(views) as views'))
-            ->where('date', $today)
-            ->groupBy('user_id')
-            ->get();
+        $alluserKeys = Redis::keys('user:*');
 
         // Duyệt qua từng dòng dữ liệu và thêm vào bảng report_data
         $batchSize = 20; // Số lượng dòng dữ liệu trong mỗi lô
         $batchData = []; // Mảng chứa dữ liệu của lô hiện tại
-        $data_country_statistics = [];
-        $data_country_statistics_size = 20;
-        foreach ($videoViews as $index => $videoView) {
-            // Thêm dữ liệu vào lô hiện tại
 
-            $vpnAdsView = 0;
-            $download = 0;
-            $paidView = ($videoView->views - $vpnAdsView) + $download;
-            $data_setting = $this->accountRepo->getSetting($videoView->user_id);
-            $earning = 0;
-            if ($data_setting->earningModes == 1)
-                $earning = 0.5;
-            if ($data_setting->earningModes == 2)
-                $earning = 1;
-            $valueArr = StatisticService::calculateValue($videoView->user_id, $earning);
+        foreach ($alluserKeys as $index => $userKey) {
+            $parts = explode(':', $userKey);
+            $userId = $parts[1];
+            $views = Redis::get($userKey) ?: 0;
+            $totalImpressionViews = 0;
+            $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
+            $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
 
-            $value = array_sum($valueArr);
+            foreach ($totalImpression1 as $totalImpression1Key) {
+                // Lấy số lượt xem của user từ khóa
+                $views = Redis::get($totalImpression1Key);
+                // Cộng số lượt xem vào tổng số lượt xem
+                $totalImpressionViews += (int)$views;
+            }
+            foreach ($totalImpression2 as $totalImpression2Key) {
+                // Lấy số lượt xem của user từ khóa
+                $views = Redis::get($totalImpression2Key);
+                // Cộng số lượt xem vào tổng số lượt xem
+                $totalImpressionViews += (int)$views;
+            }
             // lay trang thai earning
+            if ($data_setting->earningModes == 1) $earning = 0.5;
+            if ($data_setting->earningModes == 2) $earning = 1;
+            $valueArr = StatisticService::calculateValue($userId, $earning);
+            $value = array_sum($valueArr);
 
+            $download = 0;
+            $paidView = $totalImpressionViews + $download;
+            $vpnAdsView = $views - $paidView;
+            $data_setting = $this->accountRepo->getSetting($userId);
+            $earning = 0;
 
-            $cpm = $value / $videoView->views * 1000;
+            $cpm = $paidView>0 ? $value / $paidView * 1000 : 0;
             $batchData[] = [
-                'user_id' => $videoView->user_id,
-                'views' => $videoView->views,
+                'user_id' => $userId,
+                'views' => $views,
                 'date' => $today,
                 'cpm' => $cpm,
                 'vpn_ads_views' => $vpnAdsView,
@@ -78,7 +86,7 @@ class CalculateDailyRevenue extends Command
                 'revenue' => $value,
             ];
             // Nếu đã đủ số lượng dòng dữ liệu trong lô, hoặc đã duyệt hết dữ liệu
-            if (($index + 1) % $batchSize === 0 || $index === count($videoViews) - 1) {
+            if (($index + 1) % $batchSize === 0 || $index === count($alluserKeys) - 1) {
                 // Chèn lô dữ liệu hiện tại vào database
                 DB::table('reports_data')->insert($batchData);
 
@@ -87,17 +95,24 @@ class CalculateDailyRevenue extends Command
             }
         }
 
+        $data_country_statistics = [];
+        $data_country_statistics_size = 20;
         $countryViewsKeys = Redis::keys("total:{$today}:*:*");
         foreach ( $countryViewsKeys as $index => $key) {
             // Lấy views và downloads từ Redis
             $countryViews = Redis::get($key);
             $countryViews = $countryViews ?: 0;
             $user_id = explode(':', $key)[1];
-            $countryvpnAdsView = 0;
-            $countrydownload = 0;
             $countryCode = explode(':', $key)[2];
-            $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
-            $revenue =   StatisticService::calculateValue($user_id)[$countryCode];
+            $totalImpression1Views = Redis::get("total_impression1:{$user_id}:$countryCode") ?: 0;
+            $totalImpression2Views = Redis::get("total_impression2:{$user_id}:$countryCode") ?: 0;
+            $countryVpnAdsView = $countryViews - $paidView;
+            $countryDownload = 0;
+            $paidView = $totalImpression1Views+$totalImpression2Views + $countryDownload;
+            // lay trang thai earning
+            if ($data_setting->earningModes == 1) $earning = 0.5;
+            if ($data_setting->earningModes == 2) $earning = 1;
+            $revenue =  StatisticService::calculateValue($user_id, $earning)[$countryCode];
             // Tạo mới dữ liệu trong bảng country_statistics
             $data_country_statistics[] = [
                 'user_id' => $user_id,
@@ -105,11 +120,13 @@ class CalculateDailyRevenue extends Command
                 'country_code' => $countryCode,
                 'views' => $countryViews,
                 'paid_views' => $paidView,
-                'vpn_ads_views' => $countryvpnAdsView,
-                'download' => $countrydownload,
+                'vpn_ads_views' => $countryVpnAdsView,
+                'download' => $countryDownload,
                 'revenue' => $revenue,
             ];
             Redis::del($key);
+            Redis::del("total_impression1:{$user_id}:$countryCode");
+            Redis::del("total_impression2:{$user_id}:$countryCode");
             if (($index + 1) % $data_country_statistics_size === 0 || $index === count($countryViewsKeys) - 1) {
                 // Chèn lô dữ liệu hiện tại vào database
                 DB::table('country_statistics')->insert($data_country_statistics);
