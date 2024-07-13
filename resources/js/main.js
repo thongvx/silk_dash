@@ -97,6 +97,39 @@ $(document).on('click', '[btn-delete-selected]', function() {
     button.addClass('bg-[#142132]')
     button.attr('disabled', 'disabled');
 });
+export function add_notification(type, message, div){
+    let icon = '';
+    let text = ''
+    switch (type) {
+        case 'success':
+            icon = 'done';
+            text = 'text-green-400';
+            break;
+        case 'error':
+            icon = 'error';
+            text = 'text-red-400';
+            break;
+        case 'warning':
+            icon = 'warning';
+            text = 'text-orange-400';
+            break;
+        default:
+            icon = 'fa-info';
+            text = 'text-blue-400';
+            break;
+    }
+    const div_notification = `<div class="text-center w-full ${text} mt-3 items-center flex" id="noti-warning">
+                                        <i class="material-symbols-outlined mr-2">${icon}</i>
+                                        ${message}
+                                    </div>`
+    div.before(div_notification);
+    div.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
+    div.addClass('bg-[#142132]')
+    div.attr('disabled', 'disabled');
+    setInterval(function() {
+        $('#noti-warning').remove();
+    }, 2000);
+}
 export function notification(type, message) {
     let icon = '';
     let bg = ''

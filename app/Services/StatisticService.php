@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\CountryTier;
 use Illuminate\Support\Facades\Redis;
+use Carbon\Carbon;
 
 class StatisticService
 {
@@ -23,7 +24,8 @@ class StatisticService
 
     public static function calculateValue($userId)
     {
-        $keys = Redis::keys("total:{$userId}:*");
+        $today = Carbon::today()->format('Y-m-d');
+        $keys = Redis::keys("total:{$today}:{$userId}:*");
         $result = [];
         $allCountries = self::getAllCountries();
 

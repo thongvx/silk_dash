@@ -1,6 +1,5 @@
 import {fixedBox} from "./video.js";
-import {checkAll} from "./video.js";
-import { notification } from '../main.js';
+import {add_notification} from '../main.js';
 
 //add folder
 let addFolder = `<div class="add-folder" id="add-folder">
@@ -48,9 +47,13 @@ $(document).on('click', '[btn-add-folder]', function() {
                 `)
             },
             success: function(data) {
-                $('#add-folder').remove()
-                fixedBox()
-                notification('success', 'Add folder successfully')
+                const message = 'Create folder successfully';
+                add_notification('success',message, bntSubmit);
+                bntSubmit.remove()
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#add-folder').remove()
+                }, 2000);
                 $('[folder]:eq(0)').after(`<div folder
                                             class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#142132] hover:bg-[#009FB2] from-[#009FB2] to-[#4CBE1F]">
                                             <a class="w-full btn-page-folder" href="javascript:;" data-folderid="${data.folder.id}" data-limit="${limit}">
@@ -83,16 +86,19 @@ $(document).on('click', '[btn-add-folder]', function() {
                                         </div>`)
             },
             error: function(err) {
-                $('#add-folder').remove()
-                fixedBox()
-                notification('error', 'Add folder failed')
+                const message = 'Create folder failed';
+                add_notification('error',message, bntSubmit);
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#add-folder').remove()
+                }, 2000);
             }
         })
     })
 })
 //edit folder
 let formEditFolder = `<div class="edit" id="edit-folder">
-                                <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Edit file details</h5>
+                                <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Rename folder</h5>
                                 <form class="text-white mt-3" action="">
                                     <div class="grid grid-cols-3 gap-4 items-center">
                                         <h5>
@@ -124,7 +130,7 @@ $('.btn-edit-folder').on('click', function() {
     $('#edit-folder form').on('submit', function(e) {
         e.preventDefault();
         const newfolderName = $(this).find('input[name="new-folder-name"]').val();
-        const bntSubmit = $(this).find('button[type="submit"]');
+        const btnSubmit = $(this).find('button[type="submit"]');
         $.ajax({
             url: '/folder/' + folderId,
             type: 'PATCH',
@@ -132,7 +138,7 @@ $('.btn-edit-folder').on('click', function() {
                 newNameFolder: newfolderName
             },
             beforeSend: function() {
-                bntSubmit.html(`
+                btnSubmit.html(`
                      <div class="flex text-white items-center">
                         <div class="loading">
                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -145,15 +151,22 @@ $('.btn-edit-folder').on('click', function() {
                 `)
             },
             success: function(data) {
+                const message = 'Rename folder successfully';
+                add_notification('success',message, btnSubmit);
+                btnSubmit.remove()
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#edit-folder').remove()
+                }, 2000);
                 folder.find('span:eq(0)').text(data.folder.name)
-                $('#edit-folder').remove()
-                fixedBox()
-                notification('success', 'Edit folder successfully')
             },
             error: function(err) {
-                $('#edit-folder').remove()
-                fixedBox()
-                notification('error', 'Edit folder failed')
+                const message = 'Rename folder failed';
+                add_notification('error',message, btnSubmit);
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#edit-folder').remove()
+                }, 2000);
             }
         })
     })
@@ -161,7 +174,7 @@ $('.btn-edit-folder').on('click', function() {
 //delete folder
 let formDeleteFolder = `<div class="delete" id="delete-folder">
                                     <form action="">
-                                        <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected video?</h5>
+                                        <h5 class="text-center text-white text-lg">Are you sure you want to remove the folder?</h5>
                                         <div class="flex justify-center mt-3 text-white ">
                                             <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
                                             <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Delete</button>
@@ -175,12 +188,13 @@ $(document).on('click', '.btn-delete-folder', function() {
     const folderId = folder.find('a').data('folderid');
     $('#delete-folder form').on('submit', function(e) {
         e.preventDefault();
-        const bntSubmit = $(this).find('button[type="submit"]');
+        const btnSubmit = $(this).find('button[type="submit"]');
+        const cancel = $(this).find('button[type="button"]');
         $.ajax({
             url: '/folder/' + folderId,
             type: 'DELETE',
             beforeSend: function() {
-                bntSubmit.html(`
+                btnSubmit.html(`
                      <div class="flex text-white items-center">
                         <div class="loading">
                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -193,15 +207,23 @@ $(document).on('click', '.btn-delete-folder', function() {
                 `)
             },
             success: function(data) {
+                const message = 'Delete folder successfully';
+                add_notification('success',message, btnSubmit);
                 folder.remove()
-                $('#delete-folder').remove()
-                fixedBox()
-                notification('success', 'Delete folder successfully')
+                cancel.remove()
+                btnSubmit.remove()
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#delete-video').remove();
+                }, 2000);
             },
             error: function(err) {
-                $('#delete-folder').remove()
-                fixedBox()
-                notification('error', 'Delete folder failed')
+                const message = 'Delete folder failed';
+                add_notification('error',message, btnSubmit);
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#delete-video').remove();
+                }, 2000);
             }
         })
     })

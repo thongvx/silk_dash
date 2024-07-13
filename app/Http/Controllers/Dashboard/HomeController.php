@@ -46,7 +46,7 @@ class HomeController extends Controller
         $today = Carbon::today();
         $earningToday = StatisticService::calculateValue($user->id);
         $totalViews = 0;
-        $countryViewsKeys = Redis::keys("total:{$user->id}:*");
+        $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
         foreach ($countryViewsKeys as $key) {
             $views = Redis::get($key);
             $totalViews += $views;

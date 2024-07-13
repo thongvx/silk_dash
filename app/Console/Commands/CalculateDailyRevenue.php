@@ -83,7 +83,7 @@ class CalculateDailyRevenue extends Command
             }
         }
 
-        $countryViewsKeys = Redis::keys("total:*:*");
+        $countryViewsKeys = Redis::keys("total:{$today}:*:*");
         foreach ( $countryViewsKeys as $index => $key) {
             // Lấy views và downloads từ Redis
             $countryViews = Redis::get($key);

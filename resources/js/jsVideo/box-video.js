@@ -1,6 +1,5 @@
 import { checkAll, fixedBox , btn_video } from './video.js';
-import {notification, updateOriginalFormState, updateURLParameter} from '../main.js';
-var fixedVideoCloseButton = $("[fixed-video-close-button]");
+import {add_notification} from '../main.js';
 //edit video
 const formEdit = `<div class="edit" id="edit">
                                 <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Rename file</h5>
@@ -40,7 +39,7 @@ $(document).on('click', '[btn-edit]', function() {
     $('#edit form').on('submit', function(e) {
         e.preventDefault();
         const newTitle = $(this).find('input[name="newTitle"]').val();
-        const bntSubmit = $(this).find('button[type="submit"]');
+        const btnSubmit = $(this).find('button[type="submit"]');
         var form = $(this).closest('form')[0];
         var formData = new FormData(form);
         formData.append('videoIds', videoIDs)
@@ -51,7 +50,7 @@ $(document).on('click', '[btn-edit]', function() {
             processData: false,
             contentType: false,
             beforeSend: function() {
-                bntSubmit.html(`
+                btnSubmit.html(`
                      <div class="flex text-white items-center">
                         <div class="loading">
                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -62,7 +61,7 @@ $(document).on('click', '[btn-edit]', function() {
                         <span>process</span>
                     </div>
                 `)
-                bntSubmit.prop('disabled', true);
+                btnSubmit.prop('disabled', true);
             },
             success: function(response) {
                 response.forEach(function(video) {
@@ -71,16 +70,23 @@ $(document).on('click', '[btn-edit]', function() {
                     // Update the title in the row
                     row.find('.video-title').text(video.newTitle);
                 });
-                fixedBox ()
-                $('#edit').remove();
+                const message = 'Video titles updated successfully!';
+                add_notification('success',message, btnSubmit);
+                btnSubmit.remove()
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#edit').remove();
+                }, 2000);
                 tr.find('.checkbox').prop('checked', false)
-                notification('success', 'Video titles updated successfully!')
             },
             error: function(response) {
-                fixedBox()
-                $('#edit').remove();
+                const message = 'An error occurred while editing the video title.';
+                add_notification('error',message, btnSubmit);
+                setTimeout(function() {
+                    fixedBox()
+                    $('#edit').remove();
+                }, 2000);
                 tr.find('.checkbox').prop('checked', false)
-                notification('error', 'An error occurred while editing the video title.')
             }
         });
     });
@@ -97,7 +103,7 @@ const formDelete = `<div class="delete" id="delete-video">
                                         </div>
                                     </form>
                                 </div>`
-function ajaxremove(videoIDs, bntSubmit){
+function ajaxremove(videoIDs, btnSubmit, cancel){
     $.ajax({
         url: '/video/multiple',
         type: 'POST',
@@ -105,7 +111,7 @@ function ajaxremove(videoIDs, bntSubmit){
             videoID: videoIDs
         },
         beforeSend: function() {
-            bntSubmit.html(`
+            btnSubmit.html(`
                      <div class="flex text-white items-center">
                         <div class="loading">
                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -116,21 +122,30 @@ function ajaxremove(videoIDs, bntSubmit){
                         <span>process</span>
                     </div>
                 `)
-            bntSubmit.prop('disabled', true);
+            btnSubmit.prop('disabled', true);
         },
         success: function(response) {
-            fixedBox()
-            $('#delete-video').remove();
+            const message = 'Video has been successfully deleted';
+            add_notification('success',message, btnSubmit);
+            btnSubmit.remove()
+            cancel.remove()
+            setTimeout(function() {
+                fixedBox ()
+                $('#delete-video').remove();
+            }, 2000);
             videoIDs.forEach(function(videoID) {
                 $('tr[data-videoid="' + videoID + '"]').remove();
             });
             btn_video()
-            notification('success', 'Video has been successfully deleted.')
         },
         error: function(response) {
-            fixedBox()
-            $('#delete-video').remove();
-            notification('error', 'An error occurred while deleting the video.')
+            const message = 'An error occurred while deleting the video.';
+            add_notification('error',message, btnSubmit);
+            btnSubmit.remove()
+            setTimeout(function() {
+                fixedBox ()
+                $('#delete-video').remove();
+            }, 2000);
         }
     });
 }
@@ -142,9 +157,10 @@ $(document).on('click', '[btn-delete]', function() {
         return $(row).closest('tr').data('videoid');
     }).get();
     $('#delete-video form').on('submit', function(e) {
-        const bntSubmit = $(this).find('button[type="submit"]');
+        const btnSubmit = $(this).find('button[type="submit"]');
+        const cancel = $(this).find('button[type="button"]');
         e.preventDefault();
-        ajaxremove(videoIDs, bntSubmit)
+        ajaxremove(videoIDs, btnSubmit, cancel)
     });
 });
 $(document).on('click', '.btn-delete', function() {
@@ -154,9 +170,10 @@ $(document).on('click', '.btn-delete', function() {
     const videoIDs = [];
     videoIDs.push(tr.data('videoid'));
     $('#delete-video form').on('submit', function(e) {
-        const bntSubmit = $(this).find('button[type="submit"]');
+        const btnSubmit = $(this).find('button[type="submit"]');
+        const cancel = $(this).find('button[type="button"]');
         e.preventDefault();
-        ajaxremove(videoIDs, bntSubmit)
+        ajaxremove(videoIDs, btnSubmit, cancel)
     });
 });
 //export video
@@ -176,8 +193,6 @@ $(document).on('click', '[btn-export]', function() {
             $('#Embedcode textarea').val() +
             `<iframe src="https://streamsilk.com/t/${$(tr).find('.videoID').text()}" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>`+'\n'
         );
-        console.log(index, tr)
-        console.log($(tr).find('.videoID').text())
     })
 });
 
@@ -201,10 +216,10 @@ $(document).on('click', '#fixed-video [folder]', function() {
     const videoIDs = rows.map((index, row) => {
         return $(row).closest('tr').data('videoid');
     }).get();
-    let bntSubmit = $(this).closest('#move').find('button[type="submit"]');
-    bntSubmit.addClass('bg-[#01545e] hover:bg-[#009fb2]')
-    bntSubmit.removeClass('bg-[#142132]')
-    bntSubmit.removeAttr('disabled');
+    let btnSubmit = $(this).closest('#move').find('button[type="submit"]');
+    btnSubmit.addClass('bg-[#01545e] hover:bg-[#009fb2]')
+    btnSubmit.removeClass('bg-[#142132]')
+    btnSubmit.removeAttr('disabled');
     $('#move form').off('submit').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
@@ -215,7 +230,7 @@ $(document).on('click', '#fixed-video [folder]', function() {
                 videoID: videoIDs
             },
             beforeSend: function() {
-                bntSubmit.html(`
+                btnSubmit.html(`
                      <div class="flex text-white items-center">
                         <div class="loading">
                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -226,26 +241,32 @@ $(document).on('click', '#fixed-video [folder]', function() {
                         <span>process</span>
                     </div>
                 `)
-                bntSubmit.prop('disabled', true);
+                btnSubmit.prop('disabled', true);
             },
             success: function(response) {
-                fixedBox()
-                $('#move').addClass('hidden')
+                btnSubmit.html('Move To Folder')
+                const message = 'Video has been successfully moved.';
+                add_notification('success',message, btnSubmit);
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#move').addClass('hidden')
+
+                }, 2000);
                 videoIDs.forEach(function(videoID) {
                     $('tr[data-videoid="' + videoID + '"]').remove();
                 });
                 btn_video()
-                bntSubmit.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
-                bntSubmit.addClass('bg-[#142132]')
-                bntSubmit.html('Move To Folder')
-                notification('success', 'Video has been successfully moved.')
             },
             error: function(response) {
                 fixedBox()
-                bntSubmit.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
-                bntSubmit.addClass('bg-[#142132]')
-                bntSubmit.html('Move To Folder')
-                notification('error', 'An error occurred while moved the video.')
+                btnSubmit.html('Move To Folder')
+                const message = 'An error occurred while moved the video.';
+                add_notification('error',message, btnSubmit);
+                setTimeout(function() {
+                    fixedBox ()
+                    $('#move').addClass('hidden')
+
+                }, 2000);
             }
         });
     });
@@ -282,10 +303,12 @@ $(document).on('submit', '#form-edit-video', function(e) {
         processData: false,
         contentType: false,
         success: function(response) {
-            notification('success', 'Setting successfully');
-            button.removeClass('bg-blue-400 hover:bg-blue-700')
-            button.addClass('bg-[#142132]')
-            button.attr('disabled', 'disabled');
+            const message = 'Setting video successfully.';
+            add_notification('success',message, button);
+            setTimeout(function() {
+                fixedBox ()
+                $('#move').addClass('hidden')
+            }, 2000);
             form.reset();
         },
         error: function(response) {

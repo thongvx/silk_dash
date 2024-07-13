@@ -99,7 +99,7 @@ class ReportController extends Controller
         if($date == 'today'){
             $data_today = [];
             $totalViews = 0;
-            $countryViewsKeys = Redis::keys("total:{$userId}:*");
+            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
             foreach ($countryViewsKeys as $key) {
                 $views = Redis::get($key);
                 $totalViews += $views;
@@ -130,7 +130,7 @@ class ReportController extends Controller
     {
         $data_today = [];
         if($date == 'today'){
-            $countryViewsKeys = Redis::keys("total:{$userId}:*");
+            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
             foreach ( $countryViewsKeys as $index => $key) {
                 $countryViews = Redis::get($key);
                 $countryViews = $countryViews ?: 0;

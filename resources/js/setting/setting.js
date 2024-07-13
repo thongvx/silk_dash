@@ -1,4 +1,4 @@
-import { notification, updateOriginalFormState } from '../main.js';
+import {add_notification, notification, updateOriginalFormState} from '../main.js';
 
 var fixedProfileCard = $("[fixed-profile-card]");
 var fixedProfileCloseButton = $("[fixed-profile-close-button]");
@@ -30,15 +30,15 @@ $(document).on('submit', '#form-setting', function(e) {
         processData: false,
         contentType: false,
         success: function(response) {
-            notification('success', 'Setting successfully');
-            button.removeClass('bg-blue-400 hover:bg-blue-700')
-            button.addClass('bg-[#142132]')
-            button.attr('disabled', 'disabled');
+            const message = 'Account settings updated successfully!';
+            add_notification('success',message, button);
             updateOriginalFormState();
             $('[btn-delete-selected]').addClass('hidden');
             $(form).find('input[type="file"]').val('');
         },
         error: function(response) {
+            const message = 'Account settings updated fail!';
+            add_notification('error',message, button);
             console.log(response);
         }
     });
@@ -58,10 +58,8 @@ $(document).on('submit', '#form-profile', function(e) {
         url: '/update-profile',
         data: formData,
         success: function(response) {
-            notification('success', 'Profile updated successfully');
-            button.removeClass('bg-blue-400 hover:bg-blue-700')
-            button.addClass('bg-[#142132]')
-            button.attr('disabled', 'disabled');
+            const message = 'Profile updated successfully!';
+            add_notification('success',message, button);
             updateOriginalFormState();
         },
         error: function(response) {
@@ -70,7 +68,7 @@ $(document).on('submit', '#form-profile', function(e) {
                 for (var field in errors) {
                     if (errors.hasOwnProperty(field)) {
                         errors[field].forEach(function(error) {
-                            notification('warning', error);
+                            add_notification('warning',error, button);
                         });
                     }
                 }
@@ -97,14 +95,14 @@ $(document).on('click', '[btn-change-password]', function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                notification('success', 'Change password successfully');
-                button.removeClass('bg-blue-400 hover:bg-blue-700')
-                button.addClass('bg-[#142132]')
-                button.attr('disabled', 'disabled');
+                const message = 'Change password successfully!';
+                add_notification('success',message, button);
                 $('#password .error').hide()
-                fixedBox()
                 form.reset();
-                $('#password').addClass('hidden')
+                setTimeout(() => {
+                    fixedBox()
+                    $('#password').addClass('hidden')
+                }, 2000);
             },
             error: function(response) {
                 if (response.responseJSON && response.responseJSON.errors) {
@@ -142,14 +140,14 @@ $(document).on('click', '[btn-change-email]', function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                notification('success', 'Change email successfully');
-                button.removeClass('bg-blue-400 hover:bg-blue-700')
-                button.addClass('bg-[#142132]')
-                button.attr('disabled', 'disabled');
+                const message = 'Change email successfully!';
+                add_notification('success',message, button);
                 $('#email .error').hide()
-                fixedBox()
                 form.reset();
-                $('#email').addClass('hidden')
+                setTimeout(() => {
+                    fixedBox()
+                    $('#email').addClass('hidden')
+                }, 2000);
             },
             error: function(response) {
                 if (response.responseJSON && response.responseJSON.errors) {
