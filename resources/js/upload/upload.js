@@ -18,7 +18,7 @@ $(document).on('click', '[change-folder]', function () {
 });
 $(document).on('click', '[folder]', function() {
     fixedBox()
-    $('#folderPost').attr('value',$(this).data('folderid'))
+    $('#folderPost').attr('value',$(this).data('folder-id'))
     $('#folderName').text($(this).find('h5').first().text())
 });
 $(document).on('click', '[create-ftp]', function() {

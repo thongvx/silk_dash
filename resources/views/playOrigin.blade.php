@@ -5,7 +5,7 @@
     <title>{{ $title }}</title>
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
-    <link rel="icon" href="https://user.streamsilk.com/image/logo/logo4.webp">
+    <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
@@ -41,10 +41,21 @@
     var urlSub = {{ $player_setting->enable_caption }};
     var is_sub = {{ $is_sub }};
     var infinite_loop = "{{ $player_setting->infinite_loop }}";
+    var logo_link = "{{ $player_setting->logo_link }}";
+    var logo = "{{ $player_setting->show_logo }}";
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
-    var urlLogo = "{{ $player_setting->show_logo == 1 && $player_setting->logo_link != 0  ? asset(Storage::url($player_setting->logo_link)) : "" }}";
+    var urlLogo
+    if(logo === '1' && logo_link !== ''){
+        if(logo_link.includes("http")){
+            urlLogo = logo_link
+        }else{
+            urlLogo = "{{ asset(Storage::url($player_setting->logo_link)) }}"
+        }
+    }else{
+        urlLogo = ""
+    }
     //poster
     var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
     //title

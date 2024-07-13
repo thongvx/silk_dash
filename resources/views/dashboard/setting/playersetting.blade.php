@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Storage; @endphp
 <div class="mt-2">
     <form id="form-player-setting">
         <div class="grid grid-cols-2 gap-x-8 gap-y-10 text-slate-400 font-medium px-2 md:px-4 overflow-auto max-h-[calc(100vh-23em)] md:max-h-[calc(100vh-17em)]">
@@ -165,7 +166,15 @@
                     <h1 class="text-white text-2xl mb-3 ">Customize Logo</h1>
                     <div class="items-center w-full">
                         <div class="flex box-img">
-                            <img src="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? '' : Storage::url($playerSettings->logo_link) }}" alt="" class="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? 'hidden' : ''}} w-1/3 h-12 mr-3 mb-3">
+                            @php
+                                $checkUrl = strpos($playerSettings->logo_link, 'http') !== false ? 0 : 1;
+                                if ($checkUrl == 0) {
+                                    $logoLink = $playerSettings->logo_link;
+                                } else {
+                                    $logoLink = asset(Storage::url($playerSettings->logo_link));
+                                }
+                            @endphp
+                            <img src="{{ !empty($playerSettings->logo_link) ? $logoLink : '' }}" alt="" class="{{ empty($playerSettings->logo_link) ? 'hidden' : '' }} w-1/3 h-12 mr-3 mb-3">
                             <div class="bg-[#142132] rounded-lg py-1 text-center mb-3 flex w-full items-center relative">
                                 <input name="logo" type="file" id="file-logo" accept=".jpg, .png, .jpeg"
                                        class="absolute opacity-0 file-img cursor-pointer w-full h-full">
@@ -176,9 +185,9 @@
                             </div>
                         </div>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power" value="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? '' : asset(Storage::url($playerSettings->logo_link)) }}"
+                            <input type="text" id="power" value="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? '' : $logoLink }}"
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Power url">
+                                   placeholder="Power url" readonly>
                         </div>
                     </div>
                     <div class="items-center mt-3 w-full">
