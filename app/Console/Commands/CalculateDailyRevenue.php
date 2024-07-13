@@ -36,7 +36,7 @@ class CalculateDailyRevenue extends Command
         // Lấy ngày hiện tại
         $today = Carbon::yesterday()->format('Y-m-d');
 
-        $alluserKeys = Redis::keys('user:*');
+        $alluserKeys = Redis::keys("user:{$today}:*");
 
         // Duyệt qua từng dòng dữ liệu và thêm vào bảng report_data
         $batchSize = 20; // Số lượng dòng dữ liệu trong mỗi lô
@@ -85,6 +85,7 @@ class CalculateDailyRevenue extends Command
                 'download' => $download,
                 'revenue' => $value,
             ];
+            redis::del($userKey);
             // Nếu đã đủ số lượng dòng dữ liệu trong lô, hoặc đã duyệt hết dữ liệu
             if (($index + 1) % $batchSize === 0 || $index === count($alluserKeys) - 1) {
                 // Chèn lô dữ liệu hiện tại vào database

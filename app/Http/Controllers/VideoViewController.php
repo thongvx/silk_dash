@@ -35,7 +35,7 @@ class VideoViewController
             if (!$video){
                 return response()->json(['status' => 'fail']);
             }
-            $userKey = "user_views:{$video->user_id}";
+            $userKey = "user_views:{$today}:{$video->user_id}";
             $watchingUserKey ="watching_users:{$video->user_id}";
             $totalViewKey = "total:{$today}:{$video->user_id}:{$country}";
             $keyWithCountry = "country_video_views:{$video->id}:{$video->user_id}:{$country}";
