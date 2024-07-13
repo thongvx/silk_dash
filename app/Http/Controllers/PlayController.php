@@ -86,8 +86,18 @@ class PlayController
                         'player_setting' => $player_setting,
                         'is_sub' => $video->is_sub,
                     ];
-
-                    return view('play', $playData);
+                    switch ($data_setting->earningModes) {
+                        case 1:
+                            $pagePlay = 'play1';
+                            break;
+                        case 2:
+                            $pagePlay = 'play2';
+                            break;
+                        default:
+                            $pagePlay = 'play';
+                            break;
+                    }
+                    return view($pagePlay, $playData);
                 }
             }
             else{
