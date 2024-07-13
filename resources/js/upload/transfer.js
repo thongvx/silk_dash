@@ -1,4 +1,4 @@
-import {formatFileSize} from "../main.js";
+import {add_notification, formatFileSize} from "../main.js";
 $(document).on('submit', '#transferLink', function(event) {
     event.preventDefault();
 
@@ -12,20 +12,18 @@ $(document).on('submit', '#transferLink', function(event) {
 
     // Biểu thức chính quy để kiểm tra URL hợp lệ
     var urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    var invalidUrlFound = false; // Flag to track invalid URLs
+
 
     urls.forEach(function(url, index) {
         if(url != ''){
             url = url.trim();
             // Kiểm tra xem URL có hợp lệ không
             if (!urlRegex.test(url)) {
-                const div_warning = `<div class=" lg:mx-32 text-start text-orange-500 mt-3 items-center flex" id="noti-warning">
-                                                <i class="material-symbols-outlined mr-2">warning</i>
-                                                The entered URL is invalid: <span class="italic ml-2">${url}</span>
-                                            </div>`
-                button.before(div_warning);
-                setInterval(function() {
-                    $('#noti-warning').remove();
-                }, 1500);
+                const message = `The entered URL is invalid:<span class="italic ml-2">${url}</span>`;
+                add_notification('warning',message, button);
+                invalidUrlFound = true;
+                form.reset();
                 return;
             }
             validUrls.push(url);
@@ -50,6 +48,10 @@ $(document).on('submit', '#transferLink', function(event) {
         }
 
     });
+    if (invalidUrlFound) {
+        // If any invalid URL was found, stop execution here
+        return;
+    }
     formData.set('url', validUrls.join('\n'));
 
     fetch('/postTransfer', {

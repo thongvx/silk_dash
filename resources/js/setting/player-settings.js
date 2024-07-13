@@ -1,4 +1,5 @@
-import {notification} from "../main.js";
+import {add_notification} from "../main.js";
+import {fixedBox} from "../jsVideo/video.js";
 
 $(document).on('submit', '#form-player-setting', function (e) {
     e.preventDefault();
@@ -16,10 +17,8 @@ $(document).on('submit', '#form-player-setting', function (e) {
         processData: false,
         contentType: false,
         success: function (data) {
-            notification('success', 'Profile updated successfully');
-            button.removeClass('bg-blue-400 hover:bg-blue-700')
-            button.addClass('bg-[#142132]')
-            button.attr('disabled', 'disabled');
+            const message = 'Profile updated successfully!';
+            add_notification('success',message, button);
         },
         error: function (response) {
             if (response.responseJSON && response.responseJSON.errors) {
@@ -27,7 +26,7 @@ $(document).on('submit', '#form-player-setting', function (e) {
                 for (var field in errors) {
                     if (errors.hasOwnProperty(field)) {
                         errors[field].forEach(function(error) {
-                            notification('warning', error);
+                            add_notification('warning',error, button);
                         });
                     }
                 }

@@ -1,4 +1,4 @@
-import {notification} from "../main.js";
+import {add_notification} from "../main.js";
 
 $(document).on('submit', '#clone', function (event) {
     event.preventDefault();
@@ -12,28 +12,13 @@ $(document).on('submit', '#clone', function (event) {
         processData: false,
         contentType: false,
         success: function(response) {
-            button.removeClass('bg-blue-400 hover:bg-blue-700')
-            button.addClass('bg-[#142132]')
-            button.attr('disabled', 'disabled');
             form.reset();
             if (response.status === 404) {
-                const div_warning = `<div class=" lg:mx-32 text-start text-orange-500 mt-3 items-center flex" id="noti-warning">
-                                                <i class="material-symbols-outlined mr-2">warning</i>
-                                                Clone Video failed
-                                            </div>`
-                button.before(div_warning);
-                setInterval(function() {
-                    $('#noti-warning').remove();
-                }, 2000);
+                const message = `Clone Video failed`;
+                add_notification('warning',message, button);
             } else{
-                const div_warning = `<div class=" lg:mx-32 text-start text-green-500 mt-3 items-center flex" id="noti-warning">
-                                                <i class="material-symbols-outlined mr-2">done</i>
-                                                Clone Video successfully
-                                            </div>`
-                button.before(div_warning);
-                setInterval(function() {
-                    $('#noti-warning').remove();
-                }, 2000);
+                const message = `Clone Video successfully`;
+                add_notification('success',message, button);
                 $('#list-clone').empty();
                 let embedLink = [];
                 response.file_clone.forEach(function(item, index) {
@@ -68,14 +53,9 @@ $(document).on('submit', '#clone', function (event) {
             }
         },
         error: function(response) {
-            const div_warning = `<div class=" lg:mx-32 text-start text-red-500 mt-3 items-center flex" id="noti-warning">
-                                                <i class="material-symbols-outlined mr-2">error</i>
-                                                Clone Video failed
-                                            </div>`
-            button.before(div_warning);
-            setInterval(function() {
-                $('#noti-warning').remove();
-            }, 2000);
+            const message = `Clone Video failed`;
+            add_notification('warning',message, button);
+            form.reset();
         }
     });
 })

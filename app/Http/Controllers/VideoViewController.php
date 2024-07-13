@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\VideoRepo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -21,7 +22,7 @@ class VideoViewController
         $referer = $request->headers->get('Referer');
         $keyPerIp = "user_views:{$request->ip()}";
         $views = Redis::get($keyPerIp) ?: 0;
-
+        $today = Carbon::today()->format('Y-m-d');
         //1 ngày 1 ip chỉ được tính 2 view thôi
         if ($views < 2 ) {
 
@@ -39,7 +40,7 @@ class VideoViewController
                 return response()->json(['status' => 'fail']);
             }
             $watchingUserKey ="watching_users:{$video->user_id}";
-            $totalViewKey = "total:{$video->user_id}:{$country}";
+            $totalViewKey = "total:{$today}:{$video->user_id}:{$country}";
             $keyWithCountry = "country_video_views:{$video->id}:{$video->user_id}:{$country}";
             $key = "video_views:{$video->id}:{$video->user_id}";
             //Todo: nếu bật kiếm tiền

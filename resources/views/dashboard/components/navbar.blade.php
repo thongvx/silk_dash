@@ -32,7 +32,7 @@
                       </a>
                       <ul dropdown-menu
                           class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
-                               shadow-lg shadow-slate-900 duration-250 before:text-5.5 pointer-events-none absolute right-3 top-20 z-10
+                                duration-250 before:text-5.5 pointer-events-none absolute right-3 top-20 z-10
                                origin-top list-none rounded-lg border-none bg-clip-padding
                                pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-6 before:left-auto before:-top-4 before:z-10
                                before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲']
@@ -141,7 +141,7 @@
                 </div>
               <ul dropdown-menu
                 class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
-                       shadow-lg shadow-slate-900 duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10
+                       duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10
                        origin-top list-none rounded-lg border-none bg-clip-padding
                        text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:-top-4 before:z-10
                        before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
@@ -194,7 +194,7 @@
               </a>
               <ul dropdown-menu
                 class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
-                       shadow-lg shadow-slate-900 duration-250 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-12
+                       duration-250 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-12
                        origin-top list-none rounded-lg border-none bg-clip-padding
                        pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:-top-4 before:z-10
                        before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6

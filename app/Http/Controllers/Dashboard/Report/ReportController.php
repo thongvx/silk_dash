@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Report;
 use App\Models\CountryTier;
 use App\Repositories\ReportRepo;
 use App\Repositories\CountryRepo;
+use App\Repositories\AccountRepo;
 use App\Http\Controllers\Controller;
 use App\Services\StatisticService;
 use Carbon\Carbon;
@@ -15,12 +16,13 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    protected $reportRepo, $countryRepo;
+    protected $reportRepo, $countryRepo, $accountRepo;
 
-    public function __construct(ReportRepo $reportRepo, CountryRepo $countryRepo)
+    public function __construct(ReportRepo $reportRepo, CountryRepo $countryRepo, AccountRepo $accountRepo)
     {
         $this->reportRepo = $reportRepo;
         $this->countryRepo = $countryRepo;
+        $this->accountRepo = $accountRepo;
     }
     private function getDateRange($date, $request)
     {
@@ -56,7 +58,13 @@ class ReportController extends Controller
         $totalWithdrawalskey = "user:{$userId}:total_withdrawal";
         $totalProfit = Redis::get($totalProfitkey);
         $totalWithdrawals = Redis::get($totalWithdrawalskey);
-        $earningToday = StatisticService::calculateValue($userId);
+        $data_setting = $this->accountRepo->getSetting($userId);
+        $earning = 0;
+        if ($data_setting->earningModes == 1)
+            $earning = 0.5;
+        if ($data_setting->earningModes == 2)
+            $earning = 1;
+        $earningToday = StatisticService::calculateValue($userId, $earning);
         $data['title'] = 'Report';
         $data['userWatching'] = Redis::get("watching_users:{$userId}") ?? 0;
         $data['totalProfit'] = floatval($totalProfit ?? $this->reportRepo->where('user_id', $userId)->sum('revenue'));
@@ -99,7 +107,7 @@ class ReportController extends Controller
         if($date == 'today'){
             $data_today = [];
             $totalViews = 0;
-            $countryViewsKeys = Redis::keys("total:{$userId}:*");
+            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
             foreach ($countryViewsKeys as $key) {
                 $views = Redis::get($key);
                 $totalViews += $views;
@@ -130,7 +138,7 @@ class ReportController extends Controller
     {
         $data_today = [];
         if($date == 'today'){
-            $countryViewsKeys = Redis::keys("total:{$userId}:*");
+            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
             foreach ( $countryViewsKeys as $index => $key) {
                 $countryViews = Redis::get($key);
                 $countryViews = $countryViews ?: 0;

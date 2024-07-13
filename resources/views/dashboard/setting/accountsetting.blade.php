@@ -116,6 +116,18 @@
                             </label>
                         </div>
                     </div>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2 w-full">
+                            <label for="domain" class="mb-1 text-[#009FB2] text-lg">
+                                Allowed Domains
+                            </label>
+                            <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
+                                <input type="text" id="domain" name ="domain" value="{{$setting -> domain}}"
+                                       class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                       placeholder="example1.com, example2.com">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-span-2 md:col-span-1 gap-4 ">
@@ -129,37 +141,37 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                   value="1"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
+                                   value="2"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
 
-                            <label for="1" class="ml-3">Maximum Ads - 100% Earnings</label>
+                            <label for="2" class="ml-3">Maximum Ads - 100% Earnings</label>
                         </div>
                     </div>
                     <div class="items-center mt-3 flex">
                         <div class="mt-2">
-                            <input type="radio" id="2" name="earningModes" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                            <input type="radio" id="1" name="earningModes" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                   value="2"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
+                                   value="1"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
 
-                            <label for="2" class="ml-3">Medium Ads - 50% Earnings</label>
+                            <label for="1" class="ml-3">Medium Ads - 50% Earnings</label>
                         </div>
                     </div>
                     <div class="items-center mt-3 flex">
                         <div class="mt-2">
-                            <input type="radio" id="2.5" name="earningModes" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                            <input type="radio" id="0" name="earningModes" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                   value="3"  {{$setting -> earningModes == 3 ? 'checked' : ''}}>
+                                   value="0"  {{$setting -> earningModes == 3 ? 'checked' : ''}}>
 
-                            <label for="3" class="ml-3">Minimal Ads - No Earnings</label>
+                            <label for="0" class="ml-3">Minimal Ads - No Earnings</label>
                         </div>
                     </div>
                 </div>
-                <div class="mt-8">
+                <div class="mt-8 hidden">
                     <h4 class="text-[#009FB2] text-lg">Download</h4>
                     <div class="items-center flex">
                         <div class="mt-2">

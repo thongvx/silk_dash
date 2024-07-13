@@ -63,8 +63,8 @@
                             </div>
                         @endif
                         <div class="text-white mt-3">
-                            <button class="px-4 py-1 rounded-lg bg-red-500 mr-3">Remote</button>
-                            <button class="px-4 py-1 rounded-lg bg-blue-500">Retry</button>
+                            <button class="px-4 py-1 rounded-lg bg-red-600/70 hover:bg-red-600 mr-3" button-remove>Remote</button>
+                            <button class="px-4 py-1 rounded-lg bg-blue-500/70 hover:bg-blue-500" button-retry>Retry</button>
                         </div>
                     </div>
                 @endforeach

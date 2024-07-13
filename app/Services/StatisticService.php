@@ -3,10 +3,17 @@
 namespace App\Services;
 
 use App\Models\CountryTier;
+use App\Repositories\AccountRepo;
 use Illuminate\Support\Facades\Redis;
+use Carbon\Carbon;
 
 class StatisticService
 {
+    protected AccountRepo $accountRepo;
+    public function __construct(AccountRepo $accountRepo)
+    {
+        $this->accountRepo = $accountRepo;
+    }
     public static function getAllCountries()
     {
         $countriesKey = 'countries';
@@ -21,12 +28,12 @@ class StatisticService
         return $countryMap;
     }
 
-    public static function calculateValue($userId)
+    public static function calculateValue($userId, $earning)
     {
-        $keys = Redis::keys("total:{$userId}:*");
+        $today = Carbon::today()->format('Y-m-d');
+        $keys = Redis::keys("total:{$today}:{$userId}:*");
         $result = [];
         $allCountries = self::getAllCountries();
-
         foreach ($keys as $key) {
             $totalViews = Redis::get($key);
             $country = explode(':', $key)[2];
@@ -35,7 +42,7 @@ class StatisticService
             $revenue = ($totalViews / 1000) * $cpm;
 
             // Add the revenue to the result array with the country code as the key
-            $result[$country] = $revenue;
+            $result[$country] = $revenue*$earning;
         }
 
         return $result;

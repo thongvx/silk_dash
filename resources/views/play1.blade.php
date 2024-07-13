@@ -45,6 +45,7 @@
     <!-- /Yandex.Metrika counter -->
 </head>
 <body>
+<div id="pop" class="div_pop"></div>
 <div class="preloader">
     <div class="preloader-icon"></div>
     <span>Loading...</span>
@@ -215,20 +216,32 @@
         a.click();
         document.body.removeChild(a);
     }
+    document.getElementById('pop').addEventListener("click", () => {
+        var e = document.getElementById('pop');
+        e.remove();
+        window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
+        //gala
+        var newScript = document.createElement('script');
+        newScript.setAttribute('data-cfasync', 'false');
+        newScript.setAttribute('async', 'true');
+        newScript.setAttribute('type', 'text/javascript');
+        newScript.src = '//yd.alchimybegins.com/rIiWXNjqhOe8AUjQ/jqWXQ';
+        document.getElementById('video_player').appendChild(newScript);
+    });
     $(document).on('click', '#video_player', function() {
         if (playID === 0) {
             playID = 1;
             openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-    let pop5s  = setTimeout(function() {
+    let pop15s = setTimeout(function() {
         $('body').click(function(){
             if(t === 0)
-                window.open("https://familiarpyromaniasloping.com/2009872/");
+                window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
             t = 1;
-            clearTimeout(pop5s)
+            clearTimeout(pop15s)
         })
-    }, 5000);
+    }, 15000);
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)

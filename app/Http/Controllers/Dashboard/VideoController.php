@@ -366,7 +366,7 @@ class VideoController
 
         // Update the titles of the videos...
         foreach ($ids as $index => $id) {
-            $video = $this->videoRepo->findWhere(['id' => $id])->first();
+            $video = $this->videoRepo->findWhere(['slug' => $id])->first();
             if ($video) {
                 $title = $video->title;
                 // append

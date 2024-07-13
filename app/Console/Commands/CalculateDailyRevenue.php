@@ -54,15 +54,19 @@ class CalculateDailyRevenue extends Command
             $vpnAdsView = 0;
             $download = 0;
             $paidView = ($videoView->views - $vpnAdsView) + $download;
-            $valueArr = StatisticService::calculateValue($videoView->user_id);
-            $value = array_sum($valueArr);
-            // lay trang thai earning
             $data_setting = $this->accountRepo->getSetting($videoView->user_id);
+            $earning = 0;
             if ($data_setting->earningModes == 1)
-                $earning = 2;
+                $earning = 0.5;
             if ($data_setting->earningModes == 2)
                 $earning = 1;
-            $cpm = $value / $videoView->views * 1000 / $earning;
+            $valueArr = StatisticService::calculateValue($videoView->user_id, $earning);
+
+            $value = array_sum($valueArr);
+            // lay trang thai earning
+
+
+            $cpm = $value / $videoView->views * 1000;
             $batchData[] = [
                 'user_id' => $videoView->user_id,
                 'views' => $videoView->views,
@@ -83,7 +87,7 @@ class CalculateDailyRevenue extends Command
             }
         }
 
-        $countryViewsKeys = Redis::keys("total:*:*");
+        $countryViewsKeys = Redis::keys("total:{$today}:*:*");
         foreach ( $countryViewsKeys as $index => $key) {
             // Lấy views và downloads từ Redis
             $countryViews = Redis::get($key);

@@ -121,7 +121,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
 
     //embed play
-    Route::get('/d/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('ePlay');
+    Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('ePlay');
+    Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('download');
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
