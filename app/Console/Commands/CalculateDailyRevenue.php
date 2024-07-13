@@ -49,18 +49,21 @@ class CalculateDailyRevenue extends Command
             $totalImpressionViews = 0;
             $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
-
-            foreach ($totalImpression1 as $totalImpression1Key) {
-                // Lấy số lượt xem của user từ khóa
-                $views = Redis::get($totalImpression1Key);
-                // Cộng số lượt xem vào tổng số lượt xem
-                $totalImpressionViews += (int)$views;
+            if($totalImpression1){
+                foreach ($totalImpression1 as $totalImpression1Key) {
+                    // Lấy số lượt xem của user từ khóa
+                    $views = Redis::get($totalImpression1Key);
+                    // Cộng số lượt xem vào tổng số lượt xem
+                    $totalImpressionViews += (int)$views;
+                }
             }
-            foreach ($totalImpression2 as $totalImpression2Key) {
-                // Lấy số lượt xem của user từ khóa
-                $views = Redis::get($totalImpression2Key);
-                // Cộng số lượt xem vào tổng số lượt xem
-                $totalImpressionViews += (int)$views;
+            if($totalImpression2){
+                foreach ($totalImpression2 as $totalImpression2Key) {
+                    // Lấy số lượt xem của user từ khóa
+                    $views = Redis::get($totalImpression2Key);
+                    // Cộng số lượt xem vào tổng số lượt xem
+                    $totalImpressionViews += (int)$views;
+                }
             }
             // lay trang thai earning
             if ($data_setting->earningModes == 1) $earning = 0.5;
