@@ -42,6 +42,9 @@ class VideoViewController
             $totalViewKey = "total:{$video->user_id}:{$country}";
             $keyWithCountry = "country_video_views:{$video->id}:{$video->user_id}:{$country}";
             $key = "video_views:{$video->id}:{$video->user_id}";
+            //Todo: nếu bật kiếm tiền
+            $totalImpression = "total_impression:{$video->user_id}:{$country}";
+
             Redis::incr($key);
             Redis::incr($keyWithCountry);
             Redis::incr($totalViewKey);
