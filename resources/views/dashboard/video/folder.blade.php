@@ -1,7 +1,7 @@
 <div list-folder
      class="w-full max-w-full px-3 lg:w-3/12 lg:flex-none mb-5 lg:mb-0" id="#list-folder">
     <div class="mb-1">
-        <div class="pl-3  rounded-lg flex justify-between items-center font-bold text-white">
+        <div class="rounded-lg flex justify-between items-center font-bold text-white">
             <h3 class="text-lg">
                 My Folders
             </h3>

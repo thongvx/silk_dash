@@ -120,6 +120,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/updatesetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
 
     Route::get('/regenerateToken', [App\Http\Controllers\Auth\ProfileController::class, 'regenerateToken'])->name('regenerate.token');
+    Route::get('/retryKeyApi', [App\Http\Controllers\Auth\ProfileController::class, 'retryKeyApi'])->name('retryKeyApi');
+
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
@@ -127,7 +129,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //embed play
     Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('ePlay');
     Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('download');
-    //getuserID
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {

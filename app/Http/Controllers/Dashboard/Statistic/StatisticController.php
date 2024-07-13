@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Statistic;
 
+use App\Models\CountryTier;
 use App\Models\VideoView;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
@@ -14,7 +15,7 @@ class StatisticController
         $userId = auth()->id();
         $date = Carbon::today()->format('Y-m-d');
         // Lấy ra top 10 quốc gia trong ngày
-        $topCountries = Redis::zrevrange("user:{$userId}:country_views:{$date}", 0, 9);
+        $topCountries = Redis::zrevrange("user:{$userId}:country_views:{$date}", 0, 9, true);
         $totalViews = 0;
         $countryViewsKey = "user:{$userId}:country_views:{$date}";
         $countries = Redis::zrange($countryViewsKey, 0, -1);
@@ -29,11 +30,17 @@ class StatisticController
         $totalViews = intval($totalViews);
 
         $result = [];
-
+        $AllCountries = Redis::get('allCountries') ;
+        if (isset($AllCountries)){
+            $AllCountries = unserialize($AllCountries);
+        }else{
+            $AllCountries = CountryTier::all();
+            Redis::set('allCountries', serialize(CountryTier::all()));
+        }
         foreach ($topCountries as $country => $views) {
             $views = intval($views);
             $result[] = [
-                'country' => $country,
+                'country' => $AllCountries->where('code', $country)->first()->name ?? $country,
                 'views' => $views,
                 'percentage' => round(($views / $totalViews) * 100, 2),
             ];
