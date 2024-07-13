@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\NotificationRepo;
 use App\Repositories\VideoRepo;
 use App\Repositories\ReportRepo;
+use App\Repositories\AccountRepo;
 use App\Http\Controllers\Dashboard\VideoController;
 use App\Services\StatisticService;
 use Carbon\Carbon;
@@ -15,16 +16,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 class HomeController extends Controller
 {
-    protected $notificationRepo, $statisticController, $videoRepo, $reportRepo, $videoController;
+    protected $notificationRepo, $statisticController, $videoRepo, $reportRepo, $videoController, $accountRepo;
 
     public function __construct(NotificationRepo $notificationRepo, StatisticController $statisticController,
-                                VideoRepo $videoRepo, ReportRepo $reportRepo, VideoController $videoController)
+                                VideoRepo $videoRepo, ReportRepo $reportRepo, VideoController $videoController, AccountRepo $accountRepo)
     {
         $this->notificationRepo = $notificationRepo;
         $this->statisticController = $statisticController;
         $this->videoRepo = $videoRepo;
         $this->reportRepo = $reportRepo;
         $this->videoController = $videoController;
+        $this->accountRepo = $accountRepo;
     }
 
     public function dashboard()
@@ -44,7 +46,13 @@ class HomeController extends Controller
         $data['topCountries'] = $this->statisticController->topCountry();
         $data['storage'] = $this->videoController->convertFileSize($user->storage);
         $today = Carbon::today();
-        $earningToday = StatisticService::calculateValue($user->id);
+        $data_setting = $this->accountRepo->getSetting($user->id);
+        $earning = 0;
+        if ($data_setting->earningModes == 1)
+            $earning = 0.5;
+        if ($data_setting->earningModes == 2)
+            $earning = 1;
+        $earningToday = StatisticService::calculateValue($user->id, $earning);
         $totalViews = 0;
         $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
         foreach ($countryViewsKeys as $key) {
