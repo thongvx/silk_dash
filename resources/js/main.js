@@ -118,7 +118,7 @@ export function add_notification(type, message, div){
             text = 'text-blue-400';
             break;
     }
-    const div_notification = `<div class="text-center w-full ${text} mt-3 items-center flex" id="noti-warning">
+    const div_notification = `<div class="justify-center w-full ${text} mt-2 items-center flex" id="noti-warning">
                                         <i class="material-symbols-outlined mr-2">${icon}</i>
                                         ${message}
                                     </div>`
