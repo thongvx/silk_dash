@@ -76,6 +76,7 @@ $(document).on('click', '#get-data-report button', function (event) {
     const country = urlParams.get('country') ?? '';
     formData.append('tab', tab);
     formData.append('date', date);
+    formData.set('country', country);
     loadReport(formData,tab, date, country);
 })
 $(document).on('click', '.tab-report', function (event) {

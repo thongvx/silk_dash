@@ -141,7 +141,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                   value="2"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
+                                   value="2"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
 
                             <label for="2" class="ml-3">Maximum Ads - 100% Earnings</label>
                         </div>
@@ -153,7 +153,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                   value="1"  {{$setting -> earningModes == 2 ? 'checked' : ''}}>
+                                   value="1"  {{$setting -> earningModes == 1 ? 'checked' : ''}}>
 
                             <label for="1" class="ml-3">Medium Ads - 50% Earnings</label>
                         </div>
@@ -165,7 +165,7 @@
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                   value="0"  {{$setting -> earningModes == 3 ? 'checked' : ''}}>
+                                   value="0"  {{$setting -> earningModes == 0 ? 'checked' : ''}}>
 
                             <label for="0" class="ml-3">Minimal Ads - No Earnings</label>
                         </div>

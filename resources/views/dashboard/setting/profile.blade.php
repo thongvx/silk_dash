@@ -139,7 +139,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">paid</i>
                             <input type="text" name="usdt_address" value="{{ Auth::user()->usdt_address}}"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Enter current password">
+                                   placeholder="USDT Address">
                         </div>
                     </div>
                     <div class="items-center mt-6 md:flex">
@@ -150,7 +150,7 @@
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">public</i>
                             <input type="text" name="network" value="{{ Auth::user()->network}}"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Enter new password">
+                                   placeholder="Network">
                         </div>
                     </div>
                 </div>
@@ -166,12 +166,12 @@
 <div fixed-profile>
     <!-- -right-90 in loc de 0-->
     <div fixed-profile-card
-         class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full  backdrop-blur-sm
+         class="opacity-0 hidden bg-black/20 z-50 w-screen ease fixed top-0 left-0 h-full  backdrop-blur-sm
            min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3">
         <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-profile-close-button>
         </div>
         <div
-            class="w-11/12 sm:w-4/5 xl:w-1/4 bg-[#121520] z-20 py-4 px-3 rounded-lg relative shadow-lg shadow-slate-900">
+            class="w-11/12 sm:w-4/5 xl:w-1/4 bg-[#121520] z-20 py-4 px-3 rounded-lg relative ">
             <div class="absolute right-4 top-3">
                 <button fixed-profile-close-button
                         class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">

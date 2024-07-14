@@ -1,16 +1,16 @@
-import {add_notification, notification, updateOriginalFormState} from '../main.js';
+import {add_notification, updateOriginalFormState} from '../main.js';
 
-var fixedProfileCard = $("[fixed-profile-card]");
 var fixedProfileCloseButton = $("[fixed-profile-close-button]");
 function fixedBox() {
+    var fixedProfileCard = $("[fixed-profile-card]");
     fixedProfileCard.toggleClass("opacity-0");
     fixedProfileCard.toggleClass("opacity-1");
     fixedProfileCard.toggleClass("hidden");
-    fixedProfileCard.toggleClass("block");
+    fixedProfileCard.toggleClass("flex");
 }
-fixedProfileCloseButton.on("click", function () {
+$(document).on("click", '[fixed-profile-close-button]' , function () {
     fixedBox()
-    $('.profile').addClass('hidden')
+    $('#password, #email').addClass('hidden')
 });
 // update setting
 
@@ -82,6 +82,7 @@ $(document).on('submit', '#form-profile', function(e) {
 $(document).on('click', '[btn-change-password]', function() {
     fixedBox()
     $('#password').removeClass('hidden')
+    console.log('a')
     $(document).on('submit', '#password', function(e) {
         e.preventDefault();
         const button = $(this).find('button[type="submit"]');

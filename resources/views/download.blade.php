@@ -21,7 +21,8 @@
 </head>
 <body class="m-0  font-sans antialiased font-normal text-start text-base leading-default
     text-slate-500 bg-[#142132]">
-<main class="mt-0 transition-all duration-200 ease-in-out auth">
+<main class="mt-0 transition-all duration-200 ease-in-out auth flex flex-col justify-between min-h-screen">
+    @include('landing-page.components.navbar')
     <section class="container mx-auto md:px-16 mb-10">
         <div class="flex flex-col justify-center items-center">
             <div class="text-slate-200 font-medium mt-10 text-3xl text-center">{{ $video->title }}</div>
@@ -32,6 +33,7 @@
             </div>
         </div>
     </section>
+    @include('landing-page.components.footer')
 </main>
 </body>
 

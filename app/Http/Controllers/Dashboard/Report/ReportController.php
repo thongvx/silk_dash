@@ -113,7 +113,6 @@ class ReportController extends Controller
                 $totalViews += $views;
             }
             $totalViews = intval($totalViews);
-            $cpm = $totalViews > 0 ? array_sum($earningToday) / $totalViews * 1000 : 0;
             $totalImpressionViews = 0;
             $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
@@ -129,6 +128,7 @@ class ReportController extends Controller
                 // Cộng số lượt xem vào tổng số lượt xem
                 $totalImpressionViews += (int)$views;
             }
+            $cpm = $totalImpressionViews > 0 ? array_sum($earningToday) / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
             $VpnAdsViews = $totalViews - $paid_views;
             $data_today[] = [
@@ -155,31 +155,31 @@ class ReportController extends Controller
     {
         $data_today = [];
         if($date == 'today'){
+            $filteredCountries = is_string($country) ? explode(',', $country) : $country;
+
             $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
-            foreach ( $countryViewsKeys as $index => $key) {
-                $countryViews = Redis::get($key);
-                $countryViews = $countryViews ?: 0;
-                $countryDownload = 0;
-                $countryCode = explode(':', $key)[2];
-                $getcountry = $AllCountries->firstWhere('code', $countryCode);
-                if($country !== null){
-                    if (is_string($country)) {
-                        $country = explode(',', $country);
-                    }
-                    if (!in_array($countryCode, $country)) {
-                        continue;
-                    }
+            $indexedCountries = $AllCountries->keyBy('code');
+            foreach ( $countryViewsKeys as $key) {
+                $countryViews = Redis::get($key) ?? 0;
+                $countryCode = explode(':', $key)[3];
+
+                if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
+                    continue;
                 }
-                if ($getcountry) {
-                    $country_name = $getcountry->name ?? $countryCode;
-                    $revenue = isset($earningToday[$countryCode]) ? $earningToday[$countryCode] : 0;
-                    $cpm = $getcountry->cpm ?? 0.8;
-                    $paidView = $revenue / $cpm * 1000;
+
+                $getCountry = $indexedCountries->get($countryCode);
+
+                if ($getCountry) {
+                    $totalImpression1Views = Redis::get("total_impression1:{$userId}:$countryCode") ?: 0;
+                    $totalImpression2Views = Redis::get("total_impression2:{$userId}:$countryCode") ?: 0;
+                    $country_name = $getCountry->name ?? $countryCode;
+                    $revenue = $earningToday[$countryCode] ?? 0;
+                    $paidView = $totalImpression1Views + $totalImpression2Views;
                     $countryVpnAdsView = $countryViews - $paidView;
+                    $countryDownload = 0;
                     $data_today[] = [
                         'date' => $today->format('Y-m-d'),
                         'country_name' => $country_name,
-                        'cpm' => $cpm,
                         'views' => $countryViews,
                         'download' => $countryDownload,
                         'paid_views' => $paidView,

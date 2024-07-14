@@ -72,7 +72,7 @@
                 </td>
                 <td class="px-2 max-w-[15rem] video-title">
                     <div class=" truncate hover:text-clip">
-                        <a href="{{route('ePlay', $video->slug)}}" title="{{ $video->title }}" target="_black" class="hover:text-[#009FB2] ">{{ $video->title }}</a>
+                        <a href="{{route('vPlay', $video->slug)}}" title="{{ $video->title }}" target="_black" class="hover:text-[#009FB2] ">{{ $video->title }}</a>
                     </div>
                 </td>
                 <td class="text-center px-2 videoID">{{ $video->slug }}</td>
