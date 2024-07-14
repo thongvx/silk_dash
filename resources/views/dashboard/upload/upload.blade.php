@@ -4,7 +4,7 @@
     <div class="min-h-[calc(100vh-10em)]">
         <div class="flex flex-col" box-lifted>
             <div
-                    class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start !flex flex-col md:flex-row">
+                class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid-cols-2 grid-rows-2 md:!flex">
                 <button
                         class="{{request()->get('tab') === 'webupload' ? 'webupload tab-active !text-[#009FB2]' : 'webupload'}}
                     tab-upload hover:text-[#009FB2] text-white tab-lifted [--tab-border-color:#121520] tab font-bold h-auto text-md px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"

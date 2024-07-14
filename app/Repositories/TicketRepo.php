@@ -23,7 +23,10 @@ class TicketRepo extends BaseRepository
             return unserialize($tickets);
         }
 
-        $tickets = $this->model->where('user_id', $userId)->paginate($limit);
+        $tickets = $this->model
+            ->where('user_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit);
 
         Redis::setex($key, 259200, serialize($tickets));
 

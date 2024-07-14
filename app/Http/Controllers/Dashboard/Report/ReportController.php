@@ -114,13 +114,30 @@ class ReportController extends Controller
             }
             $totalViews = intval($totalViews);
             $cpm = $totalViews > 0 ? array_sum($earningToday) / $totalViews * 1000 : 0;
+            $totalImpressionViews = 0;
+            $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
+            $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
+            foreach ($totalImpression1 as $totalImpression1Key) {
+                // Lấy số lượt xem của user từ khóa
+                $views = Redis::get($totalImpression1Key);
+                // Cộng số lượt xem vào tổng số lượt xem
+                $totalImpressionViews += (int)$views;
+            }
+            foreach ($totalImpression2 as $totalImpression2Key) {
+                // Lấy số lượt xem của user từ khóa
+                $views = Redis::get($totalImpression2Key);
+                // Cộng số lượt xem vào tổng số lượt xem
+                $totalImpressionViews += (int)$views;
+            }
+            $paid_views = $totalImpressionViews;
+            $VpnAdsViews = $totalViews - $paid_views;
             $data_today[] = [
                     'date' => $today->format('Y-m-d'),
                     'cpm' => $cpm ,
                     'views' => $totalViews,
                     'download' => 0,
-                    'paid_views' => $totalViews,
-                    'vpn_ads_views' => 0,
+                    'paid_views' => $paid_views,
+                    'vpn_ads_views' => $VpnAdsViews,
                     'revenue' => array_sum($earningToday)
             ];
             $data = collect(array_map(function ($item) {
@@ -142,9 +159,7 @@ class ReportController extends Controller
             foreach ( $countryViewsKeys as $index => $key) {
                 $countryViews = Redis::get($key);
                 $countryViews = $countryViews ?: 0;
-                $countryvpnAdsView = 0;
-                $countrydownload = 0;
-                $paidView = ($countryViews - $countryvpnAdsView) + $countrydownload;
+                $countryDownload = 0;
                 $countryCode = explode(':', $key)[2];
                 $getcountry = $AllCountries->firstWhere('code', $countryCode);
                 if($country !== null){
@@ -158,15 +173,17 @@ class ReportController extends Controller
                 if ($getcountry) {
                     $country_name = $getcountry->name ?? $countryCode;
                     $revenue = isset($earningToday[$countryCode]) ? $earningToday[$countryCode] : 0;
-                    $cpm = $countryViews > 0 ? $revenue / $countryViews * 1000 : 0;
+                    $cpm = $getcountry->cpm ?? 0.8;
+                    $paidView = $revenue / $cpm * 1000;
+                    $countryVpnAdsView = $countryViews - $paidView;
                     $data_today[] = [
                         'date' => $today->format('Y-m-d'),
                         'country_name' => $country_name,
                         'cpm' => $cpm,
                         'views' => $countryViews,
-                        'download' => $countrydownload,
+                        'download' => $countryDownload,
                         'paid_views' => $paidView,
-                        'vpn_ads_views' => $countryvpnAdsView,
+                        'vpn_ads_views' => $countryVpnAdsView,
                         'revenue' => $revenue,
                     ];
                 }

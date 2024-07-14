@@ -3,53 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\VideoRepo;
+use App\Repositories\AccountRepo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class VideoViewController
 {
-    protected VideoRepo $videoRepo;
+    protected $videoRepo, $accountRepo;
 
-    public function __construct(VideoRepo $videoRepo)
+    public function __construct(VideoRepo $videoRepo, AccountRepo $accountRepo)
     {
         $this->videoRepo = $videoRepo;
+        $this->accountRepo = $accountRepo;
     }
     public function updateView($slug, Request $request)
     {
-        Redis::incr("ahihidongok");
         $origin = $request->headers->get('Origin');
         $referer = $request->headers->get('Referer');
         $keyPerIp = "user_views:{$request->ip()}";
         $views = Redis::get($keyPerIp) ?: 0;
         $today = Carbon::today()->format('Y-m-d');
-        //1 ngày 1 ip chỉ được tính 2 view thôi
         if ($views < 2 ) {
 
             $views++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);
 
-            //Lấy country truy cập hệ thống ở đây
             $country = $request->header('CF-IPCountry');
-
-
-            //Tăng view cho video
 
             $video = $this->videoRepo->findVideoBySlug($slug);
             if (!$video){
                 return response()->json(['status' => 'fail']);
             }
+            $userKey = "user_views:{$today}:{$video->user_id}";
             $watchingUserKey ="watching_users:{$video->user_id}";
             $totalViewKey = "total:{$today}:{$video->user_id}:{$country}";
             $keyWithCountry = "country_video_views:{$video->id}:{$video->user_id}:{$country}";
             $key = "video_views:{$video->id}:{$video->user_id}";
-            //Todo: nếu bật kiếm tiền
-            $totalImpression = "total_impression:{$video->user_id}:{$country}";
+            $data_setting = $this->accountRepo->getSetting($video->user_id);
+            if ($data_setting->earningModes == 1){
+                $totalImpression1 = "total_impression1:{$video->user_id}:{$country}";
+                $keyWithCountryImpression1 = "country_video_impression1:{$video->id}:{$video->user_id}:{$country}";
+                $keyImpression1 = "video_impression1:{$video->id}:{$video->user_id}";
+                Redis::incr($keyImpression1);
+                Redis::incr($keyWithCountryImpression1);
+                Redis::incr($totalImpression1);
+            }
+            if ($data_setting->earningModes == 2){
+                $totalImpression2 = "total_impression2:{$video->user_id}:{$country}";
+                $keyWithCountryImpression2 = "country_video_impression2:{$video->id}:{$video->user_id}:{$country}";
+                $keyImpression2 = "video_impression2:{$video->id}:{$video->user_id}";
+                Redis::incr($keyImpression2);
+                Redis::incr($keyWithCountryImpression2);
+                Redis::incr($totalImpression2);
+            }
 
             Redis::incr($key);
             Redis::incr($keyWithCountry);
             Redis::incr($totalViewKey);
             Redis::incr($watchingUserKey);
+            Redis::incr($userKey);
             return response()->json(['status' => 'success']);
         }
         return response()->json(['status' => 'fail']);

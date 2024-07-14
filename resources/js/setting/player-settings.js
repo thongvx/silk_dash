@@ -36,3 +36,31 @@ $(document).on('submit', '#form-player-setting', function (e) {
         }
     });
 })
+$(document).on('click', '[btn-get-keyApi]', function() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/retryKeyApi',
+        success: function(response) {
+            $('#key_api').val(response.keyApi);
+            const div_notification = `<div class="justify-center w-full text-green-400 mt-2 items-center flex" id="noti-warning">
+                                                <i class="material-symbols-outlined mr-2">done</i>
+                                                Token regenerated successfully!
+                                            </div>`
+            $('#box-key-api').after(div_notification);
+            setInterval(function() {
+                $('#noti-warning').remove();
+            }, 2000);
+        },
+        error: function(response) {
+            const div_notification = `<div class="justify-center w-full text-red-400 mt-2 items-center flex" id="noti-warning">
+                                        <i class="material-symbols-outlined mr-2">error</i>
+                                        Token regenerated failed!
+                                    </div>`
+            $('#box-key-api').before(div_notification);
+            setInterval(function() {
+                $('#noti-warning').remove();
+            }, 2000);
+        }
+    });
+})

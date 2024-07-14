@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Dashboard\VideoController;
+use Carbon\Carbon;
 
 
 class HomeAdminController extends Controller
@@ -18,7 +19,8 @@ class HomeAdminController extends Controller
         $this->videoController = $videoController;
     }
     public function index(){
-        $keys = redis::keys("total:*");
+        $today = Carbon::today()->format('Y-m-d');
+        $keys = redis::keys("total:{$today}:*");
         $totalWatching = 0 ;
         $earningToday = 0;
         $countryViewsKeys = Redis::keys("user:*:country_views");

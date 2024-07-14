@@ -1,4 +1,4 @@
-import {notification, updateOriginalFormState} from "../main.js";
+import {add_notification, updateOriginalFormState} from "../main.js";
 
 $(document).on('submit', '#ticket-form', function(e) {
     e.preventDefault();
@@ -11,12 +11,9 @@ $(document).on('submit', '#ticket-form', function(e) {
         processData: false,
         contentType: false,
         success: function(response) {
-            notification('success', 'Setting successfully');
-            button.removeClass('bg-blue-400 hover:bg-blue-700')
-            button.addClass('bg-[#142132]')
-            button.attr('disabled', 'disabled');
+            const message = 'Created successfully!';
+            add_notification('success',message, button);
             updateOriginalFormState();
-            $('[btn-delete-selected]').addClass('hidden');
             $(form).find('input[type="file"]').val('');
         },
         error: function(response) {
@@ -26,7 +23,6 @@ $(document).on('submit', '#ticket-form', function(e) {
 })
 
 $(document).on('click', '[btn-get-token]', function() {
-    const ab = 'jfhjkafshas'
 
     $.ajax({
         type: 'GET',
@@ -36,12 +32,24 @@ $(document).on('click', '[btn-get-token]', function() {
                     <button class="rounded-lg ml-3 hover:text-[#009fb2] cursor-pointer" btn-get-token>
                         <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
                     </button>` );
-            $('#key_api').val(response.token);
-            notification('success', 'Token regenerated successfully');
+            const div_notification = `<div class="justify-center w-full text-green-400 mt-2 items-center flex" id="noti-warning">
+                                                <i class="material-symbols-outlined mr-2">done</i>
+                                                Token regenerated successfully!
+                                            </div>`
+            $('#token').after(div_notification);
+            setInterval(function() {
+                $('#noti-warning').remove();
+            }, 2000);
         },
         error: function(response) {
-            console.log(response);
-            notification('error', 'Token regenerated failed')
+            const div_notification = `<div class="justify-center w-full text-red-400 mt-2 items-center flex" id="noti-warning">
+                                        <i class="material-symbols-outlined mr-2">error</i>
+                                        Token regenerated failed!
+                                    </div>`
+            $('#token').before(div_notification);
+            setInterval(function() {
+                $('#noti-warning').remove();
+            }, 2000);
         }
     });
 })

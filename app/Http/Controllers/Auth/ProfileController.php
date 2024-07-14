@@ -88,10 +88,16 @@ class ProfileController extends Controller
 
         // Tạo một token mới
         $newToken = $user->createToken('api-token', ['*'])->plainTextToken;
-        $user->key_api = $newToken;
-        $user->save();
 
         return response()->json(['token' => $newToken]);
+    }
+
+    public function retryKeyApi(Request $request)
+    {
+        $user = Auth::user();
+        $user->key_api = bin2hex(random_bytes(8));
+        $user->save();
+        return response()->json(['keyApi' => $user->key_api]);
     }
 
     public function getUserInfo(Request $request)

@@ -62,6 +62,10 @@ Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
+
+Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
+
+
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
@@ -116,6 +120,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/updatesetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
 
     Route::get('/regenerateToken', [App\Http\Controllers\Auth\ProfileController::class, 'regenerateToken'])->name('regenerate.token');
+    Route::get('/retryKeyApi', [App\Http\Controllers\Auth\ProfileController::class, 'retryKeyApi'])->name('retryKeyApi');
+
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);

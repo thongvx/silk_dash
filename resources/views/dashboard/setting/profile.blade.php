@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-span-2 md:col-span-1 gap-4 ">
                     <h1 class="text-white text-2xl mb-3 ">API and FTP Credentials</h1>
-                    <div class="items-center flex">
+                    <div class="items-center flex" id="box-key-api">
                         <h5 class="text-stat w-40 mr-3">
                             API Key
                         </h5>
@@ -90,7 +90,7 @@
                             <input type="text" value="{{ Auth::user()->key_api }}" id="key_api"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                    placeholder="key_api" readonly>
-                            <div class="rounded-lg py-1 hover:text-[#009fb2] cursor-pointer" btn-get-token>
+                            <div class="rounded-lg py-1 hover:text-[#009fb2] cursor-pointer" btn-get-keyApi>
                                 <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
                             </div>
                         </div>
