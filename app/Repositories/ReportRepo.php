@@ -24,38 +24,19 @@ class ReportRepo extends BaseRepository
         if (isset($reportData)&&$reportData !== null) {
             return unserialize($reportData);
         }
-        switch ($tab) {
-            case 'date':
-                $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
-                    return $startDate->copy()->addDays($item)->format('Y-m-d');
-                });
-                $reportData = $this->query()->where('user_id', $userId)
-                    ->whereIn('date', $dates)
-                    ->selectRaw('date, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
-                    ->groupBy('date')
-                    ->orderBy('date', 'desc')
-                    ->get()
-                    ->keyBy('date');
-                $reportData = $dates->map(function($date) use ($reportData) {
-                    return $reportData->get($date, ['date' => $date, 'cpm' => 0, 'views' => 0, 'download' => 0, 'paid_views' => 0, 'vpn_ads_views' => 0, 'revenue' => 0]);
-                });
-                break;
-            default:
-                $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
-                    return $startDate->copy()->addDays($item)->format('Y-m-d');
-                });
-                $reportData = $this->query()->where('user_id', $userId)
-                    ->whereIn('date', $dates)
-                    ->selectRaw('date, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
-                    ->groupBy('date')
-                    ->orderBy('date', 'desc')
-                    ->get()
-                    ->keyBy('date');
-                $reportData = $dates->map(function($date) use ($reportData) {
-                    return $reportData->get($date, ['date' => $date, 'cpm' => 0, 'views' => 0, 'download' => 0, 'paid_views' => 0, 'vpn_ads_views' => 0, 'revenue' => 0]);
-                });
-                break;
-        }
+        $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
+            return $startDate->copy()->addDays($item)->format('Y-m-d');
+        });
+        $reportData = $this->query()->where('user_id', $userId)
+            ->whereIn('date', $dates)
+            ->selectRaw('date, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
+            ->groupBy('date')
+            ->orderBy('date', 'desc')
+            ->get()
+            ->keyBy('date');
+        $reportData = $dates->map(function($date) use ($reportData) {
+            return $reportData->get($date, ['date' => $date, 'cpm' => 0, 'views' => 0, 'download' => 0, 'paid_views' => 0, 'vpn_ads_views' => 0, 'revenue' => 0]);
+        });
         Redis::setex($reportDatakey, 86400, serialize($reportData));
         return $reportData;
     }
