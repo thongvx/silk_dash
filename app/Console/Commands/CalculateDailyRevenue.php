@@ -139,7 +139,7 @@ class CalculateDailyRevenue extends Command
                 $data_country_statistics = [];
             }
         }
-
+        Redis::del("total_country_views:{$today}");
         $this->info('Daily revenue calculated successfully.');
 
         return 0;
