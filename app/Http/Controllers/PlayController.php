@@ -132,15 +132,4 @@ class PlayController
         }
         return view('directPlay', $data);
     }
-    function embedPage($slug)
-    {
-        $video = $this->videoRepo->findVideoBySlug($slug);
-        $data['userID'] = $video->user_id;
-        $data['accountSetting'] = $this->accountRepo->getSetting($video->user_id);
-        if($data['accountSetting']->embed_page == 1){
-            return response()->view('errors.404', [], 404);
-        } else{
-            return $this->play($slug);
-        }
-    }
 }

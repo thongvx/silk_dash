@@ -56,8 +56,6 @@ Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::c
 
 Route::get('/t/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 
-Route::get('/e/{slug}', [\App\Http\Controllers\PlayController::class, 'embedPage'])->name('eplay');
-
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
@@ -127,7 +125,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
 
     //embed play
-    Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('ePlay');
+    Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('vPlay');
     Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('download');
 });
 
