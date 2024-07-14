@@ -58,8 +58,8 @@
         <div class="z-10 pb-3 bg-[#142132] px-4 py-2 rounded-xl">
             <h1 class="text-3xl">API Documentation</h1>
             <span id="token" class=" flex items-center">
-                    API Token: {{ Auth::user()->key_api}}
-                    @if(Auth::user()->key_api)
+                    API Token: {{ Auth::user()->token }}
+                    @if(Auth::user()->token)
                         <button class="rounded-lg hover:text-[#009fb2] cursor-pointer ml-3" btn-get-token>
                                 <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
                             </button>

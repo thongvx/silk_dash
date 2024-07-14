@@ -31,9 +31,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'storage',
         'last_upload',
         'encoder_priority',
+        'usdt_address',
+        'network',
+        'token',
         'key_api',
         'updated_at',
         'created_at',
+
     ];
 
     /**

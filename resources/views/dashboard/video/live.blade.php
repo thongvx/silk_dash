@@ -45,7 +45,7 @@
                 </div>
                 <div class="flex ">
                     <button type="button" class="hover:bg-[#009FB2] rounded-lg flex items-center px-2 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"
-                            title="poster"  btn-poster>
+                            title="Poster"  btn-poster>
                         {!!
                             request() -> get('poster')
                             ? '<i class="material-symbols-outlined opacity-1 text-lg md:mr-1.5">visibility_off</i><span class="hidden sm:block">hide poster</span>'
@@ -53,20 +53,20 @@
                         !!}
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"
-                            title="edit">
+                            title="Edit File">
                         <i btn-edit class="material-symbols-outlined opacity-1 text-3xl">edit_square</i>
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"
-                            title="delete">
+                            title="Delete File">
                         <i btn-delete class="material-symbols-outlined opacity-1 text-3xl">delete</i>
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"
-                            title="export">
+                            title="Export File">
                         <i btn-export
                            class="material-symbols-outlined opacity-1 text-3xl">ios_share</i>
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"
-                            title="folder">
+                            title="Move File">
                         <i btn-move
                            class="material-symbols-outlined opacity-1 text-3xl">folder_open</i>
                     </button>
