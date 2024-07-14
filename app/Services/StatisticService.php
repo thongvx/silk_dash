@@ -31,8 +31,8 @@ class StatisticService
     public static function calculateValue($userId, $earning)
     {
         $today = Carbon::today()->format('Y-m-d');
-        $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
-        $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
+        $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
+        $totalImpression2 = Redis::keys("total_impression2:{$today}:{$userId}:*");
         $result = [];
         $allCountries = self::getAllCountries();
         if($totalImpression1){

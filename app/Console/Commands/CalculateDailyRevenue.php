@@ -36,7 +36,7 @@ class CalculateDailyRevenue extends Command
         // Lấy ngày hiện tại
         $today = Carbon::yesterday()->format('Y-m-d');
 
-        $alluserKeys = Redis::keys("user:{$today}:*");
+        $alluserKeys = Redis::keys("total_user_views:{$today}:*");
 
         // Duyệt qua từng dòng dữ liệu và thêm vào bảng report_data
         $batchSize = 20; // Số lượng dòng dữ liệu trong mỗi lô
@@ -47,8 +47,8 @@ class CalculateDailyRevenue extends Command
             $userId = $parts[1];
             $views = Redis::get($userKey) ?: 0;
             $totalImpressionViews = 0;
-            $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
-            $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
+            $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
+            $totalImpression2 = Redis::keys("total_impression2:{$today}:{$userId}:*");
             if($totalImpression1){
                 foreach ($totalImpression1 as $totalImpression1Key) {
                     // Lấy số lượt xem của user từ khóa
@@ -108,8 +108,8 @@ class CalculateDailyRevenue extends Command
             $countryViews = $countryViews ?: 0;
             $user_id = explode(':', $key)[1];
             $countryCode = explode(':', $key)[2];
-            $totalImpression1Views = Redis::get("total_impression1:{$user_id}:$countryCode") ?: 0;
-            $totalImpression2Views = Redis::get("total_impression2:{$user_id}:$countryCode") ?: 0;
+            $totalImpression1Views = Redis::get("total_impression1:{$today}:{$user_id}:$countryCode") ?: 0;
+            $totalImpression2Views = Redis::get("total_impression2:{$today}:{$user_id}:$countryCode") ?: 0;
             $countryVpnAdsView = $countryViews - $paidView;
             $countryDownload = 0;
             $paidView = $totalImpression1Views+$totalImpression2Views + $countryDownload;
@@ -129,8 +129,8 @@ class CalculateDailyRevenue extends Command
                 'revenue' => $revenue,
             ];
             Redis::del($key);
-            Redis::del("total_impression1:{$user_id}:$countryCode");
-            Redis::del("total_impression2:{$user_id}:$countryCode");
+            Redis::del("total_impression1:{$today}:{$user_id}:$countryCode");
+            Redis::del("total_impression2:{$today}:{$user_id}:$countryCode");
             if (($index + 1) % $data_country_statistics_size === 0 || $index === count($countryViewsKeys) - 1) {
                 // Chèn lô dữ liệu hiện tại vào database
                 DB::table('country_statistics')->insert($data_country_statistics);

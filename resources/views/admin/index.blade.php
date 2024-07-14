@@ -77,7 +77,7 @@
               <div>
                 <h3 class='text-md text-slate-400'>Today’s Earning</h3>
                 <h5 class="mb-0 text-2xl text-white text-end">
-                  ${{ $todayEarning }}
+                  ${{ number_format($todayEarning,2) }}
                 </h5>
               </div>
             </div>
@@ -95,7 +95,7 @@
               <div>
                 <h3 class='text-md text-slate-400'>Total Balance</h3>
                 <h5 class="mb-0 text-2xl text-white text-end">
-                  $ {{ $totalBalance }}
+                  $ {{ number_format($totalBalance, 0) }}
                 </h5>
               </div>
             </div>
@@ -107,19 +107,24 @@
       <!-- cards row 2 -->
       <div class="flex flex-wrap mt-6 -mx-3">
         <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
-          <div class="border-black/12.5 bg-[#121520] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
-            <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-1">
-              <h6 class="text-[#009FB2] font-bold">Statistics</h6>
-              <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
-                <i class="fa fa-arrow-up text-[#009FB2]"></i>
-                <span class="font-semibold">4% more</span> in 2024
-              </p>
+            <div
+                class="border-black/12.5 bg-[#121520] shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
+                <div class="mb-0 rounded-t-2xl p-6 pt-4 pb-0 flex justify-between">
+                    <h6 class="text-[#009FB2] font-bold">
+                        <a href="/report?tab=date">Statistics</a>
+                    </h6>
+                    <div class="text-white">
+                        <button class="rounded-lg px-4 py-1 bg-[#009FB2] switchButton week"
+                                data-chart="week" data-date="{{ $dates['week'] }}">Week</button>
+                        <button class="rounded-lg px-4 py-1 bg-[#142132] switchButton"
+                                data-chart="month" data-date="{{ $dates['month'] }}">Month</button>
+                    </div>
+                </div>
+                <div class="h-80">
+                    <canvas id="chart-line"></canvas>
+                </div>
             </div>
-              <div class="h-80">
-                  <canvas id="chart-line"></canvas>
-              </div>
-            </div>
-          </div>
+        </div>
 
         <div class="w-full max-w-full px-3 lg:w-5/12 lg:flex-none">
           <div class="border-black/12.5 bg-[#121520] dark:shadow-dark-xl shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl
@@ -131,156 +136,27 @@
                 <div class="overflow-auto h-80">
                     <table class="items-center w-full align-top border-collapse border-gray-200">
                         <tbody>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user1
+                            @forelse( $topUsers as $user )
+                                <tr>
+                                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
+                                        <div class="flex items-center px-2 py-1">
+                                            <div class="text-white">
+                                                {{ $user['name'] }}
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user3
+                                    </td>
+                                    <td
+                                        class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                        <div class="flex-1 text-center">
+                                            <h6 class="mb-0 text-sm leading-normal dark:text-white">{{ $user['views'] }}</h6>
                                         </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user4
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user5
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user6
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user7
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user7
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user8
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user9
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                                    <div class="flex items-center px-2 py-1">
-                                        <div class="text-white">
-                                            user10
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                                    <div class="flex-1 text-center">
-                                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr class="my-3 h-12 text-white">
+                                    <td class="text-center" colspan="2">No data available in table</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -302,156 +178,22 @@
             <div class="overflow-auto h-80">
               <table class="items-center w-full mb-4 align-top border-collapse border-gray-200 overflow-hidden">
                 <tbody>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                      <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                    <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div class="text-white">
-                          sub-WAAA-135.mp4
-                        </div>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3400</h6>
-                      </div>
-                    </td>
-                  </tr>
+                    @forelse($topVideos as $video)
+                        <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] text-white">
+                            <td class="p-2  max-w-[4rem] truncate">
+                                <a href="{{route('play', $video['slug'])}}" target="_black" class="hover:text-[#009FB2] ">{{ $video['title'] }}</a>
+                            </td>
+                            <td class="p-2 text-center">
+                                {{ $video['views'] }}
+                            </td>
+                        </tr>
+                    @empty
+                        <tr class="my-3 h-12 text-white">
+                            <td class="text-center" colspan="2">No data available in table</td>
+                        </tr>
+                    @endforelse
+
+
                 </tbody>
               </table>
             </div>
@@ -464,139 +206,49 @@
             </div>
             <div class="overflow-auto h-80">
               <table class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
-                <tbody>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div>
-                          <img src="../assets/img/icons/flags/US.png" alt="Country flag" />
-                        </div>
-                        <div class="ml-6">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:
-                          </p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">United States</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">2500</h6>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">$230,900</h6>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">29.9%</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div>
-                          <img src="../assets/img/icons/flags/DE.png" alt="Country flag" />
-                        </div>
-                        <div class="ml-6">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:
-                          </p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Germany</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">3.900</h6>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">$440,000</h6>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">40.22%</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
-                      <div class="flex items-center px-2 py-1">
-                        <div>
-                          <img src="../assets/img/icons/flags/GB.png" alt="Country flag" />
-                        </div>
-                        <div class="ml-6">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Top Country:
-                          </p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Great Britain</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">1.400</h6>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">$190,700</h6>
-                      </div>
-                    </td>
-                    <td
-                      class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
-                      <div class="flex-1 text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">23.44%</h6>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="p-2 align-middle bg-transparent border-0 w-3/10 whitespace-nowrap">
-                      <div class="flex items-center px-2 py-1">
-                        <div>
-                          <img src="../assets/img/icons/flags/BR.png" alt="Country flag" />
-                        </div>
-                        <div class="ml-6">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:
-                          </p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Brasil</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">562</h6>
-                      </div>
-                    </td>
-                    <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
-                      <div class="text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">$143,960</h6>
-                      </div>
-                    </td>
-                    <td class="p-2 text-sm leading-normal align-middle bg-transparent border-0 whitespace-nowrap">
-                      <div class="flex-1 text-center">
-                        <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Bounce:</p>
-                        <h6 class="mb-0 text-sm leading-normal dark:text-white">32.14%</h6>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                  <thead class="bg-[#142132] transition-colors text-sm">
+                      <tr class="text-white">
+                          <th class="p-2 ">
+                              Country
+                          </th>
+                          <th class="p-2">
+                              Views
+                          </th>
+                          <th class="p-2">
+                              Bounce
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  @forelse ($topCountries as $country => $data)
+                      <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
+                          <td class="p-2">
+                              <div class="flex items-center px-2 py-1">
+                                  <div class="text-white">
+                                      {{ $data['country'] }}
+                                  </div>
+                              </div>
+                          </td>
+                          <td
+                              class="p-2">
+                              <div class="flex-1 text-center">
+                                  <h6 class="mb-0 text-sm leading-normal">{{ $data['views'] }}</h6>
+                              </div>
+                          </td>
+                          <td
+                              class="p-2">
+                              <div class="flex-1 text-center">
+                                  <h6 class="mb-0 text-sm leading-normal">{{ $data['percentage'] }}</h6>
+                              </div>
+                          </td>
+                      </tr>
+                  @empty
+                      <tr class="my-3 h-12 text-white">
+                          <td class="text-center" colspan="3">No data available in table</td>
+                      </tr>
+                  @endforelse
+
+                  </tbody>
               </table>
             </div>
           </div>
@@ -604,7 +256,7 @@
       </div>
     </div>
 @endsection
+
 @section('scripts')
     <script src="{{ asset('assets/js/chart/filechart.js') }}"></script>
 @endsection
-
