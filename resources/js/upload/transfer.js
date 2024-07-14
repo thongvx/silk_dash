@@ -152,21 +152,23 @@ setInterval(function() {
 //retry transfer
 $(document).on('click', '[button-retry]', function() {
     var slug = $(this).closest('.info-link').attr('id')
+    var button = $(this);
     $.ajax({
         url: '/retryTransfer',
         type: 'POST',
         data: {slug: slug},
         success: function(response) {
-            console.log(response);
+            const message = 'Transfer is retry successfully';
+            add_notification('success',message, button);
         },
         error: function(response) {
-            console.log(response);
+            const message = 'Transfer is retry failed';
+            add_notification('error',message, button);
         }
     });
 });
 $(document).on('click', '[button-remove]', function() {
     var slug = $(this).closest('.info-link').attr('id')
-
     $.ajax({
         url: '/removeTransfer',
         type: 'POST',
@@ -185,6 +187,11 @@ $(document).on('click', '[button-remove-failed]', function() {
         type: 'POST',
         success: function(response) {
             console.log(response);
+            $('.info-link').each(function(index) {
+                if($(this).find('.status').text() === 'Transfer Failed'){
+                    $(this).remove();
+                }
+            })
         },
         error: function(response) {
             console.log(response);
