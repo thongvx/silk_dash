@@ -38,7 +38,7 @@ class StatisticService
         if($totalImpression1){
             foreach ($totalImpression1 as $key) {
                 $totalViews = Redis::get($key);
-                $country = explode(':', $key)[2];
+                $country = explode(':', $key)[3];
 
                 $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
                 $revenue = ($totalViews / 1000) * $cpm;
@@ -50,7 +50,7 @@ class StatisticService
         if($totalImpression2){
             foreach ($totalImpression2 as $key) {
                 $totalViews = Redis::get($key);
-                $country = explode(':', $key)[2];
+                $country = explode(':', $key)[3];
 
                 $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
                 $revenue = ($totalViews / 1000) * $cpm;
