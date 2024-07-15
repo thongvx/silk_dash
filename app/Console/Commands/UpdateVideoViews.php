@@ -110,57 +110,57 @@ class UpdateVideoViews extends Command
     }
 
    public function upsertView($upsertData)
-{
-    // Enable query log
-    DB::enableQueryLog();
+   {
+        // Enable query log
+        DB::enableQueryLog();
 
 
-    // Your existing code to construct and execute the insert query
-    $query = "INSERT INTO video_views (video_id, user_id, date, views) VALUES ";
+        // Your existing code to construct and execute the insert query
+        $query = "INSERT INTO video_views (video_id, user_id, date, views) VALUES ";
 
-    $values = [];
-    $cases = [];
-    $ids = [];
-    $pr = [];
-    foreach ($upsertData as $data) {
-        $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
-        $cases[] = "WHEN ? THEN ?";
-        $pr[] = $data['video_id'];
-        $pr[] = $data['views'];
-        $ids[] = $data['video_id'];
-        var_dump('video id: ' . $data['video_id'].' views: '.$data['views']);
+        $values = [];
+        $cases = [];
+        $ids = [];
+        $pr = [];
+        foreach ($upsertData as $data) {
+            $values[] = "('{$data['video_id']}', '{$data['user_id']}', '{$data['date']}', '{$data['views']}')";
+            $cases[] = "WHEN ? THEN ?";
+            $pr[] = $data['video_id'];
+            $pr[] = $data['views'];
+            $ids[] = $data['video_id'];
+            var_dump('video id: ' . $data['video_id'].' views: '.$data['views']);
+        }
+
+        $query .= implode(', ', $values);
+        $query .= " ON DUPLICATE KEY UPDATE views = views + VALUES(views)";
+
+        // Execute the insert query
+        DB::statement($query);
+
+        // Log the insert query
+        $log = DB::getQueryLog();
+        $this->info('Insert Query: ' . json_encode(end($log)));
+
+        // Clear query log to prevent memory issues
+        DB::flushQueryLog();
+
+        // Your existing code to construct and execute the update query
+        $ids = implode(',', $ids);
+        $cases = implode(' ', $cases);
+        $query = "UPDATE `videos` SET `total_play` = `total_play` + CASE `id` {$cases} END WHERE `id` in ({$ids})";
+
+        // Enable query log again for the update query
+        DB::enableQueryLog();
+
+        // Execute the update query
+        DB::update($query, $pr);
+
+        // Log the update query
+        $log = DB::getQueryLog();
+        $this->info('Update Query: ' . json_encode(end($log)));
+
+        // Clear query log again
+        DB::flushQueryLog();
     }
-
-    $query .= implode(', ', $values);
-    $query .= " ON DUPLICATE KEY UPDATE views = views + VALUES(views)";
-
-    // Execute the insert query
-    DB::statement($query);
-
-    // Log the insert query
-    $log = DB::getQueryLog();
-    $this->info('Insert Query: ' . json_encode(end($log)));
-
-    // Clear query log to prevent memory issues
-    DB::flushQueryLog();
-
-    // Your existing code to construct and execute the update query
-    $ids = implode(',', $ids);
-    $cases = implode(' ', $cases);
-    $query = "UPDATE `videos` SET `total_play` = `total_play` + CASE `id` {$cases} END WHERE `id` in ({$ids})";
-
-    // Enable query log again for the update query
-    DB::enableQueryLog();
-
-    // Execute the update query
-    DB::update($query, $pr);
-
-    // Log the update query
-    $log = DB::getQueryLog();
-    $this->info('Update Query: ' . json_encode(end($log)));
-
-    // Clear query log again
-    DB::flushQueryLog();
-}
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Factories\DownloadFactory;
 use App\Jobs\CreatStorageJob;
+use App\Jobs\DeleteVideoEncoder;
 use App\Models\EncoderTask;
 use App\Models\SvStorage;
 use App\Models\Video;
@@ -45,6 +46,7 @@ class StorageController
             $dataVideo->$selectQuality = $encoderTaskInfo['path'];
             $dataVideo->origin = 1;
             $dataVideo->save();
+            Queue::push(new DeleteVideoEncoder($data->slug, $data->sv_upload, $data->quality));
         }
     }
 
