@@ -106,13 +106,7 @@ class ReportController extends Controller
     {
         if($date == 'today'){
             $data_today = [];
-            $totalViews = 0;
-            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
-            foreach ($countryViewsKeys as $key) {
-                $views = Redis::get($key);
-                $totalViews += $views;
-            }
-            $totalViews = intval($totalViews);
+            $totalViews = Redis::get("total_user_views:{$date}:{$userId}") ?? 0;
             $totalImpressionViews = 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:{$userId}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:{$userId}:*");

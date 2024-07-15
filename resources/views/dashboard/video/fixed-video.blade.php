@@ -42,7 +42,7 @@
                                 <div id="EmbedLink" class="tab-content-export">
                                     <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
                                 </div>
-                                <div id="Embedcode" class="tab-content-export hidden">
+                                <div id="Embedcode" class="tab-content-export hidden" data-height="{{ $iframeHeight }}" data-width="{{ $iframeWidth }}">
                                     <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"> </textarea>
                                 </div>
                                 <div id="Download" class="tab-content-export hidden">

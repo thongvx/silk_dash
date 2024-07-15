@@ -48,15 +48,10 @@ class CalculateDailyRevenue extends Command
         // Duyệt qua từng dòng dữ liệu và thêm vào bảng report_data
         $batchSize = 20; // Số lượng dòng dữ liệu trong mỗi lô
         $batchData = []; // Mảng chứa dữ liệu của lô hiện tại
-        $totalViews = 0;
-        foreach ($alluserKeys as $key) {
-            $views = Redis::get($key);
-            $totalViews += $views;
-        }
-        $totalViews = intval($totalViews);
         foreach ($alluserKeys as $index => $userKey) {
             $parts = explode(':', $userKey);
             $userId = $parts[2];
+            $totalViews = Redis::get($userKey) ?? 0;
             $totalImpressionViews = 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today}:{$userId}:*");

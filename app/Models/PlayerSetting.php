@@ -45,6 +45,7 @@ class PlayerSetting extends Model
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
             $model->deleteCachePlayer();
+
         });
 
         static::deleted(function ($model) {

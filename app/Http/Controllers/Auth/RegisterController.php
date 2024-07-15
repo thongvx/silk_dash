@@ -92,7 +92,7 @@ class RegisterController extends Controller
         ]);
         AccountSetting::create([
             'user_id' => $user->id,
-            'earningModes' => 1,
+            'earningModes' => 2,
             'videoType' => 1,
             'adblock' => 0,
             'showTitle' => 0,
