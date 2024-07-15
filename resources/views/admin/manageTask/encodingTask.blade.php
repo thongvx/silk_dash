@@ -149,13 +149,14 @@
                                         default:
                                             $text = 'text-teal-500';
                                     }
+                                    $size = $encoder->size;
                                 @endphp
-                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] {{ $text }}">
-                                    <td class="pl-2">{{ $encoder->id }}</td>
+                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
+                                    <td class="pl-2 {{ $text }}">{{ $encoder->id }}</td>
                                     <td class="pl-2">{{ $encoder->user_id }}</td>
-                                    <td class="pl-2">{{ $encoder->slug }}</td>
+                                    <td class="pl-2 {{ $text }}">{{ $encoder->slug }}</td>
                                     <td class="pl-2">{{ $encoder->quality }}</td>
-                                    <td class="pl-2">{{ $encoder->size }}</td>
+                                    <td class="pl-2">{{ $size }}</td>
                                     <td class="pl-2">{{ $encoder->status }}</td>
                                     <td class="pl-2">{{ $encoder->priority }}</td>
                                     <td class="pl-2">{{ $encoder->sv_upload }}</td>
