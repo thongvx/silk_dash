@@ -48,11 +48,15 @@ class CalculateDailyRevenue extends Command
         // Duyệt qua từng dòng dữ liệu và thêm vào bảng report_data
         $batchSize = 20; // Số lượng dòng dữ liệu trong mỗi lô
         $batchData = []; // Mảng chứa dữ liệu của lô hiện tại
-
+        $totalViews = 0;
+        foreach ($alluserKeys as $key) {
+            $views = Redis::get($key);
+            $totalViews += $views;
+        }
+        $totalViews = intval($totalViews);
         foreach ($alluserKeys as $index => $userKey) {
             $parts = explode(':', $userKey);
             $userId = $parts[2];
-            $views = Redis::get($userKey) ?: 0;
             $totalImpressionViews = 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today}:{$userId}:*");
@@ -82,12 +86,12 @@ class CalculateDailyRevenue extends Command
 
             $download = 0;
             $paidView = $totalImpressionViews + $download;
-            $vpnAdsView = $views - $paidView;
+            $vpnAdsView = $totalViews - $paidView;
 
             $cpm = $paidView>0 ? $value / $paidView * 1000 : 0;
             $batchData[] = [
                 'user_id' => $userId,
-                'views' => $views,
+                'views' => $totalViews,
                 'date' => $today,
                 'cpm' => $cpm,
                 'vpn_ads_views' => $vpnAdsView,
@@ -124,7 +128,8 @@ class CalculateDailyRevenue extends Command
             // lay trang thai earning
             if ($data_setting->earningModes == 1) $earning = 0.5;
             if ($data_setting->earningModes == 2) $earning = 1;
-            $revenue =  StatisticService::calculateValue($user_id, $earning)[$countryCode];
+            $revenueArray =  StatisticService::calculateValue($user_id, $earning);
+            $revenue = $revenueArray[$countryCode];
             $countryVpnAdsView = $countryViews - $paidView;
             // Tạo mới dữ liệu trong bảng country_statistics
             $data_country_statistics[] = [
