@@ -51,7 +51,8 @@ class CalculateDailyRevenue extends Command
 
         foreach ($alluserKeys as $index => $userKey) {
             $parts = explode(':', $userKey);
-            $userId = $parts[1];
+            $userId = $parts[2];
+            echo $userId;
             $views = Redis::get($userKey) ?: 0;
             $totalImpressionViews = 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
