@@ -231,13 +231,13 @@
                           </td>
                           <td
                               class="p-2">
-                              <div class="flex-1 text-center">
+                              <div class="flex-1 text-center text-white">
                                   <h6 class="mb-0 text-sm leading-normal">{{ $data['views'] }}</h6>
                               </div>
                           </td>
                           <td
                               class="p-2">
-                              <div class="flex-1 text-center">
+                              <div class="flex-1 text-center text-white">
                                   <h6 class="mb-0 text-sm leading-normal">{{ $data['percentage'] }}</h6>
                               </div>
                           </td>
