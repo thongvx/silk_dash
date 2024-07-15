@@ -28,10 +28,14 @@ $(document).on('click', '[btn-get-token]', function() {
         type: 'GET',
         url: '/regenerateToken',
         success: function(response) {
-            $('#token').html(`Token: ${response.token}
-                    <button class="rounded-lg ml-3 hover:text-[#009fb2] cursor-pointer" btn-get-token>
-                        <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
-                    </button>` );
+            $('#token').html(`<div class="relative flex">
+                                    <h5 class="text-clipboard">API Token: ${response.token}</h5>
+                                    <i class="material-symbols-outlined ml-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
+                                </div>
+                                <button class="rounded-lg ml-3 hover:text-[#009fb2] cursor-pointer" btn-get-token>
+                                    <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
+                                </button>` );
+            $('#token').addClass('justify-between')
             const div_notification = `<div class="justify-center w-full text-green-400 mt-2 items-center flex" id="noti-warning">
                                                 <i class="material-symbols-outlined mr-2">done</i>
                                                 Token regenerated successfully!
@@ -46,7 +50,7 @@ $(document).on('click', '[btn-get-token]', function() {
                                         <i class="material-symbols-outlined mr-2">error</i>
                                         Token regenerated failed!
                                     </div>`
-            $('#token').before(div_notification);
+            $('#token').after(div_notification);
             setInterval(function() {
                 $('#noti-warning').remove();
             }, 2000);

@@ -55,18 +55,21 @@
     </div>
     <script>hljs.highlightAll();</script>
     <div class="col-start-5 col-span-4 lg:col-span-3 pb-10 overflow-auto  max-h-[calc(100vh-14em)] scroll-smooth">
-        <div class="z-10 pb-3 bg-[#142132] px-4 py-2 rounded-xl">
+        <div class="z-10 pb-3 bg-[#142132] px-4 py-2 rounded-xl" id="box-title-api">
             <h1 class="text-3xl">API Documentation</h1>
-            <span id="token" class=" flex items-center">
-                    API Token: {{ Auth::user()->token }}
-                    @if(Auth::user()->token)
-                        <button class="rounded-lg hover:text-[#009fb2] cursor-pointer ml-3" btn-get-token>
-                                <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
-                            </button>
-                    @else
-                        <button class="ml-3 rounded-lg px-3 py-1 bg-[#009fb2]/50 hover:bg-[#009fb2]" btn-get-token>Get token</button>
-                    @endif
-                </span>
+            <div id="token" class=" flex items-center {{ Auth::user()->token ? 'justify-between' : '' }}">
+                <div class="relative flex">
+                    <h5 class="text-clipboard">API Token: {{ Auth::user()->token }}</h5>
+                    <i class="material-symbols-outlined ml-4 cursor-pointer hover:text-blue-500 text-md  {{ Auth::user()->token ? '' : 'hidden' }}" clipboard-copy>content_copy</i>
+                </div>
+                @if(Auth::user()->token)
+                    <button class="rounded-lg hover:text-[#009fb2] cursor-pointer ml-3" btn-get-token>
+                        <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
+                    </button>
+                @else
+                    <button class="ml-3 rounded-lg px-3 py-1 bg-[#009fb2]/50 hover:bg-[#009fb2]" btn-get-token>Get token</button>
+                @endif
+            </div>
         </div>
         <div class="mt-4">
             <div id="account_info" class="mb-10">

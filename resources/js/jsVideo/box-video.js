@@ -181,17 +181,24 @@ $(document).on('click', '[btn-export]', function() {
     fixedBox()
     $('#export').toggle("hidden");
     $('#export textarea').val('')
+    const iframeHeight = $('#Embedcode').data('height');
+    const iframeWidth = $('#Embedcode').data('width');
     const rows = checkAll()
     rows.map((index, row) => {
         const tr = row.closest('tr');
         $('#EmbedLink textarea').val(
             $('#EmbedLink textarea').val() +
-            'https://streamsilk.com/t/'+
+            'https://streamsilk.com/p/'+
             $(tr).find('.videoID').text()+'\n'
         );
         $('#Embedcode textarea').val(
             $('#Embedcode textarea').val() +
-            `<iframe src="https://streamsilk.com/t/${$(tr).find('.videoID').text()}" width="800" height="600" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>`+'\n'
+            `<iframe src="https://streamsilk.com/p/${$(tr).find('.videoID').text()}" width="${iframeWidth}" height="${iframeHeight}" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>`+'\n'
+        );
+        $('#Download textarea').val(
+            $('#Download textarea').val() +
+            'https://streamsilk.com/d/'+
+            $(tr).find('.videoID').text()+'\n'
         );
     })
 });

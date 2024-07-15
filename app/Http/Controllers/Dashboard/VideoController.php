@@ -9,21 +9,25 @@ use App\Repositories\EncoderTaskRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redis;
+use App\Repositories\PlayerSettingsRepo;
 use App\Http\Controllers\Dashboard\UploadController;
 
 
 class VideoController
 {
-    protected $videoRepo, $folderRepo, $encoderTaskRepo, $notificationService, $uploadController;
+    protected $videoRepo, $folderRepo, $encoderTaskRepo, $notificationService, $uploadController, $playerSettingsRepo;
 
     public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo,
-                                NotificationService $notificationService, UploadController $uploadController)
+                                NotificationService $notificationService, UploadController $uploadController,
+                                PlayerSettingsRepo $playerSettingsRepo)
     {
         $this->videoRepo = $videoRepo;
         $this->folderRepo = $folderRepo;
         $this->encoderTaskRepo = $encoderTaskRepo;
         $this->notificationService = $notificationService;
         $this->uploadController = $uploadController;
+        $this->playerSettingsRepo = $playerSettingsRepo;
     }
 
     // Get video data
@@ -33,6 +37,16 @@ class VideoController
         $folderId = $request->get('folderId');
         $folders = $this->folderRepo->getAllFolders($user->id);
         $folderId = $folderId ?? $folders->last()->id;
+        $playerSettings = $this->playerSettingsRepo->getAllPlayerSettings($user->id);
+        if ($playerSettings !== null) {
+            $iframeHeight = $playerSettings->embed_height;
+            $iframeWidth = $playerSettings->embed_width;
+        } else {
+            $iframeHeight = '800';
+            $iframeWidth = '600';
+        }
+
+
         $data = [
             'title' => 'Video',
             'folders' => $folders,
@@ -41,6 +55,8 @@ class VideoController
             'column' => $request->input('column', 'created_at'),
             'videos' => $this->getVideos($request, $user->id, $folderId),
             'poster' => $request->input('poster'),
+            'iframeHeight' => $iframeHeight,
+            'iframeWidth' => $iframeWidth,
         ];
 
         $this->convertVideoSizes($data['videos']);

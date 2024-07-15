@@ -290,9 +290,24 @@ $(document).on('click', function (e) {
 $(document).on('click', '[clipboard-copy]', function() {
     var div = $(this).closest('div').find('.text-clipboard');
     var text = $(div)[0].innerText;
+    const div_add_notification = $(this).closest('div');
     navigator.clipboard.writeText(text).then(function() {
-        notification('success', 'Copied to clipboard');
+        const div_notification = `<div class="justify-center w-full text-green-400 mt-2 items-center flex" id="noti-warning">
+                                                <i class="material-symbols-outlined mr-2">done</i>
+                                                Copied to clipboard!
+                                            </div>`
+        const notificationContainer = $(div_add_notification).after(div_notification).next();
+        setInterval(function() {
+            notificationContainer.remove();
+        }, 1500);
     }, function(err) {
-        notification('error', 'Failed to copy to clipboard');
+        const div_notification = `<div class="justify-center w-full text-green-400 mt-2 items-center flex" id="noti-warning">
+                                                <i class="material-symbols-outlined mr-2">error</i>
+                                                Failed to copy to clipboard!
+                                            </div>`
+        const notificationContainer = $(div_add_notification).after(div_notification).next();
+        setInterval(function() {
+            notificationContainer.remove();
+        }, 1500);
     });
 });

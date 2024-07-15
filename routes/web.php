@@ -54,7 +54,7 @@ Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class
 Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
 Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoStream']);
 
-Route::get('/t/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
+Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
@@ -156,6 +156,6 @@ Route::prefix('statistic')->group(function () {
 });
 
 Route::get('/test', function () {
-    return  '<iframe src="https://streamsilk.com/t/668bece206536" width="800" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="true"></iframe>';
+    return  '<iframe src="https://streamsilk.com/p/668bece206536" width="800" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="true"></iframe>';
 });
 
