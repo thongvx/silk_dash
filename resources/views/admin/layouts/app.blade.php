@@ -27,6 +27,9 @@
     <!-- end cards -->
 </main>
 @include('admin.components.footer')
+<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+<script src="{{ asset('assets/js/select2/select2.min.js') }}"></script>
 @vite('resources/js/admin/admin.js')
 @yield('scripts')
 </body>

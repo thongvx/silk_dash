@@ -114,8 +114,8 @@ class ReportController extends Controller
             }
             $totalViews = intval($totalViews);
             $totalImpressionViews = 0;
-            $totalImpression1 = Redis::keys("total_impression1:{$userId}:*");
-            $totalImpression2 = Redis::keys("total_impression2:{$userId}:*");
+            $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:{$userId}:*");
+            $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:{$userId}:*");
             foreach ($totalImpression1 as $totalImpression1Key) {
                 // Lấy số lượt xem của user từ khóa
                 $views = Redis::get($totalImpression1Key);
@@ -170,8 +170,8 @@ class ReportController extends Controller
                 $getCountry = $indexedCountries->get($countryCode);
 
                 if ($getCountry) {
-                    $totalImpression1Views = Redis::get("total_impression1:{$userId}:$countryCode") ?: 0;
-                    $totalImpression2Views = Redis::get("total_impression2:{$userId}:$countryCode") ?: 0;
+                    $totalImpression1Views = Redis::get("total_impression1:{$today->format('Y-m-d')}:{$userId}:$countryCode") ?: 0;
+                    $totalImpression2Views = Redis::get("total_impression2:{$today->format('Y-m-d')}:{$userId}:$countryCode") ?: 0;
                     $country_name = $getCountry->name ?? $countryCode;
                     $revenue = $earningToday[$countryCode] ?? 0;
                     $paidView = $totalImpression1Views + $totalImpression2Views;

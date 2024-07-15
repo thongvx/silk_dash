@@ -24,7 +24,7 @@ class UserRepo
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
         switch ($tab){
             case 'unverified':
-                $query->where('active', null);
+                $query->where('active', [0, null]);
                 break;
             case 'delete':
                 $query->where('active', 19);
@@ -38,7 +38,7 @@ class UserRepo
                 $query->whereIn('premium', [1,2,3])->where('active','!=', 19);
                 break;
             case 'free':
-                $query->where('premium', null)->where('active','!=', 19);
+                $query->where('premium', 0)->where('active','!=', 19);
                 break;
             default:
                 break;

@@ -35,26 +35,19 @@ class VideoViewController
             if (!$video){
                 return response()->json(['status' => 'fail']);
             }
-            $userKey = "user_views:{$today}:{$video->user_id}";
+            $totalCountryKey = "total_country_views:{$today}";
+            $userKey = "total_user_views:{$today}:{$video->user_id}";
             $watchingUserKey ="watching_users:{$video->user_id}";
             $totalViewKey = "total:{$today}:{$video->user_id}:{$country}";
             $keyWithCountry = "country_video_views:{$video->id}:{$video->user_id}:{$country}";
             $key = "video_views:{$video->id}:{$video->user_id}";
             $data_setting = $this->accountRepo->getSetting($video->user_id);
             if ($data_setting->earningModes == 1){
-                $totalImpression1 = "total_impression1:{$video->user_id}:{$country}";
-                $keyWithCountryImpression1 = "country_video_impression1:{$video->id}:{$video->user_id}:{$country}";
-                $keyImpression1 = "video_impression1:{$video->id}:{$video->user_id}";
-                Redis::incr($keyImpression1);
-                Redis::incr($keyWithCountryImpression1);
+                $totalImpression1 = "total_impression1:{$today}:{$video->user_id}:{$country}";
                 Redis::incr($totalImpression1);
             }
             if ($data_setting->earningModes == 2){
-                $totalImpression2 = "total_impression2:{$video->user_id}:{$country}";
-                $keyWithCountryImpression2 = "country_video_impression2:{$video->id}:{$video->user_id}:{$country}";
-                $keyImpression2 = "video_impression2:{$video->id}:{$video->user_id}";
-                Redis::incr($keyImpression2);
-                Redis::incr($keyWithCountryImpression2);
+                $totalImpression2 = "total_impression2:{$today}:{$video->user_id}:{$country}";
                 Redis::incr($totalImpression2);
             }
 
@@ -63,6 +56,7 @@ class VideoViewController
             Redis::incr($totalViewKey);
             Redis::incr($watchingUserKey);
             Redis::incr($userKey);
+            Redis::zincrby($totalCountryKey, 1, $country);
             return response()->json(['status' => 'success']);
         }
         return response()->json(['status' => 'fail']);

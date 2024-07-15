@@ -3,7 +3,8 @@ import '../sidebar.js';
 import '../input-search.js'
 import '../notification.js';
 import '../control-datatable.js';
-import '../chart/charts.js';
+//Dashboard
+import './admin-dashboard.js';
 //user
 import './user.js';
 //manage Task
@@ -16,6 +17,9 @@ a_menu.filter(function () {
     const urlParams = new URLSearchParams(window.location.search);
     const urlTab = urlParams.get('tab');
     let tab = $(this).find('.tab-menu').attr('tab');
-    let indexTab = urlTab.indexOf(tab)
+    let indexTab = -1;
+    if(tab != null){
+        indexTab = tab.indexOf(urlTab);
+    }
     return indexTab >= 0
 }).addClass('bg-[#009FB2]')
