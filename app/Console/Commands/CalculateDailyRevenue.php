@@ -117,7 +117,6 @@ class CalculateDailyRevenue extends Command
             $countryCode = explode(':', $key)[3];
             $totalImpression1Views = Redis::get("total_impression1:{$today}:{$user_id}:$countryCode") ?: 0;
             $totalImpression2Views = Redis::get("total_impression2:{$today}:{$user_id}:$countryCode") ?: 0;
-            $countryVpnAdsView = $countryViews - $paidView;
             $countryDownload = 0;
             $paidView = $totalImpression1Views+$totalImpression2Views + $countryDownload;
             $data_setting = $this->accountRepo->getSetting($user_id);
@@ -126,6 +125,7 @@ class CalculateDailyRevenue extends Command
             if ($data_setting->earningModes == 1) $earning = 0.5;
             if ($data_setting->earningModes == 2) $earning = 1;
             $revenue =  StatisticService::calculateValue($user_id, $earning)[$countryCode];
+            $countryVpnAdsView = $countryViews - $paidView;
             // Tạo mới dữ liệu trong bảng country_statistics
             $data_country_statistics[] = [
                 'user_id' => $user_id,
