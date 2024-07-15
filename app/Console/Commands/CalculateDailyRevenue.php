@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
 use App\Repositories\AccountRepo;
 
+
 class CalculateDailyRevenue extends Command
 {
     /**
@@ -17,7 +18,12 @@ class CalculateDailyRevenue extends Command
      * @var string
      */
     protected $signature = 'revenue:calculate';
-    protected AccountRepo $accountRepo;
+    protected $accountRepo;
+
+    public function __construct(AccountRepo $accountRepo)
+    {
+        $this->accountRepo = $accountRepo;
+    }
     /**
      * The console command description.
      *
