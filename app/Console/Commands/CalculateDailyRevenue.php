@@ -129,7 +129,7 @@ class CalculateDailyRevenue extends Command
             if ($data_setting->earningModes == 1) $earning = 0.5;
             if ($data_setting->earningModes == 2) $earning = 1;
             $revenueArray =  StatisticService::calculateValue($user_id, $earning);
-            $revenue = $revenueArray[$countryCode];
+            $revenue = $revenueArray[$countryCode] ?? 0;
             $countryVpnAdsView = $countryViews - $paidView;
             // Tạo mới dữ liệu trong bảng country_statistics
             $data_country_statistics[] = [
