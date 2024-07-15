@@ -22,6 +22,7 @@ class CalculateDailyRevenue extends Command
 
     public function __construct(AccountRepo $accountRepo)
     {
+        parent::__construct();
         $this->accountRepo = $accountRepo;
     }
     /**
