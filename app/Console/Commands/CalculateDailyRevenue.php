@@ -65,6 +65,8 @@ class CalculateDailyRevenue extends Command
                     $totalImpressionViews += (int)$views;
                 }
             }
+            $data_setting = $this->accountRepo->getSetting($userId);
+            $earning = 0;
             // lay trang thai earning
             if ($data_setting->earningModes == 1) $earning = 0.5;
             if ($data_setting->earningModes == 2) $earning = 1;
@@ -113,6 +115,8 @@ class CalculateDailyRevenue extends Command
             $countryVpnAdsView = $countryViews - $paidView;
             $countryDownload = 0;
             $paidView = $totalImpression1Views+$totalImpression2Views + $countryDownload;
+            $data_setting = $this->accountRepo->getSetting($userId);
+            $earning = 0;
             // lay trang thai earning
             if ($data_setting->earningModes == 1) $earning = 0.5;
             if ($data_setting->earningModes == 2) $earning = 1;
