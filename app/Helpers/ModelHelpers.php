@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Http\Controllers\admin\ManageTaskController;
 use App\Http\Controllers\admin\ComputeController;
+use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Dashboard\Setting\AccountController;
 use App\Http\Controllers\Dashboard\Support\TicketController;
 use App\Http\Controllers\Dashboard\UploadController;
@@ -20,7 +21,7 @@ class ModelHelpers
 
     public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController,
                                 TicketController $TicketController, ManageTaskController $manageTaskController, ComputeController $computeController,
-                                ReportController $ReportController)
+                                ReportController $ReportController, StatisticController $statisticController)
     {
         $this->controllers = [
             'setting' => $AccountController,
@@ -29,7 +30,8 @@ class ModelHelpers
             'support' => $TicketController,
             'manageTask' => $manageTaskController,
             'compute' => $computeController,
-            'report' => $ReportController
+            'report' => $ReportController,
+            'statistic' => $statisticController
         ];
     }
     public function loadPage(Request $request){
@@ -46,6 +48,9 @@ class ModelHelpers
             switch ($page) {
                 case strpos($page, 'manageTask') !== false:
                     $data = $this->controllers['manageTask']->manageControler($request);
+                    return view($page.'.'.$tab, $data);
+                case strpos($page, 'statistic') !== false:
+                    $data = $this->controllers['statistic']->statisticControler($request);
                     return view($page.'.'.$tab, $data);
                 case strpos($page, 'compute') !== false:
                     $data = $this->controllers['compute']->computeControler($request);

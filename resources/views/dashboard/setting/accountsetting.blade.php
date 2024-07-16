@@ -38,22 +38,6 @@
                     <h1 class="text-white text-2xl mb-3 ">Access Settings</h1>
                     <div class="items-center flex">
                         <div class="mt-2">
-                            <input type="checkbox" id="blockDirect" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
-                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
-                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
-                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
-                                                         bg-left bg-no-repeat align-top transition-all after:absolute
-                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
-                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
-                                                         checked:bg-none checked:bg-right"
-                                   name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
-                            <label for="blockDirect" class="ml-3">
-                                Disable Direct Access
-                            </label>
-                        </div>
-                    </div>
-                    <div class="items-center mt-3 flex">
-                        <div class="mt-2">
                             <input name="disableDownload" id="disableDownload" type="checkbox"   class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
                                                          after:duration-200 checked:after:translate-x-5 h-5 relative
                                                          float-left mt-1 w-10 cursor-pointer appearance-none border
@@ -68,22 +52,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="items-center mt-3 flex">
-                        <div class="mt-2">
-                            <input type="checkbox" id="embed_page" name="embed_page" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
-                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
-                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
-                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
-                                                         bg-left bg-no-repeat align-top transition-all after:absolute
-                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
-                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
-                                                         checked:bg-none checked:bg-right"
-                                   value="{{$setting -> embed_page}}" {{$setting -> embed_page == 1 ? 'checked' : ''}} >
-                            <label for="embed_page" class="ml-3">
-                                Disable Video Embed Page
-                            </label>
-                        </div>
-                    </div>
+
                     <div class="items-center mt-3 flex">
                         <div class="mt-2">
                             <input type="checkbox" id="publicVideo"  name="publicVideo" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
@@ -113,6 +82,38 @@
                                    value="{{$setting -> adblock}}" {{$setting -> adblock == 1 ? 'checked' : ''}}>
                             <label for="adblock" class="ml-3">
                                 Disable Adblocker
+                            </label>
+                        </div>
+                    </div>
+                    <div class="items-center flex mt-3">
+                        <div class="mt-2">
+                            <input type="checkbox" id="blockDirect" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
+                                   name="blockDirect" value="{{$setting -> blockDirect}}"  {{$setting -> blockDirect == 1 ? 'checked' : ''}}>
+                            <label for="blockDirect" class="ml-3">
+                                Disable Direct Access
+                            </label>
+                        </div>
+                    </div>
+                    <div class="items-center mt-3 flex">
+                        <div class="mt-2">
+                            <input type="checkbox" id="embed_page" name="embed_page" class="rounded-xl duration-200 ease-in-out after:rounded-full after:shadow-2xl
+                                                         after:duration-200 checked:after:translate-x-5 h-5 relative
+                                                         float-left mt-1 w-10 cursor-pointer appearance-none border
+                                                         border-solid border-gray-200 bg-slate-800/10 bg-none bg-contain
+                                                         bg-left bg-no-repeat align-top transition-all after:absolute
+                                                         after:top-px after:h-4 after:w-4 after:translate-x-0.5 after:bg-white
+                                                         after:content-[''] checked:border-[#009FB2] checked:bg-[#009FB2]
+                                                         checked:bg-none checked:bg-right"
+                                   value="{{$setting -> embed_page}}" {{$setting -> embed_page == 1 ? 'checked' : ''}} >
+                            <label for="embed_page" class="ml-3">
+                                Disable Video Embed Page
                             </label>
                         </div>
                     </div>

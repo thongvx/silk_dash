@@ -34,67 +34,67 @@
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Website:</h5>
-                                            <h5 class="py-2">{{ !$users->website ? 0 : $users->website }}</h5>
+                                            <h5 class="py-2">{{ $users->website ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Skype:</h5>
-                                            <h5 class="py-2">{{ !$users->skype ? 0 : $users->skype }}</h5>
+                                            <h5 class="py-2">{{ $users->skype ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Telegram:</h5>
-                                            <h5 class="py-2">{{ !$users->telegram ? 0 : $users->telegram }}</h5>
+                                            <h5 class="py-2">{{ $users->telegram ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Support:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->support }}</h5>
+                                            <h5 class="py-2">{{ $users->support ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Dmca:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->dmca }}</h5>
+                                            <h5 class="py-2">{{ $users->dmca ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300  ">
                                                 Latest Upload:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->lastUpload }}</h5>
+                                            <h5 class="py-2">{{ $users->last_upload ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Uploaded:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->uploaded }}</h5>
+                                            <h5 class="py-2">{{ $users->uploaded ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Video:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->video }}</h5>
+                                            <h5 class="py-2">{{ $users->video ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Play:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->play }}</h5>
+                                            <h5 class="py-2">{{ $users->play ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Storage:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->storage }}</h5>
+                                            <h5 class="py-2">{{ $users->storage ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Domain:</h5>
-                                            <h5 class="py-2">{{ !$users->support ? 0 : $users->domain }}</h5>
+                                            <h5 class="py-2">{{ $settings->domain ?? 0 }}</h5>
                                         </div>
                                     </div>
                                 </div> <!--end-info-->
@@ -163,7 +163,7 @@
                                           <i class="fa fa-sign-in" aria-hidden="true"></i>
                                           Login As User
                                       </a>
-                                      <div class="hidden" onclick="delete()">
+                                      <div class="hidden">
                                           <i class="fa fa-ban" aria-hidden="true"></i>
                                           Delete
                                       </div>
@@ -174,33 +174,33 @@
                                     <form action="/setEarning" method="post" class="mt-3 bg-[#121520] rounded-lg p-3">
                                         <input name="userID" class="hidden" value="{{ $users->id }}">
                                         <fieldset class="">
-                                            <input name="earningMode" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                            <input name="earningMode" id="0" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                  checked:border-0 checked:border-transparent checked:after:opacity-100" type="radio"
+                                                value="0" {{ $settings -> earningModes == 0 ? 'checked' : '' }}>
+                                            <label for="0" class="ml-3">No Earning: 1 Popunder on pre-roll (per
+                                                page)</label>
+                                        </fieldset>
+                                        <fieldset class="mt-3">
+                                            <input name="earningMode"  id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100" type="radio"
                                                 value="1" {{ $settings -> earningModes == 1 ? 'checked' : '' }}>
-                                            <label for="radio_1" class="ml-3">No Earning: 1 Popunder on pre-roll (per
-                                                page)</label>
-                                        </fieldset>
-                                        <fieldset class="mt-3">
-                                            <input name="earningMode" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                  checked:border-0 checked:border-transparent checked:after:opacity-100" type="radio"
-                                                value="2" {{ $settings -> earningModes == 1 ? 'checked' : '' }}>
-                                            <label for="radio_2" class="ml-3">$1 per 10k views: 2 Popunders on
+                                            <label for="1" class="ml-3">$1 per 10k views: 2 Popunders on
                                                 pre-roll </label>
                                         </fieldset>
                                         <fieldset class="mt-3">
-                                            <input name="earningMode" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                            <input name="earningMode"  id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100" type="radio"
-                                                value="3" {{ $settings -> earningModes == 1 ? 'checked' : '' }}>
-                                            <label for="radio_3" class="ml-3">$2.5 per 10k views: 3 Popunders on
+                                                value="1" {{ $settings -> earningModes == 2 ? 'checked' : '' }}>
+                                            <label for="2" class="ml-3">$2.5 per 10k views: 3 Popunders on
                                                 pre-roll</label>
                                         </fieldset>
                                         <div class=" save text-center mt-3">
@@ -213,18 +213,18 @@
                                 </div>
                                 <div class="note mt-3 py-2">
                                     <h4 class="title text-teal-400 text-lg font-bold">Note</h4>
-                                    <textarea name="" id="noteUser" value="no"
+                                    <textarea name="note" id="noteUser" value="{{ $users->note ?? 0 }}"
                                         class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full">no</textarea>
-                                    <a href="{{ !$users->website ? 0 : $users->website }}/{{ $users->key_api }}-turboviplay.html" target="_black">
+                                    <a href="{{ $users->website ?? 0 }}/{{ $users->key_api }}-turboviplay.html" target="_black">
                                         <h5 class="text-warning">
-                                            {{ !$users->website ? 0 : $users->website }}/{{ $users->key_api }}-turboviplay.html</h5>
+                                            {{ $users->website ?? 0 }}/{{ $users->key_api }}-turboviplay.html</h5>
                                     </a>
                                 </div><!--end-note-->
                                 <div class="px-0 mt-3" id="send_mail">
-                                    <div class="modal-body px-0">
+                                    <form class="modal-body px-0">
                                         <h4 class="title text-teal-400 text-lg font-bold">Compose</h4>
                                         <div class="subject">
                                             <h5 class=" mb-2">Subject</h5>
@@ -252,15 +252,15 @@
                                                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
                                                  </label>
                                             </div>
-                                            <div class="bg-indigo-500 rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 w-max" id="send_reply"
-                                                onclick="reply(this)">
+                                            <div class="bg-indigo-500 rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 w-max" id="send_reply">
                                                 <h5 class="mb-0">Send</h5>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                                 <!-- end send mail -->
-                                <div class="setting mt-3 py-2">
+                                <form class="setting mt-3 py-2">
+                                    @csrf
                                     <h4 class="title text-teal-400 text-lg font-bold">Setting</h4>
                                     <div class="grid grid-cols-4 mb-5 gap-6">
                                         <div class="">
@@ -269,7 +269,7 @@
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full" type="text"
-                                                value="{{ !$users->maxTransfer ? 0 : $users->maxTransfer }}">
+                                                value="{{ $users->max_transfer ?? 0 }}">
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Max Torrent</h6>
@@ -277,7 +277,7 @@
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full" type="text"
-                                                value="{{ !$users->maxTorrent ? 0 : $users->maxTorrent }}">
+                                                value="{{ $users->max_torrent ?? 0 }}">
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-4 mb-5 gap-6">
@@ -287,7 +287,7 @@
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
-                                                type="text" value="{{ !$users->encoderPriority ? 0 : $users->encoderPriority }}">
+                                                type="text" value="{{ $users->encoder_priority ?? 0 }}">
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Transfer Priority</h6>
@@ -295,7 +295,7 @@
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
-                                                type="text" value="{{ !$users->transferPriority ? 0 : $users->transferPriority }}">
+                                                type="text" value="{{ $users->transfer_priority ?? 0 }}">
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Download Priority</h6>
@@ -303,7 +303,7 @@
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
-                                                type="text" value="{{ !$users->downloadPriority ? 0 : $users->downloadPriority }}">
+                                                type="text" value="{{ $users->downloadPriority ?? 0 }}">
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Torrent Priority</h6>
@@ -311,7 +311,7 @@
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
-                                                type="text" value="{{ !$users->torrentPriority ? 0 : $users->torrentPriority }}">
+                                                type="text" value="{{ $users->torrent_priority ?? 0 }}">
                                         </div>
                                     </div>
                                     <div class="grid grid-cols-2 row mb-5 mt-30 gap-6">
@@ -321,16 +321,16 @@
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow "
-                                                type="text" value="{{ !$users->streamPriority ? 0 : $users->streamPriority }}">
+                                                type="text" value="{{ $users->stream_priority ?? 0 }}">
                                         </div>
                                     </div>
                                     <div class="col-xl-12 save text-center mt-3">
-                                        <button onclick="saveSetting()" class="rounded-lg bg-teal-400 px-6 py-2 relative hover:bg-gradient-to-r hover:from-blue-400 hover:to-green-500">
+                                        <button type="submit" class="rounded-lg bg-teal-400 px-6 py-2 relative hover:bg-gradient-to-r hover:from-blue-400 hover:to-green-500">
                                             <i class="fa fa-check" aria-hidden="true"></i>
                                             Save
                                         </button>
                                     </div>
-                                </div> <!--end-settings-->
+                                </form> <!--end-settings-->
                             </div>
                             <!-- /box-body -->
                         </div>

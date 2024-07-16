@@ -28,9 +28,8 @@ class StatisticService
         return $countryMap;
     }
 
-    public static function calculateValue($userId, $earning)
+    public static function calculateValue($userId, $earning, $today)
     {
-        $today = Carbon::today()->format('Y-m-d');
         $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
         $totalImpression2 = Redis::keys("total_impression2:{$today}:{$userId}:*");
         $result = [];

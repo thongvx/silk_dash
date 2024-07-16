@@ -27,7 +27,7 @@
                                                 File URL
                                             </h5>
                                             <div class="text-[#009FB2] col-span-3 md:col-span-2 flex items-center px-2">
-                                                <a href="{{route('ePlay', $video->slug)}}" target="_black">https://streamsilk.com/e/{{ $video->slug }}</a>
+                                                <a href="{{route('play', $video->slug)}}" target="_black">https://streamsilk.com/p/{{ $video->slug }}</a>
                                             </div>
                                         </div>
                                         <div class="grid grid-cols-4 gap-4 items-center mt-6">

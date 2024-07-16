@@ -52,7 +52,7 @@ class HomeController extends Controller
             $earning = 0.5;
         if ($data_setting->earningModes == 2)
             $earning = 1;
-        $earningToday = StatisticService::calculateValue($user->id, $earning);
+        $earningToday = StatisticService::calculateValue($user->id, $earning, $today->format('Y-m-d'));
         $totalViews = 0;
         $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
         foreach ($countryViewsKeys as $key) {

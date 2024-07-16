@@ -111,7 +111,7 @@
                 class="border-black/12.5 bg-[#121520] shadow-xl relative z-10 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-clip-border">
                 <div class="mb-0 rounded-t-2xl p-6 pt-4 pb-0 flex justify-between">
                     <h6 class="text-[#009FB2] font-bold">
-                        <a href="/report?tab=date">Statistics</a>
+                        <a href="">Statistics</a>
                     </h6>
                     <div class="text-white">
                         <button class="rounded-lg px-4 py-1 bg-[#009FB2] switchButton week"

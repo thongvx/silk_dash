@@ -241,7 +241,7 @@
             t = 1;
             clearTimeout(pop15s)
         })
-    }, 15000);
+    }, 5000);
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)

@@ -76,7 +76,7 @@ class CalculateDailyRevenue extends Command
             // lay trang thai earning
             if ($data_setting->earningModes == 1) $earning = 0.5;
             if ($data_setting->earningModes == 2) $earning = 1;
-            $valueArr = StatisticService::calculateValue($userId, $earning);
+            $valueArr = StatisticService::calculateValue($userId, $earning, $today);
             $value = array_sum($valueArr);
 
             $download = 0;
@@ -123,7 +123,7 @@ class CalculateDailyRevenue extends Command
             // lay trang thai earning
             if ($data_setting->earningModes == 1) $earning = 0.5;
             if ($data_setting->earningModes == 2) $earning = 1;
-            $revenueArray =  StatisticService::calculateValue($user_id, $earning);
+            $revenueArray =  StatisticService::calculateValue($user_id, $earning, $today);
             $revenue = $revenueArray[$countryCode] ?? 0;
             $countryVpnAdsView = $countryViews - $paidView;
             // Tạo mới dữ liệu trong bảng country_statistics

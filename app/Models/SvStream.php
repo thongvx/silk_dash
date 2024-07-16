@@ -22,6 +22,8 @@ class SvStream extends Model
     protected $fillable = [
         'name',
         'ip',
+        'ip_lan',
+        'ipv6',
         'domain',
         'pass',
         'port',
