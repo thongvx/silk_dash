@@ -80,10 +80,12 @@
             <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]
                             {{ $class }}">
                 <td class="userID sorting_1">{{ $user->id }}</td>
-                <td class="user-name col-lg-2"><a href="{{ route('user.show', ['user' => $user->id]) }}"
-                                                  target="_blank">{{ $user->name }}</a></td>
-                <td class="user-name"><a href="{{ route('user.show', ['user' => $user->id]) }}"
-                                         target="_blank">{{ $user->email }}</a></td>
+                <td class="user-name col-lg-2 hover:text-[#009FB2]">
+                    <a href="{{ route('user.show', ['user' => $user->id]) }}" target="_blank">{{ $user->name }}</a>
+                </td>
+                <td class="user-name hover:text-[#009FB2]">
+                    <a href="{{ route('user.show', ['user' => $user->id]) }}" target="_blank">{{ $user->email }}</a>
+                </td>
                 <td class="video">{{ !$user->video ? 0 : $user->video }}</td>
                 <td class="play">{{ !$user->play ? 0 : $user->play }}</td>
                 <td class="storage">{{ !$user->storage ? 0 : $user->storage }}</td>

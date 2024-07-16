@@ -64,7 +64,7 @@ class ReportController extends Controller
             $earning = 0.5;
         if ($data_setting->earningModes == 2)
             $earning = 1;
-        $earningToday = StatisticService::calculateValue($userId, $earning);
+        $earningToday = StatisticService::calculateValue($userId, $earning, $today->format('Y-m-d'));
         $data['title'] = 'Report';
         $data['userWatching'] = Redis::get("watching_users:{$userId}") ?? 0;
         $data['totalProfit'] = floatval($totalProfit ?? $this->reportRepo->where('user_id', $userId)->sum('revenue'));

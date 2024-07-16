@@ -138,10 +138,8 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::post('/manageTask/retryEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryEncoder'])->name('retryEncoder');
 
-    Route::get('/statistic', function (){
-        $title = 'Users';
-        return view('admin.statistic.statistic', compact('title'));
-    });
+    Route::get('/statistic', [\App\Http\Controllers\admin\StatisticController::class, 'index'])->name('statistic');
+
     Route::resource('/supportAdmin', \App\Http\Controllers\admin\TicketAdminController::class);
 
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
