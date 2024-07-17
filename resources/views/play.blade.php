@@ -103,6 +103,12 @@
             jwplayer8quality: true,
             controls: true,
             preload: preload,
+            tracks: [
+                {
+                    file: "https://cdnimg.streamsilk.com/preview/6697440e175b8/6697440e175b8.jpg",
+                    kind: "thumbnails",
+                }
+            ],
             width: '100%',
             height: '100%',
             skin: { active: "{{ $player_setting->premium_color }}", },
