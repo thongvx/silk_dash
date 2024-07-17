@@ -105,7 +105,7 @@
             preload: preload,
             tracks: [
                 {
-                    file: "https://cdnimg.streamsilk.com/preview/6697440e175b8/6697440e175b8.jpg",
+                    file: "https://cdnimg.streamsilk.com/preview/6697440e175b8/6697440e175b8.webp",
                     kind: "thumbnails",
                 }
             ],
