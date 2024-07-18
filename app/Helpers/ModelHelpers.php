@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use App\Http\Controllers\admin\ManageTaskController;
 use App\Http\Controllers\admin\ComputeController;
-use App\Http\Controllers\Admin\StatisticController;
+use App\Http\Controllers\admin\StatisticController;
 use App\Http\Controllers\Dashboard\Setting\AccountController;
 use App\Http\Controllers\Dashboard\Support\TicketController;
 use App\Http\Controllers\Dashboard\UploadController;
