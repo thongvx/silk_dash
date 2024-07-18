@@ -24,6 +24,7 @@ export function fixedBox (box) {
     fixedVideoCard.toggleClass("block");
     updateOriginalFormState(box);
 }
+
 export function checkAll() {
     return $('table').find('tbody .checkbox:checked');
 }

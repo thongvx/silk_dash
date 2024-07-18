@@ -201,7 +201,6 @@ export function loadContent(data_content) {
         data: {
             tab: data_content,
             page: page,
-            folderId: urlParams.get('folderId')
         },
         beforeSend: function() {
             $('#box-content').html(`<div class="w-full justify-center items-center flex h-full">
@@ -311,3 +310,11 @@ $(document).on('click', '[clipboard-copy]', function() {
         }, 1500);
     });
 });
+//exit box
+export function exitBox(box) {
+    $("[fixed-video-card]").addClass("opacity-0");
+    $("[fixed-video-card]").removeClass("opacity-1");
+    $("[fixed-video-card]").addClass("hidden");
+    $("[fixed-video-card]").removeClass("block");
+    updateOriginalFormState(box);
+}

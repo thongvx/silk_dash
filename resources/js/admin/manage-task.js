@@ -30,7 +30,7 @@ $(document).on('click','[btn-encoder-task]', function() {
 
 const formRetryEncoder = `<div class="delete" id="retry-encoder">
                                     <form action="">
-                                        <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected video?</h5>
+                                        <h5 class="text-center text-white text-lg">Are you sure you want to retry encoding the selected video?</h5>
                                         <div class="flex justify-center mt-3 text-white ">
                                             <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
                                             <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Retry</button>
@@ -40,14 +40,14 @@ const formRetryEncoder = `<div class="delete" id="retry-encoder">
 $(document).on('click', '[btn-retry-encoder]', function () {
     fixedBox()
     $('#fixed-box-control').append(formRetryEncoder)
+    const tr = $(this).closest('tr');
     var encoderId = $(this).data('encoder-id');
-    console.log(encoderId)
     $('#retry-encoder form').on('submit', function(e) {
         const bntSubmit = $(this).find('button[type="submit"]');
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: '/admin/manageTask/retryEncoder', // Update this with the correct URL
+            url: '/admin/manageTask/retryEncoder',
             data: {
                 encoderId: encoderId,
             },
@@ -67,6 +67,8 @@ $(document).on('click', '[btn-retry-encoder]', function () {
             },
             success: function (response) {
                 fixedBox()
+                tr.find('.status, .sv-encoder, .sv-sto').text('0');
+                tr.find('.id, .slug').removeClass('text-orange-500 text-rose-600 text-teal-500');
                 $('#retry-encoder').remove();
                 notification('success', 'The video has been successfully re-encoded.');
             },

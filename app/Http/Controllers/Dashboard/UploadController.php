@@ -43,24 +43,17 @@ class UploadController
         return view('dashboard.upload.upload', $data);
     }
 
-    public function upload($tab)
+    public function upload($request)
     {
         $user = Auth::user();
         $data['title'] = 'Upload';
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $data['folders']->last();
-        switch ($tab) {
-            case 'transfer':
-                $data['getProgressTransfer'] = $this->getProgressTransfer();
-                return view('dashboard.upload.transfer', $data);
-            case 'FTP':
-                return view('dashboard.upload.FTP', $data);
-            case 'clone':
-                return view('dashboard.upload.clone', $data);
-            default:
-                return view('dashboard.upload.webupload', $data);
+        $tab = $request->input('tab');
+        if ($tab == 'transfer') {
+            $data['getProgressTransfer'] = $this->getProgressTransfer();
         }
-
+        return $data;
     }
 
     public function remoteUploadDirect(Request $request)

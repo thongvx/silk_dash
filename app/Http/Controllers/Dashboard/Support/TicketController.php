@@ -38,16 +38,7 @@ class TicketController
             'title' => 'Support',
             'tickets' => $tickets
         ];
-        switch ($tab) {
-            case 'ticket':
-                return view('dashboard.support.ticket', $data);
-            case 'newticket':
-                return view('dashboard.support.newticket', $data);
-            case 'apiDocuments':
-                return view('dashboard.support.apiDocuments');
-            default:
-                return view('dashboard.support.knowledge');
-        }
+        return $data;
     }
     //create ticket
     public function create()
