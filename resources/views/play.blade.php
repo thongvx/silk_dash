@@ -63,7 +63,7 @@
     var t = 0;
     var playID = 0;
     var videoID ="{{ $videoID }}";
-    var urlPlay = "https://ss04.silkanu.cc/data/6/66973baaf29cb/master.m3u8";
+    var urlPlay = "{{ $urlPlay }}";
     var iframe = {{ $iframe }};
     var typeVideo = {{ $videoType }};
     var premium = {{ $premium }};
@@ -151,12 +151,8 @@
         }
         if(preview === '1') {
             const previewTrack = {
-                file: `{{ asset(Storage::url('6697440e175b8.vtt')) }}`,
+                file: `https://cdnimg.streamsilk.com/preview/${videoID}/${videoID}.jpg`,
                 kind: "thumbnails",
-                height: 300,
-                width: 400,
-                fontsize: "16px",
-                background: "#000000"
             }
             if (!options.tracks) {
                 options.tracks = [];
