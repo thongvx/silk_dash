@@ -154,6 +154,9 @@
                 file: `https://cdnimg.streamsilk.com/preview/${videoID}/${videoID}.jpg`,
                 kind: "thumbnails",
             }
+            if (!options.tracks) {
+                options.tracks = [];
+            }
             options.tracks.push(previewTrack)
         }
         player.setup(options);
