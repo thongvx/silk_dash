@@ -1,5 +1,5 @@
 import '../main.js';
-import '../sidebar.js';
+import './sidebar-admin.js';
 import '../input-search.js'
 import '../notification.js';
 import '../control-datatable.js';

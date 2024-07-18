@@ -79,15 +79,11 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th class='pl-2 py-2'>
+                                <th class='pl-2 py-2 text-center'>
                                     Quality
                                 </th>
-                                <th data-column="size" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">Size</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
+                                <th class='pl-2 py-2 text-center'>
+                                    Size
                                 </th>
                                 <th data-column="status" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
@@ -134,6 +130,16 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php
+                                function formatSize($bytes) {
+                                    $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+                                    $bytes = max($bytes, 0);
+                                    $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+                                    $pow = min($pow, count($units) - 1);
+                                    $bytes /= (1 << (10 * $pow));
+                                    return round($bytes, 2) . ' ' . $units[$pow];
+                                }
+                            @endphp
                             @forelse( $encoders as $index => $encoder)
                                 @php
                                     switch ($encoder->status) {
@@ -149,21 +155,38 @@
                                         default:
                                             $text = 'text-teal-500';
                                     }
-                                    $size = $encoder->size;
+                                    $size = formatSize($encoder->size);
                                 @endphp
-                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                    <td class="pl-2 {{ $text }}">{{ $encoder->id }}</td>
+                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" id="{{ $encoder->id }}">
+                                    <td class="pl-2 {{ $text }} id">{{ $encoder->id }}</td>
                                     <td class="pl-2">{{ $encoder->user_id }}</td>
-                                    <td class="pl-2 {{ $text }}">{{ $encoder->slug }}</td>
-                                    <td class="pl-2">{{ $encoder->quality }}</td>
-                                    <td class="pl-2">{{ $size }}</td>
-                                    <td class="pl-2">{{ $encoder->status }}</td>
+                                    <td class="pl-2 {{ $text }} slug">{{ $encoder->slug }}</td>
+                                    <td class="pl-2 text-center">{{ $encoder->quality }}</td>
+                                    <td class="pl-2 text-center">{{ $size }}</td>
+                                    <td class="pl-2 status">{{ $encoder->status }}</td>
                                     <td class="pl-2">{{ $encoder->priority }}</td>
                                     <td class="pl-2">{{ $encoder->sv_upload }}</td>
-                                    <td class="pl-2 cursor-pointer" btn-retry-encoder data-encoder-id={{ $encoder->id }}>{{ $encoder->sv_encoder }}</td>
-                                    <td class="pl-2">{{ $encoder->sv_storage }}</td>
-                                    <td class="pl-2">{{ $encoder->start_encoder }}</td>
-                                    <td class="pl-2">{{ $encoder->finish_encoder }}</td>
+                                    <td class="pl-2 cursor-pointer sv-encoder" btn-retry-encoder data-encoder-id={{ $encoder->id }}>{{ $encoder->sv_encoder }}</td>
+                                    <td class="pl-2 cursor-pointer sv-sto" btn-retry-storage data-storage-id={{ $encoder->id }}>{{ $encoder->sv_storage }}</td>
+                                    <td class="pl-2">
+                                        @php
+                                            $timestamp = (int) $encoder->start_encoder;
+                                            $finishEncoderDate = (new DateTime())->setTimestamp($timestamp);
+                                            $formattedDate = $finishEncoderDate->format('d/m/Y H:i:s');
+                                            if($encoder->start_encoder == 0){
+                                                $formattedDate = 0;
+                                            }
+                                        @endphp
+                                        {{ $formattedDate }}
+                                    </td>
+                                    <td class="pl-2">
+                                        @php
+                                            $timestamp = (int) $encoder->finish_encoder;
+                                            $finishEncoderDate = (new DateTime())->setTimestamp($timestamp);
+                                            $formattedDate = $finishEncoderDate->format('d/m/Y H:i:s');
+                                        @endphp
+                                        {{ $formattedDate }}
+                                    </td>
                                 </tr>
                             @empty
                                 <tr class="my-3 h-12 bg-[#142132]">

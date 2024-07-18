@@ -37,45 +37,62 @@ class ModelHelpers
     public function loadPage(Request $request){
         $tab = $request->input('tab');
         $page = $request->input('page');
-        if ($tab == 'encodingTask') {
-            $folder = 'encoder';
-        }elseif ($tab == 'transferTask') {
-            $folder = 'transfer';
-        }else
-            $folder = '';
         $user = Auth::user();
-        if (strpos($page, 'admin') !== false) {
-            switch ($page) {
-                case strpos($page, 'manageTask') !== false:
-                    $data = $this->controllers['manageTask']->manageControler($request);
-                    return view($page.'.'.$tab, $data);
-                case strpos($page, 'statistic') !== false:
-                    $data = $this->controllers['statistic']->statisticControler($request);
-                    return view($page.'.'.$tab, $data);
-                case strpos($page, 'compute') !== false:
-                    $data = $this->controllers['compute']->computeControler($request);
-                    return view($page.'.'.$tab, $data);
-                default:
-                    return view($page.'.'.$tab);
-            }
-        }else{
-            switch ($page) {
-                case 'setting':
-                    return $this->controllers['setting']->index($tab);
-                case 'video':
-                    $data = $this->controllers['video']->getVideoData($request);
-                    return view('dashboard.'.$page.'.'.$tab, $data);
-                case 'upload':
-                    return $this->controllers['upload']->upload($tab);
-                case 'support':
-                    return $this->controllers['support']->ticket($tab);
-                case 'report':
-                    return $this->controllers['report']->store($request);
-                default:
-                    return view('dashboard.'.$page.'.'.$tab);
+        $pageToMethodMap = [
+            'admin/manageTask' => [
+                'role'=> 'admin',
+                'controller' => 'manageTask',
+                'method' => 'manageControler'
+            ],
+            'admin/statistic' => [
+                'role'=> 'admin',
+                'controller' => 'statistic',
+                'method' => 'statisticControler'
+            ],
+            'admin/compute' => [
+                'role'=> 'admin',
+                'controller' => 'compute',
+                'method' => 'computeControler'
+            ],
+            'admin/users' => null, // No controller method to call, directly render view
+            'setting' => [
+                'role'=> 'user',
+                'controller' => 'setting',
+                'method' => 'index'],
+            'video' => [
+                'role'=> 'user',
+                'controller' => 'video',
+                'method' => 'getVideoData'
+            ],
+            'upload' => [
+                'role'=> 'user',
+                'controller' => 'upload',
+                'method' => 'upload'
+            ],
+            'support' => [
+                'role'=> 'user',
+                'controller' => 'support',
+                'method' => 'ticket'
+            ],
+            'report' => [
+                'role'=> 'user',
+                'controller' => 'report',
+                'method' => 'store'
+            ],
+        ];
+
+        if (array_key_exists($page, $pageToMethodMap)) {
+            $mapping = $pageToMethodMap[$page];
+            $basePath = $mapping['role'] == 'admin' ? '' : 'dashboard.';
+            if ($mapping) {
+                $controller = $this->controllers[$mapping['controller']];
+                $method = $mapping['method'];
+                $data = $controller->$method($request);
+                return view($basePath.$page.'.'.$tab, $data);
+            } else {
+                return view($basePath.$page.'.'.$tab);
             }
         }
-
     }
 
 }

@@ -32,7 +32,6 @@ class ManageTaskController extends Controller
     public function manageControler(Request $request)
     {
         $tab = $request->input('tab');
-        $data['title'] = 'Manage Task';
         $status = $request->input('status', 'all');
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'desc');

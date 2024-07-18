@@ -1,5 +1,5 @@
 import { checkAll, fixedBox , btn_video } from './video.js';
-import {add_notification} from '../main.js';
+import {add_notification, exitBox} from '../main.js';
 //edit video
 const formEdit = `<div class="edit" id="edit">
                                 <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Rename file</h5>
@@ -66,15 +66,16 @@ $(document).on('click', '[btn-edit]', function() {
             success: function(response) {
                 response.forEach(function(video) {
                     // Find the corresponding row in the table
-                    var row = $('tr[data-videoid="' + video.id + '"]');
+                    var row = $('#' + video.id);
+                    console.log(video.id)
                     // Update the title in the row
-                    row.find('.video-title').text(video.newTitle);
+                    row.find('.video-title a').text(video.newTitle);
                 });
                 const message = 'Video titles updated successfully!';
                 add_notification('success',message, btnSubmit);
                 btnSubmit.remove()
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox (box)
                     $('#edit').remove();
                 }, 2000);
                 tr.find('.checkbox').prop('checked', false)
@@ -83,7 +84,7 @@ $(document).on('click', '[btn-edit]', function() {
                 const message = 'An error occurred while editing the video title.';
                 add_notification('error',message, btnSubmit);
                 setTimeout(function() {
-                    fixedBox()
+                    exitBox (box)
                     $('#edit').remove();
                 }, 2000);
                 tr.find('.checkbox').prop('checked', false)
@@ -130,7 +131,7 @@ function ajaxremove(videoIDs, btnSubmit, cancel){
             btnSubmit.remove()
             cancel.remove()
             setTimeout(function() {
-                fixedBox ()
+                exitBox ()
                 $('#delete-video').remove();
             }, 2000);
             videoIDs.forEach(function(videoID) {
@@ -143,7 +144,7 @@ function ajaxremove(videoIDs, btnSubmit, cancel){
             add_notification('error',message, btnSubmit);
             btnSubmit.remove()
             setTimeout(function() {
-                fixedBox ()
+                exitBox ()
                 $('#delete-video').remove();
             }, 2000);
         }
@@ -255,7 +256,7 @@ $(document).on('click', '#fixed-video [folder]', function() {
                 const message = 'Video has been successfully moved.';
                 add_notification('success',message, btnSubmit);
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox ()
                     $('#move').addClass('hidden')
 
                 }, 2000);
@@ -265,12 +266,11 @@ $(document).on('click', '#fixed-video [folder]', function() {
                 btn_video()
             },
             error: function(response) {
-                fixedBox()
                 btnSubmit.html('Move To Folder')
                 const message = 'An error occurred while moved the video.';
                 add_notification('error',message, btnSubmit);
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox ()
                     $('#move').addClass('hidden')
 
                 }, 2000);
@@ -313,7 +313,7 @@ $(document).on('submit', '#form-edit-video', function(e) {
             const message = 'Setting video successfully.';
             add_notification('success',message, button);
             setTimeout(function() {
-                fixedBox ()
+                exitBox ()
                 $('#move').addClass('hidden')
             }, 2000);
             form.reset();

@@ -1,5 +1,4 @@
-import {add_notification} from "../main.js";
-import {fixedBox} from "../jsVideo/video.js";
+import {add_notification, updateOriginalFormState} from "../main.js";
 
 $(document).on('submit', '#form-player-setting', function (e) {
     e.preventDefault();
@@ -19,6 +18,7 @@ $(document).on('submit', '#form-player-setting', function (e) {
         success: function (data) {
             const message = 'Profile updated successfully!';
             add_notification('success',message, button);
+            updateOriginalFormState();
         },
         error: function (response) {
             if (response.responseJSON && response.responseJSON.errors) {

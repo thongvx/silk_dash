@@ -60,7 +60,7 @@
         </thead>
         <tbody>
         @forelse($videos as $index => $video)
-            <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" data-videoid="{{ $video->slug }}">
+            <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" id="{{ $video->id }}" data-videoid="{{ $video->slug }}">
                 <td class="flex items-center justify-center h-[inherit] px-2">
                     <input type="checkbox"
                            class="checkbox w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
