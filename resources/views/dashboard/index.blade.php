@@ -4,7 +4,7 @@
     <div class="flex flex-wrap -mx-3">
         <div class="w-full mb-4 pl-3 text-transparent bg-clip-text bg-gradient-to-b from-[#0692C6] to-[#00D9E1]">
             <h2 class="text-4xl font-bold italic">
-                Welcome back to {{ Auth::user()->name }} !
+                Welcome back, {{ Auth::user()->name }} !
             </h2>
         </div>
         <!-- card -->

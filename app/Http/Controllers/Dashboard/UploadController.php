@@ -31,19 +31,20 @@ class UploadController
         $this->transferRepo = $transferRepo;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $data = [
-            'title' => 'Upload',
-            'folders' => $this->folderRepo->getAllFolders($user->id),
-            'currentFolderName' => $this->folderRepo->getAllFolders($user->id)->last(),
-            'getProgressTransfer' => $this->getProgressTransfer(),
-        ];
+        $data['title'] = 'Upload';
+        $data['folders'] = $this->folderRepo->getAllFolders($user->id);
+        $data['currentFolderName'] = $data['folders']->last();
+        $tab = $request->input('tab');
+        if ($tab == 'transfer') {
+            $data['getProgressTransfer'] = $this->getProgressTransfer();
+        }
         return view('dashboard.upload.upload', $data);
     }
 
-    public function upload($request)
+    public function upload(Request $request)
     {
         $user = Auth::user();
         $data['title'] = 'Upload';

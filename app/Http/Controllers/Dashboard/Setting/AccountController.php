@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\AccountRepo;
 use App\Repositories\ActivityRepo;
 use App\Repositories\PlayerSettingsRepo;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -18,7 +19,7 @@ class AccountController extends Controller
         $this->activityRepo = $activityRepo;
         $this->playerSettingsRepo = $playerSettingsRepo;
     }
-    public function index($request)
+    public function index(Request $request)
     {
         $user = Auth::user();
         $userid = $user->id;

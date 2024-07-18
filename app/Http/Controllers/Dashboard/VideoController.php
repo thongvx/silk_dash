@@ -46,7 +46,6 @@ class VideoController
             $iframeWidth = '600';
         }
 
-
         $data = [
             'title' => 'Video',
             'folders' => $folders,

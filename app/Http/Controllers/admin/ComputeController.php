@@ -47,7 +47,7 @@ class ComputeController extends Controller
         $data = $this->getData($request, $tab);
         return view('admin.compute.compute', $data);
     }
-    public function computeControler(Request $request)
+    public function computeController(Request $request)
     {
         $tab = $request->input('tab');
         return $this->getData($request, $tab);
