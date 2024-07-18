@@ -8,7 +8,7 @@
                 <div class="text-white ">
                     <h5 class="text-4xl xl:text-5xl font-extrabold">Ideal Platform to make money by sharing videos!
                     </h5>
-                    <h6 class="text-lg mt-12 italic font-medium">At StreamSilk, everything is "smooth" like SILK,
+                    <h6 class="text-xl mt-12 italic font-medium">At StreamSilk, everything is "smooth" like SILK,
                         uploading, playing, downloading and Earning too…
                     </h6>
                     <a href="/dashboard">
