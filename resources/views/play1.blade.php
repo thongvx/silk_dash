@@ -69,6 +69,7 @@
     var infinite_loop = "{{ $player_setting->infinite_loop }}";
     var logo_link = "{{ $player_setting->logo_link }}";
     var logo = "{{ $player_setting->show_logo }}";
+    var preview = "{{ $player_setting->show_preview }}";
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
