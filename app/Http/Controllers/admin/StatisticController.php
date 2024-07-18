@@ -43,7 +43,7 @@ class StatisticController extends Controller
         return view('admin.statistic.statistic', $data);
     }
 
-    public function statisticControler(Request $request)
+    public function statisticController(Request $request)
     {
         $tab = $request->input('tab');
         return $this->getData($request, $tab);

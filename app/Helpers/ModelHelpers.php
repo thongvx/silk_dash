@@ -42,17 +42,17 @@ class ModelHelpers
             'admin/manageTask' => [
                 'role'=> 'admin',
                 'controller' => 'manageTask',
-                'method' => 'manageControler'
+                'method' => 'manageController'
             ],
             'admin/statistic' => [
                 'role'=> 'admin',
                 'controller' => 'statistic',
-                'method' => 'statisticControler'
+                'method' => 'statisticController'
             ],
             'admin/compute' => [
                 'role'=> 'admin',
                 'controller' => 'compute',
-                'method' => 'computeControler'
+                'method' => 'computeController'
             ],
             'admin/users' => null, // No controller method to call, directly render view
             'setting' => [
@@ -74,11 +74,6 @@ class ModelHelpers
                 'controller' => 'support',
                 'method' => 'ticket'
             ],
-            'report' => [
-                'role'=> 'user',
-                'controller' => 'report',
-                'method' => 'store'
-            ],
         ];
 
         if (array_key_exists($page, $pageToMethodMap)) {
@@ -92,6 +87,8 @@ class ModelHelpers
             } else {
                 return view($basePath.$page.'.'.$tab);
             }
+        }else{
+            return response()->view('errors.404', [], 404);
         }
     }
 

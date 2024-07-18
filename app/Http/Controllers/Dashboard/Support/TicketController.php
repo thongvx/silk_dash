@@ -29,15 +29,15 @@ class TicketController
         return view('dashboard.support.support', $data);
     }
 
-    public function ticket($tab)
+    public function ticket(Request $request)
     {
         $user = Auth::user();
         $userId = $user->id;
-        $tickets = $this->ticketRepo->getAllTickets($userId);
-        $data = [
-            'title' => 'Support',
-            'tickets' => $tickets
-        ];
+        $tab = $request->input('tab');
+        $data['title'] = 'Support';
+        if($tab == 'ticket'){
+            $data['tickets'] = $this->ticketRepo->getAllTickets($userId);
+        }
         return $data;
     }
     //create ticket

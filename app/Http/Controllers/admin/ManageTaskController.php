@@ -17,24 +17,16 @@ class ManageTaskController extends Controller
         $this->manageTaskRepo = $manageTaskRepo;
     }
     public function index(Request $request){
-        $tab = $request->input('tab', 'encoder');
-        $data['title'] = 'Manage Task';
-        $status = $request->input('status', 'all');
-        $column = $request->input('column', 'created_at');
-        $direction = $request->input('direction', 'desc');
-        if ($tab == 'encodingTask') {
-            $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder',$column, $direction , 20, $status);
-        } else{
-            $data['transfers'] = $this->manageTaskRepo->getAllTransfer('transfer', $column, $direction , 20);
-        }
+        $data = $this->manageController($request);
         return view('admin.manageTask.manageTask', $data);
     }
-    public function manageControler(Request $request)
+    public function manageController(Request $request)
     {
-        $tab = $request->input('tab');
+        $tab = $request->input('tab', 'encoder');
         $status = $request->input('status', 'all');
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'desc');
+        $data['title'] = 'Manage Task';
         if ($tab == 'encodingTask') {
             $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder',$column, $direction , 20, $status);
         } else{
