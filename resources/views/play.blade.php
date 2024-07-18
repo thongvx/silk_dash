@@ -150,11 +150,11 @@
             options.image = urlposter
         }
         if(preview === '1') {
-            preview = {
-                file: "https://cdnimg.streamsilk.com/preview/6697440e175b8/6697440e175b8.jpg",
+            const previewTrack = {
+                file: `https://cdnimg.streamsilk.com/preview/${videoID}/${videoID}.jpg`,
                 kind: "thumbnails",
             }
-            options.tracks = [preview]
+            options.tracks.push(previewTrack)
         }
         player.setup(options);
         window.addEventListener('beforeunload', function (e) {
