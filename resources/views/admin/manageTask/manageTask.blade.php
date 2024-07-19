@@ -38,7 +38,7 @@
                     <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
                         <div class="border-base-300 rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top">
                             <div class="tab-content-video">
-                                <div class="rounded-xl box-datatable" id="box-content">
+                                <div class="rounded-xl box-datatable  min-h-[calc(100vh-13em)]" id="box-content">
                                     @include(request()->path() . '.' . request()->get('tab'))
                                 </div>
                             </div>
@@ -50,5 +50,24 @@
 
         </div>
 
+    </div>
+    <div fixed-video>
+        <!-- -right-90 in loc de 0-->
+        <div fixed-video-card
+             class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full  backdrop-blur-sm
+           min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3" id="fixed-video">
+            <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-video-close-button>
+            </div>
+            <div
+                class="w-11/12 sm:w-4/5 xl:w-2/5 bg-[#121520] z-20 py-4 px-3 rounded-lg relative shadow-lg shadow-slate-900">
+                <div class="absolute right-4 top-3">
+                    <button fixed-video-close-button
+                            class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
+                        <i class="material-symbols-outlined text-3xl">close</i>
+                    </button>
+                </div>
+                <div  id="fixed-box-control"></div>
+            </div>
+        </div>
     </div>
 @endsection

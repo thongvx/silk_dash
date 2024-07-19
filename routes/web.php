@@ -55,6 +55,7 @@ Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class,
 Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoStream']);
 
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
+Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('download');
 
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
@@ -126,7 +127,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //embed play
     Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('vPlay');
-    Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('download');
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
@@ -137,6 +137,9 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
 
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::post('/manageTask/retryEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryEncoder'])->name('retryEncoder');
+    Route::post('/manageTask/removeEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeEncoder'])->name('removeEncoder');
+    Route::post('/manageTask/retryTransfer', [\App\Http\Controllers\admin\TransferController::class, 'retryTransferTask']);
+
 
     Route::get('/statistic', [\App\Http\Controllers\admin\StatisticController::class, 'index'])->name('statistic');
 

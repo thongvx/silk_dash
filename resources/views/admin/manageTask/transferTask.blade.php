@@ -30,8 +30,9 @@
             <div
                 class="flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
                 <div class="px-0 pt-0">
-                    <div class="px-0 pt-0 overflow-auto h-[calc(100vh-24em)] ">
-                        <table id="datatable" datatable data-page-size="10"
+                    <div class="px-0 pt-0 overflow-auto h-[calc(100vh-24em)]">
+                        <table id="datatable" atatable data-page-size="10" data-column-table="{{request()->get('column') ?? 'created_at'}}"
+                               data-column-direction="{{request()->get('direction') ?? 'desc'}}" data-total="{{$transfers->total()}}"
                                class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
                             <thead class="sticky top-0">
                             <tr class="bg-[#142132] transition-colors text-md">
@@ -42,68 +43,49 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="user_id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">User ID</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="slug" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Video ID</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th class='pl-2 sortable-column cursor-pointer relative  py-2'>
-                                    Quality
+                                <th class='pl-2 py-2'>
+                                    Url
                                 </th>
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">Size</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
-                                </th>
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">Status</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
-                                </th>
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
+                                <th data-column="priority" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                                          data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Priority</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th class='pl-2 sortable-column cursor-pointer relative  py-2'>
-                                    DL
+
                                 </th>
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="sv_transfer" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">EC</a>
+                                    <a href="javascript:void(0)">SV Transfer</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th class='pl-2 sortable-column cursor-pointer relative  py-2'>
-                                    ST
+                                <th class='pl-2 py-2'>
+                                    Folder Name
                                 </th>
-                                <th data-column="id" class='w-24 pl-1 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th class='pl-2 sortable-column cursor-pointer relative  py-2'>
+                                    Progress
+                                </th>
+                                <th data-column="updated_at" class='w-24 pl-1 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Started</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
-                                </th>
-                                <th data-column="id" class='w-24 pl-1 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">Finished</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
@@ -115,15 +97,16 @@
                                     <td class="pl-2">{{ $transfer->id }}</td>
                                     <td class="pl-2">{{ $transfer->user_id }}</td>
                                     <td class="pl-2">{{ $transfer->slug }}</td>
-                                    <td class="pl-2">{{ $transfer->quality }}</td>
-                                    <td class="pl-2">{{ $transfer->size }}</td>
-                                    <td class="pl-2">{{ $transfer->status }}</td>
-                                    <td class="pl-2">{{ $transfer->priority }}</td>
-                                    <td class="pl-2">{{ $transfer->sv_upload }}</td>
-                                    <td class="pl-2">{{ $transfer->sv_encoder }}</td>
-                                    <td class="pl-2">{{ $transfer->sv_storage }}</td>
-                                    <td class="pl-2">{{ $transfer->start_encoder }}</td>
-                                    <td class="pl-2">{{ $transfer->finish_encoder }}</td>
+                                    <td class="pl-2 max-w-[20rem] url {{ $transfer->status == 1 ? 'text-orange-500' : '' }}">
+                                        <div class="truncate hover:text-clip">
+                                            <a href="{{ $transfer->url }}"  title="{{ $transfer->url }}" target="_black" class="hover:text-[#009FB2] ">{{ $transfer->url }}</a>
+                                        </div>
+                                    </td>
+                                    <td class="pl-2">{{ $transfer->priority ?? 0 }}</td>
+                                    <td class="pl-2 cursor-pointer sv-transfer" btn-retry-transfer data-transfer-id="{{ $transfer->id }}">{{ $transfer->sv_transfer }}</td>
+                                    <td>{{ $transfer->folder_name }}</td>
+                                    <td>{{ $transfer->progress}} {{ $transfer->progress > 0 ? '%' : '' }}</td>
+                                    <td class="pl-2">{{ $transfer->updated_at ?? 0 }}</td>
                                 </tr>
                             @empty
                                 <tr class="my-3 h-12 bg-[#142132]">
@@ -151,7 +134,7 @@
                                 <span
                                     class="opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
                             @else
-                                <li class="page-encoder list-none page-item" data-page="{{ $transfers->currentPage() -1 }}">
+                                <li class="page-datatable list-none page-item" data-page="{{ $transfers->currentPage() -1 }}">
                                     <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                                        href="javascript:void(0)" rel="prev">Previous</a>
                                 </li>
@@ -160,7 +143,7 @@
 
                             {{-- Pagination Elements --}}
                             @if ($transfers->currentPage() > 2)
-                                <li class="page-encoder list-none" data-page="1">
+                                <li class="page-datatable list-none" data-page="1">
                                     <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                                        href="javascript:void(0)">1</a>
                                 </li>
@@ -170,7 +153,7 @@
                             @endif
 
                             @for ($i = max(1, $transfers->currentPage() - 1); $i <= min($transfers->lastPage(), $transfers->currentPage() + 1); $i++)
-                                <li class="page-encoder list-none page-item" data-page="{{ $i }}">
+                                <li class="page-datatable list-none page-item" data-page="{{ $i }}">
                                     <a class="mx-1 py-2 px-3 w-max rounded-lg {{ ($transfers->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed text-white' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
                                        href="javascript:void(0)">{{ $i }}</a>
                                 </li>
@@ -181,7 +164,7 @@
                                     <li class=" list-none page-item disabled px-2"><span
                                             class="page-link">...</span></li>
                                 @endif
-                                <li class="page-encoder list-none page-item" data-page="{{ $transfers->lastPage() }}">
+                                <li class="page-datatable list-none page-item" data-page="{{ $transfers->lastPage() }}">
                                     <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
                                        href="javascript:void(0)">{{ $transfers->lastPage() }}</a>
                                 </li>
@@ -189,7 +172,7 @@
 
                             {{-- Next Page Link --}}
                             @if ($transfers->hasMorePages())
-                                <li class="page-encoder list-none page-item" data-page="{{ $transfers->currentPage() +1 }}">
+                                <li class="page-datatable list-none page-item" data-page="{{ $transfers->currentPage() +1 }}">
                                     <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
                                        href="javascript:void(0)" rel="next">Next</a>
                                 </li>
