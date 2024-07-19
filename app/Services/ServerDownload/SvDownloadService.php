@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ServerStream;
+namespace App\Services\ServerDownload;
 
 use App\Models\SvDownload;
 use Illuminate\Support\Facades\Redis;
