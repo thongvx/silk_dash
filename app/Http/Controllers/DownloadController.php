@@ -23,28 +23,32 @@ class DownloadController extends Controller
     {
         $userId = auth()->id();
         $video = $this->videoRepo->findVideoBySlug($slug);
-        $data['video'] = $video;
-        $data['playerSetting'] = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
-        $data['accountSetting'] = $this->accountRepo->getSetting($video->user_id);
-        if($data['accountSetting']->disableDownload == 1 || $video->soft_delete == 1 || !$video){
+        if ($video && $video->soft_delete == 0){
+            $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
+            $data['video'] = $video;
+            $data['playerSetting'] = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
+            $data['accountSetting'] = $this->accountRepo->getSetting($video->user_id);
+            $data['svDownload'] = SvDownloadService::selectSvDownload();
+            if($data['accountSetting']->disableDownload == 1){
+                return response()->view('errors.404', [], 404);
+            }
+            return view('download', $data);
+        }
+        else{
             return response()->view('errors.404', [], 404);
         }
-        return view('download', $data);
     }
     public function addDownloadVideo(Request $request)
     {
         $slug = $request->slug;
         $quality = $request->quality;
         $path = $request->path;
-
-        Queue::push(new CreateDownload($slug, 'd01', $quality, $path));
-
-        return 'success';
+        $sv = $request->sv;
+        Queue::push(new CreateDownload($slug, $sv, $quality, $path));
+        $tokenDownload = $this->creatTokenDownload();
+        return $tokenDownload;
     }
-    function selectSvDownload()
-    {
-        $svDownload = SvDownloadService::selectSvDownload();
-    }
+
     function creatTokenDownload(){
         $exp = time()+3600;
 
