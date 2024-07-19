@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\ServerStream;
+namespace App\Services\ServerDownload;
 
 use App\Models\SvDownload;
 use Illuminate\Support\Facades\Redis;
@@ -48,5 +48,12 @@ class SvDownloadService
             }
         }
         return null;
+    }
+
+    //get all svDownload
+    public function getAllSvDownloads($column, $direction, $limit)
+    {
+        $data = SvDownload::orderBy($column, $direction)->paginate($limit);
+        return $data;
     }
 }

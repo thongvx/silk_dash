@@ -89,7 +89,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
     Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
-    Route::get('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
+    Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
 
     Route::get('dmca',function (){
         $data['title'] = 'DMCA';

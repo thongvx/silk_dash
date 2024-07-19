@@ -58,6 +58,6 @@ class DownloadController extends Controller
         $base64_hash = strtr($base64_hash, '+/', '-_');
         $base64_hash = rtrim($base64_hash, '=');
 
-        return '?token='.$base64_hash.'&expires='.$exp;
+        return '&token='.$base64_hash.'&expires='.$exp;
     }
 }

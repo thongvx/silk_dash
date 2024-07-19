@@ -8,6 +8,7 @@ use App\Models\EncoderTask;
 use App\Models\SvStream;
 use App\Models\Transfer;
 use App\Models\User;
+use App\Models\SvDownload;
 use App\Services\ServerStream\SvStreamService;
 use App\Services\ServerDownload\SvDownloadService;
 use Illuminate\Http\Request;

@@ -10,6 +10,27 @@
             </div>
             <div
                 class="mt-3 flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
+                <div class="flex justify-between items-center w-full mb-3">
+                    <div class="text-sm bg-[#142132] text-white rounded-lg p-2">
+                        <label for="limit">Show:</label>
+                        <select name="limit" class="bg-transparent outline-none"
+                                id="limit">
+                            <option value="20"
+                                    class="limit" {{ $tickets->perPage() == 20 ? 'selected' : '' }}>
+                                20
+                            </option>
+                            <option value="50"
+                                    class="limit" {{ $tickets->perPage() == 50 ? 'selected' : '' }}>
+                                50
+                            </option>
+                            <option value="100"
+                                    class="limit" {{ $tickets->perPage() == 100 ? 'selected' : '' }}>
+                                100
+                            </option>
+                        </select>
+                        <span>entries</span>
+                    </div>
+                </div>
                 <div class="px-0 pt-0">
                     <div class="px-0 pt-0 overflow-auto h-[calc(100vh-24em)] ">
                         <table id="datatable" datatable data-page-size="10"
@@ -70,7 +91,72 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="button-table pt-4 text-white text-sm flex justify-between items-center">
+                        <div class="dataTables_info bg-[#142132] rounded-lg hidden sm:block">
+                            <p class="p-2">
+                                Showing
+                                <span class="font-medium">{{$tickets->firstItem()  }}</span>
+                                to
+                                <span class="font-medium">{{$tickets->lastItem()  }}</span>
+                                of
+                                <span class="font-medium">{{$tickets->total()  }}</span>
+                                results
+                            </p>
+                        </div>
+                        <div class="pagination flex items-center pb-3 sm:pb-0">
+                            {{-- Previous Page Link --}}
+                            @if ($tickets->onFirstPage())
+                                <span
+                                    class="opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Previous</span>
+                            @else
+                                <li class="page-datatable list-none page-item" data-page="{{ $tickets->currentPage() -1 }}">
+                                    <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
+                                       href="javascript:void(0)" rel="prev">Previous</a>
+                                </li>
+                            @endif
 
+
+                            {{-- Pagination Elements --}}
+                            @if ($tickets->currentPage() > 2)
+                                <li class="page-datatable list-none" data-page="1">
+                                    <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
+                                       href="javascript:void(0)">1</a>
+                                </li>
+                                @if ($tickets->currentPage() > 3)
+                                    <li class="list-none page-item disabled px-2"><span class="page-link">...</span></li>
+                                @endif
+                            @endif
+
+                            @for ($i = max(1, $tickets->currentPage() - 1); $i <= min($tickets->lastPage(), $tickets->currentPage() + 1); $i++)
+                                <li class="page-datatable list-none page-item" data-page="{{ $i }}">
+                                    <a class="mx-1 py-2 px-3 w-max rounded-lg {{ ($tickets->currentPage() == $i) ? 'bg-[#009FB2] cursor-not-allowed text-white' : 'bg-[#142132] hover:bg-[#009FB2]' }}"
+                                       href="javascript:void(0)">{{ $i }}</a>
+                                </li>
+                            @endfor
+
+                            @if ($tickets->currentPage() < $tickets->lastPage() - 1)
+                                @if ($tickets->currentPage() < $tickets->lastPage() - 2)
+                                    <li class=" list-none page-item disabled px-2"><span
+                                            class="page-link">...</span></li>
+                                @endif
+                                <li class="page-datatable list-none page-item" data-page="{{ $tickets->lastPage() }}">
+                                    <a class="hover:bg-[#009FB2] mx-1 py-2 px-3 w-max rounded-lg bg-[#142132]"
+                                       href="javascript:void(0)">{{ $tickets->lastPage() }}</a>
+                                </li>
+                            @endif
+
+                            {{-- Next Page Link --}}
+                            @if ($tickets->hasMorePages())
+                                <li class="page-datatable list-none page-item" data-page="{{ $tickets->currentPage() +1 }}">
+                                    <a class="hover:bg-[#009FB2] py-2 px-4 w-max rounded-lg bg-[#142132]"
+                                       href="javascript:void(0)" rel="next">Next</a>
+                                </li>
+                            @else
+                                <span
+                                    class="text-white opacity-50 py-2 px-3 w-max rounded-lg cursor-not-allowed bg-[#142132]">Next</span>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -48,4 +48,22 @@ class TicketRepo extends BaseRepository
         return $tickets;
 
     }
+
+    public function adminGetAllTickets()
+    {
+        $limit = 20;
+        $key = TicketCacheKeys::ALL_TICKET_FOR_ADMIN->value . 'limit' . $limit;
+        $tickets = Redis::get($key);
+        if (isset($tickets)) {
+            return unserialize($tickets);
+        }
+
+        $tickets = $this->model
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit);
+
+        Redis::setex($key, 259200, serialize($tickets));
+
+        return $tickets;
+    }
 }

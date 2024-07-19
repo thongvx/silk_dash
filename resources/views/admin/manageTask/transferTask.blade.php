@@ -96,7 +96,7 @@
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
                                     <td class="pl-2">{{ $transfer->id }}</td>
                                     <td class="pl-2">{{ $transfer->user_id }}</td>
-                                    <td class="pl-2">{{ $transfer->slug }}</td>
+                                    <td class="pl-2 {{ $transfer->status == 1 ? 'text-orange-500' : '' }}">{{ $transfer->slug }}</td>
                                     <td class="pl-2 max-w-[20rem] url {{ $transfer->status == 1 ? 'text-orange-500' : '' }}">
                                         <div class="truncate hover:text-clip">
                                             <a href="{{ $transfer->url }}"  title="{{ $transfer->url }}" target="_black" class="hover:text-[#009FB2] ">{{ $transfer->url }}</a>
