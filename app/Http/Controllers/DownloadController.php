@@ -6,6 +6,7 @@ use App\Jobs\CreateDownload;
 use App\Repositories\AccountRepo;
 use App\Repositories\PlayerSettingsRepo;
 use App\Repositories\VideoRepo;
+use App\Services\ServerDownload\SvDownloadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
 
@@ -39,6 +40,10 @@ class DownloadController extends Controller
         Queue::push(new CreateDownload($slug, 'd01', $quality, $path));
 
         return 'success';
+    }
+    function selectSvDownload()
+    {
+        $svDownload = SvDownloadService::selectSvDownload();
     }
     function creatTokenDownload(){
         $exp = time()+3600;

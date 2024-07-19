@@ -9,6 +9,7 @@ use App\Models\SvStream;
 use App\Models\Transfer;
 use App\Models\User;
 use App\Services\ServerStream\SvStreamService;
+use App\Services\ServerDownload\SvDownloadService;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Support\Facades\Redis;
@@ -139,6 +140,19 @@ class UpdateController extends Controller
         $svStream->active = 1;
 
         SvStreamService::upsertSvStream($svStream);
+    }
+    //------------------------update info sv download----------------------------------------------
+    function updateInfoDownload(Request $request)
+    {
+        $svDownload = new SvDownload();
+        $svDownload->name = $request->sv;
+        $svDownload->domain = $request->domain;
+        $svDownload->cpu = $request->cpu;
+        $svDownload->percent_space = $request->percent_space;
+        $svDownload->out_speed = $request->out_speed;
+        $svDownload->active = 1;
+
+        SvDownloadService::upsertSvDownload($svDownload);
     }
     //=============================================================================================
 }
