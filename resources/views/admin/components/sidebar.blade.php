@@ -23,7 +23,7 @@
     <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
         <ul class="flex flex-col xl:flex-row pl-0 mb-0">
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="/admin/dashboard">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -34,7 +34,7 @@
             </li>
 
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="javascript:;" dropdown-trigger aria-expanded="false">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
@@ -46,7 +46,7 @@
  origin-top list-none rounded-lg border-none bg-clip-padding pr-2 py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
  lg:absolute lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/setting">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -57,7 +57,7 @@
                         </a>
                     </li>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/setting">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -71,7 +71,7 @@
             </li>
 
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="/admin/compute?tab=storage">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="/admin/statistic?tab=user">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -91,19 +91,19 @@
                 </a>
             </li>
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
-                   href="javascript:;" dropdown-trigger aria-expanded="false">
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                   href="/admin/manageTask?tab=encodingTask&status=all" dropdown-trigger aria-expanded="false">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                         <i class="material-symbols-outlined opacity-1">sync_alt</i>
                     </div>
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="manageTask">Manage Task</span>
                 </a>
-                <ul class="pl-4 xl:pl-2 text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none xl:absolute top-10 z-20
+                <ul class="hidden pl-4 xl:pl-2 text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none xl:absolute top-10 z-20
  origin-top list-none rounded-lg border-none bg-clip-padding pr-2 xl:py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
-lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
+lg:left-auto xl:block lg:cursor-pointer" dropdown-menu>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/manageTask?tab=encodingTask&status=all">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -113,7 +113,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                         </a>
                     </li>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/manageTask?tab=transferTask">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -123,7 +123,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                         </a>
                     </li>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/manageTask?tab=torrentTask">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -133,7 +133,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                         </a>
                     </li>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/manageTask?tab=streamTask">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -146,7 +146,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
             </li>
 
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="/admin/user?tab=all">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -157,19 +157,19 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
             </li>
 
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
-                   href="javascript:;" dropdown-trigger aria-expanded="false">
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                   href="/admin/supportAdmin?tab=cases" dropdown-trigger aria-expanded="false">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                         <i class="material-symbols-outlined opacity-1">support_agent</i>
                     </div>
                     <span class="ml-1 duration-300 opacity-1 pointer-events-none ease" name="support">Support</span>
                 </a>
-                <ul class="text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none absolute top-10 z-30
+                <ul class="hidden text-sm transform-dropdown bg-[#121520] 0 duration-250 min-w-48 pointer-events-none absolute top-10 z-30
  origin-top list-none rounded-lg border-none bg-clip-padding pr-2 py-2 text-left text-slate-500 opacity-0 transition-all sm:-mr-6
- lg:absolute lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
+ lg:absolute lg:left-auto xl:block lg:cursor-pointer" dropdown-menu>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/supportAdmin?tab=cases">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -179,7 +179,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                         </a>
                     </li>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/support?tab=reports">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -190,7 +190,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                         </a>
                     </li>
                     <li class="my-1.5 w-full">
-                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                        <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                            href="/admin/support?tab=customdomain">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -202,7 +202,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                 </ul>
             </li>
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -212,7 +212,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                 </a>
             </li>
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="/admin/payment">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
@@ -222,7 +222,7 @@ lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                 </a>
             </li>
             <li class="my-1.5 w-full">
-                <a class="menu-sidebar w-full text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
+                <a class="menu-sidebar w-full text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
                    href="">
                     <div
                         class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">

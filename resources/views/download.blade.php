@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('image/logo/logo4.webp')}}"/>
     <link rel="icon" type="image/png" href="{{asset('image/logo/logo4.webp')}}"/>
-    <title>Stream Silk</title>
+    <title>StreamSilk</title>
     @vite('resources/css/app.css')
     <style>
         @font-face {
@@ -17,7 +17,7 @@
     </style>
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
-    @vite('resources/js/eplay.js')
+    @vite('resources/js/download.js')
 </head>
 <body class="m-0  font-sans antialiased font-normal text-start text-base leading-default
     text-slate-500 bg-[#142132]">
@@ -25,11 +25,27 @@
     @include('landing-page.components.navbar')
     <section class="container mx-auto md:px-16 mb-10">
         <div class="flex flex-col justify-center items-center">
-            <div class="text-slate-200 font-medium mt-10 text-3xl text-center">{{ $video->title }}</div>
+            <div class="text-slate-200 font-medium mt-6 text-3xl text-center">{{ $video->title }}</div>
             <img src="{{ $video->poster }}" alt="" class="mt-4 lg:w-1/2">
-            <div class="mt-3 text-center">
+            <div class="mt-3 text-center" id="box-download">
                 <h4 class="text-white">Click the button to get link download</h4>
-                <button class="px-5 py-1.5 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white">Get Link Download</button>
+                <div class="flex font-bold justify-center">
+                    @if( !empty($video->sd) && $video->sd != 19)
+                        <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white" btn-download-link>
+                            <a href="">480</a>
+                        </button>
+                    @endif
+                    @if( !empty($video->hd) && $video->hd != 19)
+                        <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white mx-3" btn-download-link>
+                            <a href="">720</a>
+                        </button>
+                    @endif
+                    @if( !empty($video->fhd) && $video->fhd != 19)
+                        <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white" btn-download-link>
+                            <a href="">1080</a>
+                        </button>
+                    @endif
+                </div>
             </div>
         </div>
     </section>

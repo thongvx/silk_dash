@@ -45,9 +45,10 @@ class ManagetaskRepo
 
     public function getAllTransfer($tab, $column, $direction, $limit)
     {
-        $query = Transfer::query();
+        $query = Transfer::query()
+                ->join('folders', 'transfer.folder_id', '=', 'folders.id')
+                ->select('transfer.*', 'folders.name_folder as folder_name');
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
-        $query->where('status', 3);
         if (Auth::user()->hasRole('admin')) {
             $transfer = $query->orderBy($column1, $direction)->paginate($limit);
         } else {
@@ -55,5 +56,11 @@ class ManagetaskRepo
         }
 
         return $transfer;
+    }
+
+    public function getEncoderBySlug($slug)
+    {
+        $data = $this->encoderTask->where('slug', $slug);
+        return $data;
     }
 }

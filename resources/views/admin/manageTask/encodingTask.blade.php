@@ -127,6 +127,7 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -157,7 +158,7 @@
                                     }
                                     $size = formatSize($encoder->size);
                                 @endphp
-                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" id="{{ $encoder->id }}">
+                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] {{ $encoder->slug }}" id="{{ $encoder->id }}">
                                     <td class="pl-2 {{ $text }} id">{{ $encoder->id }}</td>
                                     <td class="pl-2">{{ $encoder->user_id }}</td>
                                     <td class="pl-2 {{ $text }} slug">{{ $encoder->slug }}</td>
@@ -169,23 +170,13 @@
                                     <td class="pl-2 cursor-pointer sv-encoder" btn-retry-encoder data-encoder-id={{ $encoder->id }}>{{ $encoder->sv_encoder }}</td>
                                     <td class="pl-2 cursor-pointer sv-sto" btn-retry-storage data-storage-id={{ $encoder->id }}>{{ $encoder->sv_storage }}</td>
                                     <td class="pl-2">
-                                        @php
-                                            $timestamp = (int) $encoder->start_encoder;
-                                            $finishEncoderDate = (new DateTime())->setTimestamp($timestamp);
-                                            $formattedDate = $finishEncoderDate->format('d/m/Y H:i:s');
-                                            if($encoder->start_encoder == 0){
-                                                $formattedDate = 0;
-                                            }
-                                        @endphp
-                                        {{ $formattedDate }}
+                                        {{ $encoder->start_encoder }}
                                     </td>
                                     <td class="pl-2">
-                                        @php
-                                            $timestamp = (int) $encoder->finish_encoder;
-                                            $finishEncoderDate = (new DateTime())->setTimestamp($timestamp);
-                                            $formattedDate = $finishEncoderDate->format('d/m/Y H:i:s');
-                                        @endphp
-                                        {{ $formattedDate }}
+                                        {{ $encoder->finish_encoder }}
+                                    </td>
+                                    <td class="w-max text-center cursor-pointer hover:text-[#009fb2]" btn-remove-encoder data-slug="{{ $encoder->slug }}">
+                                        <i class="material-symbols-outlined opacity-1">delete</i>
                                     </td>
                                 </tr>
                             @empty
@@ -268,22 +259,4 @@
         </div>
     </div>
 </div>
-<div fixed-video>
-    <!-- -right-90 in loc de 0-->
-    <div fixed-video-card
-         class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full  backdrop-blur-sm
-           min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3" id="fixed-video">
-        <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-video-close-button>
-        </div>
-        <div
-            class="w-11/12 sm:w-4/5 xl:w-2/5 bg-[#121520] z-20 py-4 px-3 rounded-lg relative shadow-lg shadow-slate-900">
-            <div class="absolute right-4 top-3">
-                <button fixed-video-close-button
-                        class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
-                    <i class="material-symbols-outlined text-3xl">close</i>
-                </button>
-            </div>
-            <div  id="fixed-box-control"></div>
-        </div>
-    </div>
-</div>
+

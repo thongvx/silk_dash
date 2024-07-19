@@ -1,7 +1,5 @@
 import {updateOriginalFormState} from "../main.js";
 
-var fixedVideoCard = $("[fixed-video-card]");
-
 export function btn_video(){
     const rows_checked = $('table').find('tbody .checkbox:checked').length;
     if (rows_checked > 0) {
@@ -18,6 +16,7 @@ export function btn_video(){
 }
 
 export function fixedBox (box) {
+    const fixedVideoCard = $("[fixed-video-card]");
     fixedVideoCard.toggleClass("opacity-0");
     fixedVideoCard.toggleClass("opacity-1");
     fixedVideoCard.toggleClass("hidden");
@@ -33,7 +32,7 @@ export function checkAll() {
 $(document).on('click', '[btn-cancel], [fixed-video-close-button]', function() {
     fixedBox ()
     $('#move,#export, #delete-report, #clone').css("display",'none')
-    $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video, #add-sever, #retry-encoder, #subtitles').remove()
+    $('#edit,#edit-folder, #delete-folder, #add-folder, #delete-video, #add-sever, #retry-encoder, #subtitles, #remove-encoder').remove()
     btn_video()
 });
 //move video to folder

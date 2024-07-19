@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\EncoderTask;
 use App\Models\SvEncoder;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redis;
@@ -28,6 +29,7 @@ class EncoderController
 
             $svEncoder->increment('encoder');
             $data->sv_encoder = $svEncoder->name;
+            $data->start_encoder = Carbon::now()->format('Y-m-d H:i:s');
             $data->save();
         }
     }
@@ -38,7 +40,7 @@ class EncoderController
         if($data){
             $data->status = 2;
             $data->sv_encoder = $encoderTaskInfo['sv'];
-            $data->finish_encoder = time();
+            $data->finish_encoder = Carbon::now()->format('Y-m-d H:i:s');
             $data->save();
             //update sv encoder
             $svEncoder = SvEncoder::where('name', $encoderTaskInfo['sv'])->first();

@@ -1,47 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>{{ $title }}</title>
-    <meta content="Embed" name="description" />
+    <meta content="Embed" name="description"/>
     <meta name="google" content="notranslate">
-    <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}"/>
     <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
-        #video_player{
+        #video_player {
             height: 100vh !important;
         }
-        .preloader .preloader-icon{
-            border-top: 2px solid {{ $player_setting->premium_color }};
+
+        .preloader .preloader-icon {
+            border-top: 2px solid{{ $player_setting->premium_color }};
         }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-Q2MFXEGDES');
     </script>
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) {
+                    return;
+                }
+            }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
         ym(97794899, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true
         });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 </head>
 <body>
@@ -62,7 +77,7 @@
 <script>
     var t = 0;
     var playID = 0;
-    var videoID ="{{ $videoID }}";
+    var videoID = "{{ $videoID }}";
     var urlPlay = "{{ $urlPlay }}";
     var iframe = {{ $iframe }};
     var typeVideo = {{ $videoType }};
@@ -72,19 +87,20 @@
     var is_sub = {{ $is_sub }};
     var infinite_loop = "{{ $player_setting->infinite_loop }}";
     var logo_link = "{{ $player_setting->logo_link }}";
-    var logo = "{{ $player_setting->show_logo }}";
-    var preview = "{{ $player_setting->show_preview }}";
+    var logo = {{ $player_setting->show_logo }};
+    var preview = {{ $player_setting->show_preview }};
+    var download = {{ $player_setting->show_download }};
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
     var urlLogo
-    if(logo === '1' && logo_link !== ''){
-        if(logo_link.includes("http")){
+    if (logo === 1 && logo_link !== '') {
+        if (logo_link.includes("http")) {
             urlLogo = logo_link
-        }else{
+        } else {
             urlLogo = "{{ asset(Storage::url($player_setting->logo_link)) }}"
         }
-    }else{
+    } else {
         urlLogo = ""
     }
     //poster
@@ -103,7 +119,7 @@
     const loadPlayer = async (file) => {
         const options = {
             key: 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=',
-            sources: [{ file, type: 'hls' }],
+            sources: [{file, type: 'hls'}],
             playbackRateControls: [0.75, 1, 1.25, 1.5],
             aspectratio: "16:9",
             jwplayer8quality: true,
@@ -111,15 +127,62 @@
             preload: preload,
             width: '100%',
             height: '100%',
-            skin: { active: "{{ $player_setting->premium_color }}", },
-            title : title,
+            skin: {active: "{{ $player_setting->premium_color }}",},
+            title: title,
             localization: {
                 locale: 'en',
             }
         };
-        if(urlSub === 1 && is_sub === 1){
+        if (urlSub === 1 && is_sub === 1) {
             const jsonUrl = `https://streamsilk.com/storage/subtitles/${videoID}/${videoID}.json`;
-            const languageCodes = { 'eng' : 'English', 'spa' : 'Spanish', 'aze' : 'Azerbaijani', 'alb' : 'Albanian', 'ara' : 'Arabic', 'bul' : 'Bulgarian', 'chi' : 'Chinese', 'dnk' : 'Denmark', 'per' : 'Persian', 'fin' : 'Finland', 'fre' : 'French', 'ger' : 'German', 'gre' : 'Greek', 'heb' : 'Hebrew', 'hin' : 'Hindi', 'hun' : 'Hungarian', 'ind' : 'Indonesian', 'ita' : 'Italian', 'jpn' : 'Japanese', 'kan' : 'Kannada', 'khm' : 'Khmer', 'kor' : 'Korean', 'mal' : 'Malayalam', 'may' : 'Malay', 'nor' : 'Norway', 'pol' : 'Polish', 'por' : 'Portuguese', 'rus' : 'Russian', 'sin' : 'Sinhala', 'slv' : 'Slovenian', 'srp' : 'Serbian', 'swe' : 'Sweden', 'tam' : 'Tamil', 'tha' : 'Thai', 'tur' : 'Turkish', 'ukr' : 'Ukrainian', 'vie' : 'Vietnamese', 'rum' : 'Romanian', 'mar' : 'Marathi', 'cze' : 'Czech', 'slo' : 'Slovak', 'lit' : 'Lithuanian', 'kur' : 'Kurdish', 'dan' : 'Danish', 'bos' : 'Bosnian', 'hrv' : 'Croatian' };
+            const languageCodes = {
+                'eng': 'English',
+                'spa': 'Spanish',
+                'aze': 'Azerbaijani',
+                'alb': 'Albanian',
+                'ara': 'Arabic',
+                'bul': 'Bulgarian',
+                'chi': 'Chinese',
+                'dnk': 'Denmark',
+                'per': 'Persian',
+                'fin': 'Finland',
+                'fre': 'French',
+                'ger': 'German',
+                'gre': 'Greek',
+                'heb': 'Hebrew',
+                'hin': 'Hindi',
+                'hun': 'Hungarian',
+                'ind': 'Indonesian',
+                'ita': 'Italian',
+                'jpn': 'Japanese',
+                'kan': 'Kannada',
+                'khm': 'Khmer',
+                'kor': 'Korean',
+                'mal': 'Malayalam',
+                'may': 'Malay',
+                'nor': 'Norway',
+                'pol': 'Polish',
+                'por': 'Portuguese',
+                'rus': 'Russian',
+                'sin': 'Sinhala',
+                'slv': 'Slovenian',
+                'srp': 'Serbian',
+                'swe': 'Sweden',
+                'tam': 'Tamil',
+                'tha': 'Thai',
+                'tur': 'Turkish',
+                'ukr': 'Ukrainian',
+                'vie': 'Vietnamese',
+                'rum': 'Romanian',
+                'mar': 'Marathi',
+                'cze': 'Czech',
+                'slo': 'Slovak',
+                'lit': 'Lithuanian',
+                'kur': 'Kurdish',
+                'dan': 'Danish',
+                'bos': 'Bosnian',
+                'hrv': 'Croatian'
+            };
             try {
                 const response = await fetch(jsonUrl);
                 if (!response.ok) throw new Error("Subtitle file not found");
@@ -130,14 +193,14 @@
                     kind: 'captions',
                 }));
                 // Add subtitle tracks to the player options
-                if(tracks.length > 0) {
+                if (tracks.length > 0) {
                     options.tracks = tracks;
                 }
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
             }
         }
-        if(urlLogo !== ""){
+        if (urlLogo !== "") {
             options.logo = {
                 "file": urlLogo,
                 'hide': 1,
@@ -146,10 +209,10 @@
                 "height": 50,
             }
         }
-        if(urlposter !== "" && urlposter !== "0"){
+        if (urlposter !== "" && urlposter !== "0") {
             options.image = urlposter
         }
-        if(preview === '1') {
+        if (preview === 1) {
             const previewTrack = {
                 file: `https://cdnimg.streamsilk.com/preview/${videoID}/${videoID}.jpg`,
                 kind: "thumbnails",
@@ -164,6 +227,17 @@
         //     var currentPosition = player.getPosition();
         //     localStorage.setItem(`savedPosition_${videoID}`, currentPosition);
         // });
+        if( download === 1){
+            player.addButton(
+                '<svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-download" viewBox="0 0 24 24" focusable="false"><path d="M12 16l4-4h-3V4h-2v8H8l4 4zm-6 2v2h12v-2H6z"/></svg>',
+                'Download',
+                function(){
+                    const link_download = '{{ route('download', $videoID) }}';
+                    openNewTab(link_download);
+                },
+                'Download'
+            );
+        }
         player.addButton(
             '<svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-rewind2" viewBox="0 0 240 240" focusable="false"><path d="m 25.993957,57.778 v 125.3 c 0.03604,2.63589 2.164107,4.76396 4.8,4.8 h 62.7 v -19.3 h -48.2 v -96.4 H 160.99396 v 19.3 c 0,5.3 3.6,7.2 8,4.3 l 41.8,-27.9 c 2.93574,-1.480087 4.13843,-5.04363 2.7,-8 -0.57502,-1.174985 -1.52502,-2.124979 -2.7,-2.7 l -41.8,-27.9 c -4.4,-2.9 -8,-1 -8,4.3 v 19.3 H 30.893957 c -2.689569,0.03972 -4.860275,2.210431 -4.9,4.9 z m 163.422413,73.04577 c -3.72072,-6.30626 -10.38421,-10.29683 -17.7,-10.6 -7.31579,0.30317 -13.97928,4.29374 -17.7,10.6 -8.60009,14.23525 -8.60009,32.06475 0,46.3 3.72072,6.30626 10.38421,10.29683 17.7,10.6 7.31579,-0.30317 13.97928,-4.29374 17.7,-10.6 8.60009,-14.23525 8.60009,-32.06475 0,-46.3 z m -17.7,47.2 c -7.8,0 -14.4,-11 -14.4,-24.1 0,-13.1 6.6,-24.1 14.4,-24.1 7.8,0 14.4,11 14.4,24.1 0,13.1 -6.5,24.1 -14.4,24.1 z m -47.77056,9.72863 v -51 l -4.8,4.8 -6.8,-6.8 13,-12.99999 c 3.02543,-3.03598 8.21053,-0.88605 8.2,3.4 v 62.69999 z"></path></svg>',
             'next 10s',
@@ -187,25 +261,25 @@
         //         player.seek(parseFloat(savedPosition));
         //     });
         // }
-        player.on('seek', function() {
+        player.on('seek', function () {
             isSeeking = true;
         });
-        player.on('seeked', function() {
+        player.on('seeked', function () {
             isSeeking = false;
         });
-        player.on('play', function() {
+        player.on('play', function () {
             isPaused = false;
-            if(player.getDuration() < 600){
+            if (player.getDuration() < 600) {
                 totalTimeRequired = player.getDuration() * 0.3
-            }else{
+            } else {
                 totalTimeRequired = 120
             }
             clearInterval(intervalId);
-            if(viewTime >= totalTimeRequired){
+            if (viewTime >= totalTimeRequired) {
                 return
             }
-            intervalId = setInterval(function() {
-                if ( !isSeeking && !isPaused) {
+            intervalId = setInterval(function () {
+                if (!isSeeking && !isPaused) {
                     viewTime++;
                     if (viewTime >= totalTimeRequired && !hasIncreasedPlayCount) {
                         clearInterval(intervalId);
@@ -215,23 +289,24 @@
                 }
             }, 1000);
         });
-        player.on('pause', function() {
+        player.on('pause', function () {
             isPaused = true;
             clearInterval(intervalId);
         });
-        player.on('complete', function() {
+        player.on('complete', function () {
             isPaused = true;
             clearInterval(intervalId);
         });
     };
     $(document).ready(async () => {
         let adBlockEnabled = false
-        if(adBlockEnabled == false || enablePlay == 'yes'){
+        if (adBlockEnabled == false || enablePlay == 'yes') {
             let file = urlPlay;
             loadPlayer(file);
             $('.preloader').fadeOut();
         }
     });
+
     function openNewTab(url) {
         var a = document.createElement('a');
         a.href = url;
@@ -241,20 +316,22 @@
         a.click();
         document.body.removeChild(a);
     }
-    $(document).on('click', '#video_player', function() {
+
+    $(document).on('click', '#video_player', function () {
         if (playID === 0) {
             playID = 1;
             openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-    let pop5s  = setTimeout(function() {
-        $('body').click(function(){
-            if(t === 0)
+    let pop5s = setTimeout(function () {
+        $('body').click(function () {
+            if (t === 0)
                 window.open("https://familiarpyromaniasloping.com/2009872/");
             t = 1;
             clearTimeout(pop5s)
         })
     }, 5000);
+
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)
@@ -267,7 +344,7 @@
             .then(json => {
                 console.log("update views success");
             })
-            .catch(function() {
+            .catch(function () {
                 console.log("fail");
             });
     }

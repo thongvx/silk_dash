@@ -3,23 +3,28 @@
       class="flex z-20 flex-wrap items-center justify-between px-3 py-2 lg:px-3 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
       navbar-main navbar-scroll="false">
       <div class="flex items-center justify-between w-full px-0 mx-auto flex-wrap">
+          <a href="javascript:;" class="block xl:hidden p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
+              <div class="w-6 overflow-hidden">
+                  <i class="ease mb-1.5 relative block h-0.5 rounded-sm bg-white transition-all"></i>
+                  <i class="ease mb-1.5 relative block h-0.5 rounded-sm bg-white transition-all"></i>
+                  <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
+              </div>
+          </a>
          <div class="">
-          <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white text-slate-400 xl:hidden"
-            sidenav-close></i>
           <a class="flex px-6 m-0 text-sm whitespace-nowrap items-center" href="" target="_blank">
-            <img src="{{asset('assets/img/logo3.png')}}"
-              class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-10"
+            <img src="{{asset('image/logo/logo4.webp')}}"
+              class="h-full max-w-full transition-all duration-200 ease-nav-brand max-h-10"
               alt="main_logo" />
-            <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">
-              <img src="{{asset('assets/img/name-web3.png')}}"
-              class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
+            <span class="ml-3 font-semibold transition-all duration-200 ease-nav-brand">
+              <img src="{{asset('image/logo/name.webp')}}"
+              class="h-full max-w-full transition-all duration-200 ease-nav-brand max-h-10"
               alt="main_logo" />
             </span>
           </a>
         </div>
 
-          <div class="flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-              <div class="flex items-center md:ml-auto px-2">
+          <div class="block xl:flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto max-w-max">
+              <div class="hidden items-center md:ml-auto px-2 xl:flex">
                   <form class="flex items-center relative bg-[#121520] w-full rounded-lg ease" action="/video/search" method="GET" search>
                       <label for="search" class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
                       <input type="text" id="search" name="videoID" value="" search-input
@@ -36,7 +41,7 @@
               </li> -->
             <!-- notifications -->
 
-            <li class="relative flex items-center pr-2">
+            <li class="relative flex items-center pr-2 hidden">
               <p class="hidden transform-dropdown-show"></p>
               <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger
                 aria-expanded="false">
@@ -129,7 +134,7 @@
                 </li>
               </ul>
             </li>
-              <li class="relative items-center px-4 hidden md:flex">
+              <li class="relative items-center px-4 md:flex">
                   <a href="javascript:;" aria-expanded="false"  dropdown-trigger
                      class="flex flex-col text-sm font-semibold text-white transition-all ease-nav-brand">
                 <span class="rounded-full border h-10 w-10 text-lg font-bold flex items-center justify-center">

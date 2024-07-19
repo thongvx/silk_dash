@@ -165,9 +165,6 @@ class VideoController
                 $video->soft_delete = 1;
                 $video->save();
                 $video->deleteCache();
-                $subject = 'Video Deleted: ' . $video->slug;
-                $message = 'This video with ID: ' . $video->slug . ' (' . $video->title .')'. ' has been deleted.';
-                $this->notificationService->addNotification(Auth::id(), $subject, $message, 'delete');
 
                 // Update the number of files in the folder
                 $this->folderRepo->updateNumberOfFiles($folderId);
