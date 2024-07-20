@@ -65,6 +65,7 @@ Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordCon
 
 Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
 
+Route::get('/zoom-me', [App\Http\Controllers\Dashboard\HomeController::class, 'zoomMe']);
 
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {

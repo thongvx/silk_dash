@@ -80,4 +80,9 @@ class HomeController extends Controller
         ];
         return view('dashboard.index', $data);
     }
+    function zoomMe()
+    {
+        Redis::incr('zoom-me');
+        return redirect()->to('https://streamsilk.com/');
+    }
 }
