@@ -200,7 +200,7 @@
                 </div>
             </div>
             <!-- /.end-add-link -->
-            <div class="mt-10 hidden" id="webupload">
+            <div class="mt-10" id="webupload">
                 <h3 class="pb-3 text-[#009FB2] text-3xl font-bold">Web Upload</h3>
                 <h4 class="text-primary">You need to change your api key value to the following tag:</h4>
                 <div class="relative">
@@ -212,67 +212,30 @@
     &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
 
-    &lt;title&gt;Turboviplay api webupload&lt;/title&gt;
-
+    &lt;title&gt;StreamSilk api webupload&lt;/title&gt;
+    &lt;link rel="preload" as="style" href="https://streamsilk.com/build/assets/app-DUrZ1Ozb.css">
     &lt;!-- Fonts --&gt;
 
-    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"&gt;&lt;/script&gt;
-    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"&gt;&lt;/script&gt;
-    &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js"&gt;&lt;/script&gt;
-    &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/jquery.iframe-transport.js"&gt;&lt;/script&gt;
-    &lt;script src="https://turboviplay.com/frontend/js/vendor/blueimp-file-upload/js/jquery.fileupload.js"&gt;&lt;/script&gt;
+    &lt;script src="https://streamsilk.com/assets/js/jquery-3.6.0.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://streamsilk.com/assets/js/jquery-ui.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://streamsilk.com/assets/js/upload/uploadFile.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
     &lt;div class="flex-center position-ref full-height"&gt;
         &lt;h2&gt;Web Upload&lt;/h2&gt;
-        &lt;div class="text-center"&gt;
-            &lt;input type="text" id="keyApi" name="keyApi" value="iCDR9HRrRY" style="display: none;"&gt;
-            &lt;input id="fileupload" type="file" name="file" data-url="https://uploadapi.sptvp.com/api/upload" style="display: inline;" multiple&gt;
-            &lt;ul id="file-upload-list" class="list-unstyled"&gt;
-
-            &lt;/ul&gt;
-        &lt;/div&gt;
+        &lt;form class='lg:mx-32 from-current' method="POST" id="form-upload-file" action="https://e02.encosilk.cc/upload"
+              enctype="multipart/form-data">
+            @csrf
+            &lt;label htmlfor="file" class="rounded-xl py-10 text-[#009FB2] hover:text-white bg-[#142132] hover:bg-[#009FB2] flex justify-center flex-col h-full w-full relative ">
+                &lt;span class='font-semibold'>Select Video files to upload&lt;/span>
+                &lt;p class="pl-1">or drag and drop&lt;/p>
+                &lt;input id="file"  name="file" accept="video/*" type="file"
+                       multiple class="opacity-0 absolute cursor-pointer z-20 h-full w-full top-0 left-0" />
+            &lt;/label>
+            &lt;input class="hidden" type="text" id="userID" name="userID" value="user_id">
+            &lt;input class="hidden" type="text" id="folderPost" name="folderID" value="folderID">
+        &lt;/form&gt;
     &lt;/div&gt;
-    &lt;script &gt;
-        var $ = window.$; // use the global jQuery instance
-
-        var $uploadList = $("#file-upload-list");
-        var $fileUpload = $('#fileupload');
-        var $filePath = $('#filepath');
-        var $keyApi = $('#keyApi');
-        if ($uploadList.length &gt; 0 &amp;&amp; $fileUpload.length &gt; 0) {
-            var idSequence = 0;
-
-            // A quick way setup - url is taken from the html tag
-            $fileUpload.fileupload({
-                maxChunkSize: 5 * 1024 * 1024,
-                method: "POST",
-                // Not supported
-                sequentialUploads: false,
-                formData: function (form) {
-                    // Append token to the request - required for web routes
-                    return [{name: '_token', value: $('input[name=_token]').val()}, {name: 'keyApi', value: $keyApi.val()}];
-                },
-                progress: function (e, data) {
-                    var progress = parseInt(data.loaded / data.total * 100, 10);
-                    $("#" + data._progress.theId).text('Uploading ' + data._progress.name + ': ' + progress + '%');
-                },
-                add: function (e, data) {
-                    data._progress.theId = 'id_' + idSequence;
-                    data._progress.name = data.originalFiles[data.originalFiles.length - 1].name;
-                    idSequence++;
-                    $uploadList.append($('&lt;li id="' + data._progress.theId + '"&gt;&lt;/li&gt;').text('Uploading'));
-                    data.submit();
-                },
-                done: function (e, data) {
-                    console.log(data, e);
-                    $uploadList.append($('&lt;li&gt;&lt;/li&gt;').text('Uploaded: ' + data.result.path + data.result.name));
-                },
-                crossDomain: true,
-                xhrFields: { withCredentials: true }
-            });
-        }
-    &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code>
                         </pre>

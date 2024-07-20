@@ -219,9 +219,6 @@
                                 <h6 class="text-red-500 font-bold">
                                     {{ $notification->subject }}
                                 </h6>
-                                <p class="italic">
-                                    {{ $notification->message }}
-                                </p>
                             </div>
                         </div>
                     @empty

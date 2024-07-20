@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/eplay.js',
                 'resources/js/download.js',
+                'resources/js/upload/uploadFile.js',
                 'resources/js/landing.js',
                 'resources/css/vs2015.css',
                 'resources/js/admin/admin.js',
