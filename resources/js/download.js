@@ -50,9 +50,9 @@ $(document).on('click', '[btn-download-link]', function() {
                     $('.time').text(time - 1)
                 }else{
                     $('#loading').remove()
-                    const url = `https://${sv}/download?slug=${slug}&quality=${quality}&title=${title}${res}`
+                    const url = `https://${ sv.replace('d','s')}.dolasilk.cc/download?slug=${slug}&quality=${quality}&title=${title}${res}`
                     $('#box-download').html(`<div class="mt-6">
-                                                <a href="${url}" class="px-7 py-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white" download="${slug}">Download</a>
+                                                <a href="${url}" target="_blank" class="px-7 py-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white" download="${slug}">Download</a>
                                             </div>`)
                     clearInterval(getlink)
                 }
