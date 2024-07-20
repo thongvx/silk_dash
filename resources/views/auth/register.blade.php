@@ -76,6 +76,37 @@
                                         </div>
                                     </div>
 
+                                    <div class="mb-3">
+                                        <label  class="text-[#142132] font-medium">Website</label>
+                                        <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2]">
+                                            <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3">link</i>
+                                            <input type="text" name="website" autocomplete="off" value=""
+                                                   class="@error('website') is-invalid @enderror bg-transparent text-white placeholder:text-gray-200 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                   placeholder="website">
+                                        </div>
+                                        @error('website')
+                                        <span class="font-italic  error invalid-feedback text-red-500" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="flex justify-between w-full items-center">
+                                            <label  class="text-[#142132] font-medium">Contact</label>
+                                            <div class="flex w-max py-1.5">
+                                                <div class="cursor-pointer tab-contact bg-[#009FB2] hover:bg-[#009FB2] px-3 py-1 rounded-full">Telegram</div>
+                                                <div class="ml-3 cursor-pointer tab-contact bg-[#121520] hover:bg-[#009FB2] px-3 py-1 rounded-full">Skype</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="rounded-xl flex items-center bg-[#142132] hover:bg-[#009FB2]">
+                                            <i class="material-symbols-outlined opacity-1 text-2xl p-1 ml-3" id="icon-contact">contacts</i>
+                                            <input type="text" name="telegram" autocomplete="off" value="" id="contact"
+                                                   class="bg-transparent text-white placeholder:text-gray-200 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                   placeholder="telegram">
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-8">
                                             <div class="icheck-primary">
@@ -103,7 +134,7 @@
                             </div>
                             <div class="border-black/12.5 rounded-b-2xl border-t-0 border-solid p-6 text-center pt-0 px-1 sm:px-6">
                                 <p class="mx-auto mb-6 leading-normal text-sm  text-[#142132]">
-                                    Already have an account? <a href="{{ route('login') }}" class="font-semibold text-[#009FB2]">Sign up</a>
+                                    Already have an account? <a href="{{ route('login') }}" class="font-semibold text-[#009FB2]">Sign in</a>
                                 </p>
                             </div>
                         </div>
@@ -117,5 +148,26 @@
             </div>
         </div>
     </section>
+    <script>
+        const tabs = document.querySelectorAll('.tab-contact');
+        const contact = document.getElementById('contact');
+        $(document).on('click', '.tab-contact', function () {
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-[#009FB2]');
+                tab.classList.add('bg-[#121520]');
+            });
+            $(this).removeClass('bg-[#121520]');
+            $(this).addClass('bg-[#009FB2]');
+            contact.placeholder = $(this).text().toLowerCase();
+            contact.name = $(this).text().toLowerCase();
+        });
+        $(document).on('submit', 'form', function () {
+            $(this).find('button').attr('disabled', true);
+            $(this).find('button').css('cursor', 'not-allowed');
+            $(this).find('button').removeClass('hover:bg-[#009FB2] bg-[#009FB2]/70');
+            $(this).find('button').addClass('bg-[#009FB2]');
+            $(this).find('button').html('Processing...');
+        });
+    </script>
 @endsection
 
