@@ -1,10 +1,20 @@
+function openNewTab(url) {
+    var a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
 $(document).on('click', '[btn-download-link]', function() {
     $('[btn-download-link]').remove()
-
+    openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
     const slug = $('#box-download').data('slug')
     const quality = $(this).data('quality')
     const path = $(this).data('path')
-    const sv = $('#box-download').data('svDownload') ?? 'st01'
+    const sv = $('#box-download').data('svDownload')
     const title = $('#box-download').data('title')
     const data = {
         'slug': slug,
@@ -52,3 +62,22 @@ $(document).on('click', '[btn-download-link]', function() {
         }
     })
 })
+
+$(document).on('click', '#pop', function() {
+    var e = $('#pop');
+    e.remove();
+    window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
+    //gala
+    var newScript = document.createElement('script');
+    newScript.setAttribute('data-cfasync', 'false');
+    newScript.setAttribute('async', 'true');
+    newScript.setAttribute('type', 'text/javascript');
+    newScript.src = '//yd.alchimybegins.com/rIiWXNjqhOe8AUjQ/jqWXQ';
+    $('#box-download').appendChild(newScript);
+});
+
+$(document).on('click', '#pop1', function()  {
+    var e1 = $('#pop1');
+    e1.remove();
+    window.open("https://familiarpyromaniasloping.com/2009872/");
+});
