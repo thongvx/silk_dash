@@ -46,11 +46,11 @@
                                 <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer">
                                     name
                                 </th>
-                                <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2">
-                                    IP
-                                </th>
                                 <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer">
                                     Domain
+                                </th>
+                                <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2">
+                                    IP
                                 </th>
                                 <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer">
                                     Provider
@@ -83,8 +83,8 @@
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
                                     <td class="sorting_1">{{ $download->id }}</td>
                                     <td class="domain {{ $download->active == 0 ? 'text-red-400' : '' }}" onclick="edit(this)">{{ $download->name }}</td>
-                                    <td class="ip  {{ $download->active == 0 ? 'text-red-400' : '' }}">{{ $download->ip }}</td>
                                     <td class=" {{ $download->active == 0 ? 'text-red-400' : '' }}">{{ $download->domain }}</td>
+                                    <td class="ip  {{ $download->active == 0 ? 'text-red-400' : '' }}">{{ $download->ip }}</td>
                                     <td>{{ $download->provider }}</td>
                                     <td>{{ $download->in_data }}</td>
                                     <td>{{ $download->space }}</td>
