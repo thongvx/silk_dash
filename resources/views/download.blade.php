@@ -77,7 +77,7 @@
             <div class="text-slate-200 font-medium mt-6 text-3xl text-center">{{ $video->title }}</div>
             <img src="{{ $video->poster }}" alt="" class="mt-4 lg:w-1/2">
             <div class="mt-3 text-center" id="box-download" data-slug="{{ $video->slug }}"
-                 data-title="{{ base64_encode($video->title) }}" data-svDownload="{{ $svDownload }}">
+                 data-title="{{ base64_encode($video->title) }}" data-sv="{{ $svDownload }}">
                 <h4 class="text-white">Click the button to get link download</h4>
                 <div class="flex font-bold justify-center">
                     @if( !empty($video->sd) && $video->sd != 19)
