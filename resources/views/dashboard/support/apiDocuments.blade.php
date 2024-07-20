@@ -200,7 +200,7 @@
                 </div>
             </div>
             <!-- /.end-add-link -->
-            <div class="mt-10" id="webupload">
+            <div class="mt-10 hidden" id="webupload">
                 <h3 class="pb-3 text-[#009FB2] text-3xl hidden font-bold">Web Upload</h3>
                 <h4 class="text-primary">You need to change your api key value to the following tag:</h4>
                 <div class="relative">
