@@ -20,7 +20,7 @@ class SvDownloadService
                 'cpu' => $svDownload->cpu,
                 'percent_space' => $svDownload->percent_space,
                 'out_speed' => $svDownload->out_speed,
-                // thêm các thuộc tính khác của $svStream ở đây
+                'domain' => $svDownload->name,
             ]);
         } else {
             // Nếu key chưa tồn tại, thêm mới
@@ -29,7 +29,7 @@ class SvDownloadService
                 'cpu' => $svDownload->cpu,
                 'percent_space' => $svDownload->percent_space,
                 'out_speed' => $svDownload->out_speed,
-                // thêm các thuộc tính khác của $svStream ở đây
+                'domain' => $svDownload->name,
             ]);
             Redis::sadd('sv_download', $key);
         }
