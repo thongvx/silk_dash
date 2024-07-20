@@ -36,7 +36,7 @@
             <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full">
               <div
                 class="border-base-300 rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top">
-                <div class="tab-content-video box-datatable"  id="box-content">
+                <div class="tab-content-video box-datatable min-h-[calc(100vh-13em)]"  id="box-content">
                     @include(request()->path() . '.' . request()->get('tab'))
                 </div>
               </div>

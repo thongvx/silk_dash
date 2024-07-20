@@ -49,4 +49,11 @@ class SvDownloadService
         }
         return null;
     }
+
+    //get all svDownload
+    public function getAllSvDownloads($column, $direction, $limit)
+    {
+        $data = SvDownload::orderBy($column, $direction)->paginate($limit);
+        return $data;
+    }
 }

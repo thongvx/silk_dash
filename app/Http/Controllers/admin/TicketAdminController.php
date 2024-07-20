@@ -20,7 +20,7 @@ class TicketAdminController
     }
     public function index()
     {
-        $tickets = $this->ticketRepo->all();
+        $tickets = $this->ticketRepo->adminGetAllTickets();
         $data = [
             'title' => 'Support',
             'tickets' => $tickets,

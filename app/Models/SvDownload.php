@@ -22,6 +22,7 @@ class SvDownload extends Model
     protected $fillable = [
         'name',
         'ip',
+        'domain',
         'pass',
         'port',
         'number_video',

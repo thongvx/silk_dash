@@ -5,35 +5,61 @@ var fixedVideoCloseButton = $("[fixed-video-close-button]");
 const formAdd = `<div class="add" id="add-sever">
                                 <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Add Sever</h5>
                                 <form class="text-white mt-3" action="">
-                                    <div class="grid grid-cols-3 gap-4 items-center">
+                                   <div class="grid grid-cols-3 gap-4 items-center">
                                         <h5>
-                                            Video title
-                                        </h5>
-                                        <div class="col-span-2 pr-2 video-title"></div>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-4 items-center my-4">
-                                        <h5>
-                                            Video URL
-                                        </h5>
-                                        <a class="col-span-2 hover:text-[#009FB2]" url-video href="">
-                                            https://cdnwish.com/2aw9nl106nz1
-                                        </a>
-                                    </div>
-                                    <div class="grid grid-cols-3 gap-4 items-center">
-                                        <h5>
-                                            New video title
+                                            Name
                                         </h5>
                                         <div class="col-span-2 pr-2">
                                             <input id="" name="new-name" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
                                    border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
-                                   focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="title"/>
+                                   focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="name"/>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-4 items-center mt-4">
+                                        <h5>
+                                            Domain
+                                        </h5>
+                                        <div class="col-span-2 pr-2">
+                                            <input id="" name="new-name" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
+                                   border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
+                                   focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="domain"/>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-4 items-center mt-4">
+                                        <h5>
+                                            IP
+                                        </h5>
+                                        <div class="col-span-2 pr-2">
+                                            <input id="" name="new-name" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
+                                   border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
+                                   focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="ip"/>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-4 items-center mt-4">
+                                        <h5>
+                                            Password
+                                        </h5>
+                                        <div class="col-span-2 pr-2">
+                                            <input id="" name="new-name" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
+                                   border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
+                                   focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="password"/>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-3 gap-4 items-center mt-4">
+                                        <h5>
+                                            Provider
+                                        </h5>
+                                        <div class="col-span-2 pr-2">
+                                            <input id="" name="new-name" type="text" class="pl-2 text-sm w-full focus:shadow-primary-outline ease leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid
+                                   border-gray-300 bg-slate-900 text-white bg-clip-padding py-2 pr-3 transition-all placeholder:text-gray-500
+                                   focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="provider"/>
                                         </div>
                                     </div>
                                     <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132]" disabled>Submit</button>
                                 </form>
                         </div>`
 $(document).on('click', '[btn-add-sever]', function() {
-    const box = 'edit'
+    const box = 'add-sever'
     console.log('a')
     $('#fixed-box-control').append(formAdd)
     fixedBox(box)

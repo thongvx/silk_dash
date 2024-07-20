@@ -159,7 +159,7 @@
                                     $size = formatSize($encoder->size);
                                 @endphp
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] {{ $encoder->slug }}" id="{{ $encoder->id }}">
-                                    <td class="pl-2 {{ $text }} id">{{ $encoder->id }}</td>
+                                    <td class="pl-2 id">{{ $encoder->id }}</td>
                                     <td class="pl-2">{{ $encoder->user_id }}</td>
                                     <td class="pl-2 {{ $text }} slug">{{ $encoder->slug }}</td>
                                     <td class="pl-2 text-center">{{ $encoder->quality }}</td>
