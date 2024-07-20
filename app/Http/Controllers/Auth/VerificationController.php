@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Facades\Bot;
 
 class VerificationController extends Controller
 {
@@ -52,6 +53,7 @@ class VerificationController extends Controller
         $user = Auth::user();
         $user->active = 1;
         $user->save();
+        Bot::send('new user registered email: ' . $user->email);
         // Log out the user after verification
         Auth::logout();
 
