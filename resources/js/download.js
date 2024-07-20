@@ -14,8 +14,9 @@ $(document).on('click', '[btn-download-link]', function() {
     const slug = $('#box-download').data('slug')
     const quality = $(this).data('quality')
     const path = $(this).data('path')
-    const sv = $('#box-download').data('svDownload')
+    const sv = $('#box-download').data('sv')
     const title = $('#box-download').data('title')
+    console.log(sv)
     const data = {
         'slug': slug,
         'quality': quality,
