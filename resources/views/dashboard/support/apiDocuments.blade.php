@@ -201,7 +201,7 @@
             </div>
             <!-- /.end-add-link -->
             <div class="mt-10" id="webupload">
-                <h3 class="pb-3 text-[#009FB2] text-3xl font-bold">Web Upload</h3>
+                <h3 class="pb-3 text-[#009FB2] text-3xl hidden font-bold">Web Upload</h3>
                 <h4 class="text-primary">You need to change your api key value to the following tag:</h4>
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
@@ -232,10 +232,50 @@
                 &lt;input id="file"  name="file" accept="video/*" type="file"
                        multiple class="opacity-0 absolute cursor-pointer z-20 h-full w-full top-0 left-0" />
             &lt;/label>
-            &lt;input class="hidden" type="text" id="userID" name="userID" value="user_id">
+            &lt;input class="hidden" type="text" id="userID" name="token" value="API Token">
             &lt;input class="hidden" type="text" id="folderPost" name="folderID" value="folderID">
         &lt;/form&gt;
     &lt;/div&gt;
+                                 &lt;script &gt;
+        var $ = window.$; // use the global jQuery instance
+
+        var $uploadList = $("#file-upload-list");
+        var $fileUpload = $('#fileupload');
+        var $filePath = $('#filepath');
+        var $keyApi = $('#keyApi');
+        if ($uploadList.length &gt; 0 &amp;&amp; $fileUpload.length &gt; 0) {
+            var idSequence = 0;
+
+            // A quick way setup - url is taken from the html tag
+            $fileUpload.fileupload({
+                maxChunkSize: 5 * 1024 * 1024,
+                method: "POST",
+                // Not supported
+                sequentialUploads: false,
+                formData: function (form) {
+                    // Append token to the request - required for web routes
+                    return [{name: '_token', value: $('input[name=_token]').val()}, {name: 'keyApi', value: $keyApi.val()}];
+                },
+                progress: function (e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $("#" + data._progress.theId).text('Uploading ' + data._progress.name + ': ' + progress + '%');
+                },
+                add: function (e, data) {
+                    data._progress.theId = 'id_' + idSequence;
+                    data._progress.name = data.originalFiles[data.originalFiles.length - 1].name;
+                    idSequence++;
+                    $uploadList.append($('&lt;li id="' + data._progress.theId + '"&gt;&lt;/li&gt;').text('Uploading'));
+                    data.submit();
+                },
+                done: function (e, data) {
+                    console.log(data, e);
+                    $uploadList.append($('&lt;li&gt;&lt;/li&gt;').text('Uploaded: ' + data.result.path + data.result.name));
+                },
+                crossDomain: true,
+                xhrFields: { withCredentials: true }
+            });
+        }
+    &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code>
                         </pre>
