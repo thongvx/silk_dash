@@ -147,7 +147,6 @@ class UpdateController extends Controller
     {
         $svDownload = new SvDownload();
         $svDownload->name = $request->sv;
-        $svDownload->domain = $request->domain;
         $svDownload->cpu = $request->cpu;
         $svDownload->percent_space = $request->percent_space;
         $svDownload->out_speed = $request->out_speed;
