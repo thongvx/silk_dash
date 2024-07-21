@@ -35,7 +35,7 @@ class StorageController
         if($data){
             $data->status = 4;
             $data->sv_storage = $encoderTaskInfo['sv'];
-            $data->finish_encoder = time();
+            $data->finish_encoder = now();
             $data->save();
             $selectQuality = 'sd';
             if($encoderTaskInfo['quality'] == '720')
