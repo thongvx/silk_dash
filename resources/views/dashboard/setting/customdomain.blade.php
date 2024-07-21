@@ -1,5 +1,10 @@
-
 <div class="mt-5">
+    <h5 class="text-white text-center">
+        Please Create Support Ticket to request this feature!<br>
+        Thank you!
+    </h5>
+</div>
+<div class="mt-5 hidden">
     <div class="flex justify-center">
         <h5 class="text-white md:w-3/4 w-full text-center">
             To add your custom domain, ensure your authoritative DNS servers, or nameservers have been changed. These are your assigned nameservers.
