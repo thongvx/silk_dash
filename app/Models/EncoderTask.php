@@ -41,8 +41,8 @@ class EncoderTask extends Model
         $this->sv_encoder = 0;
         $this->sv_upload = $videoData['sv_upload'];
         $this->sv_storage = 0;
-        $this->start_encoder = 0;
-        $this->finish_encoder = 0;
+        $this->start_encoder = null;
+        $this->finish_encoder = null;
     }
     protected static function boot()
     {
