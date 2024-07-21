@@ -29,7 +29,7 @@ class EncoderController
 
             $svEncoder->increment('encoder');
             $data->sv_encoder = $svEncoder->name;
-            $data->start_encoder = Carbon::now()->format('Y-m-d H:i:s');
+            $data->start_encoder = now();
             $data->save();
         }
     }
@@ -44,6 +44,7 @@ class EncoderController
             //update sv encoder
             $svEncoder = SvEncoder::where('name', $encoderTaskInfo['sv'])->first();
             $svEncoder->decrement('encoder');
+            $data->finish_encoder = now();
             $svEncoder->save();
         }
     }
