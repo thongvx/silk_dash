@@ -40,7 +40,7 @@ class EncoderController
         if($data){
             $data->status = 2;
             $data->sv_encoder = $encoderTaskInfo['sv'];
-            $data->finish_encoder = Carbon::now()->format('Y-m-d H:i:s');
+            $data->finish_encoder = now();
             $data->save();
             //update sv encoder
             $svEncoder = SvEncoder::where('name', $encoderTaskInfo['sv'])->first();
