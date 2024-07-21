@@ -83,7 +83,8 @@ if ($("#chart-line").length) {
                             style: 'normal',
                             lineHeight: 2
                         },
-                    }
+                    },
+                    min: 0
                 },
                 x: {
                     grid: {
