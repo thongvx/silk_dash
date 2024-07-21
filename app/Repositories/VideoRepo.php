@@ -15,7 +15,8 @@ class VideoRepo extends BaseRepository
     {
         return Video::class;
     }
-    public function getAllUserVideo($userId, $tab ,$column , $direction, $folderId, $limit, $page, $columns = ['*']){
+    public function getAllUserVideo($userId, $tab ,$column , $direction, $folderId, $limit, $page, $columns = ['*'])
+    {
 
         $query = $this->query()
             ->where('user_id', $userId);
@@ -24,15 +25,17 @@ class VideoRepo extends BaseRepository
         $cacheKey = VideoCacheKeys::ALL_VIDEO_FOR_USER->value . $userId . 'tab' . $tab . 'get_all' . $limit . '.' . $columnsString . 'direction' . $direction . 'column' . $column . 'folderId' . $folderId . '.page' . $page;
         //Lấy cache
         $video = Redis::get($cacheKey);
-        if (isset($video)){
+        if (isset($video)) {
             return unserialize($video);
         }
 
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
         // Không có thì cache lại, Trả về kết quả, Ví dụ một query nào đó
-        if ($tab == 'removed'){
+        if ($tab == 'removed') {
             $query->where('soft_delete', 1);
-        } else {
+        } elseif ($tab == 'dmca'){
+            $query->where('soft_delete', 2);
+        }else {
             $query->where('soft_delete', 0)
                   ->where('folder_id', $folderId);
         }
