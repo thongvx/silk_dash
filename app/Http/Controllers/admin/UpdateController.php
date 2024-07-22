@@ -47,6 +47,10 @@ class UpdateController extends Controller
         $user = User::find($userId);
         //Update user
         $videoSize = $videoInfo['size'];
+        if($user->video == null)
+            $user->video = 0;
+        if($user->storage == null)
+            $user->storage = 0;
         $user->increment('video');
         $user->increment('storage', $videoSize);
         $user->last_upload = time();
