@@ -60,12 +60,13 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 </head>
+
 <body class="m-0  font-sans antialiased font-normal text-start text-base leading-default
     text-slate-500 bg-[#142132]">
-@if($accountSetting->earningModes == 2)
+@if($accountSetting['earningModes'] == 2)
     <div id="pop1" class="div_pop"></div>
     <div id="pop" class="div_pop"></div>
-@elseif($accountSetting->earningModes == 1)
+@elseif($accountSetting['earningModes'] == 1)
     <div id="pop1" class="div_pop"></div>
 @else
 
@@ -74,27 +75,27 @@
     @include('landing-page.components.navbar')
     <section class="container mx-auto md:px-16 mb-10">
         <div class="flex flex-col justify-center items-center">
-            <div class="text-slate-200 font-medium mt-6 text-3xl text-center">{{ $video->title }}</div>
-            <img src="{{ $video->poster }}" alt="" class="mt-4 lg:w-1/2">
-            <div class="mt-3 text-center" id="box-download" data-slug="{{ $video->slug }}"
-                 data-title="{{ base64_encode($video->title) }}" data-sv="{{ $svDownload }}">
+            <div class="text-slate-200 font-medium mt-6 text-3xl text-center">{{ $video['title'] }}</div>
+            <img src="{{ $video['poster'] }}" alt="" class="mt-4 lg:w-1/2">
+            <div class="mt-3 text-center" id="box-download" data-slug="{{ $video['slug'] }}"
+                 data-title="{{ base64_encode($video['title']) }}" data-sv="{{ $svDownload }}">
                 <h4 class="text-white">Click the button to get link download</h4>
                 <div class="flex font-bold justify-center">
-                    @if( !empty($video->sd) && $video->sd != 19)
+                    @if( !empty($video['sd']) && $video['sd'] != 19)
                         <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white"
-                                data-path="{{ $video->sd }}" data-quality="480" btn-download-link>
+                                data-path="{{ $video['sd'] }}" data-quality="480" btn-download-link>
                             480
                         </button>
                     @endif
-                    @if( !empty($video->hd) && $video->hd != 19)
+                    @if( !empty($video['hd']) && $video['hd'] != 19)
                         <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white mx-3"
-                                data-path="{{ $video->hd }}" data-quality="720" btn-download-link>
+                                data-path="{{ $video['hd'] }}" data-quality="720" btn-download-link>
                             720
                         </button>
                     @endif
-                    @if( !empty($video->fhd) && $video->fhd != 19)
+                    @if( !empty($video['fhd']) && $video['fhd'] != 19)
                         <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white"
-                                data-path="{{ $video->fhd }}" data-quality="1080" btn-download-link>
+                                data-path="{{ $video['fhd'] }}" data-quality="1080" btn-download-link>
                             1080
                         </button>
                     @endif

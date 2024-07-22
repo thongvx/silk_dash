@@ -4,6 +4,7 @@ namespace App\Repositories\Admin;
 
 use App\Models\User;
 use Prettus\Repository\Eloquent\BaseRepository;
+use App\Models\File;
 
 
 class UserRepo
@@ -29,15 +30,12 @@ class UserRepo
             case 'delete':
                 $query->where('active', 19);
                 break;
-            default:
-                break;
-        }
-        switch ($tab) {
             case 'premium':
                 $query->whereIn('premium', [1,2,3]);
                 break;
             case 'free':
-                $query->where('premium', 0);
+                $query->where('active', [1,2])
+                        ->where('premium', 0);
                 break;
             default:
                 break;
@@ -45,7 +43,6 @@ class UserRepo
 
         $users = $query->orderBy($column1, $direction)
                         ->paginate($limit);
-
         return $users;
     }
 

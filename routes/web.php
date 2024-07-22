@@ -56,7 +56,8 @@ Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::c
 Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
 
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
-Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('download');
+Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
+Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
 
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 

@@ -318,3 +318,34 @@ export function exitBox(box) {
     $("[fixed-video-card]").removeClass("block");
     updateOriginalFormState(box);
 }
+// time
+function date_time() {
+    var d = new Date();
+    var utcDay = d.getUTCDay();
+    var utcDate = d.getUTCDate();
+    var utcMonth = d.getUTCMonth();
+    var utcYear = d.getUTCFullYear();
+    var utcHours = d.getUTCHours();
+    var utcMinutes = d.getUTCMinutes();
+    var utcSeconds = d.getUTCSeconds();
+    utcMinutes = utcMinutes < 10 ? '0' + utcMinutes : utcMinutes; // Add leading zero to minutes if needed
+
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var dayName = days[utcDay];
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var monthName = months[utcMonth];
+
+    var period = utcHours >= 12 ? 'PM' : 'AM';
+    utcHours = utcHours % 12;
+    utcHours = utcHours ? utcHours : 12; // the hour '0' should be '12'
+    utcHours = utcHours < 10 ? '0' + utcHours : utcHours;
+
+    var formattedDate = utcDate + ' ' + monthName + ' ' + utcYear + ', ' + utcHours + ':' + utcMinutes + ' ' + period;
+    $('#time').text(formattedDate);
+}
+$(document).ready(function() {
+    date_time();
+    setInterval(function() {
+        date_time();
+    }, 1000);
+});

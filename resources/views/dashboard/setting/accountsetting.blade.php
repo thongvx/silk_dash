@@ -123,7 +123,7 @@
                                 Allowed Embed (Sub)Domains:
                             </label>
                             <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                                <input type="text" id="domain" name ="domain" value="{{$setting -> domain}}"
+                                <input type="text" id="domain" name ="domain" value="{{$setting -> domain == 0 ? '' : $setting -> domain}}"
                                        class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                        placeholder="Ex: yoursite1.com,yoursite2.net,…">
                             </div>
