@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="clckd" content="a30efa94d69745bec06f7a296338c8ef" />
     <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
     <title>Stream Silk</title>
     @vite('resources/css/app.css')
