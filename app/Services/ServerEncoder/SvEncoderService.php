@@ -24,7 +24,7 @@ class SvEncoderService
         }
         return $svEncoders;
     }
-    public function upsertSvEncoder($svEncoder)
+    public static function upsertSvEncoder($svEncoder)
     {
         $key = 'sv_encoder:' . $svEncoder->name;
 
