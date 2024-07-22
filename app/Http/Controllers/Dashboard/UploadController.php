@@ -263,7 +263,7 @@ class UploadController
     public function getProgressTransfer()
     {
         $user = Auth::user();
-        $keys = Redis::keys('transfer' . $user->user_id . '-*');
+        $keys = Redis::keys('transfer' . $user->id . '-*');
 
         $data = array_map(function ($key) {
             return json_decode(Redis::get($key), true);
