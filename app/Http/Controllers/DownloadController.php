@@ -9,6 +9,8 @@ use App\Repositories\VideoRepo;
 use App\Services\ServerDownload\SvDownloadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
 
 class DownloadController extends Controller
 {
@@ -19,8 +21,23 @@ class DownloadController extends Controller
         $this->accountRepo = $accountRepo;
         $this->playerSettingsRepo = $playerSettingsRepo;
     }
-    public function download($slug)
+    public function download($slug, Request $request)
     {
+        $recaptchaResponse = $request->input('g-recaptcha-response');
+        if (!$recaptchaResponse) {
+            return view('captcha', ['slug' => $slug]);
+        }
+
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('services.recaptcha.secret_key'),
+            'response' => $recaptchaResponse,
+        ]);
+
+        $body = json_decode($response->body());
+
+        if (!$body->success) {
+            return view('captcha', ['slug' => $slug]);
+        }
         $userId = auth()->id();
         $video = $this->videoRepo->findVideoBySlug($slug);
         if ($video && $video->soft_delete == 0){
@@ -32,11 +49,23 @@ class DownloadController extends Controller
             if($data['accountSetting']->disableDownload == 1){
                 return response()->view('errors.404', [], 404);
             }
-            return view('download', $data);
+            $cacheKey = 'download_link_' . $slug;
+            Redis::setex($cacheKey, 600, json_encode($data));
+            return redirect()->route('download', ['slug' => $slug]);
         }
         else{
             return response()->view('errors.404', [], 404);
         }
+    }
+    public function showDownloadPage($slug)
+    {
+        $cacheKey = 'download_link_' . $slug;
+        if (!Redis::exists($cacheKey)) {
+            return $this->download($slug, request());
+        }
+
+        $data = json_decode(Redis::get($cacheKey), true);
+        return view('download', $data);
     }
     public function addDownloadVideo(Request $request)
     {

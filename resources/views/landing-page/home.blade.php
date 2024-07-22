@@ -92,7 +92,7 @@
                     </div>
                     <div
                         class="col-span-full sm:col-span-1 flex items-center flex-col bg-[#142132] py-8 px-4 rounded-3xl z-index-20 relative">
-                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"fill="white"
+                        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" fill="white"
                              width="100" height="80"
                              viewBox="0 0 113.22 122.88">
                             <defs>

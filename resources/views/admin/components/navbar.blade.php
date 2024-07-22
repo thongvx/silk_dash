@@ -24,6 +24,8 @@
         </div>
 
           <div class="block xl:flex items-center justify-between mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto max-w-max">
+              <div id="time" class="text-white">
+              </div>
               <div class="hidden items-center md:ml-auto px-2 xl:flex">
                   <form class="flex items-center relative bg-[#121520] w-full rounded-lg ease" action="/video/search" method="GET" search>
                       <label for="search" class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>

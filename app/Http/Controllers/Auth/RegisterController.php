@@ -109,7 +109,7 @@ class RegisterController extends Controller
             'position' => 0,
             'poster' => 0,
             'blockDirect' => 0,
-            'domain' => 0,
+            'domain' => '0',
             'publicVideo' => 0,
             'premiumMode' => 0,
             'captionsMode' => 0,

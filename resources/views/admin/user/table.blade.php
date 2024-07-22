@@ -59,7 +59,7 @@
         </thead>
         <tbody class="text-center">
         @forelse($users as $index => $user)
-            @if( $user->active !== 19)
+            @if( $user->active == 1)
                 @switch($user->premium)
                     @case(1)
                         @php $class = 'text-emerald-500'; @endphp
@@ -71,24 +71,26 @@
                         @php $class = 'text-indigo-500'; @endphp
                         @break
                     @default
-                        @php $class = 'bg-[#142132]'; @endphp
+                        @php $class = ''; @endphp
                 @endswitch
+            @elseif( $user->active == 0)
+                @php $class = "text-orange-500" @endphp
             @else
                 @php $class = "text-rose-500" @endphp
             @endif
 
-            <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]
-                            {{ $class }}">
-                <td class="userID sorting_1">{{ $user->id }}</td>
-                <td class="user-name col-lg-2 hover:text-[#009FB2]">
+
+            <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
+                <td class="userID sorting_1 ">{{ $user->id }}</td>
+                <td class="user-name col-lg-2 hover:text-[#009FB2] {{ $class }}">
                     <a href="{{ route('user.show', ['user' => $user->id]) }}" target="_blank">{{ $user->name }}</a>
                 </td>
-                <td class="user-name hover:text-[#009FB2]">
+                <td class="user-name hover:text-[#009FB2]  {{ $class }}">
                     <a href="{{ route('user.show', ['user' => $user->id]) }}" target="_blank">{{ $user->email }}</a>
                 </td>
-                <td class="video">{{ !$user->video ? 0 : $user->video }}</td>
-                <td class="play">{{ !$user->play ? 0 : $user->play }}</td>
-                <td class="storage">{{ !$user->storage ? 0 : $user->storage }}</td>
+                <td class="video">{{ !$user->video ? 0 : \App\Models\File::formatNumber($user->video) }}</td>
+                <td class="play">{{ !$user->play ? 0 : \App\Models\File::formatNumber($user->play) }}</td>
+                <td class="storage">{{ !$user->storage ? 0 : \App\Models\File::formatSizeUnits($user->storage ) }}</td>
                 <td class="earning">{{ !$user->earning ? 0 : '$ '.$user->earning }}</td>
                 <td class="d-none">{{ $user->created_at->format('Y-m-d') }}</td>
                 <td>

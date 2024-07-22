@@ -11,33 +11,26 @@ class File extends Model
 
     // Other model methods...
 
-    public static function formatSizeUnits($bytes)
+    public static function formatSizeUnits($sizeInBytes)
     {
-        if ($bytes >= 1073741824)
-        {
-            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
-        }
-        elseif ($bytes >= 1048576)
-        {
-            $bytes = number_format($bytes / 1048576, 2) . ' MB';
-        }
-        elseif ($bytes >= 1024)
-        {
-            $bytes = number_format($bytes / 1024, 2) . ' KB';
-        }
-        elseif ($bytes > 1)
-        {
-            $bytes = $bytes . ' bytes';
-        }
-        elseif ($bytes == 1)
-        {
-            $bytes = $bytes . ' byte';
-        }
-        else
-        {
-            $bytes = '0 bytes';
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $i = 0;
+        while ($sizeInBytes > 1024) {
+            $sizeInBytes /= 1024;
+            $i++;
         }
 
-        return $bytes;
+        return round((float)$sizeInBytes, 2) . ' ' . $units[$i];
+    }
+
+    public static function formatNumber($number)
+    {
+        $units = ['', 'K', 'M', 'B', 'T'];
+        $i = 0;
+        while ($number > 1000) {
+            $number /= 1000;
+            $i++;
+        }
+        return round($number, 2) . ' ' . $units[$i];
     }
 }

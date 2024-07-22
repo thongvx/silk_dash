@@ -22,9 +22,13 @@ class UsersAdminController
     }
     public function index(Request $request)
     {
-        $tab = request()->get('tab');
+        $tab = $request->get('tab');
+        $limit = $request->get('limit', 20);
+        $columns = ['*'];
+        $column = $request->get('column', 'created_at');
+        $direction = $request->get('direction', 'desc');
         $data = [
-            'users' => $this->userRepo->getAllUsers($tab, 'created_at', 'desc', 20, 15, ['*']),
+            'users' => $this->userRepo->getAllUsers($tab, $column, $direction, 20, $limit, ['*']),
             'title' => 'Users',
         ];
         return view('admin.user.user', $data);
