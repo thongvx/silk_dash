@@ -61,6 +61,18 @@
                             <div class="text-teal-500 mt-3 status">
                                 Transfer successfully
                             </div>
+                        @elseif($value['status'] == 19)
+                            <div class="text-red-500 mt-3 status">
+                                Transfer failed
+                            </div>
+                        @elseif($value['status'] == 1)
+                            <div class="text-yellow-500 mt-3 status">
+                                Transferring
+                            </div>
+                        @else
+                            <div class="text-blue-500 mt-3 status">
+                                Pending
+                            </div>
                         @endif
                         <div class="text-white mt-3">
                             <button class="px-4 py-1 rounded-lg bg-red-600/70 hover:bg-red-600 mr-3" button-remove>Remote</button>

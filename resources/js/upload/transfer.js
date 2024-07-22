@@ -65,7 +65,6 @@ $(document).on('submit', '#transferLink', function(event) {
             response.json()
         })
         .then(data => {
-            console.error(data);
             form.reset();
             button.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
             button.addClass('bg-[#142132]')
@@ -105,7 +104,7 @@ setInterval(function() {
                             bar.removeClass('bg-green-500 bg-orange-500 bg-blue-500').addClass('bg-red-500');
                             status.removeClass('text-blue-500 text-green-500 text-orange-500').addClass('text-red-500');
                         } else if(Object.values(data)[indexurl].status === 2){
-                            status.text('Transfer successfully');
+                            status.text('Transfer Successfully');
                             bar.removeClass('bg-orange-500 bg-red-500 bg-blue-500').addClass('bg-green-500');
                             status.removeClass('text-blue-500 text-red-500 text-orange-500').addClass('text-green-500');
                         } else{

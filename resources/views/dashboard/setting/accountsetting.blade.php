@@ -120,12 +120,12 @@
                     <div class="items-center mt-3 flex">
                         <div class="mt-2 w-full">
                             <label for="domain" class="mb-1 text-[#009FB2] text-lg">
-                                Allowed Domains
+                                Allowed Embed (Sub)Domains:
                             </label>
                             <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
                                 <input type="text" id="domain" name ="domain" value="{{$setting -> domain}}"
                                        class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                       placeholder="example1.com, example2.com">
+                                       placeholder="Ex: yoursite1.com,yoursite2.net,…">
                             </div>
                         </div>
                     </div>
