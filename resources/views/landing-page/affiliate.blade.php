@@ -168,7 +168,7 @@
                         </div>
                         <div class="col-span-full lg:col-span-1">
                             <ul class="list-disc text-xl grid gap-y-6">
-                                <li>10% of video must be watched to be counted as paid. If below 10 minutes 60% required
+                                <li>5% of video must be watched to be counted as paid. If below 10 minutes 40% required
                                     to be watched.
                                 </li>
                                 <li>Minimum payout amount - 50$</li>
