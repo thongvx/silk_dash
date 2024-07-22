@@ -165,6 +165,8 @@ class UpdateController extends Controller
         $svEncoder->percent_space = $request->percent_space;
         $svEncoder->inSpeed = $request->inSpeed;
         $svEncoder->out_speed = $request->out_speed;
+        $svEncoder->encoder_task = $request->encoder_task;
+        $svEncoder->transfer_task = $request->transfer_task;
         $svEncoder->taskFF = base64_decode($request->taskFF);
         $svEncoder->active = 1;
 

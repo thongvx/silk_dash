@@ -36,6 +36,8 @@ class SvEncoderService
                 'percent_space' => $svEncoder->percent_space,
                 'inSpeed' => $svEncoder->inSpeed,
                 'out_speed' => $svEncoder->out_speed,
+                'encoder_task' => $svEncoder->encoder_task,
+                'transfer_task' => $svEncoder->transfer_task,
                 'taskFF' => $svEncoder->taskFF,
                 'active' => 1,
             ]);
@@ -48,6 +50,8 @@ class SvEncoderService
                 'percent_space' => $svEncoder->percent_space,
                 'inSpeed' => $svEncoder->inSpeed,
                 'out_speed' => $svEncoder->out_speed,
+                'encoder_task' => $svEncoder->encoder_task,
+                'transfer_task' => $svEncoder->transfer_task,
                 'taskFF' => $svEncoder->taskFF,
                 'active' => 1,
             ]);
