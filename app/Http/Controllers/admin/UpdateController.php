@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\SvDownload;
 use App\Services\ServerStream\SvStreamService;
 use App\Services\ServerDownload\SvDownloadService;
+use App\Services\ServerEncoder\SvEncoderService;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Support\Facades\Redis;
@@ -153,6 +154,20 @@ class UpdateController extends Controller
         $svDownload->active = 1;
 
         SvDownloadService::upsertSvDownload($svDownload);
+    }
+    function updateInfoEncoder(Request $request)
+    {
+        $svEncoder = new SvEncoder();
+        $svEncoder->name = $request->sv;
+        $svEncoder->cpu = $request->cpu;
+        $svEncoder->usedSpace = $request->usedSpace;
+        $svEncoder->percent_space = $request->percent_space;
+        $svEncoder->inSpeed = $request->inSpeed;
+        $svEncoder->out_speed = $request->out_speed;
+        $svEncoder->taskFF = base64_decode($request->taskFF);
+        $svEncoder->active = 1;
+
+        SvEncoderService::upsertSvEncoder($svEncoder);
     }
     //=============================================================================================
 }

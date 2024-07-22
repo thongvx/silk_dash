@@ -24,4 +24,35 @@ class SvEncoderService
         }
         return $svEncoders;
     }
+    public function upsertSvEncoder($svEncoder)
+    {
+        $key = 'sv_encoder:' . $svEncoder->name;
+
+        if (Redis::exists($key)) {
+            Redis::hmset($key, [
+                'name' => $svEncoder->name,
+                'cpu' => $svEncoder->cpu,
+                'usedSpace' => $svEncoder->usedSpace,
+                'percent_space' => $svEncoder->percent_space,
+                'inSpeed' => $svEncoder->inSpeed,
+                'out_speed' => $svEncoder->out_speed,
+                'taskFF' => $svEncoder->taskFF,
+                'active' => 1,
+            ]);
+        } else {
+            // Nếu key chưa tồn tại, thêm mới
+            Redis::hmset($key, [
+                'name' => $svEncoder->name,
+                'cpu' => $svEncoder->cpu,
+                'usedSpace' => $svEncoder->usedSpace,
+                'percent_space' => $svEncoder->percent_space,
+                'inSpeed' => $svEncoder->inSpeed,
+                'out_speed' => $svEncoder->out_speed,
+                'taskFF' => $svEncoder->taskFF,
+                'active' => 1,
+            ]);
+            Redis::sadd('sv_encoder', $key);
+        }
+        Redis::expire($key, 120);
+    }
 }
