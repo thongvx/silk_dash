@@ -89,6 +89,7 @@
                                             $status = $statuses[$i] ?? null;
                                             switch ($status) {
                                                 case '1':
+                                                case '3':
                                                     $bgColor = 'bg-orange-500';
                                                     break;
                                                 case '4':
@@ -98,11 +99,8 @@
                                                 case '0':
                                                     $bgColor = 'bg-slate-500';
                                                     break;
-                                                case '19':
-                                                    $bgColor = 'bg-red-500';
-                                                    break;
                                                 default:
-                                                    $bgColor = 'bg-transparent';
+                                                    $bgColor = 'bg-red-500';
                                                     break;
                                             }
                                         @endphp

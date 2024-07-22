@@ -10,7 +10,7 @@
     <title>StreamSilk</title>
     @vite('resources/css/app.css')
     <!-- ... other head elements ... -->
-    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
 
 </head>
 <body class="m-0  font-sans antialiased font-normal text-start text-base leading-default
