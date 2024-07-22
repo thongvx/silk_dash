@@ -145,12 +145,15 @@
                                 @php
                                     switch ($encoder->status) {
                                         case 1:
+                                        case 3:
+                                        case 2:
                                             $text = 'text-orange-500';
                                             break;
                                         case 0:
                                             $text = 'text-white';
                                             break;
                                         case 19:
+                                        case 11:
                                             $text = 'text-rose-600';
                                             break;
                                         default:
