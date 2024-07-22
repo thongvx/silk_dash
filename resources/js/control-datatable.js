@@ -79,7 +79,6 @@ export function loadDatatable(tab,column, direction, folderId, poster, limit, pa
         success: function (response) {
             $('#box-datatable, .box-datatable, #live').html(response);
             $('#total-encoder').text('Encoder: '+ $('#datatable').data('total'))
-            $('#sever').text('Server: '+ $('#datatable').data('total'))
             highlightSortedColumn();
         },
         error: function (error) {

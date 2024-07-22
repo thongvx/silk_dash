@@ -141,7 +141,7 @@
                         </div>
                         <div class="pl-7 mt-5">
                             <ul class="list-disc grid grid-cols-2 gap-x-5 gap-y-3">
-                                <li>10% of video must be watched to be counted as paid. If below 10 minutes 60% required to be watched.</li>
+                                <li>5% of video must be watched to be counted as paid. If below 10 minutes 40% required to be watched.</li>
                                 <li>Minimum payout amount - 50$</li>
                                 <li>Rewards are not counted if advertising is being blocked.</li>
                                 <li>2 Views or Downloads are counted per 24 hours per user ip</li>

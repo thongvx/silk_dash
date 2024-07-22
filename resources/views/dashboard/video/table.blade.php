@@ -1,4 +1,4 @@
-<div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] lg:max-h-[calc(100vh-25em)] xl:max-h-[calc(100vh-20em)] ">
+<div class="px-0 pt-0 overflow-auto max-h-[calc(100vh-20em)] lg:max-h-[calc(100vh-25em)] xl:max-h-[calc(100vh-20em)]">
     <table id="datatable" datatable data-page-size="10" data-column-table="{{ $column }}"
            data-column-direction="{{ $direction }}"
            class=" text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0 ">
@@ -84,7 +84,7 @@
                 <td class="pl-2 w-24">{{ $video->created_at }}</td>
                 <td class="pl-2 w-24">{{ $video->total_play != 0 ? $video->updated_at : 0 }}</td>
                 <td class="relative {{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
-                    <li class="list-none">
+                    <li class="list-none relative">
                         <a
                             href="javascript:" dropdown-trigger
                             aria-expanded="false"><i class="material-symbols-outlined">more_vert</i></a>
@@ -92,15 +92,19 @@
                             class="text-sm transform-dropdown bg-[#009FB2] before:font-awesome before:leading-default before:duration-350 before:ease
                                              duration-250 before:sm:right-3 before:text-lg after:text-lg pointer-events-none absolute right-0
                                              origin-top list-none rounded-lg  bg-clip-padding text-white z-30 sm:-mr-6
-                                             {{ $loop->count>4 && $loop->last || $loop->iteration === $loop->count - 1  ? " bottom-12 lg:bottom-12 after:-bottom-5 after:content-['▼']": " top-12 lg:top-10 before:-top-5  before:content-['▲']"}}
+                                             {{ $loop->count > 4 || $loop->last || $loop->iteration === $loop->count - 1  ? " bottom-12 lg:bottom-12 after:-bottom-5 after:content-['▼']": " top-12 lg:top-10 before:-top-5  before:content-['▲']"}}
                                              px-2 py-4 text-left opacity-0 transition-all before:absolute after:absolute before:right-3 after:right-3.5 before:left-auto before:z-10
                                              before:font-normal before:text-[#009FB2] after:text-[#009FB2] before:antialiased before:transition-all
                                              lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                            <li class="relative w-max btn-edit hover:text-[#142132] items-center flex"><i
+                            <li class="w-max btn-edit hover:text-[#142132] items-center flex"><i
                                     class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
                                 <a href="{{ Route('video.editVideo', $video->slug) }}">Edit File</a>
                             </li>
-                            <li class="relative btn-delete hover:text-[#142132] items-center flex mt-3"><i
+                            <li class="w-max btn-edit hover:text-[#142132] items-center flex mt-3"><i
+                                    class="material-symbols-outlined opacity-1 mr-2">closed_caption_add</i>
+                                <a href="{{ Route('video.editVideo', $video->slug) }}">Add Subtitle</a>
+                            </li>
+                            <li class="btn-delete hover:text-[#142132] items-center flex mt-3"><i
                                     class="material-symbols-outlined opacity-1 mr-2">delete</i>
                                 Delete
                             </li>

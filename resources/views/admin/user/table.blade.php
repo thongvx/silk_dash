@@ -59,7 +59,7 @@
         </thead>
         <tbody class="text-center">
         @forelse($users as $index => $user)
-            @if( $user->active == 1)
+            @if( $user->active == 1 || $user->active == 2)
                 @switch($user->premium)
                     @case(1)
                         @php $class = 'text-emerald-500'; @endphp

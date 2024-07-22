@@ -2,7 +2,7 @@
     <div class="relative rounded-xl bg-[#121520]">
         <div class="px-2 pt-4 md:p-4">
             <div class="mb-2 flex justify-between items-center">
-                <h5 class="text-white" id="sever">
+                <h5 class="text-white">
                     Sever : {{ $downloads->total() }}
                 </h5>
                 <div class="bg-[#142132] px-5 py-1 rounded-lg hover:text-[#009FB2] cursor-pointer" title="edit">
@@ -108,7 +108,7 @@
                                 Showing
                                 <span class="font-medium">{{$downloads->firstItem()  }}</span>
                                 to
-                                <span class="font-medium">{{$downloads->lastItem()  }}</span>
+                                <span class="font-medium">{{ $downloads->lastItem()  }}</span>
                                 of
                                 <span class="font-medium">{{$downloads->total()  }}</span>
                                 results
