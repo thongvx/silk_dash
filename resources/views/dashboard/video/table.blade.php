@@ -92,7 +92,7 @@
                             class="text-sm transform-dropdown bg-[#009FB2] before:font-awesome before:leading-default before:duration-350 before:ease
                                              duration-250 before:sm:right-3 before:text-lg after:text-lg pointer-events-none absolute right-0
                                              origin-top list-none rounded-lg  bg-clip-padding text-white z-30 sm:-mr-6
-                                             {{ $loop->count > 4 || $loop->last || $loop->iteration === $loop->count - 1  ? " bottom-12 lg:bottom-12 after:-bottom-5 after:content-['▼']": " top-12 lg:top-10 before:-top-5  before:content-['▲']"}}
+                                             {{ $loop->count > 4 && $loop->last || $loop->iteration === $loop->count - 1  ? " bottom-12 lg:bottom-12 after:-bottom-5 after:content-['▼']": " top-12 lg:top-10 before:-top-5  before:content-['▲']"}}
                                              px-2 py-4 text-left opacity-0 transition-all before:absolute after:absolute before:right-3 after:right-3.5 before:left-auto before:z-10
                                              before:font-normal before:text-[#009FB2] after:text-[#009FB2] before:antialiased before:transition-all
                                              lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
