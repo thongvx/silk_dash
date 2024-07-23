@@ -13,8 +13,8 @@
                 <input id="file"  name="file" accept="video/*" type="file"
                        multiple class="opacity-0 absolute cursor-pointer z-20 h-full w-full top-0 left-0" />
             </label>
-            <input class="hidden" type="text" id="userID" name="userID" value="{{ Auth::user()->id}}">
-            <input class="hidden" type="text" id="folderPost" name="folderID" value="{{ $currentFolderName-> id }}">
+            <input class="hidden" type="text" id="userID" name="userID" value="1">
+            <input class="hidden" type="text" id="folderPost" name="folderID" value="1">
         </form>
         <div class="lg:mx-32" id="list-upload-file">
         </div>
