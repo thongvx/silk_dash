@@ -28,7 +28,9 @@ class FolderRepo extends BaseRepository
         }
 
         // Get folders
-        $folders = Folder::where('user_id', $userId)->orderBy('id', 'desc')->get();
+        $folders = Folder::where('user_id', $userId)
+                    ->where('soft_delete', 0)
+                    ->orderBy('id', 'desc')->get();
 
         // Set cache
         Redis::setex($cacheKey, 259200, serialize($folders));

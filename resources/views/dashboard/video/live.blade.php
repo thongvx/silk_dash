@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="flex justify-between items-center w-full mb-3">
-                <div class="text-sm bg-[#142132] rounded-lg p-2">
+                <div class="text-sm bg-[#142132] rounded-lg p-2 flex ">
                     <label for="limit">Show:</label>
                     <select name="limit" class="bg-transparent outline-none outline-none"
                             id="limit">
@@ -41,7 +41,7 @@
                             100
                         </option>
                     </select>
-                    <span>entries</span>
+                    <span class="hidden sm:block">entries</span>
                 </div>
                 <div class="flex ">
                     <button type="button" class="hover:bg-[#009FB2] rounded-lg flex items-center px-2 {{ request() -> get('poster') ? 'bg-[#009FB2]' : 'bg-[#142132]' }}"

@@ -59,6 +59,7 @@ Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
 Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
+Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
 
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
@@ -93,7 +94,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
     Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
-    Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
 
     Route::get('dmca',function (){
         $data['title'] = 'DMCA';
@@ -150,6 +150,8 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::resource('/supportAdmin', \App\Http\Controllers\admin\TicketAdminController::class);
 
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
+
+    Route::resource('/videoAdmin', \App\Http\Controllers\admin\VideoAdminController::class);
 });
 
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);

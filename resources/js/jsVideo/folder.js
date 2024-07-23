@@ -1,5 +1,5 @@
 import {fixedBox} from "./video.js";
-import {add_notification} from '../main.js';
+import {add_notification, exitBox} from '../main.js';
 
 //add folder
 let addFolder = `<div class="add-folder" id="add-folder">
@@ -51,7 +51,7 @@ $(document).on('click', '[btn-add-folder]', function() {
                 add_notification('success',message, bntSubmit);
                 bntSubmit.remove()
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox()
                     $('#add-folder').remove()
                 }, 2000);
                 $('[folder]:eq(0)').after(`<div folder
@@ -89,7 +89,7 @@ $(document).on('click', '[btn-add-folder]', function() {
                 const message = 'Create folder failed';
                 add_notification('error',message, bntSubmit);
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox()
                     $('#add-folder').remove()
                 }, 2000);
             }
@@ -155,7 +155,7 @@ $('.btn-edit-folder').on('click', function() {
                 add_notification('success',message, btnSubmit);
                 btnSubmit.remove()
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox()
                     $('#edit-folder').remove()
                 }, 2000);
                 folder.find('span:eq(0)').text(data.folder.name)
@@ -164,7 +164,7 @@ $('.btn-edit-folder').on('click', function() {
                 const message = 'Rename folder failed';
                 add_notification('error',message, btnSubmit);
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox()
                     $('#edit-folder').remove()
                 }, 2000);
             }
@@ -213,7 +213,7 @@ $(document).on('click', '.btn-delete-folder', function() {
                 cancel.remove()
                 btnSubmit.remove()
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox()
                     $('#delete-video').remove();
                 }, 2000);
             },
@@ -221,7 +221,7 @@ $(document).on('click', '.btn-delete-folder', function() {
                 const message = 'Delete folder failed';
                 add_notification('error',message, btnSubmit);
                 setTimeout(function() {
-                    fixedBox ()
+                    exitBox()
                     $('#delete-video').remove();
                 }, 2000);
             }

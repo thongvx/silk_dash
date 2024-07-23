@@ -176,7 +176,7 @@ export function notification(type, message) {
         }
     }, decreaseInterval);
 }
-export function updateURLParameter(tab, column, direction, folderId, limit, page, poster, status) {
+export function updateURLParameter(tab, column, direction, folderId, limit, page, poster, status, videoID) {
     var urlParams = new URLSearchParams(window.location.search);
     tab ? urlParams.set('tab', tab) : urlParams.delete('tab');
     column ? urlParams.set('column', column) : urlParams.delete('column');
@@ -186,6 +186,7 @@ export function updateURLParameter(tab, column, direction, folderId, limit, page
     page ? urlParams.set('page', page) : urlParams.delete('page');
     poster ? urlParams.set('poster', poster) : urlParams.delete('poster');
     status ? urlParams.set('status', status) : urlParams.delete('status');
+    videoID ? urlParams.set('videoID', videoID) : urlParams.delete('videoID');
     const newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
 }

@@ -48,14 +48,18 @@ class VideoRepo extends BaseRepository
 
     public function searchVideos($userId, $searchTerm, $limit, $column, $direction, $columns = ['*'],)
     {
-        return $this->query()
-            ->where('user_id', $userId)
-            ->where(function ($query) use ($searchTerm) {
-                $query->where('title', 'LIKE', '%' . $searchTerm . '%')
-                    ->orWhere('slug', 'LIKE', '%' . $searchTerm . '%');
-            })
-            ->orderBy($column, $direction)
-            ->paginate($limit);
+        $videos = $this->query();
+        if($userId){
+            $videos = $videos->where('user_id', $userId);
+        };
+        $videos = $videos
+                ->where(function ($query) use ($searchTerm) {
+                    $query->where('title', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('slug', 'LIKE', '%' . $searchTerm . '%');
+                })
+                ->orderBy($column, $direction)
+                ->paginate($limit);
+        return $videos;
     }
 
     public function findVideoBySlug($slug)

@@ -27,7 +27,8 @@ export function getUrlParams() {
         limit: urlParams.get('limit') || null,
         page: urlParams.get('page') || null,
         status: urlParams.get('status') || null,
-        tab: urlParams.get('tab') || null
+        tab: urlParams.get('tab') || null,
+        videoID: urlParams.get('videoID') || null
     };
 }
 
@@ -45,7 +46,7 @@ function highlightSortedColumn() {
         }
     });
 }
-export function loadDatatable(tab,column, direction, folderId, poster, limit, page, status ) {
+export function loadDatatable(tab,column, direction, folderId, poster, limit, page, status , videoID) {
     updateURLParameter(tab, column, direction, folderId, limit, page, poster, status);
     const path = window.location.pathname;
     // Sử dụng hàm
@@ -61,7 +62,8 @@ export function loadDatatable(tab,column, direction, folderId, poster, limit, pa
             poster: poster,
             limit: limit,
             status: status,
-            path: path
+            path: path,
+            videoID: videoID
         },
         beforeSend: function () {
             $('#box-datatable, .box-datatable, #live').html(`<div class="w-full justify-center items-center flex h-full">
@@ -93,21 +95,21 @@ $(document).on('click', '.sortable-column', function() {
     params.column = $(this).data('column');
     params.direction = $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc';
     params.page = 1;
-    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status);
+    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID);
 })
 
 // pagination
 $(document).on('click', '.page-datatable', function() {
     const params = getUrlParams();
     params.page = $(this).data('page');
-    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status);
+    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID);
 });
 
 // limit
 $(document).on('change', '#limit', function() {
     const params = getUrlParams();
     params.limit = $(this).val();
-    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status);
+    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID);
 });
 //folder
 // $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {

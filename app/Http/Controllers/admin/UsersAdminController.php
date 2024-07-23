@@ -43,7 +43,7 @@ class UsersAdminController
     {
         $tab = request()->get('tab');
         $data = [
-            'users' => $this->userRepo->getAllUsers($tab, 'created_at', 'desc', 20, 15, ['*']),
+            'users' => $this->userRepo->getAllUsers($tab, 'created_at', 'desc', 20, 20, ['*']),
             'title' => 'Users',
         ];
         return view('admin.user.boxuser', $data);
