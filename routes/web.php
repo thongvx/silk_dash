@@ -163,6 +163,9 @@ Route::prefix('statistic')->group(function () {
 });
 
 Route::get('/test', function () {
-    return view('dashboard.upload.webupload1');
+    $data['title'] = 'Upload';
+    $data['folders'] = '1';
+    $data['currentFolderName'] = '1';
+    return view('dashboard.upload.webupload1', $data);
 });
 
