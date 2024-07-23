@@ -19,10 +19,5 @@
         <div class="lg:mx-32" id="list-upload-file">
         </div>
     </div>
-    <div class='-mb-12 bg-slate-900 mx-6 rounded-xl flex justify-between items-center px-3'>
-        <h3 class='py-4  dark:text-white font-bold'>Save To <span id="folderName" class="italic text-[#009FB2]">{{ $currentFolderName-> name_folder }}( Default Folder)</span></h3>
-        <div class="changefolder text-[#009FB2] font-bold cursor-pointer" change-folder>
-            Change Folder
-        </div>
-    </div>
+
 </div>
