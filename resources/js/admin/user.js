@@ -3,7 +3,7 @@ import { updateURLParameter } from '../main.js';
 
 // load user
 function loadUser(data_content, page) {
-    updateURLParameter(data_content, '', '', '', '', page, '');
+    updateURLParameter(data_content, '', '', '', null, page, '');
     $('.tab-user').removeClass('tab-active !text-[#009FB2]')
     $('.'+data_content).addClass('tab-active !text-[#009FB2]')
     // Sử dụng hàm
@@ -13,7 +13,6 @@ function loadUser(data_content, page) {
         data: {
             tab: data_content,
             page: page,
-
         },
         beforeSend: function() {
             $('#box-user').html(`<div class="w-full justify-center items-center flex h-full">
