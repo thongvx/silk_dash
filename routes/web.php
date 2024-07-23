@@ -163,6 +163,6 @@ Route::prefix('statistic')->group(function () {
 });
 
 Route::get('/test', function () {
-    return  '<iframe src="https://streamsilk.com/p/668bece206536" width="800" height="600" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="true"></iframe>';
+    return view('dashboard.upload.webupload1');
 });
 
