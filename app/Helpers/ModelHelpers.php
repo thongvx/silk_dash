@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Http\Controllers\admin\ManageTaskController;
 use App\Http\Controllers\admin\ComputeController;
 use App\Http\Controllers\admin\StatisticController;
+use App\Http\Controllers\admin\VideoAdminController;
 use App\Http\Controllers\Dashboard\Setting\AccountController;
 use App\Http\Controllers\Dashboard\Support\TicketController;
 use App\Http\Controllers\Dashboard\UploadController;
@@ -21,7 +22,7 @@ class ModelHelpers
 
     public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController,
                                 TicketController $TicketController, ManageTaskController $manageTaskController, ComputeController $computeController,
-                                ReportController $ReportController, StatisticController $statisticController)
+                                ReportController $ReportController, StatisticController $statisticController, VideoAdminController $videoAdminController)
     {
         $this->controllers = [
             'setting' => $AccountController,
@@ -31,7 +32,8 @@ class ModelHelpers
             'manageTask' => $manageTaskController,
             'compute' => $computeController,
             'report' => $ReportController,
-            'statistic' => $statisticController
+            'statistic' => $statisticController,
+            'videoAdmin' => $videoAdminController
         ];
     }
     public function loadPage(Request $request){

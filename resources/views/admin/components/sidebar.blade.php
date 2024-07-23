@@ -8,11 +8,11 @@
         <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white xl:hidden"
            sidenav-close></i>
         <a class="flex px-6 py-4 m-0 text-sm whitespace-nowrap items-center" href="" target="_blank">
-            <img src="../assets/img/logo3.png"
+            <img src="{{asset('image/logo/logo4.webp')}}"
                  class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-12"
                  alt="main_logo"/>
             <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">
-        <img src="../assets/img/name-web3.png"
+        <img src="{{asset('image/logo/name.webp')}}"
              class="brightness-150	h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
              alt="main_logo"/>
       </span>

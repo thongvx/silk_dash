@@ -10,14 +10,17 @@ use App\Services\ServerStream\SvStreamService;
 use App\Services\ServerStorage\SvStorageService;
 use App\Services\ServerEncoder\SvEncoderService;
 use App\Http\Controllers\Dashboard\VideoController;
+use App\Http\Controllers\admin\VideoAdminController;
 
 class DatatableController
 {
-    protected $userRepo, $manageTaskRepo, $svStreamService, $svStorageService, $svEncoderService, $videoController;
+    protected $userRepo, $manageTaskRepo, $svStreamService, $svStorageService,
+            $svEncoderService, $videoController, $adminVideoSearch;
 
 
     public function __construct( UserRepo $userRepo, ManagetaskRepo $manageTaskRepo, SvStreamService $svStreamService,
-                                 SvStorageService $svStorageService, SvEncoderService $svEncoderService, VideoController $videoController)
+                                 SvStorageService $svStorageService, SvEncoderService $svEncoderService, VideoController $videoController,
+                                 VideoAdminController $adminVideoSearch)
     {
         $this->userRepo = $userRepo;
         $this->manageTaskRepo = $manageTaskRepo;
@@ -25,6 +28,7 @@ class DatatableController
         $this->svStorageService = $svStorageService;
         $this->svEncoderService = $svEncoderService;
         $this->videoController = $videoController;
+        $this->adminVideoSearch = $adminVideoSearch;
     }
     public function datatableControl(Request $request)
     {
@@ -59,6 +63,9 @@ class DatatableController
                     $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'], $data['limit']);
                 }
                 return view('admin.compute'.'.'.$tab, $data);
+            case '/admin/videoAdmin/search':
+                $data = $this->adminVideoSearch->getDataSearch($request);
+                return view('admin.video.table', $data);
             case '/video':
                 return $this->videoController->control($request);
             default:

@@ -105,9 +105,13 @@ class VideoController
     // Control
     public function control(Request $request)
     {
-        $data = $this->getVideoData($request);
         $tab = $request->input('tab');
         if ($tab != 'processing') {
+            if($request->input('videoID')) {
+                $data = $this->getDataSearch($request);
+            }else{
+                $data = $this->getVideoData($request);
+            }
             return view('dashboard.video.table', $data);
         }else {
             return response('');
@@ -190,7 +194,7 @@ class VideoController
         );
     }
     // select2 video
-    public function show(Request $request)
+    public function getDataSearch(Request $request)
     {
         $user = Auth::user();
         $searchTerm = $request->input('videoID');
@@ -199,13 +203,29 @@ class VideoController
         $direction = $request->input('direction', 'asc');
         $videos = $this->videoRepo->searchVideos($user->id, $searchTerm, $limit, $column, $direction);
         $folders = $this->folderRepo->getAllFolders($user->id);
+        $playerSettings = $this->playerSettingsRepo->getAllPlayerSettings($user->id);
+        if ($playerSettings !== null) {
+            $iframeHeight = $playerSettings->embed_height;
+            $iframeWidth = $playerSettings->embed_width;
+        } else {
+            $iframeHeight = '800';
+            $iframeWidth = '600';
+        }
         $data = [
             'title' => 'Search Results',
             'videos' => $videos,
             'folders' => $folders,
             'column' => $request->input('column', 'created_at'),
             'direction' => $request->input('direction', 'asc'),
+            'iframeHeight' => $iframeHeight,
+            'iframeWidth' => $iframeWidth,
         ];
+        $this->convertVideoSizes($data['videos']);
+        return $data;
+    }
+    public function show(Request $request)
+    {
+        $data = $this->getDataSearch($request);
 
         return view('dashboard.video.search', $data);
     }

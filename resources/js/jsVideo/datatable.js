@@ -9,7 +9,8 @@ function getUrlParams() {
         folderId: urlParams.get('folderId') || '',
         limit: urlParams.get('limit') || '20',
         poster: urlParams.get('poster') || '',
-        tab: urlParams.get('tab') || ''
+        tab: urlParams.get('tab') || '',
+        videoID: urlParams.get('videoID') || ''
     };
 }
 $(document).on('click', '[checked-All]', function () {
@@ -43,10 +44,10 @@ $(document).on('click', '.checkbox',function(){
     }
     btn_video()
 });// Hàm để update giá trị của URL Parameters
-function ajaxdatatable(column,direction,folderId,limit,page, poster) {
+function ajaxdatatable(column,direction,folderId,limit,page, poster, videoID) {
     const urlParams = new URLSearchParams(window.location.search);
     const tab = urlParams.get('tab');
-    updateURLParameter(tab,column,direction,folderId,limit,page,poster)
+    updateURLParameter(tab,column,direction,folderId,limit,page,poster,'', videoID)
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -57,7 +58,8 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster) {
             limit: limit,
             page: page,
             tab: tab,
-            poster: poster
+            poster: poster,
+            videoID: videoID
         },
         beforeSend: function () {
             $('#live').html(`<div class="w-full justify-center items-center flex h-full">
@@ -94,16 +96,16 @@ export function highlightSortedColumn() {
 }
 
 $(document).on('click', '.sortable-column', function() {
-    const { column, direction, folderId, limit, poster } = getUrlParams();
-    ajaxdatatable($(this).data('column'), $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc', folderId, limit, '', poster)
+    const { column, direction, folderId, limit, poster, videoID } = getUrlParams();
+    ajaxdatatable($(this).data('column'), $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc', folderId, limit, '', poster, videoID)
 });
 $(document).on('click', '.page-datatable', function() {
-    const { column, direction, folderId, limit, poster } = getUrlParams();
-    ajaxdatatable(column, direction, folderId, limit, $(this).data('page'), poster)
+    const { column, direction, folderId, limit, poster, videoID } = getUrlParams();
+    ajaxdatatable(column, direction, folderId, limit, $(this).data('page'), poster, videoID)
 });
 $(document).on('change', '#limit', function() {
-    const { column, direction, folderId, poster } = getUrlParams();
-    ajaxdatatable(column, direction, folderId, $(this).val(), '', poster)
+    const { column, direction, folderId, poster, videoID } = getUrlParams();
+    ajaxdatatable(column, direction, folderId, $(this).val(), '', poster, videoID)
 });
 $(document).on('click', '[btn-poster]', function() {
     $(this).toggleClass('bg-[#142132]')

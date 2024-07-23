@@ -81,6 +81,7 @@ class FolderController
         $folder->name_folder = $request->nameFolder;
         $folder->user_id = $user->id;
         $folder->number_file = 0;
+        $folder->soft_delete = 0;
         $folder->save();
 
         // Return a response
