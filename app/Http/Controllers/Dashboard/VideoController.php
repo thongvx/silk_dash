@@ -219,6 +219,7 @@ class VideoController
             'direction' => $request->input('direction', 'asc'),
             'iframeHeight' => $iframeHeight,
             'iframeWidth' => $iframeWidth,
+            'searchTerm' => $searchTerm,
         ];
         $this->convertVideoSizes($data['videos']);
         return $data;
