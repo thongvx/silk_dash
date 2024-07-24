@@ -58,6 +58,7 @@
         <div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+    <script src="https://streamsilk.com/ads.js"></script>
 </head>
 <body>
 <div>
@@ -320,17 +321,17 @@
     $(document).on('click', '#video_player', function () {
         if (playID === 0) {
             playID = 1;
-            openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
+            //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
     let pop5s = setTimeout(function () {
         $('body').click(function () {
             if (t === 0)
-                window.open("https://familiarpyromaniasloping.com/2009872/");
+                window.open("https://holahupa.com/2032563/");
             t = 1;
             clearTimeout(pop5s)
         })
-    }, 5000);
+    }, 10000);
 
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;

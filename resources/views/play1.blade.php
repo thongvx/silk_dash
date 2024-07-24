@@ -243,19 +243,17 @@
     document.getElementById('pop').addEventListener("click", () => {
         var e = document.getElementById('pop');
         e.remove();
-        window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
-        //gala
-        var newScript = document.createElement('script');
-        newScript.setAttribute('data-cfasync', 'false');
-        newScript.setAttribute('async', 'true');
-        newScript.setAttribute('type', 'text/javascript');
-        newScript.src = '//yd.alchimybegins.com/rIiWXNjqhOe8AUjQ/jqWXQ';
-        document.getElementById('video_player').appendChild(newScript);
+        window.open("https://holahupa.com/2032563/");
+        //ads gala
+        var script = document.createElement('script');
+        script.type = 'application/javascript';
+        script.src = 'https://streamsilk.com/ads.js';
+        document.head.appendChild(script);
     });
     $(document).on('click', '#video_player', function() {
         if (playID === 0) {
             playID = 1;
-            openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
+            //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
     let pop15s = setTimeout(function() {
@@ -265,7 +263,7 @@
             t = 1;
             clearTimeout(pop15s)
         })
-    }, 5000);
+    }, 10000);
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)
