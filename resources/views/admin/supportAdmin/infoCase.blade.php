@@ -46,13 +46,22 @@
                                                     @endphp
                                                 @endif
                                                 <div class="flex flex-col {{ $value['type'] != 2 ? 'items-end' : 'items-start'}}">
+                                                    <div class="message-class  text-slate-200 {{ $value['type'] !== $previousType ? '' : 'hidden'}}
+                                                                mb-2">
+                                                        <h4 class="italic">
+                                                            {{ $value['type'] == 2 ? Auth::user()->name : 'StreamSilk'}}
+                                                        </h4>
+                                                    </div>
+                                                    @php
+                                                        $previousType = $value['type'];
+                                                    @endphp
                                                     @if($value['url_file'] != 0)
-                                                        <div class="max-w-64 mb-2">
+                                                        <div class="max-w-[70%] mb-2 rounded-3xl">
                                                             <img src="{{ $value['url_file'] }}" alt="File Image">
                                                         </div>
                                                     @endif
                                                     <div class="message-class {{ $value['type'] != 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}}
-                                                    px-3 py-2 rounded-full mb-2 max-w-64 w-max" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
+                                                    px-5 py-2.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
                                                         <h4>
                                                             {{ $value['message'] }}
                                                             <span class="{{ $value['type'] != 2 ?'text-white' : 'text-gray-600'}} text-xs -mb-2 relative -bottom-1 ml-2">
