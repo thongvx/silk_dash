@@ -70,7 +70,7 @@ class TransferController extends Controller
         $data = Transfer::where('user_id', $user_id)->where('slug', $slug)->first();
         $data->status = 19;
         $data->save();
-        Redis::setex('transfer'.$user_id.'-'.$slug, json_encode([
+        Redis::set('transfer'.$user_id.'-'.$slug, json_encode([
             'slug' => $slug,
             'url' => $data->url,
             'status' => 19,
