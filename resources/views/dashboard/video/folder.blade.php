@@ -44,7 +44,7 @@
                           <ul dropdown-menu
                               class="text-sm transform-dropdown bg-[#009FB2] before:font-awesome before:leading-default before:duration-350 before:ease
                                              duration-250 before:sm:right-3 before:text-lg after:text-lg pointer-events-none absolute right-0
-                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10 sm:-mr-6
+                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-20 sm:-mr-6
                                              top-12 lg:top-10 before:-top-5  before:content-['▲']
                                              px-2 py-4 text-left opacity-0 transition-all before:absolute after:absolute before:right-3 after:right-3.5 before:left-auto before:z-10
                                              before:font-normal before:text-[#009FB2] after:text-[#009FB2] before:antialiased before:transition-all
@@ -77,7 +77,7 @@
                                   <ul dropdown-menu
                                       class="text-sm transform-dropdown bg-[#009FB2] before:font-awesome before:leading-default before:duration-350 before:ease
                                              duration-250 before:sm:right-3 before:text-lg after:text-lg pointer-events-none absolute right-0
-                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-10 sm:-mr-6
+                                             origin-top list-none rounded-lg  bg-clip-padding text-white z-20 sm:-mr-6
                                              {{ $loop->iteration >= 3 && $loop->iteration >= $loop->last - 3  ? " bottom-12 lg:bottom-12 after:-bottom-5 after:content-['▼']": "  top-12 lg:top-10 before:-top-5  before:content-['▲']"}}
                                              px-2 py-4 text-left opacity-0 transition-all before:absolute after:absolute before:right-3 after:right-3.5 before:left-auto before:z-10
                                              before:font-normal before:text-[#009FB2] after:text-[#009FB2] before:antialiased before:transition-all

@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="flex items-center">
                                             <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Status</h4>
-                                            <h4 class="ml-3">Free-Active
+                                            <h4 class="ml-3">{{ $users->active == 1 ? 'Free Active' : 'Unverified' }}
                                             </h4>
                                         </div>
                                     </div>
@@ -64,31 +64,31 @@
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300  ">
                                                 Latest Upload:</h5>
-                                            <h5 class="py-2">{{ $users->last_upload ?? 0 }}</h5>
+                                            <h5 class="py-2">{{ $users->last_upload ? date("Y-m-d", $users->last_upload) : 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Uploaded:</h5>
-                                            <h5 class="py-2">{{ $users->uploaded ?? 0 }}</h5>
+                                            <h5 class="py-2">{{ $users->uploaded ? date("Y-m-d", $users->uploaded) : 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Video:</h5>
-                                            <h5 class="py-2">{{ $users->video ?? 0 }}</h5>
+                                            <h5 class="py-2">{{ \App\Models\File::formatNumber($users->video) ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Play:</h5>
-                                            <h5 class="py-2">{{ $users->play ?? 0 }}</h5>
+                                            <h5 class="py-2">{{ \App\Models\File::formatNumber($users->play) ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Storage:</h5>
-                                            <h5 class="py-2">{{ $users->storage ?? 0 }}</h5>
+                                            <h5 class="py-2">{{ \App\Models\File::formatSizeUnits($users->storage ) ?? 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
@@ -105,37 +105,15 @@
                                         <tbody>
                                             <tr class="border-b border-gray-100/80 text-teal-500 text-center">
                                                 <th class="py-2">Date</th>
-                                                <th>22/02</th>
-                                                <th>23/02</th>
-                                                <th>24/02</th>
-                                                <th>25/02</th>
-                                                <th>26/02</th>
-                                                <th>27/02</th>
-                                                <th>28/02</th>
-                                                <th>29/02</th>
-                                                <th>1/03</th>
-                                                <th>2/03</th>
-                                                <th>3/03</th>
-                                                <th>4/03</th>
-                                                <th>5/03</th>
-                                                <th>6/03</th>
+                                                @for ($i = 0; $i <= 15; $i++)
+                                                    <th>{{ date('d/m', strtotime('-' . $i . ' days')) }}</th>
+                                                @endfor
                                             </tr>
                                             <tr class="text-white text-center">
-                                                <td class="fonr-bold py-2">Plays</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
-                                                <td>0</td>
+                                                <td class="font-bold py-2">Plays</td>
+                                                @foreach($viewDate as $view)
+                                                    <td>{{ $view }}</td>
+                                                @endforeach
                                             </tr>
                                         </tbody>
                                     </table>
@@ -171,37 +149,35 @@
                                 </div> <!--end-actions-->
                                 <div>
                                     <h4 class="title text-teal-400 text-lg font-bold">Earning Modes </h4>
-                                    <form action="/setEarning" method="post" class="mt-3 bg-[#121520] rounded-lg p-3">
+                                    <form action="/admin/updateEarning" method="post" class="mt-3 bg-[#121520] rounded-lg p-3">
+                                        @csrf
                                         <input name="userID" class="hidden" value="{{ $users->id }}">
                                         <fieldset class="">
-                                            <input name="earningMode" id="0" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                            <input name="earningModes" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100" type="radio"
-                                                value="0" {{ $settings -> earningModes == 0 ? 'checked' : '' }}>
-                                            <label for="0" class="ml-3">No Earning: 1 Popunder on pre-roll (per
-                                                page)</label>
+                                                value="2" {{ $settings -> earningModes == 2 ? 'checked' : '' }}>
+                                            <label for="2" class="ml-3">Maximum Ads - 100% Earnings</label>
                                         </fieldset>
                                         <fieldset class="mt-3">
-                                            <input name="earningMode"  id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                            <input name="earningModes"  id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100" type="radio"
                                                 value="1" {{ $settings -> earningModes == 1 ? 'checked' : '' }}>
-                                            <label for="1" class="ml-3">$1 per 10k views: 2 Popunders on
-                                                pre-roll </label>
+                                            <label for="1" class="ml-3">Medium Ads - 50% Earnings</label>
                                         </fieldset>
                                         <fieldset class="mt-3">
-                                            <input name="earningMode"  id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                            <input name="earningModes"  id="0" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                   after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                   border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                   after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                   checked:border-0 checked:border-transparent checked:after:opacity-100" type="radio"
-                                                value="1" {{ $settings -> earningModes == 2 ? 'checked' : '' }}>
-                                            <label for="2" class="ml-3">$2.5 per 10k views: 3 Popunders on
-                                                pre-roll</label>
+                                                value="0" {{ $settings -> earningModes == 0 ? 'checked' : '' }}>
+                                            <label for="0" class="ml-3">Minimal Ads - No Earnings</label>
                                         </fieldset>
                                         <div class=" save text-center mt-3">
                                             <button class="bg-indigo-500 rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500">
@@ -259,13 +235,14 @@
                                     </form>
                                 </div>
                                 <!-- end send mail -->
-                                <form class="setting mt-3 py-2">
+                                <form class="setting mt-3 py-2" method="post" action="/admin/updateUser">
                                     @csrf
                                     <h4 class="title text-teal-400 text-lg font-bold">Setting</h4>
+                                    <input name="userID" class="hidden" value="{{ $users->id }}">
                                     <div class="grid grid-cols-4 mb-5 gap-6">
                                         <div class="">
                                             <h6 class="mb-2">Max Transfer</h6>
-                                            <input id="maxTransfer" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                            <input id="maxTransfer" name="max_transfer" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full" type="text"
@@ -273,7 +250,7 @@
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Max Torrent</h6>
-                                            <input id="maxTorrent" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                            <input id="maxTorrent" name="max_torrent" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full" type="text"
@@ -283,7 +260,7 @@
                                     <div class="grid grid-cols-4 mb-5 gap-6">
                                         <div class="">
                                             <h6 class="mb-2">Encode Priority</h6>
-                                            <input id="encodePriority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                            <input id="encodePriority" name="encoder_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
@@ -291,7 +268,7 @@
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Transfer Priority</h6>
-                                            <input id="transferPriority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                            <input id="transferPriority" name="transfer_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
@@ -299,15 +276,15 @@
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Download Priority</h6>
-                                            <input id="downloadPriority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                            <input id="downloadPriority" name="download_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
-                                                type="text" value="{{ $users->downloadPriority ?? 0 }}">
+                                                type="text" value="{{ $users->download_priority ?? 0 }}">
                                         </div>
                                         <div class="">
                                             <h6 class="mb-2">Torrent Priority</h6>
-                                            <input id="torrentPriority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                            <input id="torrentPriority" name="torrent_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
@@ -317,7 +294,7 @@
                                     <div class="grid grid-cols-2 row mb-5 mt-30 gap-6">
                                         <div class="flex items-center">
                                             <h4 class="me-4 mb-0 w-max">Streming Priority</h4>
-                                            <input id="streamPriority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                            <input id="streamPriority" name="stream_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow "

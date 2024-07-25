@@ -172,6 +172,12 @@ class VideoController
 
                 // Update the number of files in the folder
                 $this->folderRepo->updateNumberOfFiles($folderId);
+                $encoders = $this->encoderTaskRepo->findWhere(['slug' => $video->slug]);
+                if ($encoders) {
+                    $encoders->each(function ($encoder) {
+                        $encoder->delete();
+                    });
+                }
             }else {
                 return response()->json(
                     [

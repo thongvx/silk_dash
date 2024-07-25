@@ -27,10 +27,10 @@ class ManagetaskRepo
                 $query->where('status', 0);
                 break;
             case 'encoding':
-                $query->whereIn('status', [1,3]);
+                $query->whereIn('status', [1,3,2]);
                 break;
             case 'completed':
-                $query->whereIn('status', [4,5,6, 2]);
+                $query->whereIn('status', [4,5,6]);
                 break;
             case 'failed':
                 $query->whereIn('status', [19,11]);

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Models\User;
 
 class TicketAdminController
 {
@@ -35,7 +36,7 @@ class TicketAdminController
         $tickets = $this->ticketRepo->getAllTickets($userId);
         $data = [
             'title' => 'Support',
-            'tickets' => $tickets
+            'tickets' => $tickets,
         ];
         switch ($tab) {
             case 'ticket':
@@ -105,6 +106,7 @@ class TicketAdminController
             'title' => 'Support',
             'tickets' => $ticket,
             'userId' => $userId,
+            'userName'=> User::find($userId)->name,
         ];
         return view('admin.supportAdmin.infoCase', $data);
     }

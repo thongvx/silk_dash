@@ -36,14 +36,7 @@
                                class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
                             <thead class="sticky top-0">
                             <tr class="bg-[#142132] transition-colors text-md">
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">ID</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
-                                </th>
-                                <th data-column="user_id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="user_id" class='text-center pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">User ID</a>
@@ -59,6 +52,9 @@
                                 </th>
                                 <th class='pl-2 py-2'>
                                     Url
+                                </th>
+                                <th class='pl-2 py-2 text-center'>
+                                    Status
                                 </th>
                                 <th data-column="priority" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                     <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
@@ -76,10 +72,10 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th class='pl-2 py-2'>
+                                <th class='pl-2 py-2 text-center'>
                                     Folder Name
                                 </th>
-                                <th class='pl-2 sortable-column cursor-pointer relative  py-2'>
+                                <th class='pl-2 py-2 text-center'>
                                     Progress
                                 </th>
                                 <th data-column="updated_at" class='w-24 pl-1 sortable-column cursor-pointer relative  py-2' aria-sort>
@@ -89,24 +85,28 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             @forelse( $transfers as $index => $transfer)
-                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                    <td class="pl-2">{{ $transfer->id }}</td>
-                                    <td class="pl-2">{{ $transfer->user_id }}</td>
-                                    <td class="pl-2 {{ $transfer->status == 1 ? 'text-orange-500' : '' }}">{{ $transfer->slug }}</td>
+                                <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" id="transfer{{ $transfer->id }}">
+                                    <td class="pl-2 text-center">{{ $transfer->user_id }}</td>
+                                    <td class="pl-2 slug {{ $transfer->status == 1 ? 'text-orange-500' : '' }}">{{ $transfer->slug }}</td>
                                     <td class="pl-2 max-w-[20rem] url {{ $transfer->status == 1 ? 'text-orange-500' : '' }}">
                                         <div class="truncate hover:text-clip">
                                             <a href="{{ $transfer->url }}"  title="{{ $transfer->url }}" target="_black" class="hover:text-[#009FB2] ">{{ $transfer->url }}</a>
                                         </div>
                                     </td>
-                                    <td class="pl-2">{{ $transfer->priority ?? 0 }}</td>
-                                    <td class="pl-2 cursor-pointer sv-transfer" btn-retry-transfer data-transfer-id="{{ $transfer->id }}">{{ $transfer->sv_transfer }}</td>
-                                    <td>{{ $transfer->folder_name }}</td>
-                                    <td>{{ $transfer->progress}} {{ $transfer->progress > 0 ? '%' : '' }}</td>
+                                    <td class="text-center status">{{ $transfer->status }}</td>
+                                    <td class="pl-2 text-center">{{ $transfer->priority ?? 0 }}</td>
+                                    <td class="pl-2 cursor-pointer sv-transfer text-center" btn-retry-transfer data-transfer-id="{{ $transfer->id }}">{{ $transfer->sv_transfer }}</td>
+                                    <td class="text-center">{{ $transfer->folder_name }}</td>
+                                    <td class="text-center">{{ $transfer->progress}} {{ $transfer->progress > 0 ? '%' : '' }}</td>
                                     <td class="pl-2">{{ $transfer->updated_at ?? 0 }}</td>
+                                    <td class="w-max text-center cursor-pointer hover:text-[#009fb2]" btn-delete-transfer data-transfer-id="{{ $transfer->id }}">
+                                        <i class="material-symbols-outlined opacity-1">delete</i>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr class="my-3 h-12 bg-[#142132]">

@@ -73,10 +73,10 @@ class HomeController extends Controller
             'today' => array_sum($earningToday),
             'yesterday' => $monthData->filter(function($item) {
                 return $item['date'] == Carbon::yesterday()->format('Y-m-d');
-            })[0]['revenue'] ?? 0,
+            })->first()['revenue'] ?? 0,
             '2days' => $monthData->filter(function($item) {
                     return $item['date'] == Carbon::today()->subDay(2)->format('Y-m-d');
-            })[0]['revenue'] ?? 0,
+            })->first()['revenue'] ?? 0,
         ];
         return view('dashboard.index', $data);
     }

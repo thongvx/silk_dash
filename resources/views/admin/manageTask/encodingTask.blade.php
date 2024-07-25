@@ -58,13 +58,6 @@
                                class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
                             <thead class="sticky top-0">
                             <tr class="bg-[#142132] transition-colors text-md">
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">ID</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
-                                </th>
                                 <th data-column="user_id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
@@ -162,7 +155,6 @@
                                     $size = formatSize($encoder->size);
                                 @endphp
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] {{ $encoder->slug }}" id="{{ $encoder->id }}">
-                                    <td class="pl-2 id">{{ $encoder->id }}</td>
                                     <td class="pl-2">{{ $encoder->user_id }}</td>
                                     <td class="pl-2 {{ $text }} slug">{{ $encoder->slug }}</td>
                                     <td class="pl-2 text-center">{{ $encoder->quality }}</td>
@@ -173,10 +165,10 @@
                                     <td class="pl-2 cursor-pointer sv-encoder" btn-retry-encoder data-encoder-id={{ $encoder->id }}>{{ $encoder->sv_encoder }}</td>
                                     <td class="pl-2 cursor-pointer sv-sto" btn-retry-storage data-storage-id={{ $encoder->id }}>{{ $encoder->sv_storage }}</td>
                                     <td class="pl-2">
-                                        {{ $encoder->start_encoder }}
+                                        {{ $encoder->start_encoder ?? 0 }}
                                     </td>
                                     <td class="pl-2">
-                                        {{ $encoder->finish_encoder }}
+                                        {{ $encoder->finish_encoder ?? 0 }}
                                     </td>
                                     <td class="w-max text-center cursor-pointer hover:text-[#009fb2]" btn-remove-encoder data-slug="{{ $encoder->slug }}">
                                         <i class="material-symbols-outlined opacity-1">delete</i>
