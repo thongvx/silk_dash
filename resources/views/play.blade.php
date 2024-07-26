@@ -301,7 +301,8 @@
     };
     $(document).ready(async () => {
         let adBlockEnabled = false
-        if (adBlockEnabled == false || enablePlay == 'yes') {
+        const checkloadplayer = await checkUrlStatus(url);
+        if ((adBlockEnabled == false || enablePlay == 'yes') && checkloadplayer == true) {
             let file = urlPlay;
             loadPlayer(file);
             $('.preloader').fadeOut();
@@ -348,6 +349,22 @@
             .catch(function () {
                 console.log("fail");
             });
+    }
+    async function checkUrlStatus(url) {
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                mode: 'cors'
+            });
+
+            if (response.status === 200) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            return false;
+        }
     }
 </script>
 </body>
