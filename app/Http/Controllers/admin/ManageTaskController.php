@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Transfer;
 use Illuminate\Http\Request;
 use App\Repositories\Admin\ManagetaskRepo;
 use App\Repositories\VideoRepo;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB; // Thêm dòng này
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
+
+// Thêm dòng này
 
 class ManageTaskController extends Controller
 {
@@ -60,27 +64,72 @@ class ManageTaskController extends Controller
     public function removeEncoder(Request $request)
     {
         $slugEncoder = $request->input('slugEncoder');
-        $encoders = $this->manageTaskRepo->getEncoderBySlug($slugEncoder)->get();
-        $video = $this->videoRepo->findVideoBySlug($slugEncoder)->first();
+        $encoders = $this->manageTaskRepo->getEncoderBySlug($slugEncoder);
+        $video = $this->videoRepo->findVideoBySlug($slugEncoder);
         // Check if the encoder exists
         if ($encoders) {
             // Set the status and storage values to 0
-            $subject = 'Encoder Error: ' . $encoders[0]->slug;
-            $message = 'An error occurred with the video ID: ' . $encoders[0]->slug . '.';
+            $subject = 'Encoder Error: ' . $encoders->slug;
+            $message = 'An error occurred with the video ID: ' . $encoders->slug. ' (' . $encoders->title. ')'. '.' . "\n"
+                        . 'The video has been removed from the encoder queue. Please upload your video again.';
             Notification::create([
-                'user_id' => $encoders[0]->user_id,
+                'user_id' => $encoders->user_id,
                 'subject' => $subject,
                 'message' => $message,
                 'type' => 'encoder',
                 'status' => 0
             ]);
             // Delete the encoder
-            $this->manageTaskRepo->getEncoderBySlug($slugEncoder)->delete();
+            $this->manageTaskRepo->deleteEncoder($slugEncoder);
             // Delete the video
-            $video->delete();
+            if($video){
+                $video->first()->delete();
+            }
         } else {
             // Throw an exception if the encoder does not exist
             throw new \Exception('Encoder not found');
+        }
+    }
+    // retry transfer task
+    public function retryTransferTask(Request $request)
+    {
+        $transferId = $request->transferId;
+        $data = Transfer::query()->find($transferId);
+        $data->status = 0;
+        $data->save();
+        Redis::setex('transfer'.$data->user_id.'-'.$data->slug, 1800, json_encode([
+            'slug' => $data->slug,
+            'url' => $data->url,
+            'status' => 0,
+            'progress' => 0,
+            'size_download' => 0,
+            'size' => 0,
+        ]));
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => $data,
+        ]);
+    }
+
+    //remove transfer task
+    public function removeTransferTask(Request $request)
+    {
+        $transferId = $request->transferId;
+        $data = Transfer::query()->find($transferId);
+        if ($data) {
+            $data->delete();
+            Redis::del('transfer' . $data->user_id . '-' . $data->slug);
+            return response()->json([
+                'status' => 200,
+                'message' => 'success',
+                'data' => $data,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Transfer task not found',
+            ]);
         }
     }
 }

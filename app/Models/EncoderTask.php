@@ -53,9 +53,6 @@ class EncoderTask extends Model
         static::updated(function ($encoderTask) {
             Redis::del(Redis::keys(VideoCacheKeys::ALL_ENCODER_TASKS->value . $encoderTask->user_id . '*'));
         });
-        static::deleted(function ($encoderTask) {
-            Redis::del(Redis::keys(VideoCacheKeys::ALL_ENCODER_TASKS->value . $encoderTask->user_id . '*'));
-        });
     }
 
 }

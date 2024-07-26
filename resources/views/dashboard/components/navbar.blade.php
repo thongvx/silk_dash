@@ -32,7 +32,7 @@
                       </a>
                       <ul dropdown-menu
                           class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
-                                duration-250 before:text-5.5 pointer-events-none absolute right-3 top-20 z-10
+                                duration-250 before:text-5.5 pointer-events-none absolute right-3 top-30 z-10
                                origin-top list-none rounded-lg border-none bg-clip-padding
                                pl-1 py-2 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-6 before:left-auto before:-top-4 before:z-10
                                before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲']
@@ -127,7 +127,7 @@
             </li>
             <!-- notifications -->
 
-            <li class="relative flex items-center pr-2">
+            <li class="relative flex items-center pr-2 z-30">
                 <div class="relative">
                   <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger
                     aria-expanded="false">
@@ -144,9 +144,9 @@
                 </div>
               <ul dropdown-menu
                 class="text-sm transform-dropdown bg-[#121520] before:font-awesome before:leading-default before:duration-350 before:ease
-                       duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-10 lg:top-10
+                       duration-250 min-w-44 before:sm:right-3 before:text-5.5 pointer-events-none absolute right-0 top-10 z-30 lg:top-10
                        origin-top list-none rounded-lg border-none bg-clip-padding
-                       text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:-top-4 before:z-10
+                       text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:-top-4 before:z-20
                        before:inline-block before:font-normal before:text-[#121520] before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6
                        lg:absolute lg:right-5 lg:left-auto lg:mt-2 lg:block" notification>
                   @if($notifications->count() > 0)
@@ -160,17 +160,18 @@
                   <div class=" max-h-64 overflow-auto">
                   @forelse($notifications as $notification)
                       <!-- add show class on dropdown open js -->
-                      <li class="relative {{ $notification->read == 0 ? 'bg-[#142132]' :'' }}">
+                      <li class="relative z-30 {{ $notification->read == 0 ? 'bg-[#142132]' :'' }}">
                           <a class="flex items-center rounded-lg px-2 text-white shadow-lg drop-shadow-sm py-3"
-                             href="javascript:;" data-id="{{ $notification->id }}" btn-read>
+                             href="javascript:;" data-id="{{ $notification->id }}" btn-read btn-info-noti>
                               <i class="material-symbols-outlined mr-3 text-3xl text-red-500">
                                   {{ $notification->type == 'delete' ? 'delete' : 'error' }}
                               </i>
-                              <div>
-                                  <h6 class="text-white font-bold w-max">
+                              <div class="info">
+                                  <h6 class="text-white font-bold w-max subject">
                                       {{ $notification->subject }}
                                   </h6>
-                                  <span class="text-slate-400 text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                                  <span class="text-slate-400 text-sm date" data-date="{{ $notification->created_at }}">{{ $notification->created_at->diffForHumans() }}</span>
+                                  <span class="hidden message">{{ $notification->message }}</span>
                               </div>
                           </a>
                       </li>

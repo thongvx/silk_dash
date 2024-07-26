@@ -33,17 +33,18 @@ class Ticket extends Model
             if ($model->wasChanged('message')) {
                 $model->deleteCacheTicketById();
             }
+            $model->deleteCacheTicket();
         });
 
         static::deleted(function ($model) {
             $model-> deleteCacheTicket();
-
         });
     }
     // Các phương thức, quan hệ và logic thêm có thể được định nghĩa ở đây
     public function deleteCacheTicket()
     {
         $keys = Redis::keys(TicketCacheKeys::ALL_TICKET_FOR_USER ->value . $this->user_id . '*');
+        redis::del(TicketCacheKeys::ALL_TICKET_FOR_ADMIN->value . '*');
         foreach ($keys as $key) {
             Redis::del($key);
         }

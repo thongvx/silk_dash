@@ -2,7 +2,7 @@
 <aside
     class="fixed inset-y-0 xl:sticky xl:top-0 xl:inset-x-0 flex-wrap items-center justify-between block p-0 my-4 xl:my-0
          antialiased transition-transform duration-200 -translate-x-full border-0 shadow-xl max-w-64 xl:max-w-full
-         ease-nav-brand z-20 xl:mx-6 rounded-2xl xl:rounded-lg xl:left-0 xl:translate-x-0 bg-[#121520]"
+         ease-nav-brand z-20 xl:mx-6 rounded-2xl xl:rounded-lg xl:left-0 xl:translate-x-0 bg-[#121520]" aside-menu
     aria-expanded="false">
     <div class="h-19 lg:hidden">
         <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white xl:hidden"

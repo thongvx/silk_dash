@@ -27,10 +27,10 @@ class ManagetaskRepo
                 $query->where('status', 0);
                 break;
             case 'encoding':
-                $query->whereIn('status', [1,3]);
+                $query->whereIn('status', [1,3,2]);
                 break;
             case 'completed':
-                $query->whereIn('status', [4,5,6, 2]);
+                $query->whereIn('status', [4,5,6]);
                 break;
             case 'failed':
                 $query->whereIn('status', [19,11]);
@@ -60,7 +60,25 @@ class ManagetaskRepo
 
     public function getEncoderBySlug($slug)
     {
-        $data = $this->encoderTask->where('slug', $slug);
+        $data = $this->encoderTask
+            ->join('videos', 'encoder_task.slug', '=', 'videos.slug')
+            ->where('encoder_task.slug', $slug)
+            ->selectRaw('encoder_task.slug as slug,
+                        encoder_task.size as size,
+                        encoder_task.user_id as user_id,
+                        videos.title as title,
+                        GROUP_CONCAT(encoder_task.quality) as qualities,
+                        GROUP_CONCAT(encoder_task.status) as status,
+                        count(*) as total,
+                        MAX(encoder_task.created_at) as created_at,
+                        MAX(encoder_task.updated_at) as updated_at'
+            )
+            ->groupBy('encoder_task.slug', 'encoder_task.size', 'encoder_task.user_id', 'videos.title')
+            ->first();
         return $data;
+    }
+    public function deleteEncoder($slug)
+    {
+        $this->encoderTask->where('slug', $slug)->delete();
     }
 }

@@ -5,8 +5,7 @@ $(document).on('focus', '[search-input]', function() {
     label.classList.remove('translate-x-3')
     label.classList.remove('text-slate-400')
     label.classList.add('text-red-500')
-    this.classList.remove('z-20')
-    this.classList.remove('border-slate-900')
+    this.classList.remove('border-transparent')
     this.classList.add('border-red-500')
 })
 $(document).on('blur', '[search-input]', function() {
@@ -17,8 +16,7 @@ $(document).on('blur', '[search-input]', function() {
         label.classList.add('translate-x-3')
         label.classList.add('text-slate-400')
         label.classList.remove('text-red-500')
-        this.classList.add('z-20')
-        this.classList.add('border-slate-900')
+        this.classList.add('border-transparent')
         this.classList.remove('border-red-500')
     }
 });

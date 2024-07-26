@@ -11,7 +11,7 @@
               </div>
           </a>
          <div class="">
-          <a class="flex px-6 m-0 text-sm whitespace-nowrap items-center" href="" target="_blank">
+          <a class="flex ld:px-6 m-0 text-sm whitespace-nowrap items-center" href="" target="_blank">
             <img src="{{asset('image/logo/logo4.webp')}}"
               class="h-full max-w-full transition-all duration-200 ease-nav-brand max-h-10"
               alt="main_logo" />
@@ -42,7 +42,7 @@
                 <a class="inline-block px-8 py-2 mb-0 mr-4 text-xs font-bold text-center text-blue-500 uppercase align-middle transition-all ease-in bg-transparent border border-blue-500 border-solid rounded-lg shadow-none cursor-pointer leading-pro hover:-translate-y-px active:shadow-xs hover:border-blue-500 active:bg-blue-500 active:hover:text-blue-500 hover:text-blue-500 tracking-tight-rem hover:bg-transparent hover:opacity-75 hover:shadow-none active:text-white active:hover:bg-transparent" target="_blank" href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053">Online Builder</a>
               </li> -->
             <!-- notifications -->
-              <li class="relative items-center px-4 md:flex">
+              <li class="relative items-center lg:px-4 md:flex">
                   <a href="javascript:;" aria-expanded="false"  dropdown-trigger
                      class="flex flex-col text-sm font-semibold text-white transition-all ease-nav-brand">
                 <span class="rounded-full border h-10 w-10 text-lg font-bold flex items-center justify-center">

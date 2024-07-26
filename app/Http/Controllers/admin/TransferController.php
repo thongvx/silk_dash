@@ -90,25 +90,5 @@ class TransferController extends Controller
         }
     }
     //=============================================================================================
-    // retry transfer task
-    public function retryTransferTask(Request $request)
-    {
-        $transferId = $request->transferId;
-        $data = Transfer::query()->find($transferId);
-        $data->status = 0;
-        $data->save();
-        Redis::setex('transfer'.$data->user_id.'-'.$data->slug, 1800, json_encode([
-            'slug' => $data->slug,
-            'url' => $data->url,
-            'status' => 0,
-            'progress' => 0,
-            'size_download' => 0,
-            'size' => 0,
-        ]));
-        return response()->json([
-            'status' => 200,
-            'message' => 'success',
-            'data' => $data,
-        ]);
-    }
+
 }

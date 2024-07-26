@@ -12,14 +12,40 @@
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
         #video_player{
-            height: 100vh !important;
+            height: 100dvh !important;
         }
         .preloader .preloader-icon{
             border-top: 2px solid {{ $player_setting->premium_color }};
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q2MFXEGDES');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(97794899, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </head>
 <body>
+<div id="pop" class="div_pop"></div>
 <div class="preloader">
     <div class="preloader-icon"></div>
     <span>Loading...</span>
@@ -181,6 +207,39 @@
             $('.preloader').fadeOut();
         }
     });
+    function openNewTab(url) {
+        var a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+    document.getElementById('pop').addEventListener("click", () => {
+        var e = document.getElementById('pop');
+        e.remove();
+        window.open("https://holahupa.com/2032563/");
+        //ads gala
+        var script = document.createElement('script');
+        script.type = 'application/javascript';
+        script.src = 'https://streamsilk.com/ads.js';
+        document.head.appendChild(script);
+    });
+    $(document).on('click', '#video_player', function() {
+        if (playID === 0) {
+            playID = 1;
+            //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
+        }
+    });
+    let pop15s = setTimeout(function() {
+        $('body').click(function(){
+            if(t === 0)
+                window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
+            t = 1;
+            clearTimeout(pop15s)
+        })
+    }, 10000);
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)

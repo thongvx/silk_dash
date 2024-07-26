@@ -28,6 +28,7 @@
                                             @php
                                                 $currentDate = null;
                                                 $data = json_decode($tickets->message, true);
+                                                $previousType = null;
                                             @endphp
                                             <div class="lg:h-[calc(100vh-26em)] h-[calc(100vh-26em)] overflow-auto pb-2 px-2 relative" id="box-message">
                                             @foreach($data as $value)
@@ -49,7 +50,7 @@
                                                     <div class="message-class  text-slate-200 {{ $value['type'] !== $previousType ? '' : 'hidden'}}
                                                                 mb-2">
                                                         <h4 class="italic">
-                                                            {{ $value['type'] == 2 ? Auth::user()->name : 'StreamSilk'}}
+                                                            {{ $value['type'] == 2 ? $userName : 'StreamSilk'}}
                                                         </h4>
                                                     </div>
                                                     @php
@@ -60,8 +61,7 @@
                                                             <img src="{{ $value['url_file'] }}" alt="File Image">
                                                         </div>
                                                     @endif
-                                                    <div class="message-class {{ $value['type'] != 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}}
-                                                    px-5 py-2.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
+                                                    <div class="message-class {{ $value['type'] != 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}} px-5 py-2.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
                                                         <h4>
                                                             {{ $value['message'] }}
                                                             <span class="{{ $value['type'] != 2 ?'text-white' : 'text-gray-600'}} text-xs -mb-2 relative -bottom-1 ml-2">

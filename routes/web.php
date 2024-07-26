@@ -136,14 +136,17 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\HomeAdminController::class, 'index'])->name('admin');
     Route::resource('/compute', \App\Http\Controllers\admin\ComputeController::class);
+
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
     Route::get('/login-as/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'loginAs'])->name('admin.login-as');
+    Route::post('/updateEarning', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateEarning']);
+    Route::post('/updateUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateUser']);
 
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::post('/manageTask/retryEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryEncoder'])->name('retryEncoder');
     Route::post('/manageTask/removeEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeEncoder'])->name('removeEncoder');
-    Route::post('/manageTask/retryTransfer', [\App\Http\Controllers\admin\TransferController::class, 'retryTransferTask']);
-
+    Route::post('/manageTask/retryTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryTransferTask']);
+    Route::post('/manageTask/removeTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeTransferTask']);
 
     Route::get('/statistic', [\App\Http\Controllers\admin\StatisticController::class, 'index'])->name('statistic');
 

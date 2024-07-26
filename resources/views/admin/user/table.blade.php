@@ -31,7 +31,7 @@
             <th data-column="play" class='pl-2 sortable-column cursor-pointer relative' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
-                <a href="javascript:void(0)">Plays</a>
+                <a href="javascript:void(0)">Views</a>
                 <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                       data-direction="desc">▼</span>
             </th>
@@ -92,7 +92,7 @@
                 <td class="play">{{ !$user->play ? 0 : \App\Models\File::formatNumber($user->play) }}</td>
                 <td class="storage">{{ !$user->storage ? 0 : \App\Models\File::formatSizeUnits($user->storage ) }}</td>
                 <td class="earning">{{ !$user->earning ? 0 : '$ '.$user->earning }}</td>
-                <td class="d-none">{{ $user->created_at->format('Y-m-d') }}</td>
+                <td class="max-w-12">{{ $user->created_at->format('Y-m-d H:m:s') }}</td>
                 <td>
                     <a class="rounded-lg px-4 py-1.5 bg-[#009FB2]/40 hover:bg-[#009FB2] text-md text-white"
                        href="{{ route('admin.login-as', ['user' => $user->id]) }}"

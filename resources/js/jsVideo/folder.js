@@ -54,7 +54,7 @@ $(document).on('click', '[btn-add-folder]', function() {
                     exitBox()
                     $('#add-folder').remove()
                 }, 2000);
-                $('[folder]:eq(0)').after(`<div folder
+                $('.list-folder').prepend(`<div folder
                                             class="item-folder rounded-lg text-white flex justify-between px-2 py-1.5 mb-2 bg-[#142132] hover:bg-[#009FB2] from-[#009FB2] to-[#4CBE1F]">
                                             <a class="w-full btn-page-folder" href="javascript:;" data-folderid="${data.folder.id}" data-limit="${limit}">
                                                 <h5>
@@ -66,17 +66,19 @@ $(document).on('click', '[btn-add-folder]', function() {
                                                                           aria-expanded="false" class="flex items-center"><i
                                                             class="material-symbols-outlined">more_vert</i></a>
                                                   <ul dropdown-menu
-                                                      class="text-sm transform-dropdown bg-slate-900 before:font-awesome before:leading-default before:duration-350 before:ease
-                                                         shadow-lg shadow-slate-900 duration-250 px-5 before:sm:right-1 before:text-5.5 pointer-events-none absolute right-1 top-8 -lg:top-0
-                                                         origin-top list-none rounded-lg  bg-clip-padding text-white z-10
-                                                         py-4 text-left opacity-0 transition-all before:absolute before:right-0 before:left-auto before:top-0 before:z-10
-                                                         before:inline-block before:font-normal before:text-slate-900 before:antialiased before:transition-all before:text-xl before:content-['▲'] sm:-mr-6                         lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
+                                                      class="text-sm transform-dropdown bg-[#009FB2] before:font-awesome before:leading-default before:duration-350 before:ease
+                                                                     duration-250 before:sm:right-3 before:text-lg after:text-lg pointer-events-none absolute right-0
+                                                                     origin-top list-none rounded-lg  bg-clip-padding text-white z-20 sm:-mr-6
+                                                                     top-12 lg:top-10 before:-top-5  before:content-['▲']
+                                                                     px-2 py-4 text-left opacity-0 transition-all before:absolute after:absolute before:right-3 after:right-3.5 before:left-auto before:z-10
+                                                                     before:font-normal before:text-[#009FB2] after:text-[#009FB2] before:antialiased before:transition-all
+                                                                     lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
                                                     <!-- add show class on dropdown open js -->
-                                                    <li class="relative w-max btn-edit-folder hover:text-[#009FB2] items-center flex"><i
+                                                    <li class="relative w-max btn-edit-folder hover:text-[#142132] items-center flex"><i
                                                             class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
                                                         Edit Folder
                                                     </li>
-                                                    <li class=" mt-3 relative btn-delete-folder hover:text-[#009FB2] items-center flex"><i
+                                                    <li class=" mt-3 relative btn-delete-folder hover:text-[#142132] items-center flex"><i
                                                             class="material-symbols-outlined opacity-1 mr-2">delete</i>
                                                         Delete
                                                     </li>

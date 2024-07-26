@@ -127,6 +127,7 @@
                                             $bounce1 = round(($earnings['yesterday'] - $earnings['2days']) / $earnings['2days'] * 100, 2);
                                             else
                                             $bounce1 = 0;
+
                                         @endphp
                                         @if($earnings['yesterday'] > $earnings['2days'] && $earnings['2days'] != 0)
                                         <span
@@ -136,7 +137,7 @@
                                         @else
                                             <span
                                                 class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center flex">
-                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> {{ $bounce1 }}%
+                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> -{{ $bounce1 }}%
                                         </span>
                                         @endif
                                     </div>
@@ -164,7 +165,7 @@
                                         @else
                                             <span
                                                 class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center flex">
-                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> {{ $bounce2 }}%
+                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> -{{ $bounce2 }}%
                                         </span>
                                         @endif
                                     </div>
