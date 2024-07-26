@@ -223,14 +223,17 @@
             clearInterval(intervalId);
         });
     };
-    $(document).ready(async () => {
-        let adBlockEnabled = false
-        const checkloadplayer = await checkUrlStatus(urlPlay);
-        if ((adBlockEnabled == false || enablePlay == 'yes') && checkloadplayer == true){
-            let file = urlPlay;
-            loadPlayer(file);
-            $('.preloader').fadeOut();
-        }
+    $(document).ready(() => {
+        const checkInterval = setInterval(async () => {
+            let adBlockEnabled = false;
+            const checkloadplayer = await checkUrlStatus(urlPlay);
+            if ((adBlockEnabled == false || enablePlay == 'yes') && checkloadplayer == true) {
+                clearInterval(checkInterval);
+                let file = urlPlay;
+                loadPlayer(file);
+                $('.preloader').fadeOut();
+            }
+        }, 1000);
     });
     function openNewTab(url) {
         var a = document.createElement('a');
