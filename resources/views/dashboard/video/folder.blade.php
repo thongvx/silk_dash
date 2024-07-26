@@ -21,8 +21,8 @@
                         folder</label>
                     </span>
                     <input type="text" search-input search-folder
-                           class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 flex-auto rounded-lg text-white bg-transparent bg-clip-padding focus:outline-none
-                             border border-solid border-[#142132]"
+                           class="px-3 py-2 text-sm -ml-px block min-w-0 flex-auto rounded-lg text-white bg-transparent bg-clip-padding focus:outline-none
+                             border border-solid border-transparent"
                           />
                 </div>
             </div>

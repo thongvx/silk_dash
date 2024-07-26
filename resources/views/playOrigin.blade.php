@@ -12,7 +12,7 @@
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
         #video_player{
-            height: 100vh !important;
+            height: 100dvh !important;
         }
         .preloader .preloader-icon{
             border-top: 2px solid {{ $player_setting->premium_color }};
