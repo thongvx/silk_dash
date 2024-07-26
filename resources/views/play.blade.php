@@ -326,8 +326,8 @@
     });
     let pop5s = setTimeout(function () {
         $('body').click(function () {
-            if (t === 0)
-                window.open("https://holahupa.com/2032563/");
+            //if (t === 0)
+                //window.open("https://holahupa.com/2032563/");
             t = 1;
             clearTimeout(pop5s)
         })
