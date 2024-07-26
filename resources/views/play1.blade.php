@@ -225,6 +225,7 @@
     };
     $(document).ready(async () => {
         let adBlockEnabled = false
+        const checkloadplayer = await checkUrlStatus(urlPlay);
         if ((adBlockEnabled == false || enablePlay == 'yes') && checkloadplayer == true){
             let file = urlPlay;
             loadPlayer(file);
