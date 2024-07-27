@@ -9,8 +9,8 @@ if ($("#my-awesome-dropzone").length > 0) {
         // Setup chunking
         chunking: true,
         method: "POST",
-        maxFilesize: 4000000000,
-        chunkSize: 2000000,
+        maxFilesize: 10000000000,
+        chunkSize: 5000000,
         // If true, the individual chunks of a file are being uploaded simultaneously.
         parallelChunkUploads: true
     });
