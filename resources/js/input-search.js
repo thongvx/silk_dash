@@ -1,4 +1,4 @@
-$(document).on('focus', '[search-input]', function() {
+$(document).on('focus', '[search-input], [search-user]', function() {
     let label = this.closest('[search]').querySelector('label')
     label.classList.add('-translate-y-5')
     label.classList.add('scale-75')
@@ -8,7 +8,7 @@ $(document).on('focus', '[search-input]', function() {
     this.classList.remove('border-transparent')
     this.classList.add('border-red-500')
 })
-$(document).on('blur', '[search-input]', function() {
+$(document).on('blur', '[search-input], [search-user]', function() {
     let label = this.closest('[search]').querySelector('label')
     if(this.value === ''){
         label.classList.remove('-translate-y-5')

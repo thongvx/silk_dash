@@ -57,7 +57,7 @@
                         <i btn-edit class="material-symbols-outlined opacity-1 text-3xl">edit_square</i>
                     </button>
                     <button btn-subtitle disabled class="cursor-not-allowed px-2" title="Add Subtitle">
-                        <a href=""><i btn-subtitle class="material-symbols-outlined opacity-1 text-3xl">closed_caption_add</i></a>
+                        <a href="" class="cursor-not-allowed"><i btn-subtitle class="material-symbols-outlined opacity-1 text-3xl">closed_caption_add</i></a>
                     </button>
                     <button type="button" btn-video disabled class="cursor-not-allowed px-2"
                             title="Delete File">

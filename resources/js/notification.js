@@ -64,12 +64,12 @@ $(document).on('click', '[btn-info-noti]', function() {
                                                 <i class="material-symbols-outlined text-3xl">close</i>
                                             </button>
                                         </div>
-                                        <div  id="fixed-box-control">
+                                        <div  id="fixed-box-control" class="mb-4">
                                             <div class="export">
                                                 <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Notification</h5>
-                                                <div class="text-white">
+                                                <div class="text-white my-2">
                                                     <div class="flex justify-between">
-                                                        <h4>${subject}</h4>
+                                                        <h4 class="text-red-500">${subject}</h4>
                                                         <h4>${date}</h4>
                                                     </div>
                                                     <div class="mt-3">

@@ -64,13 +64,13 @@
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300  ">
                                                 Latest Upload:</h5>
-                                            <h5 class="py-2">{{ $users->last_upload ? date("Y-m-d", $users->last_upload) : 0 }}</h5>
+                                            <h5 class="py-2">{{ $users->last_upload ? date("Y-m-d H:m:s", $users->last_upload) : 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5
                                                 class="py-2 min-h-max h-max text-slate-300 ">
                                                 Uploaded:</h5>
-                                            <h5 class="py-2">{{ $users->uploaded ? date("Y-m-d", $users->uploaded) : 0 }}</h5>
+                                            <h5 class="py-2">{{ $users->uploaded ? date("Y-m-d H:m:s", $users->uploaded) : 0 }}</h5>
                                         </div>
                                         <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                             <h5

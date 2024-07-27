@@ -279,49 +279,5 @@ $(document).on('click', '#fixed-video [folder]', function() {
     });
 });
 
-const formSubtitles = `<div class="subtitles" id="subtitles">
-                                <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Subtitle</h5>
-                                <div id="list-file" class="max-h-80 overflow-auto my-3">
-                                     <div class="text-white">
-                                        <span>dgasdgsd</span>
-                                     </div>
-                                </div>
-                                <div class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132] w-max text-white cursor-pointer hover:bg-[#009fb2]" btn-add-sub>Add Subtitles</div>
-                                <form class="text-white mt-3 hidden" action="" id="add-sub">
-                                    <h4>Add Subtitles</h4>
-                                    <div class="bg-[#142132] rounded-lg text-center flex relative h-max box-img  hover:text-[#009fb2]">
-                                        <input name="file-sub" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
-                                               class="absolute opacity-0 file-img cursor-pointer w-full">
-                                        <label for="file-attach" class="w-full py-2 cursor-pointer text-center">Choose File Subtitles</label>
-                                    </div>
-                                    <button type="submit" class="mt-2 px-5 py-1.5 rounded-lg bg-[#142132]" disabled>Submit</button>
-                                </form>
-                            </div>`
-$(document).on('submit', '#form-edit-video', function(e) {
-    e.preventDefault();
-    var form = this;
-    var formData = new FormData(form);
-    formData.set('subtitle', $(form).find('select[name="subtitle"] option:selected').text().trim())
-    const button = $(form).find('button[type="submit"]');
-    $.ajax({
-        type: 'POST',
-        url: '/updatefile',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            const message = 'Setting video successfully.';
-            add_notification('success',message, button);
-            setTimeout(function() {
-                exitBox ()
-                $('#move').addClass('hidden')
-            }, 2000);
-            form.reset();
-        },
-        error: function(response) {
-            console.log(response);
-        }
-    });
-})
 
 

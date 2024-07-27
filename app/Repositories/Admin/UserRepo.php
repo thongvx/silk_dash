@@ -52,5 +52,18 @@ class UserRepo
         return $user;
     }
 
+    //search user
+    public function searchUser($search, $column, $direction, $limit, $columns)
+    {
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        $users = User::query()
+            ->where('name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%')
+            ->orWhere('id', 'like', '%' . $search . '%')
+            ->orderBy($column1, $direction)
+            ->paginate($limit);
+        return $users;
+    }
+
     // Add more methods as needed
 }

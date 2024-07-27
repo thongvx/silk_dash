@@ -18,7 +18,7 @@
                                         <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
                                             <div class="flex items-center px-2 py-1">
                                                 <div class="text-white">
-                                                    {{ $user->name }}
+                                                    {{ $user['name'] }}
                                                 </div>
                                             </div>
                                         </td>
@@ -26,7 +26,7 @@
                                             class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                             <div class="flex-1 text-center">
                                                 <h6 class="mb-0 text-sm leading-normal dark:text-white">
-                                                    3400</h6>
+                                                    {{ $user['views'] }}</h6>
                                             </div>
                                         </td>
                                     </tr>

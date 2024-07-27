@@ -141,7 +141,7 @@
                                     <td class="p-2 align-middle bg-transparent border-b w-3/10 whitespace-nowrap dark:border-white/40">
                                         <div class="flex items-center px-2 py-1">
                                             <div class="text-white">
-                                                {{ $user['name'] }}
+                                                <a href="{{ route('user.show', ['user' => $user['id']]) }}" class="hover:text-[#009FB2] " target="_black">{{ $user['name'] }}</a>
                                             </div>
                                         </div>
                                     </td>
