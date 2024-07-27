@@ -59,7 +59,7 @@
             <h1 class="text-3xl">API Documentation</h1>
             <div id="token" class=" flex items-center {{ Auth::user()->token ? 'justify-between' : '' }}">
                 <div class="relative flex">
-                    <h5 class="text-clipboard">API Token: {{ Auth::user()->token }}</h5>
+                    <h5>API Token: <span class="text-clipboard">{{ Auth::user()->token }}</span></h5>
                     <i class="material-symbols-outlined ml-4 cursor-pointer hover:text-blue-500 text-md  {{ Auth::user()->token ? '' : 'hidden' }}" clipboard-copy>content_copy</i>
                 </div>
                 @if(Auth::user()->token)

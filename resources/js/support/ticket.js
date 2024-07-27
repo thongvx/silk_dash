@@ -29,7 +29,7 @@ $(document).on('click', '[btn-get-token]', function() {
         url: '/regenerateToken',
         success: function(response) {
             $('#token').html(`<div class="relative flex">
-                                    <h5 class="text-clipboard">API Token: ${response.token}</h5>
+                                    <h5>API Token: <span class="text-clipboard">${response.token}</span></h5>
                                     <i class="material-symbols-outlined ml-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                                 </div>
                                 <button class="rounded-lg ml-3 hover:text-[#009fb2] cursor-pointer" btn-get-token>
