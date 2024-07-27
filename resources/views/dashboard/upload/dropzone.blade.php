@@ -7,7 +7,7 @@
                 You can upload multiple video files per a session with total sizes up to 100 GB
             </div>
             <hr class="h-px my-6 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
-            <form action="https://e02.encosilk.cc/upload"
+            <form action="https://e01.encosilk.cc/upload"
                   class="dropzone"
                   id="my-awesome-dropzone">
                 <input type="file" name="file"  style="display: none;">
