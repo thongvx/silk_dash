@@ -70,6 +70,7 @@ class HomeAdminController extends Controller
             $scores[str_replace("total_user_views:{$today}:", '', $key)] = [
                 'views' => Redis::get($key) ?? 0,
                 'name' => User::find($userId)->name,
+                'id' => $userId,
             ];
         }
         arsort($scores);

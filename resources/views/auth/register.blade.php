@@ -15,7 +15,7 @@
                     <div class="flex -mx-3 rounded-2xl xl:w-7/12 md:w-10/12 w-11/12 text-[#142132]">
                         <div class="relative w-full flex flex-col items-center min-w-0 break-words border-0 shadow-none lg:py4">
                             <div class="py-6 pb-0 mb-0 text-center">
-                                <h4 class="font-semibold text-3xl sm:text-4xl">Welcome to <span class="text-[#009FB2]">StreamSilk</span></h4>
+                                <h4 class="font-semibold text-3xl sm:text-4xl text-[#009FB2] sm:text-[#142132]">Welcome to <span class="text-[#142132] sm:text-[#009FB2]">StreamSilk</span></h4>
                                 <p class="mb-0">Fill out the details below</p>
                             </div>
                             <div class="w-11/12 px-0 py-3 sm:p-6 text-white">
@@ -124,7 +124,7 @@
                                         <!-- /.col -->
                                         <div class="flex justify-center">
                                             <button type="submit"  class="inline-block w-full px-16 py-3.5 mt-4 mb-0 font-bold leading-normal text-center
-                                                 text-white align-middle transition-all bg-[#009FB2]/70 hover:bg-[#009FB2]
+                                                 text-white align-middle transition-all bg-[#009FB2] hover:bg-[#00cdcd]
                                                   border-0 rounded-lg cursor-pointer hover:-translate-y-px active:opacity-85 hover:shadow-xs text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25">
                                                 Register</button>
                                         </div>

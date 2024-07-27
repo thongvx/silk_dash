@@ -31,14 +31,14 @@ $(document).on('click', '.checkbox',function(){
     const slug = $(table).find('tbody .checkbox:checked').closest('tr').data('videoid');
     if(rows_checked === 1){
         $('[btn-subtitle]').prop('disabled', false);
-        $('[btn-subtitle]').removeClass('cursor-not-allowed')
-        $('[btn-subtitle]').addClass('cursor-pointer')
+        $('[btn-subtitle], [btn-subtitle] a').removeClass('cursor-not-allowed')
+        $('[btn-subtitle], [btn-subtitle] a').addClass('cursor-pointer')
         $('[btn-subtitle]').addClass('hover:text-[#009FB2]')
         $('[btn-subtitle] a').attr('href', `/edit-video/${slug}`)
     } else {
         $('[btn-subtitle]').prop('disabled', true);
-        $('[btn-subtitle]').addClass('cursor-not-allowed')
-        $('[btn-subtitle]').removeClass('cursor-pointer')
+        $('[btn-subtitle], [btn-subtitle] a').addClass('cursor-not-allowed')
+        $('[btn-subtitle], [btn-subtitle] a').removeClass('cursor-pointer')
         $('[btn-subtitle]').removeClass('hover:text-[#009FB2]')
         $('[btn-subtitle] a').attr('href', 'javascript:void(0)')
     }

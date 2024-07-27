@@ -130,6 +130,7 @@
                 // Add subtitle tracks to the player options
                 if(tracks.length > 0) {
                     options.tracks = tracks;
+                    options.captions = { default: true, track: 0 };
                 }
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);

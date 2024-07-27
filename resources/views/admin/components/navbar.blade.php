@@ -28,7 +28,7 @@
               </div>
               <div class="hidden items-center md:ml-auto px-2 xl:flex">
                   <form class="flex items-center relative bg-[#121520] w-full rounded-lg ease" action="/admin/videoAdmin/search" method="GET" search>
-                      <label for="search" class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-10 absolute text-slate-400">Search video...</label>
+                      <label for="search" class="p-1 flex bg-[#121520] items-center translate-x-3 transition duration-300 ease-in-out z-30 absolute text-slate-400">Search video...</label>
                       <input type="text" id="search" name="videoID" value="" search-input
                              class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 lg:w-52 flex-auto text-white rounded-lg bg-transparent bg-clip-padding focus:outline-none
                          border border-solid border-[#121520]"

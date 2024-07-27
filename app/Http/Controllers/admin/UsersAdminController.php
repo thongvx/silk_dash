@@ -151,4 +151,17 @@ class UsersAdminController
         $user->update($request->all());
         return back()->with('success', 'User updated successfully');
     }
+    // search user
+    public function searchUser(Request $request)
+    {
+        $limit = $request->get('limit', 20);
+        $columns = ['*'];
+        $column = $request->get('column', 'created_at');
+        $direction = $request->get('direction', 'desc');
+        $data = [
+            'users' => $this->userRepo->searchUser($request->search, $column, $direction, $limit, $columns),
+            'title' => 'Users',
+        ];
+        return view('admin.user.table', $data);
+    }
 }

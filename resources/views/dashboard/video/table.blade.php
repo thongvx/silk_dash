@@ -96,13 +96,15 @@
                                              px-2 py-4 text-left opacity-0 transition-all before:absolute after:absolute before:right-3 after:right-3.5 before:left-auto before:z-10
                                              before:font-normal before:text-[#009FB2] after:text-[#009FB2] before:antialiased before:transition-all
                                              lg:absolute lg:right-6 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-                            <li class="w-max btn-edit hover:text-[#142132] items-center flex"><i
-                                    class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
-                                <a href="{{ Route('video.editVideo', $video->slug) }}">Edit File</a>
+                            <li class="w-max btn-edit hover:text-[#142132] items-center flex">
+                                <a href="{{ Route('video.editVideo', $video->slug) }}" class="flex items-center"><i
+                                        class="material-symbols-outlined opacity-1 mr-2">edit_square</i>
+                                    Edit File</a>
                             </li>
-                            <li class="w-max btn-edit hover:text-[#142132] items-center flex mt-3"><i
-                                    class="material-symbols-outlined opacity-1 mr-2">closed_caption_add</i>
-                                <a href="{{ Route('video.editVideo', $video->slug) }}">Add Subtitle</a>
+                            <li class="w-max btn-edit hover:text-[#142132] items-center flex mt-3">
+                                <a href="{{ Route('video.editVideo', $video->slug) }}" class="flex items-center"><i
+                                        class="material-symbols-outlined opacity-1 mr-2">closed_caption_add</i>Add Subtitle
+                                </a>
                             </li>
                             <li class="btn-delete hover:text-[#142132] items-center flex mt-3"><i
                                     class="material-symbols-outlined opacity-1 mr-2">delete</i>

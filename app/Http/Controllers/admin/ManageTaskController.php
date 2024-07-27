@@ -70,7 +70,7 @@ class ManageTaskController extends Controller
         if ($encoders) {
             // Set the status and storage values to 0
             $subject = 'Encoder Error: ' . $encoders->slug;
-            $message = 'An error occurred with the video ID: ' . $encoders->slug. ' (' . $encoders->title. ')'. '.' . "\n"
+            $message = 'An error occurred with the video ID: ' . $encoders->slug. ' "' . $encoders->title. '"'. '.' . "\n"
                         . 'The video has been removed from the encoder queue. Please upload your video again.';
             Notification::create([
                 'user_id' => $encoders->user_id,

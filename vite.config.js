@@ -13,7 +13,8 @@ export default defineConfig({
                 'resources/js/landing.js',
                 'resources/css/vs2015.css',
                 'resources/js/admin/admin.js',
-
+                'resources/js/dropzone/app-dropzone.js',
+                'resources/css/dropzone/dropzone.css',
             ],
             refresh: true,
         }),
