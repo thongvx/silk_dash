@@ -15,6 +15,7 @@ export default defineConfig({
                 'resources/js/admin/admin.js',
                 'resources/js/dropzone/app-dropzone.js',
                 'resources/css/dropzone/dropzone.css',
+                'resources/js/resumable/app-resumable.js',
             ],
             refresh: true,
         }),
