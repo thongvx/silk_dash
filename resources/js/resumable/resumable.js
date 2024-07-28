@@ -62,10 +62,10 @@ if ($fileUpload.length > 0) {
                                                 </div>
                                                 <div class="flex justify-between">
                                                       <div class="flex">
-                                                          <div class="text-progress mr-3 text-lg font-bold"></div>
+                                                          <div class="text-progress mr-3 text-lg font-bold">0%</div>
                                                           <div class="status text-slate-400">Pending</div>
                                                       </div>
-                                                      <div class="estimated-time text-slate-400">0</div>
+                                                      <div class="estimated-time text-slate-400">Estimated time: 0</div>
                                                 </div>
                                                 <div class="progress bg-gray-600 h-3.5 rounded-lg resumable-file-progress">
                                                     <div class="progress-bar bg-[#009FB2] h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center"
