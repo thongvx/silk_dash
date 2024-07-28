@@ -10,6 +10,7 @@ if ($("#my-awesome-dropzone").length > 0) {
         chunking: true,
         method: "POST",
         maxFilesize: 20000,
+        maxFiles: 10,
         chunkSize: 5000000,
         // If true, the individual chunks of a file are being uploaded simultaneously.
         parallelChunkUploads: true
