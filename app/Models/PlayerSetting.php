@@ -32,6 +32,7 @@ class PlayerSetting extends Model
         'logo_link',
         'position',
         'poster_link',
+        'power_url_logo',
         // Thêm các cột khác tương ứng vào đây
     ];
 

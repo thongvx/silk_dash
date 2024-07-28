@@ -185,9 +185,9 @@
                             </div>
                         </div>
                         <div class="text-white col-span-2 rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power" value="{{ in_array($playerSettings->logo_link, ['', null, 0]) ? '' : $logoLink }}"
+                            <input type="text" id="power" name="power_url_logo" value="{{ $playerSettings->power_url_logo }}"
                                    class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Power url" readonly>
+                                   placeholder="Power url">
                         </div>
                     </div>
                     <div class="items-center mt-3 w-full">
@@ -232,11 +232,6 @@
                             <div btn-delete-selected class="hidden items-center rounded-lg bg-rose-500 hover:bg-red-700 px-3 py-1 cursor-pointer mb-3 ml-3">
                                 <h4 class="w-max flex h-full items-center">Delete selected</h4>
                             </div>
-                        </div>
-                        <div class="rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/70">
-                            <input type="text" id="power" name="poster_link" value=""
-                                   class="py-1.5 bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="Power url">
                         </div>
                     </div>
                 </div>
