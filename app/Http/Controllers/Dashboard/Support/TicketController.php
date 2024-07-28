@@ -68,7 +68,7 @@ class TicketController
         // Giả sử $newMessage là tin nhắn mới bạn muốn thêm vào
         $newMessage = [
             'type' => 2,
-            'message' => nl2br(e($validated['message'])), // Preserve line breaks
+            'message' => $validated['message'],
             'url_file' => $url_file,
             'date' => Carbon::now(),
         ];
@@ -119,7 +119,7 @@ class TicketController
         $dataMessage = [
             [
                 'type' => 2,
-                'message' => nl2br(e($message)), // Preserve line breaks
+                'message' => $message,
                 'url_file' => $url_file,
                 'date' => Carbon::now(),
             ]

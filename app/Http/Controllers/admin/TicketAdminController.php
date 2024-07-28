@@ -77,7 +77,7 @@ class TicketAdminController
         // Giả sử $newMessage là tin nhắn mới bạn muốn thêm vào
         $newMessage = [
             'type' => 1,
-            'message' => nl2br(e($validated['message'])), // Preserve line breaks
+            'message' => $validated['message'],
             'url_file' => $url_file,
             'date' => Carbon::now(),
         ];
