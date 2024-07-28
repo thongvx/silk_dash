@@ -24,13 +24,13 @@
                                             </div>
                                         </div>
                                         <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
-                                        <div>
+                                        <div class="relative h-[calc(100vh-20em)] lg:h-[calc(100vh-18em)] text-base">
                                             @php
                                                 $currentDate = null;
                                                 $data = json_decode($tickets->message, true);
                                                 $previousType = null;
                                             @endphp
-                                            <div class="lg:h-[calc(100vh-26em)] h-[calc(100vh-26em)] overflow-auto pb-2 px-2 relative" id="box-message">
+                                            <div class="lg:h-[calc(100vh-24em)] h-[calc(100vh-26em)] overscroll-y-auto snap-y pb-2 px-2" id="box-message">
                                             @foreach($data as $value)
                                                 @php
                                                     $messageDate = date("m/d/Y", strtotime($value['date']));
@@ -72,22 +72,25 @@
                                                 </div>
                                             @endforeach
                                             </div>
-                                            <div class="w-full bg-[#142132] text-white rounded-xl py-2">
+                                            <div class="w-full absolute bottom-3 bg-[#142132] text-white rounded-3xl py-2">
                                                 <form action="/admin/supportAdmin" method="POST" enctype="multipart/form-data" class="text-white">
                                                     @csrf
                                                     <input type="text" class="hidden" name="ticketID" value="{{ $tickets->id }}"
                                                            placeholder="Subject" readonly>
-                                                    <textarea name="message" class="outline-none bg-transparent w-full  px-3 py-1"></textarea>
-                                                    <div class="flex justify-between px-3">
+                                                    <div class="flex justify-between px-3 items-center">
                                                         <div class="bg-[#142132] rounded-lg text-center flex relative h-max box-img  hover:text-[#009fb2]">
                                                             <input name="file" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
                                                                    class="absolute opacity-0 file-img cursor-pointer w-full">
-                                                            <label for="file-attach" class="w-max py-2 cursor-pointer">
+                                                            <label for="file-attach" class="w-max cursor-pointer">
                                                                 <i class="material-symbols-outlined opacity-1 text-white text-3xl">attach_file</i>
                                                             </label>
                                                         </div>
+                                                        <textarea name="message" id="myTextarea" rows="1" class="ml-2 m-0 resize-none border-0 bg-transparent px-0
+                                                        text-token-text-primary focus:ring-0 focus-visible:ring-0 max-h-52 outline-none w-full" placeholder="message"></textarea>
                                                         <div class="text-center">
-                                                            <button type="submit" class=" cursor-pointer px-10 py-2 rounded-lg bg-[#009FB2]/70 hover:bg-[#009fb2] text-white" disabled>Save</button>
+                                                            <button type="submit" class="!bg-transparent cursor-pointer rounded-lg hover:text-[#009fb2] text-white" disabled>
+                                                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">send</i>
+                                                            </button>
                                                         </div>
                                                     </div>
 
