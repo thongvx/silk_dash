@@ -1,4 +1,4 @@
-import './lb-resumable.js'
+import('./lb-resumable.js')
 
 var $ = window.$; // use the global jQuery instance
 
