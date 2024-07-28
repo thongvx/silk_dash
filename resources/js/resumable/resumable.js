@@ -1,11 +1,21 @@
 
 var $ = window.$; // use the global jQuery instance
+var size1, size2, size3, size4;
+const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+function niceBytes(x){
+    let l = 0, n = parseInt(x, 10) || 0;
+    while(n >= 1024 && ++l){
+        n = n/1024;
+    }
+    return n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l];
+}
 
 var $fileUpload = $('#resumable-browse');
 var $fileUploadDrop = $('#resumable-drop');
 var $uploadList = $("#file-upload-list");
 
-if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
+if ($fileUpload.length > 0) {
     var resumable = new Resumable({
         chunkSize: 5 * 1024 * 1024, // 10MB
         simultaneousUploads: 15,
@@ -22,7 +32,9 @@ if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
                 resumableTotalSize: file.size,
                 resumableType: file.file.type,
                 resumableRelativePath: file.relativePath,
-                resumableTotalChunks: file.chunks.length
+                resumableTotalChunks: file.chunks.length,
+                userID: $('#userID').val(),
+                folderID: $('#folderPost').val(),
             };
         }
     });
@@ -38,12 +50,23 @@ if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
             $uploadList.show();
             $('.resumable-progress .progress-resume-link').hide();
             $('.resumable-progress .progress-pause-link').show();
-            $uploadList.append('<li class="resumable-file-' + file.uniqueIdentifier + '">Uploading' +
-                                    '<br> <span class="resumable-file-name"></span>' +
-                                    '<br> <span class="resumable-file-progress">' +'</span>' +
-                                    '<br> <span class="resumable-file-speed"></span>' +
-                                '</li>');
-            $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-name').html(file.fileName);
+            $('#box-upload-file').addClass('hidden');
+            var div_progress = `<div class="mx-3 mb-3 resumable-file-${file.uniqueIdentifier}">
+                                                <div class="text-white pb-2 flex justify-between">
+                                                    <div class="title-file resumable-file-name">${file.fileName}</div>
+                                                    <div class="size">${niceBytes(file.size)}</div>
+                                                </div>
+                                                <div class="progress bg-gray-600 h-3.5 rounded-lg resumable-file-progress">
+                                                    <div class="progress-bar w-0 bg-orange-500 h-full rounded-lg text-xs text-white font-semibold pl-2 flex items-center "></div>
+                                                </div>
+                                            </div>`;
+            // $uploadList.append('<li class="resumable-file-' + file.uniqueIdentifier + '">Uploading' +
+            //                         '<br> <span class="resumable-file-name"></span>' +
+            //                         '<br> <span class="resumable-file-progress">' +'</span>' +
+            //                         '<br> <span class="resumable-file-speed"></span>' +
+            //                     '</li>');
+            $uploadList.append(div_progress);
+            // $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-name').html(file.fileName);
             resumable.upload(); // Automatically start upload when file is added
         });
 
@@ -68,7 +91,9 @@ if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
             var speed = totalBytesTransferred / timeElapsed / (1024*1024); // Speed in KB/s
 
             var progress = Math.floor(file.progress() * 100);
-            $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html(progress + '%');
+            var uploadedSize = (file.size * file.progress()).toFixed(2);
+            $('.resumable-file-' + file.uniqueIdentifier + ' .size').html(niceBytes(uploadedSize)+'/'+niceBytes(file.size));
+            $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').text(progress + '%');
             $('.progress-bar').css({width: Math.floor(resumable.progress() * 100) + '%'});
         });
     }
