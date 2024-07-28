@@ -14,6 +14,9 @@
             <div class="progress-bar"></div>
         </div>
     </div>
-    @vite('resources/js/resumable/app-resumable.js')
 
+@endsection
+@section('scripts')
+    <script src="{{ asset('assets/js/resumable/lb-resumable.js') }}"></script>
+    @vite('resources/js/resumable/resumable.js')
 @endsection

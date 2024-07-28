@@ -8,7 +8,7 @@ var $uploadList = $("#file-upload-list");
 if ($fileUpload.length > 0 && $fileUploadDrop.length > 0) {
     var resumable = new Resumable({
         chunkSize: 5 * 1024 * 1024, // 10MB
-        simultaneousUploads: 15,
+        simultaneousUploads: 20,
         testChunks: false, // Disable the GET requests for testing chunks
         throttleProgressCallbacks: 1,
         target: $fileUpload.data('url'),
