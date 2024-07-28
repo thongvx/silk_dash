@@ -349,27 +349,28 @@ $(document).ready(function() {
     setInterval(function() {
         date_time();
     }, 1000);
-});
-document.getElementById('myTextarea').addEventListener('input', function () {
-    // Đặt số hàng mặc định và tối đa
-    const maxRows = 10;
-    const minRows = 1;
+    $('#myTextarea').on('input', function () {
+        // Đặt số hàng mặc định và tối đa
+        const maxRows = 10;
+        const minRows = 1;
 
-    // Tính toán chiều cao của văn bản
-    const textarea = this;
-    textarea.style.height = 'auto'; // Đặt chiều cao về tự động để tính toán
-    const rows = Math.floor(textarea.scrollHeight / 24); // 24 là chiều cao của một dòng (có thể cần điều chỉnh)
+        // Tính toán chiều cao của văn bản
+        const textarea = this;
+        textarea.style.height = 'auto'; // Đặt chiều cao về tự động để tính toán
+        const rows = Math.floor(textarea.scrollHeight / 24); // 24 là chiều cao của một dòng (có thể cần điều chỉnh)
 
-    // Điều chỉnh số hàng hiển thị
-    if (rows <= minRows) {
-        textarea.rows = minRows;
-    } else if (rows > maxRows) {
-        textarea.rows = maxRows;
-        textarea.style.overflowY = 'auto'; // Hiển thị thanh cuộn dọc khi vượt quá số hàng tối đa
-    } else {
-        textarea.rows = rows;
-    }
-    if (textarea.value.split('\n').length < textarea.rows) {
-        textarea.rows = textarea.value.split('\n').length;
-    }
+        // Điều chỉnh số hàng hiển thị
+        if (rows <= minRows) {
+            textarea.rows = minRows;
+        } else if (rows > maxRows) {
+            textarea.rows = maxRows;
+            textarea.style.overflowY = 'auto'; // Hiển thị thanh cuộn dọc khi vượt quá số hàng tối đa
+        } else {
+            textarea.rows = rows;
+        }
+        if (textarea.value.split('\n').length < textarea.rows) {
+            textarea.rows = textarea.value.split('\n').length;
+        }
+    });
 });
+
