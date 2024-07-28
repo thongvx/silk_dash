@@ -66,7 +66,7 @@
                                                         @endif
                                                             <div class="message-class {{ $value['type'] == 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}} px-5 py-2.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
                                                                 <h4>
-                                                                    {{ $value['message'] }}
+                                                                    {{ htmlspecialchars($value['message']) }}
                                                                     <span class="{{ $value['type'] == 2 ?'text-white' : 'text-gray-600'}} text-xs -mb-2 relative -bottom-1 ml-2">
                                                                     {{ date("h:m a", strtotime($value['date'])) }}
                                                                     </span>
