@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Support;
 
+use App\Facades\Bot;
 use App\Models\Ticket;
 use App\Repositories\TicketRepo;
 use Illuminate\Http\Request;
@@ -136,6 +137,8 @@ class TicketController
             'url_file' => $url_file,
         ];
         Ticket::create($dataTicke);
+        $count = Ticket::count();
+        Bot::send('new ticket: '. $user->username .' - Link: https://streamsilk.com/admin/supportAdmin/'.$count.'?user_id='.$user->id);
         return redirect('https://streamsilk.com/support?tab=ticket');
     }
 }
