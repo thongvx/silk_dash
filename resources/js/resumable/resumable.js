@@ -26,7 +26,7 @@ if ($fileUpload.length > 0) {
         testChunks: false, // Disable the GET requests for testing chunks
         throttleProgressCallbacks: 1,
         target: $fileUpload.data('url'),
-        method: 'POST', // Ensure the method is POST
+        method: 'multipart', // Ensure the method is POST
         query: function (file, chunk) {
             return {
                 resumableIdentifier: file.uniqueIdentifier,
@@ -110,7 +110,7 @@ if ($fileUpload.length > 0) {
             document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-remove-btn`).addEventListener('click', () => {
                 resumable.removeFile(file);
                 document.querySelector(`.resumable-file-${file.uniqueIdentifier}`).remove();
-                if (document.querySelectorAll('#file-upload-list info-file').length === 0) {
+                if (document.querySelectorAll('#file-upload-list .info-file').length === 0) {
                     $('#box-upload-file').show()
                 }
             });
@@ -119,6 +119,8 @@ if ($fileUpload.length > 0) {
         resumable.on('fileSuccess', function (file, message) {
             $('.resumable-file-' + file.uniqueIdentifier + ' .status').text('completed')
             $('.resumable-file-' + file.uniqueIdentifier + ' .button-file').remove();
+            $('.resumable-file-' + file.uniqueIdentifier + ' .text-progress').text('100%')
+            $('.resumable-file-' + file.uniqueIdentifier + ' .progress-bar').css({width: '100%'});
         });
 
         resumable.on('fileError', function (file, message) {

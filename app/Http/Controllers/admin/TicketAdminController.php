@@ -58,6 +58,21 @@ class TicketAdminController
         return view('dashboard.supportAdmin.newticket', $data);
     }
     //store ticket
+    private function isVietnamese($string) {
+        // Biểu thức chính quy để kiểm tra các ký tự tiếng Việt
+        $pattern = '/^[\p{L}\p{M}\s]*$/u';
+
+        // Kiểm tra xem chuỗi có chứa các ký tự hợp lệ không
+        if (preg_match($pattern, $string)) {
+            // Kiểm tra nếu có ít nhất một ký tự tiếng Việt
+            $vietnamesePattern = '/[\p{L}&&[^\p{Latin}]]/u';
+            if (preg_match($vietnamesePattern, $string)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -65,6 +80,9 @@ class TicketAdminController
             'message' => 'required|string',
             'file' => 'mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:2048',
         ]);
+        if ($this->isVietnamese($validated['message'])) {
+            return redirect()->back()->withErrors(['message' => 'The message must contain non-Vietnamese characters.']);
+        }
         // Tìm ticket cần cập nhật
         $ticket = $this->ticketRepo->find($validated['ticketID']);
         $url_file = '0';
