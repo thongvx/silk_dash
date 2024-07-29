@@ -138,7 +138,7 @@ class TicketController
         ];
         Ticket::create($dataTicke);
         $count = Ticket::count();
-        Bot::send('new ticket: '. $user->username .' - Link: https://streamsilk.com/admin/supportAdmin/'.$count.'?user_id='.$user->id);
+        Bot::send('new ticket: '. $user->name .' - Link: https://streamsilk.com/admin/supportAdmin/'.$count.'?user_id='.$user->id);
         return redirect('https://streamsilk.com/support?tab=ticket');
     }
 }
