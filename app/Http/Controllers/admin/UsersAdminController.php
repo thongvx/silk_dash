@@ -63,8 +63,8 @@ class UsersAdminController
             ->selectRaw('date, sum(views) as views')
             ->groupBy('date')
             ->get();
-        $totalViewsDay = 0;
-        $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
+        $totalViews = 0;
+        $countryViewsKeys = Redis::keys("total:{$today}:{$user}:*");
         foreach ($countryViewsKeys as $key) {
             $views = Redis::get($key);
             $totalViews += $views;
