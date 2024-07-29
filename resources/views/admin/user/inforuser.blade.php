@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="flex items-center">
                                             <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Status</h4>
-                                            <h4 class="ml-3">{{ $users->active == 1 ? 'Free Active' : 'Unverified' }}
+                                            <h4 class="ml-3">{{ $users->active == 1 ? 'Free Active' : ($users->active == 19 ? 'Ban' : 'Unverified' )}}
                                             </h4>
                                         </div>
                                     </div>
@@ -126,17 +126,21 @@
                                           Open Cases
                                       </div>
                                       <div class="ml-4 rounded-lg bg-gradient-to-r from-pink-500 to-red-500 w-max py-2 px-5">
-                                          <a href="https://turboviplay.com/verifyAccount/f1zSePGDjX"
-                                              style="color: white;">
-                                              <i class="fa fa-ban" aria-hidden="true"></i>
-                                              Ban It </a>
+                                          <form action="{{ route('user.destroy', ['user' => $users->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');" style="display:inline;">
+                                              @csrf
+                                              @method('DELETE')
+                                              <a href="javascript:void(0)" onclick="this.closest('form').submit();" class="text-white">
+                                                  <i class="fa fa-ban" aria-hidden="true"></i>
+                                                  Ban It
+                                              </a>
+                                          </form>
                                       </div>
                                       <div class="ml-4 rounded-lg bg-gradient-to-r from-blue-400 to-green-500 w-max py-2 px-5" onclick="premium()">
                                           <i class="fa fa-money" aria-hidden="true"></i>
                                           Add Premium View
                                       </div>
                                       <a class="ml-4 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 w-max py-2 px-5"
-                                          href="https://turboviplay.com/loginUserAdmin?keyLogin=eigjcnehwjru34&amp;email=jwplayerplay01@gmail.com&amp;password=1234567890"
+                                          href="{{ route('admin.login-as', ['user' => $users->id]) }}"
                                           target="_blank">
                                           <i class="fa fa-sign-in" aria-hidden="true"></i>
                                           Login As User

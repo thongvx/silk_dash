@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'key_api',
         'updated_at',
         'created_at',
-
+        'active',
     ];
 
     /**
