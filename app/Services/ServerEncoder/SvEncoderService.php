@@ -14,7 +14,7 @@ class SvEncoderService
 {
     public function getAllSvEncoders($column, $direction, $limit)
     {
-        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        $column == 'created_at' ? $column1 = 'name' : $column1 = $column;
         $data = [];
         $keys = Redis::keys('sv_encoder:*');
         foreach ($keys as $key) {
