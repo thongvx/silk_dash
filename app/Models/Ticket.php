@@ -30,7 +30,7 @@ class Ticket extends Model
         });
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
-            if ($model->wasChanged('message')) {
+            if ($model->wasChanged('message') || $model->wasChanged('status')) {
                 $model->deleteCacheTicketById();
             }
             $model->deleteCacheTicket();
