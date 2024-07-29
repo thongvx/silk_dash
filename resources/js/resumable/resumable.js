@@ -1,5 +1,8 @@
+import {uploadState} from "../main.js";
 
-var $ = window.$; // use the global jQuery instance
+var $ = window.$;
+
+// use the global jQuery instance
 var size1, size2, size3, size4;
 const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 
@@ -15,47 +18,48 @@ function formatTime(seconds) {
     if (seconds < 3600) return `${Math.floor(seconds / 60)}m ${Math.floor(seconds % 60)}s`;
     if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ${Math.floor((seconds % 3600) / 60)}m`;
 }
-var $fileUpload = $('#resumable-browse');
-var $fileUploadDrop = $('#resumable-drop');
-var $uploadList = $("#file-upload-list");
+export function Upload_Resumable_FILE () {
+    var $fileUpload = $('#resumable-browse');
+    var $fileUploadDrop = $('#resumable-drop');
+    var $uploadList = $("#file-upload-list");
 
-if ($fileUpload.length > 0) {
-    var resumable = new Resumable({
-        chunkSize: 5 * 1024 * 1024, // 10MB
-        simultaneousUploads: 15,
-        testChunks: false, // Disable the GET requests for testing chunks
-        throttleProgressCallbacks: 1,
-        target: $fileUpload.data('url'),
-        method: 'multipart', // Ensure the method is POST
-        query: function (file, chunk) {
-            return {
-                resumableIdentifier: file.uniqueIdentifier,
-                resumableFilename: file.fileName,
-                resumableChunkNumber: chunk.offset,
-                resumableChunkSize: chunk.size,
-                resumableTotalSize: file.size,
-                resumableType: file.file.type,
-                resumableRelativePath: file.relativePath,
-                resumableTotalChunks: file.chunks.length,
-                userID: $('#userID').val(),
-                folderID: $('#folderPost').val(),
-            };
-        }
-    });
+    if ($fileUpload.length > 0) {
+        var resumable = new Resumable({
+            chunkSize: 5 * 1024 * 1024, // 10MB
+            simultaneousUploads: 15,
+            testChunks: false, // Disable the GET requests for testing chunks
+            throttleProgressCallbacks: 1,
+            target: $fileUpload.data('url'),
+            method: 'multipart', // Ensure the method is POST
+            query: function (file, chunk) {
+                return {
+                    resumableIdentifier: file.uniqueIdentifier,
+                    resumableFilename: file.fileName,
+                    resumableChunkNumber: chunk.offset,
+                    resumableChunkSize: chunk.size,
+                    resumableTotalSize: file.size,
+                    resumableType: file.file.type,
+                    resumableRelativePath: file.relativePath,
+                    resumableTotalChunks: file.chunks.length,
+                    userID: $('#userID').val(),
+                    folderID: $('#folderPost').val(),
+                };
+            }
+        });
+        var idSequence = 0;
+        if (!resumable.support) {
+            $('#resumable-error').show();
+        } else {
+            $fileUploadDrop.show();
+            resumable.assignDrop($fileUploadDrop[0]);
+            resumable.assignBrowse($fileUpload[0]);
 
-    if (!resumable.support) {
-        $('#resumable-error').show();
-    } else {
-        $fileUploadDrop.show();
-        resumable.assignDrop($fileUploadDrop[0]);
-        resumable.assignBrowse($fileUpload[0]);
-
-        resumable.on('fileAdded', function (file) {
-            $uploadList.show();
-            $('.resumable-progress .progress-resume-link').hide();
-            $('.resumable-progress .progress-pause-link').show();
-            $('#box-upload-file').hide()
-            var div_progress = `<div class="mx-3 mb-3 info-file resumable-file-${file.uniqueIdentifier} flex justify-between items-center">
+            resumable.on('fileAdded', function (file) {
+                $uploadList.show();
+                $('.resumable-progress .progress-resume-link').hide();
+                $('.resumable-progress .progress-pause-link').show();
+                $('#box-upload-file').hide()
+                var div_progress = `<div class="mx-3 mb-3 info-file resumable-file-${file.uniqueIdentifier} flex justify-between items-center">
                                                 <div>
                                                     <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111.87 122.88"
                                                     fill="white" width="60" height="50">
@@ -93,85 +97,101 @@ if ($fileUpload.length > 0) {
                                                     </button>
                                                 </div>
                                             </div>`;
-            $uploadList.append(div_progress);
-            resumable.upload(); // Automatically start upload when file is added
-            document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-pause-btn`).addEventListener('click', () => {
-                resumable.pause();
-                document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-pause-btn`).style.display = 'none';
-                document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-resume-btn`).style.display = 'inline';
+                $uploadList.append(div_progress);
+                resumable.upload(); // Automatically start upload when file is added
+                document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-pause-btn`).addEventListener('click', () => {
+                    resumable.pause();
+                    document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-pause-btn`).style.display = 'none';
+                    document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-resume-btn`).style.display = 'inline';
+                });
+
+                document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-resume-btn`).addEventListener('click', () => {
+                    resumable.upload();
+                    document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-pause-btn`).style.display = 'inline';
+                    document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-resume-btn`).style.display = 'none';
+                });
+
+                document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-remove-btn`).addEventListener('click', () => {
+                    resumable.removeFile(file);
+                    document.querySelector(`.resumable-file-${file.uniqueIdentifier}`).remove();
+                    if (document.querySelectorAll('#file-upload-list .info-file').length === 0) {
+                        $('#box-upload-file').show()
+                    }else{
+                        resumable.upload();
+                    }
+                });
+                uploadState.isUploading = true;
             });
 
-            document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-resume-btn`).addEventListener('click', () => {
-                resumable.upload();
-                document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-pause-btn`).style.display = 'inline';
-                document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-resume-btn`).style.display = 'none';
+            resumable.on('fileSuccess', function (file, message) {
+                $('.resumable-file-' + file.uniqueIdentifier + ' .status').text('completed')
+                $('.resumable-file-' + file.uniqueIdentifier + ' .button-file').remove();
+                $('.resumable-file-' + file.uniqueIdentifier + ' .text-progress').text('100%')
+                $('.resumable-file-' + file.uniqueIdentifier + ' .progress-bar').css({width: '100%'});
+                uploadState.isUploading = false
             });
 
-            document.querySelector(`.resumable-file-${file.uniqueIdentifier} .resumable-remove-btn`).addEventListener('click', () => {
-                resumable.removeFile(file);
-                document.querySelector(`.resumable-file-${file.uniqueIdentifier}`).remove();
-                if (document.querySelectorAll('#file-upload-list .info-file').length === 0) {
-                    $('#box-upload-file').show()
+            resumable.on('fileError', function (file, message) {
+                $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('file could not be uploaded: ' + message);
+                $('.resumable-file-' + file.uniqueIdentifier + ' .button-file').remove();
+            });
+            const startTimes = {};
+            resumable.on('fileProgress', function (file) {
+                if (!startTimes[file.uniqueIdentifier]) {
+                    startTimes[file.uniqueIdentifier] = Date.now();
+                }
+
+                const now = Date.now();
+                const timeElapsed = (now - startTimes[file.uniqueIdentifier]) / 1000; // Time elapsed in seconds
+                const bytesTransferred = file.size * file.progress();
+
+                const speed = (bytesTransferred / timeElapsed) / (1024 * 1024);
+                const remainingBytes = file.size - bytesTransferred;
+                const eta = (remainingBytes / (speed * 1024 * 1024)).toFixed(2); // ETA in seconds
+
+                var progress = Math.floor(file.progress() * 100);
+                var uploadedSize = (file.size * file.progress()).toFixed(2);
+                $('.resumable-file-' + file.uniqueIdentifier + ' .size').text(niceBytes(uploadedSize) + '/' + niceBytes(file.size));
+                $('.resumable-file-' + file.uniqueIdentifier + ' .status').text('Uploading')
+                $('.resumable-file-' + file.uniqueIdentifier + ' .text-progress').text(progress + '%')
+                $('.resumable-file-' + file.uniqueIdentifier + ' .progress-bar').css({width: Math.floor(resumable.progress() * 100) + '%'});
+                $('.resumable-file-' + file.uniqueIdentifier + ' .estimated-time').html(`Estimated time: <span class="text-white">${formatTime(eta)}</span>`);
+
+            });
+            $uploadList.on('click', '.pause-upload', function () {
+                var $fileDiv = $(this).closest('div[class^="resumable-file-"]');
+                var uniqueIdentifier = $fileDiv.attr('class').split('resumable-file-')[1];
+                var file = resumable.getFromUniqueIdentifier(uniqueIdentifier);
+                if (file) {
+                    resumable.pause();
+                    $fileDiv.find('.status').text('Paused');
                 }
             });
-        });
-
-        resumable.on('fileSuccess', function (file, message) {
-            $('.resumable-file-' + file.uniqueIdentifier + ' .status').text('completed')
-            $('.resumable-file-' + file.uniqueIdentifier + ' .button-file').remove();
-            $('.resumable-file-' + file.uniqueIdentifier + ' .text-progress').text('100%')
-            $('.resumable-file-' + file.uniqueIdentifier + ' .progress-bar').css({width: '100%'});
-        });
-
-        resumable.on('fileError', function (file, message) {
-            $('.resumable-file-' + file.uniqueIdentifier + ' .resumable-file-progress').html('file could not be uploaded: ' + message);
-            $('.resumable-file-' + file.uniqueIdentifier + ' .button-file').remove();
-        });
-        const startTimes = {};
-        resumable.on('fileProgress', function (file) {
-            if (!startTimes[file.uniqueIdentifier]) {
-                startTimes[file.uniqueIdentifier] = Date.now();
-            }
-
-            const now = Date.now();
-            const timeElapsed = (now - startTimes[file.uniqueIdentifier]) / 1000; // Time elapsed in seconds
-            const bytesTransferred = file.size * file.progress();
-
-            const speed = (bytesTransferred / timeElapsed) / (1024 * 1024);
-            const remainingBytes = file.size - bytesTransferred;
-            const eta = (remainingBytes / (speed * 1024 * 1024)).toFixed(2); // ETA in seconds
-
-            var progress = Math.floor(file.progress() * 100);
-            var uploadedSize = (file.size * file.progress()).toFixed(2);
-            $('.resumable-file-' + file.uniqueIdentifier + ' .size').text(niceBytes(uploadedSize)+'/'+niceBytes(file.size));
-            $('.resumable-file-' + file.uniqueIdentifier + ' .status').text('Uploading')
-            $('.resumable-file-' + file.uniqueIdentifier + ' .text-progress').text(progress + '%')
-            $('.resumable-file-' + file.uniqueIdentifier + ' .progress-bar').css({width: Math.floor(resumable.progress() * 100) + '%'});
-            $('.resumable-file-' + file.uniqueIdentifier + ' .estimated-time').html(`Estimated time: <span class="text-white">${formatTime(eta)}</span>`);
-
-        });
-        $uploadList.on('click', '.pause-upload', function () {
-            var $fileDiv = $(this).closest('div[class^="resumable-file-"]');
-            var uniqueIdentifier = $fileDiv.attr('class').split('resumable-file-')[1];
-            var file = resumable.getFromUniqueIdentifier(uniqueIdentifier);
-            if (file) {
-                resumable.pause();
-                $fileDiv.find('.status').text('Paused');
-            }
-        });
-        $uploadList.on('click', '.remove-upload', function () {
-            var $fileDiv = $(this).closest('div[class^="resumable-file-"]');
-            var uniqueIdentifier = $fileDiv.attr('class').split('resumable-file-')[1];
-            var file = resumable.getFromUniqueIdentifier(uniqueIdentifier);
-            if (file) {
-                resumable.removeFile(file);
-                $fileDiv.remove();
-            }
-        });
+            $uploadList.on('click', '.remove-upload', function () {
+                var $fileDiv = $(this).closest('div[class^="resumable-file-"]');
+                var uniqueIdentifier = $fileDiv.attr('class').split('resumable-file-')[1];
+                var file = resumable.getFromUniqueIdentifier(uniqueIdentifier);
+                if (file) {
+                    resumable.removeFile(file);
+                    $fileDiv.remove();
+                }
+            });
+        }
     }
-}
 
-// Simulate a click on the hidden file input when the drop zone is clicked
-$fileUploadDrop.on('click', function () {
-    $fileUpload.click();
+    // Simulate a click on the hidden file input when the drop zone is clicked
+}
+$(document).ready(function() {
+    Upload_Resumable_FILE()
+});
+window.addEventListener('beforeunload', function (e) {
+    if (uploadState.isUploading) {
+        var userResponse = confirm('A video is currently uploading. Do you want to continue switching tabs?');
+        if (!userResponse) {
+            e.preventDefault();
+            e.returnValue = ''; // Required for some browsers
+        } else {
+            uploadState.isUploading = false;
+        }
+    }
 });

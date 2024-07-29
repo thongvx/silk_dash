@@ -1,4 +1,5 @@
 import { Upload_FILE } from './upload/uploadFile.js';
+import {Upload_Resumable_FILE} from "./resumable/resumable.js";
 // Load JS
 document.onreadystatechange = function () {
     var state = document.readyState;
@@ -220,7 +221,7 @@ export function loadContent(data_content) {
             $('#box-content').html(response);
             $('#sever').text('Server: '+ $('#datatable').data('total'))
             if(data_content === 'webupload'){
-                Upload_FILE()
+                Upload_Resumable_FILE();
             }
             if (data_content === 'transfer'){
                 updateOriginalFormState('transferLink')
