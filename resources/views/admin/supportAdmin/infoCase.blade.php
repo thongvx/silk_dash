@@ -30,7 +30,7 @@
                                                 $data = json_decode($tickets->message, true);
                                                 $previousType = null;
                                             @endphp
-                                            <div class="lg:h-[calc(100vh-24em)] h-[calc(100vh-26em)] overscroll-y-auto snap-y pb-2 px-2" id="box-message">
+                                            <div class="lg:h-[calc(100vh-24em)] h-[calc(100vh-26em)] overflow-auto overscroll-y-auto snap-y pb-2 px-2" id="box-message">
                                             @foreach($data as $value)
                                                 @php
                                                     $messageDate = date("m/d/Y", strtotime($value['date']));
