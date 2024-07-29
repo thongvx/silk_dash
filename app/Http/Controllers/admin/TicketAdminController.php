@@ -60,15 +60,11 @@ class TicketAdminController
     //store ticket
     private function isVietnamese($string) {
         // Biểu thức chính quy để kiểm tra các ký tự tiếng Việt
-        $pattern = '/^[\p{L}\p{M}\s]*$/u';
+        $vietnamesePattern = '/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]/u';
 
-        // Kiểm tra xem chuỗi có chứa các ký tự hợp lệ không
-        if (preg_match($pattern, $string)) {
-            // Kiểm tra nếu có ít nhất một ký tự tiếng Việt
-            $vietnamesePattern = '/[\p{L}&&[^\p{Latin}]]/u';
-            if (preg_match($vietnamesePattern, $string)) {
-                return true;
-            }
+        // Kiểm tra nếu có ít nhất một ký tự tiếng Việt
+        if (preg_match($vietnamesePattern, $string)) {
+            return true;
         }
 
         return false;

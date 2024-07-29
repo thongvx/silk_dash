@@ -5,17 +5,32 @@ namespace App\Services\ServerEncoder;
 use App\Models\SvEncoder;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+
 
 class SvEncoderService
 {
     public function getAllSvEncoders($column, $direction, $limit)
     {
-        $user = Auth::user();
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
-        if ($user->hasRole('admin')) {
-            $svEncoders = SvEncoder::query()->orderBy($column1, $direction)->paginate($limit);
+        $data = [];
+        $keys = Redis::keys('sv_encoder:*');
+        foreach ($keys as $key) {
+            $data[] = Redis::hgetall($key);
         }
-        return $svEncoders;
+        $data = collect($data);
+        $sortedData = $data->sortBy($column1, SORT_REGULAR, $direction == 'desc');
+
+        // Manually paginate the sorted data
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $sortedData->slice(($currentPage - 1) * $limit, $limit)->values();
+        $paginatedData = new LengthAwarePaginator($currentPageItems, $sortedData->count(), $limit, $currentPage, [
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
+        ]);
+
+        return $paginatedData;
     }
     public static function upsertSvEncoder($svEncoder)
     {

@@ -350,6 +350,8 @@ $(document).ready(function() {
     setInterval(function() {
         date_time();
     }, 1000);
+    const scrollContainer = $("#box-message");
+    scrollContainer.scrollTop = scrollContainer.scrollHeight;
     $('#myTextarea').on('input', function () {
         // Đặt số hàng mặc định và tối đa
         const maxRows = 10;

@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
     Route::post('/postTickket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTickket']);
+    Route::get('/completeTicket/{ticketID}', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'completeTicket'])->name('complete.ticket');
 
     Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);
     Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');

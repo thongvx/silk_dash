@@ -72,12 +72,12 @@
                                     </td>
                                     <td class="px-2">{{ $ticket -> topic }}</td>
                                     <td class="px-2">
-                                        @if($ticket -> status === 'completed')
+                                        @if($ticket->status === 'completed')
                                             <span class="rounded-lg px-3 py-1 bg-emerald-400 completed">{{ $ticket -> status }}</span>
                                         @elseif ($ticket -> status === 'pending')
-                                            <span class="rounded-lg px-3 py-1 bg-rose-600 pending">{{ $ticket -> status }}</span>
+                                            <span class="rounded-lg px-3 py-1 bg-orange-600 pending">{{ $ticket -> status }}</span>
                                         @else
-                                            <span class="rounded-lg px-3 py-1 bg-orange-500 open">{{ $ticket -> status }}</span>
+                                            <span class="rounded-lg px-3 py-1 bg-rose-500 open">{{ $ticket -> status }}</span>
                                         @endif
                                     </td>
                                     <td class="px-2">{{ $ticket -> created_at }}</td>
