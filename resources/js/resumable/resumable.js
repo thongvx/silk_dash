@@ -85,7 +85,7 @@ export function Upload_Resumable_FILE () {
                                                     </div>
 
                                                 </div>
-                                                <div class="flex justify-between mt-2 button-file">
+                                                <div class="justify-between mt-2 button-file hidden">
                                                     <button class="resumable-pause-btn hover:text-orange-500 text-white rounded-lg">
                                                         <i class="material-symbols-outlined opacity-1 text-3xl">pause_circle</i>
                                                     </button>
@@ -156,6 +156,7 @@ export function Upload_Resumable_FILE () {
                 $('.resumable-file-' + file.uniqueIdentifier + ' .text-progress').text(progress + '%')
                 $('.resumable-file-' + file.uniqueIdentifier + ' .progress-bar').css({width: Math.floor(resumable.progress() * 100) + '%'});
                 $('.resumable-file-' + file.uniqueIdentifier + ' .estimated-time').html(`Estimated time: <span class="text-white">${formatTime(eta)}</span>`);
+                $('.resumable-file-' + file.uniqueIdentifier + ' .button-file').addClass('flex').removeClass('hidden')
 
             });
             $uploadList.on('click', '.pause-upload', function () {
