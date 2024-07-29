@@ -55,21 +55,21 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="task" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="taskFF" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Task FF</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="encoder" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="encoder_task" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Encoder</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="transfer" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="transfer_task" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Transfer</a>
@@ -83,12 +83,8 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="space" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">Space</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
+                                <th class='pl-2 py-2'>
+                                    Space
                                 </th>
                                 <th data-column="used_space" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
@@ -100,21 +96,21 @@
                                 <th class='pl-2 py-2'>
                                     Percent Space
                                 </th>
-                                <th data-column="max_speed" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="inSpeed" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">In Speed</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="in_speed" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="out_speed" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Out Speed</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="out_speed" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="active" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Active</a>
@@ -126,18 +122,18 @@
                             <tbody>
                             @forelse( $encoders as $index => $encoder )
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                    <td class="sorting_1">{{ $encoder->id }}</td>
-                                    <td class="name text-success">{{ $encoder->name }}</td>
-                                    <td class="ip text-success">{{ $encoder->task ?? 0 }}</td>
-                                    <td>{{ $encoder->encoder }}</td>
-                                    <td>{{ $encoder->transfer }}</td>
-                                    <td>{{ $encoder->cpu }}</td>
-                                    <td>{{ $encoder->space }}</td>
-                                    <td>{{ $encoder->used_space }}</td>
-                                    <td>{{ number_format($encoder->used_space / $encoder->space *100, 2) }} %</td>
-                                    <td>{{ $encoder->max_speed }}</td>
-                                    <td>{{ $encoder->in_speed }}</td>
-                                    <td>{{ $encoder->active }}</td>
+                                    <td class="sorting_1">{{ $index+1 }}</td>
+                                    <td class="name text-success">{{ $encoder['name'] }}</td>
+                                    <td class="ip text-success">{{ $encoder['taskFF'] }}</td>
+                                    <td>{{ $encoder['encoder_task'] }}</td>
+                                    <td>{{ $encoder['transfer_task'] }}</td>
+                                    <td>{{ $encoder['cpu'] }}</td>
+                                    <td>{{ $encoder['usedSpace']*100/$encoder['percent_space'] }}</td>
+                                    <td>{{ $encoder['usedSpace'] }}</td>
+                                    <td>{{ $encoder['percent_space'] }}</td>
+                                    <td>{{ $encoder['inSpeed'] }}</td>
+                                    <td>{{ $encoder['out_speed'] }}</td>
+                                    <td>{{ $encoder['active'] }}</td>
                                 </tr>
 
                             @empty

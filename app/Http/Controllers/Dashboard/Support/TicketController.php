@@ -132,7 +132,7 @@ class TicketController
             'user_id' => $user->id,
             'subject' => $subject,
             'topic' => $topic,
-            'status' => 'pendding',
+            'status' => 'pending',
             'message' => $dataMessage,
             'url_file' => $url_file,
         ];
@@ -140,5 +140,13 @@ class TicketController
         $count = Ticket::count();
         Bot::send('new ticket: '. $user->name .' - Link: https://streamsilk.com/admin/supportAdmin/'.$count.'?user_id='.$user->id);
         return redirect('https://streamsilk.com/support?tab=ticket');
+    }
+    // complete ticket
+    public function completeTicket($ticketID)
+    {
+        $ticket = $this->ticketRepo->find($ticketID);
+        $ticket->status = 'completed';
+        $ticket->save();
+        return redirect()->back();
     }
 }

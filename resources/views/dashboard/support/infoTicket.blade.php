@@ -20,6 +20,7 @@
                                                 </h5>
                                             </div>
                                             <div class="text-white font-lg font-bold">
+                                                <a href="{{route('complete.ticket',['ticketID'=> $tickets->id])}}" class="rounded-lg bg-[#142132] hover:bg-[#009fb2] px-3 py-1.5">Complete</a>
                                                 <a href="/support?tab=ticket" class="rounded-lg bg-[#142132] hover:bg-[#009fb2] px-3 py-1.5">All Ticket</a>
                                                 <a href="/support?tab=newticket" class="ml-3 rounded-lg bg-[#142132] hover:bg-[#009fb2] px-3 py-1.5">New Ticket</a>
                                             </div>
@@ -75,30 +76,33 @@
                                                     </div>
                                                 @endforeach
                                             </div>
-                                            <div class="w-full absolute bottom-3 bg-[#142132] text-white rounded-3xl py-2">
-                                                <form action="/support" method="POST" enctype="multipart/form-data" class="text-white">
-                                                    @csrf
-                                                    <input type="text" class="hidden" name="ticketID" value="{{ $tickets->id }}"
-                                                           placeholder="Subject" readonly>
-                                                    <div class="flex justify-between px-3 items-center">
-                                                        <div class="bg-[#142132] rounded-lg text-center flex relative h-max box-img  hover:text-[#009fb2]">
-                                                            <input name="file" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
-                                                                   class="absolute opacity-0 file-img cursor-pointer w-full">
-                                                            <label for="file-attach" class="w-max cursor-pointer">
-                                                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">attach_file</i>
-                                                            </label>
-                                                        </div>
-                                                        <textarea name="message" id="myTextarea" rows="1" class="ml-2 m-0 resize-none border-0 bg-transparent px-0
+                                            @if( $tickets -> status === 'pending')
+                                                <div class="w-full absolute bottom-3 bg-[#142132] text-white rounded-3xl py-2">
+                                                    <form action="/support" method="POST" enctype="multipart/form-data" class="text-white">
+                                                        @csrf
+                                                        <input type="text" class="hidden" name="ticketID" value="{{ $tickets->id }}"
+                                                               placeholder="Subject" readonly>
+                                                        <div class="flex justify-between px-3 items-center">
+                                                            <div class="bg-[#142132] rounded-lg text-center flex relative h-max box-img  hover:text-[#009fb2]">
+                                                                <input name="file" type="file" id="file-attach" accept=".jpg, .png, .jpeg"
+                                                                       class="absolute opacity-0 file-img cursor-pointer w-full">
+                                                                <label for="file-attach" class="w-max cursor-pointer">
+                                                                    <i class="material-symbols-outlined opacity-1 text-white text-3xl">attach_file</i>
+                                                                </label>
+                                                            </div>
+                                                            <textarea name="message" id="myTextarea" rows="1" class="ml-2 m-0 resize-none border-0 bg-transparent px-0
                                                         text-token-text-primary focus:ring-0 focus-visible:ring-0 max-h-52 outline-none w-full" placeholder="message"></textarea>
-                                                        <div class="text-center">
-                                                            <button type="submit" class="!bg-transparent cursor-pointer rounded-lg hover:text-[#009fb2] text-white" disabled>
-                                                                <i class="material-symbols-outlined opacity-1 text-white text-3xl">send</i>
-                                                            </button>
+                                                            <div class="text-center">
+                                                                <button type="submit" class="!bg-transparent cursor-pointer rounded-lg hover:text-[#009fb2] text-white" disabled>
+                                                                    <i class="material-symbols-outlined opacity-1 text-white text-3xl">send</i>
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                </form>
-                                            </div>
+                                                    </form>
+                                                </div>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>
