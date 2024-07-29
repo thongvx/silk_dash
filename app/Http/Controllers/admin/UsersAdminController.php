@@ -64,11 +64,13 @@ class UsersAdminController
             ->groupBy('date')
             ->get();
         $totalViewsDay = 0;
-        $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
-        foreach ($totalViewsKey as $key) {
-            $totalViewsDay += Redis::get($key) ?? 0;
+        $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
+        foreach ($countryViewsKeys as $key) {
+            $views = Redis::get($key);
+            $totalViews += $views;
         }
-        // Process views data for month and week
+        $totalViewsDay = intval($totalViews);
+
         $allDatesWithDefaults = $dates->mapWithKeys(function($date) {
             return [$date => 0];
         });
@@ -111,10 +113,10 @@ class UsersAdminController
     }
     public function destroy(User $user)
     {
-        $user->delete();
+        $user->active = 19;
+        $user->save();
 
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+        return back()->with('success','User deleted successfully');
     }
 
     public function loginAs(User $user)
