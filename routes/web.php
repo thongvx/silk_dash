@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Mail\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,6 +158,12 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
 
     Route::resource('/videoAdmin', \App\Http\Controllers\admin\VideoAdminController::class);
+});
+
+Route::prefix('email')->group(function () {
+    Route::get('/send-email', [EmailController::class, 'sendEmails']);
+    Route::get('/send-discount-program-email', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.program.emails');
+    // Add more email routes here as needed
 });
 
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);

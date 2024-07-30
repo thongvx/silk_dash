@@ -221,7 +221,7 @@ export function loadContent(data_content) {
             $('#box-content').html(response);
             $('#sever').text('Server: '+ $('#datatable').data('total'))
             if(data_content === 'webupload'){
-                Upload_Resumable_FILE();
+                Upload_FILE();
             }
             if (data_content === 'transfer'){
                 updateOriginalFormState('transferLink')

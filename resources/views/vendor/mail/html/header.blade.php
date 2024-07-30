@@ -5,7 +5,7 @@
 @if (trim($slot) === 'StreamSilk')
     <div style="display: flex;">
         <img src="https://streamsilk.com/image/logo/logo4.webp" style="width: 70px;height:auto;" class="logo" alt="StreamSilk">
-        <img src="https://streamsilk.com/image/logo/name-web1.webp" style="height: 40px; margin: 15px 0;" alt="Logo StreamSilk">
+        <img src="https://streamsilk.com/image/logo/name.webp" style="height: 50px; margin: 15px 0;">
     </div>
 @else
 {{ $slot }}
