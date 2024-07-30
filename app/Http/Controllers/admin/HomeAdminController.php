@@ -96,7 +96,7 @@ class HomeAdminController extends Controller
     }
     //top Country
     private function topCountry($today){
-        $topCountries = Redis::zrevrange("total_country_views:{$today}", 0, 9);
+        $topCountries = Redis::zrevrange("total_country_views:{$today}", 0, 9, true);
         $totalViews = 0;
         $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
         foreach ($totalViewsKey as $key) {

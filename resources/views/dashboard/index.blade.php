@@ -212,16 +212,29 @@
                     <a href="" class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">View All</a>
                 </div>
                 <div class="px-4 pb-1 mt-4 h-72 overflow-auto">
+                    <a href="javascript:;" data-id=""
+                       class="bg-[#142132]  hidden items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
+                        <span class="absolute pt-2 pr-2">📌</span>
+                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
+                        <div class="info">
+                            <h6 class="text-white font-bold w-max subject">
+                                Gift up to 30% for first withdrawal!
+                            </h6>
+                            <span class="text-slate-400 text-sm date" data-date=""></span>
+                        </div>
+                    </a>
                     @forelse($notifications as $notification)
-                        <div
+                        <a href="javascript:;" data-id="{{ $notification->id }}" btn-read btn-info-noti
                             class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
                             <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
-                            <div>
-                                <h6 class="text-red-500 font-bold">
+                            <div class="info">
+                                <h6 class="text-white font-bold w-max subject">
                                     {{ $notification->subject }}
                                 </h6>
+                                <span class="text-slate-400 text-sm date" data-date="{{ $notification->created_at }}">{{ $notification->created_at->diffForHumans() }}</span>
+                                <span class="hidden message">{{ $notification->message }}</span>
                             </div>
-                        </div>
+                        </a>
                     @empty
                         <div class="my-3 text-white text-center">
                             No notifications
