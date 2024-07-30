@@ -23,3 +23,7 @@
         </div>
     </div>
 </div>
+@section('scripts')
+    <script src="{{ asset('assets/js/resumable/lb-resumable.js') }}"></script>
+    @vite('resources/js/resumable/resumable.js')
+@endsection

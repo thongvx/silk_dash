@@ -12,7 +12,8 @@ use App\Models\User;
 use App\Repositories\AccountRepo;
 use App\Repositories\ReportRepo;
 use App\Models\CountryTier;
-
+use App\Services\StatisticService;
+use App\Models\File;
 
 class HomeAdminController extends Controller
 {
@@ -30,11 +31,16 @@ class HomeAdminController extends Controller
         $dates = collect(range(30, 0))->map(function($item) use ($today) {
             return Carbon::tomorrow()->subDays($item)->format('Y-m-d');
         });
-        $viewsData = $this->reportRepo
-            ->whereIn('date', $dates)
-            ->selectRaw('date, sum(views) as views')
-            ->groupBy('date')
-            ->get();
+        $cacheKey = "viewsData:{$today}";
+        $viewsData = unserialize(Redis::get($cacheKey));
+        if (!$viewsData) {
+            $viewsData = $this->reportRepo
+                ->whereIn('date', $dates)
+                ->selectRaw('date, sum(views) as views')
+                ->groupBy('date')
+                ->get();
+            Redis::setex($cacheKey, 43200, serialize($viewsData));
+        }
 
         $totalViewsDay = 0;
         $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
@@ -89,8 +95,8 @@ class HomeAdminController extends Controller
         return $allVideos;
     }
     //top Country
-    public function topCountry($today){
-        $topCountries = Redis::zrevrange("total_country_views:{$today}", 0, 9, true);
+    private function topCountry($today){
+        $topCountries = Redis::zrevrange("total_country_views:{$today}", 0, 9);
         $totalViews = 0;
         $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
         foreach ($totalViewsKey as $key) {
@@ -125,29 +131,36 @@ class HomeAdminController extends Controller
     //index
     public function index(){
         $today = Carbon::today()->format('Y-m-d');
-        $users = User::all();
-
+        $users = Redis::get('all_users') ? unserialize(Redis::get('all_users')) : User::all();
         $totalWatching = 0;
         $watchingKeys = redis::keys("watching_users:*");
         foreach ($watchingKeys as $key) {
             $value = redis::get($key);
             $totalWatching += $value;
         }
-
-        $totalEarningsToday = 0;
+        $statisticService = new StatisticService($this->accountRepo);
+        $totalEarnings = $statisticService->calculateTotalEarnings($today);
 
         $data_chart = $this->getDataChart($today);
 
         $topUsers = $this->getTopUsers($today);
         $topVideos = $this->getTopVideos($today);
+        $cacheKey = "total_balance:{$today}";
+        $totalBalance = Redis::get($cacheKey);
 
+        if (!$totalBalance) {
+            $totalBalance = $this->reportRepo->sum('revenue') - Payment::sum('amount');
+            Redis::setex($cacheKey, 43200, $totalBalance); // Cache for 12 hours
+        } else {
+            $totalBalance = floatval($totalBalance);
+        }
         $data =[
             'title' => 'Dashboard',
             'userWatching' => $totalWatching,
-            'storage' => $this->videoController->convertFileSize(User::sum('storage')),
-            'users' => User::count(),
-            'todayEarning' => $totalEarningsToday,
-            'totalBalance' => Payment::sum('amount'),
+            'storage' => File::formatSizeUnits($users->sum('storage')),
+            'users' => $users->count(),
+            'todayEarning' => $totalEarnings,
+            'totalBalance' => $totalBalance,
             'dates' => $data_chart['dates'],
             'topUsers' => $topUsers,
             'topVideos' => $topVideos,

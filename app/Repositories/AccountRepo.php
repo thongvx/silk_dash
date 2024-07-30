@@ -16,7 +16,8 @@ class AccountRepo extends BaseRepository
 
     public function getSetting($userId)
     {
-        $setting = unserialize(Redis::get(AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $userId));
+        $cacheKey = AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $userId;
+        $setting = unserialize(Redis::get($cacheKey));
         if (!$setting) {
             $setting = $this->query()
                 ->where('user_id', $userId)
@@ -25,5 +26,15 @@ class AccountRepo extends BaseRepository
 
         }
         return $setting;
+    }
+
+    public function getSettingsByUserIds($userIds)
+    {
+        $settings = AccountSetting::whereIn('user_id', $userIds)->get();
+        foreach ($settings as $setting) {
+            $cacheKey = AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $setting->user_id;
+            Redis::setex($cacheKey, 2592000, serialize($setting));
+        }
+        return $settings;
     }
 }

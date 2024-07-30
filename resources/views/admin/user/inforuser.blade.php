@@ -121,11 +121,7 @@
                                 <div class="actions mt-3 flex flex-col	">
                                     <h4 class="text-teal-400 text-lg font-bold">Actions</h4>
                                     <div class="flex justify-center	">
-                                      <div class="rounded-lg bg-gradient-to-r from-yellow-600 to-rose-400 w-max py-2 px-5 ">
-                                          <i class="fa fa-comment-o" aria-hidden="true"></i>
-                                          Open Cases
-                                      </div>
-                                      <div class="ml-4 rounded-lg bg-gradient-to-r from-pink-500 to-red-500 w-max py-2 px-5">
+                                      <div class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-pink-500 to-red-500 w-max py-2 px-5">
                                           <form action="{{ route('user.destroy', ['user' => $users->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');" style="display:inline;">
                                               @csrf
                                               @method('DELETE')
@@ -135,11 +131,11 @@
                                               </a>
                                           </form>
                                       </div>
-                                      <div class="ml-4 rounded-lg bg-gradient-to-r from-blue-400 to-green-500 w-max py-2 px-5" onclick="premium()">
+                                      <div class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-blue-400 to-green-500 w-max py-2 px-5" onclick="premium()">
                                           <i class="fa fa-money" aria-hidden="true"></i>
                                           Add Premium View
                                       </div>
-                                      <a class="ml-4 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 w-max py-2 px-5"
+                                      <a class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-indigo-500 to-purple-500 w-max py-2 px-5"
                                           href="{{ route('admin.login-as', ['user' => $users->id]) }}"
                                           target="_blank">
                                           <i class="fa fa-sign-in" aria-hidden="true"></i>
@@ -184,7 +180,7 @@
                                             <label for="0" class="ml-3">Minimal Ads - No Earnings</label>
                                         </fieldset>
                                         <div class=" save text-center mt-3">
-                                            <button class="bg-indigo-500 rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500">
+                                            <button class="bg-[#142132] rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
                                                 Save Mode
                                             </button>
