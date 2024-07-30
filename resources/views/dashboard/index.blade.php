@@ -100,7 +100,8 @@
                                     <h3 class='text-slate-400'>Total Balance</h3>
                                     <div class="flex items-center text-xl">
                                         <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                            <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
+                                            <span
+                                                class='text-slate-400 text-lg mr-0.5'>$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
                                         </h5>
                                         <span
                                             class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center hidden">
@@ -130,8 +131,8 @@
 
                                         @endphp
                                         @if($earnings['yesterday'] > $earnings['2days'] && $earnings['2days'] != 0)
-                                        <span
-                                            class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
+                                            <span
+                                                class="text-emerald-500 pl-3 text-sm font-bold leading-normal items-center flex">
                                             <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_up</i> +{{ $bounce1 }}%
                                         </span>
                                         @else
@@ -142,7 +143,8 @@
                                         @endif
                                     </div>
                                     <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ number_format($earnings['yesterday'], 2, '.', ',') }}
+                                        <span
+                                            class='text-slate-400 text-lg mr-0.5'>$</span>{{ number_format($earnings['yesterday'], 2, '.', ',') }}
                                     </h5>
                                 </div>
                             </div>
@@ -152,10 +154,10 @@
                                     <div class='text-md w-full flex items-center justify-between'>
                                         <h3 class='text-slate-400'>Today’s Earning</h3>
                                         @php
-                                        if ($earnings['yesterday'] != 0)
-                                            $bounce2 = round(($earnings['today'] - $earnings['yesterday']) / $earnings['yesterday'] * 100, 2);
-                                        else
-                                            $bounce2 = 0;
+                                            if ($earnings['yesterday'] != 0)
+                                                $bounce2 = round(($earnings['today'] - $earnings['yesterday']) / $earnings['yesterday'] * 100, 2);
+                                            else
+                                                $bounce2 = 0;
                                         @endphp
                                         @if($earnings['today'] > $earnings['yesterday'] && $earnings['yesterday'] != 0)
                                             <span
@@ -170,7 +172,8 @@
                                         @endif
                                     </div>
                                     <h5 class="text-2xl mb-0 text-white mt-2 flex items-start">
-                                        <span class='text-slate-400 text-lg mr-0.5'>$</span>{{ number_format($earnings['today'], 2, '.', ',') }}
+                                        <span
+                                            class='text-slate-400 text-lg mr-0.5'>$</span>{{ number_format($earnings['today'], 2, '.', ',') }}
                                     </h5>
                                 </div>
                             </div>
@@ -192,9 +195,11 @@
                     </h6>
                     <div class="text-white">
                         <button class="rounded-lg px-4 py-1 bg-[#009FB2] switchButton week"
-                                data-chart="week" data-date="{{ $dates['week'] }}">Week</button>
+                                data-chart="week" data-date="{{ $dates['week'] }}">Week
+                        </button>
                         <button class="rounded-lg px-4 py-1 bg-[#142132] switchButton"
-                                data-chart="month" data-date="{{ $dates['month'] }}">Month</button>
+                                data-chart="month" data-date="{{ $dates['month'] }}">Month
+                        </button>
                     </div>
                 </div>
                 <div class="h-80">
@@ -212,26 +217,45 @@
                     <a href="" class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">View All</a>
                 </div>
                 <div class="px-4 pb-1 mt-4 h-72 overflow-auto">
-                    <a href="javascript:;" data-id=""
-                       class="bg-[#142132]  hidden items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
-                        <span class="absolute pt-2 pr-2">📌</span>
-                        <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
-                        <div class="info">
-                            <h6 class="text-white font-bold w-max subject">
-                                Gift up to 30% for first withdrawal!
+                    <a href="javascript:;" data-id="" btn-info-noti-gift
+                       class="bg-[#009FB2] sticky top-0 flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
+                        <span class="absolute -left-2 -bottom-4 w-16">
+                            <img src="{{ asset('image/voucher/discount2.svg') }}" alt="" class="animate-ping !scale-125 opacity-50 absolute">
+                            <img src="{{ asset('image/voucher/discount2.svg') }}" alt="">
+                        </span>
+                        <span class="absolute left-44 top-2 w-16 opacity-75">
+                            <img src="{{ asset('image/voucher/Fireworks.gif') }}" alt="">
+                        </span>
+                        <span class="absolute right-48 top-0 w-20 opacity-75">
+                            <img src="{{ asset('image/voucher/Confetti.gif') }}" alt="">
+                        </span>
+                        <span class="absolute left-20 w-20 lg:hidden xl:block">
+                            <img src="{{ asset('image/voucher/party.svg') }}" alt="">
+                        </span>
+                        <span class="absolute -right-4 w-20">
+                            <img src="{{ asset('image/voucher/BitcoinTrade.gif') }}" alt="" class="scale-x-[-1]">
+                        </span>
+                        <span class="absolute right-20 w-20 lg:hidden xl:block">
+                            <img src="{{ asset('image/voucher/party.svg') }}" alt="" class="scale-x-[-1]">
+                        </span>
+                        <div class="info sticky z-30">
+                            <h6 class="text-white font-bold w-max subject text-center">
+                                Gift up to 30% for first withdrawal!<br>
+                                <span
+                                    class="text-sm">Expires: {{ Auth::user()->created_at->addMonth()->format('Y-m-d') }}</span>
                             </h6>
-                            <span class="text-slate-400 text-sm date" data-date=""></span>
                         </div>
                     </a>
                     @forelse($notifications as $notification)
                         <a href="javascript:;" data-id="{{ $notification->id }}" btn-read btn-info-noti
-                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
+                           class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
                             <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
                             <div class="info">
                                 <h6 class="text-white font-bold w-max subject">
                                     {{ $notification->subject }}
                                 </h6>
-                                <span class="text-slate-400 text-sm date" data-date="{{ $notification->created_at }}">{{ $notification->created_at->diffForHumans() }}</span>
+                                <span class="text-slate-400 text-sm date"
+                                      data-date="{{ $notification->created_at }}">{{ $notification->created_at->diffForHumans() }}</span>
                                 <span class="hidden message">{{ $notification->message }}</span>
                             </div>
                         </a>
@@ -262,7 +286,8 @@
                         @forelse( $topVideos as $video )
                             <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] text-white">
                                 <td class="p-2  max-w-[4rem] truncate">
-                                    <a href="{{route('play', $video->slug)}}" target="_black" class="hover:text-[#009FB2] ">{{ $video->title }}</a>
+                                    <a href="{{route('play', $video->slug)}}" target="_black"
+                                       class="hover:text-[#009FB2] ">{{ $video->title }}</a>
                                 </td>
                                 <td class="p-2 text-center">
                                     {{ $video->views }}
@@ -288,17 +313,17 @@
                     <table
                         class="text-center text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
                         <thead class="bg-[#142132] transition-colors text-sm">
-                            <tr class="text-white">
-                                <th class="p-2 ">
-                                    Country
-                                </th>
-                                <th class="p-2">
-                                    Views
-                                </th>
-                                <th class="p-2">
-                                    Bounce
-                                </th>
-                            </tr>
+                        <tr class="text-white">
+                            <th class="p-2 ">
+                                Country
+                            </th>
+                            <th class="p-2">
+                                Views
+                            </th>
+                            <th class="p-2">
+                                Bounce
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
                         @forelse ($topCountries as $country => $data)
@@ -331,6 +356,42 @@
 
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div fixed-noti-gift-card
+         class="opacity-1 bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full backdrop-blur-sm
+                                       min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3">
+        <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-noti-gift-close-button>
+        </div>
+        <div
+            class="w-11/12 sm:w-4/5 xl:w-2/5 bg-[#121520] z-20 py-4 px-3 rounded-lg relative">
+            <div class="absolute right-4 top-3">
+                <button fixed-noti-gift-close-button
+                        class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
+                    <i class="material-symbols-outlined text-3xl">close</i>
+                </button>
+            </div>
+            <div  id="fixed-box-control" class="mb-4">
+                <div class="export text-white">
+                    <h1><b><i>Dear member,</i></b></h1><br>
+                    <p>I’m Richard, manager of <a href="https://streamsilk.com/">StreamSilk.com</a>.</p><br>
+                    <p>I’m very happy to give you our <b><i>Gift program for new members. On your first withdrawal, you will receive an
+                        additional 10% to 30%</i></b>.</p>
+                    <p>The bigger the amount, the bigger the gift. The program is valid for <b>1 month</b> from the time you register
+                        your account.</p><br>
+                    <p>Please access the Report page to get details.</p>
+                    <div class="text-center mt-3">
+                        <button class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">
+                            <a href="https://streamsilk.com/report?tab=date">Report Page</a>
+                        </button>
+                    </div><br>
+                    <p>Let’s start uploading your videos and sharing them to make lots of money now!</p>
+                    <p>If you need any further support, please don’t hesitate to contact me!</p>
+                    <p >Telegram: <a class="font-bold"  href="https://t.me/RichardSSilk" target="_black">https://t.me/RichardSSilk</a><br>
+                        Skype: <a class="font-bold" href="skype:live:.cid.62ed279799bfed31" target="_black">live:.cid.62ed279799bfed31</a></p><br>
+                    <p>Regards,<br><b><i>Richard - StreamSilk</i></b></p>
                 </div>
             </div>
         </div>
