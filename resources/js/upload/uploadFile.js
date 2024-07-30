@@ -23,7 +23,7 @@ export function Upload_FILE (){
         var tokenValue = formData.get('_token');
         var idSequence = 0;
         $fileUpload.fileupload({
-            maxChunkSize: 1024 * 1024,
+            maxChunkSize: 10*1024 * 1024,
             method: "POST",
             // Not supported
             sequentialUploads: false,
