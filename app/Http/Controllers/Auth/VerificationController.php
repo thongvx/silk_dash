@@ -57,7 +57,8 @@ class VerificationController extends Controller
         $user->active = 1;
         $user->save();
         Bot::send('new user registered email: ' . $user->email);
-//        $this->emailController->sendDiscountProgramEmails($user->id);
+        $request = new Request(['user_id' => $user->id]);
+        $this->emailController->sendDiscountProgramEmails($request);
         // Log out the user after verification
         Auth::logout();
 
