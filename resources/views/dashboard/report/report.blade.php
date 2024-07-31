@@ -194,7 +194,7 @@
 
                         </h5>
                         <h4 class="text-4xl text-center font-bold flex items-start justify-center">
-                            <span class="text-slate-400 text-2xl">$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
+                            <span class="text-slate-400 text-2xl" id="total-balance" data-balance="{{number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}">$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
                         </h4>
                         <div class="text-white mt-3 flex justify-between items-center">
                             <h5>
@@ -208,7 +208,7 @@
                         </h5>
                         <div class="mt-4" id="box-request-payment">
                             @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
-                                <span class="animate-colorChange">Gift up to 30% for first withdrawal!</span>
+                                <span class="animate-colorChange pb-2">Gift up to 30% for first withdrawal!</span>
                             @endif
                             <form class="text-white flex justify-between" id="request-payment" method="POST" action="">
                                 @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
@@ -218,7 +218,8 @@
                                     <label for="amount" class="mr-3">
                                         Amount:
                                     </label>
-                                    <input type="number" min="50" max="2000" name="amount" id="amount"
+                                    <input type="number" min="50"
+                                           max="{{ ($totalProfit-$totalWithdrawals) < 2000 ? ($totalProfit-$totalWithdrawals) : 2000 }}" name="amount" id="amount"
                                            class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
                                            placeholder="50"/>
                                     <h5>
