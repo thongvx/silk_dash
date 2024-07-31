@@ -25,7 +25,9 @@ class Payment extends Model
     protected static function boot()
     {
         parent::boot();
-
+        static::created(function ($model) {
+            $model->deleteRedisKeys();
+        });
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
             $model->deleteRedisKeys();
@@ -34,13 +36,13 @@ class Payment extends Model
         static::deleted(function ($model) {
             $model->deleteRedisKeys();
         });
+
     }
 
     private function deleteRedisKeys()
     {
-        $today = Carbon::today();
         Redis::del("user:{$this->user_id}:payment");
-        Redis::del("user:{$this->user_id}:total_withdrawal:$today");
-        Redis::del("user:{$this->user_id}:total_profit:$today");
+        Redis::del("user:{$this->user_id}:total_withdrawal");
+        Redis::del("user:{$this->user_id}:total_profit");
     }
 }

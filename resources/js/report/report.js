@@ -135,7 +135,6 @@ var amount = 0;
 var gift = 0;
 $(document).on('submit', '#request-payment', function () {
     event.preventDefault();
-    $('#request-payment input').val((amount + gift).toFixed(1));
     var form = $(this);
     var formData = new FormData(form[0]);
     $.ajax({
@@ -153,22 +152,27 @@ $(document).on('submit', '#request-payment', function () {
     });
 })
 $(document).on('keyup', '#request-payment input', function () {
-    amount = parseFloat($(this).val());
-    console.log(amount)
+    let amount = parseInt($(this).val().replace(/,/g, ''), 10);
     const button = $('#request-payment button');
     $('.noti-request-payment, .amount-info').remove();
     if(amount >=50 && amount <= 2000) {
         if($('#request-payment #Expires').length > 0){
-            if (amount <= 100) {
-                gift = amount * 0.1;
-            } else if (amount > 100 && amount <= 300) {
-                gift = amount * 0.15;
-            } else if (amount > 300 && amount <= 600) {
-                gift = amount * 0.2;
-            } else if (amount > 600 && amount <= 1200) {
-                gift = amount * 0.25;
-            } else {
-                gift = amount * 0.3;
+            switch (true) {
+                case (amount <= 100):
+                    gift = amount * 0.1;
+                    break;
+                case (amount > 100 && amount <= 300):
+                    gift = amount * 0.15;
+                    break;
+                case (amount > 300 && amount <= 600):
+                    gift = amount * 0.2;
+                    break;
+                case (amount > 600 && amount <= 1200):
+                    gift = amount * 0.25;
+                    break;
+                default:
+                    gift = amount * 0.3;
+                    break;
             }
         }
         $('#box-request-payment').after(`
@@ -178,11 +182,10 @@ $(document).on('keyup', '#request-payment input', function () {
                 <span>Total Amount: ${(amount + gift).toFixed(1)}</span>
             </div>
         `);
-        if($('#total-balance').data('balance') >= amount){
+        if(parseInt($('#total-balance').data('balance').replace(/,/g, ''), 10) >= amount){
             button.prop('disabled', false);
             button.addClass('bg-[#01545e] hover:bg-[#009fb2]').removeClass('bg-[#142132]')
         }
-
     }else{
         button.attr('disabled', true);
         button.removeClass('bg-[#01545e] hover:bg-[#009fb2]').addClass('bg-[#142132]')

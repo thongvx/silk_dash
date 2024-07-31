@@ -224,19 +224,19 @@
                             <img src="{{ asset('image/voucher/discount2.svg') }}" alt="" class="animate-ping !scale-125 opacity-50 absolute">
                             <img src="{{ asset('image/voucher/discount2.svg') }}" alt="">
                         </span>
-                            <span class="absolute left-44 top-2 w-16 opacity-75">
+                            <span class="absolute left-44 top-2 w-16 opacity-75 hidden">
                             <img src="{{ asset('image/voucher/Fireworks.gif') }}" alt="">
                         </span>
                             <span class="absolute right-48 top-0 w-20 opacity-75">
                             <img src="{{ asset('image/voucher/Confetti.gif') }}" alt="">
                         </span>
-                            <span class="absolute left-20 w-20 lg:hidden xl:block">
+                            <span class="absolute left-20 w-20 hidden lg:hidden xl:block">
                             <img src="{{ asset('image/voucher/party.svg') }}" alt="">
                         </span>
                             <span class="absolute -right-4 w-20">
                             <img src="{{ asset('image/voucher/BitcoinTrade.gif') }}" alt="" class="scale-x-[-1]">
                         </span>
-                            <span class="absolute right-20 w-20 lg:hidden xl:block">
+                            <span class="absolute right-20 w-20 hidden lg:hidden xl:block">
                             <img src="{{ asset('image/voucher/party.svg') }}" alt="" class="scale-x-[-1]">
                         </span>
                             <div class="info sticky z-30">
