@@ -17,7 +17,7 @@
             <tr class="my-3 h-12 font-medium odd:bg-transparent even:bg-[#142132] {{ $payment->status == 0 ? 'text-orange-400' : 'text-emerald-500' }}">
                 <td class="text-center">{{ $payment->created_at }}</td>
                 <td class="text-center">{{ $payment->comment }}</td>
-                <td class="text-center">{{ $payment->amount }}</td>
+                <td class="text-center">{{ $payment->amount + $payment->gift }}</td>
                 <td class="text-center">{{ $payment->status == 0 ? 'pending' : 'paid' }}</td>
             </tr>
         @empty
