@@ -38,6 +38,8 @@ class PlayController
         if ($video && $video->soft_delete == 0) {
             $data_setting = $this->accountRepo->getSetting($video->user_id);
             $player_setting = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
+            $is_sub = $video->is_sub;
+            $title = $video->title;
             if($domain == 'streamsilk.com' || $data_setting->embed_page == 0 || strpos($data_setting->domain, $domain) != 0) {
                 $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
                 $poster = $player_setting->thumbnail_grid == 5 ? $video->grid_poster_5 : ($player_setting->thumbnail_grid == 3 ? $video->grid_poster_3 : $video->poster);
@@ -47,12 +49,12 @@ class PlayController
                         'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->value('sv_upload') . '.encosilk.cc/storage/' . $slug . '.' . $video->format,
                         'videoID' => $video->slug,
                         'poster' => $poster,
-                        'title' => $video->title,
+                        'title' => $title,
                         'iframe' => $data_setting->blockDirect,
                         'videoType' => $data_setting->videoType,
                         'premium' => $data_setting->premiumMode,
                         'player_setting' => $player_setting,
-                        'is_sub' => $video->is_sub,
+                        'is_sub' => $is_sub,
                     ];
                     return view('playOrigin', $playData);
                 } else {
@@ -79,12 +81,12 @@ class PlayController
                         'urlPlay' => 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8',
                         'videoID' => $video->slug,
                         'poster' => $poster,
-                        'title' => $video->title,
+                        'title' => $title,
                         'iframe' => $data_setting->blockDirect,
                         'videoType' => $data_setting->videoType,
                         'premium' => $data_setting->premiumMode,
                         'player_setting' => $player_setting,
-                        'is_sub' => $video->is_sub,
+                        'is_sub' => $is_sub,
                     ];
                     switch ($data_setting->earningModes) {
                         case 1:
