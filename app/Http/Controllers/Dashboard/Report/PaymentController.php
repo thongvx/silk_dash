@@ -21,7 +21,7 @@ class PaymentController extends Controller
     {
 
         $request->validate([
-            'amount' => 'required|numeric|min:100|max:2000',
+            'amount' => 'required|numeric|min:50|max:2000',
         ]);
         $user = auth()->user();
         $totalProfitkey = "user:{$user->id}:total_profit";
