@@ -86,7 +86,7 @@ class RegisterController extends Controller
         $user->storage = 0;
         $user->video = 0;
         $user->play = 0;
-        $user->last_upload = 0;
+//        $user->last_upload = 0;
         $user->earning = 0;
         $user->premium = 0;
         $user->active = 0;
