@@ -30,14 +30,17 @@ class ReportData extends Model
         parent::boot();
         static::created(function ($model) {
             Redis::del("user:{$model->user_id}:report_data");
+            Redis::del("user:{$model->user_id}:total_profit");
         });
         // Define the behavior for create and update
         static::saved(function ($model) {
             Redis::del("user:{$model->user_ID}:total_profit");
+            Redis::del("user:{$model->user_id}:total_profit");
         });
 
         static::deleted(function ($model) {
             Redis::del("user:{$model->user_ID}:total_profit");
+            Redis::del("user:{$model->user_id}:total_profit");
         });
 
     }
