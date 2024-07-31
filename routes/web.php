@@ -163,7 +163,8 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
 
 Route::prefix('email')->group(function () {
     Route::get('/send-email', [EmailController::class, 'sendEmails']);
-    Route::get('/send-discount-emails', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.emails');    // Add more email routes here as needed
+    Route::post('/send-discount-emails', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.emails');
+    Route::get('/view-discount-emails', [EmailController::class, 'viewDiscountProgramEmails']);
 });
 
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);

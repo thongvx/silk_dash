@@ -11,7 +11,7 @@ body *:not(html):not(style):not(br):not(tr):not(code) {
 body {
     -webkit-text-size-adjust: none;
     background-color: #ffffff;
-    color: #718096;
+    color: black;
     height: 100%;
     line-height: 1.4;
     margin: 0;
@@ -38,7 +38,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #3d4852;
+    color: black;
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
@@ -233,7 +233,8 @@ img {
 .button-blue,
 .button-primary {
     background-color: #008da5;
-    padding: 8px 18px;
+    padding: 8px 24px;
+    font-size: 1.3em;
 }
 .button-primary:hover{
     background-color: #008da5;

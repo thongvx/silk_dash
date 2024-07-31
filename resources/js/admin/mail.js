@@ -14,6 +14,9 @@ $(document).on('submit', '#gift-mail', function () {
         data: formData,
         processData: false,
         contentType: false,
+        beforeSend: function () {
+            form.find('button[type="submit"]').html('Sending...').prop('disabled', true).removeClass('bg-[#01545e] hover:bg-[#009fb2]').addClass('bg-[#121520]')
+        },
         success: function (response) {
             location.reload();
         },
