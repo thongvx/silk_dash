@@ -116,7 +116,7 @@
             }
         };
         if(urlSub === 1 && is_sub === 1){
-            const jsonUrl = `https://streamsilk.com/storage/subtitles/${videoID}/${videoID}.json`;
+            const jsonUrl = `https://streamsilk.com/storage/subtitles/{{ $slug_sub }}/{{ $slug_sub }}.json`;
             const languageCodes = { 'eng' : 'English', 'spa' : 'Spanish', 'aze' : 'Azerbaijani', 'alb' : 'Albanian', 'ara' : 'Arabic', 'bul' : 'Bulgarian', 'chi' : 'Chinese', 'dnk' : 'Denmark', 'per' : 'Persian', 'fin' : 'Finland', 'fre' : 'French', 'ger' : 'German', 'gre' : 'Greek', 'heb' : 'Hebrew', 'hin' : 'Hindi', 'hun' : 'Hungarian', 'ind' : 'Indonesian', 'ita' : 'Italian', 'jpn' : 'Japanese', 'kan' : 'Kannada', 'khm' : 'Khmer', 'kor' : 'Korean', 'mal' : 'Malayalam', 'may' : 'Malay', 'nor' : 'Norway', 'pol' : 'Polish', 'por' : 'Portuguese', 'rus' : 'Russian', 'sin' : 'Sinhala', 'slv' : 'Slovenian', 'srp' : 'Serbian', 'swe' : 'Sweden', 'tam' : 'Tamil', 'tha' : 'Thai', 'tur' : 'Turkish', 'ukr' : 'Ukrainian', 'vie' : 'Vietnamese', 'rum' : 'Romanian', 'mar' : 'Marathi', 'cze' : 'Czech', 'slo' : 'Slovak', 'lit' : 'Lithuanian', 'kur' : 'Kurdish', 'dan' : 'Danish', 'bos' : 'Bosnian', 'hrv' : 'Croatian' };
             try {
                 const response = await fetch(jsonUrl);
