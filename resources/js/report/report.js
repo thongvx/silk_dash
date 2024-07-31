@@ -154,7 +154,9 @@ $(document).on('submit', '#request-payment', function () {
 })
 $(document).on('keyup', '#request-payment input', function () {
     amount = parseFloat($(this).val());
+    console.log(amount)
     const button = $('#request-payment button');
+    $('.noti-request-payment, .amount-info').remove();
     if(amount >=50 && amount <= 2000) {
         if($('#request-payment #Expires').length > 0){
             if (amount <= 100) {
@@ -169,7 +171,6 @@ $(document).on('keyup', '#request-payment input', function () {
                 gift = amount * 0.3;
             }
         }
-        $('.amount-info').remove();
         $('#box-request-payment').after(`
             <div class="amount-info flex flex-col">
                 <span>Amount: ${amount.toFixed(1)}</span>
@@ -177,12 +178,16 @@ $(document).on('keyup', '#request-payment input', function () {
                 <span>Total Amount: ${(amount + gift).toFixed(1)}</span>
             </div>
         `);
-        button.prop('disabled', false);
-        button.addClass('bg-[#01545e] hover:bg-[#009fb2]').removeClass('bg-[#142132]')
+        if($('#total-balance').data('balance') >= amount){
+            button.prop('disabled', false);
+            button.addClass('bg-[#01545e] hover:bg-[#009fb2]').removeClass('bg-[#142132]')
+        }
+
     }else{
-        console.log('b')
-        $('.amount-info').remove();
         button.attr('disabled', true);
         button.removeClass('bg-[#01545e] hover:bg-[#009fb2]').addClass('bg-[#142132]')
+        if (!isNaN(amount)) {
+            $('#box-request-payment').after(`<span class="noti-request-payment text-rose-500">Amount must be between 50 and 2000 and less than your balance</span>`);
+        }
     }
 })
