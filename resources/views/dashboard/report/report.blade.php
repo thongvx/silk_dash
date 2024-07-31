@@ -190,7 +190,9 @@
                 </div>
                 <div>
                     <div class="payout" id="payout">
-                        <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Request Payout</h5>
+                        <h5 class="mb-0 text-[#009FB2] text-lg font-semibold flex justify-between">Request Payout
+
+                        </h5>
                         <h4 class="text-4xl text-center font-bold flex items-start justify-center">
                             <span class="text-slate-400 text-2xl">$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
                         </h4>
@@ -204,26 +206,33 @@
                         <h5 class="text-start text-slate-400 text-md italic">
                             *Update your USDT address in your profile.
                         </h5>
-                        <form class="text-white mt-6 flex justify-between" id="request-payment" method="POST" action="{{route('request.payment')}}">
-                            @csrf
-                            <div class="bg-[#142132] rounded-lg flex w-full px-3 items-center">
-                                <label for="amount" class="mr-3">
-                                    Amount:
-                                </label>
-                                <input type="number" min="50" max="{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}" name="amount" id="amount"
-                                       class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
-                                       placeholder="100"/>
-                                <h5>
-                                    USD
-                                </h5>
-                            </div>
-                            <button type="submit" class="bg-[#009fb2]/60 rounded-xl px-5 py-2 h-max ml-3 hover:bg-[#009fb2]">
-                                Submit
-                            </button>
-                        </form>
-                        <h5 class="text-start text-slate-400 text-lg italic">
-                            *Minimal payout is <span class="text-[#009FB2]">$50</span><br>
-                        </h5>
+                        <div class="mt-4" id="box-request-payment">
+                            @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                                <span class="animate-colorChange">Gift up to 30% for first withdrawal!</span>
+                            @endif
+                            <form class="text-white flex justify-between" id="request-payment" method="POST" action="">
+                                @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                                    <input type="text" id="Expires" class="hidden" value="{{ Auth::user()->email_verified_at->addMonth()->format('Y-m-d') }}">
+                                @endif
+                                <div class="bg-[#142132] rounded-lg flex w-full px-3 items-center">
+                                    <label for="amount" class="mr-3">
+                                        Amount:
+                                    </label>
+                                    <input type="number" min="50" max="2000" name="amount" id="amount"
+                                           class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
+                                           placeholder="50"/>
+                                    <h5>
+                                        USD
+                                    </h5>
+                                </div>
+                                <button type="submit" disabled class="bg-[#142132] rounded-xl px-5 py-2 h-max ml-3">
+                                    Submit
+                                </button>
+                            </form>
+                            <h5 class="text-start text-slate-400 text-lg italic">
+                                *Payouts range from $50 to $2000.
+                            </h5>
+                        </div>
                     </div>
                 </div>
             </div>

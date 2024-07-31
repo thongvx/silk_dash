@@ -217,35 +217,37 @@
                     <a href="" class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">View All</a>
                 </div>
                 <div class="px-4 pb-1 mt-4 h-72 overflow-auto">
-                    <a href="javascript:;" data-id="" btn-info-noti-gift
-                       class="bg-[#009FB2] sticky top-0 flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
+                    @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                        <a href="javascript:;" data-id="" btn-info-noti-gift
+                           class="bg-[#009FB2] sticky top-0 flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
                         <span class="absolute -left-2 -bottom-4 w-16">
                             <img src="{{ asset('image/voucher/discount2.svg') }}" alt="" class="animate-ping !scale-125 opacity-50 absolute">
                             <img src="{{ asset('image/voucher/discount2.svg') }}" alt="">
                         </span>
-                        <span class="absolute left-44 top-2 w-16 opacity-75">
+                            <span class="absolute left-44 top-2 w-16 opacity-75">
                             <img src="{{ asset('image/voucher/Fireworks.gif') }}" alt="">
                         </span>
-                        <span class="absolute right-48 top-0 w-20 opacity-75">
+                            <span class="absolute right-48 top-0 w-20 opacity-75">
                             <img src="{{ asset('image/voucher/Confetti.gif') }}" alt="">
                         </span>
-                        <span class="absolute left-20 w-20 lg:hidden xl:block">
+                            <span class="absolute left-20 w-20 lg:hidden xl:block">
                             <img src="{{ asset('image/voucher/party.svg') }}" alt="">
                         </span>
-                        <span class="absolute -right-4 w-20">
+                            <span class="absolute -right-4 w-20">
                             <img src="{{ asset('image/voucher/BitcoinTrade.gif') }}" alt="" class="scale-x-[-1]">
                         </span>
-                        <span class="absolute right-20 w-20 lg:hidden xl:block">
+                            <span class="absolute right-20 w-20 lg:hidden xl:block">
                             <img src="{{ asset('image/voucher/party.svg') }}" alt="" class="scale-x-[-1]">
                         </span>
-                        <div class="info sticky z-30">
-                            <h6 class="text-white font-bold w-max subject text-center">
-                                Gift up to 30% for first withdrawal!<br>
-                                <span
-                                    class="text-sm">Expires: {{ Auth::user()->created_at->addMonth()->format('Y-m-d') }}</span>
-                            </h6>
-                        </div>
-                    </a>
+                            <div class="info sticky z-30">
+                                <h6 class="text-white font-bold w-max subject text-center">
+                                    Gift up to 30% for first withdrawal!<br>
+                                    <span
+                                        class="text-sm">Expires: {{ Auth::user()->email_verified_at->addMonth()->format('Y-m-d') }}</span>
+                                </h6>
+                            </div>
+                        </a>
+                    @endif
                     @forelse($notifications as $notification)
                         <a href="javascript:;" data-id="{{ $notification->id }}" btn-read btn-info-noti
                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
@@ -361,14 +363,14 @@
         </div>
     </div>
     <div fixed-noti-gift-card
-         class="opacity-1 bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full backdrop-blur-sm
-                                       min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3">
-        <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-noti-gift-close-button>
+         class="opacity-1 bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 hidden h-full backdrop-blur-sm
+                min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3">
+        <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-noti-close-button>
         </div>
         <div
             class="w-11/12 sm:w-4/5 xl:w-2/5 bg-[#121520] z-20 py-4 px-3 rounded-lg relative">
             <div class="absolute right-4 top-3">
-                <button fixed-noti-gift-close-button
+                <button fixed-noti-close-button
                         class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
                     <i class="material-symbols-outlined text-3xl">close</i>
                 </button>
@@ -377,21 +379,21 @@
                 <div class="export text-white">
                     <h1><b><i>Dear member,</i></b></h1><br>
                     <p>I’m Richard, manager of <a href="https://streamsilk.com/">StreamSilk.com</a>.</p><br>
-                    <p>I’m very happy to give you our <b><i>Gift program for new members. On your first withdrawal, you will receive an
-                        additional 10% to 30%</i></b>.</p>
-                    <p>The bigger the amount, the bigger the gift. The program is valid for <b>1 month</b> from the time you register
-                        your account.</p><br>
+                    <p>I’m very happy to give you our <span class="font-bold"><i>Gift program for new members. On your first withdrawal, you will receive an
+                        additional 10% to 30%</i></span>.</p>
+                    <p>The bigger the amount, the bigger the gift. The program is valid for <b><i>1 month from the time you register
+                        your account.</i></b></p><br>
                     <p>Please access the Report page to get details.</p>
                     <div class="text-center mt-3">
-                        <button class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">
+                        <button class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:bg-[#009FB2]">
                             <a href="https://streamsilk.com/report?tab=date">Report Page</a>
                         </button>
                     </div><br>
                     <p>Let’s start uploading your videos and sharing them to make lots of money now!</p>
                     <p>If you need any further support, please don’t hesitate to contact me!</p>
-                    <p >Telegram: <a class="font-bold"  href="https://t.me/RichardSSilk" target="_black">https://t.me/RichardSSilk</a><br>
-                        Skype: <a class="font-bold" href="skype:live:.cid.62ed279799bfed31" target="_black">live:.cid.62ed279799bfed31</a></p><br>
-                    <p>Regards,<br><b><i>Richard - StreamSilk</i></b></p>
+                    <p >Telegram: <a class="font-bold"  href="https://t.me/RichardSSilk" target="_black"><i>https://t.me/RichardSSilk</i></a><br>
+                        Skype: <a class="font-bold" href="skype:live:.cid.62ed279799bfed31" target="_black"><i>live:.cid.62ed279799bfed31</i></a></p><br>
+                    <p><i>Regards,<br><b>Richard - StreamSilk</b></i></p>
                 </div>
             </div>
         </div>

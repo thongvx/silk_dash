@@ -39,6 +39,5 @@
             </div>
         </div>
     </div>
-    @include('dashboard.upload.folder')
 @endsection
 

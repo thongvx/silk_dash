@@ -16,6 +16,7 @@ $(document).on('click', '.button-payout', function () {
 fixedVideoCloseButton.on("click", function () {
     fixedBox()
 });
+
 $(function () {
     $('.select2').select2()
     $('.select2-search__field').attr('name', 'country')
@@ -112,7 +113,6 @@ $(document).on('select2:unselect','#btn-country', function (e) {
     const tab = urlParams.get('tab') ?? '';
     const date = urlParams.get('date') ?? '';
     var value = e.params.data.id;
-    // Xóa giá trị khỏi mảng khi một mục không còn được chọn
     var index = selectedValues.indexOf(value);
     if (index !== -1) {
         selectedValues.splice(index, 1);
@@ -129,3 +129,60 @@ $(document).on('select2:unselect','#btn-country', function (e) {
     loadReport(formData,tab, date, country);
 
 });
+
+//payment
+var amount = 0;
+var gift = 0;
+$(document).on('submit', '#request-payment', function () {
+    event.preventDefault();
+    $('#request-payment input').val((amount + gift).toFixed(1));
+    var form = $(this);
+    var formData = new FormData(form[0]);
+    $.ajax({
+        type: 'POST',
+        url: 'request-payment',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            location.reload();
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    });
+})
+$(document).on('keyup', '#request-payment input', function () {
+    amount = parseFloat($(this).val());
+    const button = $('#request-payment button');
+    if(amount >=50 && amount <= 2000) {
+        if($('#request-payment #Expires').length > 0){
+            if (amount <= 100) {
+                gift = amount * 0.1;
+            } else if (amount > 100 && amount <= 300) {
+                gift = amount * 0.15;
+            } else if (amount > 300 && amount <= 600) {
+                gift = amount * 0.2;
+            } else if (amount > 600 && amount <= 1200) {
+                gift = amount * 0.25;
+            } else {
+                gift = amount * 0.3;
+            }
+        }
+        $('.amount-info').remove();
+        $('#box-request-payment').after(`
+            <div class="amount-info flex flex-col">
+                <span>Amount: ${amount.toFixed(1)}</span>
+                <span>Gift: ${gift.toFixed(1)}</span>
+                <span>Total Amount: ${(amount + gift).toFixed(1)}</span>
+            </div>
+        `);
+        button.prop('disabled', false);
+        button.addClass('bg-[#01545e] hover:bg-[#009fb2]').removeClass('bg-[#142132]')
+    }else{
+        console.log('b')
+        $('.amount-info').remove();
+        button.attr('disabled', true);
+        button.removeClass('bg-[#01545e] hover:bg-[#009fb2]').addClass('bg-[#142132]')
+    }
+})

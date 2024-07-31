@@ -47,7 +47,7 @@
  lg:absolute lg:left-auto lg:block lg:cursor-pointer" dropdown-menu>
                     <li class="my-1.5 w-full">
                         <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
-                           href="/admin/setting">
+                           href="/admin/mail?tab=mailBox">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                                 <i class="material-symbols-outlined opacity-1">commit</i>
@@ -58,7 +58,7 @@
                     </li>
                     <li class="my-1.5 w-full">
                         <a class="menu-sidebar text-white opacity-80 py-1.5 text-sm ease-nav-brand my-0 xl:mx-2 flex items-center whitespace-nowrap font-semibold rounded-lg px-4 hover:bg-[#009FB2] duration-300"
-                           href="/admin/setting">
+                           href="/admin/mail?tab=emails">
                             <div
                                 class="mr-1 flex h-8 w-8 lg:h-4 lg:w-4 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                                 <i class="material-symbols-outlined opacity-1">commit</i>

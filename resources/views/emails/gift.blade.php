@@ -9,7 +9,7 @@
     {{-- Body --}}
 
     <h1><b><i>Dear member,</i></b></h1>
-    <p>I’m <b>Richard</b>, manager of <a href="https://streamsilk.com/">StreamSilk.com</a>.</p>
+    <p class="color: #009FB2">I’m <b>Richard</b>, manager of <a href="https://streamsilk.com/">StreamSilk.com</a>.</p>
     <p>I’m very happy to give you our <b>Gift program</b> for new members. On your first withdrawal, you will receive an
         additional <b>10% to 30%</b>.</p>
     <p>The bigger the amount, the bigger the gift. The program is valid for <b>1 month</b> from the time you register
