@@ -197,6 +197,7 @@
                 if (tracks.length > 0) {
                     options.tracks = tracks;
                     options.captions = { default: true, track: 0 };
+                    player.setCurrentCaptions(1);
                 }
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
@@ -209,6 +210,7 @@
                 "position": "{{ $player_setting->position }}",
                 "width": 100,
                 "height": 50,
+                "link": "{{ $player_setting->power_url_logo }}"
             }
         }
         if (urlposter !== "" && urlposter !== "0") {
