@@ -38,26 +38,28 @@ export function updateOriginalFormState(box) {
     }
 }
 $(document).on('change keyup', 'form', function() {
-    const button = $(this).find('button[type="submit"]');
-    var currentFormState = $(this).serialize();
-    var hasFile = false;
-    var fileInputs = $(this).find('input[type="file"]');
-    fileInputs.each(function() {
-        if ($(this).get(0).files.length > 0) {
-            hasFile = true;
-            return false; // Exit the loop as soon as a file input with files is found
+    if($(this).attr('id') !== 'request-payment'){
+        const button = $(this).find('button[type="submit"]');
+        var currentFormState = $(this).serialize();
+        var hasFile = false;
+        var fileInputs = $(this).find('input[type="file"]');
+        fileInputs.each(function() {
+            if ($(this).get(0).files.length > 0) {
+                hasFile = true;
+                return false; // Exit the loop as soon as a file input with files is found
+            }
+        });
+        if (currentFormState !== originalFormState || hasFile) {
+            // Form has changed
+            button.addClass('bg-[#01545e] hover:bg-[#009fb2]')
+            button.removeClass('bg-[#142132]')
+            button.removeAttr('disabled');
+        } else {
+            // Form has not changed, revert to original state
+            button.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
+            button.addClass('bg-[#142132]')
+            button.attr('disabled', 'disabled');
         }
-    });
-    if (currentFormState !== originalFormState || hasFile) {
-        // Form has changed
-        button.addClass('bg-[#01545e] hover:bg-[#009fb2]')
-        button.removeClass('bg-[#142132]')
-        button.removeAttr('disabled');
-    } else {
-        // Form has not changed, revert to original state
-        button.removeClass('bg-[#01545e] hover:bg-[#009fb2]')
-        button.addClass('bg-[#142132]')
-        button.attr('disabled', 'disabled');
     }
 });
 // Load image
@@ -220,6 +222,7 @@ export function loadContent(data_content) {
         success: function(response) {
             $('#box-content').html(response);
             $('#sever').text('Server: '+ $('#datatable').data('total'))
+            $('.select2').select2()
             if(data_content === 'webupload'){
                 Upload_FILE();
             }

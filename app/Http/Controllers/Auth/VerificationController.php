@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Facades\Bot;
+use App\Http\Controllers\Mail\EmailController;
 
 class VerificationController extends Controller
 {
@@ -29,17 +30,19 @@ class VerificationController extends Controller
      * @var string
      */
     protected $redirectTo = '/login';
+    protected $emailController;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct( EmailController $emailController)
     {
         $this->middleware('auth')->except('logout');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $this->emailController = $emailController;
     }
 
     /**
@@ -54,6 +57,7 @@ class VerificationController extends Controller
         $user->active = 1;
         $user->save();
         Bot::send('new user registered email: ' . $user->email);
+//        $this->emailController->sendDiscountProgramEmails($user->id);
         // Log out the user after verification
         Auth::logout();
 

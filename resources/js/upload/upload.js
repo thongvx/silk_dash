@@ -1,3 +1,5 @@
+import {Upload_FILE} from "./uploadFile.js";
+
 var fixedFolderCard = $("[fixed-folder-card]");
 var fixedFolderCloseButton = $("[fixed-folder-close-button]");
 
@@ -16,11 +18,11 @@ fixedFolderCloseButton.on("click", function () {
 $(document).on('click', '[change-folder]', function () {
     fixedBox();
 });
-$(document).on('click', '[folder]', function() {
-    fixedBox()
-    $('#folderPost').attr('value',$(this).data('folder-id'))
-    $('#folderName').text($(this).find('h5').first().text())
-});
 $(document).on('click', '[create-ftp]', function() {
     $('.box-ftp').removeClass('hidden')
 })
+//choose folder
+$(document).on('change','#select-folder', function (e) {
+    $('#folderPost').attr('value',this.value)
+});
+

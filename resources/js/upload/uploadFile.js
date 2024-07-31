@@ -19,7 +19,6 @@ export function Upload_FILE (){
         const form = $('#form-upload-file')[0];
         var formData = new FormData(form);
         var userIDValue = formData.get('userID');
-        var folderID = formData.get('folderID');
         var tokenValue = formData.get('_token');
         var idSequence = 0;
         $fileUpload.fileupload({
@@ -29,7 +28,7 @@ export function Upload_FILE (){
             sequentialUploads: false,
             formData: function (form) {
                         // Append token to the request - required for web routes
-                        return [{name: '_token', value: tokenValue}, {name: 'userID', value: userIDValue}, {name: 'folderID', value: folderID}];
+                        return [{name: '_token', value: tokenValue}, {name: 'userID', value: userIDValue}, {name: 'folderID', value: $('#select-folder').val()}];
                     },
             crossDomain: true,
             //xhrFields: { withCredentials: true },

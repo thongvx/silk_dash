@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Http\Controllers\admin\EmailAdminController;
 use App\Http\Controllers\admin\ManageTaskController;
 use App\Http\Controllers\admin\ComputeController;
 use App\Http\Controllers\admin\StatisticController;
@@ -22,7 +23,8 @@ class ModelHelpers
 
     public function __construct(VideoController $videoController, AccountController $AccountController, UploadController $uploadController,
                                 TicketController $TicketController, ManageTaskController $manageTaskController, ComputeController $computeController,
-                                ReportController $ReportController, StatisticController $statisticController, VideoAdminController $videoAdminController)
+                                ReportController $ReportController, StatisticController $statisticController, VideoAdminController $videoAdminController,
+                                EmailAdminController $emailAdminController)
     {
         $this->controllers = [
             'setting' => $AccountController,
@@ -33,7 +35,8 @@ class ModelHelpers
             'compute' => $computeController,
             'report' => $ReportController,
             'statistic' => $statisticController,
-            'videoAdmin' => $videoAdminController
+            'videoAdmin' => $videoAdminController,
+            'emailAdmin' => $emailAdminController
         ];
     }
     public function loadPage(Request $request){
@@ -55,6 +58,11 @@ class ModelHelpers
                 'role'=> 'admin',
                 'controller' => 'compute',
                 'method' => 'computeController'
+            ],
+            'admin/mail' => [
+                'role'=> 'admin',
+                'controller' => 'emailAdmin',
+                'method' => 'emailController'
             ],
             'admin/users' => null, // No controller method to call, directly render view
             'setting' => [

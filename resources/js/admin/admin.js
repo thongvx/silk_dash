@@ -11,6 +11,8 @@ import './user.js';
 import './manage-task.js';
 //Compute
 import './compute.js';
+//mail
+import './mail.js';
 
 var a_menu = $('.menu-sidebar')
 a_menu.filter(function () {
@@ -23,3 +25,7 @@ a_menu.filter(function () {
     }
     return indexTab >= 0
 }).addClass('bg-[#009FB2]')
+$(function () {
+    $('.select2').select2()
+    $('.select2-search__field').attr('name', 'country')
+});

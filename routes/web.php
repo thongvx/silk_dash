@@ -158,12 +158,13 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
 
     Route::resource('/videoAdmin', \App\Http\Controllers\admin\VideoAdminController::class);
+    Route::get('/mail', [\App\Http\Controllers\admin\EmailAdminController::class, 'index'])->name('mail');
 });
 
 Route::prefix('email')->group(function () {
     Route::get('/send-email', [EmailController::class, 'sendEmails']);
-    Route::get('/send-discount-program-email', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.program.emails');
-    // Add more email routes here as needed
+    Route::post('/send-discount-emails', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.emails');
+    Route::get('/view-discount-emails', [EmailController::class, 'viewDiscountProgramEmails']);
 });
 
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);

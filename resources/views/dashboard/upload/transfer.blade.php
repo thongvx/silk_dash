@@ -25,11 +25,16 @@
             <button type="submit" disabled class='mt-5 px-10 py-2 rounded-lg bg-[#142132] text-white'>Submit</button>
         </form>
     </div>
-    <div class='-mb-12 bg-slate-900 mx-6 rounded-xl flex justify-between items-center px-3'>
-        <h3 class='py-4  dark:text-white font-bold'>Save To <span id="folderName" class="italic text-[#009FB2]">{{ $currentFolderName-> name_folder }}( Default Folder)</span></h3>
-        <div class="changefolder text-[#009FB2] font-bold cursor-pointer" change-folder>
-            Change Folder
-        </div>
+    <div class='-mb-12 bg-slate-900 mx-6 rounded-xl flex items-center px-3'>
+        <label for="select-folder" class='py-4 font-bold w-28 sm:w-24 text-[#009FB2]'>Save To </label>
+        <select class="select2 w-full sm:w-1/2 bg-[#009FB2]" id="select-folder" data-placeholder="Select folder">
+            <option value="{{ $currentFolderName->id }}" selected>{{ $currentFolderName->name_folder }}( Default Folder)</option>
+            @foreach($folders as $folder)
+                @if($folder->id != $currentFolderName->id)
+                    <option value="{{ $folder->id }}">{{ $folder->name_folder }}</option>
+                @endif
+            @endforeach
+        </select>
     </div>
 </div>
 <div class="mt-14 bg-[#121520] rounded-xl py-3" id="box-list-upload">
