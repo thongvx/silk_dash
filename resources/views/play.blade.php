@@ -197,7 +197,9 @@
                 if (tracks.length > 0) {
                     options.tracks = tracks;
                     options.captions = { default: true, track: 0 };
-                    player.setCurrentCaptions(1);
+                    player.on('ready', function() {
+                        player.setCurrentCaptions(1);
+                    });
                 }
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
