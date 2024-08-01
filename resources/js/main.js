@@ -28,13 +28,14 @@ $(document).on('change', 'input[type="checkbox"]', function() {
         $(this).val(0);
     }
 });
-var originalFormState = $('#form-setting, #form-profile, #transferLink, #form, #form-player-setting').serialize();
+var form = $('#transferLink, #form, .form-change')
+var originalFormState = form.serialize();
 
 export function updateOriginalFormState(box) {
     if(box){
         originalFormState = $('#'+box+' form').serialize();
     }else{
-        originalFormState = $('#form-setting, #form-profile, #transferLink, #form, #form-player-setting').serialize();
+        originalFormState = form.serialize();
     }
 }
 $(document).on('change keyup', 'form', function() {
@@ -121,6 +122,7 @@ export function add_notification(type, message, div){
             text = 'text-blue-400';
             break;
     }
+    const date = new Date();
     const div_notification = `<div class="justify-center w-full ${text} mt-2 items-center flex" id="noti-warning">
                                         <i class="material-symbols-outlined mr-2">${icon}</i>
                                         ${message}

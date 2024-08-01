@@ -104,6 +104,13 @@
     } else {
         urlLogo = ""
     }
+    const custom_ads = {!! json_encode($custom_ads) !!};
+    function getVastAds(ads) {
+        return ads.filter(ad => ad.adsType === 'vast');
+    }
+    function getDirectAds(ads) {
+        return ads.filter(ad => ad.adsType === 'direct');
+    }
     //poster
     var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
     //title
@@ -228,6 +235,16 @@
             }
             options.tracks.push(previewTrack)
         }
+        const vastAds = getVastAds(custom_ads);
+        if (vastAds.length > 0) {
+            options.advertising = {
+                client: 'vast',
+                schedule: vastAds.map(ad => ({
+                    tag: ad.linkAds,
+                    offset: ad.offset
+                }))
+            };
+        }
         player.setup(options);
         // window.addEventListener('beforeunload', function (e) {
         //     var currentPosition = player.getPosition();
@@ -341,7 +358,23 @@
             clearTimeout(pop5s)
         })
     }, 10000);
-
+    const directAds = getDirectAds(custom_ads);
+    if(directAds.length > 0) {
+        console.log('a')
+        directAds.forEach((ad , index) => {
+            setTimeout(() => {
+                console.log('b')
+                const adDiv = document.createElement('div');
+                adDiv.className = 'div_pop'
+                adDiv.id = 'pop'+ index;
+                document.body.appendChild(adDiv);
+                adDiv.addEventListener('click', function() {
+                    openNewTab(ad.linkAds);
+                    this.remove();
+                });
+            }, ad.offset * 1000);
+        });
+    }
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)

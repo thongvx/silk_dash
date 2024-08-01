@@ -10,21 +10,44 @@ body {
     background-color: black;
     font-size: 24px;
 }
-  .div_pop{
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: -webkit-fill-available;
-      height: 100vh;
-      cursor: pointer;
-  }
-  #pop{
 
-      z-index: 99998;
-  }
-  #pop1{
-      z-index: 999999;
-  }
+.div_pop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: -webkit-fill-available;
+    height: 100vh;
+    cursor: pointer;
+}
+
+#pop {
+    z-index: 9995;
+}
+
+#pop0 {
+    z-index: 9995;
+}
+
+#pop1 {
+    z-index: 9996;
+}
+
+#pop2 {
+    z-index: 9997;
+}
+
+#pop3 {
+    z-index: 9998;
+}
+
+#pop4 {
+    z-index: 9999;
+}
+
+#pop5 {
+    z-index: 99999;
+}
+
 #player {
     height: 100vh !important;
 }
@@ -104,6 +127,7 @@ body {
 .jw-svg-icon-buffer path {
     display: none;
 }
+
 .jw-svg-icon-buffer {
     background-image: url('buffer.svg');
     background-size: contain;

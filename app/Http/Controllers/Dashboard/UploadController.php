@@ -259,25 +259,6 @@ class UploadController
         Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
         return redirect()->route('video.editVideo', ['video' => $slug]);
     }
-    //------------------------------updateCustomAds------------------------------------------------
-    function updateCustomAds(Request $request)
-    {
-        $user = Auth::user();
-        $adsType = $request->input('adsType', []);
-        $offset = $request->input('offset', []);
-        $linkAds = $request->input('linkAds', []);
-        $data = array();
-        for ($i = 0; $i < count($linkAds); $i++) {
-            $data[$i] = [
-                'adsType' => $adsType[$i] ?? null,
-                'offset' => $offset[$i] ?? null,
-                'linkAds' => $linkAds[$i] ?? null,
-            ];
-        }
-        $data = json_encode($data);
-        file_put_contents('customAds/'.$user->id.'.json', $data);
-        return redirect()->route('https://streamsilk.com/setting?tab=customads',);
-    }
     //-------------------------------get progress transfer-----------------------------------------
     public function getProgressTransfer()
     {
