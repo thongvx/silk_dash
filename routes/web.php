@@ -78,6 +78,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'index'])->name('index');
     Route::post('/cloneVideo', [\App\Http\Controllers\Dashboard\VideoController::class, 'cloneVideo']);
     Route::post('/uploadSub', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadSub']);
+    Route::post('/updateCustomAds', [\App\Http\Controllers\Dashboard\UploadController::class, 'updateCustomAds']);
 
     Route::post('/postTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'postTransfer'])->name('post.link.transfer');
     Route::get('/getProgressTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgressTransfer']);
