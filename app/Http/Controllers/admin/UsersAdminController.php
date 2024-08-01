@@ -121,12 +121,10 @@ class UsersAdminController
 
     public function loginAs(User $user)
     {
-        if (Auth::user()->hasRole('admin')) {
-            Auth::login($user);
-            return redirect()->route('dashboard');
-        } else {
-            abort(403);
-        }
+
+        Auth::login($user);
+        return redirect()->route('dashboard');
+
     }
     public function getDataRedis($slug)
     {
