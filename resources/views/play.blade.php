@@ -203,7 +203,7 @@
                 // Add subtitle tracks to the player options
                 if (tracks.length > 0) {
                     options.tracks = tracks;
-                    options.captions = { default: true, track: 0 };
+                    options.captions = { default: true, track: 1 };
                     player.on('ready', function() {
                         player.setCurrentCaptions(1);
                     });
