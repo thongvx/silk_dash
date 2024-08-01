@@ -54,7 +54,9 @@
         <div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
+    <?php if($videoID != '66a670419c98f'){ ?>
     <script src="https://streamsilk.com/ads.js"></script>
+    <?php } ?>
 </head>
 <body>
 <div class="preloader">

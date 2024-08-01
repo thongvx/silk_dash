@@ -274,7 +274,7 @@
     let pop15s = setTimeout(function() {
         $('body').click(function(){
             if(t === 0)
-                window.open("https://holahupa.com/2032563/");
+                window.open("https://ak.aimukreegee.net/4/7779337");
             t = 1;
             clearTimeout(pop15s)
         })
