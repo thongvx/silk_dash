@@ -11,10 +11,6 @@
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
-        #video_player {
-            height: 100dvh !important;
-        }
-
         .preloader .preloader-icon {
             border-top: 2px solid{{ $player_setting->premium_color }};
         }
@@ -61,11 +57,6 @@
     <script src="https://streamsilk.com/ads.js"></script>
 </head>
 <body>
-<div>
-    <div>
-        <h4></h4>
-    </div>
-</div>
 <div class="preloader">
     <div class="preloader-icon"></div>
     <span>Loading...</span>
