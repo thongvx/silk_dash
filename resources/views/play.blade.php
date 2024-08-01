@@ -206,7 +206,7 @@
                     if (englishTrackIndex !== -1) {
                         options.captions = { default: true, track: englishTrackIndex + 1 };
                     } else {
-                        options.captions = { default: true, track: 0 };
+                        options.captions = { default: true, track: 1 };
                     }
                 }
             } catch (error) {
