@@ -129,7 +129,7 @@
                     options.tracks = tracks;
                     options.captions = { default: true, track: 1 };
                     player.on('ready', function() {
-                        player.setCurrentCaptions(1);
+                        player.getCurrentCaptions(1);
                     });
                 }
             } catch (error) {
