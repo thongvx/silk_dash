@@ -123,14 +123,18 @@
                     file: item.file,
                     label: languageCodes[item.label] + ' (' + item.label + ')',
                     kind: 'captions',
+                    language: item.label
                 }));
                 // Add subtitle tracks to the player options
                 if(tracks.length > 0) {
                     options.tracks = tracks;
-                    options.captions = { default: true, track: 1 };
-                    player.on('ready', function() {
-                        player.setCurrentCaptions(1);
-                    });
+                    const englishTrackIndex = tracks.findIndex(track => track.language === 'eng');
+
+                    if (englishTrackIndex !== -1) {
+                        options.captions = { default: true, track: englishTrackIndex + 1 };
+                    } else {
+                        options.captions = { default: true, track: 1 };
+                    }
                 }
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
@@ -223,6 +227,17 @@
         player.on('complete', function() {
             isPaused = true;
             clearInterval(intervalId);
+        });
+        player.on('ready', function() {
+            const captionsList = player.getCaptionsList();
+            if (captionsList.length > 1) { // Index 0 is "Off", so check if there are actual captions
+                const englishCaptionIndex = captionsList.findIndex(caption => caption.language === 'eng');
+                if (englishCaptionIndex !== -1) {
+                    player.setCurrentCaptions(englishCaptionIndex);
+                } else {
+                    player.setCurrentCaptions(1); // Set to the first captions track
+                }
+            }
         });
     };
     $(document).ready(() => {

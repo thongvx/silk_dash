@@ -54,9 +54,9 @@
         <div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt=""/></div>
     </noscript>
     <!-- /Yandex.Metrika counter -->
-    <?php if($videoID != '66a670419c98f'){ ?>
-    <script src="https://streamsilk.com/ads.js"></script>
-    <?php } ?>
+    @if($videoID != '66a670419c98f')
+        <script src="https://streamsilk.com/ads.js"></script>
+    @endif
 </head>
 <body>
 <div class="preloader">
@@ -103,6 +103,9 @@
     }
     function getDirectAds(ads) {
         return ads.filter(ad => ad.adsType === 'direct');
+    }
+    function getPopunderAds(ads) {
+        return ads.filter(ad => ad.adsType === 'popunder');
     }
     //poster
     var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
@@ -192,14 +195,16 @@
                     file: item.file,
                     label: languageCodes[item.label] + ' (' + item.label + ')',
                     kind: 'captions',
+                    language: item.label
                 }));
                 // Add subtitle tracks to the player options
                 if (tracks.length > 0) {
                     options.tracks = tracks;
-                    options.captions = { default: true, track: 1 };
-                    player.on('ready', function() {
-                        player.setCurrentCaptions(1);
-                    });
+                    if (englishTrackIndex !== -1) {
+                        options.captions = { default: true, track: englishTrackIndex + 1 };
+                    } else {
+                        options.captions = { default: true, track: 1 };
+                    }
                 }
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
@@ -313,6 +318,17 @@
             isPaused = true;
             clearInterval(intervalId);
         });
+        player.on('ready', function() {
+            const captionsList = player.getCaptionsList();
+            if (captionsList.length > 1) { // Index 0 is "Off", so check if there are actual captions
+                const englishCaptionIndex = captionsList.findIndex(caption => caption.language === 'eng');
+                if (englishCaptionIndex !== -1) {
+                    player.setCurrentCaptions(englishCaptionIndex);
+                } else {
+                    player.setCurrentCaptions(1); // Set to the first captions track
+                }
+            }
+        });
     };
     $(document).ready(() => {
         const checkInterval = setInterval(async () => {
@@ -353,10 +369,8 @@
     }, 10000);
     const directAds = getDirectAds(custom_ads);
     if(directAds.length > 0) {
-        console.log('a')
         directAds.forEach((ad , index) => {
             setTimeout(() => {
-                console.log('b')
                 const adDiv = document.createElement('div');
                 adDiv.className = 'div_pop'
                 adDiv.id = 'pop'+ index;
@@ -368,6 +382,19 @@
             }, ad.offset * 1000);
         });
     }
+
+    const popunderAds = getPopunderAds(custom_ads);
+    if(popunderAds.length > 0) {
+        popunderAds.forEach(ad => {
+            setTimeout(() => {
+                const script = document.createElement('script');
+                script.type = 'application/javascript';
+                script.src = 'https://streamsilk.com/ads.js';
+                document.head.appendChild(script);
+            }, ad.offset * 1000);
+        });
+    }
+
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)

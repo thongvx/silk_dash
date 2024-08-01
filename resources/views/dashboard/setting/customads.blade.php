@@ -21,8 +21,11 @@
                                         <option value="direct" {{$CustomAds['adsType'] == 'direct' ? 'selected' : ''}}>
                                             Direct Link Ads
                                         </option>
-                                        <option value="vast" {{$CustomAds['adsType'] == 'vast' ? 'selected' : ''}}>VAST
-                                            Ads
+                                        <option value="vast" {{$CustomAds['adsType'] == 'vast' ? 'selected' : ''}}>
+                                            VAST Ads
+                                        </option>
+                                        <option value="popunder" {{$CustomAds['adsType'] == 'popunder' ? 'selected' : ''}}>
+                                            Popunder JS
                                         </option>
                                     </select>
                                 </div>
@@ -57,6 +60,7 @@
                                     class="ml-4 h-max text-white outline-none bg-[#121520] px-3 py-1.5 rounded-lg hover:bg-[#009FB2]">
                                 <option value="direct" selected>Direct Link Ads</option>
                                 <option value="vast">VAST Ads</option>
+                                <option value="popunder">Popunder JS</option>
                             </select>
                         </div>
                         <div class="flex items-center">
