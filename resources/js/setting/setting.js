@@ -25,7 +25,7 @@ $(document).on('submit', '#form-setting', function(e) {
     // Post data to the server
     $.ajax({
         type: 'POST',
-        url: '/updatesetting',
+        url: '/updateSetting',
         data: formData,
         processData: false,
         contentType: false,
@@ -168,4 +168,6 @@ $(document).on('click', '[btn-change-email]', function() {
         });
     });
 })
+
+
 

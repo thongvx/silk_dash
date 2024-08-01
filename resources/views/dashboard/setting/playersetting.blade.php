@@ -1,6 +1,6 @@
 @php use Illuminate\Support\Facades\Storage; @endphp
 <div class="mt-2">
-    <form id="form-player-setting">
+    <form id="form-player-setting" class="form-change">
         <div class="grid grid-cols-2 gap-x-8 gap-y-10 text-slate-400 font-medium px-2 md:px-4 overflow-auto max-h-[calc(100vh-23em)] md:max-h-[calc(100vh-17em)]">
             <div class="col-span-2 md:col-span-1 gap-4 ">
                 <div class="w-full">

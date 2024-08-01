@@ -11,6 +11,7 @@ use App\Models\AccountSetting;
 use App\Repositories\AccountRepo;
 use App\Repositories\PlayerSettingsRepo;
 use App\Repositories\VideoRepo;
+use App\Repositories\CustomAdsRepo;
 use App\Services\ServerStream\SvStreamService;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redis;
@@ -21,12 +22,15 @@ class PlayController
     protected $videoRepo;
     protected $accountRepo;
     protected $playerSettingsRepo;
+    protected $customAdsRepo;
 
-    public function __construct(VideoRepo $videoRepo, AccountRepo $accountRepo, PlayerSettingsRepo $playerSettingsRepo)
+    public function __construct(VideoRepo $videoRepo, AccountRepo $accountRepo,
+                                PlayerSettingsRepo $playerSettingsRepo, CustomAdsRepo $customAdsRepo)
     {
         $this->videoRepo = $videoRepo;
         $this->accountRepo = $accountRepo;
         $this->playerSettingsRepo = $playerSettingsRepo;
+        $this->customAdsRepo = $customAdsRepo;
     }
 
     public function play($slug, Request $request)
@@ -41,6 +45,7 @@ class PlayController
             $is_sub = $video->is_sub;
             $title = $video->title;
             $slug_sub = $video->slug;
+            $custom_ads = $this->customAdsRepo->getCustomAds($video->user_id);
             if($domain == 'streamsilk.com' || $data_setting->embed_page == 0 || strpos($data_setting->domain, $domain) != 0) {
                 $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
                 $poster = $player_setting->thumbnail_grid == 5 ? $video->grid_poster_5 : ($player_setting->thumbnail_grid == 3 ? $video->grid_poster_3 : $video->poster);
@@ -57,6 +62,7 @@ class PlayController
                         'player_setting' => $player_setting,
                         'is_sub' => $is_sub,
                         'slug_sub' => $slug_sub,
+                        'custom_ads' => $custom_ads,
                     ];
                     return view('playOrigin', $playData);
                 } else {
@@ -90,6 +96,7 @@ class PlayController
                         'player_setting' => $player_setting,
                         'is_sub' => $is_sub,
                         'slug_sub' => $slug_sub,
+                        'custom_ads' => $custom_ads,
                     ];
                     switch ($data_setting->earningModes) {
                         case 1:

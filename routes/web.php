@@ -78,7 +78,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'index'])->name('index');
     Route::post('/cloneVideo', [\App\Http\Controllers\Dashboard\VideoController::class, 'cloneVideo']);
     Route::post('/uploadSub', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadSub']);
-    Route::post('/updateCustomAds', [\App\Http\Controllers\Dashboard\UploadController::class, 'updateCustomAds']);
 
     Route::post('/postTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'postTransfer'])->name('post.link.transfer');
     Route::get('/getProgressTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgressTransfer']);
@@ -108,22 +107,23 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('report', \App\Http\Controllers\Dashboard\Report\ReportController::class);
     Route::post('/request-payment', [\App\Http\Controllers\Dashboard\Report\PaymentController::class, 'store'])->name('request.payment');
-
+    //Support
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
     Route::post('/postTickket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTickket']);
     Route::get('/completeTicket/{ticketID}', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'completeTicket'])->name('complete.ticket');
-
+    //MyAccount
     Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);
     Route::post('/update-profile', [App\Http\Controllers\Auth\ProfileController::class, 'update'])->name('update.profile');
     Route::post('/update-player', [\App\Http\Controllers\Dashboard\Setting\PlayerSettingController::class, 'update'])->name('update.player');
     Route::post('/change-password', [\App\Http\Controllers\Auth\ProfileController::class, 'changePassword'])->name('change.password');
     Route::post('/change-email', [\App\Http\Controllers\Auth\ProfileController::class, 'changeEmail'])->name('change.email');
-
+    Route::post('/updateSetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
+    Route::post('/updateCustomAds', [\App\Http\Controllers\Dashboard\Setting\CustomAdsController::class, 'updateCustomAds'])->name('updateCustomAds');
+    //Notification
     Route::post('/notifications/readall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'readAll'])->name('notifications.readall');
     Route::post('/notifications/deleteall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'deleteAll'])->name('notifications.deleteall');
     Route::post('/notifications/read/{id}', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'read'])->name('notifications.read');
 
-    Route::post('/updatesetting', [\App\Http\Controllers\Dashboard\Setting\SettingController::class, 'update']);
 
     Route::get('/regenerateToken', [App\Http\Controllers\Auth\ProfileController::class, 'regenerateToken'])->name('regenerate.token');
     Route::get('/retryKeyApi', [App\Http\Controllers\Auth\ProfileController::class, 'retryKeyApi'])->name('retryKeyApi');

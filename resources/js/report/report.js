@@ -182,7 +182,14 @@ $(document).on('keyup', '#request-payment input', function () {
                 <span>Total Amount: ${(amount + gift).toFixed(1)}</span>
             </div>
         `);
-        if(parseInt($('#total-balance').data('balance').replace(/,/g, ''), 10) >= amount){
+        let balance = $('#total-balance').data('balance');
+
+        if (typeof balance !== 'string') {
+            balance = balance.toString();
+        }
+        balance = parseInt(balance.replace(/,/g, ''), 10);
+        console.log(balance)
+        if(balance >= amount){
             button.prop('disabled', false);
             button.addClass('bg-[#01545e] hover:bg-[#009fb2]').removeClass('bg-[#142132]')
         }

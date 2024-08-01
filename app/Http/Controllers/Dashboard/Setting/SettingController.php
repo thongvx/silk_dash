@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Setting;
 use App\Repositories\ActivityRepo;
 use App\Repositories\AccountRepo;
 use App\Repositories\PlayerSettingsRepo;
+use App\Repositories\CustomAdsRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -12,12 +13,14 @@ use Illuminate\Support\Facades\Validator;
 
 class SettingController
 {
-    private $accountRepo, $activityRepo, $playerSettingsRepo;
-    public function __construct(AccountRepo $accountRepo, ActivityRepo $activityRepo, PlayerSettingsRepo $playerSettingsRepo)
+    private $accountRepo, $activityRepo, $playerSettingsRepo, $customAdsRepo;
+    public function __construct(AccountRepo $accountRepo, ActivityRepo $activityRepo,
+                                PlayerSettingsRepo $playerSettingsRepo, CustomAdsRepo $customAdsRepo)
     {
         $this->accountRepo = $accountRepo;
         $this->activityRepo = $activityRepo;
         $this->playerSettingsRepo = $playerSettingsRepo;
+        $this->customAdsRepo = $customAdsRepo;
     }
     public function index(Request $request)
     {
@@ -27,6 +30,7 @@ class SettingController
             'setting' => $this->accountRepo->getSetting($user->id),
             'activities' => $this->activityRepo->getAllActivity($user->id),
             'playerSettings' => $this->playerSettingsRepo->getAllPlayerSettings($user->id),
+            'AllCustomAds' => $this->customAdsRepo->getCustomAds($user->id),
         ];
         return view('dashboard.setting.index', $data);
     }
