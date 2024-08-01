@@ -141,7 +141,6 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::resource('/compute', \App\Http\Controllers\admin\ComputeController::class);
 
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
-    Route::get('/login-as/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'loginAs'])->name('admin.login-as');
     Route::post('/updateEarning', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateEarning']);
     Route::post('/updateUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateUser']);
     Route::get('/searchUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'searchUser']);
@@ -175,6 +174,8 @@ Route::prefix('statistic')->group(function () {
     Route::get('topCountry', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
     Route::get('topVideo', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
 });
+
+Route::get('/login-as/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'loginAs'])->name('admin.login-as');
 
 Route::get('/test', function () {
     $data['title'] = 'Upload';
