@@ -195,7 +195,7 @@
                     file: item.file,
                     label: languageCodes[item.label] + ' (' + item.label + ')',
                     kind: 'captions',
-                    languageCodes: item.label
+                    language: item.label
                 }));
                 // Add subtitle tracks to the player options
                 if (tracks.length > 0) {
