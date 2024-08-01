@@ -229,6 +229,17 @@
             isPaused = true;
             clearInterval(intervalId);
         });
+        player.on('ready', function() {
+            const captionsList = player.getCaptionsList();
+            if (captionsList.length > 1) { // Index 0 is "Off", so check if there are actual captions
+                const englishCaptionIndex = captionsList.findIndex(caption => caption.language === 'eng');
+                if (englishCaptionIndex !== -1) {
+                    player.setCurrentCaptions(englishCaptionIndex);
+                } else {
+                    player.setCurrentCaptions(1); // Set to the first captions track
+                }
+            }
+        });
     };
     $(document).ready(() => {
         const checkInterval = setInterval(async () => {
