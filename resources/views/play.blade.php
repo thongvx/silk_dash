@@ -135,9 +135,12 @@
             title: title,
             localization: {
                 locale: 'en',
-            }
+            },
+            autostart: false,
+            safarihlsjs: true,
         };
         if (urlSub === 1 && is_sub === 1) {
+            console.log('a')
             const jsonUrl = `https://streamsilk.com/storage/subtitles/{{ $slug_sub }}/{{ $slug_sub }}.json`;
             const languageCodes = {
                 'eng': 'English',
