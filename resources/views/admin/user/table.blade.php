@@ -98,7 +98,7 @@
                 <td class="video">{{ !$user->video ? 0 : \App\Models\File::formatNumber($user->video) }}</td>
                 <td class="play">{{ !$user->play ? 0 : \App\Models\File::formatNumber($user->play) }}</td>
                 <td class="storage">{{ !$user->storage ? 0 : \App\Models\File::formatSizeUnits($user->storage ) }}</td>
-                <td class="earning">{{ !$user->earning ? 0 : '$ '.$user->earning }}</td>
+                <td class="earning">{{ !$user->earning ? 0 : '$ '.number_format($user->earning) }}</td>
                 <td class="max-w-12">{{ $user->created_at->format('Y-m-d H:m:s') }}</td>
                 <td class="max-w-12">{{ $user->last_upload ? date("Y-m-d H:m:s", $user->last_upload) : 0 }}</td>
                 <td>
