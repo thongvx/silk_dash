@@ -1,4 +1,5 @@
 import {loadContent, uploadState} from "../main.js";
+import {highlightSortedColumn} from "../jsVideo/datatable.js";
 
 var fixedPayoutCard = $("[fixed-payout-card]");
 var fixedVideoCloseButton = $("[fixed-payout-close-button]");
@@ -55,6 +56,7 @@ function loadReport(formData,tab, date, country){
             $('#box-content').html(response.view);
             $('input[name="startDate"]').val(response.data.startDate);
             $('input[name="endDate"]').val(response.data.endDate);
+            highlightSortedColumn()
         },
         error: function (response) {
             console.log(response);
@@ -129,7 +131,22 @@ $(document).on('select2:unselect','#btn-country', function (e) {
     loadReport(formData,tab, date, country);
 
 });
-
+$(document).on('click', '.sortable-column', function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab') ?? '';
+    const date = urlParams.get('date') ?? '';
+    const country = urlParams.get('country') ?? '';
+    const column = $(this).data('column');
+    const direction = $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc';
+    const form = $('#get-data-report')[0];
+    var formData = new FormData(form);
+    formData.append('tab', tab);
+    formData.append('date', date);
+    formData.append('country', country);
+    formData.append('column', column);
+    formData.append('direction', direction);
+    loadReport(formData,tab, date, country);
+});
 //payment
 var amount = 0;
 var gift = 0;

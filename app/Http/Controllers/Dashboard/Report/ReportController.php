@@ -34,11 +34,11 @@ class ReportController extends Controller
                 break;
             case 'week':
                 $startDate = Carbon::today()->subWeek();
-                $endDate = Carbon::yesterday();
+                $endDate = Carbon::today();
                 break;
             case 'month':
                 $startDate = Carbon::today()->subMonth();
-                $endDate = Carbon::yesterday();
+                $endDate = Carbon::today();
                 break;
             default:
                 $startDate = $request->input('startDate', Carbon::today()->subWeek());
@@ -102,6 +102,8 @@ class ReportController extends Controller
         $data = array_merge($data, self::getDateRange($date, $today, $request));
         $data = array_merge($data, self::country($country));
         $data['payments'] = $this->reportRepo->getPayment($userId);
+        $data['column'] = $request->get('column', 'date');
+        $data['direction'] = $request->get('direction', 'desc');
         $data['earnings'] = [
             'today' => floatval(array_sum($earningToday)),
             'yesterday' => $this->reportRepo->getAllData($userId, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
@@ -114,6 +116,13 @@ class ReportController extends Controller
             }
         } else{
             $data['reports'] = self::getDataCountry($userId,$tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country, $data['AllCountries']);
+        }
+        $dataCollection = collect($data['reports']);
+
+        if ($data['direction'] === 'asc') {
+            $data['reports'] = $dataCollection->sortBy($data['column']);
+        } else {
+            $data['reports'] = $dataCollection->sortByDesc($data['column']);
         }
         return $data;
     }

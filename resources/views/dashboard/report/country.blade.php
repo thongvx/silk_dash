@@ -1,14 +1,51 @@
 <div class="px-0 pt-0 overflow-auto mx-3 my-4">
-    <table id="live-table" datatable data-page-size="10"
+    <table id="datatable" datatable data-column-table="{{ $column }}"
+           data-column-direction="{{ $direction }}"
            class="text-sm table-auto border-separate overflow-y-clip w-full min-w-max text-white text-left border-t-none">
         <thead class="sticky top-0 z-10">
         <tr class="bg-[#142132] transition-colors text-md text-center">
-            <th class="py-2.5 px-3">Country</th>
-            <th class="py-2.5 px-3">Views</th>
-            <th class="py-2.5 px-3">Download</th>
-            <th class="py-2.5 px-3">Paid Views</th>
-            <th class="py-2.5 px-3">VPN ADS Views</th>
-            <th class="py-2.5 px-3">Profit</th>
+            <th data-column="country_name" class='py-2 pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Country</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+            <th data-column="views" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Views</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+            <th data-column="download" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Download</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+            <th data-column="paid_views" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Paid Views</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+            <th data-column="vpn_ads_views" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">VPN ADS Views</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
+            <th data-column="revenue" class='pl-2 pr-6 sortable-column cursor-pointer relative' aria-sort>
+                    <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
+                          data-direction="asc">▲</span>
+                    <a href="javascript:void(0)">Profit</a>
+                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
+                          data-direction="desc">▼</span>
+                </th>
         </tr>
         </thead>
         <tbody>
