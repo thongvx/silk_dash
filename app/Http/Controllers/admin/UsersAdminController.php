@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Enums\VideoCacheKeys;
+use App\Services\StatisticService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,41 +52,71 @@ class UsersAdminController
         ];
         return view('admin.user.boxuser', $data);
     }
+    private function earningToday($userId, $today){
+        $data_setting = $this->accountRepo->getSetting($userId);
+        $earning = 0;
+        if ($data_setting->earningModes == 1)
+            $earning = 0.5;
+        if ($data_setting->earningModes == 2)
+            $earning = 1;
+        $earningToday = StatisticService::calculateValue($userId, $earning, $today);
+        return $earningToday;
+    }
     public function show($user)
     {
         $today = Carbon::today()->format('Y-m-d');
         $dates = collect(range(0, 15))->map(function($item) use ($today) {
             return Carbon::today()->subDays($item)->format('Y-m-d');
         });
-        $viewsData = $this->reportRepo
-            ->where('user_id', $user)
-            ->whereIn('date', $dates)
-            ->selectRaw('date, sum(views) as views')
-            ->groupBy('date')
-            ->get();
-        $totalViews = 0;
-        $countryViewsKeys = Redis::keys("total:{$today}:{$user}:*");
-        foreach ($countryViewsKeys as $key) {
-            $views = Redis::get($key);
-            $totalViews += $views;
+        $dataReport = $this->reportRepo->getAllData($user, 'date', $dates->last(), $dates->first(), 'all');
+        $data_today = [];
+        $totalViews = Redis::get("total_user_views:{$today}:{$user}") ?? 0;
+        $totalImpressionViews = 0;
+        $totalImpression1 = Redis::keys("total_impression1:{$today}:{$user}:*");
+        $totalImpression2 = Redis::keys("total_impression2:{$today}:{$user}:*");
+        foreach ($totalImpression1 as $totalImpression1Key) {
+            // Lấy số lượt xem của user từ khóa
+            $views = Redis::get($totalImpression1Key);
+            // Cộng số lượt xem vào tổng số lượt xem
+            $totalImpressionViews += (int)$views;
         }
-        $totalViewsDay = intval($totalViews);
-
-        $allDatesWithDefaults = $dates->mapWithKeys(function($date) {
-            return [$date => 0];
+        foreach ($totalImpression2 as $totalImpression2Key) {
+            // Lấy số lượt xem của user từ khóa
+            $views = Redis::get($totalImpression2Key);
+            // Cộng số lượt xem vào tổng số lượt xem
+            $totalImpressionViews += (int)$views;
+        }
+        $earningToday = $this->earningToday($user, $today);
+        $cpm = $totalImpressionViews > 0 ? array_sum($earningToday) / $totalImpressionViews * 1000 : 0;
+        $paid_views = $totalImpressionViews;
+        $VpnAdsViews = $totalViews - $paid_views;
+        $data_today[] = [
+            'date' => $today,
+            'cpm' => $cpm ,
+            'views' => $totalViews,
+            'download' => 0,
+            'paid_views' => $paid_views,
+            'vpn_ads_views' => $VpnAdsViews,
+            'revenue' => array_sum($earningToday)
+        ];
+        $dataReport = collect($this->reportRepo->getAllData($user, 'date', $dates->last(), $dates->first(), 'all'))->map(function ($item) use ($data_today, $today) {
+            $item = (object) $item;
+            if ($item->date == $today) {
+                $item->cpm = $data_today[0]['cpm'];
+                $item->views = $data_today[0]['views'];
+                $item->download = $data_today[0]['download'];
+                $item->paid_views = $data_today[0]['paid_views'];
+                $item->vpn_ads_views = $data_today[0]['vpn_ads_views'];
+                $item->revenue = $data_today[0]['revenue'];
+            }
+            return (object) $item;
         });
-
-        // Update with actual views data where available
-        $processedViewsData = $allDatesWithDefaults->merge($viewsData->mapWithKeys(function($item) {
-            return [$item->date => $item->views];
-        }));
-        $processedViewsData->put($today, $totalViewsDay);
 
         $data = [
             'title' => 'User Detail',
             'users' => $this->userRepo->getUserById($user),
             'settings' => $this->accountRepo->getSetting($user),
-            'viewDate' => $processedViewsData->values(),
+            'dataReport' => $dataReport
         ];
         return view('admin.user.inforuser', $data);
     }

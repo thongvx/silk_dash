@@ -23,7 +23,7 @@
     text-slate-500 bg-[#142132]">
 <main class="mt-0 transition-all duration-200 ease-in-out auth flex flex-col justify-between min-h-screen">
     @include('landing-page.components.navbar')
-    <section class="container mx-auto md:px-16 mb-10">
+    <section class="container mx-auto px-4 md:px-16 mb-10">
         <div class="rows">
             <div class="text-slate-200 font-medium mt-5 text-3xl text-center">{{ $video->title }}</div>
             <div class="aspect-video mt-4">
@@ -34,24 +34,24 @@
         <div>
             <div class="grid mt-3 text-lg" box-lifted>
                 <div
-                    class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start flex flex-col items-start md:grid">
+                    class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start items-start grid">
                     <button
-                        class="text-lg tab-export EmbedLink [--tab-border-color:#121520] tab !text-[#009FB2] text-white font-bold h-auto px-4 tab-active [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
+                        class="text-md sm:text-lg tab-export EmbedLink [--tab-border-color:#121520] tab !text-[#009FB2] text-white font-bold h-auto px-4 tab-active [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
                         data-content="EmbedLink">
                         EmbedLink
                     </button>
                     <button
-                        class="text-lg tab-export Embedcode [--tab-border-color:#121520] tab text-white font-bold h-auto px-4 [--tab-bg:#121520] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
+                        class="text-md sm:text-lg tab-export Embedcode [--tab-border-color:#121520] tab text-white font-bold h-auto px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
                         data-content="Embedcode">
                         Embedcode
                     </button>
                     <button
-                        class="text-lg hidden tab-export Download [--tab-border-color:#121520] tab text-white font-bold h-auto px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
+                        class="text-md sm:text-lg tab-export Download [--tab-border-color:#121520] tab text-white font-bold h-auto px-4 [--tab-bg:#121520] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
                         data-content="Download">
                         Download Link
                     </button>
                 </div>
-                <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative">
+                <div class="rounded-b-xl rounded-tr-xl relative">
                     <div
                         class="border-[#121520] rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
                         <div id="EmbedLink" class="tab-content-export">
@@ -64,7 +64,7 @@
                         </div>
                         <div id="Download" class="tab-content-export hidden">
                             <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-4xl" clipboard-copy>content_copy</i>
-                            <textarea rows="5" class="text-clipboard px-4 pt-2 outline-none bg-transparent w-full text-white overflow-auto">{{ route('play', $video->slug) }}
+                            <textarea rows="5" class="text-clipboard px-4 pt-2 outline-none bg-transparent w-full text-white overflow-auto">{{ route('download', $video->slug) }}
                             </textarea>
                         </div>
                     </div>
