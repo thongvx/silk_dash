@@ -64,7 +64,7 @@ class HomeController extends Controller
         $data['dates'] = [
             'month' => $monthData->map(function($item, $index) use ($totalViews) {
                 return $index === 0 ? $totalViews : $item['views'];
-            })->reverse()->values(),
+            })->slice(0, 30)->reverse()->values(),
             'week' => $monthData->map(function($item, $index) use ($totalViews) {
                 return $index === 0 ? $totalViews : $item['views'];
             })->slice(0, 7)->reverse()->values(),
