@@ -33,11 +33,12 @@ class HomeController extends Controller
     {
         $data['title'] = 'Dashboard';
         $user = Auth::user();
+        $today = Carbon::today();
         $data['userWatching'] = Redis::get("watching_users:{$user->id}") ?? 0;
         $data['totalFile'] = $user->video;
-        $totalProfitkey = "user:{$user->id}:total_profit";
+        $totalProfitkey = "user:{$user->id}:total_profit:{$today->format('Y-m-d')}";
         $data['totalProfit'] = floatval(Redis::get($totalProfitkey) ?? $this->reportRepo->where('user_id', $user->id)->sum('revenue'));
-        $totalWithdrawalskey = "user:{$user->id}:total_withdrawal";
+        $totalWithdrawalskey = "user:{$user->id}:total_withdrawal:{$today->format('Y-m-d')}";
         $data['totalWithdrawals'] = floatval(Redis::get($totalWithdrawalskey) ?? Db::table('payment')->where('user_id', $user->id)->sum('amount'));
         Redis::setex($totalProfitkey, 86400, $data['totalProfit']);
         Redis::setex($totalWithdrawalskey, 86400, $data['totalWithdrawals']);
@@ -45,7 +46,6 @@ class HomeController extends Controller
         $data['topVideos'] = $this->statisticController->topVideo();
         $data['topCountries'] = $this->statisticController->topCountry();
         $data['storage'] = $this->videoController->convertFileSize($user->storage);
-        $today = Carbon::today();
         $data_setting = $this->accountRepo->getSetting($user->id);
         $earning = 0;
         if ($data_setting->earningModes == 1)
