@@ -33,7 +33,7 @@ class CountryRepo extends BaseRepository
         // Get country name and cpm from all countries data
 
         $reportData = $this->model
-                    ->join('countries', 'country_statistics.country_code', '=', 'countries.code')
+                    ->leftJoin('countries', 'country_statistics.country_code', '=', 'countries.code')
                     ->where('country_statistics.user_id', $userId)
                     ->when($countryCode , function ($query, $countryCode) {
                         return $query->whereIn('country_statistics.country_code', $countryCode);
