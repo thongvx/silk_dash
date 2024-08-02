@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Models\Video;
+use Carbon\Carbon;
 
 class UpdateTotalPlay extends Command
 {
@@ -38,32 +38,29 @@ class UpdateTotalPlay extends Command
      *
      * @return int
      */
+
     public function handle()
     {
+        $yesterday = Carbon::yesterday()->format('Y-m-d');
+
         DB::table('reports_data')
             ->select('user_id', DB::raw('SUM(views) as total_views'), DB::raw('SUM(revenue) as total_earning'))
+            ->whereDate('date', $yesterday)
             ->groupBy('user_id')
             ->orderBy('user_id')
             ->chunk(50, function ($users) {
-                $updateData = [];
-
                 foreach ($users as $user) {
-                    $updateData[] = [
-                        'user_id' => $user->user_id,
-                        'total_play' => $user->total_views,
-                        'total_earning' => $user->total_earning
-                    ];
+                    $existingData = User::find($user->user_id);
 
-                    $this->info("Calculated total play count for user ID {$user->user_id}");
-                }
+                    if ($existingData) {
+                        $existingData->play = ($existingData->play ?? 0)+ $user->total_views;
+                        $existingData->earning = ($existingData->earning ?? 0)+ $user->total_earning;
+                        $existingData->save();
 
-                // Cập nhật dữ liệu theo lô
-                foreach ($updateData as $data) {
-                    User::where('id', $data['user_id'])->update([
-                        'play' => $data['total_play'],
-                        'earning' => $data['total_earning']
-                    ]);
-                    $this->info("Updated total play count for user ID {$data['user_id']}");
+                        $this->info("Updated total play and total earning for user ID {$user->user_id}");
+                    } else {
+                        $this->info("User ID {$user->user_id} not found");
+                    }
                 }
             });
 
