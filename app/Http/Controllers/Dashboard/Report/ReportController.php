@@ -102,7 +102,11 @@ class ReportController extends Controller
         $data = array_merge($data, self::getDateRange($date, $today, $request));
         $data = array_merge($data, self::country($country));
         $data['payments'] = $this->reportRepo->getPayment($userId);
-        $data['column'] = $request->get('column', 'date');
+        if($tab == 'date'){
+            $data['column'] = $request->get('column', 'date');
+        }else{
+            $data['column'] = $request->get('column', 'country_name');
+        }
         $data['direction'] = $request->get('direction', 'desc');
         $data['earnings'] = [
             'today' => floatval(array_sum($earningToday)),
