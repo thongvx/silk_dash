@@ -131,7 +131,7 @@ $(document).on('select2:unselect','#btn-country', function (e) {
     loadReport(formData,tab, date, country);
 
 });
-$(document).on('click', '.sortable-column', function() {
+$(document).on('click', '.sortable-column-report', function() {
     var urlParams = new URLSearchParams(window.location.search);
     const tab = urlParams.get('tab') ?? '';
     const date = urlParams.get('date') ?? '';

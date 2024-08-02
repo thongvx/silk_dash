@@ -83,7 +83,7 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster, videoID) {
 export function highlightSortedColumn() {
     const sortColumn = document.querySelectorAll("[aria-sort]");
     const Table = $("#datatable")[0];
-    console.log(Table)
+    if(Table === undefined) return
     const sortColumntable = Table.dataset.columnTable
     const sortDirectionTable = Table.dataset.columnDirection
     sortColumn.forEach(function (element) {
@@ -94,7 +94,7 @@ export function highlightSortedColumn() {
         }
     });
 }
-
+highlightSortedColumn()
 $(document).on('click', '.sortable-column', function() {
     const { column, direction, folderId, limit, poster, videoID } = getUrlParams();
     ajaxdatatable($(this).data('column'), $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc', folderId, limit, '', poster, videoID)
