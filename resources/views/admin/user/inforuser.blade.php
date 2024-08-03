@@ -70,7 +70,7 @@
                                     <h5
                                         class="py-2 min-h-max h-max text-slate-300 ">
                                         Total Balance:</h5>
-                                    <h5 class="py-2">{{ $users->earning ? '$ '.number_format($user->earning) : 0 }}</h5>
+                                    <h5 class="py-2">{{ $users->earning ? '$ '.number_format($users->earning) : 0 }}</h5>
                                 </div>
                                 <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                     <h5
