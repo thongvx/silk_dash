@@ -1,5 +1,6 @@
 import {add_notification, formatFileSize} from "../main.js";
 
+const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 function niceBytes(x){
     let l = 0, n = parseInt(x, 10) || 0;
     while(n >= 1024 && ++l){
