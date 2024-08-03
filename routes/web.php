@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mail\EmailController;
+use App\Http\Controllers\Dashboard\Upload\TransferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use App\Http\Controllers\Mail\EmailController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//-------------------------landing-page-------------------------------------------------------
 Route::get('/', function () {
     return view('landing-page.home');
 });
@@ -42,14 +43,17 @@ Route::get('/play', function () {
 Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'startEncoderTask']);
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
 Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
+
 //-------------------------storageController-------------------------------------------------------
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\StorageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::class, 'finishStorage']);
+
 //-------------------------transferController------------------------------------------------------
 Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
 Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
 Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateFailedTransfer']);
 Route::get('/deleteTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'deleteTransferTask']);
+
 //-------------------------updateController--------------------------------------------------------
 Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
 Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
@@ -57,16 +61,18 @@ Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::c
 Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
 Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoEncoder']);
 
+//-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
 Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
 Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
 
+//-------------------------menu--------------------------------------------------------
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 
+//-------------------------auth user-------------------------------------------------------
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
-
 Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
 
 Route::get('/zoom-me', [App\Http\Controllers\Dashboard\HomeController::class, 'zoomMe']);
@@ -74,17 +80,19 @@ Route::get('/zoom-me', [App\Http\Controllers\Dashboard\HomeController::class, 'z
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [\App\Http\Controllers\Dashboard\HomeController::class, 'dashboard'])->name('dashboard');
-
+    //Upload
     Route::get('/upload', [\App\Http\Controllers\Dashboard\UploadController::class, 'index'])->name('index');
     Route::post('/cloneVideo', [\App\Http\Controllers\Dashboard\VideoController::class, 'cloneVideo']);
-    Route::post('/uploadSub', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadSub']);
-
+    //Transfer
     Route::post('/postTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'postTransfer'])->name('post.link.transfer');
     Route::get('/getProgressTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgressTransfer']);
-    Route::post('/retryTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'retryTransfer']);
-    Route::post('/removeTransfer', [\App\Http\Controllers\Dashboard\UploadController::class, 'removeTransfer']);
-    Route::post('/removeAllTransferFailed', [\App\Http\Controllers\Dashboard\UploadController::class, 'removeAllTransferFailed']);
-
+    Route::post('/retryTransfer', [TransferController::class, 'retryTransfer']);
+    Route::post('/removeTransfer', [TransferController::class, 'removeTransfer']);
+    Route::post('/removeAllTransferFailed', [TransferController::class, 'removeAllTransferFailed']);
+    //webUpload
+    Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
+    Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
+    //Manage Video
     Route::resource('/video', \App\Http\Controllers\Dashboard\VideoController::class);
     Route::get('/control', [\App\Http\Controllers\Dashboard\VideoController::class, 'control'])->name('dashboard.video.control');
     Route::post('/video/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple'])->name('dashboard.video.destroyMultiple');
@@ -92,10 +100,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('folder', \App\Http\Controllers\Dashboard\FolderController::class);
     Route::post('/video/edit/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'updateMultipleTitles']);
     Route::get('/edit-video/{video}', [\App\Http\Controllers\Dashboard\VideoController::class, 'editVideo'])->name('video.editVideo');
-
-    Route::get('/uploadRemoteStatus', [\App\Http\Controllers\Dashboard\UploadController::class, 'getProgress']);
-    Route::post('/uploadRemote', [\App\Http\Controllers\Dashboard\UploadController::class, 'remoteUploadDirect']);
-
+    Route::post('/uploadSub', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadSub']);
+    // DMCA
     Route::get('dmca',function (){
         $data['title'] = 'DMCA';
         return view('dashboard.dmca.dmca', $data);
@@ -104,7 +110,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         $data['title'] = 'DMCA';
         return view('dashboard.dmca.dmcaInfo', $data);
     });
-
+    //Report
     Route::resource('report', \App\Http\Controllers\Dashboard\Report\ReportController::class);
     Route::post('/request-payment', [\App\Http\Controllers\Dashboard\Report\PaymentController::class, 'store'])->name('request.payment');
     //Support
@@ -123,44 +129,43 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/notifications/readall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'readAll'])->name('notifications.readall');
     Route::post('/notifications/deleteall', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'deleteAll'])->name('notifications.deleteall');
     Route::post('/notifications/read/{id}', [\App\Http\Controllers\Dashboard\Statistic\NotificationController::class, 'read'])->name('notifications.read');
-
-
+    //API
     Route::get('/regenerateToken', [App\Http\Controllers\Auth\ProfileController::class, 'regenerateToken'])->name('regenerate.token');
     Route::get('/retryKeyApi', [App\Http\Controllers\Auth\ProfileController::class, 'retryKeyApi'])->name('retryKeyApi');
-
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
-
-    //embed play
+    //direct play
     Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('vPlay');
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\admin\HomeAdminController::class, 'index'])->name('admin');
+    //compute
     Route::resource('/compute', \App\Http\Controllers\admin\ComputeController::class);
-
+    //mail
+    Route::get('/mail', [\App\Http\Controllers\admin\EmailAdminController::class, 'index'])->name('mail');
+    //user
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
     Route::post('/updateEarning', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateEarning']);
     Route::post('/updateUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateUser']);
     Route::get('/searchUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'searchUser']);
-
+    //manageTask
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::post('/manageTask/retryEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryEncoder'])->name('retryEncoder');
     Route::post('/manageTask/removeEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeEncoder'])->name('removeEncoder');
     Route::post('/manageTask/retryTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryTransferTask']);
     Route::post('/manageTask/removeTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeTransferTask']);
-
+    //statistic
     Route::get('/statistic', [\App\Http\Controllers\admin\StatisticController::class, 'index'])->name('statistic');
-
+    //supportAdmin
     Route::resource('/supportAdmin', \App\Http\Controllers\admin\TicketAdminController::class);
-
+    //reportAdmin
     Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
-
+    //videoAdmin
     Route::resource('/videoAdmin', \App\Http\Controllers\admin\VideoAdminController::class);
-    Route::get('/mail', [\App\Http\Controllers\admin\EmailAdminController::class, 'index'])->name('mail');
 });
-
+//-------------------------send mail-------------------------------------------------------
 Route::prefix('email')->group(function () {
     Route::get('/send-email', [EmailController::class, 'sendEmails']);
     Route::post('/send-discount-emails', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.emails');
@@ -170,11 +175,12 @@ Route::prefix('email')->group(function () {
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);
 
 Route::get('updateViewUpdate/{videoId}', [\App\Http\Controllers\VideoViewController::class, 'updateView']);
+//-------------------------statistic-------------------------------------------------------
 Route::prefix('statistic')->group(function () {
     Route::get('topCountry', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topCountry'])->name('statistic.topCountry');
     Route::get('topVideo', [\App\Http\Controllers\Dashboard\Statistic\StatisticController::class, 'topVideo'])->name('statistic.topVideo');
 });
-
+//-------------------------login user-------------------------------------------------------
 Route::get('/login-as/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'loginAs'])->name('admin.login-as');
 
 Route::get('/test', function () {
