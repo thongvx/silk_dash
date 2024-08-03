@@ -46,6 +46,12 @@ class TransferController extends Controller
         $user_id = auth()->id();
         $slug = $request->slug;
         $data = $this->transferRepo->getTransferById($slug, $user_id);
+        if (empty($data)) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'not found',
+            ]);
+        }
         $data->delete();
         Redis::del('transfer'.$user_id.'-'.$slug);
         return response()->json([

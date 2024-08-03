@@ -93,7 +93,7 @@ $(document).on('submit', '#transferLink', function(event) {
     }
     formData.set('url', validUrls.join('\n'));
 
-    fetch('/postTransfer1', {
+    fetch('/postTransfer', {
         method: 'POST',
         body: formData,
         headers: {
