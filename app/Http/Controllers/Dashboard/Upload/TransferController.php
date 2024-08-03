@@ -24,7 +24,7 @@ class TransferController extends Controller
     {
         $user_id = auth()->id();
         $slug = $request->slug;
-        $data = $this->transferRepo->getTransferById($slug);
+        $data = $this->transferRepo->getTransferById($slug, $user_id);
         $data->status = 0;
         $data->save();
         Redis::setex('transfer'.$user_id.'-'.$slug, 1800, json_encode([
@@ -45,7 +45,7 @@ class TransferController extends Controller
     {
         $user_id = auth()->id();
         $slug = $request->slug;
-        $data = $this->transferRepo->getTransferById($slug);
+        $data = $this->transferRepo->getTransferById($slug, $user_id);
         $data->delete();
         Redis::del('transfer'.$user_id.'-'.$slug);
         return response()->json([
