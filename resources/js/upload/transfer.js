@@ -161,9 +161,9 @@ setInterval(function() {
                     }
                 })
                 urls.forEach(function(url, index) {
-                    const progress = Object.values(data)[indexurl].progress;
-                    const size_downloaded = niceBytes(Object.values(data)[indexurl].size_download);
-                    const total_size = niceBytes(Object.values(data)[indexurl].size);
+                    const progress = Object.values(data)[index].progress;
+                    const size_downloaded = niceBytes(Object.values(data)[index].size_download);
+                    const total_size = niceBytes(Object.values(data)[index].size);
                     if(url != ''){
                         var div_progress = `<div class="mx-3 mb-5 info-link flex justify-between items-center">
                                                 <div>
