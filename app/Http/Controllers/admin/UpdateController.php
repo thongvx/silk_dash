@@ -57,6 +57,9 @@ class UpdateController extends Controller
         $check_duplicate = md5($videoInfo['duration'].$videoSize.$videoInfo['quality']);
         $video = Video::where('check_duplicate', $check_duplicate)->first();
         $title = base64_decode($videoInfo['title']);
+        $subtitle = base64_decode($videoInfo['subtitle']);
+        if($subtitle == 0) $is_sub = 0;
+        else $is_sub = 1;
         $videoData = [
             'slug' => $videoInfo['slug'],
             'user_id' => $userId,
@@ -65,7 +68,7 @@ class UpdateController extends Controller
             'title' => $title,
             'poster' => '0',
             'grid_poster_3' => '0',
-            'is_sub' => 0,
+            'is_sub' => $is_sub,
             'total_play' => 0,
             'size' => $videoSize,
             'duration' => $videoInfo['duration'],
@@ -129,7 +132,7 @@ class UpdateController extends Controller
                 'size' => $videoSize,
             ]));
         }
-        $subtitle = base64_decode($videoInfo['subtitle']);
+
         if($subtitle != 0){
             $folderPath = storage_path('app/public/subtitles/'.$videoInfo['slug']);
             //create folder
@@ -161,6 +164,8 @@ class UpdateController extends Controller
                     copy($tmp1, $folderPath.'/'.$value['name_file']);
                 }
             }
+
+            Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $videoInfo['slug']);
         }
         return response()->json(['status' => 'success', 'message' => 'Upload success']);
     }
