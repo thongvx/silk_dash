@@ -21,10 +21,10 @@ class TransferRepo extends BaseRepository
             ->paginate($limit);
         return $transfers;
     }
-    public function getTransferById($slug)
+    public function getTransferById($slug, $userId)
     {
         $transfer = $this->query()
-            ->where('user_id', auth()->id())
+            ->where('user_id', $userId)
             ->where('slug', $slug)
             ->first();
         return $transfer;
