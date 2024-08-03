@@ -1,4 +1,12 @@
 import {add_notification, formatFileSize} from "../main.js";
+
+function niceBytes(x){
+    let l = 0, n = parseInt(x, 10) || 0;
+    while(n >= 1024 && ++l){
+        n = n/1024;
+    }
+    return n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l];
+}
 $(document).on('submit', '#transferLink', function(event) {
     event.preventDefault();
 
@@ -128,7 +136,7 @@ setInterval(function() {
                         var total_size = Object.values(data)[indexurl].size;
                         bar.css('width', progress + '%');
                         text_progress.text(progress + '%');
-                        size.text(size_downloaded+' / '+total_size);
+                        size.text(niceBytes(size_downloaded)+' / '+niceBytes(total_size));
                         if(Object.values(data)[indexurl].status === 0){
                             status.text('Pending');
                             bar.removeClass('bg-green-500 bg-orange-500 bg-red-500').addClass('bg-blue-500');
@@ -153,8 +161,8 @@ setInterval(function() {
                 })
                 urls.forEach(function(url, index) {
                     const progress = Object.values(data)[indexurl].progress;
-                    const size_downloaded = Object.values(data)[indexurl].size_download;
-                    const total_size = Object.values(data)[indexurl].size;
+                    const size_downloaded = niceBytes(Object.values(data)[indexurl].size_download);
+                    const total_size = niceBytes(Object.values(data)[indexurl].size);
                     if(url != ''){
                         var div_progress = `<div class="mx-3 mb-5 info-link flex justify-between items-center">
                                                 <div>
