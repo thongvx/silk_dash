@@ -129,6 +129,41 @@ class UpdateController extends Controller
                 'size' => $videoSize,
             ]));
         }
+        $subtitle = base64_decode($videoInfo['subtitle']);
+        if($subtitle != 0){
+            $folderPath = storage_path('app/public/subtitles/'.$videoInfo['slug']);
+            //create folder
+            if(!file_exists($folderPath)){
+                mkdir($folderPath, 0777, true);
+            }
+            $subtitle = json_decode($subtitle, true);
+            foreach ($subtitle as $key => $value){
+                if(file_exists($folderPath.'/'.$value['name_file'])){
+                    $tmp1 = 'https://'.$videoInfo['sv'].'.encosilk.cc/subtitle/'.$value['name_file'];
+                    copy($tmp1, $folderPath.'/'.$value);
+                }
+                else{
+                    $url_file_sub = 'https://streamsilk.com/storage/subtitles/'.$videoInfo['slug'].'/'.$value['name_file'];
+                    $dataSub = [[
+                        'kind' => 'captions',
+                        'file' => $url_file_sub,
+                        'label' => $value['language'],
+                    ]];
+                    //file sub all
+                    if(!file_exists($folderPath.'/'.$videoInfo['slug'].'.json')){
+                        $dataSub = json_encode($dataSub);
+                        file_put_contents($folderPath.'/'.$videoInfo['slug'].'.json', $dataSub);
+                    }
+                    else{
+                        $jsonContent = file_get_contents($folderPath.'/'.$videoInfo['slug'].'.json');
+                        $dataSubOld = json_decode($jsonContent, true);
+                        $dataSubNew = array_merge($dataSubOld, $dataSub);
+                        $dataSubNew = json_encode($dataSubNew);
+                        file_put_contents($folderPath.'/'.$videoInfo['slug'].'.json', $dataSubNew);
+                    }
+                }
+            }
+        }
         return response()->json(['status' => 'success', 'message' => 'Upload success']);
     }
     //------------------------update info sv stream------------------------------------------------
