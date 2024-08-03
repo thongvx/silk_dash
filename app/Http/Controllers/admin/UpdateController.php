@@ -157,7 +157,7 @@ class UpdateController extends Controller
                         $dataSubNew = json_encode($dataSubNew);
                         file_put_contents($folderPath.'/'.$videoInfo['slug'].'.json', $dataSubNew);
                     }
-                    $tmp1 = 'https://'.$videoInfo['sv'].'.encosilk.cc/subtitle/'.$value['name_file'];
+                    $tmp1 = 'https://'.$videoInfo['sv'].'.encosilk.cc/subtitle/'.$videoInfo['slug'].'/'.$value['name_file'];
                     copy($tmp1, $folderPath.'/'.$value['name_file']);
                 }
             }
