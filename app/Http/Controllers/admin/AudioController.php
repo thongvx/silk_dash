@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\VideoCacheKeys;
 use App\Http\Controllers\Controller;
 use App\Models\SvStorage;
 use Illuminate\Http\Request;
 use App\Models\Audio;
+use App\Models\Video;
 use App\Jobs\CreatAudioJob;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Redis;
 
 class AudioController extends Controller
 {
@@ -55,6 +58,10 @@ class AudioController extends Controller
             $data->status = 4;
             $data->path = $request->path;
             $data->save();
+
+            $dataVideo['audio'] = 1;
+            Video::where('slug', $slug)->update($dataVideo);
+            Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
         }
     }
     //===============================================================================================================
