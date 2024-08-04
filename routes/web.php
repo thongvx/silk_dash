@@ -44,6 +44,11 @@ Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
 Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
 
+//----------------------------audio controller-----------------------------------------------------
+Route::get('/uploadAudio', [\App\Http\Controllers\admin\AudioController::class, 'uploadAudio']);
+Route::get('/startCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'startCopyAudio']);
+Route::get('/finishCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'finishCopyAudio']);
+
 //-------------------------storageController-------------------------------------------------------
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\StorageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::class, 'finishStorage']);
