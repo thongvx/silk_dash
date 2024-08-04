@@ -171,7 +171,6 @@ class VideoController
                 $video->deleteCache();
 
                 // Update the number of files in the folder
-                $this->folderRepo->updateNumberOfFiles($folderId);
                 $encoders = $this->encoderTaskRepo->findWhere(['slug' => $video->slug]);
                 if ($encoders) {
                     $encoders->each(function ($encoder) {
@@ -259,8 +258,6 @@ class VideoController
                 $video->folder_id = $validated['folderID'];
                 $video->save();
 
-                $this->folderRepo->updateNumberOfFiles($oldFolderId);
-                $this->folderRepo->updateNumberOfFiles($validated['folderID']);
             } else {
                 return response()->json(['message' => 'Video not found: ' . $videoId], 404);
             }
