@@ -43,14 +43,24 @@ class FolderRepo extends BaseRepository
     {
         return Folder::where('name_folder', $folderName)->first();
     }
-    public function updateNumberOfFiles($folderId)
+    public function incrementNumberOfFiles($folderId)
     {
+        $userId = auth()->id();
+        $key = VideoCacheKeys::All_Folder_For_User->value . $userId;
         $folder = $this->find($folderId);
         if ($folder) {
-            $folder->number_file = Video::where('folder_id', $folderId)
-                                        ->where('soft_delete', 0)
-                                        ->count();
-            $folder->save();
+            $folder->increment('number_file');
         }
+        Redis::del($key);
+    }
+    public function decrementNumberOfFiles($folderId)
+    {
+        $userId = auth()->id();
+        $key = VideoCacheKeys::All_Folder_For_User->value . $userId;
+        $folder = $this->find($folderId);
+        if ($folder) {
+            $folder->decrement('number_file');
+        }
+        Redis::del($key);
     }
 }
