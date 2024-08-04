@@ -62,7 +62,9 @@ class Video extends Model
             if (!$model->isDirty('total_play' && !$model->isDirty('quality'))) {
                 $model->deleteCache();
             }
-            self::$folderRepo->updateNumberOfFiles($model->folder_id);
+            if ($model->isDirty('folder_id') || $model->isDirty('soft_delete')) {
+                self::$folderRepo->updateNumberOfFiles($model->folder_id);
+            }
         });
 
         static::deleted(function ($model) {
