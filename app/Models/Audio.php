@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class audios extends Model
+class Audio extends Model
 {
     protected $table = 'audios';
 

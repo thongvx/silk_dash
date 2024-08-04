@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\SvStorage;
 use Illuminate\Http\Request;
-use App\Models\audios;
+use App\Models\Audio;
 use App\Jobs\CreatAudioJob;
 use Illuminate\Support\Facades\Queue;
 
@@ -24,9 +24,9 @@ class AudioController extends Controller
             'path' => '0',
             'sv_encoder' => $sv,
         ];
-        $check = audios::where('slug', $slug)->where('language', $language)->first();
+        $check = Audio::where('slug', $slug)->where('language', $language)->first();
         if(empty($check)){
-            $video = audios::create($data);
+            $video = Audio::create($data);
         }
         else{
             $check->status = 0;
@@ -37,7 +37,7 @@ class AudioController extends Controller
     //-----------------------------start copy audio------------------------------------------------------------------
     function startCopyAudio()
     {
-        $data = audios::where('status', 0)->first();
+        $data = Audio::where('status', 0)->first();
         if($data){
             $data->increment('status');
             $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 96)->where('out_speed', '<', 900)->inRandomOrder()->first();
@@ -50,7 +50,7 @@ class AudioController extends Controller
     {
         $slug = $request->slug;
         $language = $request->language;
-        $data = audios::where('slug', $slug)->where('language', $language)->first();
+        $data = Audio::where('slug', $slug)->where('language', $language)->first();
         if ($data) {
             $data->status = 4;
             $data->path = $request->path;
