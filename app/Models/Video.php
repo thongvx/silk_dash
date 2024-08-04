@@ -53,17 +53,13 @@ class Video extends Model
         parent::boot();
 
         static::created(function ($model) {
-            self::$folderRepo->updateNumberOfFiles($model->folder_id);
+            self::$folderRepo->incrementNumberOfFiles($model->folder_id);
         });
-
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
             Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $model->slug);
             if (!$model->isDirty('total_play' && !$model->isDirty('quality'))) {
                 $model->deleteCache();
-            }
-            if ($model->isDirty('folder_id') || $model->isDirty('soft_delete')) {
-                self::$folderRepo->updateNumberOfFiles($model->folder_id);
             }
         });
 
@@ -71,7 +67,6 @@ class Video extends Model
             if (!$model->isDirty('total_play')) {
                 $model->deleteCache();
             }
-            self::$folderRepo->updateNumberOfFiles($model->folder_id);
         });
     }
 

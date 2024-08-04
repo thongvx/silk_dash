@@ -173,6 +173,7 @@ class UploadController
                 //check user public video
                 $data_setting = $this->accountRepo->getSetting($video->user_id);
                 if($data_setting->publicVideo == 1){
+                    $old_folder_id = $video->folder_id;
                     $newVideo = $video->replicate();
                     $newVideo->slug = uniqid();
                     $newVideo->title = $video->title.'-clone';
@@ -189,6 +190,8 @@ class UploadController
                     $newVideo->check_duplicate = 0;
                     // Lưu video mới
                     $newVideo->save();
+                    $this->folderRepo->decrementNumberOfFiles($old_folder_id);
+                    $this->folderRepo->incrementNumberOfFiles($folder_id);
                     $result[] = [
                         'slug' => $newVideo->slug,
                         'title' => $newVideo->title,

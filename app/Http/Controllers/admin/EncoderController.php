@@ -56,6 +56,7 @@ class EncoderController
             ->first();
         if($data){
             Queue::push(new DeleteFileUploadJob($data->slug, $data->sv_upload, $data->format));
+
             EncoderTask::where('slug', $data->slug)->delete();
             return json_encode($data);
         }

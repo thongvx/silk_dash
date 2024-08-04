@@ -86,6 +86,14 @@ $(document).on('click', '[btn-add-folder]', function() {
                                                 </span>
                                             </li>
                                         </div>`)
+                $('#list-move-folder').prepend(`<div folder data-folder-id="${data.folder.id}" class="item-folder text-center cursor-pointer hover:text-transparent hover:bg-gradient-to-r bg-clip-text  from-[#009fb2] to-[#009fb2]">
+                                                    <div class="text-center">
+                                                        <i class="material-symbols-outlined text-3xl">folder</i>
+                                                    </div>
+                                                    <h5 name-folder>
+                                                        ${data.folder.name}
+                                                    </h5>
+                                                </div>`)
             },
             error: function(err) {
                 const message = 'Create folder failed';
@@ -188,6 +196,7 @@ $(document).on('click', '.btn-delete-folder', function() {
     $('#fixed-box-control').append(formDeleteFolder)
     const folder = $(this).closest('[folder]');
     const folderId = folder.find('a').data('folderid');
+    const folderID2 = $("#list-move-folder").find(`[folder][data-folder-id="${folderId}"]`);
     $('#delete-folder form').on('submit', function(e) {
         e.preventDefault();
         const btnSubmit = $(this).find('button[type="submit"]');
@@ -214,6 +223,7 @@ $(document).on('click', '.btn-delete-folder', function() {
                 folder.remove()
                 cancel.remove()
                 btnSubmit.remove()
+                folderID2.remove()
                 setTimeout(function() {
                     exitBox()
                     $('#delete-video').remove();
