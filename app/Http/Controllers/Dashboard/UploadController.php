@@ -199,7 +199,6 @@ class UploadController
             } else
                 return null;
         }
-        $this->folderRepo->updateNumberOfFiles($folder_id);
         return $result;
     }
     //-------------------------------upload sub----------------------------------------------------
