@@ -94,7 +94,7 @@ class PlayController
                     if($video->audio == 1){
                         $audioFile = $this->AudioVideoRepo->getAudioVideo($video->slug);
                         foreach ($audioFile as $audio){
-                            Queue::push(new CreatStreamAudioJob($audio->slug, $svStream, $audio->language, $audio->path));
+                            Queue::push(new CreatStreamAudioJob($audio['slug'], $svStream, $audio['language'], $audio['path']));
                         }
                     }
                     $playData = [
