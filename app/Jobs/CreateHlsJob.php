@@ -33,7 +33,7 @@ class CreateHlsJob implements ShouldQueue
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://'.$this->sv.'/insertData?slug='.$this->slug.'&path='.$this->path.'&sto480='.$this->sto480.'&sto720='.$this->sto720.'&sto1080='.$this->sto1080,
+            CURLOPT_URL => 'https://'.$this->sv.'./insertData?slug='.$this->slug.'&path='.$this->path.'&sto480='.$this->sto480.'&sto720='.$this->sto720.'&sto1080='.$this->sto1080,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
