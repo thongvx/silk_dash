@@ -62,6 +62,7 @@ class AudioController extends Controller
             $dataVideo['audio'] = 1;
             Video::where('slug', $slug)->update($dataVideo);
             Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
+            Redis::del(VideoCacheKeys::GET_AUDIO_BY_SLUG->value . $slug);
         }
     }
     //===============================================================================================================
