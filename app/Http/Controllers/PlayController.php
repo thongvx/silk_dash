@@ -92,9 +92,9 @@ class PlayController
                         Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                     }
                     if($video->audio == 1){
-                        $audioFile = $this->AudioVideoRepo->getAudioBySlug($video->slug);
+                        $audioFile = $this->AudioVideoRepo->getAudioVideo($video->slug);
                         foreach ($audioFile as $audio){
-                            Queue::push(new CreatStreamAudioJob($audio->slug, $svStream, $audio->language, $audio->path));
+                            Queue::push(new CreatStreamAudioJob($audio['slug'], $svStream, $audio['language'], $audio['path']));
                         }
                     }
                     $playData = [

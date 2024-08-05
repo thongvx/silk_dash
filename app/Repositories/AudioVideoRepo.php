@@ -22,7 +22,7 @@ class AudioVideoRepo extends BaseRepository
         if(!$video){
             $video = $this->query()
                 ->where('slug', $slug)
-                ->get();
+                ->get()->toArray();
             Redis::setex(VideoCacheKeys::GET_AUDIO_BY_SLUG->value . $slug, 259200, json_encode($video));
         }
         return $video;
