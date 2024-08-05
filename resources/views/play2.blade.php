@@ -215,6 +215,14 @@
                     }
                 }
             }, 1000);
+            let pop15s = setTimeout(function() {
+                $('body').click(function(){
+                    if(t === 0)
+                        window.open("https://ak.aimukreegee.net/4/7779337");
+                    t = 1;
+                    clearTimeout(pop15s)
+                })
+            }, 5000);
         });
         player.on('pause', function() {
             isPaused = true;
@@ -301,14 +309,7 @@
         e1.remove();
         window.open("https://holahupa.com/2032563/");
     });
-    let pop15s = setTimeout(function() {
-        $('body').click(function(){
-            if(t === 0)
-                window.open("https://ak.aimukreegee.net/4/7779337");
-            t = 1;
-            clearTimeout(pop15s)
-        })
-    }, 10000);
+
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)

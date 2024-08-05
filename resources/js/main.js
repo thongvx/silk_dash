@@ -200,7 +200,6 @@ export function loadContent(data_content) {
     var urlParams = new URLSearchParams(window.location.search);
     $('.tab-lifted').removeClass('tab-active !text-[#009FB2]')
     $('.'+data_content).addClass('tab-active !text-[#009FB2]')
-    // Sử dụng hàm
     $.ajax({
         url: '/loadPage',
         type: 'GET',
@@ -282,7 +281,6 @@ $(document).on('click', '[dropdown-trigger]', function (e) {
     currentDropdownMenu = newDropdownMenu;
 });
 
-// Đóng dropdown menu khi click ra ngoài
 $(document).on('click', function (e) {
     if (currentDropdownTrigger && currentDropdownMenu && !$(e.target).closest('[dropdown-trigger]').length) {
         currentDropdownMenu.addClass("opacity-0 pointer-events-none");
@@ -358,21 +356,18 @@ $(document).ready(function() {
     const scrollContainer = $("#box-message");
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
     $('#myTextarea').on('input', function () {
-        // Đặt số hàng mặc định và tối đa
         const maxRows = 10;
         const minRows = 1;
 
-        // Tính toán chiều cao của văn bản
         const textarea = this;
-        textarea.style.height = 'auto'; // Đặt chiều cao về tự động để tính toán
-        const rows = Math.floor(textarea.scrollHeight / 24); // 24 là chiều cao của một dòng (có thể cần điều chỉnh)
+        textarea.style.height = 'auto'; n
+        const rows = Math.floor(textarea.scrollHeight / 24);
 
-        // Điều chỉnh số hàng hiển thị
         if (rows <= minRows) {
             textarea.rows = minRows;
         } else if (rows > maxRows) {
             textarea.rows = maxRows;
-            textarea.style.overflowY = 'auto'; // Hiển thị thanh cuộn dọc khi vượt quá số hàng tối đa
+            textarea.style.overflowY = 'auto';
         } else {
             textarea.rows = rows;
         }
@@ -381,4 +376,7 @@ $(document).ready(function() {
         }
     });
 });
-
+$(document).ready(function () {
+    var scrollContainer = document.getElementById('box-message');
+    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+})

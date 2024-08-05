@@ -40,9 +40,9 @@ $(document).on('click', '[btn-get-keyApi]', function() {
 
     $.ajax({
         type: 'GET',
-        url: '/retryKeyApi',
+        url: '/regenerateToken',
         success: function(response) {
-            $('#key_api').val(response.keyApi);
+            $('#key_api').val(response.token);
             const div_notification = `<div class="justify-center w-full text-green-400 mt-2 items-center flex" id="noti-warning">
                                                 <i class="material-symbols-outlined mr-2">done</i>
                                                 Token regenerated successfully!
