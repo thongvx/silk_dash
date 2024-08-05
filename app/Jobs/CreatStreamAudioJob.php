@@ -29,7 +29,7 @@ class CreatStreamAudioJob implements ShouldQueue
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://'.$this->sv.'.silkanu.cc/insertAudio?slug='.$this->slug.'&path='.$this->path.'&language='.$this->language,
+            CURLOPT_URL => 'https://'.$this->sv.'/insertAudio?slug='.$this->slug.'&path='.$this->path.'&language='.$this->language,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
