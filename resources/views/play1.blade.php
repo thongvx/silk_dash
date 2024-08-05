@@ -6,7 +6,7 @@
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
     <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
-    <script src="{{asset('/assets/jwplayer/js/jwplayer.js')}}"></script>
+    <script src="{{asset('/assets/jwplayer/js/jwplayer2.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
     <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
