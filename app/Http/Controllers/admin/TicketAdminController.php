@@ -107,6 +107,7 @@ class TicketAdminController
 
         // Cập nhật cột message
         $ticket->message = $updatedMessages;
+        $ticket->status = 'replied';
         $ticket->save();
 
         return redirect()->back();
@@ -121,6 +122,7 @@ class TicketAdminController
             'tickets' => $ticket,
             'userId' => $userId,
             'userName'=> User::find($userId)->name,
+            'email' => User::find($userId)->email,
         ];
         return view('admin.supportAdmin.infoCase', $data);
     }

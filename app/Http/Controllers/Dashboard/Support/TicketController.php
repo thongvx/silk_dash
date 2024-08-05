@@ -85,6 +85,7 @@ class TicketController
 
         // Cập nhật cột message
         $ticket->message = $updatedMessages;
+        $ticket->status = "pending";
         $ticket->save();
 
         return redirect()->back();

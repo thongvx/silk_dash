@@ -5,7 +5,7 @@
         <div class="w-full max-w-full px-3 mt-0 text-white lg:flex-none">
             <div
                 class="my-4 border-[#121520] rounded-b-xl rounded-tr-xl gap-2 bg-[#121520] bg-top [border-width:var(--tab-border)] undefined">
-                <div class="lg:h-[calc(100vh-12em)] h-[calc(100vh-11em)]">
+                <div class="lg:h-[calc(100dvh-11em)] h-[calc(100dvh-11em)]">
                     <div class="rounded-xl">
                         <div class="relative rounded-xl">
                             <div class="px-2 pt-4 md:p-4">
@@ -17,6 +17,12 @@
                                                 <h5 class="items-start text-white flex flex-col">
                                                     <span>Subject Ticket: {{ $tickets->subject }}</span>
                                                     <span>Topic: {{ $tickets->topic }}</span>
+                                                    <span>User:
+                                                        <a href="{{ route('user.show', ['user' => $userId]) }}" class="hover:text-[#009FB2]">{{ $userName }}</a>
+                                                    </span>
+                                                    <span>Email:
+                                                        <a href="{{ route('user.show', ['user' => $userId]) }}" class="hover:text-[#009FB2]">{{ $email }}</a>
+                                                    </span>
                                                 </h5>
                                             </div>
                                             <div class="text-white font-lg font-bold">
@@ -24,7 +30,7 @@
                                             </div>
                                         </div>
                                         <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
-                                        <div class="relative h-[calc(100vh-20em)] lg:h-[calc(100vh-18em)] text-base">
+                                        <div class="relative h-[calc(100dvh-20em)] lg:h-[calc(100dvh-19em)] text-base">
                                             @php
                                                 $currentDate = null;
                                                 $data = json_decode($tickets->message, true);
@@ -36,8 +42,8 @@
                                                     $messageDate = date("m/d/Y", strtotime($value['date']));
                                                 @endphp
                                                 @if($messageDate !== $currentDate)
-                                                    <div class="flex justify-center items-center w-full my-3 sticky top-3">
-                                                        <h5 class=" text-white">
+                                                    <div class="flex justify-center items-center w-full my-3 top-3">
+                                                        <h5 class="text-white">
                                                             {{ date("m/d/Y", strtotime($value['date'])) }}
                                                         </h5>
                                                     </div>
@@ -61,9 +67,9 @@
                                                             <img src="{{ $value['url_file'] }}" alt="File Image" class=" rounded-3xl">
                                                         </div>
                                                     @endif
-                                                    <div class="message-class {{ $value['type'] != 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}} px-5 py-2.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
+                                                    <div class="message-class {{ $value['type'] != 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}} px-5 py-1.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
                                                         <h4 class="break-words">
-                                                            {!! nl2br(html_entity_decode($value['message'])) !!} <br>
+                                                            {!! nl2br(html_entity_decode($value['message'])) !!}
                                                             <span class="{{ $value['type'] != 2 ?'text-white' : 'text-gray-600'}} text-xs -mb-2 relative -bottom-1 ml-2">
                                                                 {{ date("h:m a", strtotime($value['date'])) }}
                                                             </span>
@@ -72,7 +78,7 @@
                                                 </div>
                                             @endforeach
                                             </div>
-                                            @if( $tickets -> status === 'pending')
+                                            @if( $tickets -> status === 'pending' || $tickets -> status === 'replied')
                                                 <div class="w-full absolute bottom-3 bg-[#142132] text-white rounded-3xl py-2">
                                                     <form action="/admin/supportAdmin" method="POST" enctype="multipart/form-data" class="text-white">
                                                         @csrf

@@ -2,7 +2,7 @@
     <nav
       class="flex z-20 flex-wrap items-center justify-between px-3 py-2 lg:px-3 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
       navbar-main navbar-scroll="false">
-      <div class="flex items-center justify-between w-full px-0 mx-auto flex-wrap">
+      <div class="flex items-center justify-between w-full px-0 md:pl-3 mx-auto flex-wrap">
           <a href="javascript:;" class="block xl:hidden p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
               <div class="w-6 overflow-hidden">
                   <i class="ease mb-1.5 relative block h-0.5 rounded-sm bg-white transition-all"></i>
