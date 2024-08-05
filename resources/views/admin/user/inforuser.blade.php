@@ -70,7 +70,7 @@
                                     <h5
                                         class="py-2 min-h-max h-max text-slate-300 ">
                                         Total Balance:</h5>
-                                    <h5 class="py-2">{{ $users->earning ? '$ '.number_format($users->earning) : 0 }}</h5>
+                                    <h5 class="py-2">{{ $users->earning ? '$ '.number_format($users->earning + $earningToday) : 0 }}</h5>
                                 </div>
                                 <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                     <h5
@@ -82,7 +82,7 @@
                                     <h5
                                         class="py-2 min-h-max h-max text-slate-300 ">
                                         Play:</h5>
-                                    <h5 class="py-2">{{ \App\Models\File::formatNumber($users->play) ?? 0 }}</h5>
+                                    <h5 class="py-2">{{ \App\Models\File::formatNumber($users->play + $viewsToday) ?? 0 }}</h5>
                                 </div>
                                 <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                     <h5
@@ -289,7 +289,7 @@
                             @csrf
                             <h4 class="title text-teal-400 text-lg font-bold">Setting</h4>
                             <input name="userID" class="hidden" value="{{ $users->id }}">
-                            <div class="grid grid-cols-4 mb-5 gap-6">
+                            <div class="grid grid-cols-2 md:grid-cols-4 mb-5 gap-6">
                                 <div class="">
                                     <h6 class="mb-2">Max Transfer</h6>
                                     <input id="maxTransfer" name="max_transfer" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
@@ -307,7 +307,7 @@
                                            value="{{ $users->max_torrent ?? 0 }}">
                                 </div>
                             </div>
-                            <div class="grid grid-cols-4 mb-5 gap-6">
+                            <div class="grid grid-cols-2 md:grid-cols-4 mb-5 gap-6">
                                 <div class="">
                                     <h6 class="mb-2">Encode Priority</h6>
                                     <input id="encodePriority" name="encoder_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
@@ -341,7 +341,7 @@
                                            type="text" value="{{ $users->torrent_priority ?? 0 }}">
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 row mb-5 mt-30 gap-6">
+                            <div class="grid md:grid-cols-1 md:grid-cols-2 row mb-5 mt-30 gap-6">
                                 <div class="flex items-center">
                                     <h4 class="me-4 mb-0 w-max">Streming Priority</h4>
                                     <input id="streamPriority" name="stream_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
