@@ -321,19 +321,6 @@
             if (captionsList.length > 1) {
                 player.setCurrentCaptions(1);
             }
-            $('.jw-settings-submenu-button').on('click', function(){
-                $('.jw-settings-submenu').removeClass('jw-settings-submenu-active');
-                $('.jw-icon').attr('aria-expanded', 'false');
-                $('.jw-settings-submenu-captions').toggleClass('jw-settings-submenu-active');
-                $('.jw-controls.jw-reset').toggleClass('jw-settings-open')
-                if($('.jw-settings-submenu-captions').hasClass('jw-settings-submenu-active')){
-                    $('.jw-settings-submenu-captions, #jw-settings-menu, .jw-submenu-captions').attr('aria-expanded', 'true');
-                }else{
-                    $('.jw-settings-submenu').removeClass('jw-settings-submenu-active');
-                    $('.jw-icon').attr('aria-expanded', 'false');
-                    $('.jw-settings-submenu-captions, #jw-settings-menu, .jw-submenu-captions').attr('aria-expanded', 'false');
-                }
-            })
         });
         player.on('audioTracks', function() {
             const tracks_audio = player.getAudioTracks();
