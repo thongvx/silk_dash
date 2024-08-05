@@ -87,9 +87,9 @@
                         </h5>
                         <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
-                            <input type="text" value="{{ Auth::user()->token }}" id="key_api"
+                            <input type="text" value="{{ Auth::user()->token ?? '' }}" id="key_api"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="key_api" readonly>
+                                   placeholder="Api token" readonly>
                             <div class="rounded-lg py-1 hover:text-[#009fb2] cursor-pointer" btn-get-keyApi>
                                 <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
                             </div>
