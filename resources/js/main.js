@@ -380,20 +380,26 @@ $(document).ready(function () {
     var scrollContainer = $('#box-message');
     scrollContainer.scrollTop(scrollContainer.prop('scrollHeight'));
 })
-$(document).on('scroll', '#box-api', function() {
+$('#box-api').on('scroll', function() {
+    console.log('Scroll event triggered');
+
     const boxes = $('.box');
     const menuItems = $('.menu-item');
     let index = -1;
-    console.log('a')
+
     boxes.each(function(i, box) {
         const rect = box.getBoundingClientRect();
+        console.log(`Box ${i} rect:`, rect);
         if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
-            index = box.getAttribute('id');
+            index = $(box).attr('id');
         }
     });
 
+    console.log('Active index:', index);
+
     menuItems.each(function(i, item) {
         const id = $(item).find('a').attr('href').replace('#', '');
+        console.log(`Menu item ${i} id:`, id);
         if (id === index) {
             $(item).addClass('bg-[#009fb2]');
         } else {

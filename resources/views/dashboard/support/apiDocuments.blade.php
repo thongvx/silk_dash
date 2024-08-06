@@ -56,8 +56,9 @@
             </ul>
         </div>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
-    <div class="col-start-5 col-span-4 lg:col-span-3 pb-10 overflow-auto  max-h-[calc(100vh-14em)] scroll-smooth"  id="box-api">
+    <div class="col-start-5 col-span-4 lg:col-span-3 pb-10 overflow-y-scroll  max-h-[calc(100vh-14em)] scroll-smooth"  id="box-api">
         <div class="z-10 pb-3 bg-[#142132] px-4 py-2 rounded-xl" id="box-title-api">
             <h1 class="text-3xl">API Documentation</h1>
             <div id="token" class=" flex items-center {{ Auth::user()->token ? 'justify-between' : '' }}">
@@ -207,7 +208,8 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="!bg-[#142132] rounded-xl shadow-md font-normal">
-                        <code class="language-html !bg-[#142132] !py-0 break-all text-sm text-clipboard">curl -X POST -F "key=${token}" -F "file=@1.avi" -F "file=@2.avi" https://upload02.encosilk.cc/uploadapi</code>
+                        <code class="language-html !bg-[#142132] !py-0 break-all text-sm text-clipboard">
+    curl -X POST -F "key=${token}" -F "file=@1.avi" -F "file=@2.avi" https://upload02.encosilk.cc/uploadapi</code>
                     </pre>
                 </div>
                 <h4 class="text-lg font-medium text-white mb-2">HTML form upload sample:</h4>
@@ -215,11 +217,11 @@
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="!bg-[#142132] rounded-xl shadow-md font-normal">
                             <code class="language-html !bg-[#142132] !py-0 break-all text-clipboard">
-&lt;form method="POST" enctype="multipart/form-data" action="https://upload02.encosilk.cc/uploadapi"&gt;
-    &lt;input type="hidden" name="token" value="${token}"&gt;
-    &lt;input type="file" name="file"&gt;
-    &lt;input type="submit"&gt;
-&lt;/form&gt;</code>
+    &lt;form method="POST" enctype="multipart/form-data" action="https://upload02.encosilk.cc/uploadapi"&gt;
+        &lt;input type="hidden" name="token" value="${token}"&gt;
+        &lt;input type="file" name="file"&gt;
+        &lt;input type="submit"&gt;
+    &lt;/form&gt;</code>
                         </pre>
                 </div>
                 <h4 class="text-lg font-medium text-white mb-2">Response</h4>
