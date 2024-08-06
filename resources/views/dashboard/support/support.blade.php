@@ -49,5 +49,6 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
     @vite('resources/css/vs2015.css')
 @endsection
