@@ -377,8 +377,8 @@ $(document).ready(function() {
     });
 });
 $(document).ready(function () {
-    var scrollContainer = document.getElementById('box-message');
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    var scrollContainer = $('#box-message');
+    scrollContainer.scrollTop(scrollContainer.prop('scrollHeight'));
 })
 $(document).on('scroll', '#box-api', function() {
     const boxes = $('.box');
