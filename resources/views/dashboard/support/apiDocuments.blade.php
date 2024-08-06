@@ -12,10 +12,10 @@
                     <a href="#get_upload_sever" class="px-3 h-full w-full">Get Upload Sever</a>
                 </li>
                 <li class="menu-item mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#add_link" class="px-3 h-full w-full">Remote Upload</a>
+                    <a href="#webupload" class="px-3 h-full w-full">Web Upload</a>
                 </li>
                 <li class="menu-item mt-2 rounded-lg hover:bg-[#009fb2] cursor-pointer">
-                    <a href="#webupload" class="px-3 h-full w-full">Web Upload</a>
+                    <a href="#add_link" class="px-3 h-full w-full">Remote Upload</a>
                 </li>
             </ul>
             <h4 class="text-[#009fb2] text-xl font-medium mt-4">File Management</h4>
