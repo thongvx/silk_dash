@@ -226,19 +226,16 @@
                 <div class="relative">
 <pre class="bg-[#142132] rounded-xl shadow-md font-normal">
     <code class="language-json !bg-[#142132] !py-0">
-    {
-        "msg": "ok",
-        "status": 200,
-        "sever_time": "2024-06-22 07:32:54",
-        "files": [{
-            "filecode": "u9150wqzvhxj",
-            "filename": "1.avi",
-            "status": "OK"
-        }, {
-            "filecode": "gzky98gfg6hn",
-            "filename": "2.avi",
-            "status": "OK"
-        }]
+    {"videoID":
+        {
+            "status":0,
+            "user_id":12,
+            "slug":"66b23aa2d3796",
+            "title":"2361778.mkv",
+            "format":"mp4",
+            "folder_id":13
+        },
+        "title":"2361778.mkv"
     }
     </code>
 </pre>
