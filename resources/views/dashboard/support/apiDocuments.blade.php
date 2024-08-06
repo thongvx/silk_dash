@@ -56,6 +56,7 @@
             </ul>
         </div>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
     <div class="col-start-5 col-span-4 lg:col-span-3 pb-10 overflow-y-scroll  max-h-[calc(100vh-14em)] scroll-smooth"  id="box-api">
         <div class="z-10 pb-3 bg-[#142132] px-4 py-2 rounded-xl" id="box-title-api">
