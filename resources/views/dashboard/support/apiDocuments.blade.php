@@ -230,7 +230,15 @@
         "msg": "ok",
         "status": 200,
         "sever_time": "2024-06-22 07:32:54",
-        "result": "https://upload02.encosilk.cc/uploadapi"
+        "files": [{
+            "filecode": "u9150wqzvhxj",
+            "filename": "1.avi",
+            "status": "OK"
+        }, {
+            "filecode": "gzky98gfg6hn",
+            "filename": "2.avi",
+            "status": "OK"
+        }]
     }
     </code>
 </pre>
