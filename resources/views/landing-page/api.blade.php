@@ -7,28 +7,28 @@
                 <div class="fixed">
                     <h4 class="text-[#05ffff] text-xl font-medium">Account Info</h4>
                     <ul class="list-disc pl-4">
-                        <li><a href="#account_info">Account Information</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] bg-[#009fb2] cursor-pointer"><a href="#account_info">Account Information</a></li>
                     </ul>
                     <h4 class="text-[#05ffff] text-xl font-medium mt-4">Upload</h4>
                     <ul class="list-disc pl-4">
-                        <li><a href="#add_link">Remote Upload</a></li>
-                        <li><a href="#webupload">Web Upload</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#add_link">Remote Upload</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#webupload">Web Upload</a></li>
                     </ul>
                     <h4 class="text-[#05ffff] text-xl font-medium mt-4">File Management</h4>
                     <ul class="list-disc pl-4">
-                        <li><a href="#list_file">List Files</a></li>
-                        <li><a href="#info_video">Info File</a></li>
-                        <li><a href="#file-rename">Rename File</a></li>
-                        <li><a href="#copy">Clone File</a></li>
-                        <li><a href="#move">Move File</a></li>
-                        <li><a href="#delete">Delete File</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#list_file">List Files</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#info_video">Info File</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#file-rename">Rename File</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#copy">Clone File</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#move">Move File</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#delete">Delete File</a></li>
                     </ul>
                     <h4 class="text-[#05ffff] text-xl font-medium mt-4">Folder</h4>
                     <ul class="list-disc pl-4">
-                        <li><a href="#list-folder">List Folder</a></li>
-                        <li><a href="#create-folder">Create Folder</a></li>
-                        <li><a href="#rename-folder">Rename Folder</a></li>
-                        <li><a href="#delete-folder">Delete Folder</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#list-folder">List Folder</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#create-folder">Create Folder</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#rename-folder">Rename Folder</a></li>
+                        <li class="menu-item rounded-lg hover:bg-[#009fb2] cursor-pointer"><a href="#delete-folder">Delete Folder</a></li>
                     </ul>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     </span>
                 </div>
                 <div class="mt-4">
-                    <div id="account_info" class="mb-10 scroll-mt-20">
+                    <div id="account_info" class="mb-10 scroll-mt-20 box">
                         <h3 class="pb-3 text-[#05ffff] text-3xl font-bold">Account Info</h3>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <h3 class="mt-10 text-[#05ffff] text-3xl font-bold">UPLOAD</h3>
-                    <div id="add_link" class="mt-2 scroll-mt-20">
+                    <div id="add_link" class="mt-2 scroll-mt-20 box">
                         <h4 class="text-2xl font-medium text-white mb-2">Remote Upload</h4>
                         <h4 class="text-primary">Add link: Upload file using direct links</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                     <!-- /.end-add-link -->
-                    <div class="mt-10 hidden" id="webupload">
+                    <div class="scroll-mt-20 box" id="webupload">
                         <h3 class="pb-3 text-[#009FB2] text-3xl font-bold">Web Upload</h3>
                         <h4 class="text-primary">You need to change your api key value to the following tag:</h4>
                         <div class="relative">
@@ -260,7 +260,7 @@
                     </div>
                     <!-- /.end-web-upload -->
                     <h3 class="mt-10 text-[#05ffff] text-3xl font-bold">FILE</h3>
-                    <div class="mt-2 scroll-mt-20" id="list_file">
+                    <div class="mt-2 scroll-mt-20 box" id="list_file">
                         <h4 class="text-2xl font-medium text-white mb-2">List Files</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -359,7 +359,7 @@
                         </div>
                     </div>
                     <!-- /.end-list-file -->
-                    <div class="mt-10 scroll-mt-20" id="info_video">
+                    <div class="mt-10 scroll-mt-20 box" id="info_video">
                         <h4 class="text-2xl font-medium text-white mb-2">Info File</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -433,7 +433,7 @@
                         </div>
                     </div>
                     <!-- /.end-info-video -->
-                    <div class="mt-10 scroll-mt-20" id="file-rename">
+                    <div class="mt-10 scroll-mt-20 box" id="file-rename">
                         <h4 class="text-2xl font-medium text-white mb-2">RENAME FILE</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -506,7 +506,7 @@
                         </div>
                     </div>
                     <!-- /.end-file-name -->
-                    <div class="mt-10 scroll-mt-20" id="copy">
+                    <div class="mt-10 scroll-mt-20 box" id="copy">
                         <h4 class="text-2xl font-medium text-white mb-2">Clone File</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -590,7 +590,7 @@
                     </div>
                     <!-- /.end-copy -->
                     <!-- move file -->
-                    <div class="mt-10 scroll-mt-20" id="move">
+                    <div class="mt-10 scroll-mt-20 box" id="move">
                         <h4 class="text-2xl font-medium text-white mb-2">Move File</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -660,7 +660,7 @@
                     </div>
                     <!-- /.end-move -->
                     <!-- delete file -->
-                    <div class="mt-10 scroll-mt-20" id="delete">
+                    <div class="mt-10 scroll-mt-20 box" id="delete">
                         <h4 class="text-2xl font-medium text-white mb-2">Delete File</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -727,7 +727,7 @@
                     <!-- /.end-delete-file -->
                     <h3 class="mt-10 text-[#05ffff] text-3xl font-bold">FOLDER</h3>
                     <!-- list folder -->
-                    <div class="mt-2 scroll-mt-20" id="list-folder">
+                    <div class="mt-2 scroll-mt-20 box" id="list-folder">
                         <h4 class="text-2xl font-medium text-white mb-2">List Folder</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -788,7 +788,7 @@
                     </div>
                     <!-- /.end list folder -->
                     <!-- creat folder -->
-                    <div class="mt-10 scroll-mt-20" id="create-folder">
+                    <div class="mt-10 scroll-mt-20 box" id="create-folder">
                         <h4 class="text-2xl font-medium text-white mb-2">Create Folder</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -856,7 +856,7 @@
                     </div>
                     <!-- /.end creat folder -->
                     <!-- rename folder -->
-                    <div class="mt-10 scroll-mt-20" id="rename-folder">
+                    <div class="mt-10 scroll-mt-20 box" id="rename-folder">
                         <h4 class="text-2xl font-medium text-white mb-2">Rename Folder</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
@@ -933,7 +933,7 @@
                     </div>
                     <!-- /.end rename folder -->
                     <!-- delete folder -->
-                    <div class="mt-10 scroll-mt-20" id="delete-folder">
+                    <div class="mt-10 scroll-mt-20 box" id="delete-folder">
                         <h4 class="text-2xl font-medium text-white mb-2">Delete Folder</h4>
                         <h4 class="text-lg font-medium text-white mb-2">Request</h4>
                         <div class="relative">
