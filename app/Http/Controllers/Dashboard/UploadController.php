@@ -284,5 +284,41 @@ class UploadController
 
         return round($sizeInBytes, 2) . ' ' . $units[$i];
     }
+    //get sever
+    public function getServer()
+    {
+        $keys = Redis::keys('sv_encoder:*');
+        $data = [];
+        foreach ($keys as $key) {
+            $data[] = Redis::hgetall($key);
+        }
+        $data = collect($data);
+        $filteredData = $data->filter(function ($item) {
+            return $item['percent_space'] < 85 && $item['name'] !== 'e01' && $item['active'] == 1;
+        });
+        $sortedData = $filteredData->sort(function ($a, $b) {
+            if ($a['inSpeed'] == $b['inSpeed']) {
+                return $a['out_speed'] <=> $b['out_speed'];
+            }
+            return $a['inSpeed'] <=> $b['inSpeed'];
+        });
+        $svEncoderWithMinInSpeed = $sortedData->first();
+        if ($svEncoderWithMinInSpeed) {
+            $data = [
+                "msg" => "ok",
+                'status' => 200,
+                'sever_time' => date('Y-m-d H:i:s'),
+                'result' => 'https://'.str_replace('e', 'upload', $svEncoderWithMinInSpeed['name']).'.encosilk.cc/uploadapi',
+            ];
+        } else {
+            $data = [
+                "msg" => "error",
+                'status' => 404,
+                'sever_time' => date('Y-m-d H:i:s'),
+                'result' => 'No server found with the specified criteria',
+            ];
+        }
+        return response()->json($data);
+    }
 
 }

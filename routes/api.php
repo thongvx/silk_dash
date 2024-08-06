@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function (){
         Route::get('deleteFolder/{id}', [\App\Http\Controllers\Dashboard\FolderController::class, 'destroy']);
     });
     Route::prefix('upload')->group(function () {
+        Route::get('sever', [\App\Http\Controllers\Dashboard\UploadController::class, 'getServer']);
         Route::get('uploadUrl', [\App\Http\Controllers\Dashboard\UploadController::class, 'postTransfer']);
     });
 });

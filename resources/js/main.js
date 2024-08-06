@@ -380,3 +380,24 @@ $(document).ready(function () {
     var scrollContainer = document.getElementById('box-message');
     scrollContainer.scrollTop = scrollContainer.scrollHeight;
 })
+$(document).on('scroll', '#box-api', function() {
+    const boxes = $('.box');
+    const menuItems = $('.menu-item');
+    let index = -1;
+    console.log('a')
+    boxes.each(function(i, box) {
+        const rect = box.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
+            index = box.getAttribute('id');
+        }
+    });
+
+    menuItems.each(function(i, item) {
+        const id = $(item).find('a').attr('href').replace('#', '');
+        if (id === index) {
+            $(item).addClass('bg-[#009fb2]');
+        } else {
+            $(item).removeClass('bg-[#009fb2]');
+        }
+    });
+});
