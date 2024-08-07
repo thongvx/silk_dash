@@ -13,7 +13,7 @@
     <p>Message: </p>
     <p>{!! nl2br(html_entity_decode($ticketData['message'])) !!}</p>
     <p>Click the button below to view the ticket.</p>
-    @component('mail::button', ['url' => route('support.show', ['support' => $ticketData['ticket_id']])])
+    @component('mail::button', ['url' => 'https://streamsilk.com/support/'.$ticketData['ticket_id']])
         View Ticket
     @endcomponent
     <p>Thank you for using our application!</p>
