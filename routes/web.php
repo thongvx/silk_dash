@@ -120,7 +120,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/request-payment', [\App\Http\Controllers\Dashboard\Report\PaymentController::class, 'store'])->name('request.payment');
     //Support
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
-    Route::post('/postTickket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTickket']);
+    Route::post('/postTicket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTicket']);
     Route::get('/completeTicket/{ticketID}', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'completeTicket'])->name('complete.ticket');
     //MyAccount
     Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);

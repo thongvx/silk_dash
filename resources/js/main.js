@@ -315,6 +315,18 @@ $(document).on('click', '[clipboard-copy]', function() {
         }, 1500);
     });
 });
+//show password
+$(document).on('click', '[btn-show-password]', function() {
+    console.log('a')
+    var div = $(this).closest('div').find('input');
+    if(div.attr('type') === 'password'){
+        div.attr('type', 'text');
+        $(this).find('i').text('visibility_off');
+    } else {
+        div.attr('type', 'password');
+        $(this).find('i').text('visibility');
+    }
+})
 //exit box
 export function exitBox(box) {
     $("[fixed-video-card]").addClass("opacity-0");
@@ -360,7 +372,7 @@ $(document).ready(function() {
         const minRows = 1;
 
         const textarea = this;
-        textarea.style.height = 'auto'; n
+        textarea.style.height = 'auto';
         const rows = Math.floor(textarea.scrollHeight / 24);
 
         if (rows <= minRows) {
@@ -381,7 +393,6 @@ $(document).ready(function () {
     scrollContainer.scrollTop(scrollContainer.prop('scrollHeight'));
 })
 $('#box-api').on('scroll', function() {
-    console.log('Scroll event triggered');
 
     const boxes = $('.box');
     const menuItems = $('.menu-item');
@@ -389,17 +400,13 @@ $('#box-api').on('scroll', function() {
 
     boxes.each(function(i, box) {
         const rect = box.getBoundingClientRect();
-        console.log(`Box ${i} rect:`, rect);
         if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
             index = $(box).attr('id');
         }
     });
 
-    console.log('Active index:', index);
-
     menuItems.each(function(i, item) {
         const id = $(item).find('a').attr('href').replace('#', '');
-        console.log(`Menu item ${i} id:`, id);
         if (id === index) {
             $(item).addClass('bg-[#009fb2]');
         } else {

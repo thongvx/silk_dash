@@ -250,10 +250,12 @@
                     @endif
                     @forelse($notifications as $notification)
                         <a href="javascript:;" data-id="{{ $notification->id }}" btn-read btn-info-noti
-                           class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4">
-                            <i class="material-symbols-outlined mr-3 text-3xl text-red-500">error</i>
+                           class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white group shadow-lg drop-shadow-sm mb-4">
+                            <i class="material-symbols-outlined mr-3 text-3xl {{ $notification->type  == 'error' || $notification->type == 'delete' ? 'text-red-500' : 'text-orange-500'}}">
+                                {{ $notification->type }}
+                            </i>
                             <div class="info">
-                                <h6 class="text-white font-bold w-max subject">
+                                <h6 class="text-white font-bold w-max subject group-hover:text-[#009FB2]">
                                     {{ $notification->subject }}
                                 </h6>
                                 <span class="text-slate-400 text-sm date"

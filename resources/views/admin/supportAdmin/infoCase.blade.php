@@ -80,7 +80,7 @@
                                             </div>
                                             @if( $tickets -> status === 'pending' || $tickets -> status === 'replied')
                                                 <div class="w-full absolute bottom-3 bg-[#142132] text-white rounded-3xl py-2">
-                                                    <form action="/admin/supportAdmin" method="POST" enctype="multipart/form-data" class="text-white">
+                                                    <form action="/admin/supportAdmin" method="POST" id="ticket-replied" enctype="multipart/form-data" class="text-white">
                                                         @csrf
                                                         <input type="text" class="hidden" name="ticketID" value="{{ $tickets->id }}"
                                                                placeholder="Subject" readonly>

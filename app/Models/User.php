@@ -45,6 +45,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'updated_at',
         'created_at',
         'active',
+        'ftp_user',
+        'ftp_password',
+        'ftp_link',
     ];
 
     /**

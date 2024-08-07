@@ -56,6 +56,7 @@ class TicketController
             'ticketID' => 'required|integer',
             'message' => 'required|string',
             'file' => 'mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:2048',
+            'email'=>'required|email',
         ]);
         // Tìm ticket cần cập nhật
         $ticket = $this->ticketRepo->find($validated['ticketID']);
@@ -103,12 +104,16 @@ class TicketController
         ];
         return view('dashboard.support.infoTicket', $data);
     }
-    public function postTickket(Request $request)
+    public function postTicket(Request $request)
     {
         $user = Auth::user();
-        $topic = $request->topic;
-        $subject = $request->subject;
-        $message = $request->message;
+        $validated = $request->validate([
+            'message' => 'required|string',
+            'file' => 'mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:2048',
+            'email' => 'required|email',
+            'subject' => 'required|string',
+            'topic' => 'required|string',
+        ]);
         $url_file = '0';
         if ($request->hasFile('file')){
             $file = $request->file('file');
@@ -117,11 +122,10 @@ class TicketController
             $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
         }
 
-
         $dataMessage = [
             [
                 'type' => 2,
-                'message' => $message,
+                'message' => $validated['message'],
                 'url_file' => $url_file,
                 'date' => Carbon::now(),
             ]
@@ -129,18 +133,19 @@ class TicketController
 
         $dataMessage = json_encode($dataMessage);
         //create ticket
-        $dataTicke = [
+        $dataTicket = [
             'user_id' => $user->id,
-            'subject' => $subject,
-            'topic' => $topic,
+            'email' => $validated['email'],
+            'subject' => $validated['subject'],
+            'topic' => $validated['topic'],
             'status' => 'pending',
             'message' => $dataMessage,
             'url_file' => $url_file,
         ];
-        Ticket::create($dataTicke);
+        Ticket::create($dataTicket);
         $count = Ticket::count();
-        Bot::send('new ticket: '. $user->name .' - Link: https://streamsilk.com/admin/supportAdmin/'.$count.'?user_id='.$user->id);
-        return redirect('https://streamsilk.com/support?tab=ticket');
+        Bot::send('new ticket: '. $user->name .' - Link: https://ad.streamsilk.com/admin/supportAdmin/'.$count.'?user_id='.$user->id);
+        return redirect('/support?tab=ticket');
     }
     // complete ticket
     public function completeTicket($ticketID)
