@@ -214,7 +214,7 @@ class UpdateController extends Controller
     function getFolderid($userid)
     {
         $folderid = Redis::get('getFolderid_'.$userid);
-        if($folderid){
+        if(!$folderid){
             $folderid = Folder::where('user_id', $userid)->where('name_folder', 'root')->value('id');
             Redis::set('getFolderid_'.$userid, $folderid);
         }
