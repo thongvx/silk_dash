@@ -65,7 +65,7 @@ Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class,
 Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoStream']);
 Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
 Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoEncoder']);
-
+Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateController::class, 'getFolderid']);
 //-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
