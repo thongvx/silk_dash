@@ -118,7 +118,7 @@ class TicketAdminController
     private function notificationTicket($ticket){
         $subject = 'Ticket has been replied.';
         $message = 'Ticket with subject: "' . $ticket->subject . '" has been replied '. "<br>"
-            . 'View Ticket: <a href="'.route('support.show', ['support' => $ticket->id]).'" class="hover:text-[#009FB2]">' . route('support.show', ['support' => $ticket->id]).'</a>';
+            . 'View Ticket: <a href="https://streamsilk.com/support/'.$ticket->id.'" class="hover:text-[#009FB2]">https://streamsilk.com/support/' . $ticket->id.'</a>';
         Notification::create([
             'user_id' => $ticket->user_id,
             'subject' => $subject,
