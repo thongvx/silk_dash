@@ -76,7 +76,7 @@ class ManageTaskController extends Controller
                 'user_id' => $encoders->user_id,
                 'subject' => $subject,
                 'message' => $message,
-                'type' => 'encoder',
+                'type' => 'error',
                 'status' => 0
             ]);
             // Delete the encoder

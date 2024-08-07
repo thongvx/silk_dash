@@ -2,7 +2,7 @@ import {add_notification, updateOriginalFormState} from "../main.js";
 
 $(document).on('submit', '#ticket-form', function (e) {
     e.preventDefault();
-    button = $(this).find('[btn-save]');
+    const button = $(this).find('[btn-save]');
     let formData = new FormData(this);
     $.ajax({
         type: 'POST',

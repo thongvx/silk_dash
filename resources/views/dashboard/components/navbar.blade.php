@@ -163,8 +163,8 @@
                       <li class="relative z-30 {{ $notification->read == 0 ? 'bg-[#142132]' :'' }}">
                           <a class="flex items-center rounded-lg px-2 text-white shadow-lg drop-shadow-sm py-3"
                              href="javascript:;" data-id="{{ $notification->id }}" btn-read btn-info-noti>
-                              <i class="material-symbols-outlined mr-3 text-3xl text-red-500">
-                                  {{ $notification->type == 'delete' ? 'delete' : 'error' }}
+                              <i class="material-symbols-outlined mr-3 text-3xl {{ $notification->type  == 'error' || $notification->type == 'delete' ? 'text-red-500' : 'text-orange-500'}}">
+                                  {{ $notification->type }}
                               </i>
                               <div class="info">
                                   <h6 class="text-white font-bold w-max subject">
