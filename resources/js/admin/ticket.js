@@ -8,4 +8,5 @@ $(document).on('click', '#ticket-replied button', function(e) {
                             </svg>
                         </div>
                     </div>`)
+    $(this).attr('disabled', true)
 })
