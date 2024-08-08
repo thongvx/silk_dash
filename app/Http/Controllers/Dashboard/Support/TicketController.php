@@ -56,7 +56,6 @@ class TicketController
             'ticketID' => 'required|integer',
             'message' => 'required|string',
             'file' => 'mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:2048',
-            'email'=>'required|email',
         ]);
         // Tìm ticket cần cập nhật
         $ticket = $this->ticketRepo->find($validated['ticketID']);
