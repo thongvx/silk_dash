@@ -165,7 +165,7 @@
         "msg": "ok",
         "status": 200,
         "sever_time": "2024-06-22 07:32:54",
-        "result": "https://upload02.encosilk.cc/uploadapi"
+        "result": "https://up02.encosilk.cc/uploadapi"
     }
     </code>
 </pre>
@@ -209,7 +209,7 @@
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="!bg-[#142132] rounded-xl shadow-md font-normal">
                         <code class="language-html !bg-[#142132] !py-0 break-all text-sm text-clipboard">
-    curl -X POST -F "key=${token}" -F "file=@1.avi" -F "file=@2.avi" https://upload02.encosilk.cc/uploadapi</code>
+    curl -X POST -F "keyapi=${token}" -F "file=@1.avi" -F "file=@2.avi" https://up02.encosilk.cc/uploadapi</code>
                     </pre>
                 </div>
                 <h4 class="text-lg font-medium text-white mb-2">HTML form upload sample:</h4>
@@ -217,7 +217,7 @@
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <pre class="!bg-[#142132] rounded-xl shadow-md font-normal">
                             <code class="language-html !bg-[#142132] !py-0 break-all text-clipboard">
-    &lt;form method="POST" enctype="multipart/form-data" action="https://upload02.encosilk.cc/uploadapi"&gt;
+    &lt;form method="POST" enctype="multipart/form-data" action="https://up02.encosilk.cc/uploadapi"&gt;
         &lt;input type="hidden" name="token" value="${token}"&gt;
         &lt;input type="file" name="file"&gt;
         &lt;input type="submit"&gt;
