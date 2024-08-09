@@ -22,8 +22,28 @@ class AccountRepo extends BaseRepository
             $setting = $this->query()
                 ->where('user_id', $userId)
                 ->first();
+            if(!$setting) {
+                $setting = AccountSetting::create([
+                    'user_id' => $userId,
+                    'earningModes' => 2,
+                    'videoType' => 1,
+                    'adblock' => 0,
+                    'showTitle' => 0,
+                    'logo' => 0,
+                    'logoLink' => 0,
+                    'position' => 0,
+                    'poster' => 0,
+                    'blockDirect' => 0,
+                    'domain' => '0',
+                    'publicVideo' => 0,
+                    'premiumMode' => 0,
+                    'captionsMode' => 0,
+                    'disableDownload' => 0,
+                    'gridPoster' => 1,
+                    'embed_page' => 0,
+                ]);
+            }
             Redis::setex(AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $userId, 2592000, serialize($setting));
-
         }
         return $setting;
     }
