@@ -31,7 +31,18 @@ class FolderRepo extends BaseRepository
         $folders = Folder::where('user_id', $userId)
                     ->where('soft_delete', 0)
                     ->orderBy('id', 'desc')->get();
-
+        if($folders->isEmpty()){
+            Folder::create([
+                'user_id' => $userId,
+                'name_folder' => 'root',
+                'number_file' => 0,
+                'soft_delete' => 0,
+            ]);
+            // Refresh folders after creation
+            $folders = Folder::where('user_id', $userId)
+                ->where('soft_delete', 0)
+                ->orderBy('id', 'desc')->get();
+        }
         // Set cache
         Redis::setex($cacheKey, 259200, serialize($folders));
 

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccountSetting;
+use App\Models\Folder;
+use App\Models\PlayerSetting;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Facades\Bot;
 use App\Http\Controllers\Mail\EmailController;
+use Illuminate\Support\Facades\DB;
 
 class VerificationController extends Controller
 {
@@ -57,7 +61,58 @@ class VerificationController extends Controller
         $user->active = 1;
         $user->save();
         Bot::send('new user registered email: ' . $user->email);
+        DB::transaction(function () use ($request) {
+            $user = Auth::user();
+            // Create the account setting
+            Folder::create([
+                'user_id' => $user->id,
+                'name_folder' => 'root',
+                'number_file' => 0,
+                'soft_delete' => 0,
+            ]);
+            // Create the player setting
+            AccountSetting::create([
+                'user_id' => $user->id,
+                'earningModes' => 2,
+                'videoType' => 1,
+                'adblock' => 0,
+                'showTitle' => 0,
+                'logo' => 0,
+                'logoLink' => 0,
+                'position' => 0,
+                'poster' => 0,
+                'blockDirect' => 0,
+                'domain' => '0',
+                'publicVideo' => 0,
+                'premiumMode' => 0,
+                'captionsMode' => 0,
+                'disableDownload' => 0,
+                'gridPoster' => 1,
+                'embed_page' => 0,
+            ]);
+            // Create the folder
+            PlayerSetting::create([
+                'user_id' => $user->id,
+                'show_title' => 1,
+                'show_logo' => 1,
+                'show_poster' => 0,
+                'show_download' => 0,
+                'show_preview' => 1,
+                'enable_caption' => 1,
+                'infinite_loop' => 0,
+                'disable_adblock' => 0,
+                'thumbnail_grid' => 1,
+                'premium_color' => '#05ffff',
+                'embed_width' => 800,
+                'embed_height' => 600,
+                'logo_link' => 'https://streamsilk.com/image/logo/name.webp',
+                'position' => 'control-bar',
+                'poster_link' => 0,
+            ]);
+
+        });
         $request = new Request(['user_id' => $user->id]);
+        // Send the discount program email
         $this->emailController->sendDiscountProgramEmails($request);
         // Log out the user after verification
         Auth::logout();
