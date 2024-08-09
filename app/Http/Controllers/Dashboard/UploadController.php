@@ -308,7 +308,7 @@ class UploadController
                 "msg" => "ok",
                 'status' => 200,
                 'sever_time' => date('Y-m-d H:i:s'),
-                'result' => 'https://'.str_replace('e', 'up', $svEncoderWithMinInSpeed['name']).'.encosilk.cc/uploadapi',
+                'result' => 'https://up02.encosilk.cc/uploadapi',
             ];
         } else {
             $data = [
