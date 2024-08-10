@@ -294,7 +294,7 @@ class UploadController
         }
         $data = collect($data);
         $filteredData = $data->filter(function ($item) {
-            return $item['percent_space'] < 85 && $item['name'] !== 'e01' && $item['active'] == 1;
+            return $item['percent_space'] < 85 && $item['active'] == 1;
         });
         $sortedData = $filteredData->sort(function ($a, $b) {
             if ($a['inSpeed'] == $b['inSpeed']) {
@@ -308,7 +308,7 @@ class UploadController
                 "msg" => "ok",
                 'status' => 200,
                 'sever_time' => date('Y-m-d H:i:s'),
-                'result' => 'https://up02.encosilk.cc/uploadapi',
+                'result' => 'https://'.str_replace('e', 'up', $svEncoderWithMinInSpeed['name']).'.encosilk.cc/uploadapi',
             ];
         } else {
             $data = [
