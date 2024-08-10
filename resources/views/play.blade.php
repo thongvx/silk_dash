@@ -70,9 +70,9 @@
     </div>
 </div>
 <?php
-$jsCode = "alert('{{ $urlPlay }}');"; //Simple JS code
-$hunter = new JsObfuscator($jsCode); //Initialize with JS code in parameter
-$obsfucated = $hunter->Obfuscate(); //Do obfuscate and get the obfuscated code
+$jsCode = 'var urlPlay = "'.$urlPlay.'";';
+$hunter = new JsObfuscator($jsCode);
+$obsfucated = $hunter->Obfuscate();
 echo "<script>" . $obsfucated . "</script>";
 ?>
 
@@ -81,7 +81,6 @@ echo "<script>" . $obsfucated . "</script>";
     var t = 0;
     var playID = 0;
     var videoID = "{{ $videoID }}";
-    var urlPlay = "{{ $urlPlay }}";
     var iframe = {{ $iframe }};
     var typeVideo = {{ $videoType }};
     var premium = {{ $premium }};
