@@ -1,3 +1,4 @@
+@php use App\Helpers\JsObfuscator; @endphp
 <!DOCTYPE html>
 <html>
 <head>
