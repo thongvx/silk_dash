@@ -112,7 +112,7 @@ class PlayController
                             $pagePlay = 'play';
                             break;
                     }
-                    return view($pagePlay, $playData);
+                    return view('play', $playData);
                 }
             }
             else{
