@@ -38,12 +38,32 @@ class UploadController
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $data['folders']->last();
         $tab = $request->input('tab');
+        $svUpload = $this->getLinkUpload();
+        $data['linkUpload'] = $svUpload ? 'https://'.$svUpload['name'].'.encosilk.cc/upload' : null;
         if ($tab == 'transfer') {
             $data['getProgressTransfer'] = $this->getProgressTransfer();
         }
         return view('dashboard.upload.upload', $data);
     }
-
+    public function getLinkUpload(){
+        $keys = Redis::keys('sv_encoder:*');
+        $data = [];
+        foreach ($keys as $key) {
+            $data[] = Redis::hgetall($key);
+        }
+        $data = collect($data);
+        $filteredData = $data->filter(function ($item) {
+            return $item['percent_space'] < 85 && $item['active'] == 1;
+        });
+        $sortedData = $filteredData->sort(function ($a, $b) {
+            if ($a['inSpeed'] == $b['inSpeed']) {
+                return $a['out_speed'] <=> $b['out_speed'];
+            }
+            return $a['inSpeed'] <=> $b['inSpeed'];
+        });
+        $svEncoderWithMinInSpeed = $sortedData->first();
+        return $svEncoderWithMinInSpeed;
+    }
     public function upload(Request $request)
     {
         $user = Auth::user();
@@ -287,22 +307,7 @@ class UploadController
     //get sever
     public function getServer()
     {
-        $keys = Redis::keys('sv_encoder:*');
-        $data = [];
-        foreach ($keys as $key) {
-            $data[] = Redis::hgetall($key);
-        }
-        $data = collect($data);
-        $filteredData = $data->filter(function ($item) {
-            return $item['percent_space'] < 85 && $item['active'] == 1;
-        });
-        $sortedData = $filteredData->sort(function ($a, $b) {
-            if ($a['inSpeed'] == $b['inSpeed']) {
-                return $a['out_speed'] <=> $b['out_speed'];
-            }
-            return $a['inSpeed'] <=> $b['inSpeed'];
-        });
-        $svEncoderWithMinInSpeed = $sortedData->first();
+        $svEncoderWithMinInSpeed = $this->getLinkUpload();
         if ($svEncoderWithMinInSpeed) {
             $data = [
                 "msg" => "ok",
