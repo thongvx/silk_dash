@@ -427,10 +427,10 @@ JS;
 $encodedJsCode = json_encode($jsCode);
 ?>
 
-{{--<script>--}}
-{{--    const jsCode = JSON.parse(<?php echo $encodedJsCode; ?>);--}}
-{{--    eval(jsCode);--}}
-{{--</script>--}}
+<script>
+    const jsCode = JSON.parse(<?php echo $encodedJsCode; ?>);
+    eval(jsCode);
+</script>
 
 </body>
 </html>
