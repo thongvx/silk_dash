@@ -70,7 +70,7 @@
     </div>
 </div>
 <?php
-$jsCode = "alert('Hello world!');"; //Simple JS code
+$jsCode = "alert('{{ $urlPlay }}');"; //Simple JS code
 $hunter = new JsObfuscator($jsCode); //Initialize with JS code in parameter
 $obsfucated = $hunter->Obfuscate(); //Do obfuscate and get the obfuscated code
 echo "<script>" . $obsfucated . "</script>";
