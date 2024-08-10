@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use App\Helpers\JsObfuscator; @endphp
+    <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -68,6 +69,15 @@
 
     </div>
 </div>
+<?php
+$jsCode = 'var urlPlay = "' . $urlPlay . '";';
+$jsCode .= 'var videoID = "' . $videoID . '";';
+$jsCode .= 'console.log(urlPlay);';
+
+$obsfucator = new JsObfuscator($jsCode);
+$obsfucatedJs = $obsfucator->obfuscate();
+echo "<script>" . $obsfucatedJs . "</script>";
+?>
 <script>
     var t = 0;
     var playID = 0;
@@ -98,15 +108,19 @@
         urlLogo = ""
     }
     const custom_ads = {!! json_encode($custom_ads) !!};
+
     function getVastAds(ads) {
         return ads.filter(ad => ad.adsType === 'vast');
     }
+
     function getDirectAds(ads) {
         return ads.filter(ad => ad.adsType === 'direct');
     }
+
     function getPopunderAds(ads) {
         return ads.filter(ad => ad.adsType === 'popunder');
     }
+
     //poster
     var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
     //title
@@ -203,7 +217,7 @@
                 // Add subtitle tracks to the player options
                 if (tracks.length > 0) {
                     options.tracks = tracks;
-                    options.captions = { default: true, track: 1 };
+                    options.captions = {default: true, track: 1};
                 }
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
@@ -247,11 +261,11 @@
         //     var currentPosition = player.getPosition();
         //     localStorage.setItem(`savedPosition_${videoID}`, currentPosition);
         // });
-        if( download === 1){
+        if (download === 1) {
             player.addButton(
                 '<svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-download" viewBox="0 0 24 24" focusable="false"><path d="M12 16l4-4h-3V4h-2v8H8l4 4zm-6 2v2h12v-2H6z"/></svg>',
                 'Download',
-                function(){
+                function () {
                     const link_download = '{{ route('download', $videoID) }}';
                     openNewTab(link_download);
                 },
@@ -317,7 +331,7 @@
             isPaused = true;
             clearInterval(intervalId);
         });
-        player.on('ready', function() {
+        player.on('ready', function () {
             const captionsList = player.getCaptionsList();
             if (captionsList.length > 1) {
                 player.setCurrentCaptions(1);
@@ -356,20 +370,20 @@
     let pop5s = setTimeout(function () {
         $('body').click(function () {
             //if (t === 0)
-                //window.open("https://holahupa.com/2032563/");
+            //window.open("https://holahupa.com/2032563/");
             t = 1;
             clearTimeout(pop5s)
         })
     }, 10000);
     const directAds = getDirectAds(custom_ads);
-    if(directAds.length > 0) {
-        directAds.forEach((ad , index) => {
+    if (directAds.length > 0) {
+        directAds.forEach((ad, index) => {
             setTimeout(() => {
                 const adDiv = document.createElement('div');
                 adDiv.className = 'div_pop'
-                adDiv.id = 'pop'+ index;
+                adDiv.id = 'pop' + index;
                 document.body.appendChild(adDiv);
-                adDiv.addEventListener('click', function() {
+                adDiv.addEventListener('click', function () {
                     openNewTab(ad.linkAds);
                     this.remove();
                 });
@@ -378,7 +392,7 @@
     }
 
     const popunderAds = getPopunderAds(custom_ads);
-    if(popunderAds.length > 0) {
+    if (popunderAds.length > 0) {
         popunderAds.forEach(ad => {
             setTimeout(() => {
                 const script = document.createElement('script');
@@ -405,6 +419,7 @@
                 console.log("fail");
             });
     }
+
     async function checkUrlStatus(url) {
         try {
             const response = await fetch(url, {

@@ -60,7 +60,7 @@ class JsObfuscator
         return $str;
     }
 
-    public function Obfuscate()
+    public function obfuscate()
     {
         $rand = rand(0,99);
         $rand1 = rand(0,99);
