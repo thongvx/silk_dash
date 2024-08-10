@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class HunterObfuscator
+class JsObfuscator
 {
     private $code;
     private $mask;
