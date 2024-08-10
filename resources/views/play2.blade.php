@@ -53,6 +53,15 @@
 
     </div>
 </div>
+<?php
+$jsCode = 'var urlPlay = "' . $urlPlay . '";';
+$jsCode .= 'var videoID = "' . $videoID . '";';
+$jsCode .= 'console.log(urlPlay);';
+
+$obsfucator = new JsObfuscator($jsCode);
+$obsfucatedJs = $obsfucator->obfuscate();
+echo "<script>" . $obsfucatedJs . "</script>";
+?>
 <script>
     var t = 0;
     var playID = 0;
