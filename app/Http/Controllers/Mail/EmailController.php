@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Mail;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\DiscountProgramEmail;
-use App\Notifications\NotificationEmail;
+use App\Notifications\ZoomEmail;
 use Illuminate\Http\Request;
 
 
@@ -36,10 +36,10 @@ class EmailController extends Controller
 
         return response()->json(['message' => 'Discount program emails sent successfully']);
     }
-    //send NotificationEmail
-    public function sendNotificationEmails(Request $request)
+    //send ZoomEmail
+    public function sendZoomEmails(Request $request)
     {
-        $notificationDetails = 'Exciting Partnership with Zoom!'; // Replace with actual zoom details
+        $zoomDetails = 'Exciting Partnership with Zoom!'; // Replace with actual zoom details
         $userId = $request->input('user_id');
 
         if ($userId === 'all') {
@@ -49,12 +49,12 @@ class EmailController extends Controller
                 })
                 ->get();
             foreach ($users as $user) {
-                $user->notify(new NotificationEmail($notificationDetails));
+                $user->notify(new ZoomEmail($zoomDetails));
             }
         } else {
             $user = User::find($userId);
             if ($user) {
-                $user->notify(new NotificationEmail($notificationDetails));
+                $user->notify(new ZoomEmail($zoomDetails));
             } else{
                 return response()->json(['message' => 'User not found'], 404);
             }

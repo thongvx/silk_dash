@@ -31,7 +31,7 @@ $(document).on('submit', '#notification-mail', function () {
     var formData = new FormData(form[0]);
     $.ajax({
         type: 'POST',
-        url: '/email/send-notification-emails',
+        url: '/email/send-zoom-emails',
         data: formData,
         processData: false,
         contentType: false,

@@ -175,7 +175,7 @@ Route::prefix('email')->group(function () {
     Route::get('/send-email', [EmailController::class, 'sendEmails']);
     Route::post('/send-discount-emails', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.emails');
     Route::get('/view-discount-emails', [EmailController::class, 'viewDiscountProgramEmails']);
-    Route::post('/send-notification-emails', [EmailController::class, 'sendNotificationEmails'])->name('send.notification.emails');
+    Route::post('/send-zoom-emails', [EmailController::class, 'sendZoomEmails'])->name('send.zoom.emails');
 });
 
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);

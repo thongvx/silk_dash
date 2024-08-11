@@ -38,7 +38,7 @@
                     <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />
                     <div class="mt-2">
                         <a href="/email/view-discount-emails">
-                            <img src="{{ asset('image/email/mail-gift.webp') }}" alt="" class="rounded-xl">
+                            <img src="{{ asset('image/email/mail-zoom.webp') }}" alt="" class="rounded-xl">
                         </a>
                     </div>
                     <form  class="flex items-center select user mt-3" id="notification-mail">
