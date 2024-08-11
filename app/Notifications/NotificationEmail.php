@@ -27,7 +27,7 @@ class NotificationEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Upgrade Upload Zoom successfully!')
+            ->subject('Please use newest Z-o-o-m version to upload videos !')
             ->markdown('emails.notification', [
                 'notificationDetails' => $this->notificationDetails,
                 'subcopy' => $this->subcopy,
