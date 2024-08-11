@@ -6,16 +6,16 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NotificationEmail extends Notification
+class ZoomEmail extends Notification
 {
     use Queueable;
 
-    protected $notificationDetails;
+    protected $zoomDetails;
     protected $subcopy;
 
-    public function __construct($notificationDetails, $subcopy = null)
+    public function __construct($zoomDetails, $subcopy = null)
     {
-        $this->notificationDetails = $notificationDetails;
+        $this->zoomDetails = $zoomDetails;
         $this->subcopy = $subcopy;
     }
 
@@ -28,8 +28,8 @@ class NotificationEmail extends Notification
     {
         return (new MailMessage)
             ->subject('Please use newest Z-o-o-m version to upload videos !')
-            ->markdown('emails.notification', [
-                'notificationDetails' => $this->notificationDetails,
+            ->markdown('emails.zoom', [
+                'notificationDetails' => $this->zoomDetails,
                 'subcopy' => $this->subcopy,
             ]);
     }
