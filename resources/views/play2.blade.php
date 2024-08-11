@@ -54,6 +54,10 @@
 
     </div>
 </div>
+@php
+    $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
+    $logo_link =  asset(Storage::url($player_setting->logo_link))
+@endphp
 <?php
 $jsCode = <<<JS
  var t = 0;
@@ -79,13 +83,13 @@ $jsCode = <<<JS
         if (logo_link.includes("http")) {
             urlLogo = logo_link
         } else {
-            urlLogo = " asset(Storage::url($player_setting->logo_link)) "
+            urlLogo = "$logo_link";
         }
     } else {
         urlLogo = ""
     }
     //poster
-    var urlposter = " $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster";
+    var urlposter = "$poster_link";
     //title
     var title = " $player_setting->show_title == 1 ? $title : ''";
     var player = jwplayer('video_player');

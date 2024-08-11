@@ -71,6 +71,8 @@
 </div>
 @php
     $custom_ads_json = json_encode($custom_ads);
+    $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
+    $logo_link =  asset(Storage::url($player_setting->logo_link))
 @endphp
 <?php
 $jsCode = <<<JS
@@ -97,11 +99,14 @@ $jsCode = <<<JS
         if (logo_link.includes("http")) {
             urlLogo = logo_link
         } else {
-            urlLogo = " asset(Storage::url($player_setting->logo_link)) "
+            urlLogo = "$logo_link";
         }
     } else {
         urlLogo = ""
     }
+    //poster
+    var urlposter = "$poster_link";
+    //ads
     const custom_ads = $custom_ads_json;
     function getVastAds(ads) {
         return ads.filter(ad => ad.adsType === 'vast');
@@ -112,8 +117,6 @@ $jsCode = <<<JS
     function getPopunderAds(ads) {
         return ads.filter(ad => ad.adsType === 'popunder');
     }
-    //poster
-    var urlposter = " $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster";
     //title
     var title = " $player_setting->show_title == 1 ? $title : ''";
     var player = jwplayer('video_player');
