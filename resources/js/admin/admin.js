@@ -13,7 +13,8 @@ import './manage-task.js';
 import './compute.js';
 //mail
 import './mail.js';
-
+//support
+import './ticket.js'
 var a_menu = $('.menu-sidebar')
 a_menu.filter(function () {
     const urlParams = new URLSearchParams(window.location.search);

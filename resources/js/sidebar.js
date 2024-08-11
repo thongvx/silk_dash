@@ -59,16 +59,12 @@ function addclass() {
 buttonMiniSidebar.on("click", function () {
     var miniSidebarStatus = $(this).attr('mini-sidebar');
 
-    // Đảo ngược giá trị của mini-sidebar
     miniSidebarStatus = (miniSidebarStatus === 'false') ? 'true' : 'false';
 
-    // Cập nhật giá trị của mini-sidebar trong HTML
     $(this).attr('mini-sidebar', miniSidebarStatus);
 
-    // Lưu giá trị của mini-sidebar vào localStorage
     localStorage.setItem('minisidebar', miniSidebarStatus);
 
-    // Gửi yêu cầu AJAX đến server để cập nhật cookie
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/update-minimenu", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

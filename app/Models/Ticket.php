@@ -15,6 +15,7 @@ class Ticket extends Model
 
     protected $fillable = [
         'user_id',
+        'email',
         'subject',
         'topic',
         'status',
@@ -44,8 +45,11 @@ class Ticket extends Model
     public function deleteCacheTicket()
     {
         $keys = Redis::keys(TicketCacheKeys::ALL_TICKET_FOR_USER ->value . $this->user_id . '*');
-        redis::del(TicketCacheKeys::ALL_TICKET_FOR_ADMIN->value . '*');
+        $keysForAdmin = Redis::keys(TicketCacheKeys::ALL_TICKET_FOR_ADMIN->value . '*');
         foreach ($keys as $key) {
+            Redis::del($key);
+        }
+        foreach ($keysForAdmin as $key) {
             Redis::del($key);
         }
     }

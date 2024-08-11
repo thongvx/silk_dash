@@ -7,12 +7,22 @@ use App\Enums\VideoCacheKeys;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redis;
+use App\Repositories\FolderRepo;
 
 class Video extends Model
 {
     use HasFactory;
 
     protected $table = 'videos';
+    protected static $folderRepo;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        if (!self::$folderRepo) {
+            self::$folderRepo = app(FolderRepo::class);
+        }
+    }
 
     protected $fillable = [
         'slug',
@@ -42,6 +52,9 @@ class Video extends Model
     {
         parent::boot();
 
+        static::created(function ($model) {
+            self::$folderRepo->incrementNumberOfFiles($model->folder_id);
+        });
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
             Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $model->slug);
@@ -54,7 +67,6 @@ class Video extends Model
             if (!$model->isDirty('total_play')) {
                 $model->deleteCache();
             }
-
         });
     }
 

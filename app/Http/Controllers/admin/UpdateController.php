@@ -10,6 +10,7 @@ use App\Models\Transfer;
 use App\Models\User;
 use App\Models\SvDownload;
 use App\Models\SvEncoder;
+use App\Models\Folder;
 use App\Services\ServerStream\SvStreamService;
 use App\Services\ServerDownload\SvDownloadService;
 use App\Services\ServerEncoder\SvEncoderService;
@@ -209,6 +210,15 @@ class UpdateController extends Controller
         $svEncoder->active = 1;
 
         SvEncoderService::upsertSvEncoder($svEncoder);
+    }
+    function getFolderid($userid)
+    {
+        $folderid = Redis::get('getFolderid_'.$userid);
+        if(!$folderid){
+            $folderid = Folder::where('user_id', $userid)->where('name_folder', 'root')->value('id');
+            Redis::set('getFolderid_'.$userid, $folderid);
+        }
+        return $folderid;
     }
     //=============================================================================================
 }

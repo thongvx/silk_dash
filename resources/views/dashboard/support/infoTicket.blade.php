@@ -39,7 +39,7 @@
                                                         $messageDate = date("m/d/Y", strtotime($value['date']));
                                                     @endphp
                                                     @if($messageDate !== $currentDate)
-                                                        <div class="flex justify-center items-center w-full my-3 sticky top-3">
+                                                        <div class="flex justify-center items-center w-full my-3 top-3">
                                                             <h5 class=" text-white">
                                                                 {{ date("m/d/Y", strtotime($value['date'])) }}
                                                             </h5>
@@ -65,18 +65,20 @@
                                                                 <img src="{{ $value['url_file'] }}" alt="File Image" class=" rounded-3xl">
                                                             </div>
                                                         @endif
-                                                            <div class="message-class {{ $value['type'] == 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}} px-5 py-2.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
-                                                                <h4>
+                                                            <div class="message-class {{ $value['type'] == 2 ? 'text-white bg-[#009FB2]' : 'text-black bg-slate-200'}} px-5 py-1.5 mb-2 max-w-[70%] rounded-3xl" data-date="{{ date("m/d/Y", strtotime($value['date'])) }}">
+                                                                <h4 class="break-words">
                                                                     {!! nl2br(html_entity_decode($value['message'])) !!}
-                                                                    <span class="{{ $value['type'] == 2 ?'text-white' : 'text-gray-600'}} text-xs -mb-2 relative -bottom-1 ml-2">
+                                                                    <span class="{{ $value['type'] == 2 ?'text-white' : 'text-gray-600'}} relative -bottom-1 text-xs -mb-2 ml-2">
                                                                     {{ date("h:m a", strtotime($value['date'])) }}
                                                                     </span>
                                                                 </h4>
+
                                                             </div>
+
                                                     </div>
                                                 @endforeach
                                             </div>
-                                            @if( $tickets -> status === 'pending')
+                                            @if( $tickets -> status === 'pending' || $tickets -> status === 'replied')
                                                 <div class="w-full absolute bottom-3 bg-[#142132] text-white rounded-3xl py-2">
                                                     <form action="/support" method="POST" enctype="multipart/form-data" class="text-white">
                                                         @csrf

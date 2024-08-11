@@ -13,4 +13,8 @@ enum VideoCacheKeys: string
 
     case GET_VIDEO_BY_SLUG = 'video_by_slug:';
 
+    case GET_AUDIO_BY_SLUG = 'audio_by_slug:';
+
+    case COUNT_VIDEO_FOR_FOLDER = 'count_video_for_folder:';
+
 }

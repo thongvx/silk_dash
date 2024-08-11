@@ -33,7 +33,7 @@ const formRetryEncoder = `<div class="retry" id="retry-encoder">
                                         <h5 class="text-center text-white text-lg">Are you sure you want to retry encoding the selected video?</h5>
                                         <div class="flex justify-center mt-3 text-white ">
                                              <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Retry</button>
-                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
+                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 ml-4" fixed-video-close-button>Cancel</button>
                                         </div>
                                     </form>
                                 </div>`
@@ -89,7 +89,7 @@ const divRemoveEncoder = `<div class="delete" id="remove-encoder">
                                         <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected video from the encoder?</h5>
                                         <div class="flex justify-center mt-3 text-white ">
                                             <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Remove</button>
-                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
+                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 ml-4" fixed-video-close-button>Cancel</button>
                                         </div>
                                     </form>
                                 </div>`
@@ -145,7 +145,7 @@ const formRetryTransfer = `<div class="retry" id="retry-transfer">
                                         <h5 class="text-center text-white text-lg">Are you sure you want to retry transferring the selected video?</h5>
                                         <div class="flex justify-center mt-3 text-white ">
                                             <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Retry</button>
-                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
+                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 ml-4" fixed-video-close-button>Cancel</button>
                                         </div>
                                     </form>
                                 </div>`
@@ -199,7 +199,7 @@ const divRemoveTransfer = `<div class="delete" id="remove-transfer">
                                         <h5 class="text-center text-white text-lg">Are you sure you want to remove the selected video from the transfer?</h5>
                                         <div class="flex justify-center mt-3 text-white ">
                                             <button type="submit" class="px-7 py-1.5 rounded-lg bg-rose-400 hover:bg-rose-600">Remove</button>
-                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 mr-4" fixed-video-close-button>Cancel</button>
+                                            <button type="button" class="px-7 py-1.5 rounded-lg bg-gray-400 hover:bg-gray-600 ml-4" fixed-video-close-button>Cancel</button>
                                         </div>
                                     </form>
                                 </div>`

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\VideoCacheKeys;
 use App\Jobs\CreateHlsJob;
+use App\Jobs\CreatStreamAudioJob;
 use App\Models\EncoderTask;
 use App\Models\SvStream;
 use App\Models\Video;
@@ -12,6 +13,7 @@ use App\Repositories\AccountRepo;
 use App\Repositories\PlayerSettingsRepo;
 use App\Repositories\VideoRepo;
 use App\Repositories\CustomAdsRepo;
+use App\Repositories\AudioVideoRepo;
 use App\Services\ServerStream\SvStreamService;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Redis;
@@ -23,14 +25,16 @@ class PlayController
     protected $accountRepo;
     protected $playerSettingsRepo;
     protected $customAdsRepo;
+    protected $AudioVideoRepo;
 
     public function __construct(VideoRepo $videoRepo, AccountRepo $accountRepo,
-                                PlayerSettingsRepo $playerSettingsRepo, CustomAdsRepo $customAdsRepo)
+                                PlayerSettingsRepo $playerSettingsRepo, CustomAdsRepo $customAdsRepo, AudioVideoRepo $AudioVideoRepo)
     {
         $this->videoRepo = $videoRepo;
         $this->accountRepo = $accountRepo;
         $this->playerSettingsRepo = $playerSettingsRepo;
         $this->customAdsRepo = $customAdsRepo;
+        $this->AudioVideoRepo = $AudioVideoRepo;
     }
 
     public function play($slug, Request $request)
@@ -87,7 +91,12 @@ class PlayController
                         }
                         Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                     }
-
+                    if($video->audio == 1){
+                        $audioFile = $this->AudioVideoRepo->getAudioVideo($video->slug);
+                        foreach ($audioFile as $audio){
+                            Queue::push(new CreatStreamAudioJob($audio['slug'], $svStream, $audio['language'], $audio['path']));
+                        }
+                    }
                     $playData = [
                         'urlPlay' => 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8',
                         'videoID' => $video->slug,

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Models\Ticket;
+use App\Models\Notification;
 use App\Repositories\TicketRepo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Models\User;
+use App\Http\Controllers\Mail\TicketEmailMailable;
+use Illuminate\Support\Facades\Mail;
 
 class TicketAdminController
 {
@@ -107,9 +109,31 @@ class TicketAdminController
 
         // Cập nhật cột message
         $ticket->message = $updatedMessages;
+        $ticket->status = 'replied';
         $ticket->save();
-
+        // create notification
+        $this->notificationTicket($ticket);
         return redirect()->back();
+    }
+    private function notificationTicket($ticket){
+        $subject = 'Ticket has been replied.';
+        $message = 'Ticket with subject: "' . $ticket->subject . '" has been replied '. "<br>"
+            . 'View Ticket: <a href="https://streamsilk.com/support/'.$ticket->id.'" class="hover:text-[#009FB2]">https://streamsilk.com/support/' . $ticket->id.'</a>';
+        Notification::create([
+            'user_id' => $ticket->user_id,
+            'subject' => $subject,
+            'message' => $message,
+            'type' => 'feedback',
+            'status' => 0
+        ]);
+        $ticketMessages = json_decode($ticket->message, true);
+        $lastMessage = end($ticketMessages)['message'];
+        $ticketData = [
+            'ticket_id' => $ticket->id,
+            'subject' => $ticket->subject,
+            'message' => $lastMessage,
+        ];
+        Mail::to($ticket->email)->send(new TicketEmailMailable($ticketData));
     }
     //show ticket
     public function show($ticketID,Request $request)
@@ -121,6 +145,7 @@ class TicketAdminController
             'tickets' => $ticket,
             'userId' => $userId,
             'userName'=> User::find($userId)->name,
+            'email' => User::find($userId)->email,
         ];
         return view('admin.supportAdmin.infoCase', $data);
     }

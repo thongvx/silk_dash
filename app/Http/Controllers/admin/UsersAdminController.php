@@ -116,7 +116,9 @@ class UsersAdminController
             'title' => 'User Detail',
             'users' => $this->userRepo->getUserById($user),
             'settings' => $this->accountRepo->getSetting($user),
-            'dataReport' => $dataReport
+            'dataReport' => $dataReport,
+            'earningToday' => array_sum($earningToday),
+            'viewsToday' => $totalViews,
         ];
         return view('admin.user.inforuser', $data);
     }

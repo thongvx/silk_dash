@@ -73,4 +73,17 @@ class VideoRepo extends BaseRepository
 
         return $video;
     }
+
+    public function countVideos($folderId)
+    {
+        $cacheKey = VideoCacheKeys::COUNT_VIDEO_FOR_FOLDER->value . $folderId;
+        $count = Redis::get($cacheKey);
+        if (isset($count)) {
+            return unserialize($count);
+        }
+        $count = $this->query()->where('folder_id', $folderId)->where('soft_delete', 0)->total();
+        Redis::setex($cacheKey, 259200, serialize($count));
+        return $count;
+    }
+
 }

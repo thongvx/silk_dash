@@ -23,7 +23,9 @@ class Notification extends Model
     protected static function boot()
     {
         parent::boot();
-
+        static::created(function ($model) {
+            Redis::del(NotificationCacheKeys::GET_ALl_NOTIFICATION_BY_USER_ID->value . $model->user_id);
+        });
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
             Redis::del(NotificationCacheKeys::GET_ALl_NOTIFICATION_BY_USER_ID->value . $model->user_id);

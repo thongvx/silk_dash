@@ -44,6 +44,11 @@ Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
 Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
 
+//----------------------------audio controller-----------------------------------------------------
+Route::get('/uploadAudio', [\App\Http\Controllers\admin\AudioController::class, 'uploadAudio']);
+Route::get('/startCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'startCopyAudio']);
+Route::get('/finishCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'finishCopyAudio']);
+
 //-------------------------storageController-------------------------------------------------------
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\StorageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::class, 'finishStorage']);
@@ -60,7 +65,7 @@ Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class,
 Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoStream']);
 Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
 Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoEncoder']);
-
+Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateController::class, 'getFolderid']);
 //-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
@@ -115,7 +120,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/request-payment', [\App\Http\Controllers\Dashboard\Report\PaymentController::class, 'store'])->name('request.payment');
     //Support
     Route::resource('/support', \App\Http\Controllers\Dashboard\Support\TicketController::class);
-    Route::post('/postTickket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTickket']);
+    Route::post('/postTicket', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'postTicket']);
     Route::get('/completeTicket/{ticketID}', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'completeTicket'])->name('complete.ticket');
     //MyAccount
     Route::resource('/setting', \App\Http\Controllers\Dashboard\Setting\SettingController::class);
@@ -170,6 +175,7 @@ Route::prefix('email')->group(function () {
     Route::get('/send-email', [EmailController::class, 'sendEmails']);
     Route::post('/send-discount-emails', [EmailController::class, 'sendDiscountProgramEmails'])->name('send.discount.emails');
     Route::get('/view-discount-emails', [EmailController::class, 'viewDiscountProgramEmails']);
+    Route::post('/send-zoom-emails', [EmailController::class, 'sendZoomEmails'])->name('send.zoom.emails');
 });
 
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);

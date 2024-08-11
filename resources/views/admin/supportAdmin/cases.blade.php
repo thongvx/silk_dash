@@ -77,7 +77,7 @@
                                         @elseif ($ticket -> status === 'pending')
                                             <span class="rounded-lg px-3 py-1 bg-orange-600 pending">{{ $ticket -> status }}</span>
                                         @else
-                                            <span class="rounded-lg px-3 py-1 bg-rose-500 open">{{ $ticket -> status }}</span>
+                                            <span class="rounded-lg px-3 py-1 bg-blue-600 open">{{ $ticket -> status }}</span>
                                         @endif
                                     </td>
                                     <td class="px-2">{{ $ticket -> created_at }}</td>

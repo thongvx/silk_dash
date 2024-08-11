@@ -83,49 +83,52 @@
                     <h1 class="text-white text-2xl mb-3 ">API and FTP Credentials</h1>
                     <div class="items-center flex" id="box-key-api">
                         <h5 class="text-stat w-40 mr-3">
-                            API Key
+                            API Token
                         </h5>
                         <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
-                            <input type="text" value="{{ Auth::user()->key_api }}" id="key_api"
+                            <input type="text" value="{{ Auth::user()->token ?? '' }}" id="key_api"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="key_api" readonly>
+                                   placeholder="Api token" readonly>
                             <div class="rounded-lg py-1 hover:text-[#009fb2] cursor-pointer" btn-get-keyApi>
                                 <i class="material-symbols-outlined opacity-1 text-2xl">autorenew</i>
                             </div>
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
-                        <h5 class="text-start w-40 mr-3">
+                        <label class="text-start w-40 mr-3" for="ftp_user">
                             FTP User
-                        </h5>
+                        </label>
                         <div class="text-white w-full  rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">person</i>
-                            <input type="text" value="{{ Auth::user()->name }}"
+                            <input type="text" value="{{ Auth::user()->ftp_user ?? '' }}" id="ftp_user"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="ftp_user">
+                                   placeholder="FTP User" readonly>
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
-                        <h5 class="text-start w-40 mr-3">
+                        <label class="text-start w-40 mr-3" for="ftp_password">
                             FTP Password
-                        </h5>
+                        </label>
                         <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
-                            <input type="password" value=""
+                            <input type="password" value="{{ Auth::user()->ftp_password ?? '' }}" id="ftp_password"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="ftp_password">
+                                   placeholder="FTP Password" readonly>
+                            <span class="rounded-lg py-1 hover:text-[#009fb2] cursor-pointer" btn-show-password>
+                                <i class="material-symbols-outlined opacity-1 text-2xl">visibility</i>
+                            </span>
                         </div>
                     </div>
                     <div class="items-center mt-6 flex">
-                        <h5 class="text-start w-40 mr-3">
+                        <label class="text-start w-40 mr-3" for="ftp_link">
                             FTP Link
-                        </h5>
+                        </label>
                         <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
                             <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">link</i>
-                            <input type="text" value=""
+                            <input type="text" value="{{ Auth::user()->ftp_link ?? '' }}" id="ftp_link"
                                    class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                   placeholder="ftp_link">
+                                   placeholder="FTP Link" readonly>
                         </div>
                     </div>
                 </div>

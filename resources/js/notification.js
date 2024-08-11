@@ -51,6 +51,8 @@ $(document).on('click', '[btn-info-noti]', function() {
     const subject = $(this).find('.subject').text()
     const date = $(this).find('.date').data('date')
     const message = $(this).find('.message').text()
+    const type = $(this).find('i').text()
+    const text = type  === 'error' || type === 'delete' ? 'text-red-500' : 'text-orange-500'
     const divInfoNoti = `<div fixed-noti-card
                                      class="opacity-1 bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full backdrop-blur-sm
                                        min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3">
@@ -69,7 +71,7 @@ $(document).on('click', '[btn-info-noti]', function() {
                                                 <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Notification</h5>
                                                 <div class="text-white my-2">
                                                     <div class="flex justify-between">
-                                                        <h4 class="text-red-500">${subject}</h4>
+                                                        <h4 class="${text}">${subject}</h4>
                                                         <h4>${date}</h4>
                                                     </div>
                                                     <div class="mt-3">

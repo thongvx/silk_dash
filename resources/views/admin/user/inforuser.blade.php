@@ -70,7 +70,7 @@
                                     <h5
                                         class="py-2 min-h-max h-max text-slate-300 ">
                                         Total Balance:</h5>
-                                    <h5 class="py-2">{{ $users->earning ? '$ '.number_format($users->earning) : 0 }}</h5>
+                                    <h5 class="py-2">{{ $users->earning ? '$ '.number_format($users->earning + $earningToday) : 0 }}</h5>
                                 </div>
                                 <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                     <h5
@@ -82,7 +82,7 @@
                                     <h5
                                         class="py-2 min-h-max h-max text-slate-300 ">
                                         Play:</h5>
-                                    <h5 class="py-2">{{ \App\Models\File::formatNumber($users->play) ?? 0 }}</h5>
+                                    <h5 class="py-2">{{ \App\Models\File::formatNumber($users->play + $viewsToday) ?? 0 }}</h5>
                                 </div>
                                 <div class="flex justify-between bg-[#121520] rounded-lg px-3">
                                     <h5
@@ -189,49 +189,98 @@
                                 </div>
                             </div>
                         </div> <!--end-actions-->
-                        <div>
-                            <h4 class="title text-teal-400 text-lg font-bold">Earning Modes </h4>
-                            <form action="/admin/updateEarning" method="post" class="mt-3 bg-[#121520] rounded-lg p-3">
-                                @csrf
-                                <input name="userID" class="hidden" value="{{ $users->id }}">
-                                <fieldset class="">
-                                    <input name="earningModes" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                  checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                           type="radio"
-                                           value="2" {{ $settings -> earningModes == 2 ? 'checked' : '' }}>
-                                    <label for="2" class="ml-3">Maximum Ads - 100% Earnings</label>
-                                </fieldset>
-                                <fieldset class="mt-3">
-                                    <input name="earningModes" id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                  checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                           type="radio"
-                                           value="1" {{ $settings -> earningModes == 1 ? 'checked' : '' }}>
-                                    <label for="1" class="ml-3">Medium Ads - 50% Earnings</label>
-                                </fieldset>
-                                <fieldset class="mt-3">
-                                    <input name="earningModes" id="0" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                  after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                  checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                           type="radio"
-                                           value="0" {{ $settings -> earningModes == 0 ? 'checked' : '' }}>
-                                    <label for="0" class="ml-3">Minimal Ads - No Earnings</label>
-                                </fieldset>
-                                <div class=" save text-center mt-3">
-                                    <button
-                                        class="bg-[#142132] rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500">
-                                        <i class="fa fa-check" aria-hidden="true"></i>
-                                        Save Mode
-                                    </button>
-                                </div>
-                            </form>
+                        <div class="grid grid-cols-2 gap-6 mt-8">
+                            <div class="mt-3 bg-[#121520] rounded-lg p-3">
+                                <h4 class="title text-teal-400 text-lg font-bold">Earning Modes </h4>
+                                <form action="/admin/updateEarning" method="post">
+                                    @csrf
+                                    <input name="userID" class="hidden" value="{{ $users->id }}">
+                                    <fieldset class="mt-6">
+                                        <input name="earningModes" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                               type="radio"
+                                               value="2" {{ $settings -> earningModes == 2 ? 'checked' : '' }}>
+                                        <label for="2" class="ml-3">Maximum Ads - 100% Earnings</label>
+                                    </fieldset>
+                                    <fieldset class="mt-6">
+                                        <input name="earningModes" id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                               type="radio"
+                                               value="1" {{ $settings -> earningModes == 1 ? 'checked' : '' }}>
+                                        <label for="1" class="ml-3">Medium Ads - 50% Earnings</label>
+                                    </fieldset>
+                                    <fieldset class="mt-6">
+                                        <input name="earningModes" id="0" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                               type="radio"
+                                               value="0" {{ $settings -> earningModes == 0 ? 'checked' : '' }}>
+                                        <label for="0" class="ml-3">Minimal Ads - No Earnings</label>
+                                    </fieldset>
+                                    <div class=" save text-center mt-3">
+                                        <button
+                                            class="bg-[#142132] rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Save Mode
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mt-3 bg-[#121520] rounded-lg p-3">
+                                <h4 class="title text-teal-400 text-lg font-bold">FTP Credentials</h4>
+                                <form action="/admin/updateUser" method="post">
+                                    @csrf
+                                    <input name="userID" class="hidden" value="{{ $users->id }}">
+                                    <div class="items-center mt-6 flex">
+                                        <label class="text-start w-40 mr-3" for="ftp_user">
+                                            FTP User
+                                        </label>
+                                        <div class="text-white w-full  rounded-lg flex items-center backdrop-blur-3xl px-2 bg-[#142132]/60">
+                                            <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">person</i>
+                                            <input type="text" value="{{ $users->ftp_user ?? '' }}" id="ftp_user" name="ftp_user"
+                                                   class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                   placeholder="FTP User">
+                                        </div>
+                                    </div>
+                                    <div class="items-center mt-6 flex">
+                                        <label class="text-start w-40 mr-3" for="ftp_password">
+                                            FTP Password
+                                        </label>
+                                        <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
+                                            <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">key</i>
+                                            <input type="text" value="{{ $users->ftp_password ?? '' }}" id="ftp_password" name="ftp_password"
+                                                   class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                   placeholder="FTP Password">
+                                        </div>
+                                    </div>
+                                    <div class="items-center mt-6 flex">
+                                        <label class="text-start w-40 mr-3" for="ftp_link">
+                                            FTP Link
+                                        </label>
+                                        <div class="text-white w-full rounded-lg flex items-center backdrop-blur-3xl px-2 hover:bg-[#142132] bg-[#142132]/60">
+                                            <i class="material-symbols-outlined opacity-1 text-xl  py-1 px-2 border-r border-gray-200/30">link</i>
+                                            <input type="text" value="{{ $users->ftp_link ?? '' }}" id="ftp_link" name="ftp_link"
+                                                   class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                   placeholder="FTP Link">
+                                        </div>
+                                    </div>
+                                    <div class=" save text-center mt-3">
+                                        <button
+                                            class="bg-[#142132] rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Save Mode
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                         <div class="note mt-3 py-2">
                             <h4 class="title text-teal-400 text-lg font-bold">Note</h4>
@@ -289,7 +338,7 @@
                             @csrf
                             <h4 class="title text-teal-400 text-lg font-bold">Setting</h4>
                             <input name="userID" class="hidden" value="{{ $users->id }}">
-                            <div class="grid grid-cols-4 mb-5 gap-6">
+                            <div class="grid grid-cols-2 md:grid-cols-4 mb-5 gap-6">
                                 <div class="">
                                     <h6 class="mb-2">Max Transfer</h6>
                                     <input id="maxTransfer" name="max_transfer" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
@@ -307,7 +356,7 @@
                                            value="{{ $users->max_torrent ?? 0 }}">
                                 </div>
                             </div>
-                            <div class="grid grid-cols-4 mb-5 gap-6">
+                            <div class="grid grid-cols-2 md:grid-cols-4 mb-5 gap-6">
                                 <div class="">
                                     <h6 class="mb-2">Encode Priority</h6>
                                     <input id="encodePriority" name="encoder_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
@@ -341,7 +390,7 @@
                                            type="text" value="{{ $users->torrent_priority ?? 0 }}">
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 row mb-5 mt-30 gap-6">
+                            <div class="grid md:grid-cols-1 md:grid-cols-2 row mb-5 mt-30 gap-6">
                                 <div class="flex items-center">
                                     <h4 class="me-4 mb-0 w-max">Streming Priority</h4>
                                     <input id="streamPriority" name="stream_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto

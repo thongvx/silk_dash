@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="px-0 pt-0 overflow-auto pb-3">
-    <form action="/postTickket" method="POST" enctype="multipart/form-data" class="text-white">
+    <form action="/postTicket" method="POST" enctype="multipart/form-data" class="text-white">
         @csrf
         <div>
             <label for="user" class="text-slate-400">

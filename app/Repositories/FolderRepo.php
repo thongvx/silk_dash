@@ -31,7 +31,18 @@ class FolderRepo extends BaseRepository
         $folders = Folder::where('user_id', $userId)
                     ->where('soft_delete', 0)
                     ->orderBy('id', 'desc')->get();
-
+        if($folders->isEmpty()){
+            Folder::create([
+                'user_id' => $userId,
+                'name_folder' => 'root',
+                'number_file' => 0,
+                'soft_delete' => 0,
+            ]);
+            // Refresh folders after creation
+            $folders = Folder::where('user_id', $userId)
+                ->where('soft_delete', 0)
+                ->orderBy('id', 'desc')->get();
+        }
         // Set cache
         Redis::setex($cacheKey, 259200, serialize($folders));
 
@@ -43,14 +54,24 @@ class FolderRepo extends BaseRepository
     {
         return Folder::where('name_folder', $folderName)->first();
     }
-    public function updateNumberOfFiles($folderId)
+    public function incrementNumberOfFiles($folderId)
     {
+        $userId = auth()->id();
+        $key = VideoCacheKeys::All_Folder_For_User->value . $userId;
         $folder = $this->find($folderId);
         if ($folder) {
-            $folder->number_file = Video::where('folder_id', $folderId)
-                                        ->where('soft_delete', 0)
-                                        ->count();
-            $folder->save();
+            $folder->increment('number_file');
         }
+        Redis::del($key);
+    }
+    public function decrementNumberOfFiles($folderId)
+    {
+        $userId = auth()->id();
+        $key = VideoCacheKeys::All_Folder_For_User->value . $userId;
+        $folder = $this->find($folderId);
+        if ($folder) {
+            $folder->decrement('number_file');
+        }
+        Redis::del($key);
     }
 }
