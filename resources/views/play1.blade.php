@@ -53,49 +53,43 @@
 
     </div>
 </div>
+@php
+    $custom_ads_json = json_encode($custom_ads);
+@endphp
 <?php
-$jsCode = 'var urlPlay = "' . $urlPlay . '";';
-$jsCode .= 'var videoID = "' . $videoID . '";';
-$jsCode .= 'console.log(urlPlay);';
-
-$obsfucator = new JsObfuscator($jsCode);
-$obsfucatedJs = $obsfucator->obfuscate();
-echo "<script>" . $obsfucatedJs . "</script>";
-?>
-<script>
+$jsCode = <<<JS
     var t = 0;
     var playID = 0;
-    var videoID ="{{ $videoID }}";
-    var urlPlay = "{{ $urlPlay }}";
-    var iframe = {{ $iframe }};
-    var typeVideo = {{ $videoType }};
-    var premium = {{ $premium }};
+    var videoID = " $videoID ";
+    var urlPlay = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
+    var iframe =  $iframe ;
+    var typeVideo =  $videoType ;
+    var premium =  $premium ;
     var enablePlay = 'yes';
-    var urlSub = {{ $player_setting->enable_caption }};
-    var is_sub = {{ $is_sub }};
-    var infinite_loop = "{{ $player_setting->infinite_loop }}";
-    var logo_link = "{{ $player_setting->logo_link }}";
-    var logo = {{ $player_setting->show_logo }};
-    var preview = {{ $player_setting->show_preview }};
-    var download = {{ $player_setting->show_download }};
-
+    var urlSub =  $player_setting->enable_caption ;
+    var is_sub =  $is_sub ;
+    var infinite_loop = " $player_setting->infinite_loop ";
+    var logo_link = " $player_setting->logo_link ";
+    var logo =  $player_setting->show_logo ;
+    var preview =  $player_setting->show_preview ;
+    var download =  $player_setting->show_download ;
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
-    var urlLogo
-    if(logo === 1 && logo_link !== ''){
-        if(logo_link.includes("http")){
+    var urlLogo;
+    if (logo === 1 && logo_link !== '') {
+        if (logo_link.includes("http")) {
             urlLogo = logo_link
-        }else{
-            urlLogo = "{{ asset(Storage::url($player_setting->logo_link)) }}"
+        } else {
+            urlLogo = " asset(Storage::url($player_setting->logo_link)) "
         }
-    }else{
+    } else {
         urlLogo = ""
     }
     //poster
-    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
+    var urlposter = " $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster";
     //title
-    var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
+    var title = " $player_setting->show_title == 1 ? $title : ''";
     var player = jwplayer('video_player');
 
     var viewTime = 0;
@@ -108,7 +102,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
     const loadPlayer = async (file) => {
         const options = {
             key: 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=',
-            sources: [{ file, type: 'hls' }],
+            sources: [{file, type: 'hls'}],
             playbackRateControls: [0.75, 1, 1.25, 1.5],
             aspectratio: "16:9",
             jwplayer8quality: true,
@@ -116,18 +110,64 @@ echo "<script>" . $obsfucatedJs . "</script>";
             preload: preload,
             width: '100%',
             height: '100%',
-            skin: { active: "{{ $player_setting->premium_color }}", },
-            title : title,
+            skin: {active: " $player_setting->premium_color ",},
+            title: title,
             localization: {
                 locale: 'en',
             },
             autostart: false,
             safarihlsjs: true,
-
         };
-        if(urlSub === 1 && is_sub === 1){
-            const jsonUrl = `https://streamsilk.com/storage/subtitles/{{ $slug_sub }}/{{ $slug_sub }}.json`;
-            const languageCodes = { 'eng' : 'English', 'spa' : 'Spanish', 'aze' : 'Azerbaijani', 'alb' : 'Albanian', 'ara' : 'Arabic', 'bul' : 'Bulgarian', 'chi' : 'Chinese', 'dnk' : 'Denmark', 'per' : 'Persian', 'fin' : 'Finland', 'fre' : 'French', 'ger' : 'German', 'gre' : 'Greek', 'heb' : 'Hebrew', 'hin' : 'Hindi', 'hun' : 'Hungarian', 'ind' : 'Indonesian', 'ita' : 'Italian', 'jpn' : 'Japanese', 'kan' : 'Kannada', 'khm' : 'Khmer', 'kor' : 'Korean', 'mal' : 'Malayalam', 'may' : 'Malay', 'nor' : 'Norway', 'pol' : 'Polish', 'por' : 'Portuguese', 'rus' : 'Russian', 'sin' : 'Sinhala', 'slv' : 'Slovenian', 'srp' : 'Serbian', 'swe' : 'Sweden', 'tam' : 'Tamil', 'tha' : 'Thai', 'tur' : 'Turkish', 'ukr' : 'Ukrainian', 'vie' : 'Vietnamese', 'rum' : 'Romanian', 'mar' : 'Marathi', 'cze' : 'Czech', 'slo' : 'Slovak', 'lit' : 'Lithuanian', 'kur' : 'Kurdish', 'dan' : 'Danish', 'bos' : 'Bosnian', 'hrv' : 'Croatian' };
+        if (urlSub === 1 && is_sub === 1) {
+            const jsonUrl = `https://streamsilk.com/storage/subtitles/ $slug_sub / $slug_sub .json`;
+            const languageCodes = {
+                'eng': 'English',
+                'spa': 'Spanish',
+                'aze': 'Azerbaijani',
+                'alb': 'Albanian',
+                'ara': 'Arabic',
+                'bul': 'Bulgarian',
+                'chi': 'Chinese',
+                'dnk': 'Denmark',
+                'per': 'Persian',
+                'fin': 'Finland',
+                'fre': 'French',
+                'ger': 'German',
+                'gre': 'Greek',
+                'heb': 'Hebrew',
+                'hin': 'Hindi',
+                'hun': 'Hungarian',
+                'ind': 'Indonesian',
+                'ita': 'Italian',
+                'jpn': 'Japanese',
+                'kan': 'Kannada',
+                'khm': 'Khmer',
+                'kor': 'Korean',
+                'mal': 'Malayalam',
+                'may': 'Malay',
+                'nor': 'Norway',
+                'pol': 'Polish',
+                'por': 'Portuguese',
+                'rus': 'Russian',
+                'sin': 'Sinhala',
+                'slv': 'Slovenian',
+                'srp': 'Serbian',
+                'swe': 'Sweden',
+                'tam': 'Tamil',
+                'tha': 'Thai',
+                'tur': 'Turkish',
+                'ukr': 'Ukrainian',
+                'vie': 'Vietnamese',
+                'rum': 'Romanian',
+                'mar': 'Marathi',
+                'cze': 'Czech',
+                'slo': 'Slovak',
+                'lit': 'Lithuanian',
+                'kur': 'Kurdish',
+                'dan': 'Danish',
+                'bos': 'Bosnian',
+                'hrv': 'Croatian'
+            };
             try {
                 const response = await fetch(jsonUrl);
                 if (!response.ok) throw new Error("Subtitle file not found");
@@ -139,7 +179,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
                     language: item.label
                 }));
                 // Add subtitle tracks to the player options
-                if(tracks.length > 0) {
+                if (tracks.length > 0) {
                     options.tracks = tracks;
                     options.captions = { default: true, track: 1 };
                 }
@@ -147,36 +187,40 @@ echo "<script>" . $obsfucatedJs . "</script>";
                 console.error("Error loading subtitles:", error.message);
             }
         }
-        if(urlLogo !== ""){
+        if (urlLogo !== "") {
             options.logo = {
                 "file": urlLogo,
                 'hide': 1,
-                "position": "{{ $player_setting->position }}",
+                "position": " $player_setting->position ",
                 "width": 100,
                 "height": 50,
-                "link": "{{ $player_setting->power_url_logo }}"
+                "link": " $player_setting->power_url_logo "
             }
         }
-        if(urlposter !== "" && urlposter !== "0"){
+        if (urlposter !== "" && urlposter !== "0") {
             options.image = urlposter
         }
-        if(preview === 1) {
+        if (preview === 1) {
             const previewTrack = {
                 file: `https://cdnimg.streamsilk.com/preview/${videoID}/${videoID}.jpg`,
                 kind: "thumbnails",
-            }
+            };
             if (!options.tracks) {
                 options.tracks = [];
             }
-            options.tracks.push(previewTrack);
+            options.tracks.push(previewTrack)
         }
         player.setup(options);
+        // window.addEventListener('beforeunload', function (e) {
+        //     var currentPosition = player.getPosition();
+        //     localStorage.setItem(`savedPosition_${videoID}`, currentPosition);
+        // });
         if( download === 1){
             player.addButton(
                 '<svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-download" viewBox="0 0 24 24" focusable="false"><path d="M12 16l4-4h-3V4h-2v8H8l4 4zm-6 2v2h12v-2H6z"/></svg>',
                 'Download',
                 function(){
-                    const link_download = '{{ route('download', $videoID) }}';
+                    const link_download = 'https://streamsilk.com/d/${videoID}';
                     openNewTab(link_download);
                 },
                 'Download'
@@ -198,25 +242,32 @@ echo "<script>" . $obsfucatedJs . "</script>";
             },
             'prv 10s'
         );
-        player.on('seek', function() {
+        // const savedPosition = localStorage.getItem(`savedPosition_${videoID}`);
+        // if (savedPosition) {
+        //     options.autostart = false;
+        //     player.on('ready', function() {
+        //         player.seek(parseFloat(savedPosition));
+        //     });
+        // }
+        player.on('seek', function () {
             isSeeking = true;
         });
-        player.on('seeked', function() {
+        player.on('seeked', function () {
             isSeeking = false;
         });
-        player.on('play', function() {
+        player.on('play', function () {
             isPaused = false;
-            if(player.getDuration() < 600){
+            if (player.getDuration() < 600) {
                 totalTimeRequired = player.getDuration() * 0.3
-            }else{
+            } else {
                 totalTimeRequired = 120
             }
             clearInterval(intervalId);
-            if(viewTime >= totalTimeRequired){
+            if (viewTime >= totalTimeRequired) {
                 return
             }
-            intervalId = setInterval(function() {
-                if ( !isSeeking && !isPaused) {
+            intervalId = setInterval(function () {
+                if (!isSeeking && !isPaused) {
                     viewTime++;
                     if (viewTime >= totalTimeRequired && !hasIncreasedPlayCount) {
                         clearInterval(intervalId);
@@ -226,12 +277,11 @@ echo "<script>" . $obsfucatedJs . "</script>";
                 }
             }, 1000);
         });
-        player.on('pause', function() {
+        player.on('pause', function () {
             isPaused = true;
             clearInterval(intervalId);
         });
-
-        player.on('complete', function() {
+        player.on('complete', function () {
             isPaused = true;
             clearInterval(intervalId);
         });
@@ -251,7 +301,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
                         $('.jw-settings-submenu').removeClass('jw-settings-submenu-active');
                         $('.jw-icon').attr('aria-expanded', 'false');
                         $('.jw-settings-submenu-audioTracks').toggleClass('jw-settings-submenu-active');
-                        $('.jw-controls.jw-reset').toggleClass('jw-settings-open')
+                        $('.jw-controls.jw-reset').toggleClass('jw-settings-open');
                         if($('.jw-settings-submenu-audioTracks').hasClass('jw-settings-submenu-active')){
                             $('.jw-settings-submenu-audioTracks, #jw-settings-menu, .jw-submenu-audioTracks').attr('aria-expanded', 'true');
                         }else{
@@ -265,6 +315,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
                 );
             }
         });
+
     };
     $(document).ready(() => {
         const checkInterval = setInterval(async () => {
@@ -278,6 +329,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
             }
         }, 1000);
     });
+
     function openNewTab(url) {
         var a = document.createElement('a');
         a.href = url;
@@ -286,7 +338,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-    }
+    };
     document.getElementById('pop').addEventListener("click", () => {
         var e = document.getElementById('pop');
         e.remove();
@@ -297,7 +349,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
         script.src = 'https://streamsilk.com/ads.js';
         document.head.appendChild(script);
     });
-    $(document).on('click', '#video_player', function() {
+    $(document).on('click', '#video_player', function () {
         if (playID === 0) {
             playID = 1;
             //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
@@ -311,6 +363,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
             clearTimeout(pop15s)
         })
     }, 10000);
+
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/" + videoID;
         fetch(apiUrl)
@@ -323,7 +376,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
             .then(json => {
                 console.log("update views success");
             })
-            .catch(function() {
+            .catch(function () {
                 console.log("fail");
             });
     }
@@ -343,6 +396,11 @@ echo "<script>" . $obsfucatedJs . "</script>";
             return false;
         }
     }
-</script>
+JS;
+
+$obsfucator = new JsObfuscator($jsCode);
+$obsfucatedJs = $obsfucator->obfuscate();
+echo "<script>" . $obsfucatedJs . "</script>";
+?>
 </body>
 </html>

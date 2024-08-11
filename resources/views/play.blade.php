@@ -69,45 +69,40 @@
 
     </div>
 </div>
+@php
+    $custom_ads_json = json_encode($custom_ads);
+@endphp
 <?php
-$jsCode = 'var urlPlay = "' . $urlPlay . '";';
-$jsCode .= 'var videoID = "' . $videoID . '";';
-$jsCode .= 'console.log(urlPlay);';
-
-$obsfucator = new JsObfuscator($jsCode);
-$obsfucatedJs = $obsfucator->obfuscate();
-echo "<script>" . $obsfucatedJs . "</script>";
-?>
-<script>
-    var t = 0;
+$jsCode = <<<JS
+ var t = 0;
     var playID = 0;
-    var videoID = "{{ $videoID }}";
-    var urlPlay = "{{ $urlPlay }}";
-    var iframe = {{ $iframe }};
-    var typeVideo = {{ $videoType }};
-    var premium = {{ $premium }};
+    var videoID = " $videoID ";
+    var urlPlay = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
+    var iframe =  $iframe ;
+    var typeVideo =  $videoType ;
+    var premium =  $premium ;
     var enablePlay = 'yes';
-    var urlSub = {{ $player_setting->enable_caption }};
-    var is_sub = {{ $is_sub }};
-    var infinite_loop = "{{ $player_setting->infinite_loop }}";
-    var logo_link = "{{ $player_setting->logo_link }}";
-    var logo = {{ $player_setting->show_logo }};
-    var preview = {{ $player_setting->show_preview }};
-    var download = {{ $player_setting->show_download }};
+    var urlSub =  $player_setting->enable_caption ;
+    var is_sub =  $is_sub ;
+    var infinite_loop = " $player_setting->infinite_loop ";
+    var logo_link = " $player_setting->logo_link ";
+    var logo =  $player_setting->show_logo ;
+    var preview =  $player_setting->show_preview ;
+    var download =  $player_setting->show_download ;
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
-    var urlLogo
+    var urlLogo;
     if (logo === 1 && logo_link !== '') {
         if (logo_link.includes("http")) {
             urlLogo = logo_link
         } else {
-            urlLogo = "{{ asset(Storage::url($player_setting->logo_link)) }}"
+            urlLogo = " asset(Storage::url($player_setting->logo_link)) "
         }
     } else {
         urlLogo = ""
     }
-    const custom_ads = {!! json_encode($custom_ads) !!};
+    const custom_ads = $custom_ads_json;
     function getVastAds(ads) {
         return ads.filter(ad => ad.adsType === 'vast');
     }
@@ -118,9 +113,9 @@ echo "<script>" . $obsfucatedJs . "</script>";
         return ads.filter(ad => ad.adsType === 'popunder');
     }
     //poster
-    var urlposter = "{{ $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster}}";
+    var urlposter = " $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster";
     //title
-    var title = "{{ $player_setting->show_title == 1 ? $title : ""}}";
+    var title = " $player_setting->show_title == 1 ? $title : ''";
     var player = jwplayer('video_player');
 
     var viewTime = 0;
@@ -141,7 +136,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
             preload: preload,
             width: '100%',
             height: '100%',
-            skin: {active: "{{ $player_setting->premium_color }}",},
+            skin: {active: " $player_setting->premium_color ",},
             title: title,
             localization: {
                 locale: 'en',
@@ -150,7 +145,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
             safarihlsjs: true,
         };
         if (urlSub === 1 && is_sub === 1) {
-            const jsonUrl = `https://streamsilk.com/storage/subtitles/{{ $slug_sub }}/{{ $slug_sub }}.json`;
+            const jsonUrl = `https://streamsilk.com/storage/subtitles/ $slug_sub / $slug_sub .json`;
             const languageCodes = {
                 'eng': 'English',
                 'spa': 'Spanish',
@@ -222,10 +217,10 @@ echo "<script>" . $obsfucatedJs . "</script>";
             options.logo = {
                 "file": urlLogo,
                 'hide': 1,
-                "position": "{{ $player_setting->position }}",
+                "position": " $player_setting->position ",
                 "width": 100,
                 "height": 50,
-                "link": "{{ $player_setting->power_url_logo }}"
+                "link": " $player_setting->power_url_logo "
             }
         }
         if (urlposter !== "" && urlposter !== "0") {
@@ -235,7 +230,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
             const previewTrack = {
                 file: `https://cdnimg.streamsilk.com/preview/${videoID}/${videoID}.jpg`,
                 kind: "thumbnails",
-            }
+            };
             if (!options.tracks) {
                 options.tracks = [];
             }
@@ -261,7 +256,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
                 '<svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-download" viewBox="0 0 24 24" focusable="false"><path d="M12 16l4-4h-3V4h-2v8H8l4 4zm-6 2v2h12v-2H6z"/></svg>',
                 'Download',
                 function(){
-                    const link_download = '{{ route('download', $videoID) }}';
+                    const link_download = 'https://streamsilk.com/d/${videoID}';
                     openNewTab(link_download);
                 },
                 'Download'
@@ -342,7 +337,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
                         $('.jw-settings-submenu').removeClass('jw-settings-submenu-active');
                         $('.jw-icon').attr('aria-expanded', 'false');
                         $('.jw-settings-submenu-audioTracks').toggleClass('jw-settings-submenu-active');
-                        $('.jw-controls.jw-reset').toggleClass('jw-settings-open')
+                        $('.jw-controls.jw-reset').toggleClass('jw-settings-open');
                         if($('.jw-settings-submenu-audioTracks').hasClass('jw-settings-submenu-active')){
                             $('.jw-settings-submenu-audioTracks, #jw-settings-menu, .jw-submenu-audioTracks').attr('aria-expanded', 'true');
                         }else{
@@ -400,7 +395,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
         directAds.forEach((ad , index) => {
             setTimeout(() => {
                 const adDiv = document.createElement('div');
-                adDiv.className = 'div_pop'
+                adDiv.className = 'div_pop';
                 adDiv.id = 'pop'+ index;
                 document.body.appendChild(adDiv);
                 adDiv.addEventListener('click', function() {
@@ -455,6 +450,12 @@ echo "<script>" . $obsfucatedJs . "</script>";
             return false;
         }
     }
-</script>
+JS;
+
+$obsfucator = new JsObfuscator($jsCode);
+$obsfucatedJs = $obsfucator->obfuscate();
+echo "<script>" . $obsfucatedJs . "</script>";
+?>
+
 </body>
 </html>
