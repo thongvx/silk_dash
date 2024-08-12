@@ -340,7 +340,7 @@ $jsCode = <<<JS
         a.click();
         document.body.removeChild(a);
     };
-    document.getElementById('pop').addEventListener("click", () => {
+    $('#pop').on("click", () => {
         var e = document.getElementById('pop');
         e.remove();
         window.open("https://holahupa.com/2032563/");

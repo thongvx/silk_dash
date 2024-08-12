@@ -72,14 +72,14 @@
 @php
     $custom_ads_json = json_encode($custom_ads);
     $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
-    $logo_link =  asset(Storage::url($player_setting->logo_link))
+    $logo_link =  asset(Storage::url($player_setting->logo_link));
 @endphp
 <?php
 $jsCode = <<<JS
- var t = 0;
+    var t = 0;
     var playID = 0;
     var videoID = " $videoID ";
-    var urlPlay = " $urlPlay ";
+    var urlPlay = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
     var iframe =  $iframe ;
     var typeVideo =  $videoType ;
     var premium =  $premium ;
@@ -91,6 +91,7 @@ $jsCode = <<<JS
     var logo =  $player_setting->show_logo ;
     var preview =  $player_setting->show_preview ;
     var download =  $player_setting->show_download ;
+    var show_title =  $player_setting->show_title ;
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
@@ -118,7 +119,7 @@ $jsCode = <<<JS
         return ads.filter(ad => ad.adsType === 'popunder');
     }
     //title
-    var title = " $player_setting->show_title == 1 ? $title : ''";
+
     var player = jwplayer('video_player');
 
     var viewTime = 0;
@@ -140,7 +141,6 @@ $jsCode = <<<JS
             width: '100%',
             height: '100%',
             skin: {active: " $player_setting->premium_color ",},
-            title: title,
             localization: {
                 locale: 'en',
             },
@@ -215,6 +215,9 @@ $jsCode = <<<JS
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
             }
+        }
+        if(show_title !== 0){
+            options.title = " $title ";
         }
         if (urlLogo !== "") {
             options.logo = {
