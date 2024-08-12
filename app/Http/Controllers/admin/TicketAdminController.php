@@ -116,7 +116,7 @@ class TicketAdminController
         return redirect()->back();
     }
     private function notificationTicket($ticket){
-        $subject = 'Ticket has been replied.';
+        $subject = 'Your ticket : #'.$ticket->id.' has been replied.';
         $message = 'Ticket with subject: "' . $ticket->subject . '" has been replied '. "<br>"
             . 'View Ticket: <a href="https://streamsilk.com/support/'.$ticket->id.'" class="hover:text-[#009FB2]">https://streamsilk.com/support/' . $ticket->id.'</a>';
         Notification::create([
