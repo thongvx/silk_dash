@@ -120,7 +120,7 @@ $jsCode = <<<JS
             safarihlsjs: true,
         };
         if (urlSub === 1 && is_sub === 1) {
-            const jsonUrl = `https://streamsilk.com/storage/subtitles/ $slug_sub / $slug_sub .json`;
+            const jsonUrl = `https://streamsilk.com/storage/subtitles/$slug_sub/$slug_sub.json`;
             const languageCodes = {
                 'eng': 'English',
                 'spa': 'Spanish',
