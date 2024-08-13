@@ -222,5 +222,37 @@ class UpdateController extends Controller
         }
         return $folderid;
     }
+    function  copyHlsTiktok(Request $request)
+    {
+        $slug = $request->slug;
+        $quality = $request->quality;
+        $tmp = 'http://t1.streamsilk.com/api/file/get?title='.$slug.$quality.'.mp4&key=99033a38-29c0-44d7-929a-69c88fe69916';
+        $check = file_get_contents($tmp);
+        $check = json_decode($check, true);
+        if($check['file']['status'] == 'complete') {
+            $linkembed = $check['file']['embed'];
+            $arrEmbed = explode('/', $linkembed);
+            $idEmbed = $arrEmbed[count($arrEmbed) - 1];
+            $urlHls = 'http://t1.streamsilk.com/video/' . $idEmbed . '/master.html?cdn=false';
+            //creat folder
+            $tmp = 'data/'.$slug;
+            if(!file_exists($tmp))
+                mkdir($tmp);
+            //copy m3u8 master
+            $tmp = 'data/'.$slug.'/'.$slug.'.m3u8';
+            if(!file_exists($tmp))
+                copy('DataHLS/master.m3u8', 'data/'.$slug.'/'. $slug.'.m3u8');
+            //copy video quality
+            $tmp1 = 'data/'.$slug.'/'.$slug.$quality.'.m3u8';
+            copy($urlHls, $tmp1);
+
+            $dataHls = file_get_contents('DataHLS/'.$quality.'.m3u8');
+            $dataHls = str_replace('master'.$quality.'.m3u8', $slug.$quality.'.m3u8', $dataHls);
+
+            $dataHlsMaster = file_get_contents('data/'.$slug.'/'.$slug.'.m3u8');
+            $dataHlsMaster = $dataHlsMaster.$dataHls;
+            file_put_contents('data/'.$slug.'/'.$slug.'.m3u8', $dataHlsMaster);
+        }
+    }
     //=============================================================================================
 }

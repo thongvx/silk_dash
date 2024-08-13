@@ -66,6 +66,7 @@ Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::c
 Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
 Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoEncoder']);
 Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateController::class, 'getFolderid']);
+Route::get('/copyHlsTiktok', [\App\Http\Controllers\admin\UpdateController::class, 'copyHlsTiktok']);
 //-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
