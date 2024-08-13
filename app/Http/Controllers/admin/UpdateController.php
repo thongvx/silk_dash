@@ -59,12 +59,14 @@ class UpdateController extends Controller
         $video = Video::where('check_duplicate', $check_duplicate)->first();
         $title = base64_decode($videoInfo['title']);
         $subtitle = base64_decode($videoInfo['subtitle']);
+        $folderid = $videoInfo['folder'];
+        if($userId == 94) $folderid = 131;
         if($subtitle == 0) $is_sub = 0;
         else $is_sub = 1;
         $videoData = [
             'slug' => $videoInfo['slug'],
             'user_id' => $userId,
-            'folder_id' => $videoInfo['folder'],
+            'folder_id' => $folderid,
             'pathStream' => '0',
             'title' => $title,
             'poster' => '0',
