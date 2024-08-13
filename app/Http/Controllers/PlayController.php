@@ -82,14 +82,16 @@ class PlayController
                         $video->stream = $nameSvStream[0];
                         $video->save();
                     } else {
-                        $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
-                        if ($svStream === null) {
-                            $svStream = SvStreamService::selectSvStream();
-                            $nameSvStream = explode('.', $svStream);
-                            $video->stream = $video->stream . '-' . $nameSvStream[0];
-                            $video->save();
+                        if($video->stream != 'ss00'){
+                            $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
+                            if ($svStream === null) {
+                                $svStream = SvStreamService::selectSvStream();
+                                $nameSvStream = explode('.', $svStream);
+                                $video->stream = $video->stream . '-' . $nameSvStream[0];
+                                $video->save();
+                            }
+                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                         }
-                        Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                     }
                     if($video->audio == 1){
                         $audioFile = $this->AudioVideoRepo->getAudioVideo($video->slug);
@@ -97,8 +99,12 @@ class PlayController
                             Queue::push(new CreatStreamAudioJob($audio['slug'], $svStream, $audio['language'], $audio['path']));
                         }
                     }
+                    if($video->stream != 'ss00')
+                        $urlPlay = 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8';
+                    else
+                        $urlPlay = 'https://streamsilk.com/data/'.$video->middle_slug.'/'.$video->middle_slug.'.m3u8';
                     $playData = [
-                        'urlPlay' => 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8',
+                        'urlPlay' => $urlPlay,
                         'videoID' => $video->slug,
                         'poster' => $poster,
                         'title' => $title,
