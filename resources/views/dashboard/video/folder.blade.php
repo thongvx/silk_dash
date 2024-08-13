@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="max-h-[calc(100vh-30em)] {{ $folders->count() > 7 ? 'overflow-auto': ''}} lg:max-h-[calc(100vh-16em)]">
+        <div class="max-h-[calc(100vh-30em)] {{ $folders->count() > 7 ? 'overflow-auto': ''}} lg:max-h-[calc(100vh-17em)]">
             <div class="w-full  list-folder">
                 @if($currentFolderName -> name_folder != 'root')
                 <div folder
