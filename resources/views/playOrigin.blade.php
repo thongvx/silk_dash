@@ -73,6 +73,7 @@ $jsCode = <<<JS
     var logo =  $player_setting->show_logo ;
     var preview =  $player_setting->show_preview ;
     var download =  $player_setting->show_download ;
+    var show_title =  $player_setting->show_title ;
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
@@ -111,7 +112,6 @@ $jsCode = <<<JS
             width: '100%',
             height: '100%',
             skin: {active: " $player_setting->premium_color ",},
-            title: title,
             localization: {
                 locale: 'en',
             },
@@ -186,6 +186,9 @@ $jsCode = <<<JS
             } catch (error) {
                 console.error("Error loading subtitles:", error.message);
             }
+        }
+         if(show_title !== 0){
+            options.title = "$title";
         }
         if (urlLogo !== "") {
             options.logo = {
