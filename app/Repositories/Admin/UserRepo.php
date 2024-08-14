@@ -18,59 +18,46 @@ class UserRepo
 
     public function getAllUsers($tab, $column , $direction, $limit, $columns)
     {
-        $cache_keys = 'all_users';
-        $all_users = Redis::get($cache_keys);
-        if(isset($all_users)){
-            $all_users = unserialize($all_users);
-        }else{
-            $all_users = User::all()->whereDoesntHave('roles', function ($query) {
-                $query->where('name', 'admin');
-            });
-            Redis::setex($cache_keys, 259200, serialize($all_users));
-        }
+        $query = User::query()
+                ->whereDoesntHave('roles', function ($query) {
+                        $query->where('name', 'admin');
+                    });
 
         $column1 = $column == 'created_at' ? 'id' : $column;
 
-        switch ($tab) {
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        switch ($tab){
             case 'unverified':
-                $all_users = $all_users->whereIn('active', [0, null]);
+                $query->whereIn('active', [0, null]);
                 break;
             case 'delete':
-                $all_users = $all_users->where('active', 19);
+                $query->where('active', 19);
                 break;
             case 'premium':
-                $all_users = $all_users->whereIn('premium', [1, 2, 3]);
+                $query->whereIn('premium', [1,2,3]);
                 break;
             case 'free':
-                $all_users = $all_users->whereIn('active', [1, 2])
-                    ->where('premium', 0);
+                $query->where('active', [1,2])
+                        ->where('premium', 0);
                 break;
             default:
                 break;
         }
 
-        $sortedData = $all_users->sortBy($column1, SORT_REGULAR, $direction === 'desc');
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $sortedData->slice(($currentPage - 1) * $limit, $limit)->values();
-        $users = new LengthAwarePaginator($currentPageItems, $sortedData->count(), $limit, $currentPage, [
-            'path' => LengthAwarePaginator::resolveCurrentPath(),
-        ]);
+        $users = $query->orderBy($column1, $direction)
+                        ->paginate($limit);
         return $users;
     }
 
     public function getUserById($id)
     {
-        $cache_keys = 'all_users';
-        $all_users = Redis::get($cache_keys);
-        if(isset($all_users)){
-            $all_users = unserialize($all_users);
-        }else{
-            $all_users = User::all()->whereDoesntHave('roles', function ($query) {
-                $query->where('name', 'admin');
-            });
-            Redis::setex($cache_keys, 259200, serialize($all_users));
+        $keys = 'user:'.$id;
+        $user = Redis::get($keys);
+        if (isset($user)) {
+            return unserialize($user);
         }
-        $user = $all_users->where('id', $id)->first();
+        $user = User::query()->where('id', $id)->first();
+        Redis::setex($keys, 259200, serialize($user));
         return $user;
     }
 

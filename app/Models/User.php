@@ -85,13 +85,17 @@ class User extends Authenticatable implements MustVerifyEmail
         static::created(function () {
             Redis::del('all_users');
         });
-
-        static::updated(function () {
+        static::saved(function ($model) {
+            Redis::del('user:' . $model->id);
+        });
+        static::updated(function ($model) {
             Redis::del('all_users');
+            Redis::del('user:' . $model->id);
         });
 
-        static::deleted(function () {
+        static::deleted(function ($model) {
             Redis::del('all_users');
+            Redis::del('user:' . $model->id);
         });
     }
 }

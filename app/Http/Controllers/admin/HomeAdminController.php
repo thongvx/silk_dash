@@ -77,7 +77,7 @@ class HomeAdminController extends Controller
             $userId = explode(':', $key)[2];
             $scores[str_replace("total_user_views:{$today}:", '', $key)] = [
                 'views' => Redis::get($key) ?? 0,
-                'name' => $this->userRepo->getUserById($userId),
+                'name' => $this->userRepo->getUserById($userId)->name,
                 'id' => $userId,
             ];
         }
