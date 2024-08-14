@@ -71,12 +71,8 @@ class CalculateDailyRevenue extends Command
                     $totalImpressionViews += (int)$views;
                 }
             }
-            $data_setting = $this->accountRepo->getSetting($userId);
-            $earning = 0;
-            // lay trang thai earning
-            if ($data_setting->earningModes == 1) $earning = 0.5;
-            if ($data_setting->earningModes == 2) $earning = 1;
-            $valueArr = StatisticService::calculateValue($userId, $earning, $today);
+
+            $valueArr = StatisticService::calculateValue($userId, $today);
             $value = array_sum($valueArr);
 
             $download = 0;
@@ -118,12 +114,7 @@ class CalculateDailyRevenue extends Command
             $totalImpression2Views = Redis::get("total_impression2:{$today}:{$user_id}:$countryCode") ?: 0;
             $countryDownload = 0;
             $paidView = $totalImpression1Views+$totalImpression2Views + $countryDownload;
-            $data_setting = $this->accountRepo->getSetting($user_id);
-            $earning = 0;
-            // lay trang thai earning
-            if ($data_setting->earningModes == 1) $earning = 0.5;
-            if ($data_setting->earningModes == 2) $earning = 1;
-            $revenueArray =  StatisticService::calculateValue($user_id, $earning, $today);
+            $revenueArray =  StatisticService::calculateValue($user_id, $today);
             $revenue = $revenueArray[$countryCode] ?? 0;
             $countryVpnAdsView = $countryViews - $paidView;
             // Tạo mới dữ liệu trong bảng country_statistics

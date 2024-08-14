@@ -30,7 +30,7 @@ class StatisticService
         return $countryMap;
     }
 
-    public static function calculateValue($userId, $earning, $today)
+    public static function calculateValue($userId, $today)
     {
         $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
         $totalImpression2 = Redis::keys("total_impression2:{$today}:{$userId}:*");

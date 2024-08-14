@@ -53,13 +53,7 @@ class ReportController extends Controller
         return $data;
     }
     private function earningToday($userId, $today){
-        $data_setting = $this->accountRepo->getSetting($userId);
-        $earning = 0;
-        if ($data_setting->earningModes == 1)
-            $earning = 0.5;
-        if ($data_setting->earningModes == 2)
-            $earning = 1;
-        $earningToday = StatisticService::calculateValue($userId, $earning, $today->format('Y-m-d'));
+        $earningToday = StatisticService::calculateValue($userId, $today->format('Y-m-d'));
         return $earningToday;
     }
     // Get total profit and total withdrawals

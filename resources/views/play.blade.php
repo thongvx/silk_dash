@@ -217,16 +217,16 @@ $jsCode = <<<JS
             }
         }
         if(show_title !== 0){
-            options.title = " $title ";
+            options.title = "$title";
         }
         if (urlLogo !== "") {
             options.logo = {
                 "file": urlLogo,
                 'hide': 1,
-                "position": " $player_setting->position ",
+                "position": "$player_setting->position",
                 "width": 100,
                 "height": 50,
-                "link": " $player_setting->power_url_logo "
+                "link": "$player_setting->power_url_logo"
             }
         }
         if (urlposter !== "" && urlposter !== "0") {
