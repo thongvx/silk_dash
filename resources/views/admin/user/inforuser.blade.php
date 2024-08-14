@@ -189,8 +189,8 @@
                                 </div>
                             </div>
                         </div> <!--end-actions-->
-                        <div class="grid grid-cols-2 gap-6 mt-8">
-                            <div class="mt-3 bg-[#121520] rounded-lg p-3">
+                        <div class="grid grid-cols-4 gap-6 mt-8">
+                            <div class="mt-3 bg-[#121520] rounded-lg p-3 col-span-2 xl:col-span-1">
                                 <h4 class="title text-teal-400 text-lg font-bold">Earning Modes </h4>
                                 <form action="/admin/updateEarning" method="post">
                                     @csrf
@@ -234,7 +234,54 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="mt-3 bg-[#121520] rounded-lg p-3">
+                            <div class="mt-3 bg-[#121520] rounded-lg p-3 col-span-2 xl:col-span-1">
+                                <h4 class="title text-teal-400 text-lg font-bold">Video Dimension For Encoding</h4>
+                                <form action="/admin/updateUser" method="post">
+                                    @csrf
+                                    <input name="userID" class="hidden" value="{{ $users->id }}">
+                                    @if($users -> active == 0 )
+                                        <input name="email_verified_at" class="hidden" value="{{ now() }}">
+                                    @endif
+                                    <fieldset class="mt-6">
+                                        <input name="active" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                               type="radio"
+                                               value="2" {{ $users -> active == 2 ? 'checked' : '' }}>
+                                        <label for="2" class="ml-3">Full: 480 - 720 -1080</label>
+                                    </fieldset>
+                                    <fieldset class="mt-6">
+                                        <input name="active" id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                               type="radio"
+                                               value="1" {{ $users -> active == 1 ? 'checked' : '' }}>
+                                        <label for="1" class="ml-3">720</label>
+                                    </fieldset>
+                                    <fieldset class="mt-6">
+                                        <input name="active" id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                               type="radio"
+                                               value="0" {{ $users -> active == 0 ? 'checked' : '' }}>
+                                        <label for="0" class="ml-3">Unverified</label>
+                                    </fieldset>
+                                    <div class=" save text-center mt-3">
+                                        <button
+                                            class="bg-[#142132] rounded-lg px-6 py-2 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Save Mode
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mt-3 bg-[#121520] rounded-lg p-3 col-span-4 xl:col-span-2">
                                 <h4 class="title text-teal-400 text-lg font-bold">FTP Credentials</h4>
                                 <form action="/admin/updateUser" method="post">
                                     @csrf
