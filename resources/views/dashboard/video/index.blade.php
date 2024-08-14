@@ -33,7 +33,7 @@
                     </button>
                 </div>
                 <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative  max-w-full w-full  bg-[#121520]">
-                    <div class="lg:min-h-[calc(100vh-18em)] xl:min-h-[calc(100vh-11em)]" id="box-content" page-video>
+                    <div class="lg:min-h-[calc(100vh-18em)] xl:min-h-[calc(100vh-10.5em)]" id="box-content" page-video>
                         @include('dashboard.'.request()->path() . '.' . request()->get('tab'))
                     </div>
                 </div>

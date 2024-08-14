@@ -218,7 +218,7 @@
                 </div>
                 <div class="px-4 pb-1 mt-4 h-72 overflow-auto">
                     @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
-                        <a href="javascript:;" data-id="" btn-info-noti-gift
+                        <a href="javascript:;" data-box="gift" btn-info-noti-important
                            class="bg-[#009FB2] sticky top-0 flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
                         <span class="absolute -left-2 -bottom-4 w-16">
                             <img src="{{ asset('image/voucher/discount2.svg') }}" alt="" class="animate-ping !scale-125 opacity-50 absolute">
@@ -248,6 +248,14 @@
                             </div>
                         </a>
                     @endif
+                        <a href="javascript:;" data-box="zoom" btn-info-noti-important
+                           class="bg-[#009FB2] sticky top-20 flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
+                            <div class="info sticky z-30">
+                                <h6 class="text-white font-bold w-max subject text-center py-3">
+                                    Please use newest Z-o-o-m version to upload videos!<br>
+                                </h6>
+                            </div>
+                        </a>
                     @forelse($notifications as $notification)
                         <a href="javascript:;" data-id="{{ $notification->id }}" btn-read btn-info-noti
                            class="bg-[#142132] flex items-center rounded-lg py-2 px-2 text-white group shadow-lg drop-shadow-sm mb-4">
@@ -378,7 +386,8 @@
                 </button>
             </div>
             <div  id="fixed-box-control" class="mb-4">
-                <div class="export text-white">
+                @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                <div class="box gift text-white hidden">
                     <h1><b><i>Dear member,</i></b></h1><br>
                     <p>I’m Richard, manager of <a href="https://streamsilk.com/">StreamSilk.com</a>.</p><br>
                     <p>I’m very happy to give you our <span class="font-bold"><i>Gift program for new members. On your first withdrawal, you will receive an
@@ -395,6 +404,33 @@
                     <p>If you need any further support, please don’t hesitate to contact me!</p>
                     <p >Telegram: <a class="font-bold"  href="https://t.me/RichardSSilk" target="_black"><i>https://t.me/RichardSSilk</i></a><br>
                         Skype: <a class="font-bold" href="skype:live:.cid.62ed279799bfed31" target="_black"><i>live:.cid.62ed279799bfed31</i></a></p><br>
+                    <p><i>Regards,<br><b>Richard - StreamSilk</b></i></p>
+                </div>
+                @endif
+                <div class="box zoom text-white hidden">
+                    <h1><b><i>Dear member,</i></b></h1>
+                    <br>
+                    <p>
+                        How are you doing?<br>
+                        I’m Richard, manager of <a href="https://streamsilk.com/">StreamSilk</a>.<br>
+                    </p>
+                    <br>
+                    <p>
+                        <span class="font-medium italic">We are excited to announce that we have partnered with Zoom to increase video upload speeds to the highest possible level.</span><br>
+                        Please use newest version of Z-o-o-m app to continue uploading your videos.<br>
+                        <span class="text-rose-600 italic font-semibold">And the streamsilk[api] has best speed for upload videos</span>
+                    </p>
+                    <br>
+                    <p>
+                        Let’s upload your videos and experience our “silky” uploading and playing service 😊
+                    </p>
+                    <br>
+                    <p>
+                        If you need any further support, please don’t hesitate to contact me!<br>
+                        Telegram: <a href="https://t.me/RichardSSilk" class="font-bold hover:text-[#009FB2] italic">https://t.me/RichardSSilk</a><br>
+                        Skype: <a href="skype:live:.cid.62ed279799bfed31" class="font-bold hover:text-[#009FB2] italic">live:.cid.62ed279799bfed31</a>
+                    </p>
+                    <br>
                     <p><i>Regards,<br><b>Richard - StreamSilk</b></i></p>
                 </div>
             </div>

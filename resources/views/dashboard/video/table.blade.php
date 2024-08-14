@@ -1,4 +1,4 @@
-<div class="px-0 pt-0 {{$videos->total() <= 4 && $videos->total() >0 ? ' min-h-72 overflow-x-auto' :' overflow-auto' }} max-h-[calc(100vh-20em)] lg:max-h-[calc(100vh-25em)] xl:max-h-[calc(100vh-20em)]">
+<div class="px-0 pt-0 {{$videos->total() <= 4 && $videos->total() >0 ? ' min-h-72 overflow-x-auto' :' overflow-auto' }} max-h-[calc(100vh-20em)] lg:max-h-[calc(100vh-25em)] xl:max-h-[calc(100vh-21.5em)]">
     <table id="datatable" datatable data-page-size="10" data-column-table="{{ $column }}"
            data-column-direction="{{ $direction }}"
            class=" text-sm border-separate table-auto w-full min-w-max text-white text-left !border-t-0 ">

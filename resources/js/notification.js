@@ -84,8 +84,11 @@ $(document).on('click', '[btn-info-noti]', function() {
                                 </div>`
     $('body').append(divInfoNoti);
 })
-$(document).on('click', '[btn-info-noti-gift]', function() {
+$(document).on('click', '[btn-info-noti-important]', function() {
     $('[fixed-noti-gift-card]').addClass('flex').removeClass('hidden');
+    var box = $(this).data('box');
+    $('.box').addClass('hidden');
+    $('.'+box).removeClass('hidden')
 })
 $(document).on('click', '[fixed-noti-close-button]', function() {
     $('[fixed-noti-card]').remove();

@@ -13,7 +13,8 @@
     </p>
     <p>
         <span style="color: #009FB2">We are excited to announce that we have partnered with Zoom to increase video upload speeds to the highest possible level.</span><br>
-        Please use newest version of Z-o-o-m app to continue uploading your videos.
+        Please use newest version of Z-o-o-m app to continue uploading your videos.<br>
+        <span style="color: #009FB2; font-style: italic;">And the streamsilk[api] has best speed for upload videos</span>
     </p>
     <p>
         Let’s upload your videos and experience our “silky” uploading and playing service 😊
