@@ -11,19 +11,21 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Repositories\AccountRepo;
 use App\Repositories\ReportRepo;
+use App\Repositories\Admin\UserRepo;
 use App\Models\CountryTier;
 use App\Services\StatisticService;
 use App\Models\File;
 
 class HomeAdminController extends Controller
 {
-    protected $videoController, $accountRepo, $reportRepo;
+    protected $videoController, $accountRepo, $reportRepo, $userRepo;
 
-    public function __construct(VideoController $videoController, AccountRepo $accountRepo, ReportRepo $reportRepo)
+    public function __construct(VideoController $videoController, AccountRepo $accountRepo, ReportRepo $reportRepo, UserRepo $userRepo)
     {
         $this->videoController = $videoController;
         $this->accountRepo = $accountRepo;
         $this->reportRepo = $reportRepo;
+        $this->userRepo = $userRepo;
     }
 
     //get data for chart
@@ -75,7 +77,7 @@ class HomeAdminController extends Controller
             $userId = explode(':', $key)[2];
             $scores[str_replace("total_user_views:{$today}:", '', $key)] = [
                 'views' => Redis::get($key) ?? 0,
-                'name' => User::find($userId)->name,
+                'name' => $this->userRepo->getAllUsers('all', 'created_at', 'desc',100, ['*'])->find($userId)->name,
                 'id' => $userId,
             ];
         }

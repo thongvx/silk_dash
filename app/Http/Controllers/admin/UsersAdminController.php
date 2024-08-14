@@ -32,7 +32,7 @@ class UsersAdminController
         $column = $request->get('column', 'created_at');
         $direction = $request->get('direction', 'desc');
         $data = [
-            'users' => $this->userRepo->getAllUsers($tab, $column, $direction, 20, $limit, ['*']),
+            'users' => $this->userRepo->getAllUsers($tab, $column, $direction, $limit, $columns),
             'title' => 'Users',
         ];
         return view('admin.user.user', $data);
