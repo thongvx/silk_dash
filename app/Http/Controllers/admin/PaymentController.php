@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Payment;
 use App\Repositories\Admin\PaymentRepo;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,14 @@ class PaymentController
             'payments' => $payments,
         ];
         return view('admin.payment.payment', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        $payment = Payment::find($id);
+        $payment->update($data);
+        return response()->json($payment);
     }
 
 }

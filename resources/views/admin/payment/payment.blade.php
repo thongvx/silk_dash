@@ -34,10 +34,10 @@
                                                                     <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer">
                                                                         Amount
                                                                     </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer">
+                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer text-center">
                                                                         Comment
                                                                     </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer">
+                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer text-center">
                                                                         Status
                                                                     </th>
                                                                     <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer px-1">
@@ -49,15 +49,37 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     @forelse( $payments as $payment)
-                                                                        <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                                                            <td>{{ $payment->user_ID }}</td>
-                                                                            <td></td>
-                                                                            <td>{{ $payment->network }}</td>
-                                                                            <td>{{ $payment->amount }}</td>
+                                                                        <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" data-id="{{ $payment->id }}">
+                                                                            <td class="text-center {{ $payment->status == 1 ? 'text-[#009FB2]' : '' }}">{{ $payment->user_ID }}</td>
                                                                             <td>{{ $payment->transaction_ID }}</td>
-                                                                            <td>{{ $payment->status }}</td>
+                                                                            <td>{{ $payment->network }}</td>
+                                                                            <td>{{ $payment->amount + $payment->gift }}</td>
+                                                                            <td class="px-3">
+                                                                                @if($payment->status == 1)
+                                                                                    {{ $payment->comment }}
+                                                                                @else
+                                                                                    <input type="email" name="comment" value="" input-comment
+                                                                                           class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
+                                                                                           placeholder="comment" >
+                                                                                @endif
+                                                                            </td>
+                                                                            <td class=" text-center {{ $payment->status == 1 ? 'text-[#009FB2]' : '' }}">
+                                                                                @if($payment->status == 0)
+                                                                                    <select name="status" class="bg-[#009FB2] text-white placeholder:text-gray-400/80 placeholder:font-normal px-3 py-1.5 pl-2
+                                                                                                        rounded-lg outline-none autofill:bg-yellow-200 w-max" select-status>
+                                                                                        <option value="0" selected>Pending</option>
+                                                                                        <option value="1">Paid</option>
+                                                                                    </select>
+                                                                                @else
+                                                                                    Paid
+                                                                                @endif
+                                                                            </td>
                                                                             <td>{{ date('Y-m-d') }}</td>
-                                                                            <td></td>
+                                                                            <td>
+                                                                                <button btn-submit-payment id="all" class="px-4 py-1 rounded-lg text-white hover:bg-[#009FB2] ml-2 bg-blue-600" data-task="all">
+                                                                                    <a href="javascript:;">Submit</a>
+                                                                                </button>
+                                                                            </td>
                                                                         </tr>
                                                                     @empty
                                                                         <tr>
