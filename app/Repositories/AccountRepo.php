@@ -50,7 +50,16 @@ class AccountRepo extends BaseRepository
 
     public function getSettingsByUserIds($userIds)
     {
-        $settings = AccountSetting::whereIn('user_id', $userIds)->get();
+        $cache_keys = AccountSettingCacheKeys::ALL_ACCOUNT_SETTING->value;
+        $settings = Redis::get($cache_keys);
+        if (isset($settings)) {
+            $settings = unserialize($settings);
+        }else{
+            $settings = $this->query()
+                ->whereIn('user_id', $userIds)
+                ->get();
+            Redis::setex($cache_keys, 2592000, serialize($settings));
+        }
         foreach ($settings as $setting) {
             $cacheKey = AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $setting->user_id;
             Redis::setex($cacheKey, 2592000, serialize($setting));

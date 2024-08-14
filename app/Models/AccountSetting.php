@@ -37,8 +37,12 @@ class AccountSetting extends Model
     protected static function boot()
     {
         parent::boot();
+        static::created(function ($model) {
+            Redis::del(AccountSettingCacheKeys::ALL_ACCOUNT_SETTING->value);
+        });
         static::saved(function ($model) {
             Redis::del(AccountSettingCacheKeys::GET_ACCOUNT_SETTING_BY_USER_ID->value . $model->user_id);
+            Redis::del(AccountSettingCacheKeys::ALL_ACCOUNT_SETTING->value);
         });
     }
 
