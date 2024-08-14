@@ -53,8 +53,8 @@ class UserRepo
 
     public function getUserById($id)
     {
-        $user = User::query()->where('id', $id)->first();
-        return $user;
+        $users = $this->getAllUsers('all', 'created_at', 'desc', 100, ['*']);
+        return $users->find($id);
     }
 
     //search user
