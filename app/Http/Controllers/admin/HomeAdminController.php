@@ -133,7 +133,6 @@ class HomeAdminController extends Controller
     //index
     public function index(){
         $today = Carbon::today()->format('Y-m-d');
-        $users = Redis::get('all_users') ? unserialize(Redis::get('all_users')) : User::all();
         $totalWatching = 0;
         $watchingKeys = redis::keys("watching_users:*");
         foreach ($watchingKeys as $key) {
@@ -159,8 +158,8 @@ class HomeAdminController extends Controller
         $data =[
             'title' => 'Dashboard',
             'userWatching' => $totalWatching,
-            'storage' => File::formatSizeUnits($users->sum('storage')),
-            'users' => $users->count(),
+            'storage' => File::formatSizeUnits(User::sum('storage')),
+            'users' => User::count(),
             'todayEarning' => $totalEarnings,
             'totalBalance' => $totalBalance,
             'dates' => $data_chart['dates'],

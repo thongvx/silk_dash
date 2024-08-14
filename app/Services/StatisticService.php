@@ -71,24 +71,18 @@ class StatisticService
     public function calculateTotalEarnings($today)
     {
         // In the `StatisticService` class
-        $cacheKey = 'all_users';
-        $users = Redis::get($cacheKey);
-
-        if (!$users) {
-            $users = User::all();
-            Redis::setex($cacheKey, 43200, serialize($users)); // Cache for 12 hours
-        } else {
-            $users = unserialize($users);
-        }
         $totalEarnings = 0;
-        $userIds = $users->pluck('id');
+        $userIds = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->pluck('id');
         $settings = $this->accountRepo->getSettingsByUserIds($userIds);
 
         // Convert settings to a key-value array for quick access
         $settingsMap = $settings->keyBy('user_id');
-        foreach ($users as $user) {
-            $data_setting = $settingsMap->get($user->id);
+        foreach ($userIds as $userId) {
+            $data_setting = $settingsMap->get($userId);
             $earning = 0;
+
             if ($data_setting !== null) {
                 if ($data_setting->earningModes == 1) {
                     $earning = 0.5;
@@ -96,7 +90,8 @@ class StatisticService
                     $earning = 1;
                 }
             }
-            $userEarnings = self::calculateValue($user->id, $earning, $today);
+
+            $userEarnings = $this->calculateValue($userId, $earning, $today);
             $totalEarnings += array_sum($userEarnings);
         }
 
