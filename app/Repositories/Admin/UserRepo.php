@@ -54,7 +54,8 @@ class UserRepo
     public function getUserById($id)
     {
         $users = $this->getAllUsers('all', 'created_at', 'desc', 100, ['*']);
-        return $users->find($id);
+        $user = $users->find($id);
+        return $user;
     }
 
     //search user
