@@ -17,4 +17,6 @@ enum VideoCacheKeys: string
 
     case COUNT_VIDEO_FOR_FOLDER = 'count_video_for_folder:';
 
+    case API_SV_TIKTOK = 'api_sv_tiktok:';
+
 }
