@@ -72,9 +72,17 @@ class StatisticService
     {
         // In the `StatisticService` class
         $totalEarnings = 0;
-        $userIds = User::whereDoesntHave('roles', function ($query) {
-            $query->where('name', 'admin');
-        })->pluck('id');
+        $key = "all_users";
+        $allUsers = Redis::get($key);
+        if (isset($allUsers)) {
+            $userIds = unserialize($allUsers);
+        } else {
+            $userIds = User::whereDoesntHave('roles', function ($query) {
+                $query->where('name', 'admin');
+            })->pluck('id');
+            Redis::set($key, serialize($userIds));
+        }
+
         $settings = $this->accountRepo->getSettingsByUserIds($userIds);
 
         // Convert settings to a key-value array for quick access
