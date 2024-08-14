@@ -42,7 +42,9 @@ class PlayerSetting extends Model
     protected static function boot()
     {
         parent::boot();
-
+        static::created(function ($model) {
+            Redis::sex(AccountSettingCacheKeys::All_PlayerSetting_For_User->value . $model->user_id, serialize($model));
+        });
         //Đại diện cho hành vi thêm và sửa
         static::saved(function ($model) {
             $model->deleteCachePlayer();

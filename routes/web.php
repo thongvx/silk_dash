@@ -170,7 +170,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     //supportAdmin
     Route::resource('/supportAdmin', \App\Http\Controllers\admin\TicketAdminController::class);
     //reportAdmin
-    Route::get('/payment', [\App\Http\Controllers\admin\PaymentController::class, 'index'])->name('payment');
+    Route::resource('/payment', \App\Http\Controllers\admin\PaymentController::class);
     //videoAdmin
     Route::resource('/videoAdmin', \App\Http\Controllers\admin\VideoAdminController::class);
 });

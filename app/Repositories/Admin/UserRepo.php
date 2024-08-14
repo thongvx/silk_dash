@@ -3,8 +3,10 @@
 namespace App\Repositories\Admin;
 
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Prettus\Repository\Eloquent\BaseRepository;
 use App\Models\File;
+use Illuminate\Support\Facades\Redis;
 
 
 class UserRepo
@@ -14,13 +16,14 @@ class UserRepo
         return User::class;
     }
 
-    public function getAllUsers($tab, $column , $direction, $columns, $limit)
+    public function getAllUsers($tab, $column , $direction, $limit, $columns)
     {
         $query = User::query()
                 ->whereDoesntHave('roles', function ($query) {
                         $query->where('name', 'admin');
                     });
 
+        $column1 = $column == 'created_at' ? 'id' : $column;
 
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
         switch ($tab){
@@ -48,7 +51,13 @@ class UserRepo
 
     public function getUserById($id)
     {
+        $keys = 'user:'.$id;
+        $user = Redis::get($keys);
+        if (isset($user)) {
+            return unserialize($user);
+        }
         $user = User::query()->where('id', $id)->first();
+        Redis::setex($keys, 259200, serialize($user));
         return $user;
     }
 

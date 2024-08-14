@@ -11,19 +11,21 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Repositories\AccountRepo;
 use App\Repositories\ReportRepo;
+use App\Repositories\Admin\UserRepo;
 use App\Models\CountryTier;
 use App\Services\StatisticService;
 use App\Models\File;
 
 class HomeAdminController extends Controller
 {
-    protected $videoController, $accountRepo, $reportRepo;
+    protected $videoController, $accountRepo, $reportRepo, $userRepo;
 
-    public function __construct(VideoController $videoController, AccountRepo $accountRepo, ReportRepo $reportRepo)
+    public function __construct(VideoController $videoController, AccountRepo $accountRepo, ReportRepo $reportRepo, UserRepo $userRepo)
     {
         $this->videoController = $videoController;
         $this->accountRepo = $accountRepo;
         $this->reportRepo = $reportRepo;
+        $this->userRepo = $userRepo;
     }
 
     //get data for chart
@@ -75,7 +77,7 @@ class HomeAdminController extends Controller
             $userId = explode(':', $key)[2];
             $scores[str_replace("total_user_views:{$today}:", '', $key)] = [
                 'views' => Redis::get($key) ?? 0,
-                'name' => User::find($userId)->name,
+                'name' => $this->userRepo->getUserById($userId)->name,
                 'id' => $userId,
             ];
         }
@@ -131,7 +133,6 @@ class HomeAdminController extends Controller
     //index
     public function index(){
         $today = Carbon::today()->format('Y-m-d');
-        $users = Redis::get('all_users') ? unserialize(Redis::get('all_users')) : User::all();
         $totalWatching = 0;
         $watchingKeys = redis::keys("watching_users:*");
         foreach ($watchingKeys as $key) {
@@ -157,8 +158,8 @@ class HomeAdminController extends Controller
         $data =[
             'title' => 'Dashboard',
             'userWatching' => $totalWatching,
-            'storage' => File::formatSizeUnits($users->sum('storage')),
-            'users' => $users->count(),
+            'storage' => File::formatSizeUnits(User::sum('storage')),
+            'users' => User::count(),
             'todayEarning' => $totalEarnings,
             'totalBalance' => $totalBalance,
             'dates' => $data_chart['dates'],

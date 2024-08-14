@@ -30,7 +30,7 @@ class StatisticService
         return $countryMap;
     }
 
-    public static function calculateValue($userId, $earning, $today)
+    public static function calculateValue($userId, $today)
     {
         $totalImpression1 = Redis::keys("total_impression1:{$today}:{$userId}:*");
         $totalImpression2 = Redis::keys("total_impression2:{$today}:{$userId}:*");
@@ -45,7 +45,7 @@ class StatisticService
                 $revenue = ($totalViews / 1000) * $cpm;
 
                 // Add the revenue to the result array with the country code as the key
-                $result[$country] = $revenue * $earning;
+                $result[$country] = $revenue * 0.5;
             }
         }
         if ($totalImpression2) {
@@ -58,9 +58,9 @@ class StatisticService
 
                 // Add the revenue to the result array with the country code as the key
                 if (isset($result[$country])) {
-                    $result[$country] += $revenue * $earning;
+                    $result[$country] += $revenue;
                 } else {
-                    $result[$country] = $revenue * $earning;
+                    $result[$country] = $revenue;
                 }
             }
         }
@@ -71,35 +71,40 @@ class StatisticService
     public function calculateTotalEarnings($today)
     {
         // In the `StatisticService` class
-        $cacheKey = 'all_users';
-        $users = Redis::get($cacheKey);
+        $totalImpression1 = Redis::keys("total_impression1:{$today}:*:*");
+        $totalImpression2 = Redis::keys("total_impression2:{$today}:*:*");
+        $result = [];
+        $allCountries = self::getAllCountries();
+        if ($totalImpression1) {
+            foreach ($totalImpression1 as $key) {
+                $totalViews = Redis::get($key);
+                $country = explode(':', $key)[3];
 
-        if (!$users) {
-            $users = User::all();
-            Redis::setex($cacheKey, 43200, serialize($users)); // Cache for 12 hours
-        } else {
-            $users = unserialize($users);
+                $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
+                $revenue = ($totalViews / 1000) * $cpm;
+
+                // Add the revenue to the result array with the country code as the key
+                $result[$country] = $revenue * 0.5;
+            }
         }
-        $totalEarnings = 0;
-        $userIds = $users->pluck('id');
-        $settings = $this->accountRepo->getSettingsByUserIds($userIds);
 
-        // Convert settings to a key-value array for quick access
-        $settingsMap = $settings->keyBy('user_id');
-        foreach ($users as $user) {
-            $data_setting = $settingsMap->get($user->id);
-            $earning = 0;
-            if ($data_setting !== null) {
-                if ($data_setting->earningModes == 1) {
-                    $earning = 0.5;
-                } elseif ($data_setting->earningModes == 2) {
-                    $earning = 1;
+        if ($totalImpression2) {
+            foreach ($totalImpression2 as $key) {
+                $totalViews = Redis::get($key);
+                $country = explode(':', $key)[3];
+
+                $cpm = isset($allCountries[$country]) ? $allCountries[$country] : 0.8;
+                $revenue = ($totalViews / 1000) * $cpm;
+
+                // Add the revenue to the result array with the country code as the key
+                if (isset($result[$country])) {
+                    $result[$country] += $revenue;
+                } else {
+                    $result[$country] = $revenue;
                 }
             }
-            $userEarnings = self::calculateValue($user->id, $earning, $today);
-            $totalEarnings += array_sum($userEarnings);
         }
-
+        $totalEarnings = array_sum($result);
         return $totalEarnings;
     }
 }

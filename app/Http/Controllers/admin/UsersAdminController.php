@@ -32,7 +32,7 @@ class UsersAdminController
         $column = $request->get('column', 'created_at');
         $direction = $request->get('direction', 'desc');
         $data = [
-            'users' => $this->userRepo->getAllUsers($tab, $column, $direction, 20, $limit, ['*']),
+            'users' => $this->userRepo->getAllUsers($tab, $column, $direction, $limit, $columns),
             'title' => 'Users',
         ];
         return view('admin.user.user', $data);
@@ -53,13 +53,7 @@ class UsersAdminController
         return view('admin.user.boxuser', $data);
     }
     private function earningToday($userId, $today){
-        $data_setting = $this->accountRepo->getSetting($userId);
-        $earning = 0;
-        if ($data_setting->earningModes == 1)
-            $earning = 0.5;
-        if ($data_setting->earningModes == 2)
-            $earning = 1;
-        $earningToday = StatisticService::calculateValue($userId, $earning, $today);
+        $earningToday = StatisticService::calculateValue($userId, $today);
         return $earningToday;
     }
     public function show($user)

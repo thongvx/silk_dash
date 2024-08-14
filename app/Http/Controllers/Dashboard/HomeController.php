@@ -46,13 +46,7 @@ class HomeController extends Controller
         $data['topVideos'] = $this->statisticController->topVideo();
         $data['topCountries'] = $this->statisticController->topCountry();
         $data['storage'] = $this->videoController->convertFileSize($user->storage);
-        $data_setting = $this->accountRepo->getSetting($user->id);
-        $earning = 0;
-        if ($data_setting->earningModes == 1)
-            $earning = 0.5;
-        if ($data_setting->earningModes == 2)
-            $earning = 1;
-        $earningToday = StatisticService::calculateValue($user->id, $earning, $today->format('Y-m-d'));
+        $earningToday = StatisticService::calculateValue($user->id, $today->format('Y-m-d'));
         $totalViews = 0;
         $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
         foreach ($countryViewsKeys as $key) {
