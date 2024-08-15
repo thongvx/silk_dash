@@ -15,9 +15,14 @@ class PaymentController
         $this->paymentRepo = $paymentRepo;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $payments = $this->paymentRepo->getAllPayment();
+        $tab = '';
+        $limit = $request->get('limit', 20);
+        $columns = ['*'];
+        $column = $request->get('column', 'created_at');
+        $direction = $request->get('direction', 'desc');
+        $payments = $this->paymentRepo->getAllPayment($direction,$column, $limit, $columns);
         $data =[
             'title' => 'Payment',
             'payments' => $payments,
