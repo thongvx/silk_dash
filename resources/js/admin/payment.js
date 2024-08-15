@@ -12,9 +12,20 @@ $(document).on('click', '[btn-submit-payment]', function() {
         },
         success: function(response) {
             console.log(response);
+            location.reload();
         },
         error: function(response) {
             console.log(response);
         }
     })
+})
+$(document).on('click', '[btn-edit-payment]', function() {
+    const tr = $(this).closest('tr');
+    const comment = tr.find('[input-comment]')
+    $(comment).addClass('border border-gray-600 py-1 rounded-lg');
+    $(comment).removeAttr('readonly');
+    const icon = $(this).find('i');
+    $(icon).text('check');
+    $(this).attr('btn-submit-payment', '');
+    $(this).removeAttr('btn-edit-payment');
 })
