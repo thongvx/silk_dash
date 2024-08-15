@@ -55,6 +55,7 @@ Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::cla
 
 //-----------------------------TiktokController----------------------------------------------------
 Route::get('/addVideoTiktok/{slug}', [\App\Http\Controllers\admin\TiktokController::class, 'addVideoTiktok']);
+Route::get('/updateVideoTiktok}', [\App\Http\Controllers\admin\TiktokController::class, 'updateVideoTiktok']);
 
 //-------------------------transferController------------------------------------------------------
 Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);

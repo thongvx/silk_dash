@@ -31,7 +31,9 @@ class TiktokController extends Controller
                 $dataVideo['quality'] = 480;
                 $dataVideo['path'] = $video->sd;
                 $dataVideo['sv'] = $svTiktok;
-                AddTiktok::create($dataVideo);
+                $check = AddTiktok::where('slug', $slug)->where('quality', 480)->first();
+                if(!$check)
+                    AddTiktok::create($dataVideo);
             }
 
             if($video->hd != '0' && $video->hd != '19'){
@@ -40,7 +42,9 @@ class TiktokController extends Controller
                 $dataVideo['quality'] = 720;
                 $dataVideo['path'] = $video->hd;
                 $dataVideo['sv'] = $svTiktok;
-                AddTiktok::create($dataVideo);
+                $check = AddTiktok::where('slug', $slug)->where('quality', 720)->first();
+                if(!$check)
+                    AddTiktok::create($dataVideo);
             }
 
             if($video->fhd != '0' && $video->fhd != '19'){
@@ -49,7 +53,9 @@ class TiktokController extends Controller
                 $dataVideo['quality'] = 1080;
                 $dataVideo['path'] = $video->fhd;
                 $dataVideo['sv'] = $svTiktok;
-                AddTiktok::create($dataVideo);
+                $check = AddTiktok::where('slug', $slug)->where('quality', 1080)->first();
+                if(!$check)
+                    AddTiktok::create($dataVideo);
             }
 
             return '200';
@@ -73,5 +79,44 @@ class TiktokController extends Controller
             Redis::set(VideoCacheKeys::API_SV_TIKTOK->value.$sv, $key_tiktok);
         }
         return $apiSvTiktok;
+    }
+    function updateVideoTiktok()
+    {
+        $video = AddTiktok::where('status', 0)->orderBy('updated_at', 'desc')->first();
+        if($video){
+
+            $tmp = 'http://t1.streamsilk.com/api/file/get?title='.$video->slug.$video->quality.'.mp4&key=99033a38-29c0-44d7-929a-69c88fe69916';
+            $check = file_get_contents($tmp);
+            $check = json_decode($check, true);
+            if($check['file']['status'] == 'complete'){
+                $video->increment('status');
+                $linkembed = $check['file']['embed'];
+                $arrEmbed = explode('/', $linkembed);
+                $idEmbed = $arrEmbed[count($arrEmbed) - 1];
+                $urlHls = 'http://t1.streamsilk.com/video/' . $idEmbed . '/master.html?cdn=false';
+                //creat folder
+                $tmp = 'data/'.$video->slug;
+                if(!file_exists($tmp))
+                    mkdir($tmp);
+                //copy m3u8 master
+                $tmp = 'data/'.$video->slug.'/'.$video->slug.'.m3u8';
+                if(!file_exists($tmp))
+                    copy('DataHLS/master.m3u8', 'data/'.$video->slug.'/'. $video->slug.'.m3u8');
+                //copy video quality
+                $tmp1 = 'data/'.$video->slug.'/'.$video->slug.$video->quality.'.m3u8';
+                copy($urlHls, $tmp1);
+
+                $dataHls = file_get_contents('DataHLS/'.$video->quality.'.m3u8');
+                $dataHls = str_replace('master'.$video->quality.'.m3u8', $video->slug.$video->quality.'.m3u8', $dataHls);
+
+                $dataHlsMaster = file_get_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8');
+                $dataHlsMaster = $dataHlsMaster.$dataHls;
+                file_put_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8', $dataHlsMaster);
+                $video->increment('status');
+            }
+            else{
+                $video->save();
+            }
+        }
     }
 }
