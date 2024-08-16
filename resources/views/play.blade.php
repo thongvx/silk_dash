@@ -1,6 +1,6 @@
 @php use App\Helpers\JsObfuscator; @endphp
-    <!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <title>{{ $title }}</title>
