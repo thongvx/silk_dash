@@ -359,7 +359,7 @@ $jsCode = <<<JS
             //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-    document.getElementById('pop').addEventListener("click", () => {
+    document.getElementById('pop1').addEventListener("click", () => {
         var e = document.getElementById('pop');
         e.remove();
         window.open("https://ceehipsy.com/4/7779337");
@@ -371,7 +371,7 @@ $jsCode = <<<JS
         document.head.appendChild(script);
     });
 
-    document.getElementById('pop1').addEventListener("click", () => {
+    document.getElementById('pop').addEventListener("click", () => {
         var e1 = document.getElementById('pop1');
         e1.remove();
         window.open("https://holahupa.com/2032563/");

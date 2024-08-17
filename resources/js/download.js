@@ -10,13 +10,12 @@ function openNewTab(url) {
 
 $(document).on('click', '[btn-download-link]', function() {
     $('[btn-download-link]').remove()
-    openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
+    openNewTab('https://holahupa.com/2032563/');
     const slug = $('#box-download').data('slug')
     const quality = $(this).data('quality')
     const path = $(this).data('path')
     const sv = $('#box-download').data('sv')
     const title = $('#box-download').data('title')
-    console.log(sv)
     const data = {
         'slug': slug,
         'quality': quality,
@@ -64,21 +63,19 @@ $(document).on('click', '[btn-download-link]', function() {
     })
 })
 
-$(document).on('click', '#pop', function() {
+$(document).on('click', '#pop1', function() {
     var e = $('#pop');
     e.remove();
-    window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
-    //gala
-    var newScript = document.createElement('script');
-    newScript.setAttribute('data-cfasync', 'false');
-    newScript.setAttribute('async', 'true');
-    newScript.setAttribute('type', 'text/javascript');
-    newScript.src = '//yd.alchimybegins.com/rIiWXNjqhOe8AUjQ/jqWXQ';
-    $('#box-download').appendChild(newScript);
+    window.open("https://ceehipsy.com/4/7779337");
+    //ads gala
+    var script = document.createElement('script');
+    script.type = 'application/javascript';
+    script.src = 'https://streamsilk.com/ads.js';
+    document.head.appendChild(script);
 });
 
-$(document).on('click', '#pop1', function()  {
+$(document).on('click', '#pop', function()  {
     var e1 = $('#pop1');
     e1.remove();
-    window.open("https://familiarpyromaniasloping.com/2009872/");
+    window.open("https://holahupa.com/2032563/");
 });
