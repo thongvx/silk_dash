@@ -50,9 +50,9 @@ class FolderRepo extends BaseRepository
     }
 
     // Get folder name
-    public function getFolder($folderName)
+    public function getFolder($userid, $folderName)
     {
-        return Folder::where('name_folder', $folderName)->first();
+        return Folder::where('name_folder', $folderName)->where('user_id', $userid)->first();
     }
     public function incrementNumberOfFiles($folderId)
     {
