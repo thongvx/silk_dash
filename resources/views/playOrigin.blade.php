@@ -296,7 +296,7 @@ $jsCode = <<<JS
     let pop15s = setTimeout(function() {
         $('body').click(function(){
             if(t === 0)
-                window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
+                window.open("https://ceehipsy.com/4/7779337");
             t = 1;
             clearTimeout(pop15s)
         })
