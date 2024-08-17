@@ -261,7 +261,7 @@ $jsCode = <<<JS
     };
 
     $(document).ready(async () => {
-        let adBlockEnabled = false
+        let adBlockEnabled = false;
         if(adBlockEnabled == false || enablePlay == 'yes'){
             let file = urlPlay;
             loadPlayer(file);
