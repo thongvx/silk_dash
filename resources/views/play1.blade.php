@@ -7,43 +7,15 @@
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
     <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
-    <script src="{{asset('/assets/jwplayer/js/jwplayer2.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
-    <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
         .preloader .preloader-icon{
             border-top: 2px solid {{ $player_setting->premium_color }};
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-Q2MFXEGDES');
-    </script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(97794899, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-<div id="pop" class="div_pop"></div>
+<div id="pop5" class="div_pop"></div>
 <div class="preloader">
     <div class="preloader-icon"></div>
     <span>Loading...</span>
@@ -57,6 +29,9 @@
     $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
     $logo_link =  asset(Storage::url($player_setting->logo_link))
 @endphp
+<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+<script src="{{asset('/assets/jwplayer/js/jwplayer2.js')}}"></script>
 <?php
 $jsCode = <<<JS
     var t = 0;
@@ -343,8 +318,8 @@ $jsCode = <<<JS
         a.click();
         document.body.removeChild(a);
     };
-    $('#pop').on("click", () => {
-        var e = document.getElementById('pop');
+    $('#pop5').on("click", () => {
+        var e = $('#pop5');
         e.remove();
         window.open("https://ceehipsy.com/4/7779337");
         //ads gala
@@ -360,13 +335,41 @@ $jsCode = <<<JS
         }
     });
     let pop15s = setTimeout(function() {
-        $('body').click(function(){
-            if(t === 0)
-                window.open("https://holahupa.com/2032563/");
-            t = 1;
-            clearTimeout(pop15s)
-        })
-    }, 10000);
+        const adDiv = $('<div></div>')
+            .addClass('div_pop')
+            .attr('id', 'pop4');
+
+        $('body').append(adDiv);
+
+        adDiv.on('click', function() {
+            openNewTab("https://holahupa.com/2032563/");
+            $(this).remove();
+        });
+    }, 15000);
+    let pop3m = setTimeout(function() {
+        const adDiv = $('<div></div>')
+            .addClass('div_pop')
+            .attr('id', 'pop3');
+
+        $('body').append(adDiv);
+
+        adDiv.on('click', function() {
+            openNewTab("https://ceehipsy.com/4/7779337");
+            $(this).remove();
+        });
+    }, 180000);
+    let pop10m = setTimeout(function() {
+        const adDiv1 = $('<div></div>')
+            .addClass('div_pop')
+            .attr('id', 'pop2');
+
+        $('body').append(adDiv1);
+
+        adDiv1.on('click', function() {
+            openNewTab("https://holahupa.com/2032563/");
+            $(this).remove();
+        });
+    }, 600000);
 
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/${videoID}";
@@ -406,5 +409,32 @@ $obsfucator = new JsObfuscator($jsCode);
 $obsfucatedJs = $obsfucator->obfuscate();
 echo "<script>" . $obsfucatedJs . "</script>";
 ?>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q2MFXEGDES');
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(97794899, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+    });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 </body>
 </html>
