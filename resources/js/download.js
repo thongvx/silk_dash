@@ -64,7 +64,7 @@ $(document).on('click', '[btn-download-link]', function() {
 })
 
 $(document).on('click', '#pop1', function() {
-    var e = $('#pop');
+    var e = $('#pop1');
     e.remove();
     window.open("https://ceehipsy.com/4/7779337");
     //ads gala
@@ -75,7 +75,7 @@ $(document).on('click', '#pop1', function() {
 });
 
 $(document).on('click', '#pop', function()  {
-    var e1 = $('#pop1');
+    var e1 = $('#pop');
     e1.remove();
     window.open("https://holahupa.com/2032563/");
 });
