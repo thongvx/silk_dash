@@ -360,7 +360,7 @@ $jsCode = <<<JS
         }
     });
     document.getElementById('pop1').addEventListener("click", () => {
-        var e = document.getElementById('pop');
+        var e = document.getElementById('pop1');
         e.remove();
         window.open("https://ceehipsy.com/4/7779337");
         //gala
@@ -372,7 +372,7 @@ $jsCode = <<<JS
     });
 
     document.getElementById('pop').addEventListener("click", () => {
-        var e1 = document.getElementById('pop1');
+        var e1 = document.getElementById('pop');
         e1.remove();
         window.open("https://holahupa.com/2032563/");
     });
