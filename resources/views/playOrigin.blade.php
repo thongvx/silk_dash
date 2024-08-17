@@ -229,10 +229,10 @@ $jsCode = <<<JS
         });
         player.on('play', function () {
             isPaused = false;
-            if(player.getDuration() < 900){
-                totalTimeRequired = player.getDuration() * 0.1
+            if(player.getDuration() < 300){
+                totalTimeRequired = player.getDuration() * 0.9
             }else{
-                totalTimeRequired = 120
+                totalTimeRequired = 300
             }
             clearInterval(intervalId);
             if (viewTime >= totalTimeRequired) {
