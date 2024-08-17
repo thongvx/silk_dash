@@ -284,7 +284,7 @@ $jsCode = <<<JS
             let pop15s = setTimeout(function() {
                 $('body').click(function(){
                     if(t === 0)
-                        window.open("https://ak.aimukreegee.net/4/7779337");
+                        window.open("https://ceehipsy.com/4/7779337");
                     t = 1;
                     clearTimeout(pop15s)
                 })
@@ -359,10 +359,10 @@ $jsCode = <<<JS
             //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-    document.getElementById('pop').addEventListener("click", () => {
-        var e = document.getElementById('pop');
+    document.getElementById('pop1').addEventListener("click", () => {
+        var e = document.getElementById('pop1');
         e.remove();
-        window.open("https://twinrdsyn.com/link.engine?z=74435&guid=0344150f-d34c-4973-b502-c54f6a89f100");
+        window.open("https://ceehipsy.com/4/7779337");
         //gala
         //ads gala
         var script = document.createElement('script');
@@ -371,8 +371,8 @@ $jsCode = <<<JS
         document.head.appendChild(script);
     });
 
-    document.getElementById('pop1').addEventListener("click", () => {
-        var e1 = document.getElementById('pop1');
+    document.getElementById('pop').addEventListener("click", () => {
+        var e1 = document.getElementById('pop');
         e1.remove();
         window.open("https://holahupa.com/2032563/");
     });
