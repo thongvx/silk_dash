@@ -386,7 +386,7 @@
                 </button>
             </div>
             <div  id="fixed-box-control" class="mb-4">
-                @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') || $payments->count() == 0)
                 <div class="box gift text-white hidden">
                     <h1><b><i>Dear member,</i></b></h1><br>
                     <p>I’m Richard, manager of <a href="https://streamsilk.com/">StreamSilk.com</a>.</p><br>

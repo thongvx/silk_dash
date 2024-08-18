@@ -207,11 +207,11 @@
                             *Update your USDT address in your profile.
                         </h5>
                         <div class="mt-4" id="box-request-payment">
-                            @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                            @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') || $payments->count() == 0)
                                 <span class="text-[#05ffff] italic pb-2">Gift up to 30% for first withdrawal!</span>
                             @endif
                             <form class="text-white flex justify-between" id="request-payment" method="POST" action="">
-                                @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                                @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') || $payments->count() == 0)
                                     <input type="text" id="Expires" name="gift" class="hidden" value="1">
                                 @endif
                                 <div class="bg-[#142132] rounded-lg flex w-full px-3 items-center">
