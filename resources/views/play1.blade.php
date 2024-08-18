@@ -236,8 +236,8 @@ $jsCode = <<<JS
         });
         player.on('play', function () {
             isPaused = false;
-            if (player.getDuration() < 300) {
-                totalTimeRequired = player.getDuration() * 0.9
+            if (player.getDuration() < 600) {
+                totalTimeRequired = player.getDuration() * 0.6
             } else {
                 totalTimeRequired = 300
             }
