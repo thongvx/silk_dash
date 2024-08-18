@@ -217,7 +217,7 @@
                     <a href="" class="rounded-lg bg-[#142132] px-4 py-1 text-white hover:text-[#009FB2]">View All</a>
                 </div>
                 <div class="px-4 pb-1 mt-4 h-72 overflow-auto">
-                    @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d'))
+                    @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') || $payments->count() == 0)
                         <a href="javascript:;" data-box="gift" btn-info-noti-important
                            class="bg-[#009FB2] sticky top-0 flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
                         <span class="absolute -left-2 -bottom-4 w-16">
@@ -249,7 +249,7 @@
                         </a>
                     @endif
                         <a href="javascript:;" data-box="zoom" btn-info-noti-important
-                           class="bg-[#009FB2] sticky {{Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') ? 'top-20' : 'top-0' }} flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
+                           class="bg-[#009FB2] sticky {{Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') || $payments->count() == 0 ? 'top-20' : 'top-0' }} flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
                             <div class="info sticky z-30">
                                 <h6 class="text-white font-bold w-max subject text-center py-3">
                                     Please use newest Z-o-o-m version to upload videos!<br>
