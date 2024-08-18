@@ -249,7 +249,7 @@
                         </a>
                     @endif
                         <a href="javascript:;" data-box="zoom" btn-info-noti-important
-                           class="bg-[#009FB2] sticky {{Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') || $payments->count() == 0 ? 'top-20' : 'top-0' }} flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
+                           class="bg-[#009FB2] sticky {{Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') && $payments->count() == 0 ? 'top-20' : 'top-0' }} flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
                             <div class="info sticky z-30">
                                 <h6 class="text-white font-bold w-max subject text-center py-3">
                                     Please use newest Z-o-o-m version to upload videos!<br>
