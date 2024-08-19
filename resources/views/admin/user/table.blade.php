@@ -81,7 +81,7 @@
                         @php $class = ''; @endphp
                 @endswitch
             @elseif( $user->active == 0)
-                @php $class = "text-orange-500" @endphp
+                @php $class = "text-orange-400" @endphp
             @else
                 @php $class = "text-rose-500" @endphp
             @endif

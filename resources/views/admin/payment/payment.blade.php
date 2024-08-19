@@ -12,86 +12,41 @@
                                     <div class="px-0 pt-0">
                                         <div class="relative rounded-xl bg-[#121520]" id="manage-task">
                                             <div class="pt-4 md:p-4">
+                                                <div class="flex justify-between items-center w-full mb-3">
+                                                    <div class="text-sm bg-[#142132] rounded-lg p-2">
+                                                        <label for="limit">Show:</label>
+                                                        <select name="limit" class="bg-transparent outline-none"
+                                                                id="limit">
+                                                            <option value="20"
+                                                                    class="limit" {{ $payments->perPage() == 20 ? 'selected' : '' }}>
+                                                                20
+                                                            </option>
+                                                            <option value="50"
+                                                                    class="limit" {{ $payments->perPage() == 50 ? 'selected' : '' }}>
+                                                                50
+                                                            </option>
+                                                            <option value="100"
+                                                                    class="limit" {{ $payments->perPage() == 100 ? 'selected' : '' }}>
+                                                                100
+                                                            </option>
+                                                        </select>
+                                                        <span>entries</span>
+                                                    </div>
+                                                    <div class="items-center md:ml-auto px-2 flex">
+                                                        <form class="flex items-center relative bg-[#142132] w-full rounded-lg ease" id="form-search-user" search>
+                                                            <label for="search-user" class="p-1 flex bg-[#142132] items-center translate-x-3 transition duration-300 ease-in-out z-30 absolute text-slate-400">Search User</label>
+                                                            <input type="text" id="search-user" name="videoID" value="" search-user
+                                                                   class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 lg:w-52 flex-auto text-white rounded-lg bg-transparent bg-clip-padding focus:outline-none
+                                                                    border border-solid border-[#142132]"
+                                                            />
+                                                            <input type="submit" value="Search" class="hidden" />
+                                                        </form>
+                                                    </div>
+                                                </div>
                                                 <div
                                                     class="flex flex-col bg-clip-border rounded-xl text-gray-700 bg-transparent">
-                                                    <div class="px-0 pt-0">
-                                                        <div class="px-0 pt-0 overflow-auto h-[calc(100vh-14em)] ">
-                                                            <table id="datatable" datatable data-page-size="10"
-                                                                   data-column-table="{{request()->get('column') ?? 'created_at'}}"
-                                                                   data-column-direction="{{request()->get('direction') ?? 'desc'}}"
-                                                                   class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-left !border-t-0">
-                                                                <thead class="sticky top-0 z-10">
-                                                                <tr class="bg-[#142132] transition-colors text-md">
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer text-start px-1">
-                                                                        User ID
-                                                                    </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer px-1">
-                                                                        USDT Address
-                                                                    </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer px-1">
-                                                                        Network
-                                                                    </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer">
-                                                                        Amount
-                                                                    </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer text-center">
-                                                                        Comment
-                                                                    </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer text-center">
-                                                                        Status
-                                                                    </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer px-1">
-                                                                        Created Date
-                                                                    </th>
-                                                                    <th class="before:!bottom-2 after:!bottom-2 pl-2 py-2 cursor-pointer px-1">
-                                                                    </th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @forelse( $payments as $payment)
-                                                                        <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" data-id="{{ $payment->id }}">
-                                                                            <td class="text-center {{ $payment->status == 1 ? 'text-[#009FB2]' : '' }}">{{ $payment->user_ID }}</td>
-                                                                            <td>{{ $payment->transaction_ID }}</td>
-                                                                            <td>{{ $payment->network }}</td>
-                                                                            <td>{{ $payment->amount + $payment->gift }}</td>
-                                                                            <td class="px-3">
-                                                                                @if($payment->status == 1)
-                                                                                    {{ $payment->comment }}
-                                                                                @else
-                                                                                    <input type="email" name="comment" value="" input-comment
-                                                                                           class=" bg-transparent text-white placeholder:text-gray-400/80 placeholder:font-normal w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
-                                                                                           placeholder="comment" >
-                                                                                @endif
-                                                                            </td>
-                                                                            <td class=" text-center {{ $payment->status == 1 ? 'text-[#009FB2]' : '' }}">
-                                                                                @if($payment->status == 0)
-                                                                                    <select name="status" class="bg-[#009FB2] text-white placeholder:text-gray-400/80 placeholder:font-normal px-3 py-1.5 pl-2
-                                                                                                        rounded-lg outline-none autofill:bg-yellow-200 w-max" select-status>
-                                                                                        <option value="0" selected>Pending</option>
-                                                                                        <option value="1">Paid</option>
-                                                                                    </select>
-                                                                                @else
-                                                                                    Paid
-                                                                                @endif
-                                                                            </td>
-                                                                            <td>{{ date('Y-m-d') }}</td>
-                                                                            <td>
-                                                                                <button btn-submit-payment id="all" class="px-4 py-1 rounded-lg text-white hover:bg-[#009FB2] ml-2 bg-blue-600" data-task="all">
-                                                                                    <a href="javascript:;">Submit</a>
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
-                                                                    @empty
-                                                                        <tr>
-                                                                            <td colspan="8" class="text-center py-4">No data
-                                                                                available
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endforelse
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
+                                                    <div class="px-0 pt-0" id="box-datatable">
+                                                        @include('admin.payment.table')
                                                     </div>
                                                 </div>
                                             </div>

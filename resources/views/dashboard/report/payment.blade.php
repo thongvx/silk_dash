@@ -31,7 +31,7 @@
         <tr class="bg-[#142132]">
             <th class="py-1.5 px-3">Total</th>
             <th class="py-1.5 px-3 text-center"></th>
-            <th class="py-1.5 px-3 text-center">{{ $payments->sum('amount') }}</th>
+            <th class="py-1.5 px-3 text-center">{{ $payments->sum('amount') + $payments->sum('gift') }}</th>
             <th class="py-1.5 px-3 text-center"></th>
         </tr>
         </tfoot>

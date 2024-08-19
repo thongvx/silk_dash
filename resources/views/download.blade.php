@@ -31,46 +31,10 @@
             z-index: 999999;
         }
     </style>
-    <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
-    @vite('resources/js/download.js')
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-Q2MFXEGDES');
-    </script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(97794899, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
 </head>
 
 <body class="m-0  font-sans antialiased font-normal text-start text-base leading-default
     text-slate-500 bg-[#142132]">
-@if($accountSetting['earningModes'] == 2)
-    <div id="pop1" class="div_pop"></div>
-    <div id="pop" class="div_pop"></div>
-@elseif($accountSetting['earningModes'] == 1)
-    <div id="pop1" class="div_pop"></div>
-@else
-
-@endif
 <main class="mt-0 transition-all duration-200 ease-in-out auth flex flex-col justify-between min-h-screen">
     @include('landing-page.components.navbar')
     <section class="container mx-auto md:px-16 mb-10">
@@ -105,6 +69,41 @@
     </section>
     @include('landing-page.components.footer')
 </main>
+@if($accountSetting['earningModes'] == 2)
+    <div id="pop1" class="div_pop"></div>
+    <div id="pop" class="div_pop"></div>
+@elseif($accountSetting['earningModes'] == 1)
+    <div id="pop1" class="div_pop"></div>
+@else
+    <script src="https://streamsilk.com/ads.js"></script>
+@endif
 </body>
+<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+@vite('resources/js/download.js')
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
+    gtag('config', 'G-Q2MFXEGDES');
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(97794899, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+    });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </html>
