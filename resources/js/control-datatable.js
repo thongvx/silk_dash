@@ -36,6 +36,7 @@ export function getUrlParams() {
 function highlightSortedColumn() {
     const sortColumn = document.querySelectorAll("[aria-sort]");
     const Table = $("#datatable")[0];
+    console.log(Table)
     const sortColumntable = Table.dataset.columnTable
     const sortDirectionTable = Table.dataset.columnDirection
     sortColumn.forEach(function (element) {

@@ -13,6 +13,7 @@
             border-top: 2px solid {{ $player_setting->premium_color }};
         }
     </style>
+
 </head>
 <body>
 <div id="pop5" class="div_pop"></div>

@@ -64,7 +64,8 @@ class ModelHelpers
                 'controller' => 'emailAdmin',
                 'method' => 'emailController'
             ],
-            'admin/users' => null, // No controller method to call, directly render view
+            'admin/users' => null,
+            'admin/payment'=> null,// No controller method to call, directly render view
             'setting' => [
                 'role'=> 'user',
                 'controller' => 'setting',
@@ -95,6 +96,9 @@ class ModelHelpers
                 $data = $controller->$method($request);
                 return view($basePath.$page.'.'.$tab, $data);
             } else {
+                if($tab == null){
+                    return view($basePath.$page);
+                }
                 return view($basePath.$page.'.'.$tab);
             }
         }else{

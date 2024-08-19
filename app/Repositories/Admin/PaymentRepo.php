@@ -11,9 +11,11 @@ class PaymentRepo
         return Payment::class;
     }
 
-    public function getAllPayment(){
-        $payment = Payment::query()->get();
-        return $payment;
+    public function getAllPayment($direction, $column, $limit, $columns){
+        $query = Payment::query();
+        $payments = $query->orderBy($column, $direction)
+            ->paginate($limit);
+        return $payments;
     }
 
     // Add other methods as needed...
