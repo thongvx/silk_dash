@@ -171,7 +171,7 @@
                                 <li>5% of video must be watched to be counted as paid. If below 10 minutes 40% required
                                     to be watched.
                                 </li>
-                                <li>Minimum payout amount - 50$</li>
+                                <li>Minimum payout amount - 20$</li>
                                 <li>Rewards are not counted if advertising is being blocked.</li>
                                 <li>2 Views or Downloads are counted per 24 hours per user ip</li>
                                 <li>Payout Methods: USDT (TRC-20 or ERC-20)</li>

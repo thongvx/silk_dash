@@ -70,6 +70,8 @@ class UploadController
         $data['title'] = 'Upload';
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $data['folders']->last();
+        $svUpload = $this->getLinkUpload();
+        $data['linkUpload'] = $svUpload ? 'https://'.$svUpload['name'].'.encosilk.cc/upload' : null;
         $tab = $request->input('tab');
         if ($tab == 'transfer') {
             $data['getProgressTransfer'] = $this->getProgressTransfer();
