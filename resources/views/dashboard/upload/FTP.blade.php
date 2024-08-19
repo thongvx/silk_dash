@@ -1,9 +1,9 @@
 <div id="transfer" class="bg-[#121520] p-4 border-[#121520] rounded-b-xl rounded-tr-xl gap-2 bg-top [border-width:var(--tab-border)]" transfer_link>
     @if(Auth::user()->ftp_user == null)
         <div class="col-span-full text-center">
-            <div class="noti text-white italic">
+            <div class="noti text-white italic font-bold text-md py-5">
                 <h4 class="mb-3">Please create support ticket or contact admin to request this feature!</h4>
-                <h4>Thanks!</h4>
+                <h4>Thank you!</h4>
             </div>
         </div>
     @else
