@@ -49,6 +49,7 @@ class HomeController extends Controller
         $earningToday = StatisticService::calculateValue($user->id, $today->format('Y-m-d'));
         $totalViews = 0;
         $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
+        $data['payments'] = $this->reportRepo->getPayment($user->id);
         foreach ($countryViewsKeys as $key) {
             $views = Redis::get($key);
             $totalViews += $views;

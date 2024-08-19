@@ -41,8 +41,9 @@ class Payment extends Model
 
     private function deleteRedisKeys()
     {
+        $today = Carbon::now()->format('Y-m-d');
         Redis::del("user:{$this->user_id}:payment");
-        Redis::del("user:{$this->user_id}:total_withdrawal");
-        Redis::del("user:{$this->user_id}:total_profit");
+        Redis::del("user:{$this->user_id}:total_withdrawal:{$today}");
+        Redis::del("user:{$this->user_id}:total_profit:{$today}");
     }
 }

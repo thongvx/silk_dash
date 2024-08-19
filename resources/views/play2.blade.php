@@ -7,44 +7,17 @@
     <meta content="Embed" name="description" />
     <meta name="google" content="notranslate">
     <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}" />
-    <script src="{{asset('/assets/jwplayer/js/jwplayer2.js')}}"></script>
     <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css')}}">
-    <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <style>
         .preloader .preloader-icon{
             border-top: 2px solid {{ $player_setting->premium_color }};
         }
     </style>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
 
-        gtag('config', 'G-Q2MFXEGDES');
-    </script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(97794899, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-<div id="pop1" class="div_pop"></div>
-<div id="pop" class="div_pop"></div>
+<div id="pop5" class="div_pop"></div>
+<div id="pop4" class="div_pop"></div>
 <div class="preloader">
     <div class="preloader-icon"></div>
     <span>Loading...</span>
@@ -58,9 +31,12 @@
     $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
     $logo_link =  asset(Storage::url($player_setting->logo_link))
 @endphp
+<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+<script src="{{asset('/assets/jwplayer/js/jwplayer2.js')}}"></script>
 <?php
 $jsCode = <<<JS
- var t = 0;
+    var t = 0;
     var playID = 0;
     var videoID = " $videoID ";
     var urlPlay = " $urlPlay ";
@@ -263,9 +239,9 @@ $jsCode = <<<JS
         player.on('play', function () {
             isPaused = false;
             if (player.getDuration() < 600) {
-                totalTimeRequired = player.getDuration() * 0.3
+                totalTimeRequired = player.getDuration() * 0.6
             } else {
-                totalTimeRequired = 120
+                totalTimeRequired = 300
             }
             clearInterval(intervalId);
             if (viewTime >= totalTimeRequired) {
@@ -281,14 +257,6 @@ $jsCode = <<<JS
                     }
                 }
             }, 1000);
-            let pop15s = setTimeout(function() {
-                $('body').click(function(){
-                    if(t === 0)
-                        window.open("https://ceehipsy.com/4/7779337");
-                    t = 1;
-                    clearTimeout(pop15s)
-                })
-            }, 5000);
         });
         player.on('pause', function () {
             isPaused = true;
@@ -359,8 +327,14 @@ $jsCode = <<<JS
             //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-    document.getElementById('pop1').addEventListener("click", () => {
-        var e = document.getElementById('pop1');
+
+    $('#pop5').on("click", () => {
+        var e1 = $('#pop5');
+        e1.remove();
+        window.open("https://holahupa.com/2032563/");
+    });
+    $('#pop4').on("click", () => {
+        var e = $('#pop4');
         e.remove();
         window.open("https://ceehipsy.com/4/7779337");
         //gala
@@ -369,14 +343,47 @@ $jsCode = <<<JS
         script.type = 'application/javascript';
         script.src = 'https://streamsilk.com/ads.js';
         document.head.appendChild(script);
+        let pop15s = setTimeout(function() {
+            const adDiv = $('<div></div>')
+                    .addClass('div_pop')
+                    .attr('id', 'pop3');
+
+                $('body').append(adDiv);
+
+                adDiv.on('click', function() {
+                    openNewTab("https://holahupa.com/2032563/");
+                    $(this).remove();
+                });
+                clearTimeout(pop15s);
+        }, 15000);
     });
 
-    document.getElementById('pop').addEventListener("click", () => {
-        var e1 = document.getElementById('pop');
-        e1.remove();
-        window.open("https://holahupa.com/2032563/");
-    });
+    let pop2m = setTimeout(function() {
+        const adDiv = $('<div></div>')
+            .addClass('div_pop')
+            .attr('id', 'pop2');
 
+        $('body').append(adDiv);
+
+        adDiv.on('click', function() {
+            openNewTab("https://ceehipsy.com/4/7779337");
+            $(this).remove();
+        });
+        clearTimeout(pop2m);
+    }, 120000);
+    let pop5m = setTimeout(function() {
+        const adDiv1 = $('<div></div>')
+            .addClass('div_pop')
+            .attr('id', 'pop1');
+
+        $('body').append(adDiv1);
+
+        adDiv1.on('click', function() {
+            openNewTab("https://holahupa.com/2032563/");
+            $(this).remove();
+        });
+        clearTimeout(pop5m);
+    }, 300000);
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/${videoID}";
         fetch(apiUrl)
@@ -415,5 +422,31 @@ $obsfucator = new JsObfuscator($jsCode);
 $obsfucatedJs = $obsfucator->obfuscate();
 echo "<script>" . $obsfucatedJs . "</script>";
 ?>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2MFXEGDES"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q2MFXEGDES');
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(97794899, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+    });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 </body>
 </html>
