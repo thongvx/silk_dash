@@ -82,7 +82,7 @@
                     </td>
                     <td class="text-center w-max">{{ $video->user_id }}</td>
                     <td class="pl-2 w-[25rem] video-title">
-                        <a href="{{$video -> slug }}">{{ $video->title }}</a>
+                        <a href="https://streamsilk.com/p/{{ $video->slug }}">{{ $video->title }}</a>
                     </td>
                     <td class="text-center px-2 videoID">{{ $video->slug }}</td>
                     <td class="text-center px-2">{{ $video->middle_slug }}</td>

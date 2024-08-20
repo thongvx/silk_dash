@@ -181,7 +181,7 @@
                     @forelse($topVideos as $video)
                         <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132] text-white">
                             <td class="p-2  max-w-[4rem] truncate">
-                                <a href="{{route('play', $video['slug'])}}" target="_black" class="hover:text-[#009FB2] ">{{ $video['title'] }}</a>
+                                <a href="https://streamsilk.com/p/{{ $video['slug'] }}" target="_black" class="hover:text-[#009FB2] ">{{ $video['title'] }}</a>
                             </td>
                             <td class="p-2 text-center">
                                 {{ $video['views'] }}
