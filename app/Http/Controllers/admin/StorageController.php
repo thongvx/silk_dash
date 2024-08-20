@@ -25,7 +25,22 @@ class StorageController
             $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 96)->where('out_speed', '<', 900)->inRandomOrder()->first();
 
             //call sto
-            Queue::push(new CreatStorageJob($data->slug, $svStorage->name, $data->quality, $data->sv_encoder));
+            //Queue::push(new CreatStorageJob($data->slug, $svStorage->name, $data->quality, $data->sv_encoder));
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'http://'.$svStorage->name.'.stosilk.cc/startStorageTask?slug='.$data->slug.'&sv='.$data->sv_encoder.'&quality='.$data->quality,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+
+            ));
+            $response = curl_exec($curl);
+            curl_close($curl);
+            return $response;
         }
     }
     public function finishStorage(Request $request)
