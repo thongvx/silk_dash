@@ -69,7 +69,21 @@ class TiktokController extends Controller
         $arrPath = explode('-', $path);
         $url = 'http://'.$arrPath[0].'.stosilk.cc/data/'.$arrPath[1].'/'.$slug.'/'.$slug.$quality.'.mp4';
         $apiSvTiktok = $this->getApiSvTiktok($svTiktok);
-        Queue::push(new CreatUploadTiktokJob($svTiktok, $apiSvTiktok, $url));
+        //Queue::push(new CreatUploadTiktokJob($svTiktok, $apiSvTiktok, $url));
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://'.$svTiktok.'.streamsilk.com/api/file/remote?url='.$url.'&key='.$apiSvTiktok,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
     }
     function getApiSvTiktok($sv)
     {
