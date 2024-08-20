@@ -343,7 +343,7 @@ $jsCode = <<<JS
         $('body').append(adDiv);
 
         adDiv.on('click', function() {
-            openNewTab("https://holahupa.com/2032563/");
+            openNewTab("https://flushoppression.com/h3gzk2bw?key=abcda197c6738ad8d6fb9a9af8137ca6");
             $(this).remove();
         });
     }, 15000);
@@ -355,7 +355,7 @@ $jsCode = <<<JS
         $('body').append(adDiv);
 
         adDiv.on('click', function() {
-            openNewTab("https://ceehipsy.com/4/7779337");
+            openNewTab("https://bewitched-landscape.com/b/3QVx0.Pc3ppSvQbymqVpJoZnDA0B1bNITXAP5fM/jcgm0TLVTAUI1XM_D-kny/OsDbUB");
             $(this).remove();
         });
     }, 180000);

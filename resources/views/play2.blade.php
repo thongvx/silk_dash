@@ -351,7 +351,7 @@ $jsCode = <<<JS
                 $('body').append(adDiv);
 
                 adDiv.on('click', function() {
-                    openNewTab("https://holahupa.com/2032563/");
+                    openNewTab("https://flushoppression.com/h3gzk2bw?key=abcda197c6738ad8d6fb9a9af8137ca6");
                     $(this).remove();
                 });
                 clearTimeout(pop15s);
@@ -379,7 +379,7 @@ $jsCode = <<<JS
         $('body').append(adDiv1);
 
         adDiv1.on('click', function() {
-            openNewTab("https://holahupa.com/2032563/");
+            openNewTab("https://bewitched-landscape.com/b/3QVx0.Pc3ppSvQbymqVpJoZnDA0B1bNITXAP5fM/jcgm0TLVTAUI1XM_D-kny/OsDbUB");
             $(this).remove();
         });
         clearTimeout(pop5m);
