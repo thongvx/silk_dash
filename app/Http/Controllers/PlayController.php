@@ -78,7 +78,8 @@ class PlayController
                     if(!file_exists('data/'.$video->middle_slug)) {
                         if ($video->stream == 0) {
                             $svStream = SvStreamService::selectSvStream();
-                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                            //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                            $this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
                             $nameSvStream = explode('.', $svStream);
                             $video->stream = $nameSvStream[0];
                             $video->save();
@@ -90,7 +91,8 @@ class PlayController
                                 $video->stream = $video->stream . '-' . $nameSvStream[0];
                                 $video->save();
                             }
-                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                            //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                            $this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
                             if($video->audio == 1){
                                 $audioFile = $this->AudioVideoRepo->getAudioVideo($video->slug);
                                 foreach ($audioFile as $audio){
@@ -137,7 +139,22 @@ class PlayController
             return response()->view('errors.404', [], 404);
         }
     }
-
+    function callSvStream($sv, $slug, $path, $sto480, $sto720, $sto1080)
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://'.$sv.'/insertData?slug='.$slug.'&path='.$path.'&sto480='.$sto480.'&sto720='.$sto720.'&sto1080='.$sto1080,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+    }
     function selectSvStream()
     {
         return SvStream::where('active', 1)->where('cpu', '<', 10)->where('percent_space', '<', 95)->where('out_speed', '<', 700)->value('name');
