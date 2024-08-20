@@ -78,8 +78,8 @@ class PlayController
                     if(!file_exists('data/'.$video->middle_slug)) {
                         if ($video->stream == 0) {
                             $svStream = SvStreamService::selectSvStream();
-                            //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
-                            $this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
+                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                            //$this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
                             $nameSvStream = explode('.', $svStream);
                             $video->stream = $nameSvStream[0];
                             $video->save();
@@ -91,8 +91,8 @@ class PlayController
                                 $video->stream = $video->stream . '-' . $nameSvStream[0];
                                 $video->save();
                             }
-                            //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
-                            $this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
+                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+                            //$this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
                             if($video->audio == 1){
                                 $audioFile = $this->AudioVideoRepo->getAudioVideo($video->slug);
                                 foreach ($audioFile as $audio){
