@@ -52,6 +52,7 @@ $jsCode = <<<JS
     var preview =  $player_setting->show_preview ;
     var download =  $player_setting->show_download ;
     var show_title =  $player_setting->show_title ;
+    var urlStream = " $urlStream ";
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
@@ -299,6 +300,20 @@ $jsCode = <<<JS
 
     };
     $(document).ready(() => {
+        if("${urlStream}" !== "0"){
+            console.log('a');
+            $.ajax({
+                url: "${urlStream}",
+                type: 'POST',
+                data: urlStream,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        };
         const checkInterval = setInterval(async () => {
             let adBlockEnabled = false;
             const checkloadplayer = await checkUrlStatus(urlPlay);

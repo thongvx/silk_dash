@@ -74,12 +74,13 @@ class PlayController
                     return view('playOrigin', $playData);
                 } else {
                     $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
-
+                    $urlStream = 0;
                     if(!file_exists('data/'.$video->middle_slug)) {
                         if ($video->stream == 0) {
                             $svStream = SvStreamService::selectSvStream();
-                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+//                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                             //$this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
+                            $urlStream = 'https://'.$svStream.'/insertData?slug='.$video->middle_slug.'&path='.$video->pathStream.'&sto480='.$video->sd.'&sto720='.$video->hd.'&sto1080='.$video->fhd;
                             $nameSvStream = explode('.', $svStream);
                             $video->stream = $nameSvStream[0];
                             $video->save();
@@ -91,8 +92,9 @@ class PlayController
                                 $video->stream = $video->stream . '-' . $nameSvStream[0];
                                 $video->save();
                             }
-                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
+//                            Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                             //$this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
+                            $urlStream = 'https://'.$svStream.'/insertData?slug='.$video->middle_slug.'&path='.$video->pathStream.'&sto480='.$video->sd.'&sto720='.$video->hd.'&sto1080='.$video->fhd;
                             if($video->audio == 1){
                                 $audioFile = $this->AudioVideoRepo->getAudioVideo($video->slug);
                                 foreach ($audioFile as $audio){
@@ -117,6 +119,7 @@ class PlayController
                         'is_sub' => $is_sub,
                         'slug_sub' => $slug_sub,
                         'custom_ads' => $custom_ads,
+                        'urlStream' => $urlStream,
                     ];
                     switch ($data_setting->earningModes) {
                         case 1:
