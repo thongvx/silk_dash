@@ -361,11 +361,11 @@ $jsCode = <<<JS
             //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-    $('body').click(function () {
-        if (t === 0)
-            openNewTab("https://ceehipsy.com/4/7779337");
-        t = 1;
-    });
+//    $('body').click(function () {
+//        if (t === 0)
+//            openNewTab("https://ceehipsy.com/4/7779337");
+//        t = 1;
+//    });
     const directAds = getDirectAds(custom_ads);
     if(directAds.length > 0) {
         directAds.forEach((ad , index) => {
