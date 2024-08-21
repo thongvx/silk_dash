@@ -16,7 +16,19 @@
             <div  id="fixed-box-control">
 
                 <div class="export hidden" id="export">
-                    <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Files Export</h5>
+                    <div class="flex items-center">
+                        <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Files Export</h5>
+                        <div class="items-center ml-2 flex text-white">
+                            <input type="checkbox" id="btn-title" name="title" class="checkbox w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                  after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                  border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all
+                                  after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center
+                                  after:text-white after:opacity-0 after:transition-all after:content-['✓'] checked:border-0
+                                  checked:border-transparent checked:after:opacity-100"
+                                   value="">
+                            <label for="btn-title" class="ml-3">Show Title</label>
+                        </div>
+                    </div>
                     <div class="grid mt-3" box-lifted>
                         <div
                             class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start flex flex-col items-start md:grid">
@@ -40,13 +52,13 @@
                             <div
                                 class="border-[#142132] rounded-b-xl rounded-tr-xl gap-2 bg-[#142132] bg-top py-4 pl-4 [border-width:var(--tab-border)] undefined">
                                 <div id="EmbedLink" class="tab-content-export">
-                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
+                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto leading-6"></textarea>
                                 </div>
                                 <div id="Embedcode" class="tab-content-export hidden" data-height="{{ $iframeHeight }}" data-width="{{ $iframeWidth }}">
-                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"> </textarea>
+                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto leading-6"> </textarea>
                                 </div>
                                 <div id="Download" class="tab-content-export hidden">
-                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
+                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto leading-6"></textarea>
                                 </div>
                             </div>
                         </div>
