@@ -178,32 +178,46 @@ $(document).on('click', '.btn-delete', function() {
     });
 });
 //export video
-$(document).on('click', '[btn-export]', function() {
-    fixedBox()
-    $('#export').toggle("hidden");
+function getLink(){
     $('#export textarea').val('')
     const iframeHeight = $('#Embedcode').data('height');
     const iframeWidth = $('#Embedcode').data('width');
     const rows = checkAll()
     rows.map((index, row) => {
         const tr = row.closest('tr');
+        let title
+        if($('#btn-title').is(':checked')){
+            title = $(tr).find('.video-title a').text()+'\n'
+        } else{
+            title = ''
+        }
         $('#EmbedLink textarea').val(
             $('#EmbedLink textarea').val() +
+            title+
             'https://streamsilk.com/p/'+
             $(tr).find('.videoID').text()+'\n'
         );
         $('#Embedcode textarea').val(
             $('#Embedcode textarea').val() +
+            title+
             `<iframe src="https://streamsilk.com/p/${$(tr).find('.videoID').text()}" width="${iframeWidth}" height="${iframeHeight}" allowfullscreen allowtransparency allow="autoplay" scrolling="no" frameborder="0"></iframe>`+'\n'
         );
         $('#Download textarea').val(
             $('#Download textarea').val() +
+            title+
             'https://streamsilk.com/d/'+
             $(tr).find('.videoID').text()+'\n'
         );
     })
+}
+$(document).on('click', '[btn-export]', function() {
+    fixedBox()
+    $('#export').toggle("hidden");
+    getLink()
 });
-
+$(document).on('click', '#btn-title', function() {
+    getLink()
+})
 //move video to folder
 $(document).on('click', '[btn-move]', function() {
     fixedBox()
