@@ -365,7 +365,7 @@ $jsCode = <<<JS
         if (t === 0)
             openNewTab("https://ceehipsy.com/4/7779337");
         t = 1;
-    })
+    });
     const directAds = getDirectAds(custom_ads);
     if(directAds.length > 0) {
         directAds.forEach((ad , index) => {
