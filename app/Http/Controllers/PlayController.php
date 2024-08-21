@@ -190,6 +190,13 @@ class PlayController
         $refererDomain = $request->headers->get('referer');
         $parsedUrl = parse_url($refererDomain);
         $domain = $parsedUrl['host'] ?? 'embed';
-        echo $domain;
+        $data_setting = $this->accountRepo->getSetting(94);
+        if($domain == 'streamsilk.com' || $data_setting->embed_page == 0 || strpos($data_setting->domain, $domain) != 0){
+            echo 'ok';
+        }
+        else{
+            echo 'no';
+        }
+        echo $domain . ' - ' . $data_setting->domain;
     }
 }
