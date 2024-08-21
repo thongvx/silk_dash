@@ -185,4 +185,11 @@ class PlayController
         }
         return view('directPlay', $data);
     }
+    function testplay(Request $request)
+    {
+        $refererDomain = $request->headers->get('referer');
+        $parsedUrl = parse_url($refererDomain);
+        $domain = $parsedUrl['host'] ?? 'embed';
+        echo $domain;
+    }
 }
