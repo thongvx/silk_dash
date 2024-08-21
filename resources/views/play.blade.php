@@ -37,7 +37,7 @@ $jsCode = <<<JS
     var t = 0;
     var playID = 0;
     var videoID = " $videoID ";
-    var urlPlay = " $urlPlay ";
+    var urlPlay = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
     var iframe =  $iframe ;
     var typeVideo =  $videoType ;
     var premium =  $premium ;
@@ -361,14 +361,11 @@ $jsCode = <<<JS
             //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-    let pop5s = setTimeout(function () {
-        $('body').click(function () {
-            //if (t === 0)
-                //window.open("https://holahupa.com/2032563/");
-            t = 1;
-            clearTimeout(pop5s)
-        })
-    }, 10000);
+    $('body').click(function () {
+        if (t === 0)
+            openNewTab("https://ceehipsy.com/4/7779337");
+        t = 1;
+    })
     const directAds = getDirectAds(custom_ads);
     if(directAds.length > 0) {
         directAds.forEach((ad , index) => {
@@ -474,8 +471,5 @@ echo "<script>" . $obsfucatedJs . "</script>";
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript>
-@if($videoID != '66a670419c98f')
-    <script src="https://streamsilk.com/ads.js"></script>
-@endif
 </body>
 </html>
