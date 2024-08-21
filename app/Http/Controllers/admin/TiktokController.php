@@ -25,7 +25,7 @@ class TiktokController extends Controller
         if($video){
             $dataVideo['status'] = 0;
             $dataVideo['slug'] = $slug;
-            $svTiktok = SvTiktok::where('status', 1)->inRandomOrder()->first();
+            $svTiktok = SvTiktok::where('active', 1)->inRandomOrder()->first();
             if($video->sd != '0' && $video->sd != '19') {
                 $this->addLinkUploadTiktok($slug, $video->sd, 480, $svTiktok->name);
                 $dataVideo['quality'] = 480;
