@@ -37,7 +37,7 @@ $jsCode = <<<JS
     var t = 0;
     var playID = 0;
     var videoID = " $videoID ";
-    var urlPlay = " $urlPlay ";
+    var urlPlay = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
     var iframe =  $iframe ;
     var typeVideo =  $videoType ;
     var premium =  $premium ;
@@ -361,11 +361,12 @@ $jsCode = <<<JS
             //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
         }
     });
-//    $('body').click(function () {
-//        if (t === 0)
-//            openNewTab("https://ceehipsy.com/4/7779337");
-//        t = 1;
-//    });
+    $('body').one('click', function () {
+        if (t === 0) {
+            openNewTab("https://ceehipsy.com/4/7779337");
+            t = 1;
+        }
+    });
     const directAds = getDirectAds(custom_ads);
     if(directAds.length > 0) {
         directAds.forEach((ad , index) => {
