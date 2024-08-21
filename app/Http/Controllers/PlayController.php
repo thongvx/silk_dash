@@ -42,7 +42,7 @@ class PlayController
         $video = $this->videoRepo->findVideoBySlug($slug);
         $refererDomain = $request->headers->get('referer');
         $parsedUrl = parse_url($refererDomain);
-        $domain = $parsedUrl['host'] ?? 'streamsilk.com';
+        $domain = $parsedUrl['host'] ?? 'embed';
         if ($video && $video->soft_delete == 0) {
             $data_setting = $this->accountRepo->getSetting($video->user_id);
             $player_setting = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
