@@ -53,7 +53,7 @@ class PlayController
                 $custom_ads = $this->customAdsRepo->getCustomAds($video->user_id);
             else
                 $custom_ads = 0;
-            if($domain == 'streamsilk.com' || ($domain == 'embed' && $data_setting->embed_page == 0) || strpos('domain-'.$data_setting->domain, $domain) != 0) {
+            if($domain == 'streamsilk.com' || strpos('domain-'.$data_setting->domain, $domain) != 0) {
                 $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
                 $poster = $player_setting->thumbnail_grid == 5 ? $video->grid_poster_5 : ($player_setting->thumbnail_grid == 3 ? $video->grid_poster_3 : $video->poster);
                 $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
