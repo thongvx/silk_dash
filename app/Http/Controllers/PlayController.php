@@ -84,7 +84,7 @@ class PlayController
                             $urlStream = 'https://'.$svStream.'/insertData?slug='.$video->middle_slug.'&path='.$video->pathStream.'&sto480='.$video->sd.'&sto720='.$video->hd.'&sto1080='.$video->fhd;
                             $nameSvStream = explode('.', $svStream);
                             $video->stream = $nameSvStream[0];
-                            if($svStream)
+                            if($nameSvStream[0])
                                 $video->save();
                         } else {
                             $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
@@ -92,7 +92,7 @@ class PlayController
                                 $svStream = SvStreamService::selectSvStream();
                                 $nameSvStream = explode('.', $svStream);
                                 $video->stream = $video->stream . '-' . $nameSvStream[0];
-                                if($svStream)
+                                if($nameSvStream[0])
                                     $video->save();
                             }
                             //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
