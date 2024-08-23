@@ -3,6 +3,7 @@
 namespace App\Services\ServerStream;
 
 use App\Models\SvStream;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Auth;
 
@@ -91,6 +92,11 @@ class SvStreamService
         } else {
             $svStreams = unserialize($svStreams);
         }
+        $svStreams->each(function ($svStream) {
+            $svStream->cpu = Redis::hgetall('sv_streams:' . $svStream->name)['cpu'];
+            $svStream->percent_space = Redis::hgetall('sv_streams:' . $svStream->name)['percent_space'];
+            $svStream->out_speed = Redis::hgetall('sv_streams:' . $svStream->name)['out_speed'];
+        });
         return $svStreams;
     }
 

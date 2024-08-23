@@ -41,10 +41,10 @@
                                class="text-sm border-separate table-auto overflow-y-clip w-full min-w-max text-white text-center !border-t-0">
                             <thead class="sticky top-0 z-10">
                             <tr class="bg-[#142132] transition-colors text-md">
-                                <th data-column="id" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
+                                <th data-column="name" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">ID</a>
+                                    <a href="javascript:void(0)">Name</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
@@ -52,13 +52,6 @@
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
                                     <a href="javascript:void(0)">Domain</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
-                                </th>
-                                <th data-column="name" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">Name</a>
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
@@ -104,13 +97,6 @@
                                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                                           data-direction="desc">▼</span>
                                 </th>
-                                <th data-column="used_bw" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
-                                <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
-                                      data-direction="asc">▲</span>
-                                    <a href="javascript:void(0)">Used BW</a>
-                                    <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
-                                          data-direction="desc">▼</span>
-                                </th>
                                 <th data-column="in_speed" class='pl-2 sortable-column cursor-pointer relative  py-2' aria-sort>
                                 <span class="text-xs sort-icon absolute opacity-50 bottom-[45%] right-2 asc"
                                       data-direction="asc">▲</span>
@@ -130,16 +116,14 @@
                             <tbody>
                             @forelse( $streams as $index => $stream )
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                    <td class="sorting_1">{{ $stream->id }}</td>
-                                    <td class="domain text-success" onclick="edit(this)">{{ $stream->domain }}</td>
                                     <td class="name text-success">{{ $stream->name }}</td>
+                                    <td class="domain text-success" onclick="edit(this)">{{ $stream->domain }}</td>
                                     <td class="ip text-success">{{ $stream->ip }}</td>
                                     <td>{{ $stream->pass }}</td>
                                     <td>{{ $stream->cpu }}</td>
                                     <td class="space">{{ $stream->space }}</td>
                                     <td>{{ $stream->used_space }}</td>
                                     <td class="BW">{{ $stream->provider }}</td>
-                                    <td>{{ $stream->used_bw }}</td>
                                     <td>{{ $stream->in_speed }}</td>
                                     <td>{{ $stream->out_speed }}</td>
                                 </tr>
