@@ -130,7 +130,7 @@
                             <tbody>
                             @forelse( $streams as $index => $stream )
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]">
-                                    <td class="sorting_1">{{ $stream->id }}</td>
+                                    <td class="sorting_1">{{ $index }}</td>
                                     <td class="domain text-success" onclick="edit(this)">{{ $stream->domain }}</td>
                                     <td class="name text-success">{{ $stream->name }}</td>
                                     <td class="ip text-success">{{ $stream->ip }}</td>

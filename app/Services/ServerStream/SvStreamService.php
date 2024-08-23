@@ -80,23 +80,24 @@ class SvStreamService
 
     public function getAllSvStreams($column, $direction, $limit)
     {
-        $column == 'created_at' ? $column1 = 'name' : $column1 = $column;
-        $data = [];
-        $keys = Redis::keys('sv_streams:*');
-        foreach ($keys as $key) {
-            $data[] = Redis::hgetall($key);
+        $user = Auth::user();
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        $cacheKey = 'svStreams:'.$column1.':'.$direction.':'.$limit;
+        $svStreams = Redis::get($cacheKey);
+        if (!$svStreams) {
+            if ($user->hasRole('admin')) {
+                $svStreams = SvStream::query()->orderBy($column1, $direction)->paginate($limit);
+                Redis::setex($cacheKey, 259200, serialize($svStreams));
+            }
+        } else {
+            $svStreams = unserialize($svStreams);
         }
-        $data = collect($data);
-        $sortedData = $data->sortBy($column1, SORT_REGULAR, $direction == 'desc');
-
-        // Manually paginate the sorted data
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentPageItems = $sortedData->slice(($currentPage - 1) * $limit, $limit)->values();
-        $paginatedData = new LengthAwarePaginator($currentPageItems, $sortedData->count(), $limit, $currentPage, [
-            'path' => LengthAwarePaginator::resolveCurrentPath(),
-        ]);
-
-        return $paginatedData;
+        $svStreams->each(function ($svStream) {
+            $svStream->cpu = Redis::hgetall('sv_streams:' . $svStream->domain)['cpu'];
+            $svStream->percent_space = Redis::hgetall('sv_streams:' . $svStream->domain)['percent_space'];
+            $svStream->out_speed = Redis::hgetall('sv_streams:' . $svStream->domain)['out_speed'];
+        });
+        return $svStreams;
     }
 
     public static function checkConnectSvStream($arrStream)
