@@ -26,15 +26,13 @@ text-slate-500 backdrop-blur-[2px]" style="background-image: url('{{asset('image
                     <div class="bg-white px-10 py-10 rounded-lg flex justify-center items-center flex-col">
                         <img src="{{ asset('image/email-verify.webp') }}" alt="logo" class="w-2/5" />
                         <h3 class="box-title text-5xl font-medium mb-3">Verify your email address</h3>
-                        @if (session('resent'))
-                            <div class="alert alert-success hidden">
+                        @if (session('resent') === true)
+                            <div class="alert alert-success">
                                 A verification email has been sent to your email
                             </div>
                         @endif
-                        <p>A verification email has been sent to your email</p>
                         <p>Please check vour email and click the link provided in the email to complete your account registration.</p>
                         <p class="mt-10 mb-6 w-3/5 text-center">If you do not receive the email within the next 5 minutes, use the button below to resend verification email.</p>
-
                         <div class="flex justify-center">
                             <a href="#" class="rounded-full bg-[#009FB2]/80 text-white px-10 py-2 text-lg hover:bg-[#009fb2] font-medium"
                                onclick="event.preventDefault(); document.getElementById('resend-form').submit();">
@@ -45,6 +43,11 @@ text-slate-500 backdrop-blur-[2px]" style="background-image: url('{{asset('image
                                 Login other acc?
                             </a>
                         </div>
+                        @if(Session::has('resentMail'))
+                            <div class="alert alert-warning italic text-rose-600">
+                                {{ Session::get('resentMail') }}
+                            </div>
+                        @endif
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                             @csrf
                         </form>

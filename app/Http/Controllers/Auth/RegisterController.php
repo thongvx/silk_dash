@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\AccountSetting;
 use App\Models\Folder;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -68,6 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+         Session::put('last_email_sent', now());
          $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
