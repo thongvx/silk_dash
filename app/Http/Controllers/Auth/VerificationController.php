@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Facades\Bot;
 use App\Http\Controllers\Mail\EmailController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class VerificationController extends Controller
 {
@@ -119,6 +120,24 @@ class VerificationController extends Controller
 
         // Redirect to login with a success message
         return redirect($this->redirectTo)->with('status', 'Your email has been verified. Please log in again.');
+    }
+    //resend
+    public function resend(Request $request)
+    {
+        $user = Auth::user();
+        if ($user->hasVerifiedEmail()) {
+            return redirect($this->redirectTo);
+        }
+        $lastEmailSent = Session::get('last_email_sent');
+        if ($lastEmailSent && now()->diffInMinutes($lastEmailSent) < 2) {
+            return back()->with([
+                'resentMail' => 'Please wait a few minutes before requesting a new email.',
+                'resent' => false,
+            ]);
+        }
+        Session::put('last_email_sent', now()->addMinutes(2));
+        $user->sendEmailVerificationNotification();
+        return back()->with('resent', true);
     }
     /**
      * Log the user out.
