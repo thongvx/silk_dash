@@ -156,7 +156,18 @@
                         </div> <!--end-traffic-->
                         <div class="actions mt-3 flex flex-col	">
                             <h4 class="text-teal-400 text-lg font-bold">Actions</h4>
-                            <div class="flex justify-center	">
+                            <div class="flex justify-center	mb-3">
+                                @if(!$users->hasVerifiedEmail())
+                                    <form action="{{ route('send.email', ['user' => $users]) }}" method="POST"  id="resend-form"
+                                          style="display:inline;">
+                                        @csrf
+                                        <button type="submit"
+                                            class="rounded-lg px-6 py-2 bg-[#121520] hover:bg-gradient-to-r hover:from-yellow-400 hover:to-orange-500">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            Send Mail Verify
+                                        </button>
+                                    </form>
+                                @endif
                                 <div
                                     class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-pink-500 to-red-500 w-max py-2 px-5">
                                     <form action="{{ route('user.destroy', ['user' => $users->id]) }}" method="POST"
@@ -183,11 +194,17 @@
                                     <i class="fa fa-sign-in" aria-hidden="true"></i>
                                     Login As User
                                 </a>
-                                <div class="hidden">
-                                    <i class="fa fa-ban" aria-hidden="true"></i>
-                                    Delete
-                                </div>
                             </div>
+                            @if (session('resent') === true)
+                                <div class="alert alert-success text-teal-400 text-center">
+                                    A verification email has been sent to {{$users->email}}
+                                </div>
+                            @endif
+                            @if(Session::has('resentMail'))
+                                <div class="alert alert-warning italic text-rose-600 text-center">
+                                    {{ Session::get('resentMail') }}
+                                </div>
+                            @endif
                         </div> <!--end-actions-->
                         <div class="grid grid-cols-4 gap-6 mt-8">
                             <div class="mt-3 bg-[#121520] rounded-lg p-3 col-span-2 xl:col-span-1">

@@ -13,6 +13,8 @@ use App\Repositories\AccountRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use App\Repositories\ReportRepo;
+use Illuminate\Support\Facades\Session;
+
 
 class UsersAdminController
 {
@@ -190,5 +192,19 @@ class UsersAdminController
             'title' => 'Users',
         ];
         return view('admin.user.table', $data);
+    }
+    // send mail
+    public function sendMail(User $user)
+    {
+        $lastEmailSent = Session::get('last_email_sent');
+        if ($lastEmailSent && now()->diffInMinutes($lastEmailSent) < 2) {
+            return back()->with([
+                'resentMail' => 'Please wait a few minutes before requesting a new email.',
+                'resent' => false,
+            ]);
+        }
+        Session::put('last_email_sent', now()->addMinutes(2));
+        $user->sendEmailVerificationNotification();
+        return back()->with('resent', true);
     }
 }

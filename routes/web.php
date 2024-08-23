@@ -161,6 +161,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::post('/updateEarning', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateEarning']);
     Route::post('/updateUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateUser']);
     Route::get('/searchUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'searchUser']);
+    Route::post('send-email/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'sendMail'])->name('send.email');
     //manageTask
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
     Route::post('/manageTask/retryEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryEncoder'])->name('retryEncoder');

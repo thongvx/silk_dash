@@ -32,3 +32,8 @@ $(function () {
     $('.select2').select2()
     $('.select2-search__field').attr('name', 'country')
 });
+$(document).on('submit', '#resend-form', function () {
+    $(this).find('button').attr('disabled', true);
+    $(this).find('button').css('cursor', 'not-allowed');
+    $(this).find('button').html('Processing...');
+});
