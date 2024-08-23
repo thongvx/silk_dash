@@ -93,9 +93,9 @@ class SvStreamService
             $svStreams = unserialize($svStreams);
         }
         $svStreams->each(function ($svStream) {
-            $svStream->cpu = Redis::hgetall('sv_streams:' . $svStream->domain)['cpu'];
-            $svStream->percent_space = Redis::hgetall('sv_streams:' . $svStream->domain)['percent_space'];
-            $svStream->out_speed = Redis::hgetall('sv_streams:' . $svStream->domain)['out_speed'];
+            $svStream->cpu = Redis::hgetall('sv_streams:' . $svStream->name)['cpu'];
+            $svStream->percent_space = Redis::hgetall('sv_streams:' . $svStream->name)['percent_space'];
+            $svStream->out_speed = Redis::hgetall('sv_streams:' . $svStream->name)['out_speed'];
         });
         return $svStreams;
     }
