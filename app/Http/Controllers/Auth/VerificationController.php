@@ -135,7 +135,7 @@ class VerificationController extends Controller
                 'resent' => false,
             ]);
         }
-        Session::put('last_email_sent', now()->addMinutes(2));
+        Session::put('last_email_sent', now());
         $user->sendEmailVerificationNotification();
         return back()->with('resent', true);
     }

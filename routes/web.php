@@ -184,7 +184,7 @@ Route::prefix('email')->group(function () {
     Route::get('/view-discount-emails', [EmailController::class, 'viewDiscountProgramEmails']);
     Route::post('/send-zoom-emails', [EmailController::class, 'sendZoomEmails'])->name('send.zoom.emails');
 });
-
+Route::get('/send-mail-api', [\App\Http\Controllers\Mail\EmailAPIController::class, 'SendMailAPI']);
 Route::get('/getDataRedis/{slug}', [\App\Http\Controllers\admin\UsersAdminController::class, 'getDataRedis']);
 
 Route::get('updateViewUpdate/{videoId}', [\App\Http\Controllers\VideoViewController::class, 'updateView']);

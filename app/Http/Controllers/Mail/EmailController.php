@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\DiscountProgramEmail;
 use App\Notifications\ZoomEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 
 class EmailController extends Controller
@@ -22,9 +23,7 @@ class EmailController extends Controller
                     $query->where('name', 'admin');
                 })
                 ->get();
-            foreach ($users as $user) {
-                $user->notify(new DiscountProgramEmail($discountDetails));
-            }
+            Notification::send($users, new DiscountProgramEmail($discountDetails));
         } else {
             $user = User::find($userId);
             if ($user) {
