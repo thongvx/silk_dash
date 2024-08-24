@@ -188,7 +188,7 @@ class PlayController
         }
         return view('directPlay', $data);
     }
-    function testplay(Request $request)
+    function testplay($userId, Request $request)
     {
         $refererDomain = $request->headers->get('referer');
         $parsedUrl = parse_url($refererDomain);

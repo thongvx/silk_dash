@@ -73,7 +73,7 @@ Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateControlle
 Route::get('/copyHlsTiktok', [\App\Http\Controllers\admin\UpdateController::class, 'copyHlsTiktok']);
 //-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
-Route::get('/testplay', [\App\Http\Controllers\PlayController::class, 'testplay'])->name('testplay');
+Route::get('/testplay/{id}', [\App\Http\Controllers\PlayController::class, 'testplay'])->name('testplay');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
 Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
 Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
