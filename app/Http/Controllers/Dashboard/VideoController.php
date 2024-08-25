@@ -354,6 +354,13 @@ class VideoController
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 50);
         $folders = $this->folderRepo->getFolder($user->id,$folderName);
+        if ($folders == null) {
+            return response()->json([
+                "msg" => "No folder found",
+                "status" => 404,
+                "sever_time" => date('Y-m-d H:i:s'),
+            ]);
+        }
         $folderId = $folders->id;
         $videos = $this->videoRepo->getAllUserVideo($user->id, 'live', 'created_at', 'desc', $folderId, $limit, $page, ['*']);
         $videoData = [];
