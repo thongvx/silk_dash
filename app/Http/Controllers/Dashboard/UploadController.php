@@ -171,7 +171,7 @@ class UploadController
             $folderName = $this->folderRepo->find($folder_id)->name_folder;
         } else {
             $folderName = $request->get('nameFolder', 'root');
-            $folder_id = $this->folderRepo->getFolder($folderName)->id ?? null;
+            $folder_id = $this->folderRepo->getFolder($user->id, $folderName)->id ?? null;
         }
         if ($folder_id == null) {
             return null;
