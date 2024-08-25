@@ -285,24 +285,13 @@ class VideoController
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
         $video = $this->videoRepo->searchVideos($user->id, $slug, $limit, $column, $direction)->first();
+
         $transfer = $this->transferRepo->getTransferById($slug, $user->id);
-        $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
         if($transfer != null){
             if($transfer->status == 19){
                 $status = "fail";
             }else{
                 $status = 'transferring';
-            }
-        }
-        if($encoder != null){
-            if($encoder->status == 0) {
-                $status = 'encoder: processing';
-            }elseif ($encoder->status == 19){
-                $status = 'encoder: failed';
-            }elseif ($encoder->status == 4){
-                $status = 'encoder: completed';
-            } else{
-                $status = 'encoder: processing';
             }
         }
         if ( $transfer != null) {
@@ -315,6 +304,8 @@ class VideoController
                 ]
             ]);
         }
+        $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
+
         if($video == null){
             return response()->json([
                 "msg" => "No video found",
@@ -326,6 +317,18 @@ class VideoController
             $status = 'deleted';
         }else{
             $status = 'active';
+        }
+
+        if($encoder != null){
+            if($encoder->status == 0) {
+                $status = 'encoder: processing';
+            }elseif ($encoder->status == 19){
+                $status = 'encoder: failed';
+            }elseif ($encoder->status == 4){
+                $status = 'encoder: completed';
+            } else{
+                $status = 'encoder: processing';
+            }
         }
         $data=[
             'msg' => 'Ok',
