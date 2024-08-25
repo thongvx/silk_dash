@@ -293,10 +293,10 @@ class VideoController
             ]);
         }
         $status = 'completed';
-        $transfer = $this->transferRepo->getTransferById($slug, $user->id)->status;
+        $transfer = $this->transferRepo->getTransferById($slug, $user->id);
         $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
         if($transfer != null){
-            $status = $transfer;
+            $status = $transfer->status;
         }
         if($encoder != null){
             $status = $encoder->status;
