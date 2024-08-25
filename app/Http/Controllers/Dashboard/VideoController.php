@@ -306,8 +306,6 @@ class VideoController
             } else{
                 $status = 'processing';
             }
-        }else{
-            $status = 'completed';
         }
         if ( $transfer != null) {
             return response()->json([
