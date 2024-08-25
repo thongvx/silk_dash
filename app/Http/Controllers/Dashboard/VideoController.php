@@ -353,7 +353,7 @@ class VideoController
         $folderName = $request->get('nameFolder', 'root');
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 50);
-        $folders = $this->folderRepo->getFolder($folderName);
+        $folders = $this->folderRepo->getFolder($user->id,$folderName);
         $folderId = $folders->id;
         $videos = $this->videoRepo->getAllUserVideo($user->id, 'live', 'created_at', 'desc', $folderId, $limit, $page, ['*']);
         $videoData = [];
