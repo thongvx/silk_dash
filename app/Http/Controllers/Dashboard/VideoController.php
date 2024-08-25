@@ -286,7 +286,11 @@ class VideoController
         $direction = $request->input('direction', 'asc');
         $video = $this->videoRepo->searchVideos($user->id, $slug, $limit, $column, $direction)->first();
 
-        $status = 'completed';
+        if($video->soft_delete == 1){
+            $status = 'deleted';
+        }else{
+            $status = 'active';
+        }
         $transfer = $this->transferRepo->getTransferById($slug, $user->id);
         $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
         if($transfer != null){
