@@ -6,6 +6,7 @@ use App\Notifications\NotificationService;
 use App\Repositories\VideoRepo;
 use App\Repositories\FolderRepo;
 use App\Repositories\EncoderTaskRepo;
+use App\Repositories\TransferRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,11 +17,11 @@ use App\Http\Controllers\Dashboard\UploadController;
 
 class VideoController
 {
-    protected $videoRepo, $folderRepo, $encoderTaskRepo, $notificationService, $uploadController, $playerSettingsRepo;
+    protected $videoRepo, $folderRepo, $encoderTaskRepo, $notificationService, $uploadController, $playerSettingsRepo, $transferRepo;
 
     public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo,
                                 NotificationService $notificationService, UploadController $uploadController,
-                                PlayerSettingsRepo $playerSettingsRepo)
+                                PlayerSettingsRepo $playerSettingsRepo, TransferRepo $transferRepo)
     {
         $this->videoRepo = $videoRepo;
         $this->folderRepo = $folderRepo;
@@ -28,6 +29,7 @@ class VideoController
         $this->notificationService = $notificationService;
         $this->uploadController = $uploadController;
         $this->playerSettingsRepo = $playerSettingsRepo;
+        $this->transferRepo = $transferRepo;
     }
 
     // Get video data
@@ -283,12 +285,50 @@ class VideoController
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
         $video = $this->videoRepo->searchVideos($user->id, $slug, $limit, $column, $direction)->first();
+
+        $transfer = $this->transferRepo->getTransferById($slug, $user->id);
+        if($transfer != null){
+            if($transfer->status == 19){
+                $status = "fail";
+            }else{
+                $status = 'transferring';
+            }
+        }
+        if ( $transfer != null) {
+            return response()->json([
+                "msg" => "Ok",
+                "status" => 200,
+                "sever_time" => date('Y-m-d H:i:s'),
+                "file" => [
+                    "status" => 'transfer: '. $status,
+                ]
+            ]);
+        }
+        $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
+
         if($video == null){
             return response()->json([
                 "msg" => "No video found",
                 "status" => 404,
                 "sever_time" => date('Y-m-d H:i:s'),
             ]);
+        }
+        if($video->soft_delete == 1){
+            $status = 'deleted';
+        }else{
+            $status = 'active';
+        }
+
+        if($encoder != null){
+            if($encoder->status == 0) {
+                $status = 'encoder: processing';
+            }elseif ($encoder->status == 19){
+                $status = 'encoder: failed';
+            }elseif ($encoder->status == 4){
+                $status = 'encoder: completed';
+            } else{
+                $status = 'encoder: processing';
+            }
         }
         $data=[
             'msg' => 'Ok',
@@ -303,6 +343,7 @@ class VideoController
                 "size" => $this->convertFileSize($video->size),
                 "duration" => $video->duration,
                 "quality" => $video->quality,
+                "status" => $status,
             ],
         ];
         return response()->json($data);
@@ -312,7 +353,14 @@ class VideoController
         $folderName = $request->get('nameFolder', 'root');
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 50);
-        $folders = $this->folderRepo->getFolder($folderName);
+        $folders = $this->folderRepo->getFolder($user->id,$folderName);
+        if ($folders == null) {
+            return response()->json([
+                "msg" => "No folder found",
+                "status" => 404,
+                "sever_time" => date('Y-m-d H:i:s'),
+            ]);
+        }
         $folderId = $folders->id;
         $videos = $this->videoRepo->getAllUserVideo($user->id, 'live', 'created_at', 'desc', $folderId, $limit, $page, ['*']);
         $videoData = [];
@@ -324,6 +372,23 @@ class VideoController
             ]);
         }
         foreach ($videos as $video) {
+            if($video->soft_delete == 1){
+                $status = 'deleted';
+            }else{
+                $status = 'active';
+            }
+            $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $video->slug)->first();
+            if($encoder != null){
+                if($encoder->status == 0) {
+                    $status = 'encoder: processing';
+                }elseif ($encoder->status == 19){
+                    $status = 'encoder: failed';
+                }elseif ($encoder->status == 4){
+                    $status = 'encoder: completed';
+                } else{
+                    $status = 'encoder: processing';
+                }
+            }
             $videoData[] = [
                 "title" => $video->title,
                 "folder" => $folderName,
@@ -333,6 +398,7 @@ class VideoController
                 "view" => $video->total_play,
                 "size" => $this->convertFileSize($video->size),
                 "date_uploaded" => $video->created_at->format('m/d/Y H:i:s'),
+                "status" => $status,
             ];
         }
         $data = [

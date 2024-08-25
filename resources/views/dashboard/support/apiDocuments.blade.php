@@ -404,7 +404,8 @@
                 "poster": "https://ver1.sptvp.com/poster/1/6E/fjre48lv7ddvE7NFpPcS.png",
                 "view": 0,
                 "size": "81.41 MB",
-                "date_uploaded": 06/28/2024 01:33:11
+                "date_uploaded": 06/28/2024 01:33:11,
+                "status": active
             },
             {
                 "title": "def.mp4",
@@ -414,7 +415,8 @@
                 "poster": "https://ver1.sptvp.com/poster/A/FF/rtjgnkDM9W3BkKmmUcj.png",
                 "view": 1,
                 "size": "81.41 MB",
-                "date_uploaded": 06/08/2024 10:53:04
+                "date_uploaded": 06/08/2024 10:53:04,
+                "status": active
             }
         ]
     }
@@ -489,7 +491,8 @@
             "date_uploaded": 07/28/2024 01:33:11,
             "size": "122.13 M",
             "duration": 515,
-            "quality": 1080
+            "quality": 1080,
+            "status": active
         }
     }
 </code>
