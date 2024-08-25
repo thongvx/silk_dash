@@ -285,12 +285,6 @@ class VideoController
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
         $video = $this->videoRepo->searchVideos($user->id, $slug, $limit, $column, $direction)->first();
-
-        if($video->soft_delete == 1){
-            $status = 'deleted';
-        }else{
-            $status = 'active';
-        }
         $transfer = $this->transferRepo->getTransferById($slug, $user->id);
         $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
         if($transfer != null){
@@ -327,6 +321,11 @@ class VideoController
                 "status" => 404,
                 "sever_time" => date('Y-m-d H:i:s'),
             ]);
+        }
+        if($video->soft_delete == 1){
+            $status = 'deleted';
+        }else{
+            $status = 'active';
         }
         $data=[
             'msg' => 'Ok',
