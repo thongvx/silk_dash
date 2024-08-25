@@ -365,6 +365,23 @@ class VideoController
             ]);
         }
         foreach ($videos as $video) {
+            if($video->soft_delete == 1){
+                $status = 'deleted';
+            }else{
+                $status = 'active';
+            }
+            $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $video->slug)->first();
+            if($encoder != null){
+                if($encoder->status == 0) {
+                    $status = 'encoder: processing';
+                }elseif ($encoder->status == 19){
+                    $status = 'encoder: failed';
+                }elseif ($encoder->status == 4){
+                    $status = 'encoder: completed';
+                } else{
+                    $status = 'encoder: processing';
+                }
+            }
             $videoData[] = [
                 "title" => $video->title,
                 "folder" => $folderName,
@@ -374,6 +391,7 @@ class VideoController
                 "view" => $video->total_play,
                 "size" => $this->convertFileSize($video->size),
                 "date_uploaded" => $video->created_at->format('m/d/Y H:i:s'),
+                "status" => $status,
             ];
         }
         $data = [
