@@ -27,33 +27,36 @@ class TiktokController extends Controller
             $dataVideo['slug'] = $slug;
             $svTiktok = SvTiktok::where('active', 1)->inRandomOrder()->first();
             if($video->sd != '0' && $video->sd != '19') {
-                $this->addLinkUploadTiktok($slug, $video->sd, 480, $svTiktok->name);
                 $dataVideo['quality'] = 480;
                 $dataVideo['path'] = $video->sd;
                 $dataVideo['sv'] = $svTiktok->name;
                 $check = AddTiktok::where('slug', $slug)->where('quality', 480)->first();
-                if(!$check)
+                if(!$check) {
                     AddTiktok::create($dataVideo);
+                    $this->addLinkUploadTiktok($slug, $video->sd, 480, $svTiktok->name);
+                }
             }
 
             if($video->hd != '0' && $video->hd != '19'){
-                $this->addLinkUploadTiktok($slug, $video->hd, 720, $svTiktok->name);
                 $dataVideo['quality'] = 720;
                 $dataVideo['path'] = $video->hd;
                 $dataVideo['sv'] = $svTiktok->name;
                 $check = AddTiktok::where('slug', $slug)->where('quality', 720)->first();
-                if(!$check)
+                if(!$check) {
                     AddTiktok::create($dataVideo);
+                    $this->addLinkUploadTiktok($slug, $video->hd, 720, $svTiktok->name);
+                }
             }
 
             if($video->fhd != '0' && $video->fhd != '19'){
-                $this->addLinkUploadTiktok($slug, $video->fhd, 1080, $svTiktok->name);
                 $dataVideo['quality'] = 1080;
                 $dataVideo['path'] = $video->fhd;
                 $dataVideo['sv'] = $svTiktok->name;
                 $check = AddTiktok::where('slug', $slug)->where('quality', 1080)->first();
-                if(!$check)
+                if(!$check) {
                     AddTiktok::create($dataVideo);
+                    $this->addLinkUploadTiktok($slug, $video->fhd, 1080, $svTiktok->name);
+                }
             }
 
             return '200';
