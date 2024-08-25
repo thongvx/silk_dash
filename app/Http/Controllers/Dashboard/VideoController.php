@@ -309,7 +309,17 @@ class VideoController
         }else{
             $status = 'completed';
         }
-        if($video == null && ($transfer == null && $encoder == null)){
+        if ( $transfer != null) {
+            return response()->json([
+                "msg" => "Ok",
+                "status" => 200,
+                "sever_time" => date('Y-m-d H:i:s'),
+                "file" => [
+                    "status" => 'transfer:'. $status,
+                ]
+            ]);
+        }
+        if($video == null){
             return response()->json([
                 "msg" => "No video found",
                 "status" => 404,
