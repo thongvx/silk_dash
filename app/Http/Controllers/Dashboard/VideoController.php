@@ -298,13 +298,13 @@ class VideoController
         }
         if($encoder != null){
             if($encoder->status == 0) {
-                $status = 'processing';
+                $status = 'encoder: processing';
             }elseif ($encoder->status == 19){
-                $status = 'failed';
+                $status = 'encoder: failed';
             }elseif ($encoder->status == 4){
-                $status = 'completed';
+                $status = 'encoder: completed';
             } else{
-                $status = 'processing';
+                $status = 'encoder: processing';
             }
         }
         if ( $transfer != null) {
@@ -313,7 +313,7 @@ class VideoController
                 "status" => 200,
                 "sever_time" => date('Y-m-d H:i:s'),
                 "file" => [
-                    "status" => 'transfer:'. $status,
+                    "status" => 'transfer: '. $status,
                 ]
             ]);
         }
