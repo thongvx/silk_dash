@@ -291,7 +291,7 @@ class VideoController
         $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
         if($transfer != null){
             if($transfer->status == 19){
-                $status = "false";
+                $status = "fail";
             }else{
                 $status = 'transferring';
             }
