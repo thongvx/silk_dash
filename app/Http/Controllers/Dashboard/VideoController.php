@@ -6,6 +6,7 @@ use App\Notifications\NotificationService;
 use App\Repositories\VideoRepo;
 use App\Repositories\FolderRepo;
 use App\Repositories\EncoderTaskRepo;
+use App\Repositories\TransferRepo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,11 +17,11 @@ use App\Http\Controllers\Dashboard\UploadController;
 
 class VideoController
 {
-    protected $videoRepo, $folderRepo, $encoderTaskRepo, $notificationService, $uploadController, $playerSettingsRepo;
+    protected $videoRepo, $folderRepo, $encoderTaskRepo, $notificationService, $uploadController, $playerSettingsRepo, $transferRepo;
 
     public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, EncoderTaskRepo $encoderTaskRepo,
                                 NotificationService $notificationService, UploadController $uploadController,
-                                PlayerSettingsRepo $playerSettingsRepo)
+                                PlayerSettingsRepo $playerSettingsRepo, TransferRepo $transferRepo)
     {
         $this->videoRepo = $videoRepo;
         $this->folderRepo = $folderRepo;
@@ -28,6 +29,7 @@ class VideoController
         $this->notificationService = $notificationService;
         $this->uploadController = $uploadController;
         $this->playerSettingsRepo = $playerSettingsRepo;
+        $this->transferRepo = $transferRepo;
     }
 
     // Get video data
@@ -290,6 +292,17 @@ class VideoController
                 "sever_time" => date('Y-m-d H:i:s'),
             ]);
         }
+        $status = 'completed';
+        $transfer = $this->transferRepo->getTransferById($slug, $user->id)->status;
+        $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
+        if($transfer != null){
+            $status = $transfer;
+        }
+        if($encoder != null){
+            $status = $encoder->status;
+        }else{
+            $status = 'completed';
+        }
         $data=[
             'msg' => 'Ok',
             'status' => '200',
@@ -303,6 +316,7 @@ class VideoController
                 "size" => $this->convertFileSize($video->size),
                 "duration" => $video->duration,
                 "quality" => $video->quality,
+                "status" => $status,
             ],
         ];
         return response()->json($data);
