@@ -162,7 +162,7 @@ class UsersAdminController
         if(is_null($data)){
             return json_encode([]);
         }
-        return json_encode($data);
+        return json_encode((array) $data);
     }
 
     public function updateEarning (Request $request)
