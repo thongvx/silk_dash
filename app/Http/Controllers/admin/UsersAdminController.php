@@ -162,7 +162,6 @@ class UsersAdminController
         if(is_null($data)){
             return json_encode([]);
         }
-        $data = method_exists($data, 'toArray') ? $data->toArray() : (array) $data;
         return json_encode($data);
     }
 
