@@ -83,7 +83,7 @@
                 data-videoid="{{ $video->slug }}">
                 <td class="text-center py-2 w-max">{{ $video->user_id }}</td>
                 <td class="pl-2 w-[25rem] video-title {{ $color }}">
-                    <a href="https://ad.streamsilk.com/p/{{ $video->slug }}" target="_black">{{ $video->title }}</a>
+                    <a href="{{route('play', $video->slug)}}" target="_black">{{ $video->title }}</a>
                 </td>
                 <td class="text-center px-2 slug videoID {{ $color }}">{{ $video->slug }}</td>
                 <td class="text-center px-2 slug {{ $color }}">{{ $video->middle_slug }}</td>
