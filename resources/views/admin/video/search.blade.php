@@ -67,45 +67,8 @@
                         <i class="material-symbols-outlined text-3xl">close</i>
                     </button>
                 </div>
-                <div  id="fixed-box-control">
+                <div id="fixed-box-control">
 
-                    <div class="export hidden" id="export">
-                        <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Files Export</h5>
-                        <div class="grid mt-3" box-lifted>
-                            <div
-                                class="tabs tabs-lifted z-10 -mb-[var(--tab-border)] justify-self-start flex flex-col items-start md:grid">
-                                <button
-                                    class="tab-export EmbedLink [--tab-border-color:#142132] tab !text-[#009FB2] text-white font-bold h-auto text-md px-4 tab-active [--tab-bg:#142132] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:!block"
-                                    data-content="EmbedLink">
-                                    EmbedLink
-                                </button>
-                                <button
-                                    class="tab-export Embedcode [--tab-border-color:#142132] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#142132] my-3 md:my-0 !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
-                                    data-content="Embedcode">
-                                    Embedcode
-                                </button>
-                                <button
-                                    class="tab-export Download [--tab-border-color:#142132] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#142132] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
-                                    data-content="Download">
-                                    Download Link
-                                </button>
-                            </div>
-                            <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative">
-                                <div
-                                    class="border-[#142132] rounded-b-xl rounded-tr-xl gap-2 bg-[#142132] bg-top py-4 pl-4 [border-width:var(--tab-border)] undefined">
-                                    <div id="EmbedLink" class="tab-content-export">
-                                        <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
-                                    </div>
-                                    <div id="Embedcode" class="tab-content-export hidden">
-                                        <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"> </textarea>
-                                    </div>
-                                    <div id="Download" class="tab-content-export hidden">
-                                        <textarea class="bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
