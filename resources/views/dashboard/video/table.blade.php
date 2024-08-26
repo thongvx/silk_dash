@@ -54,7 +54,7 @@
                     <span class="text-xs sort-icon absolute opacity-50 top-[45%] right-2 desc"
                           data-direction="desc">▼</span>
                 </th>
-                <th class="px-1 text-center">
+                <th class="px-1 text-center {{ request()->get('tab') != 'removed' ? '' : 'hidden' }}">
                 </th>
             </tr>
         </thead>

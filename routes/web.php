@@ -176,6 +176,8 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::resource('/payment', \App\Http\Controllers\admin\PaymentController::class);
     //videoAdmin
     Route::resource('/videoAdmin', \App\Http\Controllers\admin\VideoAdminController::class);
+    Route::get('/removeRedis/{slug}', [\App\Http\Controllers\admin\VideoAdminController::class, 'removeCacheVideo']);
+    Route::get('/deleteVideo/{slug}', [\App\Http\Controllers\admin\VideoAdminController::class, 'deleteVideo']);
 });
 //-------------------------send mail-------------------------------------------------------
 Route::prefix('email')->group(function () {

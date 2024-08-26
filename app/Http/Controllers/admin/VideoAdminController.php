@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\VideoCacheKeys;
 use App\Repositories\PlayerSettingsRepo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\VideoRepo;
 use App\Repositories\FolderRepo;
+use App\Repositories\Admin\ManagetaskRepo;
+use Illuminate\Support\Facades\Redis;
 
 class VideoAdminController extends Controller
 {
-    protected $videoRepo, $folderRepo, $playerSettingsRepo;
+    protected $videoRepo, $folderRepo, $playerSettingsRepo, $manageTaskRepo;
 
-    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, PlayerSettingsRepo $playerSettingsRepo)
+    public function __construct(VideoRepo $videoRepo, FolderRepo $folderRepo, PlayerSettingsRepo $playerSettingsRepo, ManagetaskRepo $manageTaskRepo)
     {
         $this->videoRepo = $videoRepo;
         $this->folderRepo = $folderRepo;
         $this->playerSettingsRepo = $playerSettingsRepo;
+        $this->manageTaskRepo = $manageTaskRepo;
     }
     public function index(Request $request)
     {
@@ -46,6 +50,7 @@ class VideoAdminController extends Controller
         $column = !request()->get('column') ? 'created_at' : request()->get('column');
         $direction = !request()->get('direction') ? 'desc' : request()->get('direction');
         $videos = $this->videoRepo->searchVideos(null, $searchTerm, $limit, $column, $direction);
+
         $data = [
             'videos' => $videos,
             'title' => 'Videos',
@@ -54,5 +59,16 @@ class VideoAdminController extends Controller
             'searchTerm' => $searchTerm,
         ];
         return $data;
+    }
+    public function removeCacheVideo($slug)
+    {
+        Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
+        return redirect()->back();
+    }
+    public function removeVideo($slug)
+    {
+        $video = $this->videoRepo->findVideoBySlug($slug);
+        $video->delete();
+        return redirect()->back();
     }
 }

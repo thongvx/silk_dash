@@ -159,8 +159,10 @@ class UsersAdminController
     {
         $data = Redis::get(VideoCacheKeys::GET_VIDEO_BY_SLUG->value . $slug);
         $data = unserialize($data);
+        if(isset($data)){
+            return json_encode([]);
+        }
         $data = method_exists($data, 'toArray') ? $data->toArray() : (array) $data;
-
         return json_encode($data);
     }
 

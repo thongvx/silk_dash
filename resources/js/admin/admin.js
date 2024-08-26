@@ -17,6 +17,9 @@ import './mail.js';
 import './ticket.js'
 //payment
 import './payment.js'
+//video
+import './video.js'
+
 var a_menu = $('.menu-sidebar')
 a_menu.filter(function () {
     const urlParams = new URLSearchParams(window.location.search);
