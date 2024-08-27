@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\PlayerSetting;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\AccountSetting;
-use App\Models\Folder;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -57,7 +56,12 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'website' => ['required', 'string', 'max:255'],
+            'website' => ['required', 'string', 'max:255', 'url'],
+            'telegram' => ['nullable', 'string', 'max:255', 'required_without:skype'],
+            'skype' => ['nullable', 'string', 'max:255', 'required_without:telegram'],
+        ], [
+            'telegram.required_without' => 'The telegram field is required when telegram is not present.',
+            'skype.required_without' => 'The skype field is required when skype is not present.',
         ]);
     }
 
@@ -69,6 +73,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $recaptchaResponse = $data['g-recaptcha-response'];
+        $recaptchaSecret = config('services.recaptcha.secret_key');
+        $recaptcha = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => $recaptchaSecret,
+            'response' => $recaptchaResponse,
+        ]);
+
+        if (!$recaptcha->json()['success']) {
+            return null;
+        }
+
          Session::put('last_email_sent', now());
          $user = User::create([
             'name' => $data['name'],
@@ -94,9 +109,21 @@ class RegisterController extends Controller
         $user->active = 0;
         $user->save();
 
-
-
 //       event(new Registered($user));
         return $user;
+    }
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+
+        if ($user === null) {
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Captcha verification failed.']);
+        }
+
+        $this->guard()->login($user);
+
+        return redirect($this->redirectPath());
     }
 }
