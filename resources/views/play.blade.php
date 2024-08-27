@@ -392,7 +392,7 @@ $jsCode = <<<JS
             setTimeout(() => {
                 const script = document.createElement('script');
                 script.type = 'application/javascript';
-                script.src = 'https://streamsilk.com/ads.js';
+                script.src = 'ad.linkAds';
                 document.head.appendChild(script);
             }, ad.offset * 1000);
         });
