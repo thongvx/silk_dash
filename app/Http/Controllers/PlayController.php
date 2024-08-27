@@ -198,7 +198,7 @@ class PlayController
         $data_setting = $this->accountRepo->getSetting($video->user_id);
         $data_setting->domain = $data_setting->domain ?? 'embed';
         if($data_setting->domain == 0) $data_setting->domain = 'embed';
-        if($domain == 'streamsilk.com' || strpos('domain-'.$data_setting->domain, $domain) != 0){
+        if($domain == 'streamsilk.com' || $data_setting->domain == 'embed' || strpos('domain-'.$data_setting->domain, $domain) != 0){
             echo 'ok';
         }
         else{
