@@ -51,7 +51,14 @@ class PlayController
             $slug_sub = $video->slug;
             //check ip
             $keyAdsIp = "ads_ip:{$request->ip()}";
-            $viewsAds = Redis::get($keyAdsIp) ?: 1;
+            $viewsAds = Redis::get($keyAdsIp) ?: 0;
+            $viewsAds++;
+            if (Redis::exists($keyAdsIp)) {
+                Redis::set($keyAdsIp, $viewsAds, 'XX');
+            } else {
+                Redis::setex($keyAdsIp, 10 * 60, $viewsAds);
+            }
+
             if($data_setting->earningModes == 0)
                 $custom_ads = $this->customAdsRepo->getCustomAds($video->user_id);
             else
