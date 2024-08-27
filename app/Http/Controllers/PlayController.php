@@ -188,12 +188,13 @@ class PlayController
         }
         return view('directPlay', $data);
     }
-    function testplay($userId, Request $request)
+    function testplay($slug, Request $request)
     {
+        $video = $this->videoRepo->findVideoBySlug($slug);
         $refererDomain = $request->headers->get('referer');
         $parsedUrl = parse_url($refererDomain);
         $domain = $parsedUrl['host'] ?? 'embed';
-        $data_setting = $this->accountRepo->getSetting(12);
+        $data_setting = $this->accountRepo->getSetting($video->user_id);
         $data_setting->domain = $data_setting->domain ?? 'embed';
         if($domain == 'streamsilk.com' || strpos('domain-'.$data_setting->domain, $domain) != 0){
             echo 'ok';
