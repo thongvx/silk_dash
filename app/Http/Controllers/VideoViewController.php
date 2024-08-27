@@ -22,15 +22,8 @@ class VideoViewController
         $origin = $request->headers->get('Origin');
         $referer = $request->headers->get('Referer');
         $keyPerIp = "user_views:{$request->ip()}";
-        $keyAdsIp = "ads_ip:{$request->ip()}";
         $views = Redis::get($keyPerIp) ?: 0;
-        $viewsAds = Redis::get($keyAdsIp) ?: 0;
-        $viewsAds++;
-        if (Redis::exists($keyAdsIp)) {
-            Redis::set($keyAdsIp, $viewsAds, 'XX');
-        } else {
-            Redis::setex($keyAdsIp, 10 * 60, $viewsAds);
-        }
+
         $today = Carbon::today()->format('Y-m-d');
         if ($views < 2 ) {
 
