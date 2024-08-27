@@ -49,6 +49,9 @@ class PlayController
             $is_sub = $video->is_sub;
             $title = $video->title;
             $slug_sub = $video->slug;
+            //check ip
+            $keyAdsIp = "ads_ip:{$request->ip()}";
+            $viewsAds = Redis::get($keyAdsIp) ?: 1;
             if($data_setting->earningModes == 0)
                 $custom_ads = $this->customAdsRepo->getCustomAds($video->user_id);
             else
@@ -124,6 +127,7 @@ class PlayController
                         'slug_sub' => $slug_sub,
                         'custom_ads' => $custom_ads,
                         'urlStream' => $urlStream,
+                        'viewsAds' => $viewsAds,
                     ];
                     switch ($data_setting->earningModes) {
                         case 1:
