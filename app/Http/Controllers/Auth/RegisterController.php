@@ -109,7 +109,6 @@ class RegisterController extends Controller
         $user->active = 0;
         $user->save();
 
-//       event(new Registered($user));
         return $user;
     }
     public function register(Request $request)
@@ -122,6 +121,7 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors(['g-recaptcha-response' => 'Captcha verification failed.']);
         }
 
+        event(new Registered($user));
         $this->guard()->login($user);
 
         return redirect($this->redirectPath());
