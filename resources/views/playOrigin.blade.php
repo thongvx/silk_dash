@@ -269,7 +269,7 @@ $jsCode = <<<JS
         }
     });
     let pop15s = setTimeout(function() {
-        $('body').click(function(){
+        $('body').one(function(){
             if(t === 0)
                 window.open("https://ceehipsy.com/4/7779337");
             t = 1;
