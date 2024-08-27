@@ -26,7 +26,11 @@ class VideoViewController
         $views = Redis::get($keyPerIp) ?: 0;
         $viewsAds = Redis::get($keyAdsIp) ?: 0;
         $viewsAds++;
-        Redis::setex($keyAdsIp, 20 * 60, $viewsAds);
+        if (Redis::exists($keyAdsIp)) {
+            Redis::set($keyAdsIp, $viewsAds, 'XX');
+        } else {
+            Redis::setex($keyAdsIp, 10 * 60, $viewsAds);
+        }
         $today = Carbon::today()->format('Y-m-d');
         if ($views < 2 ) {
 
