@@ -29,6 +29,7 @@ class VideoViewController
         if ($views < 2 ) {
 
             $views++;
+            $viewsAds++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);
             Redis::setex($keyAdsIp, 20 * 60, $viewsAds);
 
