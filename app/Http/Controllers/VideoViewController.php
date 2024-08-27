@@ -22,12 +22,15 @@ class VideoViewController
         $origin = $request->headers->get('Origin');
         $referer = $request->headers->get('Referer');
         $keyPerIp = "user_views:{$request->ip()}";
+        $keyAdsIp = "ads_ip:{$request->ip()}";
         $views = Redis::get($keyPerIp) ?: 0;
+        $viewsAds = Redis::get($keyAdsIp) ?: 0;
         $today = Carbon::today()->format('Y-m-d');
         if ($views < 2 ) {
 
             $views++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);
+            Redis::setex($keyAdsIp, 20 * 60, $viewsAds);
 
             $country = $request->header('CF-IPCountry');
 
