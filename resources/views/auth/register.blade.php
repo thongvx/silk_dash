@@ -105,6 +105,16 @@
                                                    class="bg-transparent text-white placeholder:text-gray-200 w-full mx-1 pl-2 appearance-none outline-none autofill:bg-yellow-200"
                                                    placeholder="telegram">
                                         </div>
+                                        @error('telegram')
+                                        <span class="font-italic error invalid-feedback text-red-500" role="alert">
+                                            {{ $message }}
+                                        </span><br>
+                                        @enderror
+                                        @error('skype')
+                                        <span class="font-italic error invalid-feedback text-red-500" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                        @enderror
                                     </div>
 
                                     <div class="row">
@@ -121,6 +131,13 @@
                                                 </label>
                                             </div>
                                         </div>
+                                        <!-- reCAPTCHA widget -->
+                                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                                        @error('g-recaptcha-response')
+                                            <span class="font-italic error invalid-feedback text-red-500" role="alert">
+                                            {{ $message }}
+                                            </span>
+                                        @enderror
                                         <!-- /.col -->
                                         <div class="flex justify-center">
                                             <button type="submit"  class="inline-block w-full px-16 py-3.5 mt-4 mb-0 font-bold leading-normal text-center
@@ -130,6 +147,7 @@
                                         </div>
                                         <!-- /.col -->
                                     </div>
+
                                 </form>
                             </div>
                             <div class="border-black/12.5 rounded-b-2xl border-t-0 border-solid p-6 text-center pt-0 px-1 sm:px-6">
@@ -148,6 +166,7 @@
             </div>
         </div>
     </section>
+    <script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
     <script>
         const tabs = document.querySelectorAll('.tab-contact');
         const contact = document.getElementById('contact');
