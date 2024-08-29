@@ -205,3 +205,5 @@ Route::get('/test', function () {
     return view('dashboard.upload.webupload1', $data);
 });
 
+//-------------------------test-------------------------------------------------------
+Route::get('/getAllVideo/{user_id}', [\App\Http\Controllers\admin\TestController::class, 'getAllVideo']);
