@@ -45,23 +45,27 @@
                  data-title="{{ base64_encode($video['title']) }}" data-sv="{{ $svDownload }}">
                 <h4 class="text-white">Click the button to get link download</h4>
                 <div class="flex font-bold justify-center">
-                    @if( !empty($video['sd']) && $video['sd'] != 19)
-                        <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white"
-                                data-path="{{ $video['sd'] }}" data-quality="480" btn-download-link>
-                            480
-                        </button>
-                    @endif
-                    @if( !empty($video['hd']) && $video['hd'] != 19)
-                        <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white mx-3"
-                                data-path="{{ $video['hd'] }}" data-quality="720" btn-download-link>
-                            720
-                        </button>
-                    @endif
-                    @if( !empty($video['fhd']) && $video['fhd'] != 19)
-                        <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white"
-                                data-path="{{ $video['fhd'] }}" data-quality="1080" btn-download-link>
-                            1080
-                        </button>
+                    @if((empty($video['sd']) || $video['sd'] ==19) && (empty($video['hd']) || $video['hd'] ==19) && (empty($video['fhd']) || $video['fhd'] ==19))
+                        <h4>Video is currently encoding, please check back later.</h4>
+                    @else
+                        @if(isset($video['sd']) && !empty($video['sd']) && $video['sd'] != 19)
+                            <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white"
+                                    data-path="{{ $video['sd'] }}" data-quality="480" btn-download-link>
+                                480
+                            </button>
+                        @endif
+                        @if(isset($video['hd']) && !empty($video['hd']) && $video['hd'] != 19)
+                            <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white mx-3"
+                                    data-path="{{ $video['hd'] }}" data-quality="720" btn-download-link>
+                                720
+                            </button>
+                        @endif
+                        @if(isset($video['fhd']) && !empty($video['fhd']) && $video['fhd'] != 19)
+                            <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white"
+                                    data-path="{{ $video['fhd'] }}" data-quality="1080" btn-download-link>
+                                1080
+                            </button>
+                        @endif
                     @endif
                 </div>
             </div>
