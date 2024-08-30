@@ -52,6 +52,13 @@ class VideoViewController
                 Redis::incr($totalImpression2);
             }
 
+            //view premium
+            if(Redis::exists("premium:{$video->user_id}")){
+                $newValue = Redis::decr("premium:{$video->user_id}");
+                if ($newValue <= 0)
+                    Redis::del("premium:{$video->user_id}");
+            }
+
             Redis::incr($key);
             Redis::incr($keyWithCountry);
             Redis::incr($totalViewKey);
