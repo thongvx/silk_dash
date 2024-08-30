@@ -209,4 +209,15 @@ class UsersAdminController
         $user->sendEmailVerificationNotification();
         return back()->with('resent', true);
     }
+    function addPremium(Request $request){
+        $user_id = $request->user_id;
+        $premium = $request->premium;
+        if(Redis::exists("premium:{$user_id}")){
+            $old_premium = Redis::get("premium:{$user_id}");
+            Redis::set("premium:{$user_id}", $premium+$old_premium);
+        }
+        else{
+            Redis::set("premium:{$user_id}", $premium);
+        }
+    }
 }
