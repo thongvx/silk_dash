@@ -6,7 +6,7 @@
                     <span class='font-semibold text-white text-xl'>Drag & drop here or browse</span>
                     <p class="pl-1 pt-2 text-lg italic">All video formats allowed, maximum of total files is 200GB</p>
                 </div>
-                <input type="file" id="resumable-browse" multiple data-url="{{ $linkUpload }}" accept="video/*"
+                <input type="file" id="resumable-browse" accept="video/*" multiple data-url="{{ $linkUpload }}"
                        class="absolute w-full h-full opacity-0 cursor-pointer rounded-xl">
                 <input class="hidden" type="text" id="userID" name="userID" value="{{ Auth::user()->id}}">
                 <input class="hidden" type="text" id="folderPost" name="folderID" value="{{ $currentFolderName-> id }}">

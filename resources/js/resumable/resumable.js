@@ -28,6 +28,10 @@ export function Upload_Resumable_FILE () {
             chunkSize: 5 * 1024 * 1024, // 10MB
             simultaneousUploads: 15,
             testChunks: false, // Disable the GET requests for testing chunks
+            fileType: ['mp4', 'avi', 'mov', 'mkv'],
+            fileTypeErrorCallback: function(file) {
+                alert('Invalid file type: ' + file.fileName);
+            },
             throttleProgressCallbacks: 1,
             target: $fileUpload.data('url'),
             method: 'multipart', // Ensure the method is POST
