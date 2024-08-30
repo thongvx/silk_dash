@@ -74,4 +74,11 @@ class EncoderController
             return json_encode($data);
         }
     }
+    function encoderFaild(Request $request)
+    {
+        $slug = $request->slug;
+        $quality = $request->quality;
+        $data['status'] = 19;
+        EncoderTask::where('slug', $slug)->where('quality', $quality)->update($data);
+    }
 }

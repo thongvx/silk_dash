@@ -43,7 +43,7 @@ Route::get('/play', function () {
 Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'startEncoderTask']);
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
 Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
-
+Route::get('/encoderFaild', [\App\Http\Controllers\admin\EncoderController::class, 'encoderFaild']);
 //----------------------------audio controller-----------------------------------------------------
 Route::get('/uploadAudio', [\App\Http\Controllers\admin\AudioController::class, 'uploadAudio']);
 Route::get('/startCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'startCopyAudio']);
