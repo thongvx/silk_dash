@@ -91,7 +91,9 @@
                             <tbody>
                             @forelse( $transfers as $index => $transfer)
                                 <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" id="transfer{{ $transfer->id }}">
-                                    <td class="pl-2 text-center">{{ $transfer->user_id }}</td>
+                                    <td class="pl-2 text-center hover:text-[#009FB2] ">
+                                        <a href="{{ route('user.show', ['user' => $transfer->user_id]) }}" target="_blank">{{ $transfer->user_id }}</a>
+                                    </td>
                                     <td class="pl-2 slug {{ $transfer->status == 1 ? 'text-orange-500' : ($transfer->status == 19 ? 'text-red-500' : '') }}">{{ $transfer->slug }}</td>
                                     <td class="pl-2 max-w-[20rem] url {{ $transfer->status == 1 ? 'text-orange-500' : ($transfer->status == 19 ? 'text-red-500' : '') }}">
                                         <div class="truncate hover:text-clip">
