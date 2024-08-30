@@ -97,7 +97,7 @@ class TiktokController extends Controller
     }
     function updateVideoTiktok()
     {
-        $video = AddTiktok::where('status', 0)->orderBy('updated_at', 'desc')->first();
+        $video = AddTiktok::where('status', 0)->orderBy('updated_at', 'asc')->first();
         if($video){
             $keyApi = $this->getApiSvTiktok($video->sv);
             $tmp = 'http://'.$video->sv.'.streamsilk.com/api/file/get?title='.$video->slug.$video->quality.'.mp4&key='.$keyApi;
