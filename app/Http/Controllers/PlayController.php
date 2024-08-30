@@ -69,6 +69,9 @@ class PlayController
                 $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
                 $poster = $player_setting->thumbnail_grid == 5 ? $video->grid_poster_5 : ($player_setting->thumbnail_grid == 3 ? $video->grid_poster_3 : $video->poster);
                 $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
+                if(Redis::exists("premium:{$video->user_id}")){
+                    $data_setting->earningModes = 3;
+                }
                 if ($video->origin == 0) {
                     $playData = [
                         'urlPlay' => 'https://' . EncoderTask::where('slug', $slug)->value('sv_upload') . '.encosilk.cc/storage/' . $slug . '.' . $video->format,
@@ -83,7 +86,10 @@ class PlayController
                         'slug_sub' => $slug_sub,
                         'custom_ads' => $custom_ads,
                     ];
-                    return view('playOrigin', $playData);
+                    if( $data_setting->earningModes != 3)
+                        return view('playOrigin', $playData);
+                    else
+                        return view('playOriginPremium', $playData);
                 } else {
                     $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
                     $urlStream = 0;
@@ -136,12 +142,16 @@ class PlayController
                         'urlStream' => $urlStream,
                         'viewsAds' => $viewsAds,
                     ];
+
                     switch ($data_setting->earningModes) {
                         case 1:
                             $pagePlay = 'play1';
                             break;
                         case 2:
                             $pagePlay = 'play2';
+                            break;
+                        case 3:
+                            $pagePlay = 'playPremium';
                             break;
                         default:
                             $pagePlay = 'play';
