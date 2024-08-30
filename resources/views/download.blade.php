@@ -43,11 +43,11 @@
             <img src="{{ $video['poster'] }}" alt="" class="mt-4 lg:w-1/2">
             <div class="mt-3 text-center" id="box-download" data-slug="{{ $video['slug'] }}"
                  data-title="{{ base64_encode($video['title']) }}" data-sv="{{ $svDownload }}">
-                <h4 class="text-white">Click the button to get link download</h4>
-                <div class="flex font-bold justify-center">
-                    @if((empty($video['sd']) || $video['sd'] ==19) && (empty($video['hd']) || $video['hd'] ==19) && (empty($video['fhd']) || $video['fhd'] ==19))
-                        <h4>Video is currently encoding, please check back later.</h4>
-                    @else
+                @if((empty($video['sd']) || $video['sd'] ==19) && (empty($video['hd']) || $video['hd'] ==19) && (empty($video['fhd']) || $video['fhd'] ==19))
+                    <h4 class="text-white">Video is currently encoding, please check back later.</h4>
+                @else
+                    <h4 class="text-white">Click the button to get link download</h4>
+                    <div class="flex font-bold justify-center">
                         @if(isset($video['sd']) && !empty($video['sd']) && $video['sd'] != 19)
                             <button class="px-7 py-2 mt-2 text-xl rounded-xl bg-[#121520] hover:bg-[#009FB2] text-white"
                                     data-path="{{ $video['sd'] }}" data-quality="480" btn-download-link>
@@ -66,8 +66,8 @@
                                 1080
                             </button>
                         @endif
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
         </div>
     </section>
