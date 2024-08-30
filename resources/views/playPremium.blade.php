@@ -355,21 +355,6 @@ $jsCode = <<<JS
         document.body.removeChild(a);
     }
 
-    $(document).on('click', '#video_player', function () {
-        if (playID === 0) {
-            playID = 1;
-            //openNewTab('//tsyndicate.com/api/v1/direct/9813a20eb31740eb94471b814de9693e?extid={extid}');
-        }
-    });
-    if($viewsAds !== 1){
-        $('body').one('click', function () {
-            if (t === 0) {
-                openNewTab("https://ceehipsy.com/4/7779337");
-                t = 1;
-            }
-        });
-    };
-
     const directAds = getDirectAds(custom_ads);
     if(directAds.length > 0) {
         directAds.forEach((ad , index) => {
@@ -475,8 +460,5 @@ echo "<script>" . $obsfucatedJs . "</script>";
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript>
-@if($viewsAds == 1)
-    <script src="https://streamsilk.com/ads.js"></script>
-@endif
 </body>
 </html>
