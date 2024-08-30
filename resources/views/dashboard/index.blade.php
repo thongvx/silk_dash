@@ -73,7 +73,7 @@
                                 <div class='text-md lg:text-lg w-full flex flex-col mt-3 items-end'>
                                     <h3 class='text-slate-400'>Premium</h3>
                                     <div class="flex items-center text-xl">
-                                        <h5 class="mb-0 text-white">{{ \App\Models\File::formatNumber($premium) }} Views</h5>
+                                        <h5 class="mb-0 text-white">{{ \App\Models\File::formatNumber($premium) }} <span class='text-slate-400 text-lg mr-0.5'>Views</span></h5>
                                         <span
                                             class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center hidden">
                                             <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> +0%
