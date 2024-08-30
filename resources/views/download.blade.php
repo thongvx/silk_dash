@@ -44,7 +44,7 @@
             <div class="mt-3 text-center" id="box-download" data-slug="{{ $video['slug'] }}"
                  data-title="{{ base64_encode($video['title']) }}" data-sv="{{ $svDownload }}">
                 @if((empty($video['sd']) || $video['sd'] ==19) && (empty($video['hd']) || $video['hd'] ==19) && (empty($video['fhd']) || $video['fhd'] ==19))
-                    <h4 class="text-white">Video is currently encoding, please check back later.</h4>
+                    <h4 class="text-white text-lg font-bold">The video is currently encoding, please come back later to download.</h4>
                 @else
                     <h4 class="text-white">Click the button to get link download</h4>
                     <div class="flex font-bold justify-center">
