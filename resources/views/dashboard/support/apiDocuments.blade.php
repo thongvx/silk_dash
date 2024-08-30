@@ -579,7 +579,7 @@
                 <div class="relative">
                     <i class="material-symbols-outlined absolute right-4 top-4 cursor-pointer hover:text-blue-500 text-md" clipboard-copy>content_copy</i>
                     <h5 class="pl-3 py-3 pr-6 bg-[#142132] rounded-xl shadow-md font-normal my-3 text-clipboard">
-                        https://streamsilk.com/api/cloneFile?url={embed_link}&amp;folderID={folderID}</h5>
+                        https://streamsilk.com/api/file/cloneFile?url={embed_link}&amp;folderID={folderID}</h5>
                 </div>
                 <h4 class="text-lg font-medium text-white mb-2">Parameters</h4>
                 <div class="bg-[#142132] my-3">
