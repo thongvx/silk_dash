@@ -73,6 +73,8 @@ class HomeController extends Controller
                     return $item['date'] == Carbon::today()->subDay(2)->format('Y-m-d');
             })->first()['revenue'] ?? 0,
         ];
+        // premium
+        $data['premium'] = Redis::get("premium:{$user->id}") ?? 0;
         return view('dashboard.index', $data);
     }
     function zoomMe()
