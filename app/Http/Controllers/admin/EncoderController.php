@@ -82,5 +82,6 @@ class EncoderController
         $data['status'] = 19;
         EncoderTask::where('slug', $slug)->where('quality', $quality)->update($data);
         SvEncoder::where('name', $svEncoder)->decrement('encoder');
+        echo $svEncoder;
     }
 }
