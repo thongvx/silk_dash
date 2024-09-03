@@ -75,7 +75,7 @@
                         <div class="flex justify-between items-center mt-2">
                             <h1 class="text-3xl">Tier 3</h1>
                             <span
-                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">15$</span>
+                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">12$</span>
                         </div>
                         <h1 class="italic mt-4">Profit rates for each 10k views of your video</h1>
                         <div class="mt-5">
@@ -113,7 +113,7 @@
                         <div class="flex justify-between items-center mt-2">
                             <h1 class="text-3xl">Tier 4</h1>
                             <span
-                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">11$</span>
+                                class="px-6 py-2 font-semibold rounded-full bg-[#009fb2] text-white text-2xl italic">8$</span>
                         </div>
                         <h1 class="italic mt-4">Profit rates for each 10k views of your video</h1>
                         <div class="mt-5">
@@ -158,7 +158,7 @@
                     <div class="col-span-full mt-3">
                         <h4>Earn a fixed amount per 10.000 downloads or streams. The payment amount is defined by the
                             origin country referred to in the Tier table above. Every other country that is not listed
-                            in table is paid 8$/10k views (All durations).</h4>
+                            in table is paid 6$/10k views (All durations).</h4>
                     </div>
                 </div>
                 <div class="mt-3 px-8 mb-10">

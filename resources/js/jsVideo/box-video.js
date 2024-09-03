@@ -293,5 +293,6 @@ $(document).on('click', '#fixed-video [folder]', function() {
     });
 });
 
+//clone video
 
 

@@ -132,4 +132,15 @@ class ManageTaskController extends Controller
             ]);
         }
     }
+    //search encoder
+    public function searchEncoder(Request $request)
+    {
+        $search = $request->input('search');
+        $column = $request->input('column', 'created_at');
+        $direction = $request->input('direction', 'asc');
+        $limit = $request->input('limit', 20);
+        $status = $request->input('status', 'all');
+        $data['encoders'] = $this->manageTaskRepo->searchEncoder($search, $column, $direction, $limit,$status,'*');
+        return view('admin.manageTask.tableEncoder', $data);
+    }
 }

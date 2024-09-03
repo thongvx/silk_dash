@@ -81,4 +81,32 @@ class ManagetaskRepo
     {
         $this->encoderTask->where('slug', $slug)->delete();
     }
+    //search encoder
+    public function searchEncoder($search, $column, $direction, $limit,$status, $columns)
+    {
+        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        $query = $this->encoderTask->query();
+        switch ($status) {
+            case 'pending':
+                $query->where('status', 0);
+                break;
+            case 'encoding':
+                $query->whereIn('status', [1,3,2]);
+                break;
+            case 'completed':
+                $query->whereIn('status', [4,5,6]);
+                break;
+            case 'failed':
+                $query->whereIn('status', [19,11]);
+                break;
+            default:
+                break;
+        }
+        $data = $query->where('slug', 'like', '%' . $search . '%')
+            ->orWhere('user_id', 'like', '%' . $search . '%')
+            ->orWhere('sv_encoder', 'like', '%' . $search . '%')
+            ->orderBy($column1, $direction)
+            ->paginate($limit);
+        return $data;
+    }
 }
