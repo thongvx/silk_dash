@@ -168,6 +168,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::post('/manageTask/removeEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeEncoder'])->name('removeEncoder');
     Route::post('/manageTask/retryTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryTransferTask']);
     Route::post('/manageTask/removeTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeTransferTask']);
+    Route::get('/manageTask/searchEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'searchEncoder']);
     //statistic
     Route::get('/statistic', [\App\Http\Controllers\admin\StatisticController::class, 'index'])->name('statistic');
     //supportAdmin

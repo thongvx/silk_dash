@@ -1,6 +1,6 @@
 import { getUrlParams, loadDatatable } from '../control-datatable.js';
 import { fixedBox} from "../jsVideo/video.js";
-import {notification} from "../main.js";
+import {notification, updateURLParameter} from "../main.js";
 
 $(document).on('click','[btn-encoder-task]', function() {
     const params = getUrlParams();
@@ -244,4 +244,41 @@ $(document).on('click', '[btn-delete-transfer]', function () {
         })
     });
 
+})
+// search Encoder
+$(document).on('submit', '#form-search-encoder', function(e) {
+    e.preventDefault();
+    const params = getUrlParams();
+    params.status = $(this).data('task');
+    $.ajax({
+        url: '/admin/manageTask/searchEncoder',
+        type: 'GET',
+        data: {
+            status: params.status,
+            search: $('#search-encoder').val(),
+            limit: params.limit ?? 10,
+            column: params.column ?? 'slug',
+            direction: params.direction ?? 'desc',
+        },
+        beforeSend: function() {
+            $('#box-datatable').html(`<div class="w-full justify-center items-center flex h-full">
+                                        <div class="flex text-white my-20 items-center">
+                                            <div class="loading">
+                                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                            </div>
+                                            <span>Loading</span>
+                                        </div>
+                                    </div>`);
+        },
+        success: function(response) {
+            $('#box-datatable').html(response);
+        },
+        error: function (error) {
+            console.log(error)
+        }
+
+    });
 })
