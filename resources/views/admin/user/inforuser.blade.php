@@ -260,16 +260,6 @@
                                         <input name="email_verified_at" class="hidden" value="{{ now() }}">
                                     @endif
                                     <fieldset class="mt-6">
-                                        <input name="active" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
-                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
-                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
-                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
-                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                               type="radio"
-                                               value="2" {{ $users -> active == 2 ? 'checked' : '' }}>
-                                        <label for="2" class="ml-3">Full: 480 - 720 -1080</label>
-                                    </fieldset>
-                                    <fieldset class="mt-6">
                                         <input name="active" id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
@@ -277,10 +267,20 @@
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                                type="radio"
                                                value="1" {{ $users -> active == 1 ? 'checked' : '' }}>
-                                        <label for="1" class="ml-3">720</label>
+                                        <label for="1" class="ml-3">Full: 480 - 720 -1080</label>
                                     </fieldset>
                                     <fieldset class="mt-6">
-                                        <input name="active" id="1" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                        <input name="active" id="2" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                                      after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
+                                                      border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
+                                                      after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
+                                                      checked:border-0 checked:border-transparent checked:after:opacity-100"
+                                               type="radio"
+                                               value="2" {{ $users -> active == 2 ? 'checked' : '' }}>
+                                        <label for="2" class="ml-3">720</label>
+                                    </fieldset>
+                                    <fieldset class="mt-6">
+                                        <input name="active" id="0" class="w-4 h-4 ease rounded-full checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
