@@ -181,7 +181,7 @@ $(document).on('click', '[btn-retry-transfer]', function () {
             success: function (response) {
                 fixedBox()
                 tr.find('.sv-transfer, .status').text('0');
-                tr.find('.url, .slug').removeClass('text-orange-500 text-rose-600 text-teal-500');
+                tr.find('.url, .slug').removeClass('text-orange-500 text-red-500 text-teal-500');
                 $('#retry-transfer').remove();
                 notification('success', 'The video has been successfully re-transferred.');
             },
