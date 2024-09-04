@@ -48,7 +48,7 @@ class ManagetaskRepo
         $query = Transfer::query()
                 ->join('folders', 'transfer.folder_id', '=', 'folders.id')
                 ->select('transfer.*', 'folders.name_folder as folder_name');
-        $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
+        $column == 'created_at' ? $column1 = 'updated_at' : $column1 = $column;
         if (Auth::user()->hasRole('admin')) {
             $transfer = $query->orderBy($column1, $direction)->paginate($limit);
         } else {

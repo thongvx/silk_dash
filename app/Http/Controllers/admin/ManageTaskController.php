@@ -31,8 +31,8 @@ class ManageTaskController extends Controller
     {
         $tab = $request->input('tab', 'encoder');
         $status = $request->input('status', 'all');
-        $column = $request->input('column', 'created_at');
-        $direction = $request->input('direction', 'asc');
+        $column = $request->input('column', 'updated_at');
+        $direction = $request->input('direction', 'desc');
         $data['title'] = 'Manage Task';
         if ($tab == 'encodingTask') {
             $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder',$column, $direction , 20, $status);
