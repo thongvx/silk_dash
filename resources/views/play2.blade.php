@@ -239,10 +239,12 @@ $jsCode = <<<JS
         });
         player.on('play', function () {
             isPaused = false;
-            if (player.getDuration() < 600) {
-                totalTimeRequired = player.getDuration() * 0.6
+            if (player.getDuration() < 60) {
+                totalTimeRequired = player.getDuration() * 0.8;
+            } else if (player.getDuration() < 300) {
+                totalTimeRequired = player.getDuration() * 0.6;
             } else {
-                totalTimeRequired = 300
+                totalTimeRequired = 180;
             }
             clearInterval(intervalId);
             if (viewTime >= totalTimeRequired) {
