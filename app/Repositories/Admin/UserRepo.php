@@ -67,11 +67,12 @@ class UserRepo
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
         $query = User::query()
                 ->where(function ($q) use ($search) {
-                    $q->where('slug', 'like', '%' . $search . '%')
-                        ->orWhere('user_id', 'like', '%' . $search . '%')
-                        ->orWhere('sv_encoder', 'like', '%' . $search . '%');
+                    $q->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('email', 'like', '%' . $search . '%')
+                        ->orWhere('id', 'like', '%' . $search . '%');
                 });
-        $users = $query->orderBy($column1, $direction)->paginate($limit);
+        $users = $query->orderBy($column1, $direction)
+                        ->paginate($limit);
         return $users;
     }
 
