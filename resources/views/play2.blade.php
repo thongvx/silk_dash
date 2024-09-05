@@ -238,28 +238,28 @@ $jsCode = <<<JS
             isSeeking = false;
         });
         player.on('play', function () {
-            isPaused = false;
-            if (player.getDuration() < 60) {
-                totalTimeRequired = player.getDuration() * 0.8;
-            } else if (player.getDuration() < 300) {
-                totalTimeRequired = player.getDuration() * 0.6;
-            } else {
-                totalTimeRequired = 180;
-            }
-            clearInterval(intervalId);
-            if (viewTime >= totalTimeRequired) {
-                return
-            }
-            intervalId = setInterval(function () {
-                if (!isSeeking && !isPaused) {
-                    viewTime++;
-                    if (viewTime >= totalTimeRequired && !hasIncreasedPlayCount) {
-                        clearInterval(intervalId);
-                        increasePlayCount(videoID);
-                        hasIncreasedPlayCount = true;
+            if(player.getDuration() > 60){
+                isPaused = false;
+                if (player.getDuration() < 300) {
+                    totalTimeRequired = player.getDuration() * 0.6;
+                } else {
+                    totalTimeRequired = 180;
+                };
+                clearInterval(intervalId);
+                if (viewTime >= totalTimeRequired) {
+                    return;
+                };
+                intervalId = setInterval(function () {
+                    if (!isSeeking && !isPaused) {
+                        viewTime++;
+                        if (viewTime >= totalTimeRequired && !hasIncreasedPlayCount) {
+                            clearInterval(intervalId);
+                            increasePlayCount(videoID);
+                            hasIncreasedPlayCount = true;
+                        }
                     }
-                }
-            }, 1000);
+                }, 1000);
+            };
         });
         player.on('pause', function () {
             isPaused = true;

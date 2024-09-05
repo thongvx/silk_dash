@@ -237,26 +237,28 @@ $jsCode = <<<JS
             isSeeking = false;
         });
         player.on('play', function () {
-            isPaused = false;
-            if (player.getDuration() < 600) {
-                totalTimeRequired = player.getDuration() * 0.6
-            } else {
-                totalTimeRequired = 300
-            }
-            clearInterval(intervalId);
-            if (viewTime >= totalTimeRequired) {
-                return
-            }
-            intervalId = setInterval(function () {
-                if (!isSeeking && !isPaused) {
-                    viewTime++;
-                    if (viewTime >= totalTimeRequired && !hasIncreasedPlayCount) {
-                        clearInterval(intervalId);
-                        increasePlayCount(videoID);
-                        hasIncreasedPlayCount = true;
+            if(player.getDuration() > 60){
+                isPaused = false;
+                if (player.getDuration() < 300) {
+                    totalTimeRequired = player.getDuration() * 0.6;
+                } else {
+                    totalTimeRequired = 180;
+                };
+                clearInterval(intervalId);
+                if (viewTime >= totalTimeRequired) {
+                    return;
+                };
+                intervalId = setInterval(function () {
+                    if (!isSeeking && !isPaused) {
+                        viewTime++;
+                        if (viewTime >= totalTimeRequired && !hasIncreasedPlayCount) {
+                            clearInterval(intervalId);
+                            increasePlayCount(videoID);
+                            hasIncreasedPlayCount = true;
+                        }
                     }
-                }
-            }, 1000);
+                }, 1000);
+            };
         });
         player.on('pause', function () {
             isPaused = true;
@@ -388,7 +390,7 @@ $jsCode = <<<JS
     }, 600000);
 
     function increasePlayCount(videoID) {
-        var apiUrl = "https://streamsilk.com/updateViewUpdate/${videoID}";
+        var apiUrl = "https://silkplayer.com/updateViewUpdate/${videoID}";
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
