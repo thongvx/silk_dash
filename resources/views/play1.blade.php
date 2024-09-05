@@ -162,7 +162,6 @@ $jsCode = <<<JS
                     options.captions = { default: true, track: 1 };
                 }
             } catch (error) {
-                console.error("Error loading subtitles:", error.message);
             }
         }
          if(show_title !== 0){
@@ -302,16 +301,13 @@ $jsCode = <<<JS
     };
     $(document).ready(() => {
         if("${urlStream}" !== "0"){
-            console.log('a');
             $.ajax({
                 url: "${urlStream}",
                 type: 'POST',
                 data: urlStream,
                 success: function(response) {
-                    console.log(response);
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error:', error);
                 }
             });
         };
@@ -399,10 +395,8 @@ $jsCode = <<<JS
                 return response.json();
             })
             .then(json => {
-                console.log("update views success");
             })
             .catch(function () {
-                console.log("fail");
             });
     }
     async function checkUrlStatus(url) {
