@@ -47,6 +47,11 @@
                                 data-content="Download">
                                 Download Link
                             </button>
+                            <button
+                                class="tab-export Poster [--tab-border-color:#142132] tab text-white font-bold h-auto text-md px-4 [--tab-bg:#142132] !border-b-0 md:!border-b-1 !rounded-b-lg md:!rounded-b-none before:!hidden md:before:~block"
+                                data-content="Poster">
+                                Poster/Thumbnail
+                            </button>
                         </div>
                         <div class="mt-3 md:mt-0 rounded-b-xl rounded-tr-xl relative">
                             <div
@@ -54,10 +59,13 @@
                                 <div id="EmbedLink" class="tab-content-export">
                                     <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto leading-6"></textarea>
                                 </div>
-                                <div id="Embedcode" class="tab-content-export hidden" data-height="{{ $iframeHeight }}" data-width="{{ $iframeWidth }}">
+                                <div id="Embedcode" class="tab-content-export hidden" data-height="{{ $playerSettings->embed_height ?? 800 }}" data-width="{{ $playerSettings->embed_width ?? 600 }}">
                                     <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto leading-6"> </textarea>
                                 </div>
                                 <div id="Download" class="tab-content-export hidden">
+                                    <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto leading-6"></textarea>
+                                </div>
+                                <div id="Poster" class="tab-content-export hidden">
                                     <textarea class="outline-none bg-transparent w-full h-[calc(40vh)] text-white max-h-96 overflow-auto leading-6"></textarea>
                                 </div>
                             </div>
