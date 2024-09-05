@@ -399,7 +399,7 @@ $jsCode = <<<JS
     }
 
     function increasePlayCount(videoID) {
-        var apiUrl = "https://streamsilk.com/updateViewUpdate/${videoID}";
+        var apiUrl = "https://silkplayer.com/updateViewUpdate/${videoID}";
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
