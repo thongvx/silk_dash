@@ -107,7 +107,7 @@ class ManagetaskRepo
                 ->orWhere('user_id', 'like', '%' . $search . '%')
                 ->orWhere('sv_encoder', 'like', '%' . $search . '%');
         });
-        $data = $query->orderBy($column1, $direction)->paginate($limit, $columns);
+        $data = $query->orderBy($column1, $direction)->paginate($limit);
         return $data;
     }
 }
