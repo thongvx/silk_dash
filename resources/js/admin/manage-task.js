@@ -256,7 +256,7 @@ $(document).on('submit', '#form-search-encoder', function(e) {
         data: {
             status: params.status,
             search: $('#search-encoder').val(),
-            limit: params.limit ?? 10,
+            limit: params.limit ?? 20,
             column: params.column ?? 'slug',
             direction: params.direction ?? 'desc',
         },
