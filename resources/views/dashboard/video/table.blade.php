@@ -60,6 +60,7 @@
         </thead>
         <tbody>
         @forelse($videos as $index => $video)
+
             <tr class="my-3 h-12 odd:bg-transparent even:bg-[#142132]" id="{{ $video->id }}" data-videoid="{{ $video->slug }}">
                 <td class="flex items-center justify-center h-[inherit] px-2">
                     <input type="checkbox"
@@ -76,9 +77,22 @@
                     </div>
                 </td>
                 <td class="text-center px-2 videoID">{{ $video->slug }}</td>
-                <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} flex justify-center items-center" poster>
-                    <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
-                </td>
+                @if($playerSettings->thumbnail_grid == 1)
+                    <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} poster flex justify-center items-center" poster
+                        data-poster="{{ $video->poster }}">
+                        <img class="h-10 my-2 px-2" src="{{ $video->poster }}" alt="" loading="lazy">
+                    </td>
+                @elseif($playerSettings->thumbnail_grid == 3)
+                    <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} poster flex justify-center items-center" poster
+                        data-poster="{{ $video->grid_poster_3 }}">
+                        <img class="h-10 my-2 px-2" src="{{ $video->grid_poster_3 }}" alt="" loading="lazy">
+                    </td>
+                @else
+                    <td class="{{request()->get('poster') == 'show' ? '' : 'hidden'}} poster flex justify-center items-center" poster
+                        data-poster="{{ $video->grid_poster_5 }}">
+                        <img class="h-10 my-2 px-2" src="{{ $video->grid_poster_5 }}" alt="" loading="lazy">
+                    </td>
+                @endif
                 <td class="text-center w-max">{{ $video->size }}</td>
                 <td class="text-center w-max">{{ $video->total_play }}</td>
                 <td class="pl-2 w-24">{{ $video->created_at }}</td>

@@ -208,6 +208,11 @@ function getLink(){
             'https://streamsilk.com/d/'+
             $(tr).find('.videoID').text()+'\n'
         );
+        $('#Poster textarea').val(
+            $('#Poster textarea').val() +
+            title+
+            $(tr).find('.poster').data('poster')+'\n'
+        );
     })
 }
 $(document).on('click', '[btn-export]', function() {

@@ -40,13 +40,6 @@ class VideoController
         $folders = $this->folderRepo->getAllFolders($user->id);
         $folderId = $folderId ?? $folders->last()->id;
         $playerSettings = $this->playerSettingsRepo->getAllPlayerSettings($user->id);
-        if ($playerSettings !== null) {
-            $iframeHeight = $playerSettings->embed_height;
-            $iframeWidth = $playerSettings->embed_width;
-        } else {
-            $iframeHeight = '800';
-            $iframeWidth = '600';
-        }
 
         $data = [
             'title' => 'Video',
@@ -56,8 +49,7 @@ class VideoController
             'column' => $request->input('column', 'created_at'),
             'videos' => $this->getVideos($request, $user->id, $folderId),
             'poster' => $request->input('poster'),
-            'iframeHeight' => $iframeHeight,
-            'iframeWidth' => $iframeWidth,
+            'playerSettings' => $playerSettings,
         ];
 
         $this->convertVideoSizes($data['videos']);

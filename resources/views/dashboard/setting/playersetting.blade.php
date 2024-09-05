@@ -106,14 +106,14 @@
                                     <label for="1" class="ml-3">1x1</label>
                                 </div>
                                 <div class="mx-8">
-                                    <input type="radio" id="4" name="thumbnail_grid" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
+                                    <input type="radio" id="3" name="thumbnail_grid" class="w-4 h-4 ease rounded-md checked:bg-[#009FB2] after:text-xxs after:material-symbols-outlined
                                                       after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border
                                                       border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full
                                                       after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['✓']
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
-                                           value="4" {{$playerSettings->thumbnail_grid == 4 ? 'checked' : ''}}>
+                                           value="3" {{$playerSettings->thumbnail_grid == 3 ? 'checked' : ''}}>
 
-                                    <label for="4" class="ml-3">4x4</label>
+                                    <label for="3" class="ml-3">3x3</label>
                                 </div>
 
                                 <div>
