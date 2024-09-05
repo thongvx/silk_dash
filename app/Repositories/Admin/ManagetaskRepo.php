@@ -102,11 +102,12 @@ class ManagetaskRepo
             default:
                 break;
         }
-        $data = $query->where('slug', 'like', '%' . $search . '%')
-            ->orWhere('user_id', 'like', '%' . $search . '%')
-            ->orWhere('sv_encoder', 'like', '%' . $search . '%')
-            ->orderBy($column1, $direction)
-            ->paginate($limit);
+        $query->where(function ($q) use ($search) {
+            $q->where('slug', 'like', '%' . $search . '%')
+                ->orWhere('user_id', 'like', '%' . $search . '%')
+                ->orWhere('sv_encoder', 'like', '%' . $search . '%');
+        });
+        $data = $query->orderBy($column1, $direction)->paginate($limit, $columns);
         return $data;
     }
 }
