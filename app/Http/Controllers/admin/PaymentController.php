@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\Payment;
 use App\Repositories\Admin\PaymentRepo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class PaymentController
 {
@@ -35,6 +36,7 @@ class PaymentController
         $data = $request->all();
         $payment = Payment::find($id);
         $payment->update($data);
+        Redis::del("user:{$payment->user_ID}:payment");
         return response()->json($payment);
     }
 

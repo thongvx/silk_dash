@@ -65,12 +65,14 @@ class UserRepo
     public function searchUser($search, $column, $direction, $limit, $columns)
     {
         $column == 'created_at' ? $column1 = 'id' : $column1 = $column;
-        $users = User::query()
-            ->where('name', 'like', '%' . $search . '%')
-            ->orWhere('email', 'like', '%' . $search . '%')
-            ->orWhere('id', 'like', '%' . $search . '%')
-            ->orderBy($column1, $direction)
-            ->paginate($limit);
+        $query = User::query()
+                ->where(function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('email', 'like', '%' . $search . '%')
+                        ->orWhere('id', 'like', '%' . $search . '%');
+                });
+        $users = $query->orderBy($column1, $direction)
+                        ->paginate($limit);
         return $users;
     }
 

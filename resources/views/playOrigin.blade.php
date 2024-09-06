@@ -160,7 +160,6 @@ $jsCode = <<<JS
                     options.captions = { default: true, track: 1 };
                 }
             } catch (error) {
-                console.error("Error loading subtitles:", error.message);
             }
         }
          if(show_title !== 0){
@@ -278,7 +277,7 @@ $jsCode = <<<JS
     }, 10000);
 
     function increasePlayCount(videoID) {
-        var apiUrl = "https://streamsilk.com/updateViewUpdate/${videoID}";
+        var apiUrl = "https://silkplayer.com/updateViewUpdate/${videoID}";
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
@@ -287,10 +286,8 @@ $jsCode = <<<JS
                 return response.json();
             })
             .then(json => {
-                console.log("update views success");
             })
             .catch(function () {
-                console.log("fail");
             });
     }
 
