@@ -160,7 +160,6 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::resource('/user', \App\Http\Controllers\admin\UsersAdminController::class);
     Route::post('/updateEarning', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateEarning']);
     Route::post('/updateUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'updateUser']);
-    Route::get('/searchUser', [\App\Http\Controllers\admin\UsersAdminController::class, 'searchUser']);
     Route::post('send-email/{user}', [\App\Http\Controllers\admin\UsersAdminController::class, 'sendMail'])->name('send.email');
     //manageTask
     Route::get('/manageTask', [\App\Http\Controllers\admin\ManageTaskController::class, 'index'])->name('manageTask');
@@ -168,7 +167,6 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::post('/manageTask/removeEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeEncoder'])->name('removeEncoder');
     Route::post('/manageTask/retryTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryTransferTask']);
     Route::post('/manageTask/removeTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeTransferTask']);
-    Route::get('/manageTask/searchEncoder', [\App\Http\Controllers\admin\ManageTaskController::class, 'searchEncoder']);
     //statistic
     Route::get('/statistic', [\App\Http\Controllers\admin\StatisticController::class, 'index'])->name('statistic');
     //supportAdmin

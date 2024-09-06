@@ -50,7 +50,7 @@
                 </div>
                 <div class="items-center md:ml-auto px-2 flex">
                     <form class="flex items-center relative bg-[#142132] w-full rounded-lg ease" id="form-search-encoder" search>
-                        <label for="search-encoder" class="p-1 flex bg-[#142132] items-center translate-x-3 transition duration-300 ease-in-out z-30 absolute text-slate-400">Search User</label>
+                        <label for="search-encoder" class="p-1 flex bg-[#142132] items-center translate-x-3 transition duration-300 ease-in-out z-30 absolute text-slate-400">Search Encoder</label>
                         <input type="text" id="search-encoder" name="videoID" value="" search-user
                                class="z-20 px-3 py-2 text-sm relative -ml-px block min-w-0 lg:w-52 flex-auto text-white rounded-lg bg-transparent bg-clip-padding focus:outline-none
                          border border-solid border-[#142132]"
