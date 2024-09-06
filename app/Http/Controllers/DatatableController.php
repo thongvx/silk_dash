@@ -49,7 +49,11 @@ class DatatableController
                 return view('admin.user.table', $data);
             case '/admin/manageTask':
                 if ($tab == 'encodingTask') {
-                    $data['encoders'] = $this->manageTaskRepo->getAllEncoders($tab,$data['column'], $data['direction'], $data['limit'], $status);
+                    if($request->get('search')){
+                        $data['encoders'] = $this->manageTaskRepo->searchEncoder($request->search, $data['column'], $data['direction'], $data['limit'], $status, ['*']);
+                    } else{
+                        $data['encoders'] = $this->manageTaskRepo->getAllEncoders($tab,$data['column'], $data['direction'], $data['limit'], $status);
+                    }
                 } else if ($tab == 'transferTask') {
                     $data['transfers'] = $this->manageTaskRepo->getAllTransfer($tab, $data['column'], $data['direction'], $data['limit']);
                 }

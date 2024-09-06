@@ -35,7 +35,11 @@ class ManageTaskController extends Controller
         $direction = $request->input('direction', 'desc');
         $data['title'] = 'Manage Task';
         if ($tab == 'encodingTask') {
-            $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder',$column, $direction , 20, $status);
+            if($request->get('search')){
+                $data['encoders'] = $this->manageTaskRepo->searchEncoder($request->search, $column, $direction, 20, $status, '*');
+            } else{
+                $data['encoders'] = $this->manageTaskRepo->getAllEncoders('encoder',$column, $direction , 20, $status);
+            }
         } else{
             $data['transfers'] = $this->manageTaskRepo->getAllTransfer('transfer', $column, $direction , 20);
         }
@@ -131,16 +135,5 @@ class ManageTaskController extends Controller
                 'message' => 'Transfer task not found',
             ]);
         }
-    }
-    //search encoder
-    public function searchEncoder(Request $request)
-    {
-        $search = $request->input('search');
-        $column = $request->input('column', 'created_at');
-        $direction = $request->input('direction', 'asc');
-        $limit = $request->input('limit', 20);
-        $status = $request->input('status', 'all');
-        $data['encoders'] = $this->manageTaskRepo->searchEncoder($search, $column, $direction, $limit,$status,'*');
-        return view('admin.manageTask.tableEncoder', $data);
     }
 }
