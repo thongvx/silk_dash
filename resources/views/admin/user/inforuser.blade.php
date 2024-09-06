@@ -439,11 +439,11 @@
                                 </div>
                                 <div class="">
                                     <h6 class="mb-2">Download Priority</h6>
-                                    <input id="downloadPriority" name="download_priority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
+                                    <input id="downloadPriority" class="pl-3 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto
                                                        rounded-lg bg-[#121520] text-white bg-clip-padding
                                                        py-2 pr-3 transition-all placeholder:text-gray-500 focus:border-blue-500
                                                        focus:outline-none focus:transition-shadow w-full"
-                                           type="text" value="{{ $users->download_priority ?? 0 }}">
+                                           type="text" value="0">
                                 </div>
                                 <div class="">
                                     <h6 class="mb-2">Torrent Priority</h6>

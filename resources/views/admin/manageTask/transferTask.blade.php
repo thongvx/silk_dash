@@ -95,7 +95,7 @@
                                         <a href="{{ route('user.show', ['user' => $transfer->user_id]) }}" target="_blank">{{ $transfer->user_id }}</a>
                                     </td>
                                     <td class="pl-2 slug {{ $transfer->status == 1 ? 'text-orange-500' : ($transfer->status == 19 ? 'text-red-500' : ($transfer->status == 2 ? 'text-teal-500':'')) }}">{{ $transfer->slug }}</td>
-                                    <td class="pl-2 max-w-[20rem] url {{ $transfer->status == 1 ? 'text-orange-500' : ($transfer->status == 19 ? 'text-red-500' : '') }}">
+                                    <td class="pl-2 max-w-[20rem] url {{ $transfer->status == 1 ? 'text-orange-500' : ($transfer->status == 19 ? 'text-red-500' : ($transfer->status == 2 ? 'text-teal-500':'')) }}">
                                         <div class="truncate hover:text-clip">
                                             <a href="{{ $transfer->url }}"  title="{{ $transfer->url }}" target="_black" class="hover:text-[#009FB2] ">{{ $transfer->url }}</a>
                                         </div>
