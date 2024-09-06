@@ -41,17 +41,19 @@ class DatatableController
         $status = !request()->get('status')? '' : request()->get('status');
         switch ($path) {
             case '/admin/user':
-                $data['users'] = $this->userRepo->getAllUsers($tab, $data['column'], $data['direction'], 20, $data['limit'], ['*']);
+                if($request->get('search')){
+                    $data['users'] = $this->userRepo->searchUser($request->search, $data['column'], $data['direction'], 20, ['*']);
+                } else{
+                    $data['users'] = $this->userRepo->getAllUsers($tab, $data['column'], $data['direction'], 20, $data['limit'], ['*']);
+                }
                 return view('admin.user.table', $data);
             case '/admin/manageTask':
                 if ($tab == 'encodingTask') {
                     $data['encoders'] = $this->manageTaskRepo->getAllEncoders($tab,$data['column'], $data['direction'], $data['limit'], $status);
-                    return view('admin.manageTask'.'.'.$tab, $data);
                 } else if ($tab == 'transferTask') {
                     $data['transfers'] = $this->manageTaskRepo->getAllTransfer($tab, $data['column'], $data['direction'], $data['limit']);
-                    return view('admin.manageTask'.'.'.$tab, $data);
                 }
-                break;
+                return view('admin.manageTask'.'.'.$tab, $data);
             case '/admin/compute':
                 if ($tab == 'encoder') {
                     $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'] , $data['limit']);

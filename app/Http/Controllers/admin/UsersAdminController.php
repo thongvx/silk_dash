@@ -33,10 +33,12 @@ class UsersAdminController
         $columns = ['*'];
         $column = $request->get('column', 'created_at');
         $direction = $request->get('direction', 'desc');
-        $data = [
-            'users' => $this->userRepo->getAllUsers($tab, $column, $direction, $limit, $columns),
-            'title' => 'Users',
-        ];
+        $data['title'] = 'Users';
+        if($request->get('search')){
+            $data['users'] = $this->userRepo->searchUser($request->search, $column, $direction, $limit, $columns);
+        } else{
+            $data['users'] = $this->userRepo->getAllUsers($tab, $column, $direction, $limit, $limit, $columns);
+        }
         return view('admin.user.user', $data);
     }
 

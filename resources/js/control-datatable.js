@@ -2,7 +2,7 @@
 //updateURLParameter
 import {btn_video} from "./jsVideo/video.js";
 
-function updateURLParameter(tab, column, direction, folderId, limit, page, poster, status) {
+function updateURLParameter(tab, column, direction, folderId, limit, page, poster, status, search) {
     var urlParams = new URLSearchParams(window.location.search);
     tab ? urlParams.set('tab', tab) : urlParams.delete('tab');
     column ? urlParams.set('column', column) : urlParams.delete('column');
@@ -12,6 +12,7 @@ function updateURLParameter(tab, column, direction, folderId, limit, page, poste
     page ? urlParams.set('page', page) : urlParams.delete('page');
     poster ? urlParams.set('poster', poster) : urlParams.delete('poster');
     status ? urlParams.set('status', status) : urlParams.delete('status');
+    search ? urlParams.set('search', search) : urlParams.delete('search');
     const newUrl = window.location.pathname + '?' + urlParams.toString();
     history.pushState(null, '', newUrl);
 }
@@ -28,7 +29,8 @@ export function getUrlParams() {
         page: urlParams.get('page') || null,
         status: urlParams.get('status') || null,
         tab: urlParams.get('tab') || null,
-        videoID: urlParams.get('videoID') || null
+        videoID: urlParams.get('videoID') || null,
+        search: urlParams.get('search') || null
     };
 }
 
@@ -47,8 +49,8 @@ function highlightSortedColumn() {
         }
     });
 }
-export function loadDatatable(tab,column, direction, folderId, poster, limit, page, status , videoID) {
-    updateURLParameter(tab, column, direction, folderId, limit, page, poster, status);
+export function loadDatatable(tab,column, direction, folderId, poster, limit, page, status , videoID, search) {
+    updateURLParameter(tab, column, direction, folderId, limit, page, poster, status, search);
     const path = window.location.pathname;
     // Sử dụng hàm
     $.ajax({
@@ -64,7 +66,8 @@ export function loadDatatable(tab,column, direction, folderId, poster, limit, pa
             limit: limit,
             status: status,
             path: path,
-            videoID: videoID
+            videoID: videoID,
+            search: search
         },
         beforeSend: function () {
             $('#box-datatable, .box-datatable, #live').html(`<div class="w-full justify-center items-center flex h-full">
@@ -96,21 +99,21 @@ $(document).on('click', '.sortable-column', function() {
     params.column = $(this).data('column');
     params.direction = $(this).attr('aria-sort') === 'desc' ? 'asc' : 'desc';
     params.page = 1;
-    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID);
+    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID, params.search);
 })
 
 // pagination
 $(document).on('click', '.page-datatable', function() {
     const params = getUrlParams();
     params.page = $(this).data('page');
-    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID);
+    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID, params.search);
 });
 
 // limit
 $(document).on('change', '#limit', function() {
     const params = getUrlParams();
     params.limit = $(this).val();
-    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID);
+    loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID, params.search);
 });
 //folder
 // $(document).on('click', '.btn-page-folder, .btn-folder-root', function() {

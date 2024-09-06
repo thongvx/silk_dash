@@ -110,7 +110,7 @@
             </tr>
         @empty
             <tr class="my-3 h-12 bg-[#142132]">
-                <td class="text-center" colspan="9">No data available in table</td>
+                <td class="text-center" colspan="10">No data available in table</td>
             </tr>
         @endforelse
         </tbody>
