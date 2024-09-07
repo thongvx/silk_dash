@@ -141,6 +141,7 @@ class PlayController
                         'custom_ads' => $custom_ads,
                         'urlStream' => $urlStream,
                         'viewsAds' => $viewsAds,
+                        'token' => $this->creatTokenDownload(),
                     ];
 
                     switch ($data_setting->earningModes) {
@@ -166,6 +167,17 @@ class PlayController
         } else {
             return response()->view('errors.404', [], 404);
         }
+    }
+    function creatTokenDownload(){
+        $exp = time()+300;
+
+        $string_hash = $exp.'_view_Silk@2024';
+        $md5_hash = md5($string_hash, true);
+        $base64_hash = base64_encode($md5_hash);
+        $base64_hash = strtr($base64_hash, '+/', '-_');
+        $base64_hash = rtrim($base64_hash, '=');
+
+        return '?token='.$base64_hash.'&expires='.$exp;
     }
     function callSvStream($sv, $slug, $path, $sto480, $sto720, $sto1080)
     {
