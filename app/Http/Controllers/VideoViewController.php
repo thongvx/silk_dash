@@ -24,8 +24,11 @@ class VideoViewController
         $keyPerIp = "user_views:{$request->ip()}";
         $views = Redis::get($keyPerIp) ?: 0;
 
+        $token = $request->get('token');
+        $expires = $request->get('expires');
+
         $today = Carbon::today()->format('Y-m-d');
-        if ($views < 2 ) {
+        if ($views < 2 && $this->isValidToken($token, $expires)) {
 
             $views++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);
@@ -69,5 +72,22 @@ class VideoViewController
         }
         return response()->json(['status' => 'fail']);
     }
+    function isValidToken($token, $expires)
+    {
+        if (time() > $expires || time()+60 < $expires) {
+            return false;
+        }
 
+        $string_hash = $expires . '_view_Silk@2024';
+        $md5_hash = md5($string_hash, true);
+        $base64_hash = base64_encode($md5_hash);
+        $base64_hash = strtr($base64_hash, '+/', '-_');
+        $base64_hash = rtrim($base64_hash, '=');
+
+        if ($token === $base64_hash) {
+            return true;
+        }
+
+        return false;
+    }
 }
