@@ -204,22 +204,14 @@ class VideoController
         $videos = $this->videoRepo->searchVideos($user->id, $searchTerm, $limit, $column, $direction);
         $folders = $this->folderRepo->getAllFolders($user->id);
         $playerSettings = $this->playerSettingsRepo->getAllPlayerSettings($user->id);
-        if ($playerSettings !== null) {
-            $iframeHeight = $playerSettings->embed_height;
-            $iframeWidth = $playerSettings->embed_width;
-        } else {
-            $iframeHeight = '800';
-            $iframeWidth = '600';
-        }
         $data = [
             'title' => 'Search Results',
             'videos' => $videos,
             'folders' => $folders,
             'column' => $request->input('column', 'created_at'),
             'direction' => $request->input('direction', 'asc'),
-            'iframeHeight' => $iframeHeight,
-            'iframeWidth' => $iframeWidth,
             'searchTerm' => $searchTerm,
+            'playerSettings' => $playerSettings,
         ];
         $this->convertVideoSizes($data['videos']);
         return $data;
