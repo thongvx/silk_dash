@@ -141,7 +141,7 @@ class PlayController
                         'custom_ads' => $custom_ads,
                         'urlStream' => $urlStream,
                         'viewsAds' => $viewsAds,
-                        'token' => $this->creatTokenDownload(),
+                        'token' => '?token=abc&expires=123',
                     ];
 
                     switch ($data_setting->earningModes) {
