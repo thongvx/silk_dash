@@ -71,4 +71,9 @@ class VideoAdminController extends Controller
         $video->delete();
         return redirect()->back();
     }
+    public function infoVideo($slug)
+    {
+        $video = $this->videoRepo->findVideoBySlug($slug);
+        return json_encode($video);
+    }
 }
