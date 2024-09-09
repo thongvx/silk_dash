@@ -377,7 +377,7 @@ class VideoController
                 "title" => $video->title,
                 "folder" => $folderName,
                 "video_id" => $video->slug,
-                "embedLink" => "https://user.streamsilk.com/t/".$video->slug,
+                "embedLink" => "https://streamsilk.com/p/".$video->slug,
                 "poster" => $video->poster,
                 "view" => $video->total_play,
                 "size" => $this->convertFileSize($video->size),
@@ -413,7 +413,7 @@ class VideoController
                 "title" => $video['title'],
                 "folder" => $video['folder'],
                 "video_id" => $video['slug'],
-                "embedLink" => "https://user.streamsilk.com/t/".$video['slug'],
+                "embedLink" => "https://streamsilk.com/p/".$video['slug'],
             ];
         }
         $data = [

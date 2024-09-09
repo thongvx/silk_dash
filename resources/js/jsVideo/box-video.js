@@ -247,7 +247,7 @@ $(document).on('click', '#fixed-video [folder]', function() {
     btnSubmit.addClass('bg-[#01545e] hover:bg-[#009fb2]')
     btnSubmit.removeClass('bg-[#142132]')
     btnSubmit.removeAttr('disabled');
-    $('#move form').off('submit').on('submit', function(e) {
+    $('#move form').one('submit', function(e) {
         e.preventDefault();
         $.ajax({
             url: '/videos/move',
@@ -299,5 +299,13 @@ $(document).on('click', '#fixed-video [folder]', function() {
 });
 
 //clone video
-
+$(document).on('click', '[btn-copy]', function() {
+    fixedBox()
+    $('#move').show();
+    $('[folder]').removeClass('text-transparent bg-gradient-to-r')
+    $('[folder]').filter(function() {
+        return $(this).find('h5').text().indexOf($('#currentFolderName').text()) !== -1;
+    }).addClass('bg-gradient-to-r text-transparent');
+    checkAll()
+});
 
