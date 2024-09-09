@@ -74,9 +74,6 @@ class VideoViewController
     }
     function isValidToken($token, $expires)
     {
-        if (time() > $expires || time()+60 < $expires) {
-            return false;
-        }
 
         $string_hash = $expires . '_view_Silk@2024';
         $md5_hash = md5($string_hash, true);
