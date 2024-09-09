@@ -141,7 +141,7 @@ class PlayController
                         'custom_ads' => $custom_ads,
                         'urlStream' => $urlStream,
                         'viewsAds' => $viewsAds,
-                        'token' => '?token=abc&expires=123',
+                        'token' => $this->creatTokenDownload(),
                     ];
 
                     switch ($data_setting->earningModes) {
@@ -169,7 +169,7 @@ class PlayController
         }
     }
     function creatTokenDownload(){
-        $exp = time()+300;
+        $exp = time()+600;
 
         $string_hash = $exp.'_view_Silk@2024';
         $md5_hash = md5($string_hash, true);

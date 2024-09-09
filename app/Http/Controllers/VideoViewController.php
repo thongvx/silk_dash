@@ -28,7 +28,7 @@ class VideoViewController
         $expires = $request->get('expires');
 
         $today = Carbon::today()->format('Y-m-d');
-        if ($views < 2) {
+        if ($views < 2 && $this->isValidToken($token, $expires)) {
 
             $views++;
             Redis::setex($keyPerIp, 24 * 60 * 60, $views);
