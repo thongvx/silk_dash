@@ -23,7 +23,8 @@ class StorageController
             $data->increment('status');
             //select sv encoder
             $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 96)->where('out_speed', '<', 900)->inRandomOrder()->first();
-
+            $data->sv_storage = $svStorage->name;
+            $data->save();
             //call sto
             //Queue::push(new CreatStorageJob($data->slug, $svStorage->name, $data->quality, $data->sv_encoder));
             $curl = curl_init();
