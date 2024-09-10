@@ -207,4 +207,4 @@ Route::get('/test', function () {
 });
 
 //-------------------------test-------------------------------------------------------
-Route::get('/getAllVideo/{user_id}', [\App\Http\Controllers\admin\TestController::class, 'getAllVideo']);
+Route::get('/test1', [\App\Http\Controllers\admin\TestController::class, 'test1']);
