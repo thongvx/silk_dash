@@ -342,16 +342,12 @@ $('#copy form').one('submit', function (e) {
         },
         success: function(response) {
             btnSubmitFolder.html('Move To Folder')
-            const message = 'Video has been successfully moved.';
+            const message = 'Video has been successfully clone.';
             add_notification('success',message, btnSubmitFolder);
             setTimeout(function() {
                 exitBox ()
-                $('#move').addClass('hidden')
-
+                $('#copy').addClass('hidden')
             }, 2000);
-            videoIDs.forEach(function(videoID) {
-                $('tr[data-videoid="' + videoID + '"]').remove();
-            });
             btn_video()
         },
         error: function(response) {
@@ -360,7 +356,7 @@ $('#copy form').one('submit', function (e) {
             add_notification('error',message, btnSubmitFolder);
             setTimeout(function() {
                 exitBox ()
-                $('#move').addClass('hidden')
+                $('#copy').addClass('hidden')
 
             }, 2000);
         }
