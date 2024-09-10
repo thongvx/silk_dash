@@ -194,7 +194,7 @@ class UploadController
             if($video){
                 //check user public video
                 $data_setting = $this->accountRepo->getSetting($video->user_id);
-                if($data_setting->publicVideo == 1){
+                if($data_setting->publicVideo == 0){
                     $old_folder_id = $video->folder_id;
                     $newVideo = $video->replicate();
                     $newVideo->slug = uniqid();
