@@ -52,7 +52,7 @@
                             : '<i class="material-symbols-outlined opacity-1 text-lg md:mr-1.5">visibility</i><span class="hidden sm:block">show poster</span>'
                         !!}
                     </button>
-                    <button type="button" btn-video disabled class="cursor-not-allowed px-2"
+                    <button type="button" btn-video disabled class="cursor-not-allowed px-2 hidden sm:block"
                             title="Clone File">
                         <i btn-copy class="material-symbols-outlined opacity-1 text-3xl">file_copy</i>
                     </button>
