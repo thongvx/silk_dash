@@ -11,7 +11,7 @@ class TestController extends Controller
     //------------------------------------get all video ------------------------------------
     function getAllVideo($user_id)
     {
-        $dataUpdate['status'] = 0;
+        $dataUpdate['status'] = 2;
         $data = EncoderTask::where('status', 3)->update($dataUpdate);
         echo 'ok';
     }
