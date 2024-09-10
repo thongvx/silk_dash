@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="move hidden" id="move">
+                <div class="move hidden box-choose-folder" id="move">
                     <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Choose folder to move selected to</h5>
                     <div class="mt-3" list-folder>
                         <div class="items-center w-full">
@@ -108,8 +108,8 @@
                         </form>
                     </div>
                 </div>
-                <div class="copy hidden" id="copy">
-                    <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Choose folder to move selected to</h5>
+                <div class="copy hidden box-choose-folder" id="copy">
+                    <h5 class="mb-0 text-[#009FB2] text-lg font-semibold">Choose folder to clone selected to</h5>
                     <div class="mt-3" list-folder>
                         <div class="items-center w-full">
                             <div
@@ -137,9 +137,10 @@
                             @endforeach
                         </div>
                         <form class="pt-2 w-max text-white">
+
                             <button move-to-folder type="submit" disabled
                                     class="bg-[#142132] rounded-lg w-max font-semibold text-md py-2.5 px-5">
-                                Move To Folder
+                                Clone To Folder
                             </button>
                         </form>
                     </div>
