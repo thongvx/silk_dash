@@ -343,7 +343,12 @@ $('#copy form').one('submit', function (e) {
         },
         success: function(response) {
             btnSubmitFolder.html('Move To Folder')
-            const message = 'Video has been successfully clone.';
+            let message;
+            if(response.status === 404){
+                message = 'Video has failed to clone.';
+            }else{
+                message = 'Video has been successfully clone.';
+            }
             add_notification('success',message, btnSubmitFolder);
             setTimeout(function() {
                 exitBox ()
