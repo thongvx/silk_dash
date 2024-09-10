@@ -112,6 +112,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/video/edit/multiple', [\App\Http\Controllers\Dashboard\VideoController::class, 'updateMultipleTitles']);
     Route::get('/edit-video/{video}', [\App\Http\Controllers\Dashboard\VideoController::class, 'editVideo'])->name('video.editVideo');
     Route::post('/uploadSub', [\App\Http\Controllers\Dashboard\UploadController::class, 'uploadSub']);
+    Route::post('/video/copy', [\App\Http\Controllers\Dashboard\VideoController::class, 'cloneVideo']);
     // DMCA
     Route::get('dmca',function (){
         $data['title'] = 'DMCA';

@@ -223,6 +223,20 @@ $(document).on('click', '[btn-export]', function() {
 $(document).on('click', '#btn-title', function() {
     getLink()
 })
+//get folder
+const formMove = ``
+var newFolderId = null;
+var btnSubmitFolder
+$(document).on('click', '#fixed-video [folder]', function() {
+    $(this).addClass('text-transparent bg-gradient-to-r')
+    $('#fixed-video [folder]').not(this).removeClass('text-transparent bg-gradient-to-r')
+    newFolderId = $(this).data('folder-id')
+    btnSubmitFolder = $(this).closest('.box-choose-folder').find('button[type="submit"]');
+    btnSubmitFolder.addClass('bg-[#01545e] hover:bg-[#009fb2]')
+    btnSubmitFolder.removeClass('bg-[#142132]')
+    btnSubmitFolder.removeAttr('disabled');
+});
+
 //move video to folder
 $(document).on('click', '[btn-move]', function() {
     fixedBox()
@@ -233,31 +247,21 @@ $(document).on('click', '[btn-move]', function() {
     }).addClass('bg-gradient-to-r text-transparent');
     checkAll()
 });
-const formMove = ``
-var newFolderId = null;
-$(document).on('click', '#fixed-video [folder]', function() {
-    $(this).addClass('text-transparent bg-gradient-to-r')
-    $('#fixed-video [folder]').not(this).removeClass('text-transparent bg-gradient-to-r')
-    newFolderId = $(this).data('folder-id')
+$('#move form').one('submit', function (e) {
+    e.preventDefault();
     const rows = checkAll()
     const videoIDs = rows.map((index, row) => {
         return $(row).closest('tr').data('videoid');
     }).get();
-    let btnSubmit = $(this).closest('#move').find('button[type="submit"]');
-    btnSubmit.addClass('bg-[#01545e] hover:bg-[#009fb2]')
-    btnSubmit.removeClass('bg-[#142132]')
-    btnSubmit.removeAttr('disabled');
-    $('#move form').one('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: '/videos/move',
-            type: 'POST',
-            data: {
-                folderID: newFolderId,
-                videoID: videoIDs
-            },
-            beforeSend: function() {
-                btnSubmit.html(`
+    $.ajax({
+        url: '/videos/move',
+        type: 'POST',
+        data: {
+            folderID: newFolderId,
+            videoID: videoIDs
+        },
+        beforeSend: function() {
+            btnSubmitFolder.html(`
                      <div class="flex text-white items-center">
                         <div class="loading">
                             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -268,44 +272,101 @@ $(document).on('click', '#fixed-video [folder]', function() {
                         <span>process</span>
                     </div>
                 `)
-                btnSubmit.prop('disabled', true);
-            },
-            success: function(response) {
-                btnSubmit.html('Move To Folder')
-                const message = 'Video has been successfully moved.';
-                add_notification('success',message, btnSubmit);
-                setTimeout(function() {
-                    exitBox ()
-                    $('#move').addClass('hidden')
+            btnSubmitFolder.prop('disabled', true);
+        },
+        success: function(response) {
+            btnSubmitFolder.html('Move To Folder')
+            const message = 'Video has been successfully moved.';
+            add_notification('success',message, btnSubmitFolder);
+            setTimeout(function() {
+                exitBox ()
+                $('#move').addClass('hidden')
 
-                }, 2000);
-                videoIDs.forEach(function(videoID) {
-                    $('tr[data-videoid="' + videoID + '"]').remove();
-                });
-                btn_video()
-            },
-            error: function(response) {
-                btnSubmit.html('Move To Folder')
-                const message = 'An error occurred while moved the video.';
-                add_notification('error',message, btnSubmit);
-                setTimeout(function() {
-                    exitBox ()
-                    $('#move').addClass('hidden')
+            }, 2000);
+            videoIDs.forEach(function(videoID) {
+                $('tr[data-videoid="' + videoID + '"]').remove();
+            });
+            btn_video()
+        },
+        error: function(response) {
+            btnSubmitFolder.html('Move To Folder')
+            const message = 'An error occurred while moved the video.';
+            add_notification('error',message, btnSubmitFolder);
+            setTimeout(function() {
+                exitBox ()
+                $('#move').addClass('hidden')
 
-                }, 2000);
-            }
-        });
+            }, 2000);
+        }
     });
+    newFolderId = ''
 });
 
 //clone video
 $(document).on('click', '[btn-copy]', function() {
     fixedBox()
-    $('#move').show();
+    $('#copy').show();
     $('[folder]').removeClass('text-transparent bg-gradient-to-r')
     $('[folder]').filter(function() {
         return $(this).find('h5').text().indexOf($('#currentFolderName').text()) !== -1;
     }).addClass('bg-gradient-to-r text-transparent');
     checkAll()
 });
+$('#copy form').one('submit', function (e) {
+    e.preventDefault();
+    const rows = checkAll()
+    const videoIDs = rows.map((index, row) => {
+        return 'https://streamsilk.com/p/'+$(row).closest('tr').data('videoid');
+    }).get();
+    const videoLinksString = videoIDs.join('\n');
 
+    $.ajax({
+        url: '/video/copy',
+        type: 'POST',
+        data: {
+            folderID: newFolderId,
+            url: videoLinksString
+        },
+        beforeSend: function() {
+            btnSubmitFolder.html(`
+                     <div class="flex text-white items-center">
+                        <div class="loading">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </div>
+                        <span>process</span>
+                    </div>
+                `)
+            btnSubmitFolder.prop('disabled', true);
+        },
+        success: function(response) {
+            btnSubmitFolder.html('Move To Folder')
+            let message;
+            if(response.status === 404){
+                message = 'Video has failed to clone.';
+                add_notification('error',message, btnSubmitFolder);
+            }else{
+                message = 'Video has been successfully clone.';
+                add_notification('success',message, btnSubmitFolder);
+            }
+            setTimeout(function() {
+                exitBox ()
+                $('#copy').addClass('hidden')
+            }, 2000);
+            btn_video()
+        },
+        error: function(response) {
+            btnSubmitFolder.html('Move To Folder')
+            const message = 'An error occurred while moved the video.';
+            add_notification('error',message, btnSubmitFolder);
+            setTimeout(function() {
+                exitBox ()
+                $('#copy').addClass('hidden')
+
+            }, 2000);
+        }
+    });
+    newFolderId = ''
+});
