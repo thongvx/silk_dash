@@ -112,7 +112,6 @@ class PlayController
                                 if($nameSvStream[0])
                                     $video->save();
                             }
-                            $svStream = 'ss07.tubzde.cc';
                             //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                             //$this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
                             $urlStream = 'https://'.$svStream.'/insertData?slug='.$video->middle_slug.'&path='.$video->pathStream.'&sto480='.$video->sd.'&sto720='.$video->hd.'&sto1080='.$video->fhd;
