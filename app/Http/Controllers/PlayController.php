@@ -95,8 +95,7 @@ class PlayController
                     $urlStream = 0;
                     if(!file_exists('data/'.$video->middle_slug)) {
                         if ($video->stream == 0) {
-                            //$svStream = SvStreamService::selectSvStream();
-                            $svStream = 'ss07.tubzde.cc';
+                            $svStream = SvStreamService::selectSvStream();
                             //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                             //$this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
                             $urlStream = 'https://'.$svStream.'/insertData?slug='.$video->middle_slug.'&path='.$video->pathStream.'&sto480='.$video->sd.'&sto720='.$video->hd.'&sto1080='.$video->fhd;
@@ -107,14 +106,12 @@ class PlayController
                         } else {
                             $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
                             if ($svStream === null) {
-                                //$svStream = SvStreamService::selectSvStream();
-                                $svStream = 'ss07.tubzde.cc';
+                                $svStream = SvStreamService::selectSvStream();
                                 $nameSvStream = explode('.', $svStream);
                                 $video->stream = $video->stream . '-' . $nameSvStream[0];
                                 if($nameSvStream[0])
                                     $video->save();
                             }
-                            $svStream = 'ss07.tubzde.cc';
                             //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
                             //$this->callSvStream($svStream, $video->middle_slug, $video->pathStream, $video->sd, $video->hd, $video->fhd);
                             $urlStream = 'https://'.$svStream.'/insertData?slug='.$video->middle_slug.'&path='.$video->pathStream.'&sto480='.$video->sd.'&sto720='.$video->hd.'&sto1080='.$video->fhd;
