@@ -319,6 +319,7 @@ $('#copy form').one('submit', function (e) {
         return 'https://streamsilk.com/p/'+$(row).closest('tr').data('videoid');
     }).get();
     const videoLinksString = videoIDs.join('\n');
+
     $.ajax({
         url: '/video/copy',
         type: 'POST',
