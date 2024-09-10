@@ -346,10 +346,11 @@ $('#copy form').one('submit', function (e) {
             let message;
             if(response.status === 404){
                 message = 'Video has failed to clone.';
+                add_notification('error',message, btnSubmitFolder);
             }else{
                 message = 'Video has been successfully clone.';
+                add_notification('success',message, btnSubmitFolder);
             }
-            add_notification('success',message, btnSubmitFolder);
             setTimeout(function() {
                 exitBox ()
                 $('#copy').addClass('hidden')
