@@ -68,7 +68,7 @@
         @forelse($users as $index => $user)
             @if( $user->active == 1 || $user->active == 2)
                 @if($user->encoder_priority > 0)
-                    @php $class = 'text-violet-600'; @endphp
+                    @php $class = 'text-violet-400'; @endphp
                 @else
                     @php $class = ''; @endphp
                 @endif
