@@ -46,8 +46,8 @@
                                           <p class="mb-0 text-xs leading-tight text-white/80">
                                               {{ Auth::user()->email}}
                                           </p>
-                                          <p class="mb-0 text-sm leading-tight font-bold {{ Auth::user()->encoder_priority != 0  ? 'text-violet-400' : 'text-emerald-500' }}">
-                                              {{ Auth::user()->encoder_priority != 0  ? 'Premium' : 'Free' }}
+                                          <p class="mb-0 text-sm leading-tight font-bold {{ Auth::user()->encoder_priority == 0  ? 'text-emerald-500' : 'text-violet-400' }}">
+                                              {{ Auth::user()->encoder_priority == 0  ? 'Free' : 'Premium' }}
                                           </p>
                                       </div>
                                   </div>
