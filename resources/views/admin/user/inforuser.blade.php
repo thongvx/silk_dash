@@ -15,7 +15,7 @@
                             <div class="mt-3 flex justify-between">
                                 <div class="flex items-center">
                                     <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Premium</h4>
-                                    <h4 class="ml-3" status="">{{ !$users->premium ? 'Free' : 'Premium' }} </h4>
+                                    <h4 class="ml-3" status="">{{ $users->encoder_priority == 0 ? 'Free' : 'Premium' }} </h4>
                                 </div>
                                 <div class="flex items-center">
                                     <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Status</h4>
@@ -355,7 +355,7 @@
                                                        focus:outline-none focus:transition-shadow w-full">no</textarea>
                             <a href="{{ $users->website ?? 0 }}/{{ $users->key_api }}-turboviplay.html" target="_black">
                                 <h5 class="text-warning">
-                                    {{ $users->website ?? 0 }}/{{ $users->key_api }}-turboviplay.html</h5>
+                                    {{ $users->website ?? 0 }}/{{ $users->key_api }}-streamsilk.html</h5>
                             </a>
                         </div><!--end-note-->
                         <div class="px-0 mt-3" id="send_mail">
