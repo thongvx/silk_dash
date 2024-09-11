@@ -70,11 +70,11 @@
                                     class='py-1.5 px-2 rounded-full border border-white leading-none'>
                                     <i class="material-symbols-outlined opacity-1 text-white text-3xl">star</i>
                                 </div>
-                                <div class='text-md lg:text-lg w-full flex flex-col mt-3 items-end'>
-                                    <h3 class='text-slate-400'>Premium</h3>
+                                <div class='w-full flex flex-col mt-3 items-end'>
                                     <div class="flex items-center text-xl">
-                                        <h5 class="mb-0 {{ Auth::user()->encoder_priority == 0  ? 'text-emerald-500' : 'text-violet-400' }}  grid grid-cols-2">
-                                            <span class='text-slate-400 text-lg mr-0.5 w-20'>Account:</span> {{ Auth::user()->encoder_priority == 0  ? 'Free' : 'Premium' }}
+                                        <h5 class="mb-0 text-start text-md lg:text-lg  {{ Auth::user()->encoder_priority == 0  ? 'text-emerald-500' : 'text-violet-400' }} flex w-52 justify-between">
+                                            <span class='text-slate-400 text-md mr-0.5 px-2'>Premium User:</span>
+                                            <span>{{ Auth::user()->encoder_priority == 0  ? 'Free' : 'Premium' }}</span>
                                         </h5>
                                         <span
                                             class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center hidden">
@@ -82,8 +82,9 @@
                                         </span>
                                     </div>
                                     <div class="flex items-center text-xl">
-                                        <h5 class="mb-0 text-white  grid grid-cols-2">
-                                            <span class='text-slate-400 text-lg mr-0.5 w-20'>Views:</span> {{ \App\Models\File::formatNumber($premium) }}
+                                        <h5 class="mb-0 text-start text-white text-md lg:text-lg flex w-52 justify-between">
+                                            <span class='text-slate-400 text-md mr-0.5 px-2'>Premium Views :</span>
+                                            <span>{{ \App\Models\File::formatNumber($premium) }}</span>
                                         </h5>
                                         <span
                                             class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center hidden">
