@@ -15,11 +15,11 @@
                             <div class="mt-3 flex justify-between">
                                 <div class="flex items-center">
                                     <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Premium</h4>
-                                    <h4 class="ml-3 {{ $users->encoder_priority == 0 ? 'text-white' : 'text-violet-500' }}" status="">{{ $users->encoder_priority == 0 ? 'Free' : 'Premium' }} </h4>
+                                    <h4 class="ml-3 font-bold {{ $users->encoder_priority == 0 ? 'text-white' : 'text-violet-400' }}" status="">{{ $users->encoder_priority == 0 ? 'Free' : 'Premium' }} </h4>
                                 </div>
                                 <div class="flex items-center">
                                     <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Status</h4>
-                                    <h4 class="ml-3 {{ $users->active == 1 ? 'text-teal-400' : ($users->active == 19 ? 'text-rose-500' : 'text-orange-500' )}}">{{ $users->active == 1 ? 'Active' : ($users->active == 19 ? 'Ban' : 'Unverified' )}}
+                                    <h4 class="ml-3 font-bold {{ $users->active == 1 ? 'text-teal-400' : ($users->active == 19 ? 'text-rose-500' : 'text-orange-500' )}}">{{ $users->active == 1 ? 'Active' : ($users->active == 19 ? 'Ban' : 'Unverified' )}}
                                     </h4>
                                 </div>
                             </div>
