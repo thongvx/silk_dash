@@ -69,6 +69,8 @@
             @if( $user->active == 1 || $user->active == 2)
                 @if($user->encoder_priority > 0)
                     @php $class = 'text-violet-500'; @endphp
+                @else
+                    @php $class = ''; @endphp
                 @endif
 {{--                @switch($user->encoder_priority > 0)--}}
 {{--                    @case(1)--}}
