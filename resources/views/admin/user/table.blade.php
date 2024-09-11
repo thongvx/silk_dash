@@ -67,19 +67,22 @@
         <tbody class="text-center">
         @forelse($users as $index => $user)
             @if( $user->active == 1 || $user->active == 2)
-                @switch($user->premium)
-                    @case(1)
-                        @php $class = 'text-emerald-500'; @endphp
-                        @break
-                    @case(2)
-                        @php $class = 'text-sky-500'; @endphp
-                        @break
-                    @case(3)
-                        @php $class = 'text-indigo-500'; @endphp
-                        @break
-                    @default
-                        @php $class = ''; @endphp
-                @endswitch
+                @if($user->encoder_priority > 0)
+                    @php $class = 'text-violet-500'; @endphp
+                @endif
+{{--                @switch($user->encoder_priority > 0)--}}
+{{--                    @case(1)--}}
+{{--                        @php $class = 'text-violet-500'; @endphp--}}
+{{--                        @break--}}
+{{--                    @case(2)--}}
+{{--                        @php $class = 'text-sky-500'; @endphp--}}
+{{--                        @break--}}
+{{--                    @case(3)--}}
+{{--                        @php $class = 'text-indigo-500'; @endphp--}}
+{{--                        @break--}}
+{{--                    @default--}}
+{{--                        @php $class = ''; @endphp--}}
+{{--                @endswitch--}}
             @elseif( $user->active == 0)
                 @php $class = "text-orange-400" @endphp
             @else
