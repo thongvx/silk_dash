@@ -73,7 +73,18 @@
                                 <div class='text-md lg:text-lg w-full flex flex-col mt-3 items-end'>
                                     <h3 class='text-slate-400'>Premium</h3>
                                     <div class="flex items-center text-xl">
-                                        <h5 class="mb-0 text-white">{{ \App\Models\File::formatNumber($premium) }} <span class='text-slate-400 text-lg mr-0.5'>Views</span></h5>
+                                        <h5 class="mb-0 {{ Auth::user()->encoder_priority == 0  ? 'text-emerald-500' : 'text-violet-400' }}  grid grid-cols-2">
+                                            <span class='text-slate-400 text-lg mr-0.5 w-20'>Account:</span> {{ Auth::user()->encoder_priority == 0  ? 'Free' : 'Premium' }}
+                                        </h5>
+                                        <span
+                                            class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center hidden">
+                                            <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> +0%
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center text-xl">
+                                        <h5 class="mb-0 text-white  grid grid-cols-2">
+                                            <span class='text-slate-400 text-lg mr-0.5 w-20'>Views:</span> {{ \App\Models\File::formatNumber($premium) }}
+                                        </h5>
                                         <span
                                             class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center hidden">
                                             <i class="material-symbols-outlined opacity-1 text-xl">arrow_drop_down</i> +0%
@@ -251,7 +262,7 @@
                         <a href="javascript:;" data-box="zoom" btn-info-noti-important
                            class="bg-[#009FB2] sticky {{Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') && $payments->count() == 0 ? 'top-20' : 'top-0' }} flex z-20 items-center justify-center rounded-lg py-2 px-2 text-white shadow-lg drop-shadow-sm mb-4 ">
                             <div class="info sticky z-30">
-                                <h6 class="text-white font-bold w-max subject text-center py-3">
+                                <h6 class="text-white font-bold w-auto subject text-center py-3 text-pretty">
                                     Please use newest Z-o-o-m version to upload videos!<br>
                                 </h6>
                             </div>
