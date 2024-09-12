@@ -16,7 +16,7 @@ class EncoderTaskRepo extends BaseRepository
     }
 
     // Get all EncoderTasks
-    public function getAllEncoderTasks($userId, $column = 'created_at', $direction = 'asc', $limit = 20, $page = 1)
+    public function getAllEncoderTasks($userId, $column, $direction, $limit, $page)
     {
         $cacheKey = VideoCacheKeys::ALL_ENCODER_TASKS->value . $userId . 'get_all' .'direction' . $direction .'column'.$column . '.page'. $page;
 
@@ -46,7 +46,7 @@ class EncoderTaskRepo extends BaseRepository
         $query->orderBy($column, $direction);
 
         // Paginate the results
-        $encoderTasks = $query->paginate($limit, ['*'], 'page', $page);
+        $encoderTasks = $query->paginate($limit);
         Redis::setex($cacheKey, 259200, serialize($encoderTasks));
 
         return $encoderTasks;

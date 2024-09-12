@@ -64,7 +64,7 @@ class VideoController
         $limit = $request->input('limit', 20);
         $page = $request->input('page', 1);
         if ($tab == 'processing') {
-            $videos =  $this->encoderTaskRepo->getAllEncoderTasks($userId);
+            $videos =  $this->encoderTaskRepo->getAllEncoderTasks($userId, $column, $direction, $limit, $page);
         } else {
             $videos = $this->videoRepo->getAllUserVideo($userId, $tab, $column, $direction, $folderId, $limit, $page, ['*']);
         }
