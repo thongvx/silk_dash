@@ -46,7 +46,7 @@ class EncoderTaskRepo extends BaseRepository
         $query->orderBy($column, $direction);
 
         // Paginate the results
-        $encoderTasks = $query->paginate($limit);
+        $encoderTasks = $query->paginate($limit, ['*'], 'page', $page);
         Redis::setex($cacheKey, 259200, serialize($encoderTasks));
 
         return $encoderTasks;
