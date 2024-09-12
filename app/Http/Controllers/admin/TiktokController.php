@@ -134,4 +134,30 @@ class TiktokController extends Controller
             }
         }
     }
+    function copyVideoTiktok(Request $request)
+    {
+        $slug = $request->slug;
+        $quality = $request->quality;
+        $urlHls = $request->urlHls;
+        $urlHls = base64_decode($urlHls);
+        //creat folder
+        $tmp = 'data/'.$slug;
+        if(!file_exists($tmp))
+            mkdir($tmp);
+        //copy m3u8 master
+        $tmp = 'data/'.$slug.'/'.$slug.'.m3u8';
+        if(!file_exists($tmp))
+            copy('DataHLS/master.m3u8', 'data/'.$slug.'/'. $slug.'.m3u8');
+        //copy video quality
+        $tmp1 = 'data/'.$slug.'/'.$slug.$quality.'.m3u8';
+        copy($urlHls, $tmp1);
+
+        $dataHls = file_get_contents('DataHLS/'.$quality.'.m3u8');
+        $dataHls = str_replace('master'.$quality.'.m3u8', $slug.$quality.'.m3u8', $dataHls);
+
+        $dataHlsMaster = file_get_contents('data/'.$slug.'/'.$slug.'.m3u8');
+        $dataHlsMaster = $dataHlsMaster.$dataHls;
+        file_put_contents('data/'.$slug.'/'.$slug.'.m3u8', $dataHlsMaster);
+        return 'ok';
+    }
 }
