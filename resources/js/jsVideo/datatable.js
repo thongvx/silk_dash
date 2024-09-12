@@ -48,6 +48,12 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster, videoID) {
     const urlParams = new URLSearchParams(window.location.search);
     const tab = urlParams.get('tab');
     updateURLParameter(tab,column,direction,folderId,limit,page,poster,'', videoID)
+    var box_content
+    if(tab === 'processing'){
+        box_content = '#processing';
+    }else{
+        box_content = '#live';
+    }
     $.ajax({
         url: "/control",
         type: 'GET',
@@ -62,7 +68,7 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster, videoID) {
             videoID: videoID
         },
         beforeSend: function () {
-            $('#live').html(`<div class="w-full justify-center items-center flex h-full">
+            $(box_content).html(`<div class="w-full justify-center items-center flex h-full">
                                 <div class="flex text-white my-20 items-center">
                                     <div class="loading">
                                         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -75,7 +81,7 @@ function ajaxdatatable(column,direction,folderId,limit,page, poster, videoID) {
                             </div>`);
         },
         success: function (response) {
-            $('#live').html(response);
+            $(box_content).html(response);
             highlightSortedColumn()
         }
     });

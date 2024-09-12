@@ -108,7 +108,8 @@ class VideoController
             }
             return view('dashboard.video.table', $data);
         }else {
-            return response('');
+            $data = $this->getVideoData($request);
+            return view('dashboard.video.tableProcessing', $data);
         }
     }
 
