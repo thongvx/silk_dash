@@ -270,7 +270,7 @@ class VideoController
         $column = $request->input('column', 'created_at');
         $direction = $request->input('direction', 'asc');
         $video = $this->videoRepo->searchVideos($user->id, $slug, $limit, $column, $direction)->first();
-
+        $page = $request->input('page', 1);
         $transfer = $this->transferRepo->getTransferById($slug, $user->id);
         if($transfer != null){
             if($transfer->status == 19){
@@ -289,7 +289,7 @@ class VideoController
                 ]
             ]);
         }
-        $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $slug)->first();
+        $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id, $column, $direction, $limit, $page)->where('slug', $slug)->first();
 
         if($video == null){
             return response()->json([
@@ -338,6 +338,8 @@ class VideoController
         $folderName = $request->get('nameFolder', 'root');
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 50);
+        $column = $request->get('column', 'created_at');
+        $direction = $request->get('direction', 'desc');
         $folders = $this->folderRepo->getFolder($user->id,$folderName);
         if ($folders == null) {
             return response()->json([
@@ -362,7 +364,7 @@ class VideoController
             }else{
                 $status = 'active';
             }
-            $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id)->where('slug', $video->slug)->first();
+            $encoder = $this->encoderTaskRepo->getAllEncoderTasks($user->id, $column, $direction, $limit, $page)->where('slug', $video->slug)->first();
             if($encoder != null){
                 if($encoder->status == 0) {
                     $status = 'encoder: processing';
