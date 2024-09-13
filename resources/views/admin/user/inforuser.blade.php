@@ -183,6 +183,26 @@
                                     </form>
                                 </div>
                                 <div
+                                    class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-pink-500 to-red-500 w-max py-2 px-5">
+                                    <form action="/admin/updateUser" method="POST"
+                                          style="display:inline;">
+                                        @csrf
+                                        <input name="userID" class="hidden" value="{{ $users->id }}">
+                                        <input id="uploaded" name="uploaded" class="hidden" type="text"
+                                               value="{{ $users->uploaded == 0 ? 1 : 0 }}">
+                                        <a href="javascript:void(0)" onclick="this.closest('form').submit();"
+                                           class="text-white">
+                                            <i class="fa fa-ban" aria-hidden="true"></i>
+                                            @if($users->uploaded == 0)
+                                                Maintenance
+                                            @else
+                                                Unmaintenance
+                                            @endif
+
+                                        </a>
+                                    </form>
+                                </div>
+                                <div
                                     class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-blue-400 to-green-500 w-max py-2 px-5"
                                     onclick="premium()">
                                     <i class="fa fa-money" aria-hidden="true"></i>

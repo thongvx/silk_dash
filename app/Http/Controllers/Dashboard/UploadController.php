@@ -34,6 +34,9 @@ class UploadController
     public function index(Request $request)
     {
         $user = Auth::user();
+        if($user->uploaded == 1){
+            return view('errors.maintenance');
+        }
         $data['title'] = 'Upload';
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $data['folders']->last();
@@ -43,6 +46,7 @@ class UploadController
         if ($tab == 'transfer') {
             $data['getProgressTransfer'] = $this->getProgressTransfer();
         }
+
         return view('dashboard.upload.upload', $data);
     }
     public function getLinkUpload(){
@@ -101,6 +105,15 @@ class UploadController
     public function postTransfer(Request $request)
     {
         $user = Auth::user();
+        if($user->uploaded == 1){
+            $data = [
+                "msg" => "ok",
+                "status" => '200',
+                "sever_time" => date('Y-m-d H:i:s'),
+                'message' => 'Maintenance',
+            ];
+            return response()->json($data);
+        }
         $transfer_priority = $user->transfer_priority;
         if ($transfer_priority)
             $transfer_priority = 0;

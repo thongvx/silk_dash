@@ -49,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'ftp_user',
         'ftp_password',
         'ftp_link',
+        'uploaded',
     ];
 
     /**
