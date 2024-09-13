@@ -24,7 +24,7 @@ class ComputeController extends Controller
 
     private function getData(Request $request, string $tab)
     {
-        $data['column'] = $request->input('column', 'created_at');
+        $data['column'] = $request->input('column', 'name');
         $data['direction'] = $request->input('direction', 'asc');
         $data['limit'] = $request->input('limit', 20);
         $data['title'] = 'Compute';

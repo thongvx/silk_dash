@@ -59,6 +59,7 @@ class DatatableController
                 }
                 return view('admin.manageTask'.'.'.$tab, $data);
             case '/admin/compute':
+                $data['direction'] = request()->get('direction') ?? 'asc';
                 if ($tab == 'encoder') {
                     $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'] , $data['limit']);
                 } elseif ($tab == 'storage') {
