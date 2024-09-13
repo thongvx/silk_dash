@@ -14,15 +14,17 @@ class SvEncoderService
 {
     public function getAllSvEncoders($column, $direction, $limit)
     {
+        $column == 'created_at' ? $column1 = 'name' : $column1 = $column;
         $data = [];
+
         $keys = Redis::keys('sv_encoder:*');
         foreach ($keys as $key) {
             $data[] = Redis::hgetall($key);
         }
         $data = collect($data);
         $sortedData = $direction == 'desc'
-            ? $data->sortByDesc($column)
-            : $data->sortBy($column);
+            ? $data->sortByDesc($column1)
+            : $data->sortBy($column1);
 
         // Manually paginate the sorted data
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
