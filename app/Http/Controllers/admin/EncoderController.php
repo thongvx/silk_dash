@@ -16,7 +16,7 @@ class EncoderController
     public function startEncoderTask ()
     {
         $data = EncoderTask::where('status', 0)->orderBy('priority', 'desc')->first();
-        $svEncoder = SvEncoder::where('active', 1)->where('encoder', '<', 2)->first();
+        $svEncoder = SvEncoder::where('active', 1)->where('encoder', '<', 2)->orderBy('encoder', 'asc')->first();
         if($data && $svEncoder){
             $data->increment('status');
             //select sv encoder
