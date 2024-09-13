@@ -31,7 +31,7 @@ class ManageTaskController extends Controller
     {
         $tab = $request->input('tab', 'encoder');
         $status = $request->input('status', 'all');
-        $column = $request->input('column', 'updated_at');
+        $column = $request->input('column', 'name');
         $direction = $request->input('direction', 'desc');
         $data['title'] = 'Manage Task';
         if ($tab == 'encodingTask') {
