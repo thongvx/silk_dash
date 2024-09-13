@@ -53,9 +53,11 @@ class ManageTaskController extends Controller
         $encoder = DB::table('encoder_task')->where('id', $encoderId)->first();
         // Check if the encoder exists
         if ($encoder) {
-            DB::table('sv_encoders')
-                ->where('name', $encoder->sv_encoder)
-                ->decrement('encoder');
+            if($encoder->status != 19){
+                DB::table('sv_encoders')
+                    ->where('name', $encoder->sv_encoder)
+                    ->decrement('encoder');
+            }
             // Set the status and storage values to 0
             DB::table('encoder_task')->where('id', $encoderId)->update([
                 'status' => 0,
