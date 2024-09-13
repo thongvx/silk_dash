@@ -59,15 +59,15 @@ class DatatableController
                 }
                 return view('admin.manageTask'.'.'.$tab, $data);
             case '/admin/compute':
-                $data['direction'] = request()->get('direction') ?? 'asc';
+                $data['direction-compute'] = request()->get('direction') ?? 'asc';
                 if ($tab == 'encoder') {
-                    $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'] , $data['limit']);
+                    $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction-compute'] , $data['limit']);
                 } elseif ($tab == 'storage') {
-                    $data['storages'] = $this->svStorageService->getALlSvStorages($data['column'], $data['direction'] , $data['limit']);
+                    $data['storages'] = $this->svStorageService->getALlSvStorages($data['column'], $data['direction-compute'] , $data['limit']);
                 } elseif ($tab == 'stream') {
-                    $data['streams'] = $this->svStreamService->getAllSvStreams($data['column'], $data['direction'] , $data['limit']);
+                    $data['streams'] = $this->svStreamService->getAllSvStreams($data['column'], $data['direction-compute'] , $data['limit']);
                 } else {
-                    $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction'], $data['limit']);
+                    $data['encoders'] = $this->svEncoderService->getAllSvEncoders($data['column'], $data['direction-compute'], $data['limit']);
                 }
                 return view('admin.compute'.'.'.$tab, $data);
             case '/admin/videoAdmin/search':
