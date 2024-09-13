@@ -46,20 +46,23 @@ class StorageController
     }
     public function finishStorage(Request $request)
     {
-        $encoderTaskInfo = $request->all();
-        $data = EncoderTask::where('slug', $encoderTaskInfo['slug'])->where('quality', $encoderTaskInfo['quality'])->first();
+        $slug = $request->slug;
+        $sv = $request->sv;
+        $quality = $request->quality;
+        $path = $request->path;
+        $data = EncoderTask::where('slug', $slug)->where('quality', $quality)->first();
         if($data){
             $data->status = 4;
-            $data->sv_storage = $encoderTaskInfo['sv'];
+            $data->sv_storage = $sv;
             $data->finish_encoder = now();
             $data->save();
             $selectQuality = 'sd';
-            if($encoderTaskInfo['quality'] == '720')
+            if($quality == '720')
                 $selectQuality = 'hd';
-            if($encoderTaskInfo['quality'] == '1080')
+            if($quality == '1080')
                 $selectQuality = 'fhd';
-            $dataVideo = Video::where('middle_slug',$encoderTaskInfo['slug'])->first();
-            $dataVideo->$selectQuality = $encoderTaskInfo['path'];
+            $dataVideo = Video::where('middle_slug',$slug)->first();
+            $dataVideo->$selectQuality = $path;
             $dataVideo->origin = 1;
             $dataVideo->save();
             Queue::push(new DeleteVideoEncoder($data->slug, $data->sv_upload, $data->quality));
