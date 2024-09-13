@@ -35,10 +35,10 @@ class DatatableController
         $path = request()->get('path');
         $tab = request()->get('tab');
         $data=[];
-        $data['limit'] = !request()->get('limit') ? 20 : request()->get('limit');
-        $data['column'] = !request()->get('column') ? 'created_at' : request()->get('column');
-        $data['direction'] = !request()->get('direction') ? 'desc' : request()->get('direction');
-        $status = !request()->get('status')? '' : request()->get('status');
+        $data['limit'] = request()->get('limit') ?? 20;
+        $data['column'] = request()->get('column') ?? 'created_at';
+        $data['direction'] = request()->get('direction') ?? 'desc';
+        $status = request()->get('status') ?? '';
         switch ($path) {
             case '/admin/user':
                 if($request->get('search')){

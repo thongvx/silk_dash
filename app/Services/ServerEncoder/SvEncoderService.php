@@ -21,7 +21,9 @@ class SvEncoderService
             $data[] = Redis::hgetall($key);
         }
         $data = collect($data);
-        $sortedData = $data->sortBy($column1, SORT_REGULAR, $direction == 'desc');
+        $sortedData = $direction == 'desc'
+            ? $data->sortByDesc($column1)
+            : $data->sortBy($column1);
 
         // Manually paginate the sorted data
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
