@@ -183,7 +183,7 @@
                                     </form>
                                 </div>
                                 <div
-                                    class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-pink-500 to-red-500 w-max py-2 px-5">
+                                    class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-yellow-500 to-orange-500 w-max py-2 px-5">
                                     <form action="/admin/updateUser" method="POST"
                                           style="display:inline;">
                                         @csrf
