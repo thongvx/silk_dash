@@ -48,7 +48,7 @@ class UpdateController extends Controller
         $videoInfo = $request->all();
         $userId = $videoInfo['userId'];
         $user = User::find($userId);
-        if($user != 1){
+        if($user->uploaded != 1){
             //Update user
             $videoSize = $videoInfo['size'];
             $user->increment('video');
