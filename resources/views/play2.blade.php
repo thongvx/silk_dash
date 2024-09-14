@@ -50,6 +50,7 @@ $jsCode = <<<JS
     var preview =  $player_setting->show_preview ;
     var download =  $player_setting->show_download ;
     var show_title =  $player_setting->show_title ;
+    var urlStream = " $urlStream ";
     // Preload
     //logo
     var urlLogo;
