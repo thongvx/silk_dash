@@ -44,12 +44,12 @@ $jsCode = <<<JS
     var enablePlay = 'yes';
     var urlSub =  $player_setting->enable_caption ;
     var is_sub =  $is_sub ;
-    var logo_link = " $player_setting->logo_link ";
+    var logo_link = "$player_setting->logo_link";
     var logo =  $player_setting->show_logo ;
     var preview =  $player_setting->show_preview ;
     var download =  $player_setting->show_download ;
     var show_title =  $player_setting->show_title ;
-    var urlStream = " $urlStream ";
+    var urlStream = "$urlStream";
     // Preload
     var preload = infinite_loop === "1" ? "true" : "false";
     //logo
