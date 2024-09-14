@@ -13,18 +13,15 @@ class TestController extends Controller
     //------------------------------------get all video ------------------------------------
     function test1()
     {
-        Redis::sadd('sv_streams', 'sv_streams:ss01');
-        Redis::sadd('sv_streams', 'sv_streams:ss02');
-        Redis::sadd('sv_streams', 'sv_streams:ss03');
-        Redis::sadd('sv_streams', 'sv_streams:ss04');
-        Redis::sadd('sv_streams', 'sv_streams:ss05');
-        Redis::sadd('sv_streams', 'sv_streams:ss06');
-        Redis::sadd('sv_streams', 'sv_streams:ss07');
-        Redis::sadd('sv_streams', 'sv_streams:ss08');
-        Redis::sadd('sv_streams', 'sv_streams:ss09');
-        Redis::sadd('sv_streams', 'sv_streams:ss10');
-        Redis::sadd('sv_streams', 'sv_streams:ss11');
-        Redis::sadd('sv_streams', 'sv_streams:ss12');
+        $svStreamKeys = Redis::smembers('sv_streams');
+        shuffle($svStreamKeys);
+        foreach ($svStreamKeys as $svStreamKey) {
+            $svStream = Redis::hgetall($svStreamKey);
+            if ($svStream['active'] == 1 && $svStream['out_speed'] < 900 && $svStream['cpu'] < 10 && $svStream['percent_space'] < 0.95) {
+                return $svStream['domain'];
+            }
+        }
+        return null;
     }
 
     //=========================================================================================================
