@@ -12,14 +12,16 @@ class TestController extends Controller
     //------------------------------------get all video ------------------------------------
     function test1()
     {
-        $arrStream = 'sv_streams:ss03';
+        $arrStream = 'ss03-ss01';
+        $arrStream = explode('-', $arrStream);
+        foreach ($arrStream as $valueStream){
+            $svStream = Redis::hgetall($valueStream);
+            if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
+                return $svStream['domain'];
+            }
 
-                $svStream = Redis::hgetall($arrStream);
-        if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
-            return $svStream['domain'];
         }
-        else
-            return 'no';
+        return 'no';
 
     }
 
