@@ -102,21 +102,14 @@ class SvStreamService
 
     public static function checkConnectSvStream($arrStream)
     {
-        $svStreamKeys = Redis::smembers('sv_streams');
-
-        foreach ($svStreamKeys as $svStreamKey) {
-            $svStreamName = str_replace('sv_streams:', '', $svStreamKey);
-
-            if (in_array($svStreamName, $arrStream)) {
-                $svStream = Redis::hgetall($svStreamKey);
-
-                if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
-                    return $svStream['domain'];
-                }
+        $arrStream = explode('-', $arrStream);
+        foreach ($arrStream as $valueStream){
+            $svStream = Redis::hgetall('sv_streams:'.$valueStream);
+            if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
+                return $svStream['domain'];
             }
-        }
 
-        // Nếu không tìm thấy server nào thỏa mãn, trả về null
+        }
         return null;
     }
 
