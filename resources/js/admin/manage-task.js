@@ -249,7 +249,6 @@ $(document).on('click', '[btn-delete-transfer]', function () {
 $(document).on('submit', '#form-search-encoder', function(e) {
     e.preventDefault();
     const params = getUrlParams();
-    params.status = $(this).data('task');
     params.page = 1;
     params.search = $('#search-encoder').val();
     loadDatatable(params.tab, params.column, params.direction, params.folderId, params.poster, params.limit, params.page, params.status, params.videoID, params.search);
