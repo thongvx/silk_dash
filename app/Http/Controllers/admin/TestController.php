@@ -13,7 +13,7 @@ class TestController extends Controller
     //------------------------------------get all video ------------------------------------
     function test1()
     {
-        $data = EncoderTask::where('sv_upload', 'e08')->where('quality', 720)->->pluck('slug');
+        $data = EncoderTask::where('sv_upload', 'e08')->where('quality', 720)->pluck('slug');
         return response()->json($data);
     }
 
