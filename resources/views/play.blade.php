@@ -94,7 +94,7 @@ $jsCode = <<<JS
             aspectratio: "16:9",
             jwplayer8quality: true,
             controls: true,
-            preload: auto,
+            preload: true,
             width: '100%',
             height: '100%',
             skin: {active: " $player_setting->premium_color ",},
