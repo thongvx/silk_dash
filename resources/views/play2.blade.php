@@ -27,6 +27,7 @@
 
     </div>
 </div>
+<h4 class="hidden">{{ $urlStream }}</h4>
 @php
     $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
     $logo_link =  asset(Storage::url($player_setting->logo_link))
