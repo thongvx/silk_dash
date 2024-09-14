@@ -17,7 +17,7 @@ class TestController extends Controller
                 $svStream = Redis::hgetall($arrStream);
 
                 return $svStream;
-        }
+
     }
 
     //=========================================================================================================
