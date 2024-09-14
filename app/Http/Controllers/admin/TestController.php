@@ -15,7 +15,7 @@ class TestController extends Controller
         $arrStream = 'ss03-ss01';
         $arrStream = explode('-', $arrStream);
         foreach ($arrStream as $valueStream){
-            $svStream = Redis::hgetall($valueStream);
+            $svStream = Redis::hgetall('sv_streams:'.$valueStream);
             if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
                 return $svStream['domain'];
             }
