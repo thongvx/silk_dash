@@ -50,7 +50,6 @@ $jsCode = <<<JS
     var preview =  $player_setting->show_preview ;
     var download =  $player_setting->show_download ;
     var show_title =  $player_setting->show_title ;
-    var urlStream = " $urlStream ";
     // Preload
     //logo
     var urlLogo;
@@ -299,9 +298,9 @@ $jsCode = <<<JS
 
     };
     $(document).ready(() => {
-        if("${urlStream}" !== "0"){
+        if("$urlStream" !== "0"){
             $.ajax({
-                url: "${urlStream}",
+                url: "$urlStream",
                 type: 'POST',
                 data: urlStream,
                 success: function(response) {
