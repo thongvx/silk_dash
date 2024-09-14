@@ -317,7 +317,7 @@ $jsCode = <<<JS
     $(document).ready(() => {
         if("$urlStream" !== "0"){
             $.ajax({
-                url: "$urlStream",
+                url: " $urlStream ",
                 type: 'POST',
                 data: urlStream,
                 success: function(response) {
