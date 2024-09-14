@@ -50,7 +50,6 @@ $jsCode = <<<JS
     var show_title =  $player_setting->show_title ;
     var urlStream = "$urlStream";
     // Preload
-    var preload = infinite_loop === "1" ? "true" : "false";
     //logo
     var urlLogo;
     if (logo === 1 && logo_link !== '') {
