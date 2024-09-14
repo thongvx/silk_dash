@@ -12,15 +12,16 @@ class TestController extends Controller
     //------------------------------------get all video ------------------------------------
     function test1()
     {
-        $svStreamKeys = Redis::smembers('sv_streams');
-        shuffle($svStreamKeys);
-        foreach ($svStreamKeys as $svStreamKey) {
-            $svStream = Redis::hgetall($svStreamKey);
-            if ($svStream['active'] == 1 && $svStream['out_speed'] < 900 && $svStream['cpu'] < 10 && $svStream['percent_space'] < 0.95) {
-                return $svStream['domain'];
-            }
+        $arrStream = 'sv_streams:ss03';
+
+                $svStream = Redis::hgetall($arrStream);
+
+                if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
+                    return $svStream['domain'];
+                }
+
+            return 'no';
         }
-        return null;
     }
 
     //=========================================================================================================
