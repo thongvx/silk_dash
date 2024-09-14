@@ -37,6 +37,7 @@ $jsCode = <<<JS
     var t = 0;
     var playID = 0;
     var videoID = " $videoID ";
+    var urlPlay = " $urlPlay ";
     var iframe =  $iframe ;
     var typeVideo =  $videoType ;
     var premium =  $premium ;
@@ -333,7 +334,7 @@ $jsCode = <<<JS
             const checkloadplayer = await checkUrlStatus(urlPlay);
             if ((adBlockEnabled == false || enablePlay == 'yes') && checkloadplayer == true) {
                 clearInterval(checkInterval);
-                let file = "$urlPlay";
+                let file = urlPlay;
                 loadPlayer(file);
                 $('.preloader').fadeOut();
             }
