@@ -21,7 +21,7 @@ class TestController extends Controller
                 return $svStream['domain'];
             }
         }
-        return null;
+        return $svStreamKeys;
 
     }
 
