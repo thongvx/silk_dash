@@ -15,13 +15,12 @@ class TestController extends Controller
         $arrStream = 'sv_streams:ss03';
 
                 $svStream = Redis::hgetall($arrStream);
-
-                if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
-                    return $svStream['domain'];
-                }
-
-            return 'no';
+        if ($svStream['out_speed'] < 900 && $svStream['active'] == 1) {
+            return $svStream['domain'];
         }
+        else
+            return 'no';
+
     }
 
     //=========================================================================================================
