@@ -358,12 +358,21 @@ $jsCode = <<<JS
         }
     });
     if($viewsAds !== 1){
-        $('body').one('click', function () {
-            if (t === 0) {
-                openNewTab("https://ceehipsy.com/4/7779337");
-                t = 1;
-            }
-        });
+        if($viewsAds % 2 === 0){
+            $('body').one('click', function () {
+                if (t === 0) {
+                    openNewTab("https://ceehipsy.com/4/7779337");
+                    t = 1;
+                }
+            });
+        } else{
+            $('body').one('click', function () {
+                if (t === 0) {
+                    openNewTab("https://holahupa.com/2032563/");
+                    t = 1;
+                }
+            });
+        }
     };
 
     const directAds = getDirectAds(custom_ads);
@@ -469,8 +478,5 @@ echo "<script>" . $obsfucatedJs . "</script>";
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript>
-@if($viewsAds == 1)
-    <script src="https://streamsilk.com/ads.js"></script>
-@endif
 </body>
 </html>
