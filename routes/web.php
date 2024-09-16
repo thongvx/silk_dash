@@ -44,6 +44,7 @@ Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::
 Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
 Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
 Route::get('/encoderFaild', [\App\Http\Controllers\admin\EncoderController::class, 'encoderFaild']);
+Route::get('/checkExistsEncoderTask/{slug}', [\App\Http\Controllers\admin\EncoderController::class, 'checkExistsEncoderTask']);
 //----------------------------audio controller-----------------------------------------------------
 Route::get('/uploadAudio', [\App\Http\Controllers\admin\AudioController::class, 'uploadAudio']);
 Route::get('/startCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'startCopyAudio']);

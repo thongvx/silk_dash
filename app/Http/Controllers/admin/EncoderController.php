@@ -84,4 +84,12 @@ class EncoderController
         SvEncoder::where('name', $svEncoder)->decrement('encoder');
         echo $svEncoder;
     }
+    function checkExistsEncoderTask($slug)
+    {
+        if (Redis::exists('encoserTask:'.$slug)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
