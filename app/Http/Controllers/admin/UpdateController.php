@@ -109,7 +109,7 @@ class UpdateController extends Controller
                     $encoderTask720->insertEncoderTask($videoData, $encoderPriority+1, 720);
                     $encoderTask720->save();
                     $videoData['hd'] = '0';
-                    Redis::set($videoInfo['slug'], 1);
+                    Redis::set('encoserTask:'.$videoInfo['slug'], 1);
                 }
                 //create encoder task 1080
                 if($videoInfo['quality'] > 720 && $user->active == 1){
