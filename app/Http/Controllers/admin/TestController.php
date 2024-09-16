@@ -15,7 +15,7 @@ class TestController extends Controller
     {
         $data = EncoderTask::where('status', 0)->pluck('slug');
         foreach ($data as $slug){
-            echo $slug.'</br>';
+            Redis::set('encoserTask:'.$slug, 1);
         }
     }
 
