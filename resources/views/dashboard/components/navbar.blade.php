@@ -46,8 +46,8 @@
                                           <p class="mb-0 text-xs leading-tight text-white/80">
                                               {{ Auth::user()->email}}
                                           </p>
-                                          <p class="mb-0 text-sm leading-tight font-bold {{ Auth::user()->encoder_priority == 0  ? 'text-emerald-500' : 'text-violet-400' }}">
-                                              {{ Auth::user()->encoder_priority == 0  ? 'Free' : 'Premium' }}
+                                          <p class="mb-0 text-sm leading-tight font-bold {{ Auth::user()->encoder_priority >= 5  ? 'text-violet-400' : 'text-emerald-500' }}">
+                                              {{ Auth::user()->encoder_priority >= 5  ? 'Premium' : 'Free' }}
                                           </p>
                                       </div>
                                   </div>
@@ -212,8 +212,8 @@
                         <p class="mb-0 text-xs leading-tight text-white/80">
                             {{ Auth::user()->email}}
                         </p>
-                          <p class="mb-0 text-sm leading-tight font-bold {{ Auth::user()->encoder_priority == 0  ? 'text-emerald-500' : 'text-violet-400' }}">
-                              {{ Auth::user()->encoder_priority == 0  ? 'Free' : 'Premium' }}
+                          <p class="mb-0 text-sm leading-tight font-bold {{ Auth::user()->encoder_priority < 5  ? 'text-emerald-500' : 'text-violet-400' }}">
+                              {{ Auth::user()->encoder_priority < 5  ? 'Free' : 'Premium' }}
                           </p>
                       </div>
                     </div>
