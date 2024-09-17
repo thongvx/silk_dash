@@ -45,7 +45,7 @@ $jsCode = <<<JS
     var enablePlay = 'yes';
     var urlSub =  $player_setting->enable_caption ;
     var is_sub =  $is_sub ;
-    var infinite_loop = " $player_setting->infinite_loop ";
+    var infinite_loop = $player_setting->infinite_loop ";
     var logo_link = " $player_setting->logo_link ";
     var logo =  $player_setting->show_logo ;
     var preview =  $player_setting->show_preview ;
@@ -86,7 +86,7 @@ $jsCode = <<<JS
             aspectratio: "16:9",
             jwplayer8quality: true,
             controls: true,
-            preload: preload,
+            preload: auto,
             width: '100%',
             height: '100%',
             skin: {active: " $player_setting->premium_color ",},
