@@ -34,7 +34,7 @@ class UserRepo
                 $query->where('active', 19);
                 break;
             case 'premium':
-                $query->where('encoder_priority', '!=', 0);
+                $query->where('encoder_priority', '>=', 5);
                 break;
             case 'free':
                 $query->where('active', [1,2])
