@@ -38,6 +38,7 @@ class UserRepo
                 break;
             case 'free':
                 $query->where('active', [1,2])
+                        ->where('encoder_priority', '<', 5)
                         ->where('premium', 0);
                 break;
             default:
