@@ -15,7 +15,7 @@
                             <div class="mt-3 flex justify-between">
                                 <div class="flex items-center">
                                     <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Premium</h4>
-                                    <h4 class="ml-3 font-bold {{ $users->encoder_priority == 0 ? 'text-white' : 'text-violet-400' }}" status="">{{ $users->encoder_priority == 0 ? 'Free' : 'Premium' }} </h4>
+                                    <h4 class="ml-3 font-bold {{ $users->encoder_priority < 5 ? 'text-white' : 'text-violet-400' }}" status="">{{ $users->encoder_priority < 5 ? 'Free' : 'Premium' }} </h4>
                                 </div>
                                 <div class="flex items-center">
                                     <h4 class="py-1 px-5 rounded-lg bg-teal-600 w-max">Status</h4>

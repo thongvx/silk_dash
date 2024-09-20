@@ -60,6 +60,7 @@ class VerificationController extends Controller
     {
         $user = Auth::user();
         $user->active = 1;
+        $user->encoder_priority = 3;
         $user->save();
         Bot::send('new user registered email: ' . $user->email);
         DB::transaction(function () use ($request) {

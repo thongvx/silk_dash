@@ -69,8 +69,8 @@ class EncoderController
             ->first();
         if($data){
             Queue::push(new DeleteFileUploadJob($data->slug, $data->sv_upload, $data->format));
-
             EncoderTask::where('slug', $data->slug)->delete();
+            Redis::del('encoserTask:'.$data->slug);
             return json_encode($data);
         }
     }
@@ -83,5 +83,13 @@ class EncoderController
         EncoderTask::where('slug', $slug)->where('quality', $quality)->update($data);
         SvEncoder::where('name', $svEncoder)->decrement('encoder');
         echo $svEncoder;
+    }
+    function checkExistsEncoderTask($slug)
+    {
+        if (Redis::exists('encoserTask:'.$slug)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

@@ -39,6 +39,7 @@ $jsCode = <<<JS
     var t = 0;
     var playID = 0;
     var videoID = " $videoID ";
+    var urlPlay = " $urlPlay ";
     var iframe =  $iframe ;
     var typeVideo =  $videoType ;
     var premium =  $premium ;
@@ -84,7 +85,7 @@ $jsCode = <<<JS
             aspectratio: "16:9",
             jwplayer8quality: true,
             controls: true,
-            preload: preload,
+            preload: true,
             width: '100%',
             height: '100%',
             skin: {active: " $player_setting->premium_color ",},
@@ -316,7 +317,7 @@ $jsCode = <<<JS
             const checkloadplayer = await checkUrlStatus(urlPlay);
             if ((adBlockEnabled == false || enablePlay == 'yes') && checkloadplayer == true) {
                 clearInterval(checkInterval);
-                let file = "$urlPlay";
+                let file = urlPlay;
                 loadPlayer(file);
                 $('.preloader').fadeOut();
             }
