@@ -124,7 +124,7 @@
                     </button>
                 </div>
                 <div class="rounded-b-xl rounded-tr-xl relative bg-[#121520] grid" id="box-content">
-                    @include('admin.statistic'.request()->get('tab', 'date'))
+                    @include('admin.statistic.date')
                 </div>
             </div>
         </div>

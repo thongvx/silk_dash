@@ -154,7 +154,8 @@ $jsCode = <<<JS
                 'kur': 'Kurdish',
                 'dan': 'Danish',
                 'bos': 'Bosnian',
-                'hrv': 'Croatian'
+                'hrv': 'Croatian',
+                'ton': 'Tongan',
             };
             try {
                 const response = await fetch(jsonUrl);
