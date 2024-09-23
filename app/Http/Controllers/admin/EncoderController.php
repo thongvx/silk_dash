@@ -59,13 +59,13 @@ class EncoderController
     {
         $encoderTaskInfo = $request->all();
         $data = EncoderTask::where('slug', $encoderTaskInfo['slug'])->where('quality', $encoderTaskInfo['quality'])->first();
-        $encoderTask = EncoderTask::where('sv_encoder', $encoderTaskInfo['sv'])->where('status', 1)->count();
         if($data){
             $data->status = 2;
             $data->sv_encoder = $encoderTaskInfo['sv'];
             $data->finish_encoder = now();
             $data->save();
             //update sv encoder
+            $encoderTask = EncoderTask::where('sv_encoder', $encoderTaskInfo['sv'])->where('status', 1)->count();
             $svEncoder = SvEncoder::where('name', $encoderTaskInfo['sv'])->first();
             $svEncoder->encoder = $encoderTask;
             $svEncoder->save();
