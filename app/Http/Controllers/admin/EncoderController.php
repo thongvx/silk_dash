@@ -41,6 +41,7 @@ class EncoderController
             curl_close($curl);
 
             $svEncoder->increment('encoder');
+            $svEncoder->save();
             $data->sv_encoder = $svEncoder->name;
             $data->start_encoder = now();
             $data->save();
