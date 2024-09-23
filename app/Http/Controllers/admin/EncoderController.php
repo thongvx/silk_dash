@@ -56,7 +56,9 @@ class EncoderController
             $data->save();
             //update sv encoder
             $svEncoder = SvEncoder::where('name', $encoderTaskInfo['sv'])->first();
-            $svEncoder->decrement('encoder');
+            if($svEncoder->encoder > 0){
+                $svEncoder->decrement('encoder');
+            }
             $data->finish_encoder = now();
             $svEncoder->save();
         }
