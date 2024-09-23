@@ -24,6 +24,8 @@ class EncoderController
                 $statusEncoder = 2;
             else
                 $statusEncoder = 0;
+            $svEncoder->increment('encoder');
+            $svEncoder->save();
             //call encoder
             //Queue::push(new CreateEncoderJob($data->slug, $svEncoder->name, $data->quality, $data->format, $statusEncoder, $data->sv_upload));
             $curl = curl_init();
@@ -38,10 +40,16 @@ class EncoderController
                 CURLOPT_CUSTOMREQUEST => 'GET',
             ));
             $response = curl_exec($curl);
+            $curlError = curl_error($curl);
             curl_close($curl);
 
-            $svEncoder->increment('encoder');
-            $svEncoder->save();
+            if($curlError){
+                $data->decrement('status');
+                $svEncoder->decrement('encoder');
+                $svEncoder->save();
+                return;
+            }
+
             $data->sv_encoder = $svEncoder->name;
             $data->start_encoder = now();
             $data->save();
