@@ -88,7 +88,7 @@ class StatisticController extends Controller
         $tab = $request->get('tab', 'date');
         $date = $request->input('date');
         $country = $request->input('country', null);
-        $today = Carbon::today();
+        $today = Carbon::today()->toDateString();
         $data = [];
         $data['title'] = 'Report';
         $data = array_merge($data, self::dataTotalReport($today));
