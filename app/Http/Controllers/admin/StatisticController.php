@@ -10,10 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\ServerStream\SvStreamService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
-use App\Repositories\ReportRepo;
-use App\Repositories\CountryRepo;
+use App\Repositories\Admin\StatisticRepo;
 use App\Repositories\AccountRepo;
 use App\Services\StatisticService;
 
@@ -21,16 +19,14 @@ use App\Services\StatisticService;
 class StatisticController extends Controller
 {
     protected $svStreamService;
-    protected $reportRepo;
-    protected $countryRepo;
+    protected $statisticRepo;
     protected $accountRepo;
 
-    public function __construct(SvStreamService $svStreamService, ReportRepo $reportRepo, CountryRepo $countryRepo, AccountRepo $accountRepo)
+    public function __construct(SvStreamService $svStreamService, StatisticRepo $statisticRepo, AccountRepo $accountRepo)
     {
         $this->svStreamService = $svStreamService;
-        $this->reportRepo = $reportRepo;
-        $this->countryRepo = $countryRepo;
         $this->accountRepo = $accountRepo;
+        $this->statisticRepo = $statisticRepo;
     }
     private function getDateRange($date,$today, $request)
     {
@@ -64,16 +60,16 @@ class StatisticController extends Controller
         return $earningToday;
     }
     // Get total profit and total withdrawals
-    private function dataTotalReport($userId,$today){
-        $totalProfitkey = "user:{$userId}:total_profit:{$today->format('Y-m-d')}";
-        $totalWithdrawalskey = "user:{$userId}:total_withdrawal:{$today->format('Y-m-d')}";
-        $totalProfit = Redis::get($totalProfitkey);
-        $totalWithdrawals = Redis::get($totalWithdrawalskey);
-        $data['userWatching'] = Redis::get("watching_users:{$userId}") ?? 0;
-        $data['totalProfit'] = floatval($totalProfit ?? $this->reportRepo->where('user_id', $userId)->sum('revenue'));
-        $data['totalWithdrawals'] = floatval($totalWithdrawals ?? Db::table('payment')->where('user_id', $userId)->sum('amount'));
-        Redis::setex($totalProfitkey, 86400, $data['totalProfit']);
-        Redis::setex($totalWithdrawalskey, 86400, $data['totalWithdrawals']);
+    private function dataTotalReport($today){
+        $cacheKey = "total_balance:{$today}";
+        $data['totalBalance'] = Redis::get($cacheKey);
+        $data['totalWithdrawals'] = Payment::sum('amount');
+        if (!$data['totalBalance']) {
+            $data['totalBalance'] = $this->statisticRepo->sum('revenue') - Payment::sum('amount');
+            Redis::setex($cacheKey, 43200, $data['totalBalance']); // Cache for 12 hours
+        } else {
+            $data['totalBalance'] = floatval($data['totalBalance']);
+        }
         return $data;
     }
     private function country($country){
@@ -89,19 +85,17 @@ class StatisticController extends Controller
     }
     // Get all report data
     private function getAllReportData(Request $request){
-        $user = Auth::user();
-        $userId = $user->id;
-        $tab = $request->get('tab');
+        $tab = $request->get('tab', 'date');
         $date = $request->input('date');
         $country = $request->input('country', null);
         $today = Carbon::today();
         $data = [];
         $data['title'] = 'Report';
-        $data = array_merge($data, self::dataTotalReport($userId,$today));
-        $earningToday = self::earningToday($userId, $today);
+        $data = array_merge($data, self::dataTotalReport($today));
+        $statisticService = new StatisticService($this->accountRepo);
+        $earningToday = $statisticService->calculateTotalEarnings($today);
         $data = array_merge($data, self::getDateRange($date, $today, $request));
         $data = array_merge($data, self::country($country));
-        $data['payments'] = $this->reportRepo->getPayment($userId);
         if($tab == 'date'){
             $data['column'] = $request->get('column', 'date');
         }else{
@@ -109,17 +103,16 @@ class StatisticController extends Controller
         }
         $data['direction'] = $request->get('direction', 'desc');
         $data['earnings'] = [
-            'today' => floatval(array_sum($earningToday)),
-            'yesterday' => $this->reportRepo->getAllData($userId, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
+            'yesterday' => $this->statisticRepo->getAllData('date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
         ];
         if ($tab == 'date'){
             if($country == null){
-                $data['reports'] = self::getDataDate($userId,$tab, $date ,$today, $earningToday, $data['startDate'], $data['endDate'], null);
+                $data['reports'] = self::getDataDate($tab, $date ,$today, $earningToday, $data['startDate'], $data['endDate'], null);
             }else{
-                $data['reports'] = self::getDataCountry($userId,$tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country,$data['AllCountries']);
+                $data['reports'] = self::getDataCountry($tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country,$data['AllCountries']);
             }
         } else{
-            $data['reports'] = self::getDataCountry($userId,$tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country, $data['AllCountries']);
+            $data['reports'] = self::getDataCountry($tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country, $data['AllCountries']);
         }
         $dataCollection = collect($data['reports']);
 
@@ -130,25 +123,25 @@ class StatisticController extends Controller
         }
         return $data;
     }
-    private function getDataDate($userId,$tab, $date,$today, $earningToday, $startDate, $endDate, $country)
+    private function getDataDate($tab, $date,$today, $earningToday, $startDate, $endDate, $country)
     {
 
         if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
             $data_today = [];
-            $totalViews = Redis::get("total_user_views:{$today->format('Y-m-d')}:{$userId}") ?? 0;
+            $totalViews = 0;
+            $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
+            foreach ($totalViewsKey as $key) {
+                $totalViews += Redis::get($key) ?? 0;
+            }
             $totalImpressionViews = 0;
-            $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:{$userId}:*");
-            $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:{$userId}:*");
+            $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:*");
+            $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:*");
             foreach ($totalImpression1 as $totalImpression1Key) {
-                // Lấy số lượt xem của user từ khóa
                 $views = Redis::get($totalImpression1Key);
-                // Cộng số lượt xem vào tổng số lượt xem
                 $totalImpressionViews += (int)$views;
             }
             foreach ($totalImpression2 as $totalImpression2Key) {
-                // Lấy số lượt xem của user từ khóa
                 $views = Redis::get($totalImpression2Key);
-                // Cộng số lượt xem vào tổng số lượt xem
                 $totalImpressionViews += (int)$views;
             }
             $cpm = $totalImpressionViews > 0 ? array_sum($earningToday) / $totalImpressionViews * 1000 : 0;
@@ -168,7 +161,7 @@ class StatisticController extends Controller
                     return (object) $item;
                 }, $data_today));
             }else{
-                $data = collect($this->reportRepo->getAllData($userId, $tab, $startDate, $endDate, $country))->map(function ($item) use ($data_today, $today) {
+                $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate, $country))->map(function ($item) use ($data_today, $today) {
                     $item = (object) $item;
                     if ($item->date == $today->format('Y-m-d')) {
                         $item->cpm = $data_today[0]['cpm'];
@@ -182,21 +175,21 @@ class StatisticController extends Controller
                 });
             }
         }else{
-            $data = collect($this->reportRepo->getAllData($userId, $tab, $startDate, $endDate, $country))->map(function ($item) {
+            $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate, $country))->map(function ($item) {
                 return (object) $item;
             });
         }
         return $data;
     }
 
-    private function getDataCountry($userId,$tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
+    private function getDataCountry($tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
     {
 
         if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
             $data_today = [];
             $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
-            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
+            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:*");
             $indexedCountries = $AllCountries->keyBy('code');
             foreach ( $countryViewsKeys as $key) {
                 $countryViews = Redis::get($key) ?? 0;
@@ -232,7 +225,7 @@ class StatisticController extends Controller
                 }, $data_today));
             }else{
                 if($country == null){
-                    $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) use ($data_today,$tab) {
+                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) use ($data_today,$tab) {
                         $item = (object) $item;
                         foreach ($data_today as $data) {
                             if($item->country_name == $data['country_name']){
@@ -253,7 +246,7 @@ class StatisticController extends Controller
                         }
                     }
                 } else{
-                    $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) {
+                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                         return (object) $item;
                     });
                     $data = $data->merge(collect($data_today)->map(function ($item) {
@@ -263,7 +256,7 @@ class StatisticController extends Controller
 
             }
         }else{
-            $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) {
+            $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                 return (object) $item;
             });
         }
