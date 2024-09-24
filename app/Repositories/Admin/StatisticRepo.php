@@ -19,6 +19,8 @@ class StatisticRepo extends BaseRepository
     public function getAllData($tab, $startDate, $endDate, $country)
     {
         $reportDatakey = "report_data_admin:{$tab}:{$startDate}:{$endDate}:{$country}";
+        $startDate = Carbon::parse($startDate);
+        $endDate = Carbon::parse($endDate);
         $reportData = Redis::get($reportDatakey);
         if (isset($reportData)&& $reportData !== null) {
             return unserialize($reportData);
