@@ -18,9 +18,9 @@ class StatisticRepo extends BaseRepository
     }
     public function getAllData($tab, $startDate, $endDate, $country)
     {
-        $reportDatakey = "report_data_admin:{$tab}:{$startDate}:{$endDate}:{$country}";
         $startDate = Carbon::parse($startDate);
         $endDate = Carbon::parse($endDate);
+        $reportDatakey = "report_data_admin:{$tab}:{$startDate->format('Y-m-d')}:{$endDate->format('Y-m-d')}:{$country}";
         $reportData = Redis::get($reportDatakey);
         if (isset($reportData)&& $reportData !== null) {
             return unserialize($reportData);
@@ -28,7 +28,7 @@ class StatisticRepo extends BaseRepository
         $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
             return $startDate->copy()->addDays($item)->format('Y-m-d');
         });
-        $reportData = $this->query()->whereBetween('date', [$startDate, $endDate])
+        $reportData = $this->query()->whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')])
                     ->selectRaw('date, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
                     ->groupBy('date')
                     ->orderBy('date', 'desc')
@@ -44,6 +44,8 @@ class StatisticRepo extends BaseRepository
     public function getAllDataCountry($tab,$startDate, $endDate, $countryCode)
     {
 
+        $startDate = Carbon::parse($startDate)->format('Y-m-d');
+        $endDate = Carbon::parse($endDate)->format('Y-m-d');
         $reportKeys = "report_admin:{$startDate}:{$endDate}:{$countryCode}:{$tab}";
         $reportData = Redis::get($reportKeys);
         if (isset($reportData)){

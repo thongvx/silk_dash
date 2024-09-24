@@ -48,10 +48,10 @@ class StatisticController extends Controller
                 $endDate = $request->input('endDate', Carbon::today());
         }
         if($date == 'today'){
-            $data['startDate'] = $data['endDate'] = date("Y/m/d", strtotime($today));
+            $data['startDate'] = $data['endDate'] = date("m/d/Y", strtotime($today));
         } else{
-            $data['startDate'] = date("Y/m/d", strtotime($startDate));
-            $data['endDate'] = date("Y/m/d", strtotime($endDate));
+            $data['startDate'] = date("m/d/Y", strtotime($startDate));
+            $data['endDate'] = date("m/d/Y", strtotime($endDate));
         }
         return $data;
     }
