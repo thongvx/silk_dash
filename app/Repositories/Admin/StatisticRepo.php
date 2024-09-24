@@ -28,7 +28,7 @@ class StatisticRepo extends BaseRepository
         $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
             return $startDate->copy()->addDays($item)->format('Y-m-d');
         });
-        $reportData = $this->query()->whereIn('date', $dates)
+        $reportData = $this->query()->whereBetween('date', [$startDate, $endDate])
                     ->selectRaw('date, sum(cpm) as cpm, sum(views) as views, sum(download) as download, sum(paid_views) as paid_views, sum(vpn_ads_views) as vpn_ads_views, sum(revenue) as revenue')
                     ->groupBy('date')
                     ->orderBy('date', 'desc')
