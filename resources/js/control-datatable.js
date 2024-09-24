@@ -35,7 +35,7 @@ export function getUrlParams() {
 }
 
 // highlight sorted column
-function highlightSortedColumn() {
+export function highlightSortedColumn() {
     const sortColumn = document.querySelectorAll("[aria-sort]");
     const Table = $("#datatable")[0];
     console.log(Table)
