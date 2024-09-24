@@ -170,7 +170,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::post('/manageTask/retryTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'retryTransferTask']);
     Route::post('/manageTask/removeTransfer', [\App\Http\Controllers\admin\ManageTaskController::class, 'removeTransferTask']);
     //statistic
-    Route::get('/statistic', [\App\Http\Controllers\admin\StatisticController::class, 'index'])->name('statistic');
+    Route::resource('/statistic', \App\Http\Controllers\admin\StatisticController::class);
     //supportAdmin
     Route::resource('/supportAdmin', \App\Http\Controllers\admin\TicketAdminController::class);
     //reportAdmin

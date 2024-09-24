@@ -19,6 +19,8 @@ import './ticket.js'
 import './payment.js'
 //video
 import './video.js'
+//statistic
+import './statistic.js'
 
 var a_menu = $('.menu-sidebar')
 a_menu.filter(function () {

@@ -45,7 +45,7 @@ class StatisticController extends Controller
                 break;
             default:
                 $startDate = $request->input('startDate', Carbon::today()->subWeek());
-                $endDate = $request->input('endDate', Carbon::yesterday());
+                $endDate = $request->input('endDate', Carbon::today());
         }
         if($date == 'today'){
             $data['startDate'] = $data['endDate'] = date("m/d/Y", strtotime($today));
@@ -144,7 +144,7 @@ class StatisticController extends Controller
                 $views = Redis::get($totalImpression2Key);
                 $totalImpressionViews += (int)$views;
             }
-            $cpm = $totalImpressionViews > 0 ? array_sum($earningToday) / $totalImpressionViews * 1000 : 0;
+            $cpm = $totalImpressionViews > 0 ? $earningToday / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
             $VpnAdsViews = $totalViews - $paid_views;
             $data_today[] = [
@@ -154,7 +154,7 @@ class StatisticController extends Controller
                 'download' => 0,
                 'paid_views' => $paid_views,
                 'vpn_ads_views' => $VpnAdsViews,
-                'revenue' => array_sum($earningToday)
+                'revenue' => $earningToday
             ];
             if($date == 'today'){
                 $data = collect(array_map(function ($item) {
@@ -269,6 +269,22 @@ class StatisticController extends Controller
         $data = $this->getAllReportData($request, $tab);
         // Get the total number of transfers
         return view('admin.statistic.statistic', $data);
+    }
+    public function store(Request $request)
+    {
+
+        $tab = $request->get('tab');
+        $report = $this->getAllReportData($request);
+        if ($tab == 'date') {
+            $view = view('admin.statistic.date', $report)->render();
+        } else {
+            $view = view('admin.statistic.country', $report)->render();
+        }
+
+        return response()->json([
+            'data' => $report,
+            'view' => $view,
+        ]);
     }
 
     public function statisticController(Request $request)
