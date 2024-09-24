@@ -227,7 +227,7 @@ class StatisticController extends Controller
                 }, $data_today));
             }else{
                 if($country == null){
-                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) use ($data_today,$tab) {
+                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) use ($data_today,$tab) {
                         $item = (object) $item;
                         foreach ($data_today as $data) {
                             if($item->country_name == $data['country_name']){

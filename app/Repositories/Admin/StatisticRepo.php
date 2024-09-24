@@ -22,7 +22,7 @@ class StatisticRepo extends BaseRepository
         $endDate = Carbon::parse($endDate);
         $reportDatakey = "report_data_admin:{$tab}:{$startDate}:{$endDate}:{$country}";
         $reportData = Redis::get($reportDatakey);
-        if (isset($reportData)&&$reportData !== null) {
+        if (isset($reportData)&& $reportData !== null) {
             return unserialize($reportData);
         }
         $dates = collect(range($endDate->diffInDays($startDate),0))->map(function($item) use ($startDate) {
@@ -51,9 +51,7 @@ class StatisticRepo extends BaseRepository
         if (isset($reportData)){
             return unserialize($reportData);
         }
-        if($countryCode == null){
-            $countryCode = null;
-        } else{
+        if ($countryCode !== null) {
             $countryCode = explode(',', $countryCode);
         }
 
@@ -89,6 +87,7 @@ class StatisticRepo extends BaseRepository
                 ->groupBy('countries.name', 'countries.cpm')
                 ->get();
         }
+        Redis::setex($reportKeys, 259200, serialize($reportData));
         return $reportData;
     }
     public function getPayment($userId)
