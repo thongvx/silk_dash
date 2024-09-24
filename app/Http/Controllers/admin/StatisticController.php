@@ -48,7 +48,7 @@ class StatisticController extends Controller
                 $endDate = $request->input('endDate', Carbon::today());
         }
         if($date == 'today'){
-            $data['startDate'] = $data['endDate'] = date("m/d/Y", strtotime($today));
+            $data['startDate'] = $data['endDate'] = date("Y/m/d", strtotime($today));
         } else{
             $data['startDate'] = date("Y/m/d", strtotime($startDate));
             $data['endDate'] = date("Y/m/d", strtotime($endDate));
@@ -90,7 +90,7 @@ class StatisticController extends Controller
         $country = $request->input('country', null);
         $today = Carbon::today()->toDateString();
         $data = [];
-        $data['title'] = 'Report';
+        $data['title'] = 'Statistic';
         $data = array_merge($data, self::dataTotalReport($today));
         $statisticService = new StatisticService($this->accountRepo);
         $earningToday = $statisticService->calculateTotalEarnings($today);
