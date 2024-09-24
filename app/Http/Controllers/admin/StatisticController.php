@@ -126,7 +126,7 @@ class StatisticController extends Controller
     private function getDataDate($tab, $date,$today, $earningToday, $startDate, $endDate, $country)
     {
 
-        if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
+        if(Carbon::parse($endDate)->format('Y-m-d') == $today){
             $data_today = [];
             $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
             $total = Redis::mget($totalViewsKey);
@@ -175,7 +175,7 @@ class StatisticController extends Controller
     private function getDataCountry($tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
     {
 
-        if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
+        if(Carbon::parse($endDate)->format('Y-m-d') == $today){
             $data_today = [];
             $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
