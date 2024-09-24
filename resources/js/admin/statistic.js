@@ -1,5 +1,4 @@
-import {loadContent, uploadState} from "../main.js";
-import {highlightSortedColumn} from "../jsVideo/datatable.js";
+import {highlightSortedColumn} from "../control-datatable";
 
 var fixedPayoutCard = $("[fixed-payout-card]");
 var fixedVideoCloseButton = $("[fixed-payout-close-button]");
