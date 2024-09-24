@@ -133,8 +133,8 @@ class StatisticController extends Controller
             $totalViews = array_sum($total) ?? 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today}:*");
-            $totalImpressionView1 = Redis::mget($totalImpression1);
-            $totalImpressionView2 = Redis::mget($totalImpression2);
+            $totalImpressionView1 = Redis::mget($totalImpression1) ?? 0;
+            $totalImpressionView2 = Redis::mget($totalImpression2) ?? 0;
             $totalImpressionViews = array_sum($totalImpressionView1) + array_sum($totalImpressionView2) ?? 0;
             $cpm = $totalImpressionViews > 0 ? $earningToday / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
