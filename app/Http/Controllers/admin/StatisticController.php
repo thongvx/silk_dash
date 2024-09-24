@@ -56,7 +56,7 @@ class StatisticController extends Controller
         return $data;
     }
     private function earningToday($userId, $today){
-        $earningToday = StatisticService::calculateValue($userId, $today->format('Y-m-d'));
+        $earningToday = StatisticService::calculateValue($userId, $today);
         return $earningToday;
     }
     // Get total profit and total withdrawals
@@ -131,14 +131,14 @@ class StatisticController extends Controller
             $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
             $total = Redis::mget($totalViewsKey);
             $totalViews = array_sum($total) ?? 0;
-            $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:*");
-            $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:*");
+            $totalImpression1 = Redis::keys("total_impression1:{$today}:*");
+            $totalImpression2 = Redis::keys("total_impression2:{$today}:*");
             $totalImpressionViews = array_sum(Redis::mget($totalImpression1)) + array_sum(Redis::mget($totalImpression2)) ?? 0;
             $cpm = $totalImpressionViews > 0 ? $earningToday / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
             $VpnAdsViews = $totalViews - $paid_views;
             $data_today[] = [
-                'date' => $today->format('Y-m-d'),
+                'date' => $today,
                 'cpm' => $cpm ,
                 'views' => $totalViews,
                 'download' => 0,
@@ -153,7 +153,7 @@ class StatisticController extends Controller
             }else{
                 $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate, $country))->map(function ($item) use ($data_today, $today) {
                     $item = (object) $item;
-                    if ($item->date == $today->format('Y-m-d')) {
+                    if ($item->date == $today) {
                         $item->cpm = $data_today[0]['cpm'];
                         $item->views = $data_today[0]['views'];
                         $item->download = $data_today[0]['download'];
@@ -179,7 +179,7 @@ class StatisticController extends Controller
             $data_today = [];
             $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
-            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:*");
+            $countryViewsKeys = Redis::keys("total:{$today}:*");
             $indexedCountries = $AllCountries->keyBy('code');
             foreach ( $countryViewsKeys as $key) {
                 $countryViews = Redis::get($key) ?? 0;
@@ -190,8 +190,8 @@ class StatisticController extends Controller
                 }
 
                 $getCountry = $indexedCountries->get($countryCode);
-                $totalImpression1Views = Redis::keys("total_impression1:{$today->format('Y-m-d')}:*:$countryCode");
-                $totalImpression2Views = Redis::keys("total_impression2:{$today->format('Y-m-d')}:*:$countryCode");
+                $totalImpression1Views = Redis::keys("total_impression1:{$today}:*:$countryCode");
+                $totalImpression2Views = Redis::keys("total_impression2:{$today}:*:$countryCode");
                 $totalImpressionViews = array_sum(Redis::mget($totalImpression1Views)) + array_sum(Redis::mget($totalImpression2Views)) ?? 0;
                 $country_name = $getCountry->name ?? $countryCode;
                 $revenue = $earningToday[$countryCode] ?? 0;
@@ -199,7 +199,7 @@ class StatisticController extends Controller
                 $countryVpnAdsView = $countryViews - $paidView;
                 $countryDownload = 0;
                 $data_today[] = [
-                    'date' => $today->format('Y-m-d'),
+                    'date' => $today,
                     'country_name' => $country_name,
                     'views' => $countryViews,
                     'download' => $countryDownload,
