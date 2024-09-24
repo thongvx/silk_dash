@@ -248,6 +248,7 @@ class StatisticController extends Controller
                         }
                     }
                 } else{
+                    $data_today = array_sum($data_today);
                     $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                         return (object) $item;
                     });
