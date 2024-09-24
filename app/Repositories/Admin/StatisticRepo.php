@@ -20,7 +20,7 @@ class StatisticRepo extends BaseRepository
     {
         $startDate = Carbon::parse($startDate);
         $endDate = Carbon::parse($endDate);
-        $reportDatakey = "report_data_admin:{$tab}:{$startDate->format('Y-m-d')}:{$endDate->format('Y-m-d')}:{$country}";
+        $reportDatakey = "report_data_admin:{$tab}:{$startDate}:{$endDate}:{$country}";
         $reportData = Redis::get($reportDatakey);
         if (isset($reportData)&&$reportData !== null) {
             return unserialize($reportData);
@@ -44,8 +44,8 @@ class StatisticRepo extends BaseRepository
     public function getAllDataCountry($tab,$startDate, $endDate, $countryCode)
     {
 
-        $startDate = Carbon::parse($startDate)->format('Y-m-d');
-        $endDate = Carbon::parse($endDate)->format('Y-m-d');
+        $startDate = Carbon::parse($startDate);
+        $endDate = Carbon::parse($endDate);
         $reportKeys = "report_admin:{$startDate}:{$endDate}:{$countryCode}:{$tab}";
         $reportData = Redis::get($reportKeys);
         if (isset($reportData)){
