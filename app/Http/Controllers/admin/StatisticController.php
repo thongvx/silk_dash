@@ -196,9 +196,15 @@ class StatisticController extends Controller
                 }
 
                 $getCountry = $indexedCountries->get($countryCode);
-                $totalImpression1Views = Redis::keys("total_impression1:{$today}:*:$countryCode");
-                $totalImpression2Views = Redis::keys("total_impression2:{$today}:*:$countryCode");
-                $totalImpressionViews = array_sum(Redis::mget($totalImpression1Views)) + array_sum(Redis::mget($totalImpression2Views)) ?? 0;
+                $totalImpression1 = Redis::keys("total_impression1:{$today}:*:$countryCode");
+                $totalImpression2 = Redis::keys("total_impression2:{$today}:*:$countryCode");
+                if ($totalImpression1) {
+                    $totalImpressionView1 = Redis::mget($totalImpression1);
+                }
+                if($totalImpression2){
+                    $totalImpressionView2 = Redis::mget($totalImpression2);
+                }
+                $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
                 $country_name = $getCountry->name ?? $countryCode;
                 $revenue = $earningToday[$countryCode] ?? 0;
                 $paidView = $totalImpressionViews;
