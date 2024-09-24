@@ -269,7 +269,7 @@ class StatisticController extends Controller
                     $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                         return (object) $item;
                     });
-                    $data = $data->merge(collect($aggregatedData)->map(function ($item) {
+                    $data = $data->merge(collect([$aggregatedData])->map(function ($item) {
                         return (object) $item;
                     }));
                 }
