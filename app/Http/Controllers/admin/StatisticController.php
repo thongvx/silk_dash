@@ -128,22 +128,11 @@ class StatisticController extends Controller
 
         if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
             $data_today = [];
-            $totalViews = 0;
             $totalViewsKey = Redis::keys("total_user_views:{$today}:*:*");
-            foreach ($totalViewsKey as $key) {
-                $totalViews += Redis::get($key) ?? 0;
-            }
-            $totalImpressionViews = 0;
+            $totalViews = array_sum(Redis::mget($totalViewsKey)) ?? 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:*");
-            foreach ($totalImpression1 as $totalImpression1Key) {
-                $views = Redis::get($totalImpression1Key);
-                $totalImpressionViews += (int)$views;
-            }
-            foreach ($totalImpression2 as $totalImpression2Key) {
-                $views = Redis::get($totalImpression2Key);
-                $totalImpressionViews += (int)$views;
-            }
+            $totalImpressionViews = array_sum(Redis::mget($totalImpression1)) + array_sum(Redis::mget($totalImpression2)) ?? 0;
             $cpm = $totalImpressionViews > 0 ? $earningToday / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
             $VpnAdsViews = $totalViews - $paid_views;
@@ -200,17 +189,9 @@ class StatisticController extends Controller
                 }
 
                 $getCountry = $indexedCountries->get($countryCode);
-                $totalImpressionViews = 0;
                 $totalImpression1Views = Redis::keys("total_impression1:{$today->format('Y-m-d')}:*:$countryCode");
                 $totalImpression2Views = Redis::keys("total_impression2:{$today->format('Y-m-d')}:*:$countryCode");
-                foreach ($totalImpression1Views as $totalImpression1Key) {
-                    $views = Redis::get($totalImpression1Key);
-                    $totalImpressionViews += (int)$views;
-                }
-                foreach ($totalImpression2Views as $totalImpression2Key) {
-                    $views = Redis::get($totalImpression2Key);
-                    $totalImpressionViews += (int)$views;
-                }
+                $totalImpressionViews = array_sum(Redis::mget($totalImpression1Views)) + array_sum(Redis::mget($totalImpression2Views)) ?? 0;
                 $country_name = $getCountry->name ?? $countryCode;
                 $revenue = $earningToday[$countryCode] ?? 0;
                 $paidView = $totalImpressionViews;
