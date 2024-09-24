@@ -44,8 +44,6 @@ class StatisticRepo extends BaseRepository
     public function getAllDataCountry($tab,$startDate, $endDate, $countryCode)
     {
 
-        $startDate = Carbon::parse($startDate);
-        $endDate = Carbon::parse($endDate);
         $reportKeys = "report_admin:{$startDate}:{$endDate}:{$countryCode}:{$tab}";
         $reportData = Redis::get($reportKeys);
         if (isset($reportData)){
