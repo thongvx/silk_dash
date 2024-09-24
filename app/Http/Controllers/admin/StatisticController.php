@@ -129,7 +129,8 @@ class StatisticController extends Controller
         if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
             $data_today = [];
             $totalViewsKey = Redis::keys("total_user_views:{$today}:*:*");
-            $totalViews = array_sum(Redis::mget($totalViewsKey)) ?? 0;
+            $total = Redis::mget($totalViewsKey);
+            $totalViews = array_sum($total) ?? 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:*");
             $totalImpressionViews = array_sum(Redis::mget($totalImpression1)) + array_sum(Redis::mget($totalImpression2)) ?? 0;
