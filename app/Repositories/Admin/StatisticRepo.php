@@ -16,11 +16,11 @@ class StatisticRepo extends BaseRepository
     {
         return ReportData::class;
     }
-    public function getAllData($tab, $startDate, $endDate, $country)
+    public function getAllData($tab, $startDate, $endDate)
     {
         $startDate = Carbon::parse($startDate);
         $endDate = Carbon::parse($endDate);
-        $reportDatakey = "report_data_admin:{$tab}:{$startDate->format('Y-m-d')}:{$endDate->format('Y-m-d')}:{$country}";
+        $reportDatakey = "report_data_admin:{$tab}:{$startDate->format('Y-m-d')}:{$endDate->format('Y-m-d')}";
         $reportData = Redis::get($reportDatakey);
         if (isset($reportData)&& $reportData !== null) {
             return unserialize($reportData);

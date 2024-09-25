@@ -107,7 +107,7 @@ class StatisticController extends Controller
         ];
         if ($tab == 'date'){
             if($country == null){
-                $data['reports'] = self::getDataDate($tab, $date ,$today, $earningToday, $data['startDate'], $data['endDate'], null);
+                $data['reports'] = self::getDataDate($tab, $date ,$today, $earningToday, $data['startDate'], $data['endDate']);
             }else{
                 $data['reports'] = self::getDataCountry($tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country,$data['AllCountries']);
             }
@@ -123,14 +123,16 @@ class StatisticController extends Controller
         }
         return $data;
     }
-    private function getDataDate($tab, $date,$today, $earningToday, $startDate, $endDate, $country)
+    private function getDataDate($tab, $date,$today, $earningToday, $startDate, $endDate)
     {
 
         if(Carbon::parse($endDate)->format('Y-m-d') == $today){
             $data_today = [];
             $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
-            $total = Redis::mget($totalViewsKey);
-            $totalViews = array_sum($total) ?? 0;
+            if($totalViewsKey){
+                $total = Redis::mget($totalViewsKey);
+            }
+            $totalViews = array_sum($total ?? []) ?? 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today}:*");
             if ($totalImpression1) {
@@ -157,7 +159,7 @@ class StatisticController extends Controller
                     return (object) $item;
                 }, $data_today));
             }else{
-                $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate, $country))->map(function ($item) use ($data_today, $today) {
+                $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate))->map(function ($item) use ($data_today, $today) {
                     $item = (object) $item;
                     if ($item->date == $today) {
                         $item->cpm = $data_today[0]['cpm'];
@@ -171,11 +173,24 @@ class StatisticController extends Controller
                 });
             }
         }else{
-            $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate, $country))->map(function ($item) {
+            $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate))->map(function ($item) {
                 return (object) $item;
             });
         }
         return $data;
+    }
+    function getCountryCodes($today) {
+        $keys = Redis::keys("total:{$today}:*");
+        $countryCodes = [];
+
+        foreach ($keys as $key) {
+            $countryCode = explode(':', $key)[3];
+            if (!in_array($countryCode, $countryCodes)) {
+                $countryCodes[] = $countryCode;
+            }
+        }
+
+        return $countryCodes;
     }
 
     private function getDataCountry($tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
@@ -185,9 +200,9 @@ class StatisticController extends Controller
             $data_today = [];
             $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
-            $countryViewsKeys = Redis::keys("total:{$today}:*");
             $indexedCountries = $AllCountries->keyBy('code');
-            foreach ( $countryViewsKeys as $key) {
+            $countryCodes = self::getCountryCodes($today);
+            foreach ( $countryCodes as $key) {
                 $countryViews = Redis::get($key) ?? 0;
                 $countryCode = explode(':', $key)[3];
 
@@ -221,33 +236,39 @@ class StatisticController extends Controller
                     'cpm' => $countryViews > 0 ? $revenue / $countryViews * 1000 : 0,
                 ];
             }
-            $data_today = array_reduce($data_today, function ($carry, $item) {
-                $carry['views'] += $item['views'];
-                $carry['download'] += $item['download'];
-                $carry['paid_views'] += $item['paid_views'];
-                $carry['vpn_ads_views'] += $item['vpn_ads_views'];
-                $carry['revenue'] += $item['revenue'];
+            $data_today_sum = array_reduce($data_today, function ($carry, $item) {
+                if (!isset($carry[$item['country_name']])) {
+                    $carry[$item['country_name']] = [
+                        'date' => $item['date'],
+                        'country_name' => $item['country_name'],
+                        'views' => 0,
+                        'download' => 0,
+                        'paid_views' => 0,
+                        'vpn_ads_views' => 0,
+                        'revenue' => 0,
+                        'cpm' => 0,
+                    ];
+                }
+                $carry[$item['country_name']]['views'] += $item['views'];
+                $carry[$item['country_name']]['download'] += $item['download'];
+                $carry[$item['country_name']]['paid_views'] += $item['paid_views'];
+                $carry[$item['country_name']]['vpn_ads_views'] += $item['vpn_ads_views'];
+                $carry[$item['country_name']]['revenue'] += $item['revenue'];
+                $carry[$item['country_name']]['date'] = $item['date'];
                 return $carry;
-            }, [
-                'date' => $today,
-                'country_name' => '',
-                'views' => 0,
-                'download' => 0,
-                'paid_views' => 0,
-                'vpn_ads_views' => 0,
-                'revenue' => 0,
-                'cpm' => 0,
-            ]);
-            $data_today['cpm'] = $data_today['views'] > 0 ? $data_today['revenue'] / $data_today['views'] * 1000 : 0;
+            }, []);
+            foreach ($data_today_sum as &$country) {
+                $country['cpm'] = $country['views'] > 0 ? $country['revenue'] / $country['views'] * 1000 : 0;
+            }
             if($date == 'today') {
-                $data = collect(array_map(function ($item) {
-                    return (object)$item;
-                }, $data_today));
+                $data = array_map(function ($item) {
+                    return (object) $item;
+                }, $data_today_sum);
             }else{
                 if($country == null){
-                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) use ($data_today,$tab) {
+                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) use ($data_today_sum,$tab) {
                         $item = (object) $item;
-                        foreach ($data_today as $data) {
+                        foreach ($data_today_sum as $data) {
                             if($item->country_name == $data['country_name']){
                                 $item->views += $data['views'];
                                 $item->download += $data['download'];
@@ -260,7 +281,7 @@ class StatisticController extends Controller
                         return $item;
                     });
                     $existingCountryNames = $data->pluck('country_name')->toArray();
-                    foreach ($data_today as $dataItem) {
+                    foreach ($data_today_sum as $dataItem) {
                         if (!in_array($dataItem['country_name'], $existingCountryNames)) {
                             $data->push((object) $dataItem);
                         }
@@ -269,7 +290,7 @@ class StatisticController extends Controller
                     $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                         return (object) $item;
                     });
-                    $data = $data->merge(collect([$data_today])->map(function ($item) {
+                    $data = $data->merge(collect([$data_today_sum])->map(function ($item) {
                         return (object) $item;
                     }));
                 }
