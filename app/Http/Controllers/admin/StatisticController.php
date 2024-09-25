@@ -179,19 +179,6 @@ class StatisticController extends Controller
         }
         return $data;
     }
-    function getCountryCodes($today) {
-        $keys = Redis::keys("total:{$today}:*");
-        $countryCodes = [];
-
-        foreach ($keys as $key) {
-            $countryCode = explode(':', $key)[3];
-            if (!in_array($countryCode, $countryCodes)) {
-                $countryCodes[] = $countryCode;
-            }
-        }
-
-        return $countryCodes;
-    }
 
     private function getDataCountry($tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
     {
@@ -200,9 +187,9 @@ class StatisticController extends Controller
             $data_today = [];
             $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
+            $countryViewsKeys = Redis::keys("total:{$today}:*");
             $indexedCountries = $AllCountries->keyBy('code');
-            $countryCodes = self::getCountryCodes($today);
-            foreach ( $countryCodes as $key) {
+            foreach ( $countryViewsKeys as $key) {
                 $countryViews = Redis::get($key) ?? 0;
                 $countryCode = explode(':', $key)[3];
 
