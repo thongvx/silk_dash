@@ -82,9 +82,8 @@ class StatisticRepo extends BaseRepository
                                                 sum(country_statistics.paid_views) as paid_views,
                                                 sum(country_statistics.vpn_ads_views) as vpn_ads_views,
                                                 sum(country_statistics.revenue) as revenue,
-                                                countries.name as country_name,
-                                                countries.cpm as cpm')
-                ->groupBy('countries.name', 'countries.cpm')
+                                                countries.name as country_name')
+                ->groupBy('countries.name')
                 ->get();
         }
         Redis::setex($reportKeys, 259200, serialize($reportData));
