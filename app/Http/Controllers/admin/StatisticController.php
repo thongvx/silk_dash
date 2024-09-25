@@ -244,8 +244,8 @@ class StatisticController extends Controller
                 $carry[$item['country_name']]['date'] = $item['date'];
                 return $carry;
             }, []);
-            foreach ($data_today_sum as &$country) {
-                $country['cpm'] = $country['views'] > 0 ? $country['revenue'] / $country['views'] * 1000 : 0;
+            foreach ($data_today_sum as &$item) {
+                $item['cpm'] = $item['views'] > 0 ? $item['revenue'] / $item['views'] * 1000 : 0;
             }
             if($date == 'today') {
                 $data = array_map(function ($item) {
