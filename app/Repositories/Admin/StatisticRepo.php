@@ -77,13 +77,13 @@ class StatisticRepo extends BaseRepository
                 ->groupBy('country_statistics.date','countries.name')
                 ->get();
         } elseif ($tab == 'country') {
-            $reportData = $reportData->selectRaw('sum(country_statistics.views) as views,
+            $reportData = $reportData->selectRaw('countries.name as country_name')
+                ->groupBy('countries.name')
+                ->selectRaw('sum(country_statistics.views) as views,
                                                 sum(country_statistics.download) as download,
                                                 sum(country_statistics.paid_views) as paid_views,
                                                 sum(country_statistics.vpn_ads_views) as vpn_ads_views,
-                                                sum(country_statistics.revenue) as revenue,
-                                                countries.name as country_name')
-                ->groupBy('countries.name')
+                                                sum(country_statistics.revenue) as revenue')
                 ->get();
         }
         Redis::setex($reportKeys, 259200, serialize($reportData));
