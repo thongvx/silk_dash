@@ -241,7 +241,6 @@ class StatisticController extends Controller
                 $carry[$item['country_name']]['paid_views'] += $item['paid_views'];
                 $carry[$item['country_name']]['vpn_ads_views'] += $item['vpn_ads_views'];
                 $carry[$item['country_name']]['revenue'] += $item['revenue'];
-                $carry[$item['country_name']]['date'] = $item['date'];
                 return $carry;
             }, []);
             foreach ($data_today_sum as &$item) {
