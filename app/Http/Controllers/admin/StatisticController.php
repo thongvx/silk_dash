@@ -221,6 +221,24 @@ class StatisticController extends Controller
                     'cpm' => $countryViews > 0 ? $revenue / $countryViews * 1000 : 0,
                 ];
             }
+            $data_today = array_reduce($data_today, function ($carry, $item) {
+                $carry['views'] += $item['views'];
+                $carry['download'] += $item['download'];
+                $carry['paid_views'] += $item['paid_views'];
+                $carry['vpn_ads_views'] += $item['vpn_ads_views'];
+                $carry['revenue'] += $item['revenue'];
+                return $carry;
+            }, [
+                'date' => $today,
+                'country_name' => '',
+                'views' => 0,
+                'download' => 0,
+                'paid_views' => 0,
+                'vpn_ads_views' => 0,
+                'revenue' => 0,
+                'cpm' => 0,
+            ]);
+            $data_today['cpm'] = $data_today['views'] > 0 ? $data_today['revenue'] / $data_today['views'] * 1000 : 0;
             if($date == 'today') {
                 $data = collect(array_map(function ($item) {
                     return (object)$item;
@@ -248,28 +266,10 @@ class StatisticController extends Controller
                         }
                     }
                 } else{
-                    $aggregatedData = array_reduce($data_today, function ($carry, $item) {
-                        $carry['views'] += $item['views'];
-                        $carry['download'] += $item['download'];
-                        $carry['paid_views'] += $item['paid_views'];
-                        $carry['vpn_ads_views'] += $item['vpn_ads_views'];
-                        $carry['revenue'] += $item['revenue'];
-                        return $carry;
-                    }, [
-                        'date' => $today,
-                        'country_name' => '',
-                        'views' => 0,
-                        'download' => 0,
-                        'paid_views' => 0,
-                        'vpn_ads_views' => 0,
-                        'revenue' => 0,
-                        'cpm' => 0,
-                    ]);
-                    $aggregatedData['cpm'] = $aggregatedData['views'] > 0 ? $aggregatedData['revenue'] / $aggregatedData['views'] * 1000 : 0;
                     $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                         return (object) $item;
                     });
-                    $data = $data->merge(collect([$aggregatedData])->map(function ($item) {
+                    $data = $data->merge(collect([$data_today])->map(function ($item) {
                         return (object) $item;
                     }));
                 }
