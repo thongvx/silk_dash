@@ -180,7 +180,7 @@ class StatisticController extends Controller
 
         $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
-        $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:*");
+        $countryViewsKeys = Redis::keys("total:$today}:*");
         $uniqueCountries = [];
 
         foreach ($countryViewsKeys as $key) {
@@ -193,7 +193,7 @@ class StatisticController extends Controller
         }
         $indexedCountries = $AllCountries->keyBy('code');
         foreach ( $uniqueCountries as $countryCode) {
-            $countryViews = Redis::mget("total:{$today->format('Y-m-d')}:*:$countryCode");
+            $countryViews = Redis::mget("total:$today:*:$countryCode");
             if ($countryViews) {
                 $totalCountryViews = Redis::mget($countryViews);
             }
