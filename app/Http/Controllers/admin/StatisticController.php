@@ -124,17 +124,36 @@ class StatisticController extends Controller
 
         if(Carbon::parse($endDate)->format('Y-m-d') == $today){
             $data_today = [];
-            $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
-            if($totalViewsKey){
+            $totalViewsKey = [];
+            $cursor = '0';
+            do {
+                list($cursor, $keys) = Redis::scan($cursor, ['match' => "total_user_views:{$today}:*"]);
+                $totalViewsKey = array_merge($totalViewsKey, $keys);
+            } while ($cursor != '0');
+
+            if ($totalViewsKey) {
                 $total = Redis::mget($totalViewsKey);
             }
             $totalViews = array_sum($total ?? []) ?? 0;
-            $totalImpression1 = Redis::keys("total_impression1:{$today}:*");
-            $totalImpression2 = Redis::keys("total_impression2:{$today}:*");
+
+            $totalImpression1 = [];
+            $cursor = '0';
+            do {
+                list($cursor, $keys) = Redis::scan($cursor, ['match' => "total_impression1:{$today}:*"]);
+                $totalImpression1 = array_merge($totalImpression1, $keys);
+            } while ($cursor != '0');
+
+            $totalImpression2 = [];
+            $cursor = '0';
+            do {
+                list($cursor, $keys) = Redis::scan($cursor, ['match' => "total_impression2:{$today}:*"]);
+                $totalImpression2 = array_merge($totalImpression2, $keys);
+            } while ($cursor != '0');
+
             if ($totalImpression1) {
                 $totalImpressionView1 = Redis::mget($totalImpression1);
             }
-            if($totalImpression2){
+            if ($totalImpression2) {
                 $totalImpressionView2 = Redis::mget($totalImpression2);
             }
             $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
