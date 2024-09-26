@@ -187,7 +187,6 @@ class StatisticController extends Controller
         $indexedCountries = $AllCountries->keyBy('code');
         $chunks = array_chunk($uniqueCountries, 50);
         foreach ($chunks as $chunk) {
-            // Sử dụng pipeline để giảm số lượng lệnh gửi đến Redis
             $pipeline = Redis::pipeline();
             foreach ($chunk as $countryCode) {
                 $pipeline->keys("total:{$today}:*:{$countryCode}");
@@ -201,9 +200,9 @@ class StatisticController extends Controller
                 $totalImpression1Keys = $results[$index * 3 + 1];
                 $totalImpression2Keys = $results[$index * 3 + 2];
 
-                $countryViews = array_sum(Redis::mget($countryViewsKeys) ?? []);
-                $totalImpressionViews = array_sum(Redis::mget($totalImpression1Keys) ?? []) +
-                    array_sum(Redis::mget($totalImpression2Keys) ?? []);
+                $countryViews = array_sum(array_filter(Redis::mget($countryViewsKeys) ?? []));
+                $totalImpressionViews = array_sum(array_filter(Redis::mget($totalImpression1Keys) ?? [])) +
+                    array_sum(array_filter(Redis::mget($totalImpression2Keys) ?? []));
 
                 if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
                     continue;
