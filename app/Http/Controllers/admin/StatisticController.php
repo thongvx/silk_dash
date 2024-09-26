@@ -319,7 +319,6 @@ class StatisticController extends Controller
         } else {
             $view = view('admin.statistic.country', $report)->render();
         }
-
         return response()->json([
             'data' => $report,
             'view' => $view,
