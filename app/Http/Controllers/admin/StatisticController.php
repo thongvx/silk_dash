@@ -202,10 +202,10 @@ class StatisticController extends Controller
 
                 $countryViews = array_sum(array_filter(Redis::mget($countryViewsKeys) ?? []));
                 if($totalImpression1Keys){
-                    $totalImpression1KeysResult = array_sum(Redis::mget($totalImpression1Keys?? []) ?? 0);
+                    $totalImpression1KeysResult = array_sum(Redis::mget($totalImpression1Keys?? [])) ?? 0;
                 }
                 if($totalImpression2Keys){
-                    $totalImpression2KeysResult = array_sum(Redis::mget($totalImpression2Keys ?? []) ?? 0);
+                    $totalImpression2KeysResult = array_sum(Redis::mget($totalImpression2Keys ?? [])) ?? 0;
                 }
 
                 $totalImpressionViews = $totalImpression1KeysResult + $totalImpression2KeysResult;
