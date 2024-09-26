@@ -48,16 +48,12 @@ class StatisticController extends Controller
                 $endDate = $request->input('endDate', Carbon::today());
         }
         if($date == 'today'){
-            $data['startDate'] = $data['endDate'] = date("m/d/Y", strtotime($today));
+            $data['startDate'] = $data['endDate'] = $today;
         } else{
             $data['startDate'] = date("m/d/Y", strtotime($startDate));
             $data['endDate'] = date("m/d/Y", strtotime($endDate));
         }
         return $data;
-    }
-    private function earningToday($userId, $today){
-        $earningToday = StatisticService::calculateValue($userId, $today);
-        return $earningToday;
     }
     // Get total profit and total withdrawals
     private function dataTotalReport($today){
@@ -179,73 +175,89 @@ class StatisticController extends Controller
         }
         return $data;
     }
+    private function getDataTodayCountry($today,$country, $earningToday, $AllCountries){
+        $data_today = [];
 
+        $filteredCountries = is_string($country) ? explode(',', $country) : $country;
+
+        $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:*");
+        $uniqueCountries = [];
+
+        foreach ($countryViewsKeys as $key) {
+            $parts = explode(":", $key);
+            $countryCodeRedis = end($parts);
+
+            if (!in_array($countryCodeRedis, $uniqueCountries)) {
+                $uniqueCountries[] = $countryCodeRedis;
+            }
+        }
+        $indexedCountries = $AllCountries->keyBy('code');
+        foreach ( $uniqueCountries as $countryCode) {
+            $countryViews = Redis::mget("total:{$today->format('Y-m-d')}:*:$countryCode");
+            if ($countryViews) {
+                $totalCountryViews = Redis::mget($countryViews);
+            }
+            $countryViews = array_sum($totalCountryViews ?? []) ?? 0;
+            if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
+                continue;
+            }
+
+            $getCountry = $indexedCountries->get($countryCode);
+            $totalImpression1 = Redis::keys("total_impression1:{$today}:*:$countryCode");
+            $totalImpression2 = Redis::keys("total_impression2:{$today}:*:$countryCode");
+            if ($totalImpression1) {
+                $totalImpressionView1 = Redis::mget($totalImpression1);
+            }
+            if($totalImpression2){
+                $totalImpressionView2 = Redis::mget($totalImpression2);
+            }
+            $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
+            $country_name = $getCountry->name ?? $countryCode;
+            $revenue = $earningToday[$countryCode] ?? 0;
+            $paidView = $totalImpressionViews;
+            $countryVpnAdsView = $countryViews - $paidView;
+            $countryDownload = 0;
+            $data_today[] = [
+                'date' => $today,
+                'country_name' => $country_name,
+                'views' => $countryViews,
+                'download' => $countryDownload,
+                'paid_views' => $paidView,
+                'vpn_ads_views' => $countryVpnAdsView,
+                'revenue' => $revenue,
+                'cpm' => $countryViews > 0 ? $revenue / $countryViews * 1000 : 0,
+            ];
+        }
+        $data_today_sum = array_reduce($data_today, function ($carry, $item) {
+            if (!isset($carry[$item['country_name']])) {
+                $carry[$item['country_name']] = [
+                    'date' => $item['date'],
+                    'country_name' => $item['country_name'],
+                    'views' => 0,
+                    'download' => 0,
+                    'paid_views' => 0,
+                    'vpn_ads_views' => 0,
+                    'revenue' => 0,
+                    'cpm' => 0,
+                ];
+            }
+            $carry[$item['country_name']]['views'] += $item['views'];
+            $carry[$item['country_name']]['download'] += $item['download'];
+            $carry[$item['country_name']]['paid_views'] += $item['paid_views'];
+            $carry[$item['country_name']]['vpn_ads_views'] += $item['vpn_ads_views'];
+            $carry[$item['country_name']]['revenue'] += $item['revenue'];
+            return $carry;
+        }, []);
+        foreach ($data_today_sum as &$item) {
+            $item['cpm'] = $item['views'] > 0 ? $item['revenue'] / $item['views'] * 1000 : 0;
+        }
+        return $data_today_sum;
+    }
     private function getDataCountry($tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
     {
 
         if(Carbon::parse($endDate)->format('Y-m-d') == $today){
-            $data_today = [];
-            $filteredCountries = is_string($country) ? explode(',', $country) : $country;
-
-            $countryViewsKeys = Redis::keys("total:{$today}:*");
-            $indexedCountries = $AllCountries->keyBy('code');
-            foreach ( $countryViewsKeys as $key) {
-                $countryViews = Redis::get($key) ?? 0;
-                $countryCode = explode(':', $key)[3];
-
-                if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
-                    continue;
-                }
-
-                $getCountry = $indexedCountries->get($countryCode);
-                $totalImpression1 = Redis::keys("total_impression1:{$today}:*:$countryCode");
-                $totalImpression2 = Redis::keys("total_impression2:{$today}:*:$countryCode");
-                if ($totalImpression1) {
-                    $totalImpressionView1 = Redis::mget($totalImpression1);
-                }
-                if($totalImpression2){
-                    $totalImpressionView2 = Redis::mget($totalImpression2);
-                }
-                $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
-                $country_name = $getCountry->name ?? $countryCode;
-                $revenue = $earningToday[$countryCode] ?? 0;
-                $paidView = $totalImpressionViews;
-                $countryVpnAdsView = $countryViews - $paidView;
-                $countryDownload = 0;
-                $data_today[] = [
-                    'date' => $today,
-                    'country_name' => $country_name,
-                    'views' => $countryViews,
-                    'download' => $countryDownload,
-                    'paid_views' => $paidView,
-                    'vpn_ads_views' => $countryVpnAdsView,
-                    'revenue' => $revenue,
-                    'cpm' => $countryViews > 0 ? $revenue / $countryViews * 1000 : 0,
-                ];
-            }
-            $data_today_sum = array_reduce($data_today, function ($carry, $item) {
-                if (!isset($carry[$item['country_name']])) {
-                    $carry[$item['country_name']] = [
-                        'date' => $item['date'],
-                        'country_name' => $item['country_name'],
-                        'views' => 0,
-                        'download' => 0,
-                        'paid_views' => 0,
-                        'vpn_ads_views' => 0,
-                        'revenue' => 0,
-                        'cpm' => 0,
-                    ];
-                }
-                $carry[$item['country_name']]['views'] += $item['views'];
-                $carry[$item['country_name']]['download'] += $item['download'];
-                $carry[$item['country_name']]['paid_views'] += $item['paid_views'];
-                $carry[$item['country_name']]['vpn_ads_views'] += $item['vpn_ads_views'];
-                $carry[$item['country_name']]['revenue'] += $item['revenue'];
-                return $carry;
-            }, []);
-            foreach ($data_today_sum as &$item) {
-                $item['cpm'] = $item['views'] > 0 ? $item['revenue'] / $item['views'] * 1000 : 0;
-            }
+            $data_today_sum = self::getDataTodayCountry($today, $country, $earningToday, $AllCountries);
             if($date == 'today') {
                 $data = array_map(function ($item) {
                     return (object) $item;
