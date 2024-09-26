@@ -185,47 +185,41 @@ class StatisticController extends Controller
             return explode(":", $key)[3];
         }, $countryViewsKeys));
         $indexedCountries = $AllCountries->keyBy('code');
-        $chunks = array_chunk($uniqueCountries, 50);
-        foreach ($chunks as $chunk) {
-            $pipeline = Redis::pipeline();
-            foreach ($chunk as $countryCode) {
-                $pipeline->keys("total:{$today}:*:{$countryCode}");
-                $pipeline->keys("total_impression1:{$today}:*:{$countryCode}");
-                $pipeline->keys("total_impression2:{$today}:*:{$countryCode}");
+        foreach ( $uniqueCountries as $countryCode) {
+            $countryViews = Redis::keys("total:{$today}:*:{$countryCode}");
+            if ($countryViews) {
+                $totalCountryViews = Redis::mget($countryViews);
             }
-            $results = $pipeline->exec();
-
-            foreach ($chunk as $index => $countryCode) {
-                $countryViewsKeys = $results[$index * 3];
-                $totalImpression1Keys = $results[$index * 3 + 1];
-                $totalImpression2Keys = $results[$index * 3 + 2];
-
-                $countryViews = array_sum(Redis::mget($countryViewsKeys) ?? []);
-                $totalImpressionViews = array_sum(Redis::mget($totalImpression1Keys) ?? []) +
-                    array_sum(Redis::mget($totalImpression2Keys) ?? []);
-
-                if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
-                    continue;
-                }
-
-                $getCountry = $indexedCountries->get($countryCode);
-                $country_name = $getCountry->name ?? $countryCode;
-                $revenue = $earningToday[$countryCode] ?? 0;
-                $paidView = $totalImpressionViews;
-                $countryVpnAdsView = $countryViews - $paidView;
-                $countryDownload = 0;
-
-                $data_today[] = [
-                    'date' => $today,
-                    'country_name' => $country_name,
-                    'views' => $countryViews,
-                    'download' => $countryDownload,
-                    'paid_views' => $paidView,
-                    'vpn_ads_views' => $countryVpnAdsView,
-                    'revenue' => $revenue,
-                    'cpm' => $countryViews > 0 ? $revenue / $countryViews * 1000 : 0,
-                ];
+            $countryViews = array_sum($totalCountryViews ?? []) ?? 0;
+            if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
+                continue;
             }
+
+            $getCountry = $indexedCountries->get($countryCode);
+            $totalImpression1 = Redis::keys("total_impression1:{$today}:*:{$countryCode}");
+            $totalImpression2 = Redis::keys("total_impression2:{$today}:*:{$countryCode}");
+            if ($totalImpression1) {
+                $totalImpressionView1 = Redis::mget($totalImpression1);
+            }
+            if($totalImpression2){
+                $totalImpressionView2 = Redis::mget($totalImpression2);
+            }
+            $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
+            $country_name = $getCountry->name ?? $countryCode;
+            $revenue = $earningToday[$countryCode] ?? 0;
+            $paidView = $totalImpressionViews;
+            $countryVpnAdsView = $countryViews - $paidView;
+            $countryDownload = 0;
+            $data_today[] = [
+                'date' => $today,
+                'country_name' => $country_name,
+                'views' => $countryViews,
+                'download' => $countryDownload,
+                'paid_views' => $paidView,
+                'vpn_ads_views' => $countryVpnAdsView,
+                'revenue' => $revenue,
+                'cpm' => $countryViews > 0 ? $revenue / $countryViews * 1000 : 0,
+            ];
         }
         $data_today_sum = array_reduce($data_today, function ($carry, $item) {
             if (!isset($carry[$item['country_name']])) {
