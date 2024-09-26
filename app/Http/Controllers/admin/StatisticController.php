@@ -201,18 +201,14 @@ class StatisticController extends Controller
                 $totalImpression2Keys = $results[$index * 3 + 2];
 
                 $countryViews = array_sum(array_filter(Redis::mget($countryViewsKeys) ?? []));
-                $totalImpression1KeysResult = Redis::mget($totalImpression1Keys);
-                $totalImpression2KeysResult = Redis::mget($totalImpression2Keys);
+                if($totalImpression1Keys){
+                    $totalImpression1KeysResult = array_sum(Redis::mget($totalImpression1Keys?? []) ?? 0);
+                }
+                if($totalImpression2Keys){
+                    $totalImpression2KeysResult = array_sum(Redis::mget($totalImpression2Keys ?? []) ?? 0);
+                }
 
-                $totalImpression1 = is_array($totalImpression1KeysResult)
-                    ? array_sum(array_filter($totalImpression1KeysResult, 'is_numeric'))
-                    : 0;
-
-                $totalImpression2 = is_array($totalImpression2KeysResult)
-                    ? array_sum(array_filter($totalImpression2KeysResult, 'is_numeric'))
-                    : 0;
-
-                $totalImpressionViews = $totalImpression1 + $totalImpression2;
+                $totalImpressionViews = $totalImpression1KeysResult + $totalImpression2KeysResult;
 
                 if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
                     continue;
