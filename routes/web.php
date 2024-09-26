@@ -74,6 +74,8 @@ use App\Http\Middleware\DisableSession;
 
 Route::middleware([DisableSession::class])->group(function () {
     Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateController::class, 'getFolderid']);
+    Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
+    Route::get('/apiUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'apiUserID']);
 });
 Route::get('/copyHlsTiktok', [\App\Http\Controllers\admin\UpdateController::class, 'copyHlsTiktok']);
 //-------------------------Play and download--------------------------------------------------------
@@ -89,8 +91,7 @@ Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class
 //-------------------------auth user-------------------------------------------------------
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 Route::get('password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->middleware('check.reset.token');
-Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
-Route::get('/apiUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'apiUserID']);
+
 
 Route::get('/zoom-me', [App\Http\Controllers\Dashboard\HomeController::class, 'zoomMe']);
 
