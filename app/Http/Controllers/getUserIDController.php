@@ -26,6 +26,7 @@ class getUserIDController extends Controller
     }
     public function apiUserID($keyAPI)
     {
+        $keyAPI = base64_decode($keyAPI);
         if(redis::get('apiUserID'.$keyAPI)){
             return redis::get('apiUserID'.$keyAPI);
         }
