@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mail\EmailController;
 use App\Http\Controllers\Dashboard\Upload\TransferController;
+use App\Http\Middleware\DisableSession;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,28 +66,28 @@ Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferControl
 Route::get('/deleteTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'deleteTransferTask']);
 
 //-------------------------updateController--------------------------------------------------------
-Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
-Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
-Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoStream']);
-Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
-Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoEncoder']);
-use App\Http\Middleware\DisableSession;
-
 Route::middleware([DisableSession::class])->group(function () {
+    Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
+    Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class, 'uploadVideo']);
+    Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoStream']);
+    Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
+    Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoEncoder']);
     Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateController::class, 'getFolderid']);
-    Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
-    Route::get('/apiUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'apiUserID']);
+    Route::get('/copyHlsTiktok', [\App\Http\Controllers\admin\UpdateController::class, 'copyHlsTiktok']);
 });
-Route::get('/copyHlsTiktok', [\App\Http\Controllers\admin\UpdateController::class, 'copyHlsTiktok']);
+
 //-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
 Route::get('/testplay/{id}', [\App\Http\Controllers\PlayController::class, 'testplay'])->name('testplay');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
 Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
 Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
-
 //-------------------------menu--------------------------------------------------------
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
+Route::middleware([DisableSession::class])->group(function () {
+    Route::get('/getUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'getUserID']);
+    Route::get('/apiUserID/{keyAPI}', [App\Http\Controllers\getUserIDController::class, 'apiUserID']);
+});
 
 //-------------------------auth user-------------------------------------------------------
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
