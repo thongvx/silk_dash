@@ -193,7 +193,7 @@ class StatisticController extends Controller
         }
         $indexedCountries = $AllCountries->keyBy('code');
         foreach ( $uniqueCountries as $countryCode) {
-            $countryViews = Redis::mget("total:{$today}:*:$countryCode");
+            $countryViews = Redis::keys("total:{$today}:*:{$countryCode}");
             if ($countryViews) {
                 $totalCountryViews = Redis::mget($countryViews);
             }
