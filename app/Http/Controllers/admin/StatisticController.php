@@ -180,7 +180,7 @@ class StatisticController extends Controller
 
         $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
-        $countryViewsKeys = Redis::keys("total:$today}:*");
+        $countryViewsKeys = Redis::keys("total:$today:*");
         $uniqueCountries = [];
 
         foreach ($countryViewsKeys as $key) {
@@ -264,7 +264,7 @@ class StatisticController extends Controller
                 }, $data_today_sum);
             }else{
                 if($country == null){
-                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) use ($data_today_sum,$tab) {
+                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) use ($data_today_sum, $tab) {
                         $item = (object) $item;
                         foreach ($data_today_sum as $data) {
                             if($item->country_name == $data['country_name']){
