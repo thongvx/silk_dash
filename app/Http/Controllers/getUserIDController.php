@@ -24,4 +24,18 @@ class getUserIDController extends Controller
         }
 
     }
+    public function apiUserID($keyAPI)
+    {
+        if(redis::get('apiUserID'.$keyAPI)){
+            return redis::get('apiUserID'.$keyAPI);
+        }
+        $user = User::where('token', $keyAPI)->first();
+        if ($user) {
+            $folderID = Folder::where('user_id', $user->id)->where('name_folder', 'root')->first();
+            $user_id = $user->id;
+            redis::set('apiUserID'.$keyAPI, $user_id);
+            return $user_id;
+        }
+
+    }
 }
