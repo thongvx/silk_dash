@@ -128,7 +128,7 @@ class StatisticController extends Controller
             $cursor = '0';
             do {
                 list($cursor, $keys) = Redis::scan($cursor, ['match' => "total_user_views:{$today}:*"]);
-                $totalViewsKey = array_merge($totalViewsKey, $keys);
+                $totalViewsKey = array_merge($totalViewsKey, $keys ?? []);
             } while ($cursor != '0');
 
             if ($totalViewsKey) {
@@ -140,14 +140,14 @@ class StatisticController extends Controller
             $cursor = '0';
             do {
                 list($cursor, $keys) = Redis::scan($cursor, ['match' => "total_impression1:{$today}:*"]);
-                $totalImpression1 = array_merge($totalImpression1, $keys);
+                $totalImpression1 = array_merge($totalImpression1, $keys ?? []);
             } while ($cursor != '0');
 
             $totalImpression2 = [];
             $cursor = '0';
             do {
                 list($cursor, $keys) = Redis::scan($cursor, ['match' => "total_impression2:{$today}:*"]);
-                $totalImpression2 = array_merge($totalImpression2, $keys);
+                $totalImpression2 = array_merge($totalImpression2, $keys ?? []);
             } while ($cursor != '0');
 
             if ($totalImpression1) {
