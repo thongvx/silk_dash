@@ -70,7 +70,11 @@ Route::get('/uploadvideo', [\App\Http\Controllers\admin\UpdateController::class,
 Route::get('/updateInfoStream', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoStream']);
 Route::get('/updateInfoDownload', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoDownload']);
 Route::get('/updateInfoEncoder', [\App\Http\Controllers\admin\UpdateController::class, 'updateInfoEncoder']);
-Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateController::class, 'getFolderid']);
+use App\Http\Middleware\DisableSession;
+
+Route::middleware([DisableSession::class])->group(function () {
+    Route::get('/getFolderid/{userid}', [\App\Http\Controllers\admin\UpdateController::class, 'getFolderid']);
+});
 Route::get('/copyHlsTiktok', [\App\Http\Controllers\admin\UpdateController::class, 'copyHlsTiktok']);
 //-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
