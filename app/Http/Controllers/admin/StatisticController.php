@@ -129,15 +129,34 @@ class StatisticController extends Controller
                 $total = Redis::mget($totalViewsKey);
             }
             $totalViews = array_sum($total ?? []) ?? 0;
-            $totalImpression1 = Redis::keys("total_impression1:{$today}:*");
-            $totalImpression2 = Redis::keys("total_impression2:{$today}:*");
-            if ($totalImpression1) {
+            $totalImpression1 = [];
+            $totalImpression2 = [];
+            $cursor = '0';
+
+            do {
+                // Scan both total_impression1 and total_impression2 in one loop
+                list($cursor, $keys1) = Redis::scan($cursor, ['match' => "total_impression1:{$today}:*"]);
+                list($cursor, $keys2) = Redis::scan($cursor, ['match' => "total_impression2:{$today}:*"]);
+
+                // Merge the keys found
+                $totalImpression1 = array_merge($totalImpression1, $keys1);
+                $totalImpression2 = array_merge($totalImpression2, $keys2);
+
+            } while ($cursor != '0');
+
+            $totalImpressionView1 = [];
+            $totalImpressionView2 = [];
+
+            if (!empty($totalImpression1)) {
                 $totalImpressionView1 = Redis::mget($totalImpression1);
             }
-            if($totalImpression2){
+
+            if (!empty($totalImpression2)) {
                 $totalImpressionView2 = Redis::mget($totalImpression2);
             }
+
             $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
+
             $cpm = $totalImpressionViews > 0 ? $earningToday / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
             $VpnAdsViews = $totalViews - $paid_views;
