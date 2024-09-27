@@ -132,17 +132,24 @@ class StatisticController extends Controller
             $script = <<<LUA
                 local totalSum = 0
                 local cursor = '0'
+                local keys = {}
 
-                -- Scan for total_impression1 and total_impression2 keys in one scan loop
+                -- Scan for total_impression1 and total_impression2 keys
                 repeat
                     local scanResult = redis.call('SCAN', cursor, 'MATCH', 'total_impression*:'..ARGV[1]..':*')
                     cursor = scanResult[1]
                     for _, key in ipairs(scanResult[2]) do
-                        totalSum = totalSum + tonumber(redis.call('GET', key) or 0)
+                        table.insert(keys, key)
                     end
                 until cursor == '0'
 
-                return totalSum
+                -- Use MGET to retrieve all values at once
+                if #keys > 0 then
+                    local values = redis.call('MGET', unpack(keys))
+                    for _, value in ipairs(values) do
+                        totalSum = totalSum + tonumber(value or 0)
+                    end
+                end
             LUA;
 
             $totalImpressionViews = Redis::eval($script, 0, $today);
