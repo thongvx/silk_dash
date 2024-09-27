@@ -130,21 +130,15 @@ class ReportController extends Controller
         if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
             $data_today = [];
             $totalViews = Redis::get("total_user_views:{$today->format('Y-m-d')}:{$userId}") ?? 0;
-            $totalImpressionViews = 0;
             $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:{$userId}:*");
             $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:{$userId}:*");
-            foreach ($totalImpression1 as $totalImpression1Key) {
-                // Lấy số lượt xem của user từ khóa
-                $views = Redis::get($totalImpression1Key);
-                // Cộng số lượt xem vào tổng số lượt xem
-                $totalImpressionViews += (int)$views;
+            if ($totalImpression1) {
+                $totalImpressionView1 = Redis::mget($totalImpression1);
             }
-            foreach ($totalImpression2 as $totalImpression2Key) {
-                // Lấy số lượt xem của user từ khóa
-                $views = Redis::get($totalImpression2Key);
-                // Cộng số lượt xem vào tổng số lượt xem
-                $totalImpressionViews += (int)$views;
+            if($totalImpression2){
+                $totalImpressionView2 = Redis::mget($totalImpression2);
             }
+            $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
             $cpm = $totalImpressionViews > 0 ? array_sum($earningToday) / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
             $VpnAdsViews = $totalViews - $paid_views;
