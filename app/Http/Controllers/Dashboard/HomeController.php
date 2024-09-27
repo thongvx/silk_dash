@@ -46,11 +46,6 @@ class HomeController extends Controller
         $data['topVideos'] = $this->statisticController->topVideo();
         $data['topCountries'] = $this->statisticController->topCountry();
         $data['storage'] = $this->videoController->convertFileSize($user->storage);
-        $data['allStorage'] = $this->videoRepo->where('user_id', $user->id)->sum('size');
-        $data['video']= $this->videoRepo->where('user_id', $user->id)->count();
-        $user->storage = $data['allStorage'];
-        $user->video = $data['video'];
-        $user->save();
         $earningToday = StatisticService::calculateValue($user->id, $today->format('Y-m-d'));
         $totalViews = 0;
         $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$user->id}:*");
