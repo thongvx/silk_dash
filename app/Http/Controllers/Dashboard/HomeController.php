@@ -46,7 +46,7 @@ class HomeController extends Controller
         $data['topVideos'] = $this->statisticController->topVideo();
         $data['topCountries'] = $this->statisticController->topCountry();
         $data['storage'] = $this->videoController->convertFileSize($user->storage);
-        $data['allStorage'] = $this->videoController->where('user_id', $user->id)->sum('size');
+        $data['allStorage'] = $this->videoRepo->where('user_id', $user->id)->sum('size');
         $data['video']= $this->videoRepo->where('user_id', $user->id)->count();
         $user->storage = $data['allStorage'];
         $user->video = $data['video'];
