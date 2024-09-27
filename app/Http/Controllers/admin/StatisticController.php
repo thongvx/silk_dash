@@ -129,35 +129,30 @@ class StatisticController extends Controller
                 $total = Redis::mget($totalViewsKey);
             }
             $totalViews = array_sum($total ?? []) ?? 0;
-            $totalImpression1 = [];
-            $totalImpression2 = [];
-            $cursor = '0';
+            $script = <<<LUA
+                local cursor = '0'
+                local totalSum = 0
+                repeat
+                    -- Scan for total_impression1 keys
+                    local scanResult1 = redis.call('SCAN', cursor, 'MATCH', 'total_impression1:'..ARGV[1]..':*')
+                    cursor = scanResult1[1]
+                    for i, key in ipairs(scanResult1[2]) do
+                        totalSum = totalSum + tonumber(redis.call('GET', key) or 0)
+                    end
 
-            do {
-                // Scan both total_impression1 and total_impression2 in one loop
-                list($cursor, $keys1) = Redis::scan($cursor, ['match' => "total_impression1:{$today}:*"]);
-                list($cursor, $keys2) = Redis::scan($cursor, ['match' => "total_impression2:{$today}:*"]);
+                    -- Scan for total_impression2 keys
+                    local scanResult2 = redis.call('SCAN', cursor, 'MATCH', 'total_impression2:'..ARGV[1]..':*')
+                    cursor = scanResult2[1]
+                    for i, key in ipairs(scanResult2[2]) do
+                        totalSum = totalSum + tonumber(redis.call('GET', key) or 0)
+                    end
 
-                $keys1 = $keys1 ?? [];
-                $keys2 = $keys2 ?? [];
-                // Merge the keys found
-                $totalImpression1 = array_merge($totalImpression1, $keys1);
-                $totalImpression2 = array_merge($totalImpression2, $keys2);
+                until cursor == '0'
 
-            } while ($cursor != '0');
+                return totalSum
+            LUA;
 
-            $totalImpressionView1 = [];
-            $totalImpressionView2 = [];
-
-            if (!empty($totalImpression1)) {
-                $totalImpressionView1 = Redis::mget($totalImpression1);
-            }
-
-            if (!empty($totalImpression2)) {
-                $totalImpressionView2 = Redis::mget($totalImpression2);
-            }
-
-            $totalImpressionViews = array_sum($totalImpressionView1 ?? []) + array_sum($totalImpressionView2 ?? []) ?? 0;
+            $totalImpressionViews = Redis::eval($script, 0, $today);
 
             $cpm = $totalImpressionViews > 0 ? $earningToday / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
