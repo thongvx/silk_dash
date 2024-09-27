@@ -138,6 +138,8 @@ class StatisticController extends Controller
                 list($cursor, $keys1) = Redis::scan($cursor, ['match' => "total_impression1:{$today}:*"]);
                 list($cursor, $keys2) = Redis::scan($cursor, ['match' => "total_impression2:{$today}:*"]);
 
+                $keys1 = $keys1 ?? [];
+                $keys2 = $keys2 ?? [];
                 // Merge the keys found
                 $totalImpression1 = array_merge($totalImpression1, $keys1);
                 $totalImpression2 = array_merge($totalImpression2, $keys2);
