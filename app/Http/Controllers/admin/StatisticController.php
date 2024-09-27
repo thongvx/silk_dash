@@ -132,24 +132,17 @@ class StatisticController extends Controller
             $script = <<<LUA
                 local totalSum = 0
                 local cursor = '0'
-                local keys = {}
 
-                -- Scan for total_impression1 and total_impression2 keys
+                -- Scan for total_impression1 and total_impression2 keys in one scan loop
                 repeat
                     local scanResult = redis.call('SCAN', cursor, 'MATCH', 'total_impression*:'..ARGV[1]..':*')
                     cursor = scanResult[1]
                     for _, key in ipairs(scanResult[2]) do
-                        table.insert(keys, key)
+                        totalSum = totalSum + tonumber(redis.call('GET', key) or 0)
                     end
                 until cursor == '0'
 
-                -- Use MGET to retrieve all values at once
-                if #keys > 0 then
-                    local values = redis.call('MGET', unpack(keys))
-                    for _, value in ipairs(values) do
-                        totalSum = totalSum + tonumber(value or 0)
-                    end
-                end
+                return totalSum
             LUA;
 
             $totalImpressionViews = Redis::eval($script, 0, $today);
@@ -191,60 +184,82 @@ class StatisticController extends Controller
         }
         return $data;
     }
-    private function getDataTodayCountry($today,$country, $earningToday, $AllCountries){
+    private function getDataTodayCountry($today, $country, $earningToday, $AllCountries) {
         $data_today = [];
 
+        // Xử lý danh sách quốc gia
         $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
+        // Lấy tất cả các keys liên quan đến views theo ngày
         $countryViewsKeys = Redis::keys("total:{$today}:*");
         $uniqueCountries = array_unique(array_map(function($key) {
-            return explode(":", $key)[3];
+            return explode(":", $key)[3]; // Trích xuất mã quốc gia
         }, $countryViewsKeys));
+
+        if ($filteredCountries) {
+            $uniqueCountries = array_intersect($uniqueCountries, $filteredCountries);
+        }
+
         $indexedCountries = $AllCountries->keyBy('code');
-        $chunks = array_chunk($uniqueCountries, 50);
+        $chunks = array_chunk($uniqueCountries, 50); // Chia nhỏ theo chunk để tránh quá tải
+
         foreach ($chunks as $chunk) {
-            $pipeline = Redis::pipeline();
-            foreach ($chunk as $countryCode) {
-                $pipeline->keys("total:{$today}:*:{$countryCode}");
-                $pipeline->keys("total_impression1:{$today}:*:{$countryCode}");
-                $pipeline->keys("total_impression2:{$today}:*:{$countryCode}");
-            }
-            $results = $pipeline->exec();
+            $luaScript = <<<LUA
+        local result = {}
+        for i, countryCode in ipairs(KEYS) do
+            local totalViews = 0
+            local totalImpression1 = 0
+            local totalImpression2 = 0
 
-            foreach ($chunk as $index => $countryCode) {
-                $countryViewsKeys = $results[$index * 3];
-                $totalImpression1Keys = $results[$index * 3 + 1];
-                $totalImpression2Keys = $results[$index * 3 + 2];
+            -- Lấy các keys cho từng country
+            local viewKeys = redis.call('KEYS', 'total:' .. ARGV[1] .. ':*:' .. countryCode)
+            local impression1Keys = redis.call('KEYS', 'total_impression1:' .. ARGV[1] .. ':*:' .. countryCode)
+            local impression2Keys = redis.call('KEYS', 'total_impression2:' .. ARGV[1] .. ':*:' .. countryCode)
 
-                $countryViews = array_sum(array_filter(Redis::mget($countryViewsKeys) ?? []));
-                $totalImpression1KeysResult = 0;
-                $totalImpression2KeysResult = 0;
+            -- Lấy giá trị của các keys và tính tổng
+            if #viewKeys > 0 then
+                local viewValues = redis.call('MGET', unpack(viewKeys))
+                for _, v in ipairs(viewValues) do
+                    totalViews = totalViews + tonumber(v or 0)
+                end
+            end
 
-                if($totalImpression1Keys){
-                    $totalImpression1KeysResult = array_sum(Redis::mget($totalImpression1Keys?? [])) ?? 0;
-                }
-                if($totalImpression2Keys){
-                    $totalImpression2KeysResult = array_sum(Redis::mget($totalImpression2Keys ?? [])) ?? 0;
-                }
+            if #impression1Keys > 0 then
+                local impression1Values = redis.call('MGET', unpack(impression1Keys))
+                for _, v in ipairs(impression1Values) do
+                    totalImpression1 = totalImpression1 + tonumber(v or 0)
+                end
+            end
+
+            if #impression2Keys > 0 then
+                local impression2Values = redis.call('MGET', unpack(impression2Keys))
+                for _, v in ipairs(impression2Values) do
+                    totalImpression2 = totalImpression2 + tonumber(v or 0)
+                end
+            end
+
+            table.insert(result, {countryCode, totalViews, totalImpression1, totalImpression2})
+        end
+        return result
+        LUA;
+            $args = [$today];
+            $results = Redis::eval($luaScript, count($chunk), ...$chunk, ...$args);
+
+            foreach ($results as $result) {
+                [$countryCode, $countryViews, $totalImpression1KeysResult, $totalImpression2KeysResult] = $result;
 
                 $totalImpressionViews = $totalImpression1KeysResult + $totalImpression2KeysResult;
-
-                if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
-                    continue;
-                }
-
                 $getCountry = $indexedCountries->get($countryCode);
                 $country_name = $getCountry->name ?? $countryCode;
                 $revenue = $earningToday[$countryCode] ?? 0;
                 $paidView = $totalImpressionViews;
                 $countryVpnAdsView = $countryViews - $paidView;
-                $countryDownload = 0;
 
                 $data_today[] = [
                     'date' => $today,
                     'country_name' => $country_name,
                     'views' => $countryViews,
-                    'download' => $countryDownload,
+                    'download' => 0, // Hiện tại mặc định là 0, bạn có thể điều chỉnh nếu cần
                     'paid_views' => $paidView,
                     'vpn_ads_views' => $countryVpnAdsView,
                     'revenue' => $revenue,
@@ -252,31 +267,10 @@ class StatisticController extends Controller
                 ];
             }
         }
-        $data_today_sum = array_reduce($data_today, function ($carry, $item) {
-            if (!isset($carry[$item['country_name']])) {
-                $carry[$item['country_name']] = [
-                    'date' => $item['date'],
-                    'country_name' => $item['country_name'],
-                    'views' => 0,
-                    'download' => 0,
-                    'paid_views' => 0,
-                    'vpn_ads_views' => 0,
-                    'revenue' => 0,
-                    'cpm' => 0,
-                ];
-            }
-            $carry[$item['country_name']]['views'] += $item['views'];
-            $carry[$item['country_name']]['download'] += $item['download'];
-            $carry[$item['country_name']]['paid_views'] += $item['paid_views'];
-            $carry[$item['country_name']]['vpn_ads_views'] += $item['vpn_ads_views'];
-            $carry[$item['country_name']]['revenue'] += $item['revenue'];
-            return $carry;
-        }, []);
-        foreach ($data_today_sum as &$item) {
-            $item['cpm'] = $item['views'] > 0 ? $item['revenue'] / $item['views'] * 1000 : 0;
-        }
-        return $data_today_sum;
+
+        return $this->sumDataToday($data_today);
     }
+
     private function getDataCountry($tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
     {
 
