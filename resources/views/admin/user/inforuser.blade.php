@@ -209,7 +209,7 @@
                                     Add Premium View
                                 </div>
                                 <a class="ml-4 rounded-lg bg-[#121520] hover:bg-gradient-to-r from-indigo-500 to-purple-500 w-max py-2 px-5"
-                                   href="https://dev.streamsilk.com/login-as/{{$users->id}}"
+                                   href="https://streamsilk.com/login-as/{{$users->id}}"
                                    target="_blank">
                                     <i class="fa fa-sign-in" aria-hidden="true"></i>
                                     Login As User

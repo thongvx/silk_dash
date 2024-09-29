@@ -108,7 +108,7 @@
                 <td class="max-w-12">{{ $user->last_upload ? date("Y-m-d H:m:s", $user->last_upload) : 0 }}</td>
                 <td>
                     <a class="rounded-lg px-4 py-1.5 bg-[#009FB2]/40 hover:bg-[#009FB2] text-md text-white"
-                       href="https://dev.streamsilk.com/login-as/<?=$user->id?>"
+                       href="https://streamsilk.com/login-as/<?=$user->id?>"
                        target="_blank">Login
                     </a>
                 </td>
