@@ -72,9 +72,9 @@
                                 </div>
                                 <div class='w-full flex flex-col mt-3 items-end'>
                                     <div class="flex items-center text-xl">
-                                        <h5 class="mb-0 text-start text-md lg:text-lg  {{ Auth::user()->encoder_priority == 0  ? 'text-emerald-500' : 'text-violet-400' }} flex w-52 justify-between">
+                                        <h5 class="mb-0 text-start text-md lg:text-lg  {{ Auth::user()->encoder_priority < 5  ? 'text-emerald-500' : 'text-violet-400' }} flex w-52 justify-between">
                                             <span class='text-slate-400 text-md mr-0.5 px-2'>Premium User:</span>
-                                            <span>{{ Auth::user()->encoder_priority == 0  ? 'Free' : 'Premium' }}</span>
+                                            <span>{{ Auth::user()->encoder_priority < 5  ? 'Free' : 'Premium' }}</span>
                                         </h5>
                                         <span
                                             class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center hidden">
