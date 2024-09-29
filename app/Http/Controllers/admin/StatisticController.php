@@ -184,10 +184,9 @@ class StatisticController extends Controller
         }
         return $data;
     }
-    private function getDataTodayCountry($today, $country, $earningToday, $AllCountries) {
+    private function getDataTodayCountry($today,$country, $earningToday, $AllCountries){
         $data_today = [];
 
-        // Xử lý danh sách quốc gia
         $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
         // Lấy tất cả các keys liên quan đến views theo ngày
