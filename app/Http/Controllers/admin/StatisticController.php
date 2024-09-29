@@ -10,10 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\ServerStream\SvStreamService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
-use App\Repositories\ReportRepo;
-use App\Repositories\CountryRepo;
+use App\Repositories\Admin\StatisticRepo;
 use App\Repositories\AccountRepo;
 use App\Services\StatisticService;
 
@@ -21,16 +19,14 @@ use App\Services\StatisticService;
 class StatisticController extends Controller
 {
     protected $svStreamService;
-    protected $reportRepo;
-    protected $countryRepo;
+    protected $statisticRepo;
     protected $accountRepo;
 
-    public function __construct(SvStreamService $svStreamService, ReportRepo $reportRepo, CountryRepo $countryRepo, AccountRepo $accountRepo)
+    public function __construct(SvStreamService $svStreamService, StatisticRepo $statisticRepo, AccountRepo $accountRepo)
     {
         $this->svStreamService = $svStreamService;
-        $this->reportRepo = $reportRepo;
-        $this->countryRepo = $countryRepo;
         $this->accountRepo = $accountRepo;
+        $this->statisticRepo = $statisticRepo;
     }
     private function getDateRange($date,$today, $request)
     {
@@ -49,31 +45,27 @@ class StatisticController extends Controller
                 break;
             default:
                 $startDate = $request->input('startDate', Carbon::today()->subWeek());
-                $endDate = $request->input('endDate', Carbon::yesterday());
+                $endDate = $request->input('endDate', Carbon::today());
         }
         if($date == 'today'){
-            $data['startDate'] = $data['endDate'] = date("m/d/Y", strtotime($today));
+            $data['startDate'] = $data['endDate'] = $today;
         } else{
             $data['startDate'] = date("m/d/Y", strtotime($startDate));
             $data['endDate'] = date("m/d/Y", strtotime($endDate));
         }
         return $data;
     }
-    private function earningToday($userId, $today){
-        $earningToday = StatisticService::calculateValue($userId, $today->format('Y-m-d'));
-        return $earningToday;
-    }
     // Get total profit and total withdrawals
-    private function dataTotalReport($userId,$today){
-        $totalProfitkey = "user:{$userId}:total_profit:{$today->format('Y-m-d')}";
-        $totalWithdrawalskey = "user:{$userId}:total_withdrawal:{$today->format('Y-m-d')}";
-        $totalProfit = Redis::get($totalProfitkey);
-        $totalWithdrawals = Redis::get($totalWithdrawalskey);
-        $data['userWatching'] = Redis::get("watching_users:{$userId}") ?? 0;
-        $data['totalProfit'] = floatval($totalProfit ?? $this->reportRepo->where('user_id', $userId)->sum('revenue'));
-        $data['totalWithdrawals'] = floatval($totalWithdrawals ?? Db::table('payment')->where('user_id', $userId)->sum('amount'));
-        Redis::setex($totalProfitkey, 86400, $data['totalProfit']);
-        Redis::setex($totalWithdrawalskey, 86400, $data['totalWithdrawals']);
+    private function dataTotalReport($today){
+        $cacheKey = "total_balance:{$today}";
+        $data['totalBalance'] = Redis::get($cacheKey);
+        $data['totalWithdrawals'] = Payment::sum('amount');
+        if (!$data['totalBalance']) {
+            $data['totalBalance'] = $this->statisticRepo->sum('revenue') - Payment::sum('amount');
+            Redis::setex($cacheKey, 43200, $data['totalBalance']); // Cache for 12 hours
+        } else {
+            $data['totalBalance'] = floatval($data['totalBalance']);
+        }
         return $data;
     }
     private function country($country){
@@ -89,19 +81,17 @@ class StatisticController extends Controller
     }
     // Get all report data
     private function getAllReportData(Request $request){
-        $user = Auth::user();
-        $userId = $user->id;
-        $tab = $request->get('tab');
+        $tab = $request->get('tab', 'date');
         $date = $request->input('date');
         $country = $request->input('country', null);
-        $today = Carbon::today();
+        $today = Carbon::today()->toDateString();
         $data = [];
-        $data['title'] = 'Report';
-        $data = array_merge($data, self::dataTotalReport($userId,$today));
-        $earningToday = self::earningToday($userId, $today);
+        $data['title'] = 'Statistic';
+        $data = array_merge($data, self::dataTotalReport($today));
+        $statisticService = new StatisticService($this->accountRepo);
+        $earningToday = $statisticService->calculateTotalEarnings($today);
         $data = array_merge($data, self::getDateRange($date, $today, $request));
         $data = array_merge($data, self::country($country));
-        $data['payments'] = $this->reportRepo->getPayment($userId);
         if($tab == 'date'){
             $data['column'] = $request->get('column', 'date');
         }else{
@@ -109,17 +99,16 @@ class StatisticController extends Controller
         }
         $data['direction'] = $request->get('direction', 'desc');
         $data['earnings'] = [
-            'today' => floatval(array_sum($earningToday)),
-            'yesterday' => $this->reportRepo->getAllData($userId, 'date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
+            'yesterday' => $this->statisticRepo->getAllData('date', Carbon::yesterday(), Carbon::yesterday(), null)[0]['revenue'] ?? 0,
         ];
         if ($tab == 'date'){
             if($country == null){
-                $data['reports'] = self::getDataDate($userId,$tab, $date ,$today, $earningToday, $data['startDate'], $data['endDate'], null);
+                $data['reports'] = self::getDataDate($tab, $date ,$today, $earningToday, $data['startDate'], $data['endDate']);
             }else{
-                $data['reports'] = self::getDataCountry($userId,$tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country,$data['AllCountries']);
+                $data['reports'] = self::getDataCountry($tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country,$data['AllCountries']);
             }
         } else{
-            $data['reports'] = self::getDataCountry($userId,$tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country, $data['AllCountries']);
+            $data['reports'] = self::getDataCountry($tab, $date, $today, $earningToday, $data['startDate'], $data['endDate'], $country, $data['AllCountries']);
         }
         $dataCollection = collect($data['reports']);
 
@@ -130,47 +119,54 @@ class StatisticController extends Controller
         }
         return $data;
     }
-    private function getDataDate($userId,$tab, $date,$today, $earningToday, $startDate, $endDate, $country)
+    private function getDataDate($tab, $date,$today, $earningToday, $startDate, $endDate)
     {
 
-        if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
+        if(Carbon::parse($endDate)->format('Y-m-d') == $today){
             $data_today = [];
-            $totalViews = Redis::get("total_user_views:{$today->format('Y-m-d')}:{$userId}") ?? 0;
-            $totalImpressionViews = 0;
-            $totalImpression1 = Redis::keys("total_impression1:{$today->format('Y-m-d')}:{$userId}:*");
-            $totalImpression2 = Redis::keys("total_impression2:{$today->format('Y-m-d')}:{$userId}:*");
-            foreach ($totalImpression1 as $totalImpression1Key) {
-                // Lấy số lượt xem của user từ khóa
-                $views = Redis::get($totalImpression1Key);
-                // Cộng số lượt xem vào tổng số lượt xem
-                $totalImpressionViews += (int)$views;
+            $totalViewsKey = Redis::keys("total_user_views:{$today}:*");
+            if($totalViewsKey){
+                $total = Redis::mget($totalViewsKey);
             }
-            foreach ($totalImpression2 as $totalImpression2Key) {
-                // Lấy số lượt xem của user từ khóa
-                $views = Redis::get($totalImpression2Key);
-                // Cộng số lượt xem vào tổng số lượt xem
-                $totalImpressionViews += (int)$views;
-            }
-            $cpm = $totalImpressionViews > 0 ? array_sum($earningToday) / $totalImpressionViews * 1000 : 0;
+            $totalViews = array_sum($total ?? []) ?? 0;
+            $script = <<<LUA
+                local totalSum = 0
+                local cursor = '0'
+
+                -- Scan for total_impression1 and total_impression2 keys in one scan loop
+                repeat
+                    local scanResult = redis.call('SCAN', cursor, 'MATCH', 'total_impression*:'..ARGV[1]..':*')
+                    cursor = scanResult[1]
+                    for _, key in ipairs(scanResult[2]) do
+                        totalSum = totalSum + tonumber(redis.call('GET', key) or 0)
+                    end
+                until cursor == '0'
+
+                return totalSum
+            LUA;
+
+            $totalImpressionViews = Redis::eval($script, 0, $today);
+
+            $cpm = $totalImpressionViews > 0 ? $earningToday / $totalImpressionViews * 1000 : 0;
             $paid_views = $totalImpressionViews;
             $VpnAdsViews = $totalViews - $paid_views;
             $data_today[] = [
-                'date' => $today->format('Y-m-d'),
+                'date' => $today,
                 'cpm' => $cpm ,
                 'views' => $totalViews,
                 'download' => 0,
                 'paid_views' => $paid_views,
                 'vpn_ads_views' => $VpnAdsViews,
-                'revenue' => array_sum($earningToday)
+                'revenue' => $earningToday
             ];
             if($date == 'today'){
                 $data = collect(array_map(function ($item) {
                     return (object) $item;
                 }, $data_today));
             }else{
-                $data = collect($this->reportRepo->getAllData($userId, $tab, $startDate, $endDate, $country))->map(function ($item) use ($data_today, $today) {
+                $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate))->map(function ($item) use ($data_today, $today) {
                     $item = (object) $item;
-                    if ($item->date == $today->format('Y-m-d')) {
+                    if ($item->date == $today) {
                         $item->cpm = $data_today[0]['cpm'];
                         $item->views = $data_today[0]['views'];
                         $item->download = $data_today[0]['download'];
@@ -182,59 +178,112 @@ class StatisticController extends Controller
                 });
             }
         }else{
-            $data = collect($this->reportRepo->getAllData($userId, $tab, $startDate, $endDate, $country))->map(function ($item) {
+            $data = collect($this->statisticRepo->getAllData($tab, $startDate, $endDate))->map(function ($item) {
                 return (object) $item;
             });
         }
         return $data;
     }
+    private function getDataTodayCountry($today,$country, $earningToday, $AllCountries){
+        $data_today = [];
 
-    private function getDataCountry($userId,$tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
-    {
+        $filteredCountries = is_string($country) ? explode(',', $country) : $country;
 
-        if(Carbon::parse($endDate)->format('Y-m-d') == $today->format('Y-m-d')){
-            $data_today = [];
-            $filteredCountries = is_string($country) ? explode(',', $country) : $country;
+        // Lấy tất cả các keys liên quan đến views theo ngày
+        $countryViewsKeys = Redis::keys("total:{$today}:*");
+        $uniqueCountries = array_unique(array_map(function($key) {
+            return explode(":", $key)[3]; // Trích xuất mã quốc gia
+        }, $countryViewsKeys));
 
-            $countryViewsKeys = Redis::keys("total:{$today->format('Y-m-d')}:{$userId}:*");
-            $indexedCountries = $AllCountries->keyBy('code');
-            foreach ( $countryViewsKeys as $key) {
-                $countryViews = Redis::get($key) ?? 0;
-                $countryCode = explode(':', $key)[3];
+        if ($filteredCountries) {
+            $uniqueCountries = array_intersect($uniqueCountries, $filteredCountries);
+        }
 
-                if ($filteredCountries !== null && !in_array($countryCode, $filteredCountries)) {
-                    continue;
-                }
+        $indexedCountries = $AllCountries->keyBy('code');
+        $chunks = array_chunk($uniqueCountries, 50); // Chia nhỏ theo chunk để tránh quá tải
 
+        foreach ($chunks as $chunk) {
+            $luaScript = <<<LUA
+        local result = {}
+        for i, countryCode in ipairs(KEYS) do
+            local totalViews = 0
+            local totalImpression1 = 0
+            local totalImpression2 = 0
+
+            -- Lấy các keys cho từng country
+            local viewKeys = redis.call('KEYS', 'total:' .. ARGV[1] .. ':*:' .. countryCode)
+            local impression1Keys = redis.call('KEYS', 'total_impression1:' .. ARGV[1] .. ':*:' .. countryCode)
+            local impression2Keys = redis.call('KEYS', 'total_impression2:' .. ARGV[1] .. ':*:' .. countryCode)
+
+            -- Lấy giá trị của các keys và tính tổng
+            if #viewKeys > 0 then
+                local viewValues = redis.call('MGET', unpack(viewKeys))
+                for _, v in ipairs(viewValues) do
+                    totalViews = totalViews + tonumber(v or 0)
+                end
+            end
+
+            if #impression1Keys > 0 then
+                local impression1Values = redis.call('MGET', unpack(impression1Keys))
+                for _, v in ipairs(impression1Values) do
+                    totalImpression1 = totalImpression1 + tonumber(v or 0)
+                end
+            end
+
+            if #impression2Keys > 0 then
+                local impression2Values = redis.call('MGET', unpack(impression2Keys))
+                for _, v in ipairs(impression2Values) do
+                    totalImpression2 = totalImpression2 + tonumber(v or 0)
+                end
+            end
+
+            table.insert(result, {countryCode, totalViews, totalImpression1, totalImpression2})
+        end
+        return result
+        LUA;
+            $args = [$today];
+            $results = Redis::eval($luaScript, count($chunk), ...$chunk, ...$args);
+
+            foreach ($results as $result) {
+                [$countryCode, $countryViews, $totalImpression1KeysResult, $totalImpression2KeysResult] = $result;
+
+                $totalImpressionViews = $totalImpression1KeysResult + $totalImpression2KeysResult;
                 $getCountry = $indexedCountries->get($countryCode);
-
-                $totalImpression1Views = Redis::get("total_impression1:{$today->format('Y-m-d')}:{$userId}:$countryCode") ?: 0;
-                $totalImpression2Views = Redis::get("total_impression2:{$today->format('Y-m-d')}:{$userId}:$countryCode") ?: 0;
                 $country_name = $getCountry->name ?? $countryCode;
                 $revenue = $earningToday[$countryCode] ?? 0;
-                $paidView = $totalImpression1Views + $totalImpression2Views;
+                $paidView = $totalImpressionViews;
                 $countryVpnAdsView = $countryViews - $paidView;
-                $countryDownload = 0;
+
                 $data_today[] = [
-                    'date' => $today->format('Y-m-d'),
+                    'date' => $today,
                     'country_name' => $country_name,
                     'views' => $countryViews,
-                    'download' => $countryDownload,
+                    'download' => 0, // Hiện tại mặc định là 0, bạn có thể điều chỉnh nếu cần
                     'paid_views' => $paidView,
                     'vpn_ads_views' => $countryVpnAdsView,
                     'revenue' => $revenue,
                     'cpm' => $countryViews > 0 ? $revenue / $countryViews * 1000 : 0,
                 ];
             }
+        }
+
+        return $this->sumDataToday($data_today);
+    }
+
+    private function getDataCountry($tab, $date,$today, $earningToday, $startDate, $endDate, $country, $AllCountries)
+    {
+
+        if(Carbon::parse($endDate)->format('Y-m-d') == $today){
+            $data_today_sum = self::getDataTodayCountry($today, $country, $earningToday, $AllCountries);
             if($date == 'today') {
-                $data = collect(array_map(function ($item) {
-                    return (object)$item;
-                }, $data_today));
+                $data = array_map(function ($item) {
+                    return (object) $item;
+                }, $data_today_sum);
             }else{
                 if($country == null){
-                    $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) use ($data_today,$tab) {
+                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) use ($data_today_sum, $tab) {
                         $item = (object) $item;
-                        foreach ($data_today as $data) {
+                        foreach ($data_today_sum as $data) {
                             if($item->country_name == $data['country_name']){
                                 $item->views += $data['views'];
                                 $item->download += $data['download'];
@@ -247,23 +296,23 @@ class StatisticController extends Controller
                         return $item;
                     });
                     $existingCountryNames = $data->pluck('country_name')->toArray();
-                    foreach ($data_today as $dataItem) {
+                    foreach ($data_today_sum as $dataItem) {
                         if (!in_array($dataItem['country_name'], $existingCountryNames)) {
                             $data->push((object) $dataItem);
                         }
                     }
                 } else{
-                    $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) {
+                    $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                         return (object) $item;
                     });
-                    $data = $data->merge(collect($data_today)->map(function ($item) {
+                    $data = $data->merge(collect([$data_today_sum])->map(function ($item) {
                         return (object) $item;
                     }));
                 }
 
             }
         }else{
-            $data = collect($this->countryRepo->getAllDataCountry($tab,$startDate, $endDate, $userId, $country))->map(function ($item) {
+            $data = collect($this->statisticRepo->getAllDataCountry($tab,$startDate, $endDate, $country))->map(function ($item) {
                 return (object) $item;
             });
         }
@@ -276,6 +325,21 @@ class StatisticController extends Controller
         $data = $this->getAllReportData($request, $tab);
         // Get the total number of transfers
         return view('admin.statistic.statistic', $data);
+    }
+    public function store(Request $request)
+    {
+
+        $tab = $request->get('tab');
+        $report = $this->getAllReportData($request);
+        if ($tab == 'date') {
+            $view = view('admin.statistic.date', $report)->render();
+        } else {
+            $view = view('admin.statistic.country', $report)->render();
+        }
+        return response()->json([
+            'data' => $report,
+            'view' => $view,
+        ]);
     }
 
     public function statisticController(Request $request)

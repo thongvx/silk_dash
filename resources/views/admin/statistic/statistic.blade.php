@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-4">
-        <div class=" grid grid-cols-1 lg:grid-cols-2 gap-6 lg:col-span-3">
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="lg:col-span-1">
             <!-- card1 -->
             <div class="xl:mb-0">
                 <div
@@ -18,18 +18,16 @@
         </div>
         <!-- card1 -->
         <div class="xl:mb-0 lg:col-span-1">
-            <div
-                class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
-                <div class='flex flex-col items-center justify-center py-2.5'>
-                    <div class='font-semibold text-center'>
-                        <h3 class='text-lg text-slate-400'>Total balance</h3>
-                        <h5 class="mb-0 font-bold text-2xl text-white mt-3  flex items-start">
+            <!-- card1 -->
+            <div class="xl:mb-0">
+                <div
+                    class='bg-[#121520] rounded-3xl py-2 px-5 shadow-gray-600/30 dark:shadow-slate-900'>
+                    <div class='flex items-center justify-between py-2.5'>
+                        <h3 class='text-lg text-slate-400'>Total Balance</h3>
+                        <h5 class="mb-0 font-bold text-2xl text-white  flex items-start">
                             <span class='text-slate-400 text-xl mr-0.5'>$</span> {{ number_format(($totalBalance), 0, '.', ',') }}
                         </h5>
                     </div>
-                    <button class="button-payout px-4 py-2 rounded-3xl bg-[#142132] hover:bg-[#009FB2] text-white mt-6"
-                            report>Request payout
-                    </button>
                 </div>
             </div>
         </div>
@@ -129,72 +127,6 @@
             </div>
         </div>
 
-        <div fixed-payout>
-            <!-- -right-90 in loc de 0-->
-            <div fixed-payout-card
-                 class="opacity-0 hidden bg-black/20 z-50 shadow-3xl w-screen ease fixed top-0 left-0 flex h-full  backdrop-blur-sm
-           min-w-0 flex-col break-words rounded-none border-0 bg-clip-border duration-200 justify-center items-center px-3">
-                <div class="absolute h-full w-full fixed-plugin-close-button z-10" fixed-payout-close-button>
-                </div>
-                <div
-                    class="w-11/12 sm:w-4/5 xl:w-2/5 bg-[#121520] z-20 py-4 px-3 rounded-lg relative">
-                    <div class="absolute right-4 top-3">
-                        <button fixed-payout-close-button
-                                class="inline-block p-0 text-sm font-bold leading-normal text-center uppercase align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-none cursor-pointer hover:-translate-y-px tracking-tight-rem bg-150 bg-x-25 active:opacity-85 dark:text-white text-slate-700">
-                            <i class="fa fa-close text-xl"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <div class="payout" id="payout">
-                            <h5 class="mb-0 text-[#009FB2] text-lg font-semibold flex justify-between">Request Payout
-
-                            </h5>
-                            <h4 class="text-4xl text-center font-bold flex items-start justify-center">
-                                <span class="text-slate-400 text-2xl" id="total-balance" data-balance="{{number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}">$</span>{{ number_format(($totalProfit-$totalWithdrawals), 0, '.', ',') }}
-                            </h4>
-                            <div class="text-white mt-3 flex justify-between items-center">
-                                <h5>
-                                    Your USDT Address: {{  Auth::user()->usdt_address }}<br>
-                                    Network: {{  Auth::user()->network }}
-                                </h5>
-
-                            </div>
-                            <h5 class="text-start text-slate-400 text-md italic">
-                                *Update your USDT address in your profile.
-                            </h5>
-                            <div class="mt-4" id="box-request-payment">
-                                @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') && $payments->count() == 0)
-                                    <span class="text-[#05ffff] italic pb-2">Gift up to 30% for first withdrawal!</span>
-                                @endif
-                                <form class="text-white flex justify-between" id="request-payment" method="POST" action="">
-                                    @if(Auth::user()->email_verified_at->addMonth()->format('Y-m-d') >= now()->format('Y-m-d') && $payments->count() == 0)
-                                        <input type="text" id="Expires" name="gift" class="hidden" value="1">
-                                    @endif
-                                    <div class="bg-[#142132] rounded-lg flex w-full px-3 items-center">
-                                        <label for="amount" class="mr-3">
-                                            Amount:
-                                        </label>
-                                        <input type="number" min="50"
-                                               max="{{ ($totalProfit-$totalWithdrawals) < 2000 ? ($totalProfit-$totalWithdrawals) : 2000 }}" name="amount" id="amount"
-                                               class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
-                                               placeholder="50"/>
-                                        <h5>
-                                            USD
-                                        </h5>
-                                    </div>
-                                    <button type="submit" disabled class="bg-[#142132] rounded-xl px-5 py-2 h-max ml-3">
-                                        Submit
-                                    </button>
-                                </form>
-                                <h5 class="text-start text-slate-400 text-lg italic">
-                                    *Payouts range from $50 to $2000.
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         @endsection
         @section('scripts')
             <script src="{{ asset('assets/js/daterangepicker/datepicker.min.js') }}"></script>

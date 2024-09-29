@@ -93,7 +93,7 @@ class PlayController
                 } else {
                     $video->pathStream = $video->pathStream == 0 ? $this->selectPathStream($video->sd, $video->hd, $video->fhd) : $video->pathStream;
                     $urlStream = 0;
-                    if(!file_exists('data/'.$video->middle_slug)) {
+                    if(!file_exists('data1/'.$video->middle_slug)) {
                         if ($video->stream == 0) {
                             $svStream = SvStreamService::selectSvStream();
                             //Queue::push(new CreateHlsJob($video->middle_slug, $svStream, $video->pathStream, $video->sd, $video->hd, $video->fhd));
