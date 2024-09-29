@@ -78,6 +78,9 @@ Route::middleware([DisableSession::class])->group(function () {
 
 //-------------------------Play and download--------------------------------------------------------
 Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
+//direct play
+Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('vPlay');
+
 Route::get('/testplay/{id}', [\App\Http\Controllers\PlayController::class, 'testplay'])->name('testplay');
 Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
 Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
@@ -155,8 +158,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // load page
     Route::get('/loadPage', [\App\Helpers\ModelHelpers::class, 'loadPage']);
     Route::post('/control-datatable', [\App\Http\Controllers\DatatableController::class, 'datatableControl']);
-    //direct play
-    Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('vPlay');
+
 });
 
 Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
