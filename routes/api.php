@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::prefix('file')->group(function () {
         Route::get('listFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'getListFile']);
         Route::get('infoFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'findVideoBySlug']);
+        Route::get('getLinkPlay', [\App\Http\Controllers\Dashboard\VideoController::class, 'getLinkPlay']);
         Route::get('renameFile/{id}', [\App\Http\Controllers\Dashboard\VideoController::class, 'update']);
         Route::get('deleteFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'destroyMultiple']);
         Route::get('cloneFile', [\App\Http\Controllers\Dashboard\VideoController::class, 'cloneVideo']);

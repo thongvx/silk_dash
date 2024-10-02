@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Jobs\CreatStreamAudioJob;
 use App\Notifications\NotificationService;
 use App\Repositories\VideoRepo;
 use App\Repositories\FolderRepo;
 use App\Repositories\EncoderTaskRepo;
 use App\Repositories\TransferRepo;
+use App\Services\ServerStream\SvStreamService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redis;
 use App\Repositories\PlayerSettingsRepo;
@@ -509,5 +512,39 @@ class VideoController
         ];
         return view('dashboard.video.settingVideo', $data);
     }
-
+    public function getLinkPlay($slug)
+    {
+        $video = $this->videoRepo->findVideoBySlug($slug);
+        $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
+        if ($video && $video->soft_delete == 0) {
+            if(!file_exists('data1/'.$video->middle_slug)) {
+                if ($video->stream == 0) {
+                    $svStream = SvStreamService::selectSvStream();
+                    $nameSvStream = explode('.', $svStream);
+                    $video->stream = $nameSvStream[0];
+                    if($nameSvStream[0])
+                        $video->save();
+                } else {
+                    $svStream = SvStreamService::checkConnectSvStream(explode('-', $video->stream));
+                    if ($svStream === null) {
+                        $svStream = SvStreamService::selectSvStream();
+                        $nameSvStream = explode('.', $svStream);
+                        $video->stream = $video->stream . '-' . $nameSvStream[0];
+                        if($nameSvStream[0])
+                            $video->save();
+                    }
+                }
+                $urlPlay = 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8';
+            }
+            else
+                $urlPlay = 'https://streamsilk.com/data/'.$video->middle_slug.'/'.$video->middle_slug.'.m3u8';
+            $data = [
+                'title' => 'Setting Video',
+                'video' => $video,
+                'urlPlay' => $urlPlay,
+            ];
+            return view('dashboard.video.settingVideo', $data);
+        }
+        return view('dashboard.video.settingVideo', $data);
+    }
 }
