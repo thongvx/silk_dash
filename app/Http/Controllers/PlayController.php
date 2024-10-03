@@ -56,7 +56,7 @@ class PlayController
             if (Redis::exists($keyAdsIp)) {
                 Redis::set($keyAdsIp, $viewsAds, 'XX');
             } else {
-                Redis::setex($keyAdsIp, 10 * 60, $viewsAds);
+                Redis::setex($keyAdsIp, 6 * 60 * 60, $viewsAds);
             }
 
             if($data_setting->earningModes == 0)

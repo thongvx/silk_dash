@@ -42,6 +42,16 @@ class DownloadController extends Controller
         $video = $this->videoRepo->findVideoBySlug($slug);
         if ($video && $video->soft_delete == 0){
             $video = $video->check_duplicate == 0 ? $this->videoRepo->findVideoBySlug($video->middle_slug) : $video;
+            //check ip
+            $keyAdsIp = "ads_ip:{$request->ip()}";
+            $viewsAds = Redis::get($keyAdsIp) ?: 0;
+            $viewsAds++;
+            if (Redis::exists($keyAdsIp)) {
+                Redis::set($keyAdsIp, $viewsAds, 'XX');
+            } else {
+                Redis::setex($keyAdsIp, 6 * 60 * 60, $viewsAds);
+            }
+            $data['viewsAds'] = $viewsAds;
             $data['video'] = $video;
             $data['playerSetting'] = $this->playerSettingsRepo->getAllPlayerSettings($video->user_id);
             $data['accountSetting'] = $this->accountRepo->getSetting($video->user_id);

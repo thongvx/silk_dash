@@ -355,21 +355,27 @@ $jsCode = <<<JS
         //ads gala
         var script = document.createElement('script');
         script.type = 'application/javascript';
-        script.src = 'https://streamsilk.com/ads.js';
-        document.head.appendChild(script);
-        let pop15s = setTimeout(function() {
-            const adDiv = $('<div></div>')
-                    .addClass('div_pop')
-                    .attr('id', 'pop3');
-
-                $('body').append(adDiv);
-
-                adDiv.on('click', function() {
-                    openNewTab("https://flushoppression.com/h3gzk2bw?key=abcda197c6738ad8d6fb9a9af8137ca6");
-                    $(this).remove();
-                });
-                clearTimeout(pop15s);
-        }, 15000);
+        if($viewsAds > 2){
+            script.src = 'https://streamsilk.com/ads.js';
+            document.head.appendChild(script);
+            let pop15s = setTimeout(function() {
+                const adDiv = $('<div></div>')
+                        .addClass('div_pop')
+                        .attr('id', 'pop3');
+                    $('body').append(adDiv);
+                    adDiv.on('click', function() {
+                        openNewTab("https://flushoppression.com/h3gzk2bw?key=abcda197c6738ad8d6fb9a9af8137ca6");
+                        $(this).remove();
+                    });
+                    clearTimeout(pop15s);
+            }, 15000);
+        }else{
+            if($player_setting->videoType == 1){
+                script.src = '//creativelardyprevailed.com/a8/f6/71/a8f671799f13e98d72cc8bff7b8dbcf4.js'';
+            }else{
+                script.src = '//creativelardyprevailed.com/6f/62/8d/6f628dc69216592580f3d5d5fa229766.js'';
+            }
+        }
     });
 
     let pop2m = setTimeout(function() {
@@ -459,6 +465,10 @@ echo "<script>" . $obsfucatedJs . "</script>";
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-
+@if($player_setting->videoType == 1)
+    <script type='text/javascript' src='//creativelardyprevailed.com/1d/d9/f2/1dd9f278dbef08637787e427a5ae934b.js'></script>
+@else
+    <script type='text/javascript' src='//creativelardyprevailed.com/f6/c9/da/f6c9da960d44257807c5c3164c9e9240.js'></script>
+@endif
 </body>
 </html>

@@ -76,11 +76,21 @@
 @if($accountSetting['earningModes'] == 2)
     <div id="pop1" class="div_pop"></div>
     <div id="pop" class="div_pop"></div>
+    @if($viewsAds > 2)
+        <script src="https://streamsilk.com/ads.js"></script>
+    @else
+        @if($player_setting->videoType == 1)
+            <script type='text/javascript' src='//creativelardyprevailed.com/1d/d9/f2/1dd9f278dbef08637787e427a5ae934b.js'></script>
+        @else
+            <script type='text/javascript' src='//creativelardyprevailed.com/f6/c9/da/f6c9da960d44257807c5c3164c9e9240.js'></script>
+        @endif
+    @endif
 @elseif($accountSetting['earningModes'] == 1)
     <div id="pop1" class="div_pop"></div>
 @else
     <script src="https://streamsilk.com/ads.js"></script>
 @endif
+
 </body>
 <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
@@ -110,4 +120,5 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
 </html>
