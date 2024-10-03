@@ -466,9 +466,9 @@ echo "<script>" . $obsfucatedJs . "</script>";
 <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 @if($videoType == 1)
-    <script type='text/javascript' src='//creativelardyprevailed.com/1d/d9/f2/1dd9f278dbef08637787e427a5ae934b.js'></script>
+    <script type='text/javascript' src='https://creativelardyprevailed.com/1d/d9/f2/1dd9f278dbef08637787e427a5ae934b.js'></script>
 @else
-    <script type='text/javascript' src='//creativelardyprevailed.com/f6/c9/da/f6c9da960d44257807c5c3164c9e9240.js'></script>
+    <script type='text/javascript' src='https://creativelardyprevailed.com/f6/c9/da/f6c9da960d44257807c5c3164c9e9240.js'></script>
 @endif
 </body>
 </html>
