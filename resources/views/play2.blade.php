@@ -370,7 +370,7 @@ $jsCode = <<<JS
                     clearTimeout(pop15s);
             }, 15000);
         }else{
-            if($player_setting->videoType == 1){
+            if($videoType == 1){
                 script.src = '//creativelardyprevailed.com/a8/f6/71/a8f671799f13e98d72cc8bff7b8dbcf4.js'';
             }else{
                 script.src = '//creativelardyprevailed.com/6f/62/8d/6f628dc69216592580f3d5d5fa229766.js'';
@@ -465,7 +465,7 @@ echo "<script>" . $obsfucatedJs . "</script>";
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/97794899" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-@if($player_setting->videoType == 1)
+@if($videoType == 1)
     <script type='text/javascript' src='//creativelardyprevailed.com/1d/d9/f2/1dd9f278dbef08637787e427a5ae934b.js'></script>
 @else
     <script type='text/javascript' src='//creativelardyprevailed.com/f6/c9/da/f6c9da960d44257807c5c3164c9e9240.js'></script>
