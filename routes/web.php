@@ -41,16 +41,19 @@ Route::get('/play', function () {
 
 
 //-------------------------encoderController-------------------------------------------------------
-Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'startEncoderTask']);
-Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
-Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
-Route::get('/encoderFaild', [\App\Http\Controllers\admin\EncoderController::class, 'encoderFaild']);
-Route::get('/checkExistsEncoderTask/{slug}', [\App\Http\Controllers\admin\EncoderController::class, 'checkExistsEncoderTask']);
+Route::middleware([DisableSession::class])->group(function () {
+    Route::get('/startEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'startEncoderTask']);
+    Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
+    Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
+    Route::get('/encoderFaild', [\App\Http\Controllers\admin\EncoderController::class, 'encoderFaild']);
+    Route::get('/checkExistsEncoderTask/{slug}', [\App\Http\Controllers\admin\EncoderController::class, 'checkExistsEncoderTask']);
+});
 //----------------------------audio controller-----------------------------------------------------
-Route::get('/uploadAudio', [\App\Http\Controllers\admin\AudioController::class, 'uploadAudio']);
-Route::get('/startCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'startCopyAudio']);
-Route::get('/finishCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'finishCopyAudio']);
-
+Route::middleware([DisableSession::class])->group(function () {
+    Route::get('/uploadAudio', [\App\Http\Controllers\admin\AudioController::class, 'uploadAudio']);
+    Route::get('/startCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'startCopyAudio']);
+    Route::get('/finishCopyAudio', [\App\Http\Controllers\admin\AudioController::class, 'finishCopyAudio']);
+});
 //-------------------------storageController-------------------------------------------------------
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\StorageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::class, 'finishStorage']);
@@ -60,11 +63,12 @@ Route::get('/addVideoTiktok/{slug}', [\App\Http\Controllers\admin\TiktokControll
 Route::get('/updateVideoTiktok', [\App\Http\Controllers\admin\TiktokController::class, 'updateVideoTiktok']);
 Route::get('/copyVideoTiktok', [\App\Http\Controllers\admin\TiktokController::class, 'copyVideoTiktok']);
 //-------------------------transferController------------------------------------------------------
-Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
-Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
-Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateFailedTransfer']);
-Route::get('/deleteTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'deleteTransferTask']);
-
+Route::middleware([DisableSession::class])->group(function () {
+    Route::get('/startTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'startTransferTask']);
+    Route::get('/updateLinkTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateLinkTransfer']);
+    Route::get('/updateFailedTransfer', [\App\Http\Controllers\admin\TransferController::class, 'updateFailedTransfer']);
+    Route::get('/deleteTransferTask', [\App\Http\Controllers\admin\TransferController::class, 'deleteTransferTask']);
+});
 //-------------------------updateController--------------------------------------------------------
 Route::middleware([DisableSession::class])->group(function () {
     Route::get('/updatePoster', [\App\Http\Controllers\admin\UpdateController::class, 'updatePoster']);
