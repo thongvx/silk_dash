@@ -77,7 +77,7 @@ Route::middleware([DisableSession::class])->group(function () {
 });
 
 //-------------------------Play and download--------------------------------------------------------
-
+Route::middleware([DisableSession::class])->group(function () {
     Route::get('/p/{slug}', [\App\Http\Controllers\PlayController::class, 'play'])->name('play');
     //direct play
     Route::get('/v/{slug}', [\App\Http\Controllers\PlayController::class, 'directPage'])->name('vPlay');
@@ -86,7 +86,7 @@ Route::middleware([DisableSession::class])->group(function () {
     Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
     Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
     Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
-
+});
 //-------------------------menu--------------------------------------------------------
 Route::post('/update-minimenu', [\App\Http\Controllers\MiniMenuController::class, 'update'])->name('update.minimenu');
 Route::middleware([DisableSession::class])->group(function () {
