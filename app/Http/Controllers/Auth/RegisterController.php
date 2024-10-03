@@ -73,16 +73,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $recaptchaResponse = $data['g-recaptcha-response'];
-        $recaptchaSecret = config('services.recaptcha.secret_key');
-        $recaptcha = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => $recaptchaSecret,
-            'response' => $recaptchaResponse,
-        ]);
-
-        if (!$recaptcha->json()['success']) {
-            return null;
-        }
+//        $recaptchaResponse = $data['g-recaptcha-response'];
+//        $recaptchaSecret = config('services.recaptcha.secret_key');
+//        $recaptcha = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+//            'secret' => $recaptchaSecret,
+//            'response' => $recaptchaResponse,
+//        ]);
+//
+//        if (!$recaptcha->json()['success']) {
+//            return null;
+//        }
 
          Session::put('last_email_sent', now());
          $user = User::create([

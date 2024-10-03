@@ -23,21 +23,21 @@ class DownloadController extends Controller
     }
     public function download($slug, Request $request)
     {
-        $recaptchaResponse = $request->input('g-recaptcha-response');
-        if (!$recaptchaResponse) {
-            return view('captcha', ['slug' => $slug]);
-        }
-
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => config('services.recaptcha.secret_key'),
-            'response' => $recaptchaResponse,
-        ]);
-
-        $body = json_decode($response->body());
-
-        if (!$body->success) {
-            return view('captcha', ['slug' => $slug]);
-        }
+//        $recaptchaResponse = $request->input('g-recaptcha-response');
+//        if (!$recaptchaResponse) {
+//            return view('captcha', ['slug' => $slug]);
+//        }
+//
+//        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+//            'secret' => config('services.recaptcha.secret_key'),
+//            'response' => $recaptchaResponse,
+//        ]);
+//
+//        $body = json_decode($response->body());
+//
+//        if (!$body->success) {
+//            return view('captcha', ['slug' => $slug]);
+//        }
         $userId = auth()->id();
         $video = $this->videoRepo->findVideoBySlug($slug);
         if ($video && $video->soft_delete == 0){
