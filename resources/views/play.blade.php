@@ -362,7 +362,7 @@ $jsCode = <<<JS
         if($viewsAds % 2 === 0){
             $('body').one('click', function () {
                 if (t === 0) {
-                    openNewTab("https://ceehipsy.com/4/7779337");
+                    openNewTab("https://creativelardyprevailed.com/j17ixdz4r?key=16c5c9af0ce7c3bba420ff510f36e6c3");
                     t = 1;
                 }
             });
