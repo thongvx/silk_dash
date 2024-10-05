@@ -88,8 +88,8 @@ Route::middleware([DisableSession::class])->group(function () {
 
     Route::get('/testplay/{id}', [\App\Http\Controllers\PlayController::class, 'testplay'])->name('testplay');
     Route::post('/verify-recaptcha/{slug}', [\App\Http\Controllers\DownloadController::class, 'download'])->name('verify-recaptcha');
-    Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
 });
+Route::get('/d/{slug}', [\App\Http\Controllers\DownloadController::class, 'showDownloadPage'])->name('download');
 Route::post('/addDownloadVideo', [\App\Http\Controllers\DownloadController::class, 'addDownloadVideo']);
 
 //-------------------------menu--------------------------------------------------------
