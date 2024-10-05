@@ -37,7 +37,7 @@ class PaymentController extends Controller
             Redis::setex($totalWithdrawalskey, 86400, $totalWithdrawals);
         }
         $totalbelance = $totalProfit - $totalWithdrawals;
-        if($request->amount > $totalbelance && $request->amount <= 2000){
+        if($request->amount > $totalbelance || $request->amount <= 2000){
             return back()->with('error', 'The amount you entered is greater than your balance.');
         }
         $amount = $request->amount;
