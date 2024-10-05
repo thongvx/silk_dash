@@ -26,9 +26,6 @@ $(document).on('click', '[btn-download-link]', function() {
         url: '/addDownloadVideo',
         type: 'POST',
         data: data,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
         beforeSend: function () {
             $('#box-download').html(`<div class="w-full justify-center items-center flex h-full mt-6" id="loading">
                                             <div class="flex text-white items-center">
