@@ -80,9 +80,9 @@
         <script src="https://streamsilk.com/ads.js"></script>
     @else
         @if($accountSetting['videoType'] == 1)
-            <script type='text/javascript' src='//creativelardyprevailed.com/1d/d9/f2/1dd9f278dbef08637787e427a5ae934b.js'></script>
+            <script type='text/javascript' src='//creativelardyprevailed.com/a8/f6/71/a8f671799f13e98d72cc8bff7b8dbcf4.js'></script>
         @else
-            <script type='text/javascript' src='//creativelardyprevailed.com/f6/c9/da/f6c9da960d44257807c5c3164c9e9240.js'></script>
+            <script type='text/javascript' src='//creativelardyprevailed.com/6f/62/8d/6f628dc69216592580f3d5d5fa229766.js'></script>
         @endif
     @endif
 @elseif($accountSetting['earningModes'] == 1)
@@ -90,8 +90,13 @@
 @else
     <script src="https://streamsilk.com/ads.js"></script>
 @endif
-
+@if($accountSetting['videoType'] == 1)
+    <script type='text/javascript' src='//creativelardyprevailed.com/1d/d9/f2/1dd9f278dbef08637787e427a5ae934b.js'></script>
+@else
+    <script type='text/javascript' src='//creativelardyprevailed.com/f6/c9/da/f6c9da960d44257807c5c3164c9e9240.js'></script>
+@endif
 </body>
+
 <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
 @vite('resources/js/download.js')

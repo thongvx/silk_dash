@@ -67,21 +67,12 @@ $jsCode = <<<JS
     //ads
     const custom_ads = $custom_ads_json;
     function getVastAds(ads) {
-        if (!Array.isArray(ads)) {
-            ads = Object.values(ads);
-        }
         return ads.filter(ad => ad.adsType === 'vast');
     }
     function getDirectAds(ads) {
-        if (!Array.isArray(ads)) {
-            ads = Object.values(ads);
-        }
         return ads.filter(ad => ad.adsType === 'direct');
     }
     function getPopunderAds(ads) {
-        if (!Array.isArray(ads)) {
-            ads = Object.values(ads);
-        }
         return ads.filter(ad => ad.adsType === 'popunder');
     }
     //title

@@ -25,7 +25,6 @@
     </div>
 </div>
 @php
-    $custom_ads_json = json_encode($custom_ads);
     $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
     $logo_link =  asset(Storage::url($player_setting->logo_link));
 @endphp
@@ -67,16 +66,7 @@ $jsCode = <<<JS
     //poster
     var urlposter = "$poster_link";
     //ads
-    const custom_ads = $custom_ads_json;
-    function getVastAds(ads) {
-        return ads.filter(ad => ad.adsType === 'vast');
-    }
-    function getDirectAds(ads) {
-        return ads.filter(ad => ad.adsType === 'direct');
-    }
-    function getPopunderAds(ads) {
-        return ads.filter(ad => ad.adsType === 'popunder');
-    }
+
     //title
 
     var player = jwplayer('video_player');
