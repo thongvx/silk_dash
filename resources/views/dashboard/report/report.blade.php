@@ -218,10 +218,10 @@
                                     <label for="amount" class="mr-3">
                                         Amount:
                                     </label>
-                                    <input type="number" min="50"
+                                    <input type="number" min="20"
                                            max="{{ ($totalProfit-$totalWithdrawals) < 2000 ? ($totalProfit-$totalWithdrawals) : 2000 }}" name="amount" id="amount"
                                            class="w-full bg-transparent focus:shadow-primary-outline py-2 pr-3 placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow"
-                                           placeholder="50"/>
+                                           placeholder="20"/>
                                     <h5>
                                         USD
                                     </h5>
@@ -231,7 +231,7 @@
                                 </button>
                             </form>
                             <h5 class="text-start text-slate-400 text-lg italic">
-                                *Payouts range from $50 to $2000.
+                                *Payouts range from $20 to $2000.
                             </h5>
                         </div>
                     </div>
