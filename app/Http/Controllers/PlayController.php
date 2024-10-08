@@ -122,7 +122,8 @@ class PlayController
                                 }
                             }
                         }
-                        $urlPlay = 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8';
+                        $token = $this->creatTokenDownload();
+                        $urlPlay = 'https://' . $svStream . '/data/' . explode('-', $video->pathStream)[1] . '/' . $video->middle_slug . '/master.m3u8'.$token;
                     }
                     else
                         $urlPlay = 'https://streamsilk.com/data/'.$video->middle_slug.'/'.$video->middle_slug.'.m3u8';
@@ -167,6 +168,17 @@ class PlayController
         } else {
             return response()->view('errors.404', [], 404);
         }
+    }
+    function creatTokenPlay(){
+        $exp = time()+300;
+
+        $string_hash = $exp.' Silk@2024';
+        $md5_hash = md5($string_hash, true);
+        $base64_hash = base64_encode($md5_hash);
+        $base64_hash = strtr($base64_hash, '+/', '-_');
+        $base64_hash = rtrim($base64_hash, '=');
+
+        return '&token='.$base64_hash.'&expires='.$exp;
     }
     function creatTokenDownload(){
         $exp = time()+600;
