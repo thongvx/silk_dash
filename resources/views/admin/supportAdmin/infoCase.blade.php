@@ -26,7 +26,8 @@
                                                 </h5>
                                             </div>
                                             <div class="text-white font-lg font-bold">
-                                                <a href="/admin/supportAdmin?tab=cases" class="rounded-lg bg-[#142132] hover:bg-[#009fb2] px-3 py-1.5">All Ticket</a>
+                                                <a href="{{route('complete.ticket',['ticketID'=> $tickets->id])}}" class="rounded-lg bg-[#142132] hover:bg-[#009fb2] px-3 py-1.5">Complete</a>
+                                                <a href="/admin/supportAdmin?tab=cases" class="ml-3 rounded-lg bg-[#142132] hover:bg-[#009fb2] px-3 py-1.5">All Ticket</a>
                                             </div>
                                         </div>
                                         <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent border-none" />

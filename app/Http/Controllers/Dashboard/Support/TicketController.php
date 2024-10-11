@@ -66,7 +66,6 @@ class TicketController
             $file->storeAs('fileTicket', $filename, 'public');
             $url_file = 'https://streamsilk.com/storage/fileTicket/'.$filename;
         }
-        // Giả sử $newMessage là tin nhắn mới bạn muốn thêm vào
         $newMessage = [
             'type' => 2,
             'message' => $validated['message'],
@@ -74,16 +73,12 @@ class TicketController
             'date' => Carbon::now(),
         ];
 
-        // Giải mã tin nhắn hiện tại từ JSON thành mảng
         $currentMessages = json_decode($ticket->message, true);
 
-        // Thêm tin nhắn mới vào cuối mảng
         $currentMessages[] = $newMessage;
 
-        // Mã hóa lại mảng tin nhắn thành JSON
         $updatedMessages = json_encode($currentMessages);
 
-        // Cập nhật cột message
         $ticket->message = $updatedMessages;
         $ticket->status = "pending";
         $ticket->save();

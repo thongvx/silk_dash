@@ -149,4 +149,12 @@ class TicketAdminController
         ];
         return view('admin.supportAdmin.infoCase', $data);
     }
+    // complete ticket
+    public function completeTicket($ticketID)
+    {
+        $ticket = $this->ticketRepo->find($ticketID);
+        $ticket->status = 'completed';
+        $ticket->save();
+        return redirect()->back();
+    }
 }
