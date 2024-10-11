@@ -190,7 +190,7 @@ Route::middleware(['role:admin', 'auth'])->prefix('admin')->group(function () {
     Route::resource('/statistic', \App\Http\Controllers\admin\StatisticController::class);
     //supportAdmin
     Route::resource('/supportAdmin', \App\Http\Controllers\admin\TicketAdminController::class);
-    Route::get('/completeTicket/{ticketID}', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'completeTicket'])->name('complete.ticket');
+    Route::get('/completeTicket/{ticketID}', [\App\Http\Controllers\Dashboard\Support\TicketController::class, 'completeTicket'])->name('adminComplete.ticket');
     //reportAdmin
     Route::resource('/payment', \App\Http\Controllers\admin\PaymentController::class);
     //videoAdmin
