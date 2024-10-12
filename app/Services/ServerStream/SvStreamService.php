@@ -116,7 +116,6 @@ class SvStreamService
             }
         }
 
-        // Nếu không tìm thấy server nào thỏa mãn, trả về null
         return null;
     }
 
