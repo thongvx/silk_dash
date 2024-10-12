@@ -10,7 +10,7 @@ class TestController extends Controller
     function test(){
         $arrStream = 'ss02-ss01';
         $explodeStream = explode('-', $arrStream);
-        $selectStream = null;
+        $selectStream = 0;
         foreach ($explodeStream as $svStream){
             $svStream = 'sv_streams:' . $svStream;
             $svStreamInfo = Redis::hgetall($svStream);
