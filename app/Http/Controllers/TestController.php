@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redis;
 class TestController extends Controller
 {
     function test(){
-        $arrStream = 'ss02';
+        $arrStream = 'ss02-ss01';
         $explodeStream = explode('-', $arrStream);
         foreach ($explodeStream as $svStream){
             $svStream = 'sv_streams:' . $svStream;
