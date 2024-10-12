@@ -21,6 +21,6 @@ class TestController extends Controller
             }
 
         }
-        echo $selectStream;
+        echo 123;
     }
 }
