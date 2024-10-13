@@ -101,10 +101,10 @@ class UpdateController extends Controller
                 //create encoder task 480
                 $encoderTask480 = new EncoderTask();
                 $encoderTask480->insertEncoderTask($videoData, $encoderPriority+2, 480);
-                if($user->active == 1)
+                if($user->active == 2)
                     $encoderTask480->save();
                 //create encoder task 720
-                if($videoInfo['quality'] > 480 || $user->active == 2){
+                if($videoInfo['quality'] > 480 || $user->active == 1){
                     $encoderTask720 = new EncoderTask();
                     $encoderTask720->insertEncoderTask($videoData, $encoderPriority+1, 720);
                     $encoderTask720->save();
@@ -112,7 +112,7 @@ class UpdateController extends Controller
                     Redis::set('encoserTask:'.$videoInfo['slug'], 1);
                 }
                 //create encoder task 1080
-                if($videoInfo['quality'] > 720 && $user->active == 1){
+                if($videoInfo['quality'] > 720 && $user->active == 2){
                     $encoderTask1080 = new EncoderTask();
                     $encoderTask1080->insertEncoderTask($videoData, $encoderPriority, 1080);
                     $encoderTask1080->save();
