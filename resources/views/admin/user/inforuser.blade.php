@@ -286,7 +286,7 @@
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                                type="radio"
-                                               value="1" {{ $users -> active == 1 ? 'checked' : '' }}>
+                                               value="1" {{ $users -> active == 2 ? 'checked' : '' }}>
                                         <label for="1" class="ml-3">Full: 480 - 720 -1080</label>
                                     </fieldset>
                                     <fieldset class="mt-6">
@@ -296,7 +296,7 @@
                                                       after:w-full after:justify-center after:text-white after:opacity-0 after:transition-all
                                                       checked:border-0 checked:border-transparent checked:after:opacity-100"
                                                type="radio"
-                                               value="2" {{ $users -> active == 2 ? 'checked' : '' }}>
+                                               value="2" {{ $users -> active == 1 ? 'checked' : '' }}>
                                         <label for="2" class="ml-3">720</label>
                                     </fieldset>
                                     <fieldset class="mt-6">
