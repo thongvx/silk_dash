@@ -47,9 +47,23 @@ body {
 }
 
 #pop5 {
-    z-index: 99999;
+    z-index: 99995;
+}
+#pop6 {
+    z-index: 99996;
 }
 
+#pop7 {
+    z-index: 99997;
+}
+
+#pop8 {
+    z-index: 99998;
+}
+
+#pop9 {
+    z-index: 99999;
+}
 #video_player {
     height: 100dvh !important;
 }
