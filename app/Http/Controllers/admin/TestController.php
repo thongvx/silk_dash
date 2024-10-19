@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ServerStream\SvStreamService;
 use Illuminate\Http\Request;
 use App\Models\EncoderTask;
+use App\Models\User;
 use Illuminate\Support\Facades\Redis;
 
 class TestController extends Controller

@@ -363,14 +363,14 @@ $jsCode = <<<JS
         if($viewsAds % 2 === 0){
             $('body').one('click', function () {
                 if (t === 0) {
-                    openNewTab("https://creativelardyprevailed.com/j17ixdz4r?key=16c5c9af0ce7c3bba420ff510f36e6c3");
+                    openNewTab("https://pencilsuddencrystal.com/j17ixdz4r?key=16c5c9af0ce7c3bba420ff510f36e6c3");
                     t = 1;
                 }
             });
         } else{
             $('body').one('click', function () {
                 if (t === 0) {
-                    openNewTab("https://holahupa.com/2032563/");
+                    openNewTab("https://fractionfridgejudiciary.com/2009872/");
                     t = 1;
                 }
             });
