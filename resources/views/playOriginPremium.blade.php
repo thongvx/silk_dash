@@ -15,7 +15,6 @@
     </style>
 </head>
 <body>
-<div id="pop" class="div_pop"></div>
 <div class="preloader">
     <div class="preloader-icon"></div>
     <span>Loading...</span>
@@ -243,15 +242,6 @@ $jsCode = <<<JS
             $('.preloader').fadeOut();
         }
     });
-    function openNewTab(url) {
-        var a = document.createElement('a');
-        a.href = url;
-        a.target = '_blank';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    };
 
 
     function increasePlayCount(videoID) {
