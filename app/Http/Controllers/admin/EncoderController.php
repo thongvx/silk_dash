@@ -94,6 +94,9 @@ class EncoderController
         if($data){
             return json_encode($data);
         }
+        else{
+            return 'no task';
+        }
     }
     function encoderFaild(Request $request)
     {
