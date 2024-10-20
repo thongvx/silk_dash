@@ -92,6 +92,8 @@ class EncoderController
             ->havingRaw('COUNT(DISTINCT quality) > 1 AND COUNT(DISTINCT status) = 1 AND MAX(status) = 0')
             ->first();
         if($data){
+            $count = EncoderTask::where('slug', $data->slug)->count();
+            $data->count = $count;
             return json_encode($data);
         }
         else{
