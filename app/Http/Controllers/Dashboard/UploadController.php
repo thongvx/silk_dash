@@ -323,22 +323,33 @@ class UploadController
     //get sever
     public function getServer()
     {
-        $svEncoderWithMinInSpeed = $this->getLinkUpload();
-        if ($svEncoderWithMinInSpeed) {
-            $data = [
-                "msg" => "ok",
-                'status' => 200,
-                'sever_time' => date('Y-m-d H:i:s'),
-                'result' => 'https://'.str_replace('e', 'up', $svEncoderWithMinInSpeed['name']).'.encosilk.cc/uploadapi',
-            ];
-        } else {
-            $data = [
-                "msg" => "error",
-                'status' => 404,
-                'sever_time' => date('Y-m-d H:i:s'),
-                'result' => 'No server found with the specified criteria',
-            ];
-        }
+//        $svEncoderWithMinInSpeed = $this->getLinkUpload();
+//        if ($svEncoderWithMinInSpeed) {
+//            $data = [
+//                "msg" => "ok",
+//                'status' => 200,
+//                'sever_time' => date('Y-m-d H:i:s'),
+//                'result' => 'https://'.str_replace('e', 'up', $svEncoderWithMinInSpeed['name']).'.encosilk.cc/uploadapi',
+//            ];
+//        } else {
+//            $data = [
+//                "msg" => "error",
+//                'status' => 404,
+//                'sever_time' => date('Y-m-d H:i:s'),
+//                'result' => 'No server found with the specified criteria',
+//            ];
+//        }
+        $dataSv[0] = 'e02';
+        $dataSv[1] = 'e100';
+        $dataSv[2] = 'e101';
+        $dataSv[3] = 'e102';
+        $ramdomSv = mt_rand(0, 3);
+        $data = [
+            "msg" => "ok",
+            'status' => 200,
+            'sever_time' => date('Y-m-d H:i:s'),
+            'result' => 'https://'.str_replace('e', 'up', $dataSv[$ramdomSv]).'.encosilk.cc/uploadapi',
+        ];
         return response()->json($data);
     }
 
