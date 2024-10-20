@@ -87,8 +87,8 @@ class EncoderController
 
     function getTaskEncoderVideo()
     {
-        $data = EncoderTask::select('slug')
-            ->groupBy('slug')
+        $data = EncoderTask::select('slug', 'sv_upload', 'format')
+            ->groupBy('slug', 'sv_upload', 'format')
             ->havingRaw('COUNT(DISTINCT quality) > 1 AND COUNT(DISTINCT status) = 1 AND MAX(status) = 0')
             ->first();
         if($data){
