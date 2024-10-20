@@ -65,7 +65,8 @@ class StorageController
             $dataVideo->$selectQuality = $path;
             $dataVideo->origin = 1;
             $dataVideo->save();
-            Queue::push(new DeleteVideoEncoder($data->slug, $data->sv_upload, $data->quality));
+            if($sv != 'no')
+                Queue::push(new DeleteVideoEncoder($data->slug, $data->sv_upload, $data->quality));
         }
     }
 
