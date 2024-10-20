@@ -107,7 +107,9 @@ class EncoderController
         $svEncoder = $request->sv;
         $data['status'] = 19;
         EncoderTask::where('slug', $slug)->where('quality', $quality)->update($data);
-        SvEncoder::where('name', $svEncoder)->decrement('encoder');
+        if($svEncoder != 'no'){
+            SvEncoder::where('name', $svEncoder)->decrement('encoder');
+        }
         echo $svEncoder;
     }
     function checkExistsEncoderTask($slug)
