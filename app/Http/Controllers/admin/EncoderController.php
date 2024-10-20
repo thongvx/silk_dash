@@ -84,6 +84,17 @@ class EncoderController
             return json_encode($data);
         }
     }
+
+    function getTaskEncoderVideo()
+    {
+        $data = EncoderTask::select('slug', 'sv_upload', 'format')
+            ->groupBy('slug', 'sv_upload', 'format')
+            ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 4')
+            ->first();
+        if($data){
+            return json_encode($data);
+        }
+    }
     function encoderFaild(Request $request)
     {
         $slug = $request->slug;
