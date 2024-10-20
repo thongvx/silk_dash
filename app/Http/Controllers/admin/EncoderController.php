@@ -85,7 +85,7 @@ class EncoderController
         }
     }
 
-    function getTaskEncoderVideo()
+    function getTaskEncoderVideo($name)
     {
         $data = EncoderTask::select('slug', 'sv_upload', 'format')
             ->groupBy('slug', 'sv_upload', 'format')
