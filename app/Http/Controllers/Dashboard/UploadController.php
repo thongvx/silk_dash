@@ -74,11 +74,9 @@ class UploadController
         $data['title'] = 'Upload';
         $data['folders'] = $this->folderRepo->getAllFolders($user->id);
         $data['currentFolderName'] = $data['folders']->last();
-        //$svUpload = $this->getLinkUpload();
-        //$data['linkUpload'] = $svUpload ? 'https://'.$svUpload['name'].'.encosilk.cc/upload' : null;
-        $dataSv[0] = 'e02'; $data[1] = 'e100'; $data[2] = 'e101'; $data[3] = 'e102';
-        $randomSv = mt_rand(0, 3);
-        $data['linkUpload'] = 'https://'.$dataSv[$randomSv].'.encosilk.cc/upload';
+        $svUpload = $this->getLinkUpload();
+        $data['linkUpload'] = $svUpload ? 'https://'.$svUpload['name'].'.encosilk.cc/upload' : null;
+
         $tab = $request->input('tab');
         if ($tab == 'transfer') {
             $data['getProgressTransfer'] = $this->getProgressTransfer();
