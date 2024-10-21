@@ -69,7 +69,11 @@ class StorageController
                 Queue::push(new DeleteVideoEncoder($data->slug, $data->sv_upload, $data->quality));
         }
     }
-
+    function selectSvStorage()
+    {
+        $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 96)->where('out_speed', '<', 900)->inRandomOrder()->first();
+        return json_encode($svStorage);
+    }
     function createM3u8Quality($slug, $quality, $path)
     {
         $arrPath = explode('-', $path);
