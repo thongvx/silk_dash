@@ -72,7 +72,10 @@ class StorageController
     function selectSvStorage()
     {
         $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 96)->where('out_speed', '<', 900)->inRandomOrder()->first();
-        return json_encode($svStorage);
+        if($svStorage)
+            return json_encode($svStorage);
+        else
+            return 'no';
     }
     function createM3u8Quality($slug, $quality, $path)
     {
