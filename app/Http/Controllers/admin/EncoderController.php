@@ -90,7 +90,7 @@ class EncoderController
         $data = EncoderTask::select('slug', 'sv_upload', 'format')
             ->groupBy('slug', 'sv_upload', 'format')
             ->havingRaw('COUNT(DISTINCT quality) > 1 AND COUNT(DISTINCT status) = 1 AND MAX(status) = 0')
-            ->first();
+            ->orderBy('priority', 'desc')->first();
         if($data){
             $dataUpdate['status'] = 1;
             $dataUpdate['sv_encoder'] = $name;
