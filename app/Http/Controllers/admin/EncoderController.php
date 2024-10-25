@@ -92,7 +92,7 @@ class EncoderController
             $dataUpdate['status'] = 1;
             $dataUpdate['sv_encoder'] = $name;
             $dataUpdate['start_encoder'] = now();
-            EncoderTask::where('slug', $data->id)->update($dataUpdate);
+            EncoderTask::where('id', $data->id)->update($dataUpdate);
 
             $quality480 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 480)->first();
             $quality1080 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 1080)->first();
@@ -105,7 +105,7 @@ class EncoderController
                 $dataUpdate['status'] = 1;
                 $dataUpdate['sv_encoder'] = $name;
                 $dataUpdate['start_encoder'] = now();
-                EncoderTask::where('slug', $quality480->id)->update($dataUpdate);
+                EncoderTask::where('id', $quality480->id)->update($dataUpdate);
             }
             else{
                 $data1['q480'] = 0;
@@ -115,7 +115,7 @@ class EncoderController
                 $dataUpdate['status'] = 1;
                 $dataUpdate['sv_encoder'] = $name;
                 $dataUpdate['start_encoder'] = now();
-                EncoderTask::where('slug', $quality1080->id)->update($dataUpdate);
+                EncoderTask::where('id', $quality1080->id)->update($dataUpdate);
             }
             else{
                 $data1['q1080'] = 0;
