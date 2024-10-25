@@ -91,7 +91,7 @@ class EncoderController
             ->groupBy('slug', 'sv_upload', 'format', 'quality')
             ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 0')
             ->orderBy('priority', 'desc')
-            ->get();
+            ->first();
         if($data){
             //$dataUpdate['status'] = 1;
             //$dataUpdate['sv_encoder'] = $name;
