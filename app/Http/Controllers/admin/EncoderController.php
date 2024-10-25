@@ -87,11 +87,7 @@ class EncoderController
 
     function getTaskEncoderVideo($name)
     {
-        $data = EncoderTask::select('slug', 'sv_upload', 'format', 'quality')
-            ->groupBy('slug', 'sv_upload', 'format', 'quality')
-            ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 0')
-            ->orderBy('priority', 'desc')
-            ->first();
+        $data = EncoderTask::where('status', 0)->where('quality', 720)->orderBy('priority', 'desc')->first();
         if($data){
             //$dataUpdate['status'] = 1;
             //$dataUpdate['sv_encoder'] = $name;
