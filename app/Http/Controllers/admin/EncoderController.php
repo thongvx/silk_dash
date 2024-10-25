@@ -87,18 +87,20 @@ class EncoderController
 
     function getTaskEncoderVideo($name)
     {
-        $data = EncoderTask::select('slug', 'sv_upload', 'format')
-            ->groupBy('slug', 'sv_upload', 'format')
-            ->havingRaw('COUNT(DISTINCT quality) > 1 AND COUNT(DISTINCT status) = 1 AND MAX(status) = 0')
-            ->orderBy('priority', 'desc')->first();
+        $data = EncoderTask::select('slug', 'sv_upload', 'format', 'quality')
+            ->groupBy('slug', 'sv_upload', 'format', 'quality')
+            ->havingRaw('COUNT(DISTINCT status) = 1 AND MAX(status) = 0')
+            ->orderBy('priority', 'desc')
+            ->get();
         if($data){
-            $dataUpdate['status'] = 1;
-            $dataUpdate['sv_encoder'] = $name;
-            $dataUpdate['start_encoder'] = now();
-            EncoderTask::where('slug', $data->slug)->update($dataUpdate);
-            $count = EncoderTask::where('slug', $data->slug)->count();
-            $data->count = $count;
-            return json_encode($data);
+            //$dataUpdate['status'] = 1;
+            //$dataUpdate['sv_encoder'] = $name;
+//            $dataUpdate['start_encoder'] = now();
+//            EncoderTask::where('slug', $data->slug)->update($dataUpdate);
+//            $data->quality480 =
+//            $data->count = $count;
+//            return json_encode($data);
+            var_dump($data);
         }
         else{
             return 'no task';
