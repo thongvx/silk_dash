@@ -99,8 +99,8 @@ class EncoderController
 //            EncoderTask::where('slug', $data->slug)->update($dataUpdate);
 //            $data->quality480 =
 //            $data->count = $count;
-//            return json_encode($data);
-            var_dump($data);
+            return json_encode($data);
+
         }
         else{
             return 'no task';
