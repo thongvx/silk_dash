@@ -93,8 +93,8 @@ class EncoderController
             $dataUpdate['sv_encoder'] = $name;
             $dataUpdate['start_encoder'] = now();
             EncoderTask::where('slug', $data->slug)->update($dataUpdate);
-            $quality480 = EncoderTask::where('slug', $data->slug)->where('quality', 480)->first();
-            $quality1080 = EncoderTask::where('slug', $data->slug)->where('quality', 1080)->first();
+            $quality480 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 480)->first();
+            $quality1080 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 1080)->first();
 
             $data1['originVideo'] = $data->slug;
             $data1['q720'] = 1;
