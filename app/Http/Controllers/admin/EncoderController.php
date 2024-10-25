@@ -95,7 +95,25 @@ class EncoderController
 //            EncoderTask::where('slug', $data->slug)->update($dataUpdate);
 //            $data->quality480 =
 //            $data->count = $count;
-            return json_encode($data);
+            $quality480 = EncoderTask::where('slug', $data->slug)->where('quality', 480)->first();
+            $quality1080 = EncoderTask::where('slug', $data->slug)->where('quality', 1080)->first();
+
+            $data1['originVideo'] = $data->slug;
+            $data1['q720'] = 1;
+            $data1['sv'] = $data->sv_upload;
+            if($quality480){
+                $data1['q480'] = 1;
+            }
+            else{
+                $data1['q480'] = 0;
+            }
+            if($quality1080){
+                $data1['q1080'] = 1;
+            }
+            else{
+                $data1['q1080'] = 0;
+            }
+            return json_encode($data1);
 
         }
         else{
