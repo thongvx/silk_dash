@@ -140,9 +140,8 @@ class EncoderController
         }
         echo $svEncoder;
     }
-    function encoderFaildGpu(Request $request)
+    function encoderFaildGpu($slug)
     {
-        $slug = $request->slug;
         $data['status'] = 19;
         EncoderTask::where('slug', $slug)->update($data);
         return 'ok';
