@@ -46,6 +46,7 @@ Route::middleware([DisableSession::class])->group(function () {
     Route::get('/finishEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'finishEncoder']);
     Route::get('/deleteFinishedEncoderTask', [\App\Http\Controllers\admin\EncoderController::class, 'deleteFinishedEncoderTask']);
     Route::get('/encoderFaild', [\App\Http\Controllers\admin\EncoderController::class, 'encoderFaild']);
+    Route::get('/encoderFaildGpu', [\App\Http\Controllers\admin\EncoderController::class, 'encoderFaildGpu']);
     Route::get('/checkExistsEncoderTask/{slug}', [\App\Http\Controllers\admin\EncoderController::class, 'checkExistsEncoderTask']);
     Route::get('/getTaskEncoderVideo/{name}', [\App\Http\Controllers\admin\EncoderController::class, 'getTaskEncoderVideo']);
 });

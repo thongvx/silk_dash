@@ -140,6 +140,13 @@ class EncoderController
         }
         echo $svEncoder;
     }
+    function encoderFaildGpu(Request $request)
+    {
+        $slug = $request->slug;
+        $data['status'] = 19;
+        EncoderTask::where('slug', $slug)->update($data);
+        return 'ok';
+    }
     function checkExistsEncoderTask($slug)
     {
         if (Redis::exists('encoserTask:'.$slug)) {
