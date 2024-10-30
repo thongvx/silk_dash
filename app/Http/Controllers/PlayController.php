@@ -71,6 +71,7 @@ class PlayController
                 $poster = $poster == 0 ? 'https://cdnimg.streamsilk.com/image.jpeg' : $poster;
                 if(Redis::exists("premium:{$video->user_id}")){
                     $data_setting->earningModes = 3;
+                    Redis::decr("premium:{$video->user_id}");
                 }
                 if ($video->origin == 0) {
                     $playData = [
