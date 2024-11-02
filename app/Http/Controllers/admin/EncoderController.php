@@ -87,7 +87,7 @@ class EncoderController
 
     function getTaskEncoderVideo($name)
     {
-        $data = EncoderTask::where('status', 0)->where('quality', 720)->orderBy('priority', 'desc')->first();
+        $data = EncoderTask::where('status', 0)->orderBy('priority', 'desc')->first();
         if($data){
             $dataUpdate['status'] = 1;
             $dataUpdate['sv_encoder'] = $name;
@@ -95,11 +95,12 @@ class EncoderController
             EncoderTask::where('id', $data->id)->update($dataUpdate);
 
             $quality480 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 480)->first();
+            $quality720 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 720)->first();
             $quality1080 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 1080)->first();
 
             $data1['originVideo'] = $data->slug;
-            $data1['q720'] = 1;
             $data1['sv'] = $data->sv_upload;
+            //480
             if($quality480){
                 $data1['q480'] = 1;
                 $dataUpdate['status'] = 1;
@@ -110,6 +111,18 @@ class EncoderController
             else{
                 $data1['q480'] = 0;
             }
+            //720
+            if($quality720){
+                $data1['q720'] = 1;
+                $dataUpdate['status'] = 1;
+                $dataUpdate['sv_encoder'] = $name;
+                $dataUpdate['start_encoder'] = now();
+                EncoderTask::where('id', $quality720->id)->update($dataUpdate);
+            }
+            else{
+                $data1['q720'] = 0;
+            }
+            //1080
             if($quality1080){
                 $data1['q1080'] = 1;
                 $dataUpdate['status'] = 1;
