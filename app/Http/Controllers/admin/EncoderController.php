@@ -89,10 +89,6 @@ class EncoderController
     {
         $data = EncoderTask::where('status', 0)->orderBy('priority', 'desc')->first();
         if($data){
-            $dataUpdate['status'] = 1;
-            $dataUpdate['sv_encoder'] = $name;
-            $dataUpdate['start_encoder'] = now();
-            EncoderTask::where('id', $data->id)->update($dataUpdate);
 
             $quality480 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 480)->first();
             $quality720 = EncoderTask::where('slug', $data->slug)->where('status', 0)->where('quality', 720)->first();
