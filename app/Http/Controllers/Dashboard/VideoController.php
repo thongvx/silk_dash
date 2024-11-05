@@ -495,8 +495,8 @@ class VideoController
     {
         $video = $this->videoRepo->findVideoBySlug($slug);
         $subtitles = [];
-        if($video->is_sub == 1){
-            $jsonUrl = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$slug.'.json';
+        $jsonUrl = 'https://streamsilk.com/storage/subtitles/'.$slug.'/'.$slug.'.json';
+        if($video->is_sub == 1 && @file_get_contents($jsonUrl) !== false ){
             $subtitles = json_decode(file_get_contents($jsonUrl));
             $languageCodes = [ 'eng' => 'English','ton' => 'Tongan', 'spa' => 'Spanish', 'aze' => 'Azerbaijani', 'alb' => 'Albanian', 'ara' => 'Arabic', 'bul' => 'Bulgarian', 'chi' => 'Chinese', 'dnk' => 'Denmark', 'per' => 'Persian', 'fin' => 'Finland', 'fre' => 'French', 'ger' => 'German', 'gre' => 'Greek', 'heb' => 'Hebrew', 'hin' => 'Hindi', 'hun' => 'Hungarian', 'ind' => 'Indonesian', 'ita' => 'Italian', 'jpn' => 'Japanese', 'kan' => 'Kannada', 'khm' => 'Khmer', 'kor' => 'Korean', 'mal' => 'Malayalam', 'may' => 'Malay', 'nor' => 'Norway', 'pol' => 'Polish', 'por' => 'Portuguese', 'rus' => 'Russian', 'sin' => 'Sinhala', 'slv' => 'Slovenian', 'srp' => 'Serbian', 'swe' => 'Sweden', 'tam' => 'Tamil', 'tha' => 'Thai', 'tur' => 'Turkish', 'ukr' => 'Ukrainian', 'vie' => 'Vietnamese', 'rum' => 'Romanian', 'mar' => 'Marathi', 'cze' => 'Czech', 'slo' => 'Slovak', 'lit' => 'Lithuanian', 'kur' => 'Kurdish', 'dan' => 'Danish', 'bos' => 'Bosnian', 'hrv' => 'Croatian' ];
             foreach ($subtitles as $subtitle) {
