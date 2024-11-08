@@ -60,6 +60,7 @@ Route::middleware([DisableSession::class])->group(function () {
 Route::get('/startStorageTask', [\App\Http\Controllers\admin\StorageController::class, 'startStorageTask']);
 Route::get('/finishStorage', [\App\Http\Controllers\admin\StorageController::class, 'finishStorage']);
 Route::get('/selectSvStorage', [\App\Http\Controllers\admin\StorageController::class, 'selectSvStorage']);
+Route::get('/updateStorageGoogle', [\App\Http\Controllers\admin\StorageController::class, 'updateStorageGoogle']);
 //-----------------------------TiktokController----------------------------------------------------
 Route::get('/addVideoTiktok/{slug}', [\App\Http\Controllers\admin\TiktokController::class, 'addVideoTiktok']);
 Route::get('/updateVideoTiktok', [\App\Http\Controllers\admin\TiktokController::class, 'updateVideoTiktok']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 
+use App\Enums\VideoCacheKeys;
 use App\Factories\DownloadFactory;
 use App\Jobs\CreatStorageJob;
 use App\Jobs\DeleteVideoEncoder;
@@ -76,6 +77,20 @@ class StorageController
             return json_encode($svStorage);
         else
             return 'no';
+    }
+    function updateStorageGoogle(Request $request)
+    {
+        $slug = $request->slug;
+        $quality = $request->quality;
+        $path = $request->path;
+        if($quality == 480)
+            $dataUpdate['sd'] = $path;
+        if($quality == 720)
+            $dataUpdate['hd'] = $path;
+        if($quality == 1080)
+            $dataUpdate['fhd'] = $path;
+        Video::where('middle_slug', $slug)->update($dataUpdate);
+        Redis::del(VideoCacheKeys::GET_VIDEO_BY_SLUG->value.$slug);
     }
     function createM3u8Quality($slug, $quality, $path)
     {
