@@ -348,7 +348,7 @@ class UploadController
             "msg" => "ok",
             'status' => 200,
             'sever_time' => date('Y-m-d H:i:s'),
-            'result' => 'https://'.str_replace('e', 'up', $dataSv[$ramdomSv]).'.encosilk.cc/uploadapi',
+            'result' => 'https://'.str_replace('e', 'up', $dataSv[0]).'.encosilk.cc/uploadapi',
         ];
         return response()->json($data);
     }
