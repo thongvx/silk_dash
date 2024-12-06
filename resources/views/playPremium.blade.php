@@ -77,7 +77,6 @@ $jsCode = <<<JS
     var intervalId;
     var totalTimeRequired;
     var hasIncreasedPlayCount = false;
-    console.log('premium')
     const loadPlayer = async (file) => {
         const options = {
             key: 'ITWMv7t88JGzI0xPwW8I0+LveiXX9SWbfdmt0ArUSyc=',
