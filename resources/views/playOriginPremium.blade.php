@@ -25,8 +25,10 @@
     </div>
 </div>
 @php
+    $custom_ads_json = json_encode($custom_ads);
     $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
     $logo_link =  asset(Storage::url($player_setting->logo_link))
+
 @endphp
 <script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
@@ -64,6 +66,17 @@ $jsCode = <<<JS
     }
     //poster
     var urlposter = "$poster_link";
+    //ads
+    const custom_ads = $custom_ads_json;
+    function getVastAds(ads) {
+        return ads.filter(ad => ad.adsType === 'vast');
+    }
+    function getDirectAds(ads) {
+        return ads.filter(ad => ad.adsType === 'direct');
+    }
+    function getPopunderAds(ads) {
+        return ads.filter(ad => ad.adsType === 'popunder');
+    }
     //title
     var title = " $player_setting->show_title == 1 ? $title : ''";
     var player = jwplayer('video_player');
@@ -178,6 +191,26 @@ $jsCode = <<<JS
         if (urlposter !== "" && urlposter !== "0") {
             options.image = urlposter
         }
+        if (preview === 1) {
+            const previewTrack = {
+                file: `https://cdnimg.streamsilk.com/preview/${videoID}/${videoID}.jpg`,
+                kind: "thumbnails",
+            };
+            if (!options.tracks) {
+                options.tracks = [];
+            }
+            options.tracks.push(previewTrack)
+        }
+        const vastAds = getVastAds(custom_ads);
+        if (vastAds.length > 0) {
+            options.advertising = {
+                client: 'vast',
+                schedule: vastAds.map(ad => ({
+                    tag: ad.linkAds,
+                    offset: ad.offset
+                }))
+            };
+        }
         player.setup(options);
         player.addButton(
             '<svg xmlns="http://www.w3.org/2000/svg" class="jw-svg-icon jw-svg-icon-rewind2" viewBox="0 0 240 240" focusable="false"><path d="m 25.993957,57.778 v 125.3 c 0.03604,2.63589 2.164107,4.76396 4.8,4.8 h 62.7 v -19.3 h -48.2 v -96.4 H 160.99396 v 19.3 c 0,5.3 3.6,7.2 8,4.3 l 41.8,-27.9 c 2.93574,-1.480087 4.13843,-5.04363 2.7,-8 -0.57502,-1.174985 -1.52502,-2.124979 -2.7,-2.7 l -41.8,-27.9 c -4.4,-2.9 -8,-1 -8,4.3 v 19.3 H 30.893957 c -2.689569,0.03972 -4.860275,2.210431 -4.9,4.9 z m 163.422413,73.04577 c -3.72072,-6.30626 -10.38421,-10.29683 -17.7,-10.6 -7.31579,0.30317 -13.97928,4.29374 -17.7,10.6 -8.60009,14.23525 -8.60009,32.06475 0,46.3 3.72072,6.30626 10.38421,10.29683 17.7,10.6 7.31579,-0.30317 13.97928,-4.29374 17.7,-10.6 8.60009,-14.23525 8.60009,-32.06475 0,-46.3 z m -17.7,47.2 c -7.8,0 -14.4,-11 -14.4,-24.1 0,-13.1 6.6,-24.1 14.4,-24.1 7.8,0 14.4,11 14.4,24.1 0,13.1 -6.5,24.1 -14.4,24.1 z m -47.77056,9.72863 v -51 l -4.8,4.8 -6.8,-6.8 13,-12.99999 c 3.02543,-3.03598 8.21053,-0.88605 8.2,3.4 v 62.69999 z"></path></svg>',
@@ -243,7 +276,33 @@ $jsCode = <<<JS
         }
     });
 
+    const directAds = getDirectAds(custom_ads);
+    if(directAds.length > 0) {
+        directAds.forEach((ad , index) => {
+            setTimeout(() => {
+                const adDiv = document.createElement('div');
+                adDiv.className = 'div_pop';
+                adDiv.id = 'pop'+ index;
+                document.body.appendChild(adDiv);
+                adDiv.addEventListener('click', function() {
+                    openNewTab(ad.linkAds);
+                    this.remove();
+                });
+            }, ad.offset * 1000);
+        });
+    }
 
+    const popunderAds = getPopunderAds(custom_ads);
+    if(popunderAds.length > 0) {
+        popunderAds.forEach(ad => {
+            setTimeout(() => {
+                const script = document.createElement('script');
+                script.type = 'application/javascript';
+                script.src = ad.linkAds;
+                document.head.appendChild(script);
+            }, ad.offset * 1000);
+        });
+    }
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/${videoID}";
         fetch(apiUrl)

@@ -66,7 +66,6 @@ $jsCode = <<<JS
     var urlposter = "$poster_link";
     //ads
     const custom_ads = $custom_ads_json;
-    console.log(custom_ads,'22');
     function getVastAds(ads) {
         return ads.filter(ad => ad.adsType === 'vast');
     }

@@ -25,6 +25,7 @@
     </div>
 </div>
 @php
+    $custom_ads_json = json_encode($custom_ads);
     $poster_link = $player_setting->show_poster == 1 && $player_setting->poster_link != 0 ? asset(Storage::url($player_setting->poster_link)) : $poster;
     $logo_link =  asset(Storage::url($player_setting->logo_link));
 @endphp
@@ -66,7 +67,16 @@ $jsCode = <<<JS
     //poster
     var urlposter = "$poster_link";
     //ads
-
+    const custom_ads = $custom_ads_json;
+    function getVastAds(ads) {
+        return ads.filter(ad => ad.adsType === 'vast');
+    }
+    function getDirectAds(ads) {
+        return ads.filter(ad => ad.adsType === 'direct');
+    }
+    function getPopunderAds(ads) {
+        return ads.filter(ad => ad.adsType === 'popunder');
+    }
     //title
 
     var player = jwplayer('video_player');
@@ -189,6 +199,16 @@ $jsCode = <<<JS
                 options.tracks = [];
             }
             options.tracks.push(previewTrack)
+        }
+        const vastAds = getVastAds(custom_ads);
+        if (vastAds.length > 0) {
+            options.advertising = {
+                client: 'vast',
+                schedule: vastAds.map(ad => ({
+                    tag: ad.linkAds,
+                    offset: ad.offset
+                }))
+            };
         }
         player.setup(options);
         // window.addEventListener('beforeunload', function (e) {
@@ -330,6 +350,33 @@ $jsCode = <<<JS
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+    }
+    const directAds = getDirectAds(custom_ads);
+    if(directAds.length > 0) {
+        directAds.forEach((ad , index) => {
+            setTimeout(() => {
+                const adDiv = document.createElement('div');
+                adDiv.className = 'div_pop';
+                adDiv.id = 'pop'+ index;
+                document.body.appendChild(adDiv);
+                adDiv.addEventListener('click', function() {
+                    openNewTab(ad.linkAds);
+                    this.remove();
+                });
+            }, ad.offset * 1000);
+        });
+    }
+
+    const popunderAds = getPopunderAds(custom_ads);
+    if(popunderAds.length > 0) {
+        popunderAds.forEach(ad => {
+            setTimeout(() => {
+                const script = document.createElement('script');
+                script.type = 'application/javascript';
+                script.src = ad.linkAds;
+                document.head.appendChild(script);
+            }, ad.offset * 1000);
+        });
     }
     function increasePlayCount(videoID) {
         var apiUrl = "https://streamsilk.com/updateViewUpdate/${videoID}";
