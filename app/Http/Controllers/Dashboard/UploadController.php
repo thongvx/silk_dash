@@ -224,6 +224,7 @@ class UploadController
                     $newVideo->hd = '0';
                     $newVideo->fhd = '0';
                     $newVideo->check_duplicate = 0;
+                    $newVideo->user_id=$user->id;
                     // Lưu video mới
                     $newVideo->save();
                     $this->folderRepo->decrementNumberOfFiles($old_folder_id);
