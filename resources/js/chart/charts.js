@@ -10,6 +10,9 @@ if ($("#chart-line").length) {
     var last30DaysData = Array.from({length: 30}, () => Math.floor(Math.random() * 100));
     var last30DaysLabels = [];
 
+    var last7DaysPremiumData = Array.from({length: 7}, () => Math.floor(Math.random() * 50 + 50));
+    var last30DaysPremiumData = Array.from({length: 30}, () => Math.floor(Math.random() * 50 + 50));
+
     for (var i = 0; i < 30; i++) {
         var d = new Date();
         d.setDate(d.getDate() - i);
@@ -26,7 +29,7 @@ if ($("#chart-line").length) {
         var label = d.getHours();
         last24HoursLabels.push(label);
     }
-// Reverse the arrays to have the oldest date first
+    // Reverse the arrays to have the oldest date first
     last24HoursLabels = last24HoursLabels.reverse();
 
     var ctx1 = $("#chart-line").get(0).getContext("2d");
@@ -41,24 +44,37 @@ if ($("#chart-line").length) {
         type: "line",
         data: {
             labels: last7DaysLabels,
-            datasets: [{
-                label: "View",
-                tension: 0.4,
-                pointRadius: 0,
-                borderColor: "#5e72e4",
-                backgroundColor: gradientStroke1,
-                borderWidth: 3,
-                fill: true,
-                data: last7DaysData,
-                maxBarThickness: 6
-            }],
+            datasets: [
+                {
+                    label: "View",
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderColor: "#5e72e4",
+                    backgroundColor: gradientStroke1,
+                    borderWidth: 3,
+                    fill: true,
+                    data: last7DaysData,
+                    maxBarThickness: 6
+                },
+                {
+                    label: "Premium",
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderColor: "#ff9800",
+                    backgroundColor: 'rgba(255, 152, 0, 0.2)',
+                    borderWidth: 3,
+                    fill: true,
+                    data: last7DaysPremiumData,
+                    maxBarThickness: 6
+                }
+            ],
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false,
+                    display: true,
                 }
             },
             interaction: {
@@ -122,10 +138,12 @@ if ($("#chart-line").length) {
             case 'week':
                 myChart.data.labels = last7DaysLabels;
                 myChart.data.datasets[0].data = last7DaysData;
+                myChart.data.datasets[1].data = last7DaysPremiumData;
                 break;
             case 'month':
                 myChart.data.labels = last30DaysLabels;
                 myChart.data.datasets[0].data = last30DaysData;
+                myChart.data.datasets[1].data = last30DaysPremiumData;
                 break;
         }
         myChart.update();

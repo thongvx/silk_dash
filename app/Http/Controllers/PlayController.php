@@ -72,6 +72,15 @@ class PlayController
                 if(Redis::exists("premium:{$video->user_id}")){
                     $data_setting->earningModes = 3;
                     Redis::decr("premium:{$video->user_id}");
+                    $today = date('Y-m-d');
+                    $dailyPremiumKey = "premiumView:{$video->user_id}:{$today}";
+
+                    if (Redis::exists($dailyPremiumKey)) {
+                        Redis::incr($dailyPremiumKey);
+                    } else {
+                        Redis::set($dailyPremiumKey, 1);
+                        Redis::expire($dailyPremiumKey, 3024000);
+                    }
                 }
                 if ($video->origin == 0) {
                     $playData = [

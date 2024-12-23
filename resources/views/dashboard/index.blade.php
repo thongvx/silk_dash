@@ -207,10 +207,10 @@
                     </h6>
                     <div class="text-white">
                         <button class="rounded-lg px-4 py-1 bg-[#009FB2] switchButton week"
-                                data-chart="week" data-date="{{ $dates['week'] }}">Week
+                                data-chart="week" data-date="{{ $dates['week'] }}" data-premium="{{ json_encode($viewPremium['weekPremium']) }}">Week
                         </button>
                         <button class="rounded-lg px-4 py-1 bg-[#142132] switchButton"
-                                data-chart="month" data-date="{{ $dates['month'] }}">Month
+                                data-chart="month" data-date="{{ $dates['month'] }}" data-premium="{{ json_encode($viewPremium['monthPremium']) }}">Month
                         </button>
                     </div>
                 </div>

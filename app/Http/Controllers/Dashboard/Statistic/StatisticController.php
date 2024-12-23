@@ -15,7 +15,7 @@ class StatisticController
         $userId = auth()->id();
         $date = Carbon::today()->format('Y-m-d');
         // Lấy ra top 10 quốc gia trong ngày
-        $topCountries = Redis::zrevrange("user:{$userId}:country_views:{$date}", 0, 9, true);
+        $topCountries = Redis::zrevrange("user:{$userId}:country_views:{$date}", 0, 9);
         $totalViews = Redis::get("total_user_views:{$date}:{$userId}") ?? 0;
         if ($totalViews == 0) {
             return [];

@@ -75,6 +75,24 @@ class HomeController extends Controller
         ];
         // premium
         $data['premium'] = Redis::get("premium:{$user->id}") ?? 0;
+        $premiumData7Days = [];
+        $premiumData30Days = [];
+
+        for ($i = 0; $i < 7; $i++) {
+            $date = date('Y-m-d', strtotime("-$i day"));
+            $dailyPremiumKey = "premiumView:{$user->id}:{$date}";
+            $premiumData7Days[] = Redis::exists($dailyPremiumKey) ? Redis::get($dailyPremiumKey) : 0;
+        };
+
+        for ($i = 0; $i < 30; $i++) {
+            $date = date('Y-m-d', strtotime("-$i day"));
+            $dailyPremiumKey = "premiumView:{$user->id}:{$date}";
+            $premiumData30Days[] = Redis::exists($dailyPremiumKey) ? Redis::get($dailyPremiumKey) : 0;
+        };
+        $data['viewPremium'] = [
+            'weekPremium' => array_reverse($premiumData7Days),
+            'monthPremium' => array_reverse($premiumData30Days),
+        ];
         return view('dashboard.index', $data);
     }
     function zoomMe()

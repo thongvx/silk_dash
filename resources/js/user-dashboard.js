@@ -8,6 +8,9 @@ if ($("#chart-line").length) {
     var last30DaysData = [];
     var last30DaysLabels = [];
 
+    var last7DaysPremiumData = $('.week').data('premium');
+    var last30DaysPremiumData = [];
+
     for (var i = 0; i < 30; i++) {
         var d = new Date();
         d.setUTCDate(d.getUTCDate() - i);
@@ -27,6 +30,7 @@ if ($("#chart-line").length) {
 // Reverse the arrays to have the oldest date first
     last7DaysLabels = last7DaysLabels.reverse();
     last30DaysLabels = last30DaysLabels.reverse();
+
     var ctx1 = $("#chart-line").get(0).getContext("2d");
 
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
@@ -35,28 +39,52 @@ if ($("#chart-line").length) {
     gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
     gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
 
+    var gradientStroke2 = ctx1.createLinearGradient(0, 230, 0, 50);
+    gradientStroke2.addColorStop(1, "rgba(203,12,159,0.2)");
+    gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
+    gradientStroke2.addColorStop(0, "rgba(203,12,159,0)");
+
     var myChart = new Chart(ctx1, {
         type: "line",
         data: {
             labels: last7DaysLabels,
-            datasets: [{
-                label: "View",
-                tension: 0.4,
-                pointRadius: 0,
-                borderColor: "#5e72e4",
-                backgroundColor: gradientStroke1,
-                borderWidth: 3,
-                fill: true,
-                data: last7DaysData,
-                maxBarThickness: 6
-            }],
+            datasets: [
+                {
+                    label: "View",
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderColor: "#5e72e4",
+                    backgroundColor: gradientStroke1,
+                    borderWidth: 3,
+                    fill: true,
+                    data: last7DaysData,
+                    maxBarThickness: 6
+                },
+                {
+                    label: "Premium",
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderColor: "#cb0c9f",
+                    backgroundColor: gradientStroke2,
+                    borderWidth: 3,
+                    fill: true,
+                    data: last7DaysPremiumData,
+                    maxBarThickness: 6
+                }
+            ],
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false,
+                    display: true,
+                },
+                onClick: function (e, legendItem, legend) {
+                    const index = legendItem.datasetIndex; // Lấy index của dataset
+                    const meta = legend.chart.getDatasetMeta(index);
+                    meta.hidden = meta.hidden === null ? !legend.chart.data.datasets[index].hidden : null;
+                    legend.chart.update(); // Cập nhật biểu đồ
                 }
             },
             interaction: {
@@ -113,7 +141,7 @@ if ($("#chart-line").length) {
         $(this).addClass('bg-[#009FB2]').removeClass('bg-[#142132]')
         const type = $(this).data('chart');
         const date = $(this).data('date');
-        console.log(date)
+        const premium = $(this).data('premium')
         switch (type) {
             case 'day':
                 myChart.data.labels = last24HoursLabels;
@@ -122,10 +150,12 @@ if ($("#chart-line").length) {
             case 'week':
                 myChart.data.labels = last7DaysLabels;
                 myChart.data.datasets[0].data = date;
+                myChart.data.datasets[1].data = premium;
                 break;
             case 'month':
                 myChart.data.labels = last30DaysLabels;
                 myChart.data.datasets[0].data = date;
+                myChart.data.datasets[1].data = premium;
                 break;
         }
         myChart.update();
