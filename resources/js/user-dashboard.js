@@ -50,7 +50,7 @@ if ($("#chart-line").length) {
             labels: last7DaysLabels,
             datasets: [
                 {
-                    label: "View",
+                    label: "Free",
                     tension: 0.4,
                     pointRadius: 0,
                     borderColor: "#5e72e4",
