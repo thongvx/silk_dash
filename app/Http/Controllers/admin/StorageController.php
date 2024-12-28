@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\admin;
 
-
+use App\Http\Controllers\admin\TiktokController;
 use App\Enums\VideoCacheKeys;
 use App\Factories\DownloadFactory;
 use App\Jobs\CreatStorageJob;
 use App\Jobs\DeleteVideoEncoder;
 use App\Models\EncoderTask;
 use App\Models\SvStorage;
+use App\Models\SvTiktok;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Queue;
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Redis;
 
 class StorageController
 {
+    protected $tiktokController;
+    public function __construct(tiktokController $tiktokController)
+    {
+        $this->tiktokController = $tiktokController;
+    }
     public function startStorageTask ()
     {
         $data = EncoderTask::where('status', 2)->orderBy('priority', 'desc')->first();
@@ -68,11 +74,13 @@ class StorageController
             $dataVideo->save();
             if($sv != 'no')
                 Queue::push(new DeleteVideoEncoder($data->slug, $data->sv_upload, $data->quality));
+            $svTiktok = SvTiktok::where('active', 2)->inRandomOrder()->first();
+            $this->tiktokController->addLinkUploadTiktok($data->slug, $path, $data->quality, $svTiktok->name);
         }
     }
     function selectSvStorage()
     {
-        $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 96)->where('out_speed', '<', 900)->inRandomOrder()->first();
+        $svStorage = SvStorage::where('active', 1)->where('in_data', 1)->where('percent_space', '<', 90)->where('out_speed', '<', 900)->inRandomOrder()->first();
         if($svStorage)
             return json_encode($svStorage);
         else

@@ -65,7 +65,7 @@ class TiktokController extends Controller
             return '404';
         }
     }
-    function addLinkUploadTiktok($slug, $path, $quality, $svTiktok)
+    public function addLinkUploadTiktok($slug, $path, $quality, $svTiktok)
     {
         $arrPath = explode('-', $path);
         $url = 'http://'.$arrPath[0].'.stosilk.cc/data/'.$arrPath[1].'/'.$slug.'/'.$slug.$quality.'.mp4';
@@ -73,7 +73,7 @@ class TiktokController extends Controller
         //Queue::push(new CreatUploadTiktokJob($svTiktok, $apiSvTiktok, $url));
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://'.$svTiktok.'.streamsilk.com/api/file/remote?url='.$url.'&key='.$apiSvTiktok,
+            CURLOPT_URL => 'https://'.$svTiktok.'.streamsilk.com/api/file?remoteUrl='.$url.'&key='.$apiSvTiktok,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -100,7 +100,7 @@ class TiktokController extends Controller
         $video = AddTiktok::where('status', 0)->orderBy('updated_at', 'asc')->first();
         if($video){
             $keyApi = $this->getApiSvTiktok($video->sv);
-            $tmp = 'http://'.$video->sv.'.streamsilk.com/api/file/get?title='.$video->slug.$video->quality.'.mp4&key='.$keyApi;
+            $tmp = 'http://'.$video->sv.'.streamsilk.com/api/file?title='.$video->slug.$video->quality.'.mp4&key='.$keyApi;
             $check = file_get_contents($tmp);
             $check = json_decode($check, true);
             if($check['file']['status'] == 'complete'){
