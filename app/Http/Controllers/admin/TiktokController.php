@@ -148,4 +148,32 @@ class TiktokController extends Controller
         file_put_contents('data/'.$slug.'/'.$slug.'.m3u8', $dataHlsMaster);
         return 'ok';
     }
+    function fixTiktok()
+    {
+        $video = AddTiktok::where('status', 4)->first();
+        if($video){
+            AddTiktok::where('id', $video->id)->update(['status' => 3]);
+
+            $arrPath = explode('-', $video->path);
+            $url = 'http://'.$arrPath[0].'.stosilk.cc/data/'.$arrPath[1].'/'.$video->slug.'/'.$video->slug.$video->quality.'.mp4';
+            $apiSvTiktok = $this->getApiSvTiktok($video->sv);
+            //Queue::push(new CreatUploadTiktokJob($svTiktok, $apiSvTiktok, $url));
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://'.$video->sv.'.streamsilk.com/api/file?remoteUrl='.$url.'&key='.$apiSvTiktok,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+
+            ));
+            $response = curl_exec($curl);
+            curl_close($curl);
+
+            AddTiktok::where('id', $video->id)->update(['status' => 0]);
+        }
+    }
 }
