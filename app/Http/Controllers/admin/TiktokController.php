@@ -113,9 +113,9 @@ class TiktokController extends Controller
             $tmp = 'https://'.$video->sv.'.streamsilk.com/api/file?title='.$video->slug.$video->quality.'.mp4&key='.$keyApi;
             $check = file_get_contents($tmp);
             $check = json_decode($check, true);
-            if($check['file']['status'] == 'complete'){
+            if($check['data']['status'] == 'done'){
                 $video->increment('status');
-                $linkembed = $check['file']['embed'];
+                $linkembed = $check['file']['hash'];
                 $arrEmbed = explode('/', $linkembed);
                 $idEmbed = $arrEmbed[count($arrEmbed) - 1];
                 $urlHls = 'https://'.$video->sv.'.streamsilk.com/file/' . $idEmbed . '/master.html';
