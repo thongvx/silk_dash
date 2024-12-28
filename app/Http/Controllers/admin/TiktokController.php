@@ -142,6 +142,7 @@ class TiktokController extends Controller
             else{
                 $video->save();
             }
+            var_dump($video);
         }
     }
     function copyVideoTiktok(Request $request)
