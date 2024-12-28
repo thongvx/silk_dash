@@ -158,7 +158,7 @@ class TiktokController extends Controller
             $url = 'http://'.$arrPath[0].'.stosilk.cc/data/'.$arrPath[1].'/'.$video->slug.'/'.$video->slug.$video->quality.'.mp4';
             $apiSvTiktok = $this->getApiSvTiktok($video->sv);
             //Queue::push(new CreatUploadTiktokJob($svTiktok, $apiSvTiktok, $url));
-            $tmp = 'https://'.$video->sv.'.streamsilk.com/api/file?remoteUrl='.$video->slug.$video->quality.'.mp4&key='.$apiSvTiktok;
+            $tmp = 'https://'.$video->sv.'.streamsilk.com/api/file?remoteUrl='.$url.'&key='.$apiSvTiktok;
             file_get_contents($tmp);
             AddTiktok::where('id', $video->id)->update(['status' => 0]);
             echo $tmp;
