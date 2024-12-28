@@ -85,6 +85,16 @@ class TiktokController extends Controller
         ));
         $response = curl_exec($curl);
         curl_close($curl);
+
+        $dataVideo['status'] = 0;
+        $dataVideo['slug'] = $slug;
+        $dataVideo['quality'] = $quality;
+        $dataVideo['path'] = $path;
+        $dataVideo['sv'] = $svTiktok;
+        $check = AddTiktok::where('slug', $slug)->where('quality', $quality)->first();
+        if(!$check) {
+            AddTiktok::create($dataVideo);
+        }
     }
     function getApiSvTiktok($sv)
     {
