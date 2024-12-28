@@ -115,7 +115,7 @@ class TiktokController extends Controller
             $check = json_decode($check, true);
             if($check['data']['status'] == 'done'){
                 $video->increment('status');
-                $linkembed = $check['file']['hash'];
+                $linkembed = $check['data']['hash'];
                 $arrEmbed = explode('/', $linkembed);
                 $idEmbed = $arrEmbed[count($arrEmbed) - 1];
                 $urlHls = 'https://'.$video->sv.'.streamsilk.com/file/' . $idEmbed . '/master.html';
