@@ -118,7 +118,7 @@ class TiktokController extends Controller
                 $linkembed = $check['data']['hash'];
                 $arrEmbed = explode('/', $linkembed);
                 $idEmbed = $arrEmbed[count($arrEmbed) - 1];
-                $urlHls = 'https://'.$video->sv.'.streamsilk.com/file/' . $idEmbed . '/master.html';
+                $urlHls = 'https://'.$video->sv.'.streamsilk.com/file/' . $idEmbed . '/master.m3u8';
                 //creat folder
                 $tmp = 'data/'.$video->slug;
                 if(!file_exists($tmp))
