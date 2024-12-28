@@ -110,7 +110,7 @@ class TiktokController extends Controller
         $video = AddTiktok::where('status', 0)->orderBy('updated_at', 'asc')->first();
         if($video){
             $keyApi = $this->getApiSvTiktok($video->sv);
-            $tmp = 'http://'.$video->sv.'.streamsilk.com/api/file?title='.$video->slug.$video->quality.'.mp4&key='.$keyApi;
+            $tmp = 'https://'.$video->sv.'.streamsilk.com/api/file?title='.$video->slug.$video->quality.'.mp4&key='.$keyApi;
             $check = file_get_contents($tmp);
             $check = json_decode($check, true);
             if($check['file']['status'] == 'complete'){
@@ -118,7 +118,7 @@ class TiktokController extends Controller
                 $linkembed = $check['file']['embed'];
                 $arrEmbed = explode('/', $linkembed);
                 $idEmbed = $arrEmbed[count($arrEmbed) - 1];
-                $urlHls = 'http://'.$video->sv.'.streamsilk.com/video/' . $idEmbed . '/master.html?cdn=false';
+                $urlHls = 'https://'.$video->sv.'.streamsilk.com/file/' . $idEmbed . '/master.html';
                 //creat folder
                 $tmp = 'data/'.$video->slug;
                 if(!file_exists($tmp))
