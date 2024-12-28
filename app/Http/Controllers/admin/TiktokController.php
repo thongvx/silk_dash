@@ -114,7 +114,7 @@ class TiktokController extends Controller
             $check = file_get_contents($tmp);
             $check = json_decode($check, true);
             if($check['data']['status'] == 'done'){
-                $video->increment('status');
+                AddTiktok::where('status', $video->id)->update(['status' => 1]);
                 $linkembed = $check['data']['hash'];
                 $arrEmbed = explode('/', $linkembed);
                 $idEmbed = $arrEmbed[count($arrEmbed) - 1];
@@ -137,10 +137,10 @@ class TiktokController extends Controller
                 $dataHlsMaster = file_get_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8');
                 $dataHlsMaster = $dataHlsMaster.$dataHls;
                 file_put_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8', $dataHlsMaster);
-                $video->increment('status');
+                AddTiktok::where('status', $video->id)->update(['status' => 2]);
             }
             else{
-                $video->save();
+                AddTiktok::where('status', $video->id)->update(['updated_at' => now()]);
             }
             var_dump($video);
         }
