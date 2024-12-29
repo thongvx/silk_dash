@@ -90,35 +90,38 @@ class TiktokController extends Controller
             $tmp = 'https://'.$video->sv.'.streamsilk.com/api/file?title='.$video->slug.$video->quality.'.mp4&key='.$keyApi;
             $check = file_get_contents($tmp);
             $check = json_decode($check, true);
-            if($check['data']['status'] == 'done'){
-                AddTiktok::where('id', $video->id)->update(['status' => 1]);
-                $linkembed = $check['data']['hash'];
-                $arrEmbed = explode('/', $linkembed);
-                $idEmbed = $arrEmbed[count($arrEmbed) - 1];
-                $urlHls = 'https://'.$video->sv.'.streamsilk.com/file/' . $idEmbed . '/master.m3u8';
-                //creat folder
-                $tmp = 'data/'.$video->slug;
-                if(!file_exists($tmp))
-                    mkdir($tmp);
-                //copy m3u8 master
-                $tmp = 'data/'.$video->slug.'/'.$video->slug.'.m3u8';
-                if(!file_exists($tmp))
-                    copy('DataHLS/master.m3u8', 'data/'.$video->slug.'/'. $video->slug.'.m3u8');
-                //copy video quality
-                $tmp1 = 'data/'.$video->slug.'/'.$video->slug.$video->quality.'.m3u8';
-                copy($urlHls, $tmp1);
+            if(!empty($check['data'])){
+                if($check['data']['status'] == 'done'){
+                    AddTiktok::where('id', $video->id)->update(['status' => 1]);
+                    $linkembed = $check['data']['hash'];
+                    $arrEmbed = explode('/', $linkembed);
+                    $idEmbed = $arrEmbed[count($arrEmbed) - 1];
+                    $urlHls = 'https://'.$video->sv.'.streamsilk.com/file/' . $idEmbed . '/master.m3u8';
+                    //creat folder
+                    $tmp = 'data/'.$video->slug;
+                    if(!file_exists($tmp))
+                        mkdir($tmp);
+                    //copy m3u8 master
+                    $tmp = 'data/'.$video->slug.'/'.$video->slug.'.m3u8';
+                    if(!file_exists($tmp))
+                        copy('DataHLS/master.m3u8', 'data/'.$video->slug.'/'. $video->slug.'.m3u8');
+                    //copy video quality
+                    $tmp1 = 'data/'.$video->slug.'/'.$video->slug.$video->quality.'.m3u8';
+                    copy($urlHls, $tmp1);
 
-                $dataHls = file_get_contents('DataHLS/'.$video->quality.'.m3u8');
-                $dataHls = str_replace('master'.$video->quality.'.m3u8', $video->slug.$video->quality.'.m3u8', $dataHls);
+                    $dataHls = file_get_contents('DataHLS/'.$video->quality.'.m3u8');
+                    $dataHls = str_replace('master'.$video->quality.'.m3u8', $video->slug.$video->quality.'.m3u8', $dataHls);
 
-                $dataHlsMaster = file_get_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8');
-                $dataHlsMaster = $dataHlsMaster.$dataHls;
-                file_put_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8', $dataHlsMaster);
-                AddTiktok::where('id', $video->id)->update(['status' => 2]);
+                    $dataHlsMaster = file_get_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8');
+                    $dataHlsMaster = $dataHlsMaster.$dataHls;
+                    file_put_contents('data/'.$video->slug.'/'.$video->slug.'.m3u8', $dataHlsMaster);
+                    AddTiktok::where('id', $video->id)->update(['status' => 2]);
+                }
+                else{
+                    AddTiktok::where('id', $video->id)->update(['updated_at' => now()]);
+                }
             }
-            else{
-                AddTiktok::where('id', $video->id)->update(['updated_at' => now()]);
-            }
+
             var_dump($video);
         }
     }
