@@ -121,6 +121,9 @@ class TiktokController extends Controller
                     AddTiktok::where('id', $video->id)->update(['updated_at' => now()]);
                 }
             }
+            else{
+                AddTiktok::where('id', $video->id)->delete();
+            }
 
             var_dump($video);
         }
