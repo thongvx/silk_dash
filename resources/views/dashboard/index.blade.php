@@ -84,7 +84,7 @@
                                     <div class="flex items-center text-xl">
                                         <h5 class="mb-0 text-start text-white text-md lg:text-lg flex w-56 justify-between">
                                             <span class='text-slate-400 text-md mr-0.5 px-2'>Premium Views :</span>
-                                            <span>{{ \App\Models\File::formatNumber($premium) }}</span>
+                                            <span>{{ \App\Models\File::formatNumber($premium >= 0 ? $premium : 0) }}</span>
                                         </h5>
                                         <span
                                             class="text-rose-500 pl-3 text-sm font-bold leading-normal items-center hidden">
