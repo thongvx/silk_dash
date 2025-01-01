@@ -7,7 +7,7 @@
     <meta content="Embed" name="description"/>
     <meta name="google" content="notranslate">
     <link rel="icon" type="image/png" href="{{ asset('image/logo/logo4.webp') }}"/>
-    <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css?v=1.2')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('/assets/jwplayer/css/player.css?v=1.3')}}">
     <style>
         .preloader .preloader-icon {
             border-top: 2px solid{{ $player_setting->premium_color }};

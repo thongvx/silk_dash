@@ -137,7 +137,7 @@ body {
 }
 
 .jw-icon-rewind, .jw-rightclick {
-    visibility: hidden;
+    display: none !important;
 }
 
 .jw-svg-icon-buffer path {
@@ -152,6 +152,9 @@ body {
 @media (max-width: 768px) {
     .jw-icon-pip {
         display: none !important;
+    }
+    .jw-icon-rewind, .jw-rightclick {
+        visibility: hidden;
     }
 }
 
