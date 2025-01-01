@@ -137,7 +137,7 @@ body {
 }
 
 .jw-icon-rewind, .jw-rightclick {
-    display: none !important;
+    visibility: hidden;
 }
 
 .jw-svg-icon-buffer path {
