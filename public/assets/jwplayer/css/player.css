@@ -135,9 +135,11 @@ body {
 .preloader svg path {
     fill: #5066e1;
 }
-
-.jw-icon-rewind, .jw-rightclick {
+.jw-display-icon-container .jw-icon-rewind{
     visibility: hidden;
+}
+.jw-rightclick, .jw-button-container .jw-reset.jw-icon-rewind {
+    display: none !important;
 }
 
 .jw-svg-icon-buffer path {
@@ -153,6 +155,5 @@ body {
     .jw-icon-pip {
         display: none !important;
     }
-
 }
 
