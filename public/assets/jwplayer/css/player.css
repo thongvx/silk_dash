@@ -150,7 +150,7 @@ body {
     background-repeat: no-repeat;
 }
 @media (max-width: 768px) {
-    .jw-icon-cast {
+    .jw-icon-pip {
         display: none !important;
     }
 }
