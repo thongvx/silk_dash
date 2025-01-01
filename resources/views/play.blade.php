@@ -85,6 +85,7 @@ $jsCode = <<<JS
     var intervalId;
     var totalTimeRequired;
     var hasIncreasedPlayCount = false;
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
     const loadPlayer = async (file) => {
         const options = {
@@ -104,7 +105,7 @@ $jsCode = <<<JS
             autostart: false,
             safarihlsjs: true,
             repeat: $player_setting->infinite_loop == 1 ? true : false,
-            chromecast: true,
+            chromecast: !isMobile,
         };
         if (urlSub === 1 && is_sub === 1) {
             const jsonUrl = `https://streamsilk.com/storage/subtitles/$slug_sub/$slug_sub.json`;
