@@ -85,7 +85,7 @@ $jsCode = <<<JS
     var intervalId;
     var totalTimeRequired;
     var hasIncreasedPlayCount = false;
-    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     const loadPlayer = async (file) => {
         const options = {
