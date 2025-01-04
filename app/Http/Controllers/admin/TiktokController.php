@@ -120,6 +120,9 @@ class TiktokController extends Controller
                 else{
                     AddTiktok::where('id', $video->id)->update(['updated_at' => now()]);
                 }
+                if($check['data']['status'] == 'error'){
+                    AddTiktok::where('id', $video->id)->update(['status' => 19]);
+                }
             }
             else{
                 AddTiktok::where('id', $video->id)->delete();
