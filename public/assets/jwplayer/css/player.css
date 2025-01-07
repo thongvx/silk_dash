@@ -135,10 +135,8 @@ body {
 .preloader svg path {
     fill: #5066e1;
 }
-.jw-display-icon-container .jw-icon-rewind{
-    visibility: hidden;
-}
-.jw-rightclick, .jw-button-container .jw-reset.jw-icon-rewind {
+
+.jw-rightclick, .jw-button-container .jw-reset.jw-icon-rewind, .jw-button-container .jw-reset.jw-icon-next {
     display: none !important;
 }
 
@@ -155,5 +153,10 @@ body {
     .jw-icon-pip {
         display: none !important;
     }
-}
 
+}
+@media (max-width: 500px) {
+    .jw-button-container .jw-svg-icon-prv, .jw-button-container .jw-svg-icon-next {
+        display: none !important;
+    }
+}
