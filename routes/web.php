@@ -49,6 +49,7 @@ Route::middleware([DisableSession::class])->group(function () {
     Route::get('/encoderFaildGpu/{slug}', [\App\Http\Controllers\admin\EncoderController::class, 'encoderFaildGpu']);
     Route::get('/checkExistsEncoderTask/{slug}', [\App\Http\Controllers\admin\EncoderController::class, 'checkExistsEncoderTask']);
     Route::get('/getTaskEncoderVideo/{name}', [\App\Http\Controllers\admin\EncoderController::class, 'getTaskEncoderVideo']);
+    Route::get('/checkFileEncoder', [\App\Http\Controllers\admin\EncoderController::class, 'checkFileEncoder']);
 });
 //----------------------------audio controller-----------------------------------------------------
 Route::middleware([DisableSession::class])->group(function () {

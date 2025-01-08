@@ -171,6 +171,7 @@ class UploadController
                 "videoID" => $videoID,
             ],
         ];
+        file_put_contents('checkslug/'.$slug.'.json', 'ok');
         return response()->json($data);
     }
     public function cloneVideo(Request $request)

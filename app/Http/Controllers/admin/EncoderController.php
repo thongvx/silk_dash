@@ -81,6 +81,10 @@ class EncoderController
             Queue::push(new DeleteFileUploadJob($data->slug, $data->sv_upload, $data->format));
             EncoderTask::where('slug', $data->slug)->delete();
             Redis::del('encoserTask:'.$data->slug);
+            //delete file
+            $cmd = 'rm -rf checkslug/'.$data->slug.'.json';
+            system($cmd);
+
             return json_encode($data);
         }
     }
@@ -161,6 +165,16 @@ class EncoderController
             return 1;
         } else {
             return 0;
+        }
+    }
+    function checkFileEncoder()
+    {
+        $data = EncoderTask::where('status', 0)->where('quality', 720)->get();
+        foreach ($data as $item){
+            $file = 'checkslug/'.$item->slug.'.json';
+            if(!file_exists($file)){
+                file_put_contents('checkslug/'.$item->slug.'.json', 'ok');
+            }
         }
     }
 }
